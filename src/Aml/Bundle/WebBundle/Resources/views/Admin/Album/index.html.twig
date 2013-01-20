@@ -1,0 +1,51 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% block title -%}
+    Discrographie
+{%- endblock title %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span3">
+		{# Barre de navigation left #}
+	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
+	</div>		
+
+
+	<div class="span5">
+		<h1>Liste des albums</h1>
+		
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th>Titre</th>
+		            <th>Description</th>
+		            <th>Statut</th>		            
+		            <th>Actions</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    {% for entity in entities %}
+		        <tr>
+		            <td><a href="{{ path('discographie_album', { 'id': entity.id }) }}">{{ entity.title }}</a></td>		                       
+		            <td>{% if entity.date %}{{ entity.date|date('d/m/Y') }}{% endif%}</td>
+		            <td>{{ entity.public|publicStatus }}</td>
+		            <td>
+		            	<a class="btn btn-link" href="{{ path('content_album_show', { 'id': entity.id }) }}">Voir</a>
+		                <a class="btn btn-link" href="{{ path('content_album_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>		        
+		            </td>
+		        </tr>
+		    {% endfor %}
+		    </tbody>
+		</table>
+		
+		<ul>
+		    <li>
+		        <a href="{{ path('content_album_new') }}">
+		             <i class="icon-pencil"></i> Ajouter un nouvel Album
+		        </a>
+		    </li>
+		</ul>
+	</div>
+</div>
+{% endblock body %}

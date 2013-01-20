@@ -1,0 +1,35 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% block title -%}
+    Liste des évènements
+{%- endblock title %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span3">
+	</div>		
+
+	<div class="span5">
+		<h1>Agenda</h1>
+		
+		<a class="btn btn-link pull-right" href="{{ path('admin_agenda_new_event') }}">
+            <i class="icon-plus"></i> Créer un évènement
+        </a>
+
+
+		{% if mode == 'calendar' %}
+			<a href="{{ path('admin_agenda', {mode:'calendar'}) }}" class="btn btn-primary">Calendrier</a>
+			<a href="{{ path('admin_agenda', {mode:'list'}) }}" class="btn">Liste</a>
+		
+			{# Vue calendrier #}
+		  	{% include "AmlWebBundle::Admin/Agenda/index/agenda.html.twig" %}
+	  	{% elseif mode == 'list' %}	  	
+	  		<a href="{{ path('admin_agenda', {mode:'calendar'}) }}" class="btn">Calendrier</a>
+			<a href="{{ path('admin_agenda', {mode:'list'}) }}" class="btn btn-primary">Liste</a>
+		
+			{# Vue liste #}
+		  	{% include "AmlWebBundle::Admin/Agenda/index/list.html.twig" %}
+		{% endif %}
+	</div>
+</div>
+{% endblock body %}

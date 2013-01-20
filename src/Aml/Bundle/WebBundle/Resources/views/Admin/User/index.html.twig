@@ -1,0 +1,61 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% block title -%}
+
+   - Gestion des membres
+
+{%- endblock title %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span3">
+		{# Barre de navigation left #}
+	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
+	</div>		
+
+
+	<div class="span5">
+		<h1>Liste des membres</h1>
+
+		<table class="table table-bordered table-striped">
+		    <thead>
+		        <tr>
+		            <th>Membre</th>
+		            <th>Email</th>
+		            <th>Login</th>
+		            <th>Statut</th>
+		            <th>Actions</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    {% for entity in entities %}
+		        <tr>
+		            <td><a href="{{ path('admin_user_edit', { 'id': entity.id }) }}"> {{ entity.civilite }} {{ entity.prenom }} {{ entity.nom }} ({{ entity.id }})</a></td>
+		            <td>{{ entity.email }}</td>
+		            <td>{{ entity.login }}</td>
+		            <td>{{ entity.statut }}</td>
+		            <td>
+		                <ul>
+		                    <li>
+		                        <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}">Voir</a>
+		                    </li>
+		                    <li>
+		                        <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}">Modifier</a>
+		                    </li>
+		                </ul>
+		            </td>
+		        </tr>
+		    {% endfor %}
+		    </tbody>
+		</table>
+		
+		<ul>
+		    <li>
+		        <a href="{{ path('admin_user_new') }}">
+		            Create a new entry
+		        </a>
+		    </li>
+		</ul>
+	</div>
+</div>
+{% endblock body %}

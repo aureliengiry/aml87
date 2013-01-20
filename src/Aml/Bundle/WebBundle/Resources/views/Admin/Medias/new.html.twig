@@ -1,0 +1,44 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% form_theme form 'AmlWebBundle:Form:aml_theme.html.twig' %}
+
+{% block title -%}
+
+    Blog - Créer un nouvel article de blog
+
+{%- endblock title %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span3">
+		{# Barre de navigation left #}
+	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
+	</div>		
+
+
+	<div class="span5">
+
+		<h1>{{ entity.type["label"] }}</h1>
+		
+		<form class="form-horizontal form-container" action="{{ path('admin_file_create',{'type': type} ) }}" method="post" {{ form_enctype(form) }}>
+		    <fieldset>
+			    <legend>Legend</legend>
+		  		{{ form_widget(form) }}
+			    <div class="control-group">
+			    	<div class="controls">
+			        	<button class="btn btn-primary" type="submit">Enregistrer</button>
+			        </div>
+			    </div>
+		    </fieldset>
+		</form>
+		
+		
+        <a class="btn btn-link" href="{{ path('admin_medias') }}">
+            <i class="icon-arrow-left" ></i> Retour à la liste des fichiers
+        </a>
+		   
+	</div>
+</div>
+
+	
+{% endblock body %}

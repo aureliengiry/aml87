@@ -1,0 +1,45 @@
+{% extends "AmlWebBundle::layout.html.twig" %}
+
+{% block title -%}
+    Livre d'or
+{%- endblock title %}
+
+{% block body %}
+<div id="col-left" class="two-cols-content">
+
+	<div class="contenu-page">
+	
+
+		<h1>Agenda</h1>
+
+		<table class="records_list">
+		    <thead>
+		        <tr>
+		            <th>Date</th>
+		            <th>Title</th>
+		            <th>Description</th>
+		          
+		        </tr>
+		    </thead>
+		    <tbody>
+		    {% for entity in entities %}
+		        <tr>
+		            
+		            <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif%}</td>
+		            <td>{{ entity.title }}</td>
+		            <td>{{ entity.description }}</td>
+		         
+		        </tr>
+		    {% endfor %}
+		    </tbody>
+		</table>
+
+
+	</div>
+</div>
+
+<div id="col-right">
+
+</div>
+{% endblock body %}
+

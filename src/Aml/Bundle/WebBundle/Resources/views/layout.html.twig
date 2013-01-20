@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+    	<meta charset="utf-8">
+    	<title>{% block title %}{% endblock %} {{site_name}}</title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	<meta name="description" content="">
+    	<meta name="author" content="">
+    
+    	<!-- Le styles -->
+    	<link rel="shortcut icon" href="{{ asset('bundles/amlweb/ico/aml_favicon.ico') }}">
+    	
+
+    	<link href="{{ asset('bundles/amlweb/css/bootstrap/bootstrap.css') }}" rel="stylesheet">
+    	<link href="{{ asset('bundles/amlweb/css/main.css') }}" rel="stylesheet">
+    	<link href="{{ asset('bundles/amlweb/css/form.css') }}" rel="stylesheet">
+    	<link href="{{ asset('bundles/amlweb/css/texte.css') }}" rel="stylesheet">
+    	
+    	{% block css %}{% endblock %}
+    	
+    	{% block headerJs %}{% endblock %}
+	</head>
+	<body>
+		<div id="global">	
+			{# Header #}
+  			{% include "AmlWebBundle::Partial/header.html.twig" %} 
+		
+			<div id="contenu">
+	   		{% block body %}{% endblock %}
+	   		</div>
+	   		<div class="clearfooter"></div>
+	   		
+	   		{# Footer #}
+  			{% include "AmlWebBundle::Partial/footer.html.twig" %} 
+		</div>
+		
+		
+       	{% block endJS %}{% endblock %}
+	</body>
+
+</html>

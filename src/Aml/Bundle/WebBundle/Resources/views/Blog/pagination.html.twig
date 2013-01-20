@@ -1,0 +1,24 @@
+{# Pagination Blog #}
+<div class="pagination pagination-centered">
+		<ul>	
+			{% if pagination.currentPage > 1 %}						
+				<li class=""><a class="active" title="pager-first first" href="{{ path('blog', { 'page': 1 }) }}">«&nbsp;Première</a></li>
+				<li class=""><a class="active" title="Aller à la page précédente" href="{{ path('blog', { 'page': pagination.prevPage }) }}">‹&nbsp;précédente</a></li>
+			{% endif %}
+						
+			{% for i in 1..pagination.lastPage %}					    
+			    {% if i == pagination.currentPage %}
+			    	<li class="disabled"><a href="#">{{ i }}</a></li>
+			    {% else %}
+			    	<li class=""><a class="active" title="Aller à la page {{ i }}" href="{{ path('blog', { 'page': i }) }}">{{ i }}</a></li>
+			    {% endif %}
+			{% endfor %}
+		
+			
+			{% if pagination.nextPage and pagination.currentPage != pagination.lastPage %}
+				<li class=""><a class="active" title="Aller à la page suivante" href="{{ path('blog', { 'page': pagination.nextPage }) }}">suivant&nbsp;›</a></li>
+				<li class=""><a class="active" title="Aller à la dernière page" href="{{ path('blog', { 'page': pagination.lastPage }) }}">dernier&nbsp;»</a></li>
+			{% endif %}
+		</ul>
+		
+</div>

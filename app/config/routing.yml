@@ -1,0 +1,25 @@
+aml_blog:
+    resource: "@AmlBlogBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+# Internal routing configuration to handle ESI
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal
+
+AmlWebBundle:
+    resource: "@AmlWebBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+login:
+    pattern:   /connexion
+    defaults:  { _controller: AmlWebBundle:Secure:login }
+    
+login_check:
+    pattern:   /login_check
+    
+_imagine:
+    resource: .
+    type:     imagine

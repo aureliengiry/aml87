@@ -1,0 +1,39 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% block title -%}
+
+    Liens - Modifier
+
+{%- endblock title %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span3">
+		{# Barre de navigation left #}
+	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
+	</div>		
+
+
+	<div class="span5">
+	
+		<h1>Modifier le lien</h1>
+	
+		<form action="{{ path('content_link_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+		    {{ form_widget(edit_form) }}
+		    <div class="form-actions">
+		        <button class="btn btn-primary" type="submit">Enregistrer</button>
+		        <a class="btn" href="{{ path('content_link') }}">
+		            Retour à la liste des liens
+		        </a>
+		        <p>
+		         <form action="{{ path('content_link_delete', { 'id': entity.id }) }}" method="post">
+		            {{ form_widget(delete_form) }}
+		            <button class="btn btn-danger" type="submit">Supprimer</button>
+		        </form>
+		        </p>
+		    </div>
+		</form>
+	
+	</div>
+</div>
+{% endblock body %}

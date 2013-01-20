@@ -1,0 +1,15 @@
+{#
+	File : menu.html.twig
+	Description : Tempalate pour le menu
+#}
+<div id="menu">						
+	<ul>
+		<li><a{% if app.request.attributes.get('_route') == 'home' %} class="active"{% endif %} href="{{ path('home') }}" title="Accueil">Accueil</a></li>
+		<li><a href="{{ path('home') }}" title="Association">Association</a></li>
+		<li><a{% if app.request.attributes.get('_route') == 'discographie' %} class="active"{% endif %} href="{{ path('discographie') }}" title="Discographie">Discographie</a></li>
+		<li><a{% if app.request.attributes.get('_route') == 'blog' %} class="active"{% endif %} href="{{ path('blog') }}" title="Blog">Blog</a></li>
+		<li><a{% if app.request.attributes.get('_route') == 'agenda' %} class="active"{% endif %}  href="{{ path('agenda') }}" title="Agenda">Agenda</a></li>
+		<li><a{% if app.request.attributes.get('_route') == 'liens' %} class="active"{% endif %}  href="{{ path('liens') }}" title="Liens">Liens</a></li>
+		<!--<li><a{% if app.request.attributes.get('_route') == 'guestbook' %} class="active"{% endif %} href="{{ path('guestbook') }}" title="Livre d'or">Livre d'or</a></li>-->
+	</ul>						
+</div>

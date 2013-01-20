@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+/* CAPTCHA IMAGE */
+#edit-captcha-response-wrapper {
+    float: right !important;
+    margin: 0;
+    width: 70% !important;
+}
+
+#edit-captcha-response-wrapper label,#edit-captcha-response-wrapper .description,.captcha{ 
+	float:left !important;
+	width:100% !important;
+}
+.captcha .form-item{
+	width: auto !important;
+}

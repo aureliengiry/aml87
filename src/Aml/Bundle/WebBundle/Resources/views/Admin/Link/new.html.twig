@@ -1,0 +1,33 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% block title -%}
+
+    Blog - Créer un nouvel article de blog
+
+{%- endblock title %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span3">
+		{# Barre de navigation left #}
+	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
+	</div>		
+
+
+	<div class="span5">
+		<h1>Créer un nouveau lien</h1>
+		
+		
+		<form action="{{ path('content_link_create') }}" method="post" {{ form_enctype(form) }}>
+		    {{ form_widget(form) }}
+		    <div class="form-actions">
+		        <button class="btn btn-primary" type="submit">Enregistrer</button>
+		        <a class="btn" href="{{ path('content_link') }}">
+		            Retour à la liste des liens
+		        </a>
+		    </div>
+		</form>
+	
+	</div>
+</div>
+{% endblock body %}

@@ -1,0 +1,26 @@
+{% extends "AmlWebBundle::layout.html.twig" %}
+
+{% block title -%}
+	Liens -
+{%- endblock title %}
+
+{% block body %}
+<div id="col-left" class="two-cols-content">
+
+	<div class="contenu-page">
+		<h1>Liens</h1>
+		
+		<ul id="list-links">
+		    {% for entity in entities %}
+		        <li>{{ entity.description }} : <a href="http://{{ entity.url }}" target="_blank" title="{{ entity.description }}">{{ entity.url }}</a></li>
+		    {% endfor %}		 
+		 </ul>
+	
+		
+		</div>
+</div>
+<div id="col-right">
+
+</div>
+{%- endblock body %}
+

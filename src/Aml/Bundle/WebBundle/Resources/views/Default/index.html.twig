@@ -1,0 +1,17 @@
+{% extends "AmlWebBundle::layout.html.twig" %}
+
+{% block body %}
+<div id="col-left" class="two-cols-content">
+	
+	{# Dernier article du blog #}
+	{% include "AmlWebBundle::Default/article.html.twig" %} 
+	
+	{# Dernier Album #}
+	{% include "AmlWebBundle::Default/album.html.twig" %} 
+
+</div>
+
+<div id="col-right">
+
+</div>
+{%- endblock body %}

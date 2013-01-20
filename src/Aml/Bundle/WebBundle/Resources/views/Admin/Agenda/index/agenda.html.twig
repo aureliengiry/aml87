@@ -1,0 +1,42 @@
+{# Template de la vue en mode calendrier #}
+
+
+
+<div id='calendar'></div>
+
+
+{% block endJS %}
+<script type='text/javascript'>
+$(document).ready(function() {
+	var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+	
+	$('#calendar').fullCalendar({
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+		editable: true,
+
+		events: {
+	        url: '{{ path('admin_agenda_ajax_feed') }}',
+	        type: 'POST',
+	        data: {
+	            custom_param1: 'something',
+	            custom_param2: 'somethingelse'
+	        },
+	        error: function() {
+	            alert('there was an error while fetching events!');
+	        },
+	        color: 'yellow',   // a non-ajax option
+	        textColor: 'black' // a non-ajax option
+	    }
+	});
+	
+});
+
+</script>
+{% endblock endJS %}

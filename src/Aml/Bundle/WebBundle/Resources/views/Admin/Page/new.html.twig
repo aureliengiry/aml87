@@ -1,0 +1,36 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% block title -%}Blog - Créer un nouvel article de blog{%- endblock title %}
+
+{% block body %}
+
+<div class="row-fluid">
+
+	<div class="span3">
+		{# Barre de navigation left #}
+	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
+	</div>
+
+	<div class="span5">
+		<h1>Page creation</h1>
+		
+		<form action="{{ path('admin_content_pages_create') }}" method="post" {{ form_enctype(form) }}>
+		    {{ form_widget(form) }}
+		    <p>
+		        <button type="submit">Create</button>
+		    </p>
+		</form>
+		
+		<ul class="record_actions">
+		    <li>
+		        <a href="{{ path('admin_content_pages') }}">
+		            Back to the list
+		        </a>
+		    </li>
+		</ul>
+	</div>
+</div>
+	{# CONFIG CKEDITOR #}
+  	{% include "AmlWebBundle::Admin/Partial/ckeditor.html.twig" with {'target': 'aml_bundle_WebBundle_pagetype_body'}  %} 
+
+{% endblock body %}

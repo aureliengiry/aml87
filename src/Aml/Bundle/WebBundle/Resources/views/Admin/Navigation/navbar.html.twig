@@ -1,0 +1,59 @@
+{# Template de la barre de navigation de l'espace admin #}
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">{{project_name}}</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li{% if app.request.attributes.get('_route') == 'admin' %} class="active"{% endif %}>
+          	<a href="{{ path('admin') }}">Admin</a>
+          </li>
+          <li class="dropdown">
+          	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestion des contenus <b class="caret"></b></a>
+          	<ul class="dropdown-menu">
+          		<li{% if app.request.attributes.get('_route') == 'admin_content_pages' %} class="active"{% endif %}>
+          			<a href="{{ path('admin_content_pages') }}">Pages</a>
+          		</li>
+          		
+          		<li{% if app.request.attributes.get('_route') == 'admin_content_blog' %} class="active"{% endif %}>
+          			<a href="{{ path('admin_content_blog') }}">Blog</a>
+          			<ul>
+          				<li href="{{ path('admin_content_blog_categories') }}"><a>Catégories</a></li>
+          				<li href="{{ path('admin_content_blog_categories') }}"><a>Mot-clés</a></li>
+          			</ul>
+          		</li>
+          		
+          		<li{% if app.request.attributes.get('_route') == 'content_album' %} class="active"{% endif %}>
+          			<a href="{{ path('content_album') }}">Discrographie</a>
+          		</li>
+          		
+          		<li{% if app.request.attributes.get('_route') == 'content_link' %} class="active"{% endif %}>
+          			<a href="{{ path('content_link') }}">Liens</a>
+          		</li>          		
+          		
+          	</ul>
+          	
+          </li>
+          <li{% if app.request.attributes.get('_route') == 'admin_agenda' %} class="active"{% endif %}>
+          	<a href="{{ path('admin_agenda', {mode:'calendar'}) }}" title="Gestion des évènements">Agenda</a>
+          </li>
+          <li{% if app.request.attributes.get('_route') == 'admin_medias' %} class="active"{% endif %}>
+          	<a href="{{ path('admin_medias') }}" title="Gestion des médias">Médias</a>
+          </li>
+          <li{% if app.request.attributes.get('_route') == 'admin_user' %} class="active"{% endif %}>
+          	<a href="{{ path('admin_user') }}" title="Gestion des membres">Membres</a>
+          </li>
+        </ul>
+        
+        <ul class="nav pull-right">
+          <li><a href="{{ path('deconnexion') }}"><i class="icon-ban-circle icon-white"></i> Déconnexion</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>

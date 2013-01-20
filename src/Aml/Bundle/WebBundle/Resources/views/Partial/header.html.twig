@@ -1,0 +1,36 @@
+<!-- Header -->
+<div id="banniere">
+
+	{% if app.request.attributes.get('_route') == 'home' %} 			
+	<h1 id="logo">
+		<span>Avenir Musical du Limousin</span>
+		<a href="{{ path('home') }}" title="Avenir Musical du Limousin">
+      		<img src="{{ asset('bundles/amlweb/images/aml_logo.png') }}" alt="Avenir Musical du Limousin"  />
+      	</a>
+	</h1>
+	{% else %} 	
+	<div id="logo">
+		<span>Avenir Musical du Limousin</span>
+		<a href="{{ path('home') }}" title="Avenir Musical du Limousin">
+    		<img src="{{ asset('bundles/amlweb/images/aml_logo.png') }}" alt="Avenir Musical du Limousin"  />
+    	</a>
+	</div>
+	{% endif %} 
+	
+	
+	{# Menu #}
+  	{% include "AmlWebBundle::Partial/menu.html.twig" %} 
+	
+</div><!-- /Header -->	
+
+{% if app.request.attributes.get('_route') == 'home' %} 		
+<div id="intro">
+	<div class="intro-content">
+		<div class="accueil-intro">
+			<h2>Une autre idée de l'accordéon...</h2>
+			<p>C'est un mariage peu ordinaire que vous offre l'Avenir Musical du Limousin, celui de l'accordéon avec la tradition orchestrale. Parcourez les différentes rubriques de ce site pour nous découvrir et, n'hésitez pas à prendre contact avec nous !!!</p>
+		</div>
+	</div>
+</div>
+{% endif %}
+

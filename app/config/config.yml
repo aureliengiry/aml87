@@ -1,0 +1,117 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: fr }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trust_proxy_headers: false # Whether or not the Request object should trust proxy headers (X_FORWARDED_FOR/HTTP_CLIENT_IP)
+    session:
+        lifetime:    10800
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    globals:
+          project_name: "%project_name%"
+          site_name: "%site_name%"
+
+# Assetic Configuration
+assetic:
+    debug:          "%kernel.debug%"
+    use_controller: false
+    bundles:        [ ]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
+        #yui_css:
+        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+#jms_security_extra:
+#    secure_controllers:  true
+#    secure_all_services: false
+    
+# Service Configuration
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+           - { name: twig.extension }
+ 
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+           - { name: twig.extension }
+           
+    debug.twig.extension:
+        class: Twig_Extensions_Extension_Debug
+        tags: [{ name: 'twig.extension' }]
+          
+    ic.twig.niceDate_extension:
+        class: Aml\Bundle\WebBundle\Twig\PublicStatusExtension
+        tags:
+            - { name: twig.extension }
+
+avalanche_imagine:
+    web_root:     "%kernel.root_dir%/../web"
+    source_root:  "%kernel.root_dir%/../web"
+    cache_prefix: imagine
+    driver:       gd
+    filters:
+        #Si renommage ou ajout de filters, penser � modifier les lignes de suppression de cache dans User->upload()
+        thumbnail:
+            type:    thumbnail
+            options: { size: [150, 150], mode: inset }
+        vignette_thumbnail:
+            type:    thumbnail
+            options: { size: [150, 100], mode: inbox }
+        avatar_thumbnail:
+            type:    thumbnail
+            options: { size: [80, 80], mode: inbox }
+        moyen_thumbnail:
+            type:    thumbnail
+            options: { size: [50, 50], mode: inbox }
+        mini_thumbnail:
+            type:    thumbnail
+            options: { size: [28, 28], mode: inbox }
+        micro_thumbnail:
+            type:    thumbnail
+            options: { size: [14, 14], mode: inbox }
+        big_thumbnail:
+            type:    thumbnail
+            options: { size: [300, 300], mode: inbox }

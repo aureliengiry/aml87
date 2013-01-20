@@ -1,0 +1,21 @@
+{% extends "IcPslwebBundle:Secure:layout.html.twig" %}
+
+{% form_theme form 'IcPslwebBundle:Form:psl_theme.html.twig' %} 
+
+{% block body %}
+        
+	<h1>Inscription</h1>
+	<form action="{{ path('inscription') }}" class="content-block form-inline" method="POST" {{ form_enctype(form) }} novalidate>
+		{{ form_widget(form) }}
+
+		<hr />
+		<div>
+			<input type="submit" class="btn btn-primary pull-right" value="Inscription">
+		</div>
+	</form>
+{% endblock body %}
+
+{% block javascripts %}
+{{ form_stylesheet(form) }}
+{{ form_javascript(form) }}
+{% endblock %}

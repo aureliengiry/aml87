@@ -1,0 +1,28 @@
+<div class="blog-article">
+	<h2>
+		{% if entity.url is defined and entity.url is not empty %}
+			<a href="{{ path('blog_show_rewrite', { 'url_key': entity.url }) }}" title="Voir l'article : {{ entity.title }}" >{{ entity.title }}</a>	
+		{% else %}	
+			<a href="{{ path('blog_show', { 'id': entity.id }) }}" title="Voir l'article : {{ entity.title }}" >{{ entity.title }}</a>
+		{% endif %}		
+	</h2>
+	
+	<div class="publi-info">
+		<span>Publié le 
+			<span class="date-article-block">le {% if entity.created %}{{ entity.created|date('d/m/Y à H:i') }}{% endif %}</span>		
+			{% if entity.category.name %}
+				 dans <a href="{{ path('blog',{'category' : entity.category.systemName}) }}" title="{{entity.category.name}}">{{entity.category.name}}</a>
+			{% endif %}
+		</span>
+	</div>
+		
+	<p class="container-wysiwyg">
+		{{entity.body|raw}}
+	</p>
+	
+	<span class="blog-tags">Mots clés : </span>	
+	{% for key,tag in entity.tags %}
+		{% if key > 0 %}, {% endif %}<a class="active" title="{{ tag.description }}" href="{{ path('blog',{'tag' : tag.systemName}) }}">{{ tag.name }}</a>		
+	{% endfor %}
+	
+</div>

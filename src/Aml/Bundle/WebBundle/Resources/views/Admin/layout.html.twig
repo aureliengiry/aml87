@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> {{project_name}} {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="{{ asset('bundles/amlweb/css/bootstrap/bootstrap.css') }}" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="{{ asset('bundles/amlweb/css/bootstrap/bootstrap-responsive.css') }}" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="{{ asset('bundles/amlweb/ico/favicon.ico') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('bundles/amlweb/ico/apple-touch-icon-144-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('bundles/amlweb/ico/apple-touch-icon-114-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('bundles/amlweb/ico/apple-touch-icon-72-precomposed.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/amlweb/ico/apple-touch-icon-57-precomposed.png') }}">
+    
+    <link href="{{ asset('bundles/amlweb/css/admin.css') }}" rel="stylesheet">
+    
+    <link href="{{ asset('bundles/amlweb/css/fullcalendar/fullcalendar.css') }}" rel="stylesheet">
+	<link href="{{ asset('bundles/amlweb/css/fullcalendar/fullcalendar.print.css') }}" rel="stylesheet">
+    {% block css %}{% endblock %}
+    	
+    
+    
+    <script src="{{ asset('bundles/amlweb/js/jquery.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/jquery-ui-1.8.23.custom.min.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/fullcalendar/fullcalendar.js') }}"></script>
+    {% block headerJs %}{% endblock %}
+  </head>
+
+  <body>
+  	
+  	{# Barre de navigation top #}
+  	{% include "AmlWebBundle::Admin/Navigation/navbar.html.twig" %}  	
+   
+	{% if app.request.attributes.get('_route') == 'admin' %}
+		<div class="container">
+	{% else %}
+    	<div class="container-fluid">
+    {% endif %}
+    <!-- CONTENT HERE -->
+    
+	    {% if app.session.hasFlash('success') %}
+		    <div class="alert alert-success">
+		        {{ app.session.flash('success') }}
+		    </div>
+	 	{% endif %}
+	 	{% if app.session.hasFlash('notice') %}
+		    <div class="alert alert-error">
+		        {{ app.session.flash('notice') }}
+		    </div>
+	 	{% endif %}
+	 	{% if app.session.hasFlash('info') %}
+		    <div class="alert alert-info">
+		        {{ app.session.flash('info') }}
+		    </div>
+	 	{% endif %}  
+      
+      	{% block body %}{% endblock %}
+
+		<hr>
+    
+	    <footer>
+	      <p>© AML 2012</p>
+	    </footer>
+    
+    </div> <!-- /container -->
+	
+	
+	
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-transition.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-alert.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-modal.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-dropdown.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-scrollspy.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-tab.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-tooltip.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-popover.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-button.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-collapse.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-carousel.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-typeahead.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-datepicker.js') }}"></script>
+    
+    {% block endJS %}{% endblock %}
+
+  </body>
+</html>
+ 

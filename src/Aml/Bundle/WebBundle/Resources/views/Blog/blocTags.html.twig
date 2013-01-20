@@ -1,0 +1,8 @@
+{# Bloc des Tags #}
+<h3>Mots-clés</h3>
+<ul id="bloc-blog-categorie">
+	<li><a class="active" title="Tous les articles" href="{{ path('blog') }}">Tous</a></li>
+	{% for tag in tags %}
+		<li><a class="active" title="{{ tag.description }}" href="{{ path('blog',{'tag' : tag.systemName}) }}">{{ tag.name }}</a> ({{tag.articles|length}})</li>
+	{% endfor %}
+</ul>
