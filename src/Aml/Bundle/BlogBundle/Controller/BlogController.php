@@ -1,12 +1,12 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Controller;
+namespace Aml\Bundle\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Aml\Bundle\WebBundle\Entity\Blog;
+use Aml\Bundle\BlogBundle\Entity\Blog;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 class BlogController extends Controller
 {
 	protected $_limitPagination = 5;
-	
+
     /**
      * Lists all Blog entities.
      *
@@ -26,27 +26,29 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request, $page)
     {
-    	$categories = $tags = array();
-        $em = $this->getDoctrine()->getEntityManager();
 
-        $nbEntities = $em->getRepository('AmlWebBundle:Blog')->countPublicArticles();
-           
+    	$categories = $tags = array();
+        $em = $this->getDoctrine()->getManager();
+
+        $nbEntities = $em->getRepository('AmlBlogBundle:Blog')->countPublicArticles();
+
         $num_pages = $page; // some calculation of what page you're currently on
 		$repo = $this->getDoctrine()
-		                ->getRepository('AmlWebBundle:Blog');
+		                ->getRepository('AmlBlogBundle:Blog');
+
 		$entities = $repo->findBy(
 		    array('public' => "1"),
 		    array('created' => 'DESC'),
 		    $this->_limitPagination,
-		    $this->_limitPagination * ($num_pages-1)		    
+		    $this->_limitPagination * ($num_pages-1)
 		);
-		
-		// Get Liste catégories 
-		$categories = $em->getRepository('AmlWebBundle:BlogCategories')->findAll();
-		
-		// Get Liste tags 
-		$tags = $em->getRepository('AmlWebBundle:BlogTags')->findAll();
-		
+
+		// Get Liste catégories
+		$categories = $em->getRepository('AmlBlogBundle:BlogCategories')->findAll();
+
+		// Get Liste tags
+		$tags = $em->getRepository('AmlBlogBundle:BlogTags')->findAll();
+
 		// Calcul de la pagination
 		$calculLastPage = round($nbEntities/$this->_limitPagination);
 		$pagination = array(
@@ -57,7 +59,7 @@ class BlogController extends Controller
 	        	'prevPage' => ( $page-1 > 0 ? $page-1 : false ),
 				'lastPage' => ( $calculLastPage >= 0 ? $calculLastPage : 0)
         	);
- 
+
         return array(
         	'entities' => $entities,
         	'pagination' => $pagination,
@@ -75,17 +77,17 @@ class BlogController extends Controller
      */
     public function showAction($id = false, $url_key = null)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         if( false === $id ){
-        	$entity = $em->getRepository('AmlWebBundle:Blog')->findOneBy(array('url' => $url_key));        	
+        	$entity = $em->getRepository('AmlBlogBundle:Blog')->findOneBy(array('url' => $url_key));
         }
         else{
-        	$entity = $em->getRepository('AmlWebBundle:Blog')->find($id);
+        	$entity = $em->getRepository('AmlBlogBundle:Blog')->find($id);
         }
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find AmlWebBundle:Blog entity.');
+            throw $this->createNotFoundException('Unable to find AmlBlogBundle:Blog entity.');
         }
 
         return array(

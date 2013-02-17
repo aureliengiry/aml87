@@ -1,13 +1,13 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Controller\Admin;
+namespace Aml\Bundle\BlogBundle\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Aml\Bundle\WebBundle\Entity\Blog;
-use Aml\Bundle\WebBundle\Form\Admin\BlogType;
+use Aml\Bundle\BlogBundle\Entity\Blog;
+use Aml\Bundle\BlogBundle\Form\Admin\BlogType;
 
 /**
  * Blog controller.
@@ -26,8 +26,8 @@ class BlogController extends Controller
      */
     public function indexAction($page)
     {
-        $em = $this->getDoctrine()->getEntityManager();
-        $repositoryBlog = $em->getRepository('AmlWebBundle:Blog');
+        $em = $this->getDoctrine()->getManager();
+        $repositoryBlog = $em->getRepository('AmlBlogBundle:Blog');
         	
         $allEntities = $repositoryBlog->findAll();
         $nbEntities = count($allEntities);
@@ -81,7 +81,7 @@ class BlogController extends Controller
      *
      * @Route("/create", name="admin_content_blog_create")
      * @Method("post")
-     * @Template("AmlWebBundle:Blog:new.html.twig")
+     * @Template("AmlBlogBundle:Blog:new.html.twig")
      */
     public function createAction()
     {
@@ -91,7 +91,7 @@ class BlogController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity
             	->setCreated(new \DateTime())
             	->setUpdated(new \DateTime())
@@ -121,9 +121,9 @@ class BlogController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlWebBundle:Blog')->find($id);
+        $entity = $em->getRepository('AmlBlogBundle:Blog')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Blog entity.');
@@ -144,13 +144,13 @@ class BlogController extends Controller
      *
      * @Route("/{id}/update", name="admin_content_blog_update")
      * @Method("post")
-     * @Template("AmlWebBundle:Blog:edit.html.twig")
+     * @Template("AmlBlogBundle:Blog:edit.html.twig")
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlWebBundle:Blog')->find($id);
+        $entity = $em->getRepository('AmlBlogBundle:Blog')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Blog entity.');
@@ -195,8 +195,8 @@ class BlogController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('AmlWebBundle:Blog')->find($id);
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AmlBlogBundle:Blog')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Blog entity.');
@@ -215,5 +215,62 @@ class BlogController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+
+    /* GESTION DES TAGS */
+    /**
+     * Action to search tags for autocomplete field
+     *
+     * @Route("/tags-ajax-autocomplete", name="blog_tags_ajax_autocomplete")
+     * @Template()
+     */
+    public function ajaxAutocompleteTagsAction(Request $request)
+    {
+        // récupération du mots clés en ajax selon la présélection du mot
+        $value = $request->get('tags');
+        $em = $this->getDoctrine()->getManager();
+        $tumblrTagsRepository = $em->getRepository('AmlBlogBundle:BlogTags');
+        $motscles = $tumblrTagsRepository->getTags($value);
+
+        return new Response(json_encode($motscles));
+    }
+
+    /**
+     * Action to load tag or create it if not exist
+     *
+     * @Route("/tags-load-item", name="blog_tags_load_item")
+     * @Template()
+     */
+    public function ajaxLoadTagAction(Request $request)
+    {
+        // récupération du mots clés en ajax selon la présélection du mot
+        $value = $request->get('tag');
+
+
+        $em = $this->getDoctrine()->getManager();
+        $tumblrTagsRepository = $em->getRepository('AmlBlogBundle:BlogTags');
+
+        // Check if tag Already exist
+        $resultTag = $tumblrTagsRepository->loadOneTagByName($value);
+        if( false === $resultTag ){
+
+            // Create a new tag
+            $newEntityTag = new TumblrTag();
+            $newEntityTag
+                ->setName($value)
+                ->setSystemName($value)
+            ;
+            $em->persist($newEntityTag);
+            $em->flush();
+
+            // Parsing result
+            $resultTag = array(
+                'id' => $newEntityTag->getId(),
+                'name' => $newEntityTag->getName()
+            );
+        }
+
+        return new Response(json_encode($resultTag));
     }
 }

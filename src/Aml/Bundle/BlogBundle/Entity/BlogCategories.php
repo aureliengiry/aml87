@@ -1,15 +1,15 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Aml\Bundle\WebBundle\Entity\BlogCategories
+ * Aml\Bundle\BlogBundle\Entity\BlogCategories
  *
  * @ORM\Table(name="blog_categories")
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\BlogCategoriesRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Entity\Repository\BlogCategoriesRepository")
  */
 class BlogCategories
 {

@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Aml\Bundle\WebBundle\Entity\Blog;
+use Aml\Bundle\BlogBundle\Entity\Blog;
 
 
 /**
@@ -135,7 +135,7 @@ EOF
 		         
 		         // Set category
 		         $buildCategoryName = $this->_build_category_name( $article['category'] );		         
-    			 $entityBlogCategorie = $em->getRepository('AmlWebBundle:BlogCategories')->findOneBy(array('system_name' => $buildCategoryName )); 			
+    			 $entityBlogCategorie = $em->getRepository('AmlBlogBundle:BlogCategories')->findOneBy(array('system_name' => $buildCategoryName ));
 		         $entityBlog->setCategory($entityBlogCategorie);
     			 
 		         // Set Tags
@@ -144,7 +144,7 @@ EOF
 		         $associatedTagsName = array();
 		         foreach( $associatedTags as $tag ){
 		         	$tagName = $this->_build_category_name( $tag['name'] );
-		         	$entityBlogTags = $em->getRepository('AmlWebBundle:BlogTags')->findOneBy(array('system_name' => $tagName ));
+		         	$entityBlogTags = $em->getRepository('AmlBlogBundle:BlogTags')->findOneBy(array('system_name' => $tagName ));
 		         	$entityBlog->addTags($entityBlogTags);
 		         }
 		         		         

@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity\Repository;
+namespace Aml\Bundle\BlogBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -19,7 +19,7 @@ class BlogRepository extends EntityRepository
 			
 			$qb
 				->select('COUNT(a.id)')
-				->from('AmlWebBundle:Blog', 'a')
+				->from('AmlBlogBundle:Blog', 'a')
 				->where("a.public = 1")	
 			;
 	

@@ -1,13 +1,13 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Controller\Admin;
+namespace Aml\Bundle\BlogBundle\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Aml\Bundle\WebBundle\Entity\BlogCategories;
-use Aml\Bundle\WebBundle\Form\Admin\BlogCategoriesType;
+use Aml\Bundle\BlogBundle\Entity\BlogCategories;
+use Aml\Bundle\BlogBundle\Form\Admin\BlogCategoriesType;
 
 /**
  * BlogCategories controller.
@@ -26,7 +26,7 @@ class BlogCategoriesController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('AmlWebBundle:BlogCategories')->findAll();
+        $entities = $em->getRepository('AmlBlogBundle:BlogCategories')->findAll();
 
         return array('entities' => $entities);
     }
@@ -41,7 +41,7 @@ class BlogCategoriesController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AmlWebBundle:BlogCategories')->find($id);
+        $entity = $em->getRepository('AmlBlogBundle:BlogCategories')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find BlogCategories entity.');
@@ -76,7 +76,7 @@ class BlogCategoriesController extends Controller
      *
      * @Route("/create", name="admin_content_blog_categories_create")
      * @Method("post")
-     * @Template("AmlWebBundle:BlogCategories:new.html.twig")
+     * @Template("AmlBlogBundle:BlogCategories:new.html.twig")
      */
     public function createAction()
     {
@@ -110,7 +110,7 @@ class BlogCategoriesController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AmlWebBundle:BlogCategories')->find($id);
+        $entity = $em->getRepository('AmlBlogBundle:BlogCategories')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find BlogCategories entity.');
@@ -131,13 +131,13 @@ class BlogCategoriesController extends Controller
      *
      * @Route("/{id}/update", name="admin_content_blog_categories_update")
      * @Method("post")
-     * @Template("AmlWebBundle:BlogCategories:edit.html.twig")
+     * @Template("AmlBlogBundle:BlogCategories:edit.html.twig")
      */
     public function updateAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AmlWebBundle:BlogCategories')->find($id);
+        $entity = $em->getRepository('AmlBlogBundle:BlogCategories')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find BlogCategories entity.');
@@ -179,7 +179,7 @@ class BlogCategoriesController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('AmlWebBundle:BlogCategories')->find($id);
+            $entity = $em->getRepository('AmlBlogBundle:BlogCategories')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find BlogCategories entity.');

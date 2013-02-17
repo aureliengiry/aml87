@@ -1,15 +1,15 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Aml\Bundle\WebBundle\Entity\Blog
+ * Aml\Bundle\BlogBundle\Entity\Blog
  *
  * @ORM\Table(name="blog_articles")
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\BlogRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Entity\Repository\BlogRepository")
  */
 class Blog
 {
@@ -236,26 +236,10 @@ class Blog
 	}
 
 	/**
-	 * @return the $tags
-	 */
-	public function getTags() {
-		return $this->tags;
-	}
-
-	/**
 	 * @param datetime $published
 	 */
 	public function setPublished($published) {
 		$this->published = $published;
-		return $this;
-	}
-
-
-	/**
-	 * @param field_type $tags
-	 */
-	public function setTags($tags) {
-		$this->tags[] = $tags;
 		return $this;
 	}
 
@@ -317,5 +301,39 @@ class Blog
 	
 		return strtolower($string);
 	}
-    
+
+    /**
+     *
+     * @param TumblrTag $tag
+     */
+    public function addTag($tag) {
+        // var_dump( $tag);exit;
+        $tag->addArticle($this);
+        $this->tags[] = $tag;
+        return $this;
+    }
+
+    /**
+     * Fonction to delete tag
+     * @param Discussion $discussion
+     */
+    public function removeTag($tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * @return the $tags
+     */
+    public function getTags() {
+        return $this->tags;
+    }
+
+    /**
+     * @return the $tags
+     */
+    public function setTags(ArrayCollection $tags) {
+        $this->tags = $tags;
+        return $this;
+    }
 }

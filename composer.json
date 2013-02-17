@@ -23,6 +23,7 @@
 		"dms/dms-filter-bundle": "dev-master",
 		"avalanche123/imagine-bundle": "dev-master",
 		"guzzle/guzzle": "dev-master",
+		"genemu/form-bundle": "2.1.x-dev",
 		"zendframework/zend-ldap" : "2.0.*"
     },
     "scripts": {

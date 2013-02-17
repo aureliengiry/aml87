@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Form\Admin;
+namespace Aml\Bundle\BlogBundle\Form\Admin;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,6 +17,6 @@ class BlogCategoriesType extends AbstractType
 
     public function getName()
     {
-        return 'aml_bundle_webbundle_BlogCategoriestype';
+        return 'aml_bundle_blogbundle_BlogCategoriestype';
     }
 }

@@ -1,0 +1,51 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% form_theme form 'AmlWebBundle:Form:aml_theme.html.twig' %}
+
+{% block title -%}Blog - Créer un nouvel article de blog{%- endblock title %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span3">
+		{# Barre de navigation left #}
+	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
+	</div>		
+
+
+	<div class="span5">
+		<h1>Créer un nouvel article de blog</h1>
+
+		<form class="form-horizontal" action="{{ path('admin_content_blog_create') }}" method="post" {{ form_enctype(form) }}>
+		    {{ form_widget(form) }}
+            <div class="form-actions">
+                <a class="btn btn-link" href="{{ path('admin_content_blog') }}">
+                    <i class="icon-arrow-left"></i> Retour à la liste des articles
+                </a>
+
+                <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
+            </div>
+		</form>
+
+	</div>
+</div>
+
+	{# CONFIG CKEDITOR #}
+  	{% include "AmlWebBundle::Admin/Partial/ckeditor.html.twig" with {'target': 'aml_bundle_BlogBundle_blogtype_body'}  %}
+
+{% endblock body %}
+
+
+
+{% block javascripts %}
+    {{ form_javascript(form) }}
+
+    <script src="{{ asset('bundles/amlblog/js/manageTags.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        tags.urlLoadTag = '{{ url('blog_tags_load_item') }}';
+        tags.init();
+    </script>
+{% endblock javascripts %}
+
+{% block css %}
+    {{ form_stylesheet(form) }}
+{% endblock %}

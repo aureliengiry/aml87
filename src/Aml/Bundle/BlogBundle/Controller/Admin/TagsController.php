@@ -1,13 +1,13 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Controller\Admin;
+namespace Aml\Bundle\BlogBundle\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Aml\Bundle\WebBundle\Entity\Tags;
-use Aml\Bundle\WebBundle\Form\Admin\TagsType;
+use Aml\Bundle\BlogBundle\Entity\BlogTags;
+//use Aml\Bundle\BlogBundle\Form\Admin\TagsType;
 
 /**
  * Tags controller.
@@ -24,9 +24,9 @@ class TagsController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AmlWebBundle:Tags')->findAll();
+        $entities = $em->getRepository('AmlBlogBundle:Tags')->findAll();
 
         return array('entities' => $entities);
     }
@@ -39,9 +39,9 @@ class TagsController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlWebBundle:Tags')->find($id);
+        $entity = $em->getRepository('AmlBlogBundle:Tags')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tags entity.');
@@ -76,7 +76,7 @@ class TagsController extends Controller
      *
      * @Route("/create", name="content_tags_create")
      * @Method("post")
-     * @Template("AmlWebBundle:Tags:new.html.twig")
+     * @Template("AmlBlogBundle:Tags:new.html.twig")
      */
     public function createAction()
     {
@@ -86,7 +86,7 @@ class TagsController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -108,9 +108,9 @@ class TagsController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlWebBundle:Tags')->find($id);
+        $entity = $em->getRepository('AmlBlogBundle:Tags')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tags entity.');
@@ -131,13 +131,13 @@ class TagsController extends Controller
      *
      * @Route("/{id}/update", name="content_tags_update")
      * @Method("post")
-     * @Template("AmlWebBundle:Tags:edit.html.twig")
+     * @Template("AmlBlogBundle:Tags:edit.html.twig")
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlWebBundle:Tags')->find($id);
+        $entity = $em->getRepository('AmlBlogBundle:Tags')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Tags entity.');
@@ -178,8 +178,8 @@ class TagsController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('AmlWebBundle:Tags')->find($id);
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AmlBlogBundle:Tags')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Tags entity.');

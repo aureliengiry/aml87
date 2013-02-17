@@ -1,5 +1,6 @@
 {% extends "AmlWebBundle::Admin/layout.html.twig" %}
 
+{% form_theme edit_form 'AmlWebBundle:Form:aml_theme.html.twig' %}
 {% block title -%}Blog - Créer un nouvel article de blog{%- endblock title %}
 
 {% block body %}
@@ -17,16 +18,14 @@
 		<form  class="form-horizontal" action="{{ path('admin_content_blog_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
 		    {{ form_widget(edit_form) }}
 		    <div class="form-actions">
-		        <button class="btn btn-primary" type="submit">Enregistrer</button>
+                <a class="btn btn-link" href="{{ path('admin_content_blog') }}">
+                    <i class="icon-arrow-left"></i> Retour à la liste des articles
+                </a>
+		        <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
 		    </div>
 		</form>
 		
 		<ul class="record_actions">
-		    <li>
-		        <a class="btn btn-link" href="{{ path('admin_content_blog') }}">
-		            Back to the list
-		        </a>
-		    </li>
 		    <li>
 		        <form action="{{ path('admin_content_blog_delete', { 'id': entity.id }) }}" method="post">
 		            {{ form_widget(delete_form) }}
@@ -38,6 +37,6 @@
 </div>
 
 	{# CONFIG CKEDITOR #}
-  	{% include "AmlWebBundle::Admin/Partial/ckeditor.html.twig" with {'target': 'aml_bundle_WebBundle_blogtype_body'}  %} 
+  	{% include "AmlWebBundle::Admin/Partial/ckeditor.html.twig" with {'target': 'aml_bundle_BlogBundle_blogtype_body'}  %}
 
 {% endblock body %}

@@ -15,12 +15,12 @@
 			{% for entity in entities %}
 			    	
 				{# articles #}
-	  			{% include "AmlWebBundle::Blog/article.html.twig" %} 
+	  			{% include "AmlBlogBundle::Blog/article.html.twig" %}
 			        
 			{% endfor %} 
 			 
 			{# Pagination #}
-	  		{% include "AmlWebBundle::Blog/pagination.html.twig" %}
+	  		{% include "AmlBlogBundle::Blog/pagination.html.twig" %}
 		
 		{% else %}	
 			<h1>Blog</h1>
@@ -33,12 +33,12 @@
 
 	{# Liste des catégories #}
 	<div class="side-bloc no-border">
-		{% include "AmlWebBundle::Blog/blocCategories.html.twig" %} 
+		{% include "AmlBlogBundle::Blog/blocCategories.html.twig" %}
 	</div>
 	
 	{# Liste des tags #}
 	<div class="side-bloc">
-		{% include "AmlWebBundle::Blog/blocTags.html.twig" %} 
+		{% include "AmlBlogBundle::Blog/blocTags.html.twig" %}
 	</div>
 </div>
 {% endblock body %}

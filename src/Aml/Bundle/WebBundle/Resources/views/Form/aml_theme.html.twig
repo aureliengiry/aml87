@@ -9,7 +9,7 @@
 
 {% block field_row %}
 {% spaceless %}
-        
+
         {% if radio is defined and radio is sameas(true) %}
         	{{ form_label(form, label|default(null)) }}
             {{ form_errors(form) }}
@@ -109,3 +109,4 @@
     {% endif %}
 {% endspaceless %}
 {% endblock time_widget %}
+

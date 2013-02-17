@@ -1,5 +1,5 @@
 {
-    "hash": "ccf9f10a96e9d6f04c158cf3e6fc3a54",
+    "hash": "8551f128fb2525fd7f16dc6fc0e91c54",
     "packages": [
         {
             "name": "avalanche123/imagine-bundle",
@@ -23,7 +23,6 @@
             "suggest": {
                 "symfony/twig-bundle": "2.*"
             },
-            "time": "1349799990",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -46,7 +45,8 @@
             "keywords": [
                 "image manipulation",
                 "imagine"
-            ]
+            ],
+            "time": "1349799990"
         },
         {
             "name": "dms/dms-filter",
@@ -67,7 +67,6 @@
                 "php": ">=5.3.2",
                 "doctrine/common": ">=2.1"
             },
-            "time": "1351165403",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -89,7 +88,8 @@
             "keywords": [
                 "filter",
                 "dms"
-            ]
+            ],
+            "time": "1351165403"
         },
         {
             "name": "dms/dms-filter-bundle",
@@ -110,7 +110,6 @@
                 "php": ">=5.3.2",
                 "dms/dms-filter": ">=1.0.2"
             },
-            "time": "1351165403",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -134,7 +133,8 @@
                 "bundle",
                 "filter",
                 "dms"
-            ]
+            ],
+            "time": "1351165403"
         },
         {
             "name": "doctrine/common",
@@ -153,7 +153,6 @@
             "require": {
                 "php": ">=5.3.2"
             },
-            "time": "1348120518",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -203,7 +202,8 @@
                 "eventmanager",
                 "annotations",
                 "persistence"
-            ]
+            ],
+            "time": "1348120518"
         },
         {
             "name": "doctrine/dbal",
@@ -223,7 +223,6 @@
                 "php": ">=5.3.2",
                 "doctrine/common": "2.3.*"
             },
-            "time": "1352716871",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -266,7 +265,8 @@
                 "persistence",
                 "dbal",
                 "queryobject"
-            ]
+            ],
+            "time": "1352716871"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -360,7 +360,6 @@
             "suggest": {
                 "symfony/yaml": "If you want to use YAML Metadata Mapping Driver"
             },
-            "time": "1352731781",
             "bin": [
                 "bin/doctrine",
                 "bin/doctrine.php"
@@ -405,6 +404,73 @@
             "keywords": [
                 "database",
                 "orm"
+            ],
+            "time": "1352731781"
+        },
+        {
+            "name": "genemu/form-bundle",
+            "version": "dev-master",
+            "target-dir": "Genemu/Bundle/FormBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/genemu/GenemuFormBundle.git",
+                "reference": "a71b227d49878786df9feb2ef815b8c53e0ce073"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/genemu/GenemuFormBundle/zipball/a71b227d49878786df9feb2ef815b8c53e0ce073",
+                "reference": "a71b227d49878786df9feb2ef815b8c53e0ce073",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.1,<2.3-dev",
+                "symfony/form": ">=2.1,<2.3-dev"
+            },
+            "require-dev": {
+                "symfony/finder": "2.*",
+                "doctrine/mongodb-odm-bundle": "*",
+                "propel/propel-bundle": "*",
+                "doctrine/orm": "2.*",
+                "doctrine/doctrine-bundle": "1.*"
+            },
+            "suggest": {
+                "symfony/twig-bridge": "2.*",
+                "symfony/finder": "2.*",
+                "symfony/mongodb-odm-bundle": "2.*",
+                "symfony/doctrine-bundle": "1.*",
+                "propel/propel-bundle": "*"
+            },
+            "time": "1360612279",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Genemu\\Bundle\\FormBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Chauvel",
+                    "email": "olivier@generation-multiple.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/genemu/GenemuFormBundle/contributors"
+                }
+            ],
+            "description": "Extra Form",
+            "keywords": [
+                "form",
+                "extra form"
             ]
         },
         {
@@ -465,7 +531,6 @@
                 "zend/zend-cache": "2.0.0beta3",
                 "zend/zend-log": "2.0.0beta3"
             },
-            "time": "1352746873",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -498,7 +563,8 @@
                 "http client",
                 "client",
                 "web service"
-            ]
+            ],
+            "time": "1352746873"
         },
         {
             "name": "imagine/Imagine",
@@ -714,7 +780,6 @@
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/orm": "*"
             },
-            "time": "1348217792",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -738,7 +803,8 @@
             "keywords": [
                 "dependency injection",
                 "annotations"
-            ]
+            ],
+            "time": "1348217792"
         },
         {
             "name": "jms/metadata",
@@ -820,7 +886,6 @@
                 "symfony/form": "*",
                 "symfony/validator": "*"
             },
-            "time": "1346947943",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -847,7 +912,8 @@
                 "security",
                 "secure",
                 "expression"
-            ]
+            ],
+            "time": "1346947943"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -881,7 +947,6 @@
                 "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
                 "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
             },
-            "time": "1352285252",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -913,7 +978,8 @@
                 "assets",
                 "compression",
                 "minification"
-            ]
+            ],
+            "time": "1352285252"
         },
         {
             "name": "monolog/monolog",
@@ -921,30 +987,35 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog",
-                "reference": "bcb51e01406965ebd030d4b99eb199a9226c3fef"
+                "reference": "48f22f4519ed17b4754c4b561101d19aeb0d0236"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Seldaek/monolog/archive/bcb51e01406965ebd030d4b99eb199a9226c3fef.zip",
-                "reference": "bcb51e01406965ebd030d4b99eb199a9226c3fef",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/48f22f4519ed17b4754c4b561101d19aeb0d0236",
+                "reference": "48f22f4519ed17b4754c4b561101d19aeb0d0236",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.3.0",
+                "psr/log": ">=1.0,<2.0"
             },
             "require-dev": {
-                "mlehner/gelf-php": "1.0.*"
+                "mlehner/gelf-php": "1.0.*",
+                "doctrine/couchdb": "dev-master",
+                "raven/raven": "0.3.*"
             },
             "suggest": {
                 "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mongo": "Allow sending log messages to a MongoDB server"
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "raven/raven": "Allow sending log messages to a Sentry server"
             },
-            "time": "1352653384",
+            "time": "1360778990",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "1.4.x-dev"
                 }
             },
             "installation-source": "source",
@@ -964,11 +1035,50 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Logging for PHP 5.3",
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
             "homepage": "http://github.com/Seldaek/monolog",
             "keywords": [
                 "log",
-                "logging"
+                "logging",
+                "psr-3"
+            ]
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log",
+                "reference": "1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/php-fig/log/archive/1.0.0.zip",
+                "reference": "1.0.0",
+                "shasum": ""
+            },
+            "time": "2012-12-21 11:40:51",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
             ]
         },
         {
@@ -989,7 +1099,6 @@
             "require": {
                 "symfony/framework-bundle": "2.1.*"
             },
-            "time": "1347340208",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1015,7 +1124,8 @@
             "keywords": [
                 "distribution",
                 "configuration"
-            ]
+            ],
+            "time": "1347340208"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -1193,7 +1303,6 @@
             "suggest": {
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
             },
-            "time": "1352285268",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1222,7 +1331,8 @@
                 "assets",
                 "compression",
                 "minification"
-            ]
+            ],
+            "time": "1352285268"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -1250,7 +1360,6 @@
                 "symfony/yaml": ">=2.1.0,<2.3-dev",
                 "symfony/config": ">=2.1.0,<2.3-dev"
             },
-            "time": "1348137624",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1277,7 +1386,8 @@
                 }
             ],
             "description": "Symfony MonologBundle",
-            "homepage": "http://symfony.com"
+            "homepage": "http://symfony.com",
+            "time": "1348137624"
         },
         {
             "name": "symfony/swiftmailer-bundle",
@@ -1394,7 +1504,6 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": "1.*"
             },
-            "time": "1352824146",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1425,7 +1534,8 @@
             "homepage": "http://symfony.com",
             "keywords": [
                 "framework"
-            ]
+            ],
+            "time": "1352824146"
         },
         {
             "name": "twig/extensions",
@@ -1444,7 +1554,6 @@
             "require": {
                 "twig/twig": "1.*"
             },
-            "time": "1349889206",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1472,30 +1581,31 @@
                 "debug",
                 "i18n",
                 "text"
-            ]
+            ],
+            "time": "1349889206"
         },
         {
             "name": "twig/twig",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git://github.com/fabpot/Twig.git",
-                "reference": "f85076b091c6b6a2f9e14276a436724d23a1217e"
+                "url": "https://github.com/fabpot/Twig.git",
+                "reference": "72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/archive/f85076b091c6b6a2f9e14276a436724d23a1217e.zip",
-                "reference": "f85076b091c6b6a2f9e14276a436724d23a1217e",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f",
+                "reference": "72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "1352875253",
+            "time": "1360435022",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.11-dev"
+                    "dev-master": "1.12-dev"
                 }
             },
             "installation-source": "source",
@@ -1610,6 +1720,7 @@
         "kriswallsmith/assetic": 20,
         "dms/dms-filter-bundle": 20,
         "avalanche123/imagine-bundle": 20,
-        "guzzle/guzzle": 20
+        "guzzle/guzzle": 20,
+        "genemu/form-bundle": 20
     }
 }
