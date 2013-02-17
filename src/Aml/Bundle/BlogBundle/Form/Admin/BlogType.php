@@ -2,7 +2,11 @@
 namespace Aml\Bundle\BlogBundle\Form\Admin;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\CallbackValidator;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormError;
 
 class BlogType extends AbstractType
 {
@@ -17,7 +21,7 @@ class BlogType extends AbstractType
             ))
 
             ->add('addtags', 'genemu_jqueryautocompleter_entity', array(
-                'route_name' => 'tumblr_tags_ajax_autocomplete',
+                'route_name' => 'blog_tags_ajax_autocomplete',
                 'class' => 'Aml\Bundle\BlogBundle\Entity\BlogTags',
                 'property' => 'name',
                 'label' => 'Tags',

@@ -12,6 +12,37 @@ use Doctrine\ORM\EntityRepository;
  */
 class BlogTagsRepository extends EntityRepository
 {
+
+    /**
+     * Function pour récupérer les mots clés pour l'autocomplétion
+     * @param string $value
+     * @return array
+     */
+    public function getTags($value)
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('t')
+            ->from('AmlBlogBundle:BlogTags', 't')
+            ->where("t.name LIKE :tag")
+            ->orderBy('t.name', 'ASC')
+            ->setParameter('tag', $value.'%')
+        ;
+
+        $query = $qb->getQuery();
+        $tags = $query->getResult();
+
+        $json = array();
+        foreach ($tags as $mot) {
+            $json[] = array(
+                'label' => $mot->getName(),
+                'value' => $mot->getId()
+            );
+        }
+
+        return $json;
+    }
+
     /**
      * Funtion to load TumblrTab by name
      *

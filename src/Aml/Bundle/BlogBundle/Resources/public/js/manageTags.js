@@ -3,26 +3,7 @@ var listTags = new Array();
 var tags = tags || {};
 
 (function($){
-	
-	tags.init = function(){
-		this.form = $('#tumblr-add-content');
-		this.containerSelectedTags = $('#container-selected-tags');
 
-        // Get the div that holds the collection of tags
-        this.collectionHolder = $('#tumblr_tags');
-
-        // count the current form inputs we have (e.g. 2), use that as the new
-        // index when inserting a new item (e.g. 2)
-        this.collectionHolder.data('index', this.collectionHolder.find(':input').length);
-        this.tags = new Array();
-		
-		this.addTagButton = $('#tumblr-button-add-tag');
-        this.autocompleteField = $('#autocompleter_tumblr_addtags');
-		this.removeTagButton = this.collectionHolder.find('button.close');
-		
-		this.observeAddTag();
-		this.observeRemoveTag();
-	};
 	
 	tags.observeAddTag = function(){
 		
