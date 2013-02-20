@@ -32,7 +32,7 @@
     
     <link href="{{ asset('bundles/amlweb/css/fullcalendar/fullcalendar.css') }}" rel="stylesheet">
 	<link href="{{ asset('bundles/amlweb/css/fullcalendar/fullcalendar.print.css') }}" rel="stylesheet">
-    {% block css %}{% endblock %}
+    {% block stylesheets %}{% endblock %}
     	
     
     
@@ -85,20 +85,10 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-transition.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-alert.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-modal.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-dropdown.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-scrollspy.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-tab.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-tooltip.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-popover.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-button.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-collapse.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-carousel.js') }}"></script>
-    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-typeahead.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-datepicker.js') }}"></script>
-    
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-timepicker.js') }}"></script>
+
     {% block javascripts %}{% endblock %}
 
   </body>

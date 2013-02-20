@@ -34,30 +34,6 @@ class LinkController extends Controller
     }
 
     /**
-     * Finds and displays a Link entity.
-     *
-     * @Route("/{id}/show", name="content_link_show")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('AmlWebBundle:Link')->find($id);
-
-        if (!$entity) {            
-            $this->get('session')->setFlash('notice', 'Ce lien n\'existe pas !');
-            return $this->redirect($this->generateUrl('content_link'));
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
-    }
-
-    /**
      * Displays a form to create a new Link entity.
      *
      * @Route("/new", name="content_link_new")

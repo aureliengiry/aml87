@@ -1,14 +1,14 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Controller\Admin;
+namespace Aml\Bundle\EvenementsBundle\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-use Aml\Bundle\WebBundle\Entity\Evenement;
-use Aml\Bundle\WebBundle\Form\Admin\EvenementType;
+use Aml\Bundle\EvenementsBundle\Entity\Evenement;
+use Aml\Bundle\EvenementsBundle\Form\Admin\EvenementType;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,17 +50,16 @@ class AgendaController extends Controller
      */
     public function indexAction(Request $request)
     {
-    	
-    	$em = $this->getDoctrine()->getEntityManager();
-    	$evenementRepository = $em->getRepository('AmlWebBundle:Evenement');
-    	
+    	$em = $this->getDoctrine()->getManager();
+    	$evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
+
+        // Init Display mode
     	$requestMode = $request->query->get('mode');
     	if( isset($requestMode) && !empty($requestMode) ){
 			$mode = $requestMode;    		
     	}
     	else{
     		$mode = 'calendar';
-    		
     	}
 
     	if( 'list' === $mode ){
@@ -90,8 +89,8 @@ class AgendaController extends Controller
     	$eventsArray = array();
     	$data = $request->request->all();
     	
-    	$em = $this->getDoctrine()->getEntityManager();
-    	$entities = $em->getRepository('AmlWebBundle:Evenement')->getEvenementsCalendar($data['start'], $data['end']);
+    	$em = $this->getDoctrine()->getManager();
+    	$entities = $em->getRepository('AmlEvenementsBundle:Evenement')->getEvenementsCalendar($data['start'], $data['end']);
     	
     	
     	foreach( $entities as $entity ){
@@ -128,7 +127,7 @@ class AgendaController extends Controller
      *
      * @Route("/create", name="content_agenda_create")
      * @Method("post")
-     * @Template("AmlWebBundle:Concert:new.html.twig")
+     * @Template("AmlEvenementsBundle:Concert:new.html.twig")
      */
     public function createAction()
     {
@@ -138,7 +137,7 @@ class AgendaController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -160,9 +159,9 @@ class AgendaController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlWebBundle:Evenement')->find($id);
+        $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Concert entity.');
@@ -183,13 +182,13 @@ class AgendaController extends Controller
      *
      * @Route("/{id}/update", name="admin_agenda_update")
      * @Method("post")
-     * @Template("AmlWebBundle:Concert:edit.html.twig")
+     * @Template("AmlEvenementsBundle:Concert:edit.html.twig")
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlWebBundle:Evenement')->find($id);
+        $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Concert entity.');
@@ -230,8 +229,8 @@ class AgendaController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('AmlWebBundle:Evenement')->find($id);
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Concert entity.');

@@ -15,7 +15,13 @@
 
 
 	<div class="span5">
-		<h1>Page list</h1>
+		<h1>Gestion des pages</h1>
+
+        <div class="form-actions">
+            <a class="btn btn-link" href="{{ path('admin_content_pages_new') }}">
+                <i class="icon-plus"></i> Créer une nouvelle page
+            </a>
+        </div>
 
 		<table class="table table-bordered table-striped">
 		    <thead>
@@ -29,36 +35,34 @@
 		        </tr>
 		    </thead>
 		    <tbody>
-		    {% for entity in entities %}
-		        <tr>		            
-		            <td>{{ entity.title }}</td>
-		            <td>{{ entity.body }}</td>
-		            <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif%}</td>
-		            <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif%}</td>
-		            <td>{{ entity.public }}</td>
-		            <td>{{ entity.url }}</td>
-		            <td>
-		                <ul>
-		                    <li>
-		                        <a href="{{ path('admin_content_pages_show', { 'id': entity.id }) }}">show</a>
-		                    </li>
-		                    <li>
-		                        <a href="{{ path('admin_content_pages_edit', { 'id': entity.id }) }}">edit</a>
-		                    </li>
-		                </ul>
-		            </td>
-		        </tr>
-		    {% endfor %}
+            {% if entities is not empty  %}
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity.title }}</td>
+                        <td>{{ entity.body }}</td>
+                        <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif%}</td>
+                        <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif%}</td>
+                        <td>{{ entity.public }}</td>
+                        <td>{{ entity.url }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('admin_content_pages_show', { 'id': entity.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('admin_content_pages_edit', { 'id': entity.id }) }}">edit</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <td colspan="7">Aucune page enregistré</td>
+            {% endif %}
 		    </tbody>
 		</table>
 		
-		<ul>
-		    <li>
-		        <a href="{{ path('admin_content_pages_new') }}">
-		            Create a new entry
-		        </a>
-		    </li>
-		</ul>
+
 	</div>
 </div>
 {% endblock body %}

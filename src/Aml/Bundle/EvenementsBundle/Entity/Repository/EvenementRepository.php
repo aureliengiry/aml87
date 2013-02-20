@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity\Repository;
+namespace Aml\Bundle\EvenementsBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -30,7 +30,7 @@ class EvenementRepository extends EntityRepository
 		$q = $this->getEntityManager()->createQueryBuilder();		
 		$q
 			 ->select('e')
-			 ->from('AmlWebBundle:Evenement', 'e')
+			 ->from('AmlEvenementsBundle:Evenement', 'e')
 			 ->where('e.dateStart > :dateStart')
 			// ->andWhere('e.date_start < :date_end')
 			 ->orderBy('e.dateStart', 'ASC')
@@ -60,7 +60,7 @@ class EvenementRepository extends EntityRepository
 		$q = $this->getEntityManager()->createQueryBuilder();		
 		$q
 			 ->select('e')
-			 ->from('AmlWebBundle:Evenement', 'e')
+			 ->from('AmlEvenementsBundle:Evenement', 'e')
 			 ->where('e.dateStart >= :dateStart')
 			 ->orderBy('e.dateStart', 'ASC')
 			 ->setParameters(array

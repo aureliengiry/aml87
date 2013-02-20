@@ -1,14 +1,14 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\EvenementsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Aml\Bundle\WebBundle\Entity\Evenement
+ * Aml\Bundle\EvenementsBundle\Entity\Evenement
  *
  * @ORM\Table(name="evenements")
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\EvenementRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\EvenementsBundle\Entity\Repository\EvenementRepository")
  */
 class Evenement
 {

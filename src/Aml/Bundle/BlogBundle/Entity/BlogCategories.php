@@ -44,13 +44,6 @@ class BlogCategories
     private $description;
     
     /**
-     * @var boolean weight
-     *
-     * @ORM\Column(name="weight", type="integer")
-     */
-    private $weight;
-    
-    /**
      * @ORM\OneToMany(targetEntity="Blog", mappedBy="category")
      * @ORM\JoinColumn(name="id", referencedColumnName="id_article")
      */
@@ -100,6 +93,7 @@ class BlogCategories
     public function setName($name)
     {
         $this->name = $name;
+        $this->setSystemName($name);
         return $this;
     }
 
@@ -112,21 +106,6 @@ class BlogCategories
     {
         return $this->name;
     }
-    
-/**
-	 * @return the $weight
-	 */
-	public function getWeight() {
-		return $this->weight;
-	}
-
-	/**
-	 * @param boolean $weight
-	 */
-	public function setWeight($weight) {
-		$this->weight = $weight;
-		return $this;
-	}
 	
 	/**
 	 * @return the $description

@@ -19,6 +19,12 @@ class BlogType extends AbstractType
             	'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
             	'required' => false,
             ))
+            ->add('category','entity',array(
+                'label' => 'Catégorie',
+                'class' => 'AmlBlogBundle:BlogCategories',
+                'property' => 'name',
+                'empty_value' => 'Choisissez une catégorie',
+            ))
 
             ->add('addtags', 'genemu_jqueryautocompleter_entity', array(
                 'route_name' => 'blog_tags_ajax_autocomplete',

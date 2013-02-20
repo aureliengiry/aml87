@@ -1,8 +1,10 @@
 {# Template du sous menu de navigation de l'espace admin #}
 <div class="well sidebar-nav">
 {% if app.request.attributes.get('_template').get('controller') == "Admin\\Blog" 
-	or app.request.attributes.get('_template').get('controller') == "Admin\\Page" 
-	or app.request.attributes.get('_template').get('controller') == "Admin\\Link" 
+	or app.request.attributes.get('_template').get('controller') == "Admin\\BlogCategories"
+	or app.request.attributes.get('_template').get('controller') == "Admin\\BlogTags"
+	or app.request.attributes.get('_template').get('controller') == "Admin\\Page"
+	or app.request.attributes.get('_template').get('controller') == "Admin\\Link"
 	or app.request.attributes.get('_template').get('controller') == "Admin\\Album" 
 %}
   <ul class="nav nav-list">

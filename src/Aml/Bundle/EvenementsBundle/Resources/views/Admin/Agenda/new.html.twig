@@ -1,7 +1,9 @@
 {% extends "AmlWebBundle::Admin/layout.html.twig" %}
 
+{% form_theme form 'AmlWebBundle:Form:aml_theme.html.twig' %}
+
 {% block title -%}
-    Liste des évènements
+    Créer un évènement
 {%- endblock title %}
 
 {% block body %}
@@ -13,7 +15,7 @@
 	
 	<h1>Créer un évènement</h1>
 
-	<form action="{{ path('content_agenda_create') }}" method="post" {{ form_enctype(form) }}>
+	<form class="form-horizontal" action="{{ path('content_agenda_create') }}" method="post" {{ form_enctype(form) }}>
 	    {{ form_widget(form) }}
 	   <div class="form-actions">
 	   		<a href="{{ path('admin_agenda') }}" class="btn btn-link" title="Retourner à la liste des évènements">
@@ -32,14 +34,18 @@
 </div>
 {% endblock body %}
 
-{% block endJS %}
+{% block javascripts %}
 	
 	<script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-datepicker.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-timepicker.js') }}" type="text/javascript"></script>
 	<script type="text/javascript">
-		$('#aml_bundle_WebBundle_concerttype_dateStart_date').datepicker({'format' : 'dd/mm/yyyy', 'weekStart' : 1, 'language' : 'fr'});
+		$('#aml_bundle_evenementsbundle_concerttype_dateStart_date').datepicker({
+            'format' : 'dd/mm/yyyy',
+            'weekStart' : 1,
+            'language' : 'fr'
+        });
 
-	    $('#aml_bundle_WebBundle_concerttype_dateStart_time').timepicker({
+	    $('#aml_bundle_evenementsbundle_concerttype_dateStart_time').timepicker({
 	        template : 'dropdown',
 	        showInputs: false,
 		   defaultTime: 'value',

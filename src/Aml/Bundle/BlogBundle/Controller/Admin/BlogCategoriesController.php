@@ -24,34 +24,11 @@ class BlogCategoriesController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AmlBlogBundle:BlogCategories')->findAll();
 
         return array('entities' => $entities);
-    }
-
-    /**
-     * Finds and displays a BlogCategories entity.
-     *
-     * @Route("/{id}/show", name="admin_content_blog_categories_show")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('AmlBlogBundle:BlogCategories')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find BlogCategories entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
     }
 
     /**
@@ -86,11 +63,11 @@ class BlogCategoriesController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_content_blog_categories_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_content_blog_categories'));
             
         }
 
@@ -108,7 +85,7 @@ class BlogCategoriesController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmlBlogBundle:BlogCategories')->find($id);
 
@@ -135,7 +112,7 @@ class BlogCategoriesController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmlBlogBundle:BlogCategories')->find($id);
 
@@ -154,7 +131,7 @@ class BlogCategoriesController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_content_blog_categories_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_content_blog_categories'));
         }
 
         return array(
@@ -178,7 +155,7 @@ class BlogCategoriesController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('AmlBlogBundle:BlogCategories')->find($id);
 
             if (!$entity) {

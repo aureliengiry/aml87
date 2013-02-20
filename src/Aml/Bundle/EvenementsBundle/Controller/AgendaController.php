@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Controller;
+namespace Aml\Bundle\EvenementsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -23,9 +23,9 @@ class AgendaController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AmlWebBundle:Evenement')->findAll();
+        $entities = $em->getRepository('AmlEvenementsBundle:Evenement')->findAll();
 
         return array('entities' => $entities);
     }

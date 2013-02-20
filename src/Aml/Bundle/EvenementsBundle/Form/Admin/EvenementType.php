@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Form\Admin;
+namespace Aml\Bundle\EvenementsBundle\Form\Admin;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,6 +34,6 @@ class EvenementType extends AbstractType
 
     public function getName()
     {
-        return 'aml_bundle_WebBundle_concerttype';
+        return 'aml_bundle_evenementsbundle_concerttype';
     }
 }

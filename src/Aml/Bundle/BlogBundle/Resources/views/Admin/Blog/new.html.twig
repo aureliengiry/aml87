@@ -18,6 +18,7 @@
 		<form class="form-horizontal" action="{{ path('admin_content_blog_create') }}" method="post" {{ form_enctype(form) }}>
 		    {{ form_row(form.title) }}
 		    {{ form_row(form.body) }}
+		    {{ form_row(form.category) }}
 
             <div class="control-group">
                 <label class="control-label" for="tumblr_addtags">{{ form_label(form.addtags)  }}</label>

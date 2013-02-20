@@ -1,3 +1,13 @@
+aml_evenements:
+    resource: "@AmlEvenementsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+aml_users:
+    resource: "@AmlUsersBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 aml_blog:
     resource: "@AmlBlogBundle/Controller/"
     type:     annotation
@@ -15,7 +25,7 @@ AmlWebBundle:
 
 login:
     pattern:   /connexion
-    defaults:  { _controller: AmlWebBundle:Secure:login }
+    defaults:  { _controller: AmlUsersBundle:Secure:login }
     
 login_check:
     pattern:   /login_check

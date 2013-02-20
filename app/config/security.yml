@@ -5,7 +5,7 @@ jms_security_extra:
 security:
     encoders:
        # Symfony\Component\Security\Core\User\User: plaintext
-       Aml\Bundle\WebBundle\Entity\User:
+       Aml\Bundle\UsersBundle\Entity\User:
              algorithm: sha512
              iterations: 2000
 
@@ -20,7 +20,7 @@ security:
 #                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
 #                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
         users:
-            entity: { class: AmlWebBundle:User, property: login }
+            entity: { class: AmlUsersBundle:User, property: login }
 
     firewalls:
         dev:

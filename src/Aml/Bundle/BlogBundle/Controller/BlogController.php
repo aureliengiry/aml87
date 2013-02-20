@@ -26,22 +26,33 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request, $page)
     {
+    	$filters = $categories = $tags = array();
 
-    	$categories = $tags = array();
+        $category = $request->get('category');
+        if( $category ){
+               $filters['category'] = $category;
+        }
+
+        $tag = $request->get('tag');
+        if( $tag ){
+            $filters['tag'] = $tag;
+        }
+
+
         $em = $this->getDoctrine()->getManager();
+        $repositoryBlog = $this->getDoctrine()->getRepository('AmlBlogBundle:Blog');
 
-        $nbEntities = $em->getRepository('AmlBlogBundle:Blog')->countPublicArticles();
+        // Get Nb articles
+        $nbEntities = $repositoryBlog->countPublicArticles($filters);
 
         $num_pages = $page; // some calculation of what page you're currently on
-		$repo = $this->getDoctrine()
-		                ->getRepository('AmlBlogBundle:Blog');
+        $entitiesBlog = $repositoryBlog->getPublicArticles(
+            $this->_limitPagination,
+            $this->_limitPagination * ($num_pages-1)    ,
+            $filters
+        );
 
-		$entities = $repo->findBy(
-		    array('public' => "1"),
-		    array('created' => 'DESC'),
-		    $this->_limitPagination,
-		    $this->_limitPagination * ($num_pages-1)
-		);
+        //var_dump( $entitiesBlog );exit;
 
 		// Get Liste catégories
 		$categories = $em->getRepository('AmlBlogBundle:BlogCategories')->findAll();
@@ -61,7 +72,7 @@ class BlogController extends Controller
         	);
 
         return array(
-        	'entities' => $entities,
+        	'entities' => $entitiesBlog,
         	'pagination' => $pagination,
         	'categories' => $categories,
         	'tags' => $tags

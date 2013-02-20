@@ -34,18 +34,22 @@
 		        </tr>
 		    </thead>
 		    <tbody>
-		    {% for entity in entities %}
-		        <tr>          
-		            <td><a href="{{ path('blog_show', { 'id': entity.id }) }}" target="_blank" title="Voir l'article : {{ entity.title }}">{{ entity.title }}</a></td>
-		            <td>le {% if entity.created %}{{ entity.created|date('d/m/Y à H:i') }}{% endif%}</td>
-		            <td>le {% if entity.updated %}{{ entity.updated|date('d/m/Y à H:i') }}{% endif%}</td>
-		            <td>{{ entity.public|publicStatus }}</td>
-		            <td>
-		            	<a class="btn btn-link" href="{{ path('blog_show', { 'id': entity.id }) }}" target="_blank" title="Voir l'article : {{ entity.title }}"><i class="icon-folder-open"></i> Voir</a>
-		                <a class="btn btn-link" href="{{ path('admin_content_blog_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>		                   
-		            </td>
-		        </tr>
-		    {% endfor %}
+            {% if entities is not empty  %}
+                {% for entity in entities %}
+                    <tr>
+                        <td><a href="{{ path('blog_show', { 'id': entity.id }) }}" target="_blank" title="Voir l'article : {{ entity.title }}">{{ entity.title }}</a></td>
+                        <td>le {% if entity.created %}{{ entity.created|date('d/m/Y à H:i') }}{% endif%}</td>
+                        <td>le {% if entity.updated %}{{ entity.updated|date('d/m/Y à H:i') }}{% endif%}</td>
+                        <td>{{ entity.public|publicStatus }}</td>
+                        <td>
+                            <a class="btn btn-link" href="{{ path('blog_show', { 'id': entity.id }) }}" target="_blank" title="Voir l'article : {{ entity.title }}"><i class="icon-folder-open"></i> Voir</a>
+                            <a class="btn btn-link" href="{{ path('admin_content_blog_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <td colspan="5">Aucun article enregistré</td>
+            {% endif %}
 		    </tbody>
 		</table>
 		
