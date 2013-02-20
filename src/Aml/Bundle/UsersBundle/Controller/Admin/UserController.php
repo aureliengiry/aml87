@@ -1,13 +1,13 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Controller\Admin;
+namespace Aml\Bundle\UsersBundle\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Aml\Bundle\WebBundle\Entity\User;
-use Aml\Bundle\WebBundle\Form\Admin\UserType;
+use Aml\Bundle\UsersBundle\Entity\User;
+use Aml\Bundle\UsersBundle\Form\Admin\UserType;
 
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('AmlWebBundle:User')->findAll();
+        $entities = $em->getRepository('AmlUsersBundle:User')->findAll();
 
         return array('entities' => $entities);
     }
@@ -57,7 +57,7 @@ class UserController extends Controller
      *
      * @Route("/create", name="admin_user_create")
      * @Method("post")
-     * @Template("AmlWebBundle:Admin/User:new.html.twig")
+     * @Template("AmlUsersBundle:Admin/User:new.html.twig")
      */
     public function createAction()
     {
@@ -98,7 +98,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AmlWebBundle:User')->find($id);
+        $entity = $em->getRepository('AmlUsersBundle:User')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -119,13 +119,13 @@ class UserController extends Controller
      *
      * @Route("/{id}/update", name="admin_user_update")
      * @Method("post")
-     * @Template("AmlWebBundle:Admin/User:edit.html.twig")
+     * @Template("AmlUsersBundle:Admin/User:edit.html.twig")
      */
     public function updateAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('AmlWebBundle:User')->find($id);
+        $entity = $em->getRepository('AmlUsersBundle:User')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -167,7 +167,7 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('AmlWebBundle:User')->find($id);
+            $entity = $em->getRepository('AmlUsersBundle:User')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');

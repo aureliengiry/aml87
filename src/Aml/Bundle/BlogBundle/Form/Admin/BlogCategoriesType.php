@@ -10,8 +10,8 @@ class BlogCategoriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('system_name')
             ->add('name')
+            ->add('description')
         ;
     }
 

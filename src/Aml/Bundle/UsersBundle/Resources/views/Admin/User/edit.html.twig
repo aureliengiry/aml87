@@ -1,5 +1,7 @@
 {% extends "AmlWebBundle::Admin/layout.html.twig" %}
 
+{% form_theme edit_form 'AmlWebBundle:Form:aml_theme.html.twig' %}
+
 {% block title -%}
     Membre - Ajouter un nouveau membre
 {%- endblock title %}
@@ -15,23 +17,23 @@
 	<div class="span5">
 		<h1>User edit</h1>
 
-		<form action="{{ path('admin_user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+		<form class="form-horizontal" action="{{ path('admin_user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
 		    {{ form_widget(edit_form) }}
-		    <div class="form-actions">
-				<button class="btn btn-primary" type="submit">Enregistrer</button>
-			</div>
+
+            <div class="form-actions">
+                <a class="btn btn-link" href="{{ path('admin_user') }}">
+                    <i class="icon-arrow-left"></i> Retour à la liste des membres
+                </a>
+                <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
+            </div>
 		</form>
 		
 		<ul class="record_actions">
-		    <li>
-		        <a href="{{ path('admin_user') }}">
-		            Back to the list
-		        </a>
-		    </li>
+
 		    <li>
 		        <form action="{{ path('admin_user_delete', { 'id': entity.id }) }}" method="post">
 		            {{ form_widget(delete_form) }}
-		            <button type="submit">Delete</button>
+		            <button class="btn btn-danger" type="submit">Supprimer</button>
 		        </form>
 		    </li>
 		</ul>

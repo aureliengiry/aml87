@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\UsersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,10 +15,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
- * Aml\Bundle\WebBundle\Entity\User
+ * Aml\Bundle\UsersBundle\Entity\User
  *
  * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\UsersBundle\Entity\Repository\UserRepository")
  * @UniqueEntity(fields="login", message="Un utilisateur existe déjà avec ce login.")
  */
 class User implements AdvancedUserInterface

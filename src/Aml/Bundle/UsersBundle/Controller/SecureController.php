@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace Aml\Bundle\WebBundle\Controller;
+namespace Aml\Bundle\UsersBundle\Controller;
 
 //use Ic\Bundle\PslwebBundle\Form\ForgotPasswordType;
 
@@ -20,15 +20,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Component\Security\Core\SecurityContext;
 
-use Aml\Bundle\WebBundle\Entity\User;
-/*
-use Ic\Bundle\PslwebBundle\Form\UserType;
-use Ic\Bundle\PslwebBundle\Form\UserHandler;
-use Ic\Bundle\PslwebBundle\Entity\UsersCommunaute;
-use Ic\Bundle\PslwebBundle\Entity\User;
-use Ic\Bundle\PslwebBundle\Entity\Role;
-use Ic\Bundle\PslwebBundle\Entity\Organisme;
-use Ic\Bundle\PslwebBundle\Entity\Communaute;*/
+use Aml\Bundle\UsersBundle\Entity\User;
 
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
@@ -101,7 +93,7 @@ class SecureController extends Controller
 //			return $this->redirect($this->generateUrl('admin'));
 //		}
 
-		$em = $this->getDoctrine()->getEntityManager();
+		$em = $this->getDoctrine()->getManager();
 	
 		
 
