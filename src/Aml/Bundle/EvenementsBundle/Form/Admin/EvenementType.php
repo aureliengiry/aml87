@@ -10,25 +10,32 @@ class EvenementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //->add('dateStart')
+
+            ->add('title','text',array(
+                'label' => 'Titre'
+            ))
+            ->add('type', 'choice', array(
+                'label' => 'Type d\'événement',
+                'choices'   => \Aml\Bundle\EvenementsBundle\Entity\Evenement::getTypesEvenements(),
+                'multiple' => false,
+                'empty_value' => 'Sélectionnez le type d\'événement'
+            ))
             ->add('dateStart', 'datetime', array( // genemu_jquerydate ne marche plus
             		'label' => 'Date',
             		'date_widget' => 'single_text',
             		'time_widget' => 'single_text',
             		'input'  => 'datetime',
-            		'date_format' => 'dd/MM/yyyy',
-            		'data' => new \DateTime(),
-            		'attr' => array( 'data-help' => 'Date de l\'événement'),
+            		'date_format' => 'dd/MM/yyyy'
             ))
-//             //heure
-//             ->add('lieu', 'text', array(
-//             		'label' => 'Lieu',
-//             		'attr' => array('size' => 15, 'data-help' => 'Lieu de l\'évenement'),
-//             ))
-            ->add('title')
             ->add('description')
-            ->add('archive')
-            ->add('public')
+            ->add('archive','checkbox',array(
+                'label' => 'Archiver',
+                'required' => false
+            ))
+            ->add('public','checkbox',array(
+                'label' => 'Publier',
+                'required' => false
+            ))
         ;
     }
 

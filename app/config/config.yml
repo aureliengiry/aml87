@@ -82,10 +82,20 @@ services:
         class: Twig_Extensions_Extension_Debug
         tags: [{ name: 'twig.extension' }]
           
-    ic.twig.niceDate_extension:
+    aml.twig.niceDate_extension:
         class: Aml\Bundle\WebBundle\Twig\PublicStatusExtension
         tags:
             - { name: twig.extension }
+
+    aml.twig.wordWarp_extension:
+            class: Aml\Bundle\WebBundle\Twig\WordWarpExtension
+            tags:
+              - { name: twig.extension }
+
+    aml.twig.substring_extension:
+            class: Aml\Bundle\WebBundle\Twig\SubstringExtension
+            tags:
+              - { name: twig.extension }
 
 avalanche_imagine:
     web_root:     "%kernel.root_dir%/../web"

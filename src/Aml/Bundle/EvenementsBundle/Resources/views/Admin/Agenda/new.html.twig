@@ -32,17 +32,22 @@
 
 	</div>
 </div>
+    {# CONFIG CKEDITOR #}
+    {% include "AmlWebBundle::Admin/Partial/ckeditor.html.twig" with {'target': 'aml_bundle_evenementsbundle_concerttype_description'}  %}
 {% endblock body %}
 
 {% block javascripts %}
 	
 	<script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('bundles/amlweb/js/bootstrap/locales/bootstrap-datepicker.fr.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-timepicker.js') }}" type="text/javascript"></script>
 	<script type="text/javascript">
 		$('#aml_bundle_evenementsbundle_concerttype_dateStart_date').datepicker({
             'format' : 'dd/mm/yyyy',
             'weekStart' : 1,
             'language' : 'fr'
+        }).on('changeDate', function(ev){
+            $('#aml_bundle_evenementsbundle_concerttype_dateStart_date').datepicker('hide');
         });
 
 	    $('#aml_bundle_evenementsbundle_concerttype_dateStart_time').timepicker({
@@ -52,11 +57,22 @@
 	        showMeridian: false
 	    });
 
+      /*  $('#date_evenement').datepicker({'format' : 'dd/mm/yyyy', 'weekStart' : 1, 'language' : 'fr'}).on('changeDate', function(ev){
+            $('#date_evenement').datepicker('hide');
+        });
+
+        $('#creation_evenement_date_time').timepicker({
+            template : 'dropdown',
+            showInputs: false,
+            defaultTime: 'value',
+            showMeridian: false
+        });      */
+
     </script>
     
 {% endblock %}
 
-{% block css %}
+{% block stylesheets %}
 
 	<link href="{{ asset('bundles/amlweb/css/bootstrap/datepicker.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/amlweb/css/bootstrap/timepicker.css') }}" rel="stylesheet">

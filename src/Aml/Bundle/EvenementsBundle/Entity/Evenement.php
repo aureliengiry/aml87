@@ -3,6 +3,9 @@
 namespace Aml\Bundle\EvenementsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+
 
 /**
  * Aml\Bundle\EvenementsBundle\Entity\Evenement
@@ -12,6 +15,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Evenement
 {
+    const EVENEMENT_TYPE_CONCERT = 'concert';
+    const EVENEMENT_TYPE_REUNION = 'reunion';
+    const EVENEMENT_TYPE_REPETITION = 'repetition';
+    const EVENEMENT_TYPE_ENREGISTREMENT = 'enregistrement';
+    const EVENEMENT_TYPE_CONCOURS = 'concours';
+    const EVENEMENT_TYPE_SORTIE = 'sortie';
+
     /**
      * @var integer $id
      *
@@ -68,7 +78,19 @@ class Evenement
      *
      * @ORM\Column(name="public", type="boolean")
      */
-    private $public; 
+    private $public;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Blog", mappedBy="evenements", cascade={"persist"})
+     */
+    protected $articlesBlog;
+
+    public function __construct()
+    {
+        $this->articlesBlog = new ArrayCollection();
+        // $this->files = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -219,6 +241,59 @@ class Evenement
 	public function setType($type) {
 		$this->type = $type;
 		return $this;
-	}    
-    
+	}
+
+    /**
+     * Retourne le liste des différents types d'évènement
+     * @return array
+     */
+    static function getTypesEvenements() {
+        $typesEvenement = array();
+
+        $typesEvenement[self::EVENEMENT_TYPE_CONCERT] = 'Concert';
+        $typesEvenement[self::EVENEMENT_TYPE_CONCOURS] = 'Concours';
+        $typesEvenement[self::EVENEMENT_TYPE_ENREGISTREMENT] = 'Enregistrement';
+        $typesEvenement[self::EVENEMENT_TYPE_REPETITION] = 'Répétition';
+        $typesEvenement[self::EVENEMENT_TYPE_REUNION] = 'Réunion';
+        $typesEvenement[self::EVENEMENT_TYPE_SORTIE] = 'Sortie';
+
+        return $typesEvenement;
+    }
+
+    /* ---------------- ARTICLES LIES ---------------- */
+
+    /**
+     *
+     * @param Blog $articleBlog
+     */
+    public function addArticleBlog($articleBlog) {
+        // var_dump( $tag);exit;
+        $articleBlog->addEvenement($this);
+        $this->articlesBlog[] = $articleBlog;
+        return $this;
+    }
+
+    /**
+     * Fonction to delete articleBlog
+     * @param Blog $articleBlog
+     */
+    public function removeTag($articleBlog)
+    {
+        $this->articlesBlog->removeElement($articleBlog);
+    }
+
+    /**
+     * @return Evenement
+     */
+    public function getArticlesBlog() {
+        return $this->articlesBlog;
+    }
+
+    /**
+     * @return Evenement
+     */
+    public function setArticlesBlog(ArrayCollection $articlesBlog) {
+        $this->articlesBlog = $articlesBlog;
+        return $this;
+    }
 }

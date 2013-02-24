@@ -43,7 +43,41 @@ class EvenementRepository extends EntityRepository
 			
 	    return $q->getQuery()->getResult();
 	}
-	
+
+    /**
+     * Function to build request in order to filter blog articles
+     *
+     * @param $query
+     * @param array $params
+     * @param array $filters
+     * @return mixed
+     */
+    private function _buildRequestByFilters( $query, $params = array(), $filters = array() ){
+        if( isset($filters['archive']) ){
+            $query
+                ->andWhere("e.archive = :archive")
+            ;
+            $params['archive'] = $filters['archive'];
+        }
+
+        if( isset($filters['public']) ){
+            $query
+                ->andWhere("e.public = :public")
+            ;
+            $params['public'] = $filters['public'];
+        }
+        if( isset($filters['type']) && !empty($filters['type']) ){
+            $query
+                ->andWhere("e.type = :type")
+            ;
+            $params['type'] = $filters['type'];
+        }
+
+        $query->setParameters( $params );
+
+        return $query;
+    }
+
 	/**
      * Fonction pour avoir les prochains évènements
      * 
@@ -51,7 +85,7 @@ class EvenementRepository extends EntityRepository
      * @param int $limit
      * @return ArrayCollection
      */
-	public function getNextEvenements(  )
+	public function getNextEvenements( $filters = array() )
 	{
 		$dateTimeStart = new \DateTime();
 		$dateTimeStart->setTime(0,0);
@@ -63,12 +97,25 @@ class EvenementRepository extends EntityRepository
 			 ->from('AmlEvenementsBundle:Evenement', 'e')
 			 ->where('e.dateStart >= :dateStart')
 			 ->orderBy('e.dateStart', 'ASC')
-			 ->setParameters(array
-				 (
-					'dateStart' => $dateTimeStart,
-				 ));
-		
-			
-	    return $q->getQuery()->getResult();
+			/*               */
+        ;
+
+        if( !empty($filters) ){
+            $params = array
+            (
+                'dateStart' => $dateTimeStart,
+            );
+            $q = $this->_buildRequestByFilters( $q,$params, $filters );
+        }
+        else{
+            $q->setParameters(array
+            (
+                'dateStart' => $dateTimeStart,
+            ));
+        }
+
+        $query =  $q->getQuery();
+        //var_dump('<pre>', $query->getSQL(),$query->getParameters() );exit;
+	    return $query->getResult();
 	}
 }

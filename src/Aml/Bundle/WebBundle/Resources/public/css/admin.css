@@ -58,3 +58,17 @@ input[type="file"]{
 .tumblr-row-page{
     position: relative;
 }
+
+
+
+/* Liste Evenement */
+
+.uiHeaderSection, .uiSideHeader {
+    background-color: #f2f2f2;
+    border-bottom: none;
+    border-top: solid 1px #e2e2e2;
+    padding: 4px 6px 5px;
+}
+.uiHeaderSection td{
+    padding: 5px;
+}

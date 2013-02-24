@@ -30,10 +30,24 @@ $(document).ready(function() {
 	        },
 	        error: function() {
 	            alert('there was an error while fetching events!');
-	        },
-	        color: 'yellow',   // a non-ajax option
-	        textColor: 'black' // a non-ajax option
-	    }
+	        }
+	    },
+
+        monthNames: ['Janvier','F\u00e9vrier','Mars','Avril','Mai','Juin','Juillet','Ao\u00fbt','Septembre','Octobre','Novembre','D\u00e9cembre'],
+        monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Juin','Juil','Aout','Sep','Oct','Nov','Dec'],
+        dayNames:['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
+        dayNamesShort: ['Lun','Mar','Mer','Jeu','Thu','Ven','Sam','Dim'],
+
+        buttonText: {
+            prev: '&nbsp;&#9668;&nbsp;',
+            next: '&nbsp;&#9658;&nbsp;',
+            prevYear: '&nbsp;&lt;&lt;&nbsp;',
+            nextYear: '&nbsp;&gt;&gt;&nbsp;',
+            today: 'Aujourd\'hui',
+            month: 'mois',
+            week: 'semaine',
+            day: 'journée'
+        },
 	});
 	
 });

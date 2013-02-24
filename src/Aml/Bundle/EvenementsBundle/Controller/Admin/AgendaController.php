@@ -97,7 +97,8 @@ class AgendaController extends Controller
     		$eventsArray[] = array(
     			'id' => $entity->getId(),
     			'title' => $entity->getTitle(),
-    			'start' => $entity->getDateStart()->format('Y-m-d')
+    			'start' => $entity->getDateStart()->format('Y-m-d'),
+    			'description' => $entity->getDescription()
     		);
     	}
 			

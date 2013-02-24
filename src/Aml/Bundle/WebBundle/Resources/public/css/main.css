@@ -344,6 +344,38 @@ a.black{ background : url("../images/boutons/btn_view_more_black.png") no-repeat
 #block-concert .container-date-description-block p{ display:inline; margin-top:0; }
 
 #agenda-concerts-public li{ list-style:disc outside none; }
+#agenda-concerts-public h2,#agenda-concerts-public h2 a{
+    font-size: 17px;
+    line-height: 25px;
+    margin: 0 0 5px;
+}
+
+#agenda-concerts-public .event-item{
+
+}
+#agenda-concerts-public .event-item-structure{
+   display: inline-block;
+}
+
+#agenda-concerts-public .event-item-container-thumbnail{
+
+}
+#agenda-concerts-public .event-item-container-description{
+    padding: 0 0 0 10px;
+    width: 68%;
+}
+/* AGENDA - Liste Evenement */
+
+.uiHeaderSection, .uiSideHeader {
+    /*background-color: #f2f2f2;*/
+    border-bottom: none;
+    border-top: solid 1px #e2e2e2;
+    padding: 4px 6px 5px;
+}
+.uiHeaderSection td{
+    padding: 5px;
+}
+
 .accueil-intro{
 	padding: 0 15px;
 }

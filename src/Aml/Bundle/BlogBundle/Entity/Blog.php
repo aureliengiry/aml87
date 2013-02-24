@@ -87,9 +87,19 @@ class Blog
 	 */
 	protected $tags;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", inversedBy="articlesBlog")
+     * @ORM\JoinTable(name="evenements_articles_blog",
+     * 		joinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")},
+     * 		inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}
+     * )
+     */
+    protected $evenements;
+
  	public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
        // $this->files = new ArrayCollection();
     }
 
@@ -258,17 +268,6 @@ class Blog
 		return $this;
 	}
 
-	
-	/**
-	 *
-	 * @param MotCle $mot
-	 */
-	public function addTags($tag) {
-		$tag->addArticle($this);
-		$this->tags[] = $tag;
-		return $this;
-	}
-	
 // 	/**
 // 	 *
 // 	 * @param File $file
@@ -335,5 +334,22 @@ class Blog
     public function setTags(ArrayCollection $tags) {
         $this->tags = $tags;
         return $this;
+    }
+
+    /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
+    public function getEvenements()
+    {
+        return $this->evenements;
+    }
+
+    public function setArticles($evenements)
+    {
+        $this->evenements = $evenements;
+        return $this;
+    }
+
+    public function addEvenement($evenement)
+    {
+        $this->evenements[] = $evenement;
     }
 }
