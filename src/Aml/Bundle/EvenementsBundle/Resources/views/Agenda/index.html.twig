@@ -25,7 +25,8 @@
                         </div>
                         <div class="event-item-structure event-item-container-description">
                             <h2><a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="{{ entity.title }}">{{ entity.title }}</a></h2>
-                            <div>{{ entity.description|substring(220) }}</div>
+                            {% set description = entity.description|row %}
+                            <div>{{ description|substring(220) }}</div>
                         </div>
                     </div>
                 {% endfor %}

@@ -15,7 +15,7 @@
 	<div class="span5">
 		<h1>Créer un nouvel article de blog</h1>
 
-		<form class="form-horizontal" action="{{ path('admin_content_blog_create') }}" method="post" {{ form_enctype(form) }}>
+		<form class="form-horizontal" id="blog-add-content" action="{{ path('admin_content_blog_create') }}" method="post" {{ form_enctype(form) }}>
 		    {{ form_row(form.title) }}
 		    {{ form_row(form.body) }}
 		    {{ form_row(form.category) }}
@@ -24,17 +24,19 @@
                 <label class="control-label" for="tumblr_addtags">{{ form_label(form.addtags)  }}</label>
                 <div class="controls manage-tags-container">
                     <div class="input-append manage-tags">
-                        {{ form_widget(form.addtags)  }}<button id="blog-button-add-tag" class="btn" type="button"><i class="icon-chevron-right"></i></button>
+                        {{ form_widget(form.addtags)  }}<button id="blog-button-add-tag" class="btn" type="button"><i class="icon-plus"></i></button>
                     </div>
                     {% set tagDataPrototype = '<span>__name__</span><button class="close" >&times;</button><input type="hidden" name="aml_bundle_BlogBundle_blogtype[tags][]" value="__id__" />' %}
-                    <div id="tumblr_tags" class="tags pull-right manage-tags" data-prototype="{{ tagDataPrototype }}">
+                    <div id="blog_tags" class="tags pull-right manage-tags" data-prototype="{{ tagDataPrototype }}">
 
                     </div>
 
                 </div>
             </div>
 
-		    {{ form_rest(form) }}
+            {{ form_row(form.public) }}
+
+            {{form_row(form._token)}}
             <div class="form-actions">
                 <a class="btn btn-link" href="{{ path('admin_content_blog') }}">
                     <i class="icon-arrow-left"></i> Retour à la liste des articles
@@ -60,19 +62,19 @@
         tags.urlLoadTag = '{{ url('blog_tags_load_item') }}';
 
         tags.init = function(){
-            this.form = $('#tumblr-add-content');
+            this.form = $('#blog-add-content');
             this.containerSelectedTags = $('#container-selected-tags');
 
             // Get the div that holds the collection of tags
-            this.collectionHolder = $('#tumblr_tags');
+            this.collectionHolder = $('#blog_tags');
 
             // count the current form inputs we have (e.g. 2), use that as the new
             // index when inserting a new item (e.g. 2)
             this.collectionHolder.data('index', this.collectionHolder.find(':input').length);
             this.tags = new Array();
 
-            this.addTagButton = $('#tumblr-button-add-tag');
-            this.autocompleteField = $('#autocompleter_tumblr_addtags');
+            this.addTagButton = $('#blog-button-add-tag');
+            this.autocompleteField = $('#autocompleter_aml_bundle_BlogBundle_blogtype_addtags');
             this.removeTagButton = this.collectionHolder.find('button.close');
 
             this.observeAddTag();

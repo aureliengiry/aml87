@@ -38,9 +38,7 @@ class BlogType extends AbstractType
                 'property_path' => false
             ))
             ->add('tags', 'hidden', array(
-                'data' => array('toto',"titi"),
                 'property_path' => false
-
             ))
 
             ->add('public','checkbox',array(

@@ -11,7 +11,7 @@
 				
 		<div class="publi-info">
 			<span>Publié le 
-				<span class="date-article-block">le {% if entity.created %}{{ entity.created|date('d/m/Y à H:i') }}{% endif%}</span>		
+				<span class="date-article-block">{% if entity.created %}{{ entity.created|date('d/m/Y à H:i') }}{% endif%}</span>
 			</span>
 		</div>	
 				

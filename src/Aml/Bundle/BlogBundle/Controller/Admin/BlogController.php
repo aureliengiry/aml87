@@ -20,7 +20,7 @@ use Aml\Bundle\BlogBundle\Form\Admin\BlogType;
  */
 class BlogController extends Controller
 {
-	protected $_limitPagination = 5;
+	protected $_limitPagination = 15;
 	
     /**
      * Lists all Blog entities.
@@ -36,10 +36,11 @@ class BlogController extends Controller
         $allEntities = $repositoryBlog->findAll();
         $nbEntities = count($allEntities);
         $num_pages = $page; // some calculation of what page you're currently on
+        $nbPages = (int) ceil($nbEntities / $this->_limitPagination);
 		
 		
 		$entities = $repositoryBlog->findBy(
-		    array('public' => "1"),
+		    array(),
 		    array('created' => 'DESC'),
 		    $this->_limitPagination,
 		    $this->_limitPagination * ($num_pages-1)		    
@@ -49,6 +50,7 @@ class BlogController extends Controller
 		// Calcul de la pagination
 		$calculLastPage = round($nbEntities/$this->_limitPagination);
 		$pagination = array(
+                'nbPages' => $nbPages,
 	        	'nbEntities' => $nbEntities,
 	        	'limit' => $this->_limitPagination,
 	        	'currentPage' => $page,
@@ -89,19 +91,28 @@ class BlogController extends Controller
      */
     public function createAction()
     {
+        var_dump( $_POST );
         $entity  = new Blog();
         $request = $this->getRequest();
         $form    = $this->createForm(new BlogType(), $entity);
-        $form->bindRequest($request);
+        $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            // Set Tags
+            var_dump( $form->get('tags')->getData() );
+            foreach($form->get('tags')->getData() as $tag_id)
+            {
+                $entityTag = $em->getRepository('AmlBlogBundle:BlogTags')->find($tag_id);
+                $entityTag->getArticles()->add($entity);
+            }
+
             $entity
             	->setCreated(new \DateTime())
             	->setUpdated(new \DateTime())
             	->setPublished(new \DateTime())
             	->setUrl()
-            	->setIdCategoryBlog(1)
             ;
             $em->persist($entity);
             $em->flush();
@@ -175,7 +186,11 @@ class BlogController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_content_blog_edit', array('id' => $id)));
+            $this->get('session')->setFlash('success', 'L\'article a été mis à jour avec succès');
+            return $this->redirect($this->generateUrl('admin_content_blog'));
+        }
+        else{
+            $this->get('session')->setFlash('error', 'Une erreur est survenue lors de la mise à jour de l\'article "' . $entity->getTitle() . '".');
         }
 
         return array(
@@ -232,12 +247,12 @@ class BlogController extends Controller
     public function ajaxAutocompleteTagsAction(Request $request)
     {
         // récupération du mots clés en ajax selon la présélection du mot
-        $value = $request->get('tags');
+        $value = $request->get('term');
         $em = $this->getDoctrine()->getManager();
-        $tumblrTagsRepository = $em->getRepository('AmlBlogBundle:BlogTags');
-        $motscles = $tumblrTagsRepository->getTags($value);
+        $blogTagsRepository = $em->getRepository('AmlBlogBundle:BlogTags');
+        $tags = $blogTagsRepository->getTags($value);
 
-        return new Response(json_encode($motscles));
+        return new Response(json_encode($tags));
     }
 
     /**
@@ -253,14 +268,14 @@ class BlogController extends Controller
 
 
         $em = $this->getDoctrine()->getManager();
-        $tumblrTagsRepository = $em->getRepository('AmlBlogBundle:BlogTags');
+        $blogTagsRepository = $em->getRepository('AmlBlogBundle:BlogTags');
 
         // Check if tag Already exist
-        $resultTag = $tumblrTagsRepository->loadOneTagByName($value);
+        $resultTag = $blogTagsRepository->loadOneTagByName($value);
         if( false === $resultTag ){
 
             // Create a new tag
-            $newEntityTag = new TumblrTag();
+            $newEntityTag = new \Aml\Bundle\BlogBundle\Entity\BlogTags();
             $newEntityTag
                 ->setName($value)
                 ->setSystemName($value)

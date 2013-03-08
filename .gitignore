@@ -1,5 +1,5 @@
 # phpstorm
-.idea
+/.idea
 
 # Bootstrap
 app/bootstrap*

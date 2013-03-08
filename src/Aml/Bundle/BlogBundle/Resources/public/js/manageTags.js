@@ -9,8 +9,8 @@ var tags = tags || {};
 		
 		this.addTagButton.bind('click', function(event){
 			event.preventDefault();
-            tags.loadTag( tags.autocompleteField.val() );
 
+            tags.loadTag( tags.autocompleteField.val() );
         });
 	};
 
@@ -46,6 +46,7 @@ var tags = tags || {};
             this.autocompleteField.val('');
             this.observeRemoveTag();
             console.log( prototype, index );
+            console.log(  this.tags );
         }
         else{
             alert('Tag already selected');

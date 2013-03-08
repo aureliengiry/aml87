@@ -25,7 +25,7 @@ class BlogTags
     
     /**
      * @ORM\ManyToMany(targetEntity="Blog", inversedBy="tags")
-     * @ORM\JoinTable(name="tags_articles_blog",
+     * @ORM\JoinTable(name="blog_articles_tags",
      * 		joinColumns={@ORM\JoinColumn(name="id_tag", referencedColumnName="id_tag")},
      * 		inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
      * )
@@ -50,16 +50,16 @@ class BlogTags
     /**
      * @var smallint $weight
      *
-     * @ORM\Column(name="weight", type="smallint")
+     * @ORM\Column(name="weight", type="smallint", nullable=true)
      */
-    private $weight;
+    private $weight = 0;
     
      /**
      * @var text description
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    private $description = '';
 
 	public function __construct()
     {
