@@ -9,7 +9,8 @@
 	        <tr>
 	            <td><strong>{% if entity.dateStart %}{{ entity.dateStart|date('H:i') }}{% endif %}</strong></td>
                 <td>{{ entity.title }}</td>
-                <td>{{ entity.description }}</td>
+                {% set description = entity.description|raw %}
+                <td>{{ description|substring(220) }}</td>
 	            <td>{{ entity.public|publicStatus }}</td>
 	            <td>
 	                <a class="btn btn-link" href="{{ path('admin_agenda_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>		                   

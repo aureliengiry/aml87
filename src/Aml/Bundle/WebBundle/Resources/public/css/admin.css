@@ -21,19 +21,19 @@ input[type="file"]{
 	
 }
 
-/* Tumblr Tags */
+/* Blog Tags */
 .ui-helper-hidden-accessible{
     display: none;
 }
 
-#tumblr_tags .tag-item{
+#blog_tags .tag-item{
     display: inline-block;
     margin: 0 3px;
+    padding: 5px 25px 5px 5px;
 }
 
 .manage-tags-container .manage-tags{
-
-    display: inline-block;
+    margin: 0 0 15px;
 }
 
 /* UI Autocomplete */

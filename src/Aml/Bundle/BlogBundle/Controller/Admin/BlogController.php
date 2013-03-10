@@ -165,7 +165,8 @@ class BlogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlBlogBundle:Blog')->find($id);
+        $blogRepository = $em->getRepository('AmlBlogBundle:Blog');
+        $entity = $blogRepository->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Blog entity.');
@@ -176,13 +177,29 @@ class BlogController extends Controller
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        $editForm->bind($request);
 
         if ($editForm->isValid()) {
+
+            // Clean tags
+            $blogRepository->cleanTags($entity);
+
+            $listTags = $entity->getTags();
+
+
+            // Save tags
+            foreach($editForm->get('tags')->getData() as $tag_id)
+            {
+                $entityTag = $em->getRepository('AmlBlogBundle:BlogTags')->find($tag_id);
+                $entityTag->getArticles()->add($entity);
+            }
+
+
         	$entity
         		->setUpdated(new \DateTime())
         		->setUrl()
         	;
+
             $em->persist($entity);
             $em->flush();
 

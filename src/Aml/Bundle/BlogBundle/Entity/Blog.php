@@ -319,6 +319,7 @@ class Blog
     public function removeTag($tag)
     {
         $this->tags->removeElement($tag);
+        $tag->deleteArticle($this);
     }
 
     /**
@@ -342,7 +343,7 @@ class Blog
         return $this->evenements;
     }
 
-    public function setArticles($evenements)
+    public function setEvenements($evenements)
     {
         $this->evenements = $evenements;
         return $this;

@@ -100,4 +100,19 @@ class BlogRepository extends EntityRepository
 
         return $query->getResult();
     }
+
+    /**
+     * Fonction qui permet de supprimer les mots clés libres d'une discussion pour les rajouter proprement
+     * @param unknown_type $blog
+     */
+    public function cleanTags($blog)
+    {
+        $em = $this->getEntityManager();
+        foreach ($blog->getTags() as $tag)
+        {
+            $blog->removeTag($tag);
+        }
+        $em->flush();
+    }
+
 }

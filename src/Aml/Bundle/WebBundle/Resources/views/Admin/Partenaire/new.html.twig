@@ -1,0 +1,38 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% form_theme form 'AmlWebBundle:Form:aml_theme.html.twig' %}
+
+{% block title -%}
+    Créer un évènement
+{%- endblock title %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span3">
+    </div>
+
+    <div class="span5">
+        <h1>Ajouter un partenaire</h1>
+
+            <form class="form-horizontal" action="{{ path('admin_partenaire_create') }}" method="post" {{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+
+                <div class="form-actions">
+                    <a href="{{ path('admin_agenda') }}" class="btn btn-link" title="Retourner à la liste des évènements">
+                        <i class="icon-arrow-left"></i>
+                        retour à la liste des partenaires
+                    </a>
+
+                    <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
+                </div>
+            </form>
+    </div>
+
+</div>
+
+    {# CONFIG CKEDITOR #}
+    {% include "AmlWebBundle::Admin/Partial/ckeditor.html.twig" with {'target': 'aml_bundle_webbundle_partenairetype_description'}  %}
+{% endblock body %}
+
+
+

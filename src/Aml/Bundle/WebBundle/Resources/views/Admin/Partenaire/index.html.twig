@@ -1,0 +1,56 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% block title -%}
+
+    Blog - Liste des articles
+
+{%- endblock title %}
+
+{% block body %}
+
+<div class="row-fluid">
+    <div class="span3">
+        {# Barre de navigation left #}
+        {% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}
+    </div>
+
+
+    <div class="span5">
+
+        <h1>Liste des partenaires</h1>
+
+        <div class="form-actions">
+            <a class="btn btn-link" href="{{ path('admin_partenaire_new') }}">
+                <i class="icon-plus"></i> Ajouter un partenaire
+            </a>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.logo }}</td>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.description }}</td>
+                    <td>
+                        <a class="btn btn-link" href="{{ path('admin_partenaire_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+</div>
+{% endblock body %}

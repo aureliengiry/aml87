@@ -25,9 +25,18 @@ class EvenementType extends AbstractType
             		'date_widget' => 'single_text',
             		'time_widget' => 'single_text',
             		'input'  => 'datetime',
-            		'date_format' => 'dd/MM/yyyy'
+            		'date_format' => 'dd/MM/yyyy',
+                    'required' => false
             ))
-            ->add('description')
+            ->add('description','textarea', array(
+                    'required' => false
+            ))
+          /*  ->add('articles','collection', array(
+                    'type' => 'entity',
+                    'class' => 'Aml\Bundle\BlogBundle\Entity\Blog',
+                    'property' => 'title',
+                    'required' => false
+            ))   */
             ->add('archive','checkbox',array(
                 'label' => 'Archiver',
                 'required' => false

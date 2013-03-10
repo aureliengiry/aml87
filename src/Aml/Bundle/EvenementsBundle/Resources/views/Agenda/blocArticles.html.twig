@@ -1,0 +1,13 @@
+{# Bloc des articles liés #}
+<h3>Articles liés</h3>
+<ul id="blocs-evenement-articles">
+    {% for key,article in entity.articlesBlog %}
+        <li>
+            {% if article.url is defined and article.url is not empty %}
+                <a href="{{ path('blog_show_rewrite', { 'url_key': article.url }) }}" title="Voir l'article : {{ article.title }}" >{{ article.title }}</a>
+            {% else %}
+                <a href="{{ path('blog_show', { 'id': article.id }) }}" title="Voir l'article : {{ article.title }}" >{{ article.title }}</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
