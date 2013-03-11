@@ -306,9 +306,10 @@ class Blog
      * @param TumblrTag $tag
      */
     public function addTag($tag) {
-        // var_dump( $tag);exit;
-        $tag->addArticle($this);
-        $this->tags[] = $tag;
+        if (!$this->tags->contains($tag)) {
+            $tag->addArticle($this);
+            $this->tags[] = $tag;
+        }
         return $this;
     }
 

@@ -4,7 +4,7 @@
 <table class="table table-bordered table-striped">
 {% for key,day in entities %}
 
-	 <tr class="uiHeaderSection"> <td colspan="5"><strong>{{ key|date('l d M Y')|trans }}</strong></td></tr>
+	 <tr class="uiHeaderSection"> <td colspan="5"><strong>{{ key|format_date }}</strong></td></tr>
 	{% for entity in day %}
 	        <tr>
 	            <td><strong>{% if entity.dateStart %}{{ entity.dateStart|date('H:i') }}{% endif %}</strong></td>

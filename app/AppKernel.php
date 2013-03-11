@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
         	new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),			
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
             new Aml\Bundle\BlogBundle\AmlBlogBundle(),
             new Aml\Bundle\UsersBundle\AmlUsersBundle(),
             new Aml\Bundle\EvenementsBundle\AmlEvenementsBundle(),

@@ -5,10 +5,14 @@ namespace Aml\Bundle\WebBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 /**
  * Partenaire
  *
  * @ORM\Table(name="partenaires")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\PartenaireRepository")
  */
 class Partenaire
@@ -40,6 +44,15 @@ class Partenaire
      * @var string
      *
      * @ORM\Column(name="logo", type="string", length=255)
+     */
+    /**
+     * @Assert\File(
+     *     maxSize = "2M",
+     *     mimeTypes = {"image/jpeg","image/gif","image/png"},
+     *     mimeTypesMessage = "L'image choisie ne correspond pas à un type de fichier valide",
+     *     notFoundMessage = "L'image n'a pas été trouvée sur le disque",
+     *     uploadErrorMessage = "Erreur dans l'upload de l'image"
+     * )
      */
     private $logo;
 
