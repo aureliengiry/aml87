@@ -15,7 +15,7 @@
         <div id="agenda-concerts-public">
         {% for key,day in entities %}
             <div>
-                <div class="uiHeaderSection"><strong><i class="icon-calendar"></i> {{ key|date('l d M Y')|trans }}</strong></div>
+                <div class="uiHeaderSection"><strong><i class="icon-calendar"></i> {{ key | format_datetime(null, 'fr', 'Europe/Paris',  constant('IntlDateFormatter::LONG'), constant('IntlDateFormatter::SHORT')) }}</strong></div>
                 {% for entity in day %}
                     <div class="event-item">
                         <div class="event-item-structure event-item-container-thumbnail">
@@ -25,7 +25,7 @@
                         </div>
                         <div class="event-item-structure event-item-container-description">
                             <h2><a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="{{ entity.title }}">{{ entity.title }}</a></h2>
-                            {% set description = entity.description|row %}
+                            {% set description = entity.description|raw %}
                             <div>{{ description|substring(220) }}</div>
                         </div>
                     </div>

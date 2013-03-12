@@ -62,10 +62,10 @@ class LinkController extends Controller
         $entity  = new Link();
         $request = $this->getRequest();
         $form    = $this->createForm(new LinkType(), $entity);
-        $form->bindRequest($request);
+        $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 

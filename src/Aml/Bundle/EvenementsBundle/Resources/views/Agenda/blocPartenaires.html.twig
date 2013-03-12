@@ -1,0 +1,9 @@
+{# Bloc des partenaires #}
+<h3>Partenaires</h3>
+<ul id="blocs-evenement-partenaires">
+    {% for key,partenaire  in entity.partenaires %}
+        <li>
+            {{ partenaire.name }}
+        </li>
+    {% endfor %}
+</ul>

@@ -85,10 +85,15 @@ class Evenement
      */
     protected $articlesBlog;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="evenements", cascade={"persist"})
+     */
+    protected $partenaires;
+
     public function __construct()
     {
         $this->articlesBlog = new ArrayCollection();
-        // $this->files = new ArrayCollection();
+        $this->partenaires = new ArrayCollection();
     }
 
 
@@ -277,7 +282,7 @@ class Evenement
      * Fonction to delete articleBlog
      * @param Blog $articleBlog
      */
-    public function removeTag($articleBlog)
+    public function removeArticleBlog($articleBlog)
     {
         $this->articlesBlog->removeElement($articleBlog);
     }
@@ -294,6 +299,44 @@ class Evenement
      */
     public function setArticlesBlog(ArrayCollection $articlesBlog) {
         $this->articlesBlog = $articlesBlog;
+        return $this;
+    }
+
+
+    /* ---------------- PARTENAIRES ---------------- */
+
+    /**
+     *
+     * @param Partenaire $partenaire
+     */
+    public function addPartenaire($partenaire) {
+        // var_dump( $tag);exit;
+        $partenaire->addEvenement($this);
+        $this->partenaires[] = $partenaire;
+        return $this;
+    }
+
+    /**
+     * Fonction to delete partenaire
+     * @param Partenaire $partenaire
+     */
+    public function removePartenaire($partenaire)
+    {
+        $this->partenaires->removeElement($partenaire);
+    }
+
+    /**
+     * @return Evenement
+     */
+    public function getPartenaires() {
+        return $this->partenaires;
+    }
+
+    /**
+     * @return Evenement
+     */
+    public function setPartenaires(ArrayCollection $partenaires) {
+        $this->partenaires = $partenaires;
         return $this;
     }
 }

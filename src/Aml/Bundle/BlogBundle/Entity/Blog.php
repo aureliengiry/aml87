@@ -306,9 +306,10 @@ class Blog
      * @param TumblrTag $tag
      */
     public function addTag($tag) {
-        // var_dump( $tag);exit;
-        $tag->addArticle($this);
-        $this->tags[] = $tag;
+        if (!$this->tags->contains($tag)) {
+            $tag->addArticle($this);
+            $this->tags[] = $tag;
+        }
         return $this;
     }
 
@@ -319,6 +320,7 @@ class Blog
     public function removeTag($tag)
     {
         $this->tags->removeElement($tag);
+        $tag->deleteArticle($this);
     }
 
     /**
@@ -342,7 +344,7 @@ class Blog
         return $this->evenements;
     }
 
-    public function setArticles($evenements)
+    public function setEvenements($evenements)
     {
         $this->evenements = $evenements;
         return $this;

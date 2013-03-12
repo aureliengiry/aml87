@@ -125,3 +125,13 @@ avalanche_imagine:
         big_thumbnail:
             type:    thumbnail
             options: { size: [300, 300], mode: inbox }
+
+sonata_intl:
+    timezone:
+        # default timezone used as fallback
+        default: Europe/Paris
+
+        # locale specific overrides
+        locales:
+            fr: Europe/Paris
+            en_UK: Europe/London

@@ -63,7 +63,8 @@ class AgendaController extends Controller
     	}
 
     	if( 'list' === $mode ){
-    		$events = $evenementRepository->getNextEvenements();
+    		//$events = $evenementRepository->getNextEvenements();
+    		$events = $evenementRepository->findAll();
     		$entities = $this->_formatEventByDay( $events );
     	}
     	else{
@@ -135,7 +136,7 @@ class AgendaController extends Controller
         $entity  = new Evenement();
         $request = $this->getRequest();
         $form    = $this->createForm(new EvenementType(), $entity);
-        $form->bindRequest($request);
+        $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

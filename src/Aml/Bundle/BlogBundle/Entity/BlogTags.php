@@ -154,6 +154,16 @@ class BlogTags
     {
     	$this->articles[] = $article;
     }
+
+    /**
+     * Fonction pour supprimer une discussion d'un mot clé
+     * @param Discussion $discussion
+     */
+    public function deleteArticle($article)
+    {
+        $this->articles->removeElement($article);
+    }
+
 	/**
 	 * @return the $description
 	 */

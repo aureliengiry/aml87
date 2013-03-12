@@ -1,0 +1,45 @@
+{% extends "AmlWebBundle::Admin/layout.html.twig" %}
+
+{% form_theme edit_form 'AmlWebBundle:Form:aml_theme.html.twig' %}
+
+{% block title -%}
+    Créer un évènement
+{%- endblock title %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span3">
+    </div>
+
+    <div class="span5">
+        <h1>Edition d'un partenaire</h1>
+
+        <form class="form-horizontal" action="{{ path('admin_partenaire_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+            {{ form_widget(edit_form) }}
+
+            <div class="form-actions">
+                <a href="{{ path('admin_agenda') }}" class="btn btn-link" title="Retourner à la liste des évènements">
+                    <i class="icon-arrow-left"></i>
+                    retour à la liste des partenaires
+                </a>
+
+                <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
+            </div>
+        </form>
+
+        <ul class="record_actions">
+            <li>
+                <form action="{{ path('admin_partenaire_delete', { 'id': entity.id }) }}" method="post">
+                    {{ form_widget(delete_form) }}
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+
+    {# CONFIG CKEDITOR #}
+    {% include "AmlWebBundle::Admin/Partial/ckeditor.html.twig" with {'target': 'aml_bundle_webbundle_partenairetype_description'}  %}
+{% endblock body %}
