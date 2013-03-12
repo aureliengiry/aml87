@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Aml\Bundle\WebBundle\Command\Import;
+namespace Aml\Bundle\BlogBundle\Command\Import;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
@@ -38,15 +38,15 @@ class ImportBlogCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('aml:import:blog')
+            ->setName('blog:import:articles')
 //            ->setDefinition(array(
 //                new InputOption('no-warmup', '', InputOption::VALUE_NONE, 'Do not warm up the cache'),
 //            ))
             ->setDescription('Import Blog contents from old website')
             ->setHelp(<<<EOF
-The <info>aml:import:blog</info> command imports blog contents from website aml87.fr and debug mode:
+The <info>blog:import:articles</info> command imports blog contents from website aml87.fr and debug mode:
 
-<info>php app/console cache:clear --debug</info>
+<info>php app/console blog:import:articles --debug</info>
 EOF
             )
         ;
@@ -110,7 +110,8 @@ EOF
     	$em = $this->getContainer()->get('doctrine')->getEntityManager('default');
     	
     	if( !empty($this->_oldArticles) ){
-    		foreach ($this->_oldArticles as $article) {      			
+    		foreach ($this->_oldArticles as $article) {
+                var_dump($article);
 		    	$entityBlog = new Blog();
 		    	
 		    	$createdDate = new \DateTime();
@@ -145,15 +146,16 @@ EOF
 		         foreach( $associatedTags as $tag ){
 		         	$tagName = $this->_build_category_name( $tag['name'] );
 		         	$entityBlogTags = $em->getRepository('AmlBlogBundle:BlogTags')->findOneBy(array('system_name' => $tagName ));
-		         	$entityBlog->addTags($entityBlogTags);
+		         	$entityBlog->addTag($entityBlogTags);
 		         }
 		         		         
 		         
 		        // var_dump( $associatedTags,$associatedTagsName,$entityBlogTags );exit;
-		        			
+		         var_dump( $entityBlogTags );exit;
+
 		         
 		         
-		         $em->persist($entityBlog);
+		         $em->persist($entityBlog->getData());
 		         $em->flush();
     		}
     	}

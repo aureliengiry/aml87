@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Aml\Bundle\WebBundle\Command\Import;
+namespace Aml\Bundle\BlogBundle\Command\Import;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
@@ -18,15 +18,15 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Aml\Bundle\BlogBundle\Entity\BlogCategories;
+use Aml\Bundle\BlogBundle\Entity\BlogTags;
 
 
 /**
- * Import Blog contens from aml87.fr
+ * Import Blog contents from aml87.fr
  *
  * @author Aurélien GIRY <aurelien.giry@gmail.com>
  */
-class ImportBlogCategoriesCommand extends ContainerAwareCommand
+class ImportBlogTagsCommand extends ContainerAwareCommand
 {
     protected $name;
     protected $dbh;
@@ -38,15 +38,15 @@ class ImportBlogCategoriesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('aml:import:blogcategories')
+            ->setName('blog:import:tags')
 //            ->setDefinition(array(
 //                new InputOption('no-warmup', '', InputOption::VALUE_NONE, 'Do not warm up the cache'),
 //            ))
-            ->setDescription('Import Blog Categories from old website')
+            ->setDescription('Import Blog tags from old website')
             ->setHelp(<<<EOF
-The <info>aml:import:blogcategories</info> command imports blog categories from website aml87.fr and debug mode:
+The <info>blog:import:tags</info> command imports blog categories from website aml87.fr and debug mode:
 
-<info>php app/console aml:import:blogcategories --debug</info>
+<info>php app/console blog:import:tags --debug</info>
 EOF
             )
         ;
@@ -88,7 +88,7 @@ EOF
     	// import vocabulary 2 ( Blog )
 		$queryString = "SELECT * 
 		FROM term_data 		
-		WHERE vid=2";
+		WHERE vid=3";
 		$query = $this->dbh->query($queryString);
 		
 		$this->_oldData = $query->fetchAll();
@@ -100,7 +100,7 @@ EOF
     	
     	if( !empty($this->_oldData) ){
     		foreach ($this->_oldData as $item) {    			   		
-		    	$entity = new BlogCategories();
+		    	$entity = new BlogTags();
 		    		    	
 		        $entity
 		        	->setName($item['name'])

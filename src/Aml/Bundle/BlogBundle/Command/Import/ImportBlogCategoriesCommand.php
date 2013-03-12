@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Aml\Bundle\WebBundle\Command\Import;
+namespace Aml\Bundle\BlogBundle\Command\Import;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
@@ -18,15 +18,15 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Aml\Bundle\BlogBundle\Entity\BlogTags;
+use Aml\Bundle\BlogBundle\Entity\BlogCategories;
 
 
 /**
- * Import Blog contens from aml87.fr
+ * Import Blog contents from aml87.fr
  *
  * @author Aurélien GIRY <aurelien.giry@gmail.com>
  */
-class ImportBlogTagsCommand extends ContainerAwareCommand
+class ImportBlogCategoriesCommand extends ContainerAwareCommand
 {
     protected $name;
     protected $dbh;
@@ -38,15 +38,15 @@ class ImportBlogTagsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('aml:import:blogTags')
+            ->setName('blog:import:categories')
 //            ->setDefinition(array(
 //                new InputOption('no-warmup', '', InputOption::VALUE_NONE, 'Do not warm up the cache'),
 //            ))
             ->setDescription('Import Blog Categories from old website')
             ->setHelp(<<<EOF
-The <info>aml:import:blogTags</info> command imports blog categories from website aml87.fr and debug mode:
+The <info>blog:import:categories</info> command imports blog categories from website aml87.fr and debug mode:
 
-<info>php app/console aml:import:blogTags --debug</info>
+<info>php app/console blog:import:categories --debug</info>
 EOF
             )
         ;
@@ -88,7 +88,7 @@ EOF
     	// import vocabulary 2 ( Blog )
 		$queryString = "SELECT * 
 		FROM term_data 		
-		WHERE vid=3";
+		WHERE vid=2";
 		$query = $this->dbh->query($queryString);
 		
 		$this->_oldData = $query->fetchAll();
@@ -100,12 +100,12 @@ EOF
     	
     	if( !empty($this->_oldData) ){
     		foreach ($this->_oldData as $item) {    			   		
-		    	$entity = new BlogTags();
+		    	$entity = new BlogCategories();
 		    		    	
 		        $entity
 		        	->setName($item['name'])
 		            ->setSystemName($item['name'])
-		            ->setWeight($item['weight'])
+		            //->setWeight($item['weight'])
 		            ->setDescription($item['description'])
 		         ;
 		         
