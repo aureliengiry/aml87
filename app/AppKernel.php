@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Aml\Bundle\BlogBundle\AmlBlogBundle(),
             new Aml\Bundle\UsersBundle\AmlUsersBundle(),
             new Aml\Bundle\EvenementsBundle\AmlEvenementsBundle(),
+            new Aml\Bundle\MediasBundle\AmlMediasBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

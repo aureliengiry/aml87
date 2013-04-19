@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Aml\Bundle\WebBundle\Form\Admin\ImageType;
+
 class PartenaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -13,9 +15,7 @@ class PartenaireType extends AbstractType
         $builder
             ->add('name')
             ->add('url')
-            ->add('logo','file',array(
-                'required' => false,
-            ))
+            ->add('logo',new ImageType())
             ->add('description','textarea', array(
                 'required' => false
             ))

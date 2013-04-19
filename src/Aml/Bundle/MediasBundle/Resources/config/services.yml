@@ -1,0 +1,7 @@
+parameters:
+#    aml_medias.example.class: Aml\Bundle\MediasBundle\Example
+
+services:
+#    aml_medias.example:
+#        class: %aml_medias.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

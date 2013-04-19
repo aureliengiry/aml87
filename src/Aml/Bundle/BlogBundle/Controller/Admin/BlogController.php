@@ -91,9 +91,13 @@ class BlogController extends Controller
      */
     public function createAction()
     {
-        var_dump( $_POST );
+        //var_dump( $_POST );
         $entity  = new Blog();
         $request = $this->getRequest();
+
+        //$em = $this->getDoctrine()->getManager();
+      //  $blogRepository = $em->getRepository('AmlBlogBundle:Blog');
+
         $form    = $this->createForm(new BlogType(), $entity);
         $form->bind($request);
 
@@ -101,11 +105,13 @@ class BlogController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             // Set Tags
-            var_dump( $form->get('tags')->getData() );
-            foreach($form->get('tags')->getData() as $tag_id)
-            {
-                $entityTag = $em->getRepository('AmlBlogBundle:BlogTags')->find($tag_id);
-                $entityTag->getArticles()->add($entity);
+           // var_dump( $form->get('tags')->getData() );
+            if( $form->get('tags')->getData() ){
+                foreach($form->get('tags')->getData() as $tag_id)
+                {
+                    $entityTag = $em->getRepository('AmlBlogBundle:BlogTags')->find($tag_id);
+                    $entityTag->getArticles()->add($entity);
+                }
             }
 
             $entity

@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Aml\Bundle\WebBundle\Entity\Partenaire;
 use Aml\Bundle\WebBundle\Form\Admin\PartenaireType;
+use Aml\Bundle\WebBundle\Entity\Image;
 
 /**
  * Partenaire controller.
@@ -63,10 +64,23 @@ class PartenaireController extends Controller
     {
         $entity  = new Partenaire();
         $form = $this->createForm(new PartenaireType(), $entity);
+
         $form->bind($request);
 
         if ($form->isValid()) {
+
+            $logo = $entity->getLogo();
+
+            // Set Image
+            $imageEntity = new Image();
+            $imageEntity
+                ->setTitle($logo['title'])
+                ->setFile($logo['file'])
+            ;
+            $entity->setLogo($imageEntity);
+
             $em = $this->getDoctrine()->getManager();
+            $em->persist($imageEntity);
             $em->persist($entity);
             $em->flush();
 

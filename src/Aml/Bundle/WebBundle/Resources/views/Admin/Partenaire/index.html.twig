@@ -37,7 +37,7 @@
             <tbody>
             {% for entity in entities %}
                 <tr>
-                    <td>{{ entity.logo }}</td>
+                    <td><img src="{{ asset('uploads/images/' ~ entity.logo.path ) }}" title="{{ entity.logo.title }}"></td>
                     <td>{{ entity.name }}</td>
                     <td>{{ entity.description }}</td>
                     <td>

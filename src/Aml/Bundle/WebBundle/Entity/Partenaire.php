@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 /**
  * Partenaire
@@ -40,19 +40,9 @@ class Partenaire
      */
     private $url;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="logo", type="string", length=255)
-     */
-    /**
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     mimeTypes = {"image/jpeg","image/gif","image/png"},
-     *     mimeTypesMessage = "L'image choisie ne correspond pas à un type de fichier valide",
-     *     notFoundMessage = "L'image n'a pas été trouvée sur le disque",
-     *     uploadErrorMessage = "Erreur dans l'upload de l'image"
-     * )
+       /**
+     * @ORM\ManyToOne(targetEntity="Image", inversedBy="partenaires")
+     * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $logo;
 
@@ -140,7 +130,7 @@ class Partenaire
      * @param string $logo
      * @return Partenaire
      */
-    public function setLogo($logo)
+    public function setLogo( $logo)
     {
         $this->logo = $logo;
     

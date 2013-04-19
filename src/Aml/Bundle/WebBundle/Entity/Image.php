@@ -16,6 +16,12 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Image extends \Aml\Bundle\WebBundle\Entity\File
 {
+    /**
+     * @ORM\OneToMany(targetEntity="Partenaire", mappedBy="logo")
+     * @ORM\JoinColumn(name="id", referencedColumnName="id_partenaire")
+     */
+    protected $partenaires;
+
 	/**
 	 * @Assert\File(
 	 *     maxSize = "2M",
@@ -26,6 +32,12 @@ class Image extends \Aml\Bundle\WebBundle\Entity\File
 	 * )
 	 */
 	private $file;
+
+
+    public function __construct()
+    {
+        $this->partenaires = new ArrayCollection();
+    }
 	
 
     protected function getUploadDir()
@@ -38,6 +50,23 @@ class Image extends \Aml\Bundle\WebBundle\Entity\File
     public function getType(){
     	return array('label' => 'Image', 'key' => 'image' );
     }
-    
+
+
+    /* Link with Partenaire entity */
+    /**
+     * @return the $articles
+     */
+    public function getPartenaires() {
+        return $this->partenaires;
+    }
+
+    /**
+     *
+     * @param Blog $article
+     */
+    public function addPartenaire($partenaire) {
+        $this->partenaires[] = $partenaire;
+        return $this;
+    }
    
 }
