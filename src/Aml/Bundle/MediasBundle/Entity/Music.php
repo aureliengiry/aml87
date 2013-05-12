@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,9 +13,9 @@ use Aml\Bundle\WebBundle\Entity\File;
  * Aml\Bundle\WebBundle\Entity\Music
  *
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\MusicRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\MusicRepository")
  */
-class Music extends File
+class Music extends \Aml\Bundle\MediasBundle\Entity\File
 {
 	/**
 	 * @Assert\File(

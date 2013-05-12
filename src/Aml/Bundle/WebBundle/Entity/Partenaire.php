@@ -41,7 +41,7 @@ class Partenaire
     private $url;
 
        /**
-     * @ORM\ManyToOne(targetEntity="Image", inversedBy="partenaires")
+     * @ORM\ManyToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="partenaires")
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $logo;

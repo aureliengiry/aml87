@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Aml\Bundle\WebBundle\Entity\Media
  *
- * @ORM\MappedSuperclass(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\MediaRepository")
+ * @ORM\MappedSuperclass(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\MediaRepository")
  */
 class Media
 {

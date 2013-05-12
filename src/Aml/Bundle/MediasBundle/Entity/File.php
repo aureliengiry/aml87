@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,13 +15,13 @@ use Aml\Bundle\WebBundle\Entity\Media;
  *
  * @ORM\Table(name="medias")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\FileRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\FileRepository")
  * 
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"file" = "File", "image" = "Image", "music" = "Music"})
  */
-class File extends Media
+class File extends \Aml\Bundle\MediasBundle\Entity\Media
 {
     
 	/**

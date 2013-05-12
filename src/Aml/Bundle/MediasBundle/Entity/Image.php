@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,12 +12,12 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Aml\Bundle\WebBundle\Entity\Image
  * 
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\ImageRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\ImageRepository")
  */
-class Image extends \Aml\Bundle\WebBundle\Entity\File
+class Image extends \Aml\Bundle\MediasBundle\Entity\File
 {
     /**
-     * @ORM\OneToMany(targetEntity="Partenaire", mappedBy="logo")
+     * @ORM\OneToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="logo")
      * @ORM\JoinColumn(name="id", referencedColumnName="id_partenaire")
      */
     protected $partenaires;

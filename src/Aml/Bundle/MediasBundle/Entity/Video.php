@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,7 +13,7 @@ use Aml\Bundle\WebBundle\Entity\File;
  * Aml\Bundle\WebBundle\Entity\Video
  *
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\VideoRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\VideoRepository")
  */
 class Video 
 {
