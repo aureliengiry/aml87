@@ -15,7 +15,13 @@
         <h1>Ajouter un partenaire</h1>
 
             <form class="form-horizontal" action="{{ path('admin_partenaire_create') }}" method="post" {{ form_enctype(form) }}>
-                {{ form_widget(form) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.url) }}
+                <div>
+                    {{ form_widget(form.logo) }}
+                </div>
+
+                {{ form_rest(form) }}
 
                 <div class="form-actions">
                     <a href="{{ path('admin_agenda') }}" class="btn btn-link" title="Retourner à la liste des évènements">

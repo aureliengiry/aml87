@@ -1,10 +1,10 @@
 <?php
-namespace Aml\Bundle\WebBundle\Form\Admin;
+namespace Aml\Bundle\MediasBundle\Form\Admin;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Symfony\Component\Form\CallbackValidator;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormError;
 
@@ -13,18 +13,21 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title','text',array(
-            		'label' => 'Titre',
-            		'attr' => array('placeholder' => 'Saisir le titre')
-            ))   
             ->add('file','file',array(
-            		'label' => 'Fichier'
+            		'label' => 'Image'
             ))
         ;
     }
 
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Aml\Bundle\MediasBundle\Entity\Image'
+        ));
+    }
+
     public function getName()
     {
-        return 'aml_bundle_webbundle_admin_filetype';
+        return 'aml_bundle_mediasbundle_admin_filetype';
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\WebBundle\Form\Admin;
+namespace Aml\Bundle\MediasBundle\Form\Admin;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

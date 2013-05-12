@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Aml\Bundle\WebBundle\Entity\File;
+use Aml\Bundle\MediasBundle\Entity\File;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Music
@@ -15,7 +15,7 @@ use Aml\Bundle\WebBundle\Entity\File;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\MusicRepository")
  */
-class Music extends \Aml\Bundle\MediasBundle\Entity\File
+class Music extends File
 {
 	/**
 	 * @Assert\File(

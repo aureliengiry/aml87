@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Aml\Bundle\WebBundle\Entity\Partenaire;
 use Aml\Bundle\WebBundle\Form\Admin\PartenaireType;
-use Aml\Bundle\WebBundle\Entity\Image;
+use Aml\Bundle\MediasBundle\Entity\Image;
 
 /**
  * Partenaire controller.
@@ -74,7 +74,7 @@ class PartenaireController extends Controller
             // Set Image
             $imageEntity = new Image();
             $imageEntity
-                ->setTitle($logo['title'])
+                ->setTitle("Logo " . $entity->getName())
                 ->setFile($logo['file'])
             ;
             $entity->setLogo($imageEntity);

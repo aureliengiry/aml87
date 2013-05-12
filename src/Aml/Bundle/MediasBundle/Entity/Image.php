@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Aml\Bundle\MediasBundle\Entity\File;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Image
@@ -14,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\ImageRepository")
  */
-class Image extends \Aml\Bundle\MediasBundle\Entity\File
+class Image extends File
 {
     /**
      * @ORM\OneToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="logo")

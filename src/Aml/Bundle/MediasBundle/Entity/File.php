@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
 // Entities
-use Aml\Bundle\WebBundle\Entity\Media;
+use Aml\Bundle\MediasBundle\Entity\Media;
 
 /**
  * Aml\Bundle\WebBundle\Entity\File
@@ -21,7 +21,7 @@ use Aml\Bundle\WebBundle\Entity\Media;
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"file" = "File", "image" = "Image", "music" = "Music"})
  */
-class File extends \Aml\Bundle\MediasBundle\Entity\Media
+class File extends Media
 {
     
 	/**
