@@ -3,7 +3,7 @@
 {% form_theme edit_form 'AmlWebBundle:Form:aml_theme.html.twig' %}
 
 {% block title -%}
-    Créer un évènement
+    Partenaires - éditer le partenaire "{{ entity.name }}"
 {%- endblock title %}
 
 {% block body %}
@@ -18,8 +18,10 @@
             {{ form_row(edit_form.name) }}
             {{ form_row(edit_form.url) }}
 
+            <div>
+                <img src="{{ asset('uploads/images/' ~ entity.logo.path ) }}" title="{{ entity.logo.title }}">
                 {{ form_row(edit_form.logo.file) }}
-
+            </div>
 
             {{ form_rest(edit_form) }}
 

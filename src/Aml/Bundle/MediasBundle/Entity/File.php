@@ -13,13 +13,9 @@ use Aml\Bundle\MediasBundle\Entity\Media;
 /**
  * Aml\Bundle\WebBundle\Entity\File
  *
- * @ORM\Table(name="medias")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\FileRepository")
- * 
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"file" = "File", "image" = "Image", "music" = "Music"})
+ *
  */
 class File extends Media
 {
@@ -121,7 +117,7 @@ class File extends Media
     public function preUpload()
     {
     	if (null !== $this->file) {
-    		
+
     			$cleanName = $this->_build_SystemName(  $this->file->getClientOriginalName() );
     			$name = $this->_renameIfFileExist( $cleanName );    		
     			$this->path = $name;
@@ -138,48 +134,18 @@ class File extends Media
     	if (null === $this->file) {
     		return;
     	}
-    
+
     	// vous devez lancer une exception ici si le fichier ne peut pas
     	// être déplacé afin que l'entité ne soit pas persistée dans la
-    	// base de données comme le fait la méthode move() de UploadedFile   
+    	// base de données comme le fait la méthode move() de UploadedFile
     	$this->file->move($this->getUploadRootDir(), $this->path );
-    
+
     	unset($this->file);
-    	
-    	
+
+
     }
     
-    /**
-     * 
-     * @param unknown_type $name
-     * @return string
-     */
-    protected function _renameIfFileExist( $name ){
-    	
-    	$filename = $this->getUploadRootDir() .'/'. $name;
-    	if( true === file_exists($filename) ){
-    		$nameExplode = explode('.',$name);
-    		$nameFile = $nameExplode[0];
-    		$extension = $nameExplode[1];
-    	
-    		$fileExist = true;
-    		$count=1;
-    		while( true === $fileExist  ){
-    			$name = $nameFile . '_' .$count . '.' . $extension;
-    			$filename = $this->getUploadRootDir() .'/'. $name;
-    			if( false === file_exists($filename) ){
-    				$fileExist = false;
-    				break;
-    			}
-    			else{
-    				$count++;
-    			}
-    		}
-    	
-    	
-    	}
-    	return $name;
-    }
+
     
     /**
      * @ORM\PreRemove()
@@ -204,7 +170,7 @@ class File extends Media
     {
     	return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
-    
+
     public function getType(){
     	return array('label' => 'Fichier', 'key' => 'file' );
     }

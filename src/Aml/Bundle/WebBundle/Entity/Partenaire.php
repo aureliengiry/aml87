@@ -40,7 +40,7 @@ class Partenaire
      */
     private $url;
 
-       /**
+    /**
      * @ORM\ManyToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="partenaires")
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
@@ -54,7 +54,7 @@ class Partenaire
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", inversedBy="partenaires")
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", inversedBy="partenaires", cascade={"persist"})
      * @ORM\JoinTable(name="evenements_partenaires",
      * 		joinColumns={@ORM\JoinColumn(name="id_partenaire", referencedColumnName="id_partenaire")},
      * 		inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}

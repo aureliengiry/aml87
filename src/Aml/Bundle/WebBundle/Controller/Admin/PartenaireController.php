@@ -58,7 +58,7 @@ class PartenaireController extends Controller
      *
      * @Route("/create", name="admin_partenaire_create")
      * @Method("POST")
-     * @Template("AmlWebBundle:Partenaire:new.html.twig")
+     * @Template("AmlWebBundle:Admin/Partenaire:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -71,16 +71,27 @@ class PartenaireController extends Controller
 
             $logo = $entity->getLogo();
 
-            // Set Image
-            $imageEntity = new Image();
-            $imageEntity
-                ->setTitle("Logo " . $entity->getName())
-                ->setFile($logo['file'])
-            ;
-            $entity->setLogo($imageEntity);
+            var_dump(  '<pre>',$logo->getFile(),isset($logo) , empty($logo));exit;
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($imageEntity);
+            if( isset($logo) && !empty($logo) ){
+
+                //var_dump('<pre>',$logo);
+
+
+                // Set Image
+                $imageEntity = $logo;
+                $imageEntity
+                    ->setTitle("Logo " . $entity->getName()
+                );
+
+                $entity->setLogo($imageEntity);
+
+                $em->persist($imageEntity);
+            }
+
+
+
             $em->persist($entity);
             $em->flush();
 
@@ -124,7 +135,6 @@ class PartenaireController extends Controller
      *
      * @Route("/{id}/update", name="admin_partenaire_update")
      * @Method("POST")
-     * @Template("AmlWebBundle:Partenaire:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -136,22 +146,40 @@ class PartenaireController extends Controller
             throw $this->createNotFoundException('Unable to find Partenaire entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $old_partenaire = clone $entity;
+
         $editForm = $this->createForm(new PartenaireType(), $entity);
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+
+            $logo = $entity->getLogo();
+           // var_dump(  '<pre>',$logo->getFile(),isset($logo) , empty($logo));exit;
+            $em = $this->getDoctrine()->getManager();
+            if( isset($logo) && !empty($logo) ){
+
+
+                // Set Image
+                $imageEntity = $logo;
+
+                $imageEntity
+                    ->setTitle("Logo " . $entity->getName()
+                    );
+
+                //$entity->setLogo($imageEntity);
+
+                $em->persist($imageEntity);
+                exit;
+            }
+
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_partenaire_edit', array('id' => $id)));
+
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        return $this->redirect($this->generateUrl('admin_partenaire_edit', array('id' => $id)));
+
     }
 
     /**

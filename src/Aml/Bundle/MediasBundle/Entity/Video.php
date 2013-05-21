@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Aml\Bundle\WebBundle\Entity\File;
+use Aml\Bundle\MediasBundle\Entity\File;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Video
