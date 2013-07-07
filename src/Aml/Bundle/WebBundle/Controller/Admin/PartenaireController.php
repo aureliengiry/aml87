@@ -71,7 +71,7 @@ class PartenaireController extends Controller
 
             $logo = $entity->getLogo();
 
-            var_dump(  '<pre>',$logo->getFile(),isset($logo) , empty($logo));exit;
+            //var_dump(  '<pre>',$logo->getFile(),isset($logo) , empty($logo));exit;
 
             $em = $this->getDoctrine()->getManager();
             if( isset($logo) && !empty($logo) ){
@@ -154,7 +154,7 @@ class PartenaireController extends Controller
         if ($editForm->isValid()) {
 
             $logo = $entity->getLogo();
-           // var_dump(  '<pre>',$logo->getFile(),isset($logo) , empty($logo));exit;
+            var_dump(  '<pre>',get_class($logo),isset($logo) , empty($logo));exit;
             $em = $this->getDoctrine()->getManager();
             if( isset($logo) && !empty($logo) ){
 
@@ -166,10 +166,10 @@ class PartenaireController extends Controller
                     ->setTitle("Logo " . $entity->getName()
                     );
 
-                //$entity->setLogo($imageEntity);
+                $entity->setLogo($imageEntity);
 
                 $em->persist($imageEntity);
-                exit;
+                //exit;
             }
 
             $em->persist($entity);

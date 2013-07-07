@@ -1,0 +1,12 @@
+# Aml\Bundle\BlogBundle/Resources/config/admin.yml
+services:
+    sonata.admin.blog:
+        class: Aml\Bundle\BlogBundle\Admin\BlogAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: posts, label: "Blog" }
+        arguments:
+            - ~
+            - Aml\Bundle\UsersBundle\Entity\User
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [YourNSAdminBundle]]

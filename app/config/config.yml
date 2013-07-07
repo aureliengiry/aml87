@@ -1,6 +1,35 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @AmlUsersBundle/Resources/config/admin.yml }
+    - { resource: @AmlBlogBundle/Resources/config/admin.yml }
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+        sonata.block.service.text:
+        sonata.block.service.rss:
+
+sonata_admin:
+    title:      AML87
+    templates:
+        # default global templates
+        layout:  SonataAdminBundle::standard_layout.html.twig
+        ajax:    SonataAdminBundle::ajax_layout.html.twig
+
+        # default actions templates, should extend a global templates
+        list:    SonataAdminBundle:CRUD:list.html.twig
+        show:    SonataAdminBundle:CRUD:show.html.twig
+        edit:    SonataAdminBundle:CRUD:edit.html.twig
+
+    dashboard:
+        blocks:
+            # display a dashboard block
+            - { position: left, type: sonata.admin.block.admin_list }
+
 
 framework:
     #esi:             ~

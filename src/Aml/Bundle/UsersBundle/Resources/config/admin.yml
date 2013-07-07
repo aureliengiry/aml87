@@ -1,0 +1,12 @@
+# Aml\Bundle\UsersBundle/Resources/config/admin.yml
+services:
+    sonata.admin.users:
+        class: Aml\Bundle\UsersBundle\Admin\UsersAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: users, label: "Members" }
+        arguments:
+            - ~
+            - Aml\Bundle\UsersBundle\Entity\User
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [YourNSAdminBundle]]

@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class PartenaireRepository extends EntityRepository
 {
+    /**
+     * Function to delete tumblr/tags relation
+     *
+     * @param MongoboxTumblrBundle:Tumblr $partenaire
+     */
+    public function cleanTags($partenaire)
+    {
+        $em = $this->getEntityManager();
+        foreach ($partenaire->getLogo() as $tag)
+        {
+            $partenaire->removeTag($tag);
+        }
+        $em->flush();
+    }
 }
