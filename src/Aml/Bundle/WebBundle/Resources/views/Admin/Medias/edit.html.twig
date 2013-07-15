@@ -2,17 +2,15 @@
 
 {% block title -%}
 
-    Blog - Créer un nouvel article de blog
+    File edit
 
 {%- endblock title %}
 
 {% block body %}
 <div class="row-fluid">
 
-	<div class="span5">
-	
-		<h1>File edit</h1>
-		
+	<div class="span12">
+
 		<form action="{{ path('admin_file_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
 		    {{ form_widget(edit_form) }}
 		    <p>

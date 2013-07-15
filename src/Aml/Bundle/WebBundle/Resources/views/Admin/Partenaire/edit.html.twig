@@ -8,11 +8,9 @@
 
 {% block body %}
 <div class="row-fluid">
-    <div class="span3">
-    </div>
 
-    <div class="span5">
-        <h1>Edition d'un partenaire</h1>
+
+    <div class="span12">
 
         <form class="form-horizontal" action="{{ path('admin_partenaire_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
             {{ form_row(edit_form.name) }}

@@ -9,9 +9,7 @@
 {% block body %}
 <div class="row-fluid">
 
-	<div class="span5">
-		<h1>Créer un nouveau lien</h1>
-		
+	<div class="span12">
 		
 		<form action="{{ path('content_link_create') }}" method="post" {{ form_enctype(form) }}>
 		    {{ form_widget(form) }}
