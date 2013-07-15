@@ -13,7 +13,7 @@
 	<div class="span12">
 	
 		<div class="form-actions">
-		        <a class="btn btn-link" href="{{ path('admin_content_blog_new') }}">
+		        <a class="btn btn-default" href="{{ path('admin_content_blog_new') }}">
 		            <i class="icon-plus"></i> Créer un nouvel article
 		        </a>
 		 </div>
@@ -37,8 +37,8 @@
                         <td>le {% if entity.updated %}{{ entity.updated|date('d/m/Y à H:i') }}{% endif%}</td>
                         <td>{{ entity.public|publicStatus }}</td>
                         <td>
-                            <a class="btn btn-link" href="{{ path('blog_show', { 'id': entity.id }) }}" target="_blank" title="Voir l'article : {{ entity.title }}"><i class="icon-folder-open"></i> Voir</a>
-                            <a class="btn btn-link" href="{{ path('admin_content_blog_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>
+                            <a class="btn btn-default" href="{{ path('blog_show', { 'id': entity.id }) }}" target="_blank" title="Voir l'article : {{ entity.title }}"><i class="icon-folder-open"></i> Voir</a>
+                            <a class="btn btn-default" href="{{ path('admin_content_blog_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>
                         </td>
                     </tr>
                 {% endfor %}

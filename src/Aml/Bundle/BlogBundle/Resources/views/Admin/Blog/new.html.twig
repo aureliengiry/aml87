@@ -1,46 +1,63 @@
 {% extends "AmlWebBundle::Admin/layout.html.twig" %}
 
-{% form_theme form 'AmlWebBundle:Form:aml_theme.html.twig' %}
+{% form_theme form 'AmlWebBundle:Form:aml_theme_admin.html.twig' %}
 
 {% block title -%}Blog - Créer un nouvel article de blog{%- endblock title %}
 
 {% block body %}
 <div class="row-fluid">
 
-
 	<div class="span12">
 
-		<form class="form-horizontal" id="blog-add-content" action="{{ path('admin_content_blog_create') }}" method="post" {{ form_enctype(form) }}>
-		    {{ form_row(form.title) }}
-		    {{ form_row(form.body) }}
-		    {{ form_row(form.category) }}
+        <div class="box">
 
-            <div class="control-group">
-                <label class="control-label" for="tumblr_addtags">{{ form_label(form.addtags)  }}</label>
-                <div class="controls manage-tags-container">
-                    <div class="input-append manage-tags">
-                        {{ form_widget(form.addtags)  }}<button id="blog-button-add-tag" class="btn" type="button"><i class="icon-plus"></i></button>
-                    </div>
-                    {% set tagDataPrototype = '<span>__name__</span><button class="close" >&times;</button><input type="hidden" name="aml_bundle_BlogBundle_blogtype[tags][]" value="__id__" />' %}
-                    <div id="blog_tags" class="tags pull-right manage-tags" data-prototype="{{ tagDataPrototype }}">
-
-                    </div>
-
-                </div>
+            <div class="box-header">
+                <span class="title">Forms</span>
             </div>
 
-            {{ form_row(form.public) }}
+            <div class="box-content">
+                <form class="form-horizontal fill-up" id="blog-add-content" action="{{ path('admin_content_blog_create') }}" method="post" {{ form_enctype(form) }}>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="padded">
 
-            {{form_row(form._token)}}
-            <div class="form-actions">
-                <a class="btn btn-link" href="{{ path('admin_content_blog') }}">
-                    <i class="icon-arrow-left"></i> Retour à la liste des articles
-                </a>
+                                {{ form_row(form.title) }}
+                                {{ form_row(form.body) }}
+                                {{ form_row(form.category) }}
 
-                <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
+                                <div class="control-group">
+                                    <label class="control-label" for="tumblr_addtags">{{ form_label(form.addtags)  }}</label>
+                                    <div class="controls manage-tags-container">
+                                        <div class="input-append manage-tags">
+                                            {{ form_widget(form.addtags)  }}<button id="blog-button-add-tag" class="btn" type="button"><i class="icon-plus"></i></button>
+                                        </div>
+                                        {% set tagDataPrototype = '<span>__name__</span><button class="close" >&times;</button><input type="hidden" name="aml_bundle_BlogBundle_blogtype[tags][]" value="__id__" />' %}
+                                        <div id="blog_tags" class="tags pull-right manage-tags" data-prototype="{{ tagDataPrototype }}">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                {{ form_row(form.public) }}
+
+                                {{form_row(form._token)}}
+                            </div>
+
+                            <div class="form-actions">
+                                <a class="btn btn-default" href="{{ path('admin_content_blog') }}">
+                                    <i class="icon-arrow-left"></i> Retour à la liste des articles
+                                </a>
+
+                                <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
             </div>
-		</form>
 
+        </div>
 	</div>
 </div>
 
