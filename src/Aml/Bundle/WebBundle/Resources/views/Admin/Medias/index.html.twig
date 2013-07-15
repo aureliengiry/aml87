@@ -34,7 +34,7 @@
 		            <td>{{ entity.type['label'] }}</td>
 		            <td>
 		             	{# Lien voir/télécharger #}
-                        <a class="btn btn-link" href="{{ asset(entity.webPath) }}" target="_blanck"><i class="icon-download"></i> Voir</a>
+                        <a class="btn btn-default" href="{{ asset(entity.webPath) }}" target="_blanck"><i class="icon-download"></i> Voir</a>
                  
                  		{# Bouton supprimer #}
                         <form action="{{ path('admin_file_delete', { 'id': entity.id }) }}" method="post">

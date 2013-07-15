@@ -10,7 +10,7 @@
 	<div class="span12">
 
         <div class="form-actions">
-            <a class="btn btn-link" href="{{ path('content_album_new') }}">
+            <a class="btn btn-default" href="{{ path('content_album_new') }}">
                 <i class="icon-plus"></i> Ajouter un nouvel Album
             </a>
         </div>
@@ -32,8 +32,8 @@
                         <td>{% if entity.date %}{{ entity.date|date('d/m/Y') }}{% endif%}</td>
                         <td>{{ entity.public|publicStatus }}</td>
                         <td>
-                            <a class="btn btn-link" href="{{ path('content_album_show', { 'id': entity.id }) }}"><i class="icon-folder-open"></i> Voir</a>
-                            <a class="btn btn-link" href="{{ path('content_album_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>
+                            <a class="btn btn-default" href="{{ path('content_album_show', { 'id': entity.id }) }}"><i class="icon-folder-open"></i> Voir</a>
+                            <a class="btn btn-default" href="{{ path('content_album_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>
                         </td>
                     </tr>
                 {% endfor %}
