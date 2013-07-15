@@ -6,14 +6,9 @@
 
 {% block body %}
 <div class="row-fluid">
-	<div class="span3">
-		{# Barre de navigation left #}
-	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
-	</div>		
 
 
-	<div class="span5">
-		<h1>Créer un nouvel article de blog</h1>
+	<div class="span12">
 
 		<form class="form-horizontal" id="blog-add-content" action="{{ path('admin_content_blog_create') }}" method="post" {{ form_enctype(form) }}>
 		    {{ form_row(form.title) }}
