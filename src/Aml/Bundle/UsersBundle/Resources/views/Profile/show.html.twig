@@ -1,0 +1,21 @@
+{% extends "AmlWebBundle::layout.html.twig" %}
+
+{% block title -%}
+    Connexion -
+{%- endblock title %}
+
+{% block body %}
+<div id="col-left" class="two-cols-content">
+
+    <div class="contenu-page">
+
+        {% block fos_user_content %}
+            {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+        {% endblock fos_user_content %}
+
+    </div>
+</div>
+<div id="col-right">
+
+</div>
+{%- endblock body %}
