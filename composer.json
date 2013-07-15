@@ -30,7 +30,8 @@
         "sonata-project/exporter": "1.*",
         "sonata-project/block-bundle": "2.2.*@dev",
         "sonata-project/doctrine-orm-admin-bundle":"dev-master",
-        "sonata-project/admin-bundle":"dev-master"
+        "sonata-project/admin-bundle":"dev-master",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "scripts": {
         "post-install-cmd": [

@@ -51,7 +51,7 @@
         </ul>
         
         <ul class="nav pull-right">
-          <li><a href="{{ path('deconnexion') }}"><i class="icon-ban-circle icon-white"></i> Déconnexion</a></li>
+          <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-ban-circle icon-white"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>

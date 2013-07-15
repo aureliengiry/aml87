@@ -164,3 +164,8 @@ sonata_intl:
         locales:
             fr: Europe/Paris
             en_UK: Europe/London
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Aml\Bundle\UsersBundle\Entity\User
