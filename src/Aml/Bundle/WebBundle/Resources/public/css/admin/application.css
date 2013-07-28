@@ -17046,3 +17046,13 @@ a.editable-click.editable-disabled:hover {
         margin-left: 0
     }
 }
+
+
+/* OVERRIDE SONATA */
+body.sonata-bc{
+    padding:0px;
+}
+
+#breadcrumbs .blue .breadcrumb-label a{
+    color:white;
+}

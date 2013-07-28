@@ -1,0 +1,45 @@
+# Aml\Bundle\UsersBundle/Resources/config/admin.yml
+services:
+    sonata.admin.link:
+        class: Aml\Bundle\WebBundle\Admin\LinkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Contenus, label: "Liens" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Link
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [YourNSAdminBundle]]
+
+    sonata.admin.album:
+        class: Aml\Bundle\WebBundle\Admin\AlbumAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Contenus, label: "Album" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Album
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [YourNSAdminBundle]]
+
+    sonata.admin.page:
+        class: Aml\Bundle\WebBundle\Admin\PageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Contenus, label: "Page" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Page
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [YourNSAdminBundle]]
+
+    sonata.admin.partner:
+        class: Aml\Bundle\WebBundle\Admin\PartenaireAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Contenus, label: "Partenaires" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Partenaire
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [YourNSAdminBundle]]
