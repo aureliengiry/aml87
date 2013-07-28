@@ -14,13 +14,13 @@ class UsersAdmin extends Admin
             ->add('email','email',array(
                 'label' => 'Adresse Email'
             ))
-            ->add('login')
+            ->add('username')
             ->add('password','password')
-            ->add('civilite')
-            ->add('nom')
-            ->add('prenom')
-            ->add('adresse')
-            ->add('avatar')
+          //  ->add('civilite')
+            //->add('nom')
+            //->add('prenom')
+            //->add('adresse')
+           // ->add('avatar')
         ;
     }
 
@@ -28,16 +28,17 @@ class UsersAdmin extends Admin
     {
         $datagridMapper
             ->add('email')
-            ->add('login')
+            ->add('username')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('username')
             ->addIdentifier('email')
-            ->add('login')
-            ->add('statut')
+           //->add('last_login')
+            //->add('statut')
         ;
     }
 
@@ -48,7 +49,7 @@ class UsersAdmin extends Admin
      */
     public function getTemplate($name)
     {
-        var_dump( $name );
+        //var_dump( $name );
         if (isset($this->templates[$name])) {
             return $this->templates[$name];
         }
