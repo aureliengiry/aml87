@@ -68,7 +68,7 @@ class BlogAdmin extends Admin
      */
     public function getTemplate($name)
     {
-        var_dump( $name );
+        //var_dump( $name );
         if (isset($this->templates[$name])) {
             return $this->templates[$name];
         }

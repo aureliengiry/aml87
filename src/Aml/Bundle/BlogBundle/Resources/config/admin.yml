@@ -3,10 +3,32 @@ services:
     sonata.admin.blog:
         class: Aml\Bundle\BlogBundle\Admin\BlogAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: posts, label: "Blog" }
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Articles" }
         arguments:
             - ~
-            - Aml\Bundle\UsersBundle\Entity\User
+            - Aml\Bundle\BlogBundle\Entity\Blog
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [YourNSAdminBundle]]
+
+    sonata.admin.blog.tags:
+        class: Aml\Bundle\BlogBundle\Admin\BlogAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Tags" }
+        arguments:
+            - ~
+            - Aml\Bundle\BlogBundle\Entity\BlogTags
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [YourNSAdminBundle]]
+
+    sonata.admin.blog.categories:
+        class: Aml\Bundle\BlogBundle\Admin\CategoriesAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Categories" }
+        arguments:
+            - ~
+            - Aml\Bundle\BlogBundle\Entity\BlogCategories
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [YourNSAdminBundle]]
