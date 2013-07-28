@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Aml\Bundle\WebBundle\Entity\Album
  *
- * @ORM\Table()
+ * @ORM\Table(name="webbundle_albums")
  * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\AlbumRepository")
  */
 class Album

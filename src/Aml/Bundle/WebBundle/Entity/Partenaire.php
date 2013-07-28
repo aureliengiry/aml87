@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Partenaire
  *
- * @ORM\Table(name="partenaires")
+ * @ORM\Table(name="webbundle_partenaires")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\PartenaireRepository")
  */
