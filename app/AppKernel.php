@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
         );
 
+
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();

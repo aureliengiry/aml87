@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: @AmlUsersBundle/Resources/config/admin.yml }
     - { resource: @AmlBlogBundle/Resources/config/admin.yml }
+    - { resource: @AmlWebBundle/Resources/config/admin.yml }
 
 sonata_block:
     default_contexts: [cms]

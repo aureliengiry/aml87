@@ -38,14 +38,14 @@ _imagine:
     resource: .
     type:     imagine
 
-#admin_sonata:
-#    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-#    prefix: /admin-sonata
+admin_sonata:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin-sonata
 
-#_sonata_admin:
-#    resource: .
-#    type: sonata_admin
-#    prefix: /admin-sonata
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin-sonata
 
 # FOS USER
 fos_user_security:
