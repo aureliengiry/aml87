@@ -6,6 +6,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+use Aml\Bundle\MediasBundle\Form\Admin\ImageType;
+
 class PartenaireAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -16,6 +18,7 @@ class PartenaireAdmin extends Admin
             ))
             ->add('url')
             ->add('description')
+            ->add('logo',new ImageType() )
         ;
     }
 
