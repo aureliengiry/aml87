@@ -17,7 +17,9 @@ class PartenaireAdmin extends Admin
                 'label' => 'Nom'
             ))
             ->add('url')
-            ->add('description')
+            ->add('description','textarea',array(
+                'required' => false
+            ))
             ->add('logo',new ImageType() )
         ;
     }
@@ -50,5 +52,28 @@ class PartenaireAdmin extends Admin
         }
 
         return null;
+    }
+
+    public function preUpdate($partenaire) {
+
+        $this->_setLogoTitle($partenaire);
+    }
+
+    protected function _setLogoTitle($partenaire){
+        $logo = $partenaire->getLogo();
+
+        $logo->setTitle($partenaire->getName());
+
+        // Remove old file
+        $logo->storeFilenameForRemove();
+        $logo->removeUpload();
+
+        // Upload
+        $logo->preUpload();
+
+
+
+
+        //$logo->remove();
     }
 }

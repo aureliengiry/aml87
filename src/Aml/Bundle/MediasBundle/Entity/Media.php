@@ -32,7 +32,7 @@ class Media
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    protected $title = 'test';
+    protected $title;
 
     /**
      * Get id
