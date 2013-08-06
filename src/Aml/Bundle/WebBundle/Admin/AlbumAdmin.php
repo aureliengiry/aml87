@@ -23,7 +23,11 @@ class AlbumAdmin extends Admin
               // 'attr' => array('readonly' => 'readonly')
             ))
             ->add('titres')
-            ->add('public')
+            ->add('public','checkbox',array(
+                'label' => 'Publier',
+                'required' => false,
+                'attr' => array('data-help' => 'Signifie que l\'album sera visible pour tout le monde'),
+            ))
         ;
     }
 

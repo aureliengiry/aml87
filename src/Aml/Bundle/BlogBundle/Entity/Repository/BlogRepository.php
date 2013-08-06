@@ -83,6 +83,7 @@ class BlogRepository extends EntityRepository
         $qb
             ->select('b')
             ->from('AmlBlogBundle:Blog', 'b')
+            ->leftJoin('b.logo','m')
             ->where("b.public = 1")
             ->orderBy('b.created', 'DESC')
             ->setMaxResults($limit)

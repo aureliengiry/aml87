@@ -5,6 +5,7 @@
 {%- endblock title %}
 
 {% block body %}
+
 <div id="col-left" class="two-cols-content">
 	<div class="blog-article">
 		<h2>{{ entity.title }}</h2>
@@ -16,7 +17,7 @@
 		</div>	
 				
 		<div class="blog-visuel">
-			<img src="http://www.aml87.fr/sites/default/files/imagecache/visuel_blog/blog/photo.JPG" alt="" title="" class="imagecache imagecache-visuel_blog" width="500" height="300">
+			<img src="{{ asset(entity.logo.webpath) }}" alt="" title="{{ entity.logo.title }}" class="imagecache imagecache-visuel_blog" width="500" height="300">
 		</div>				
 				
 		<div class="article-description">{{entity.body|raw}}</div>

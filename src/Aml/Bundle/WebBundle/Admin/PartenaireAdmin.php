@@ -70,10 +70,5 @@ class PartenaireAdmin extends Admin
 
         // Upload
         $logo->preUpload();
-
-
-
-
-        //$logo->remove();
     }
 }

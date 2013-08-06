@@ -6,12 +6,17 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+use Aml\Bundle\MediasBundle\Form\Admin\ImageType;
+
 class BlogAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('title')
+            ->add('logo',new ImageType() , array(
+                'required' => false,
+            ) )
             ->add('body','textarea', array(
                 'label' => 'Texte',
                 'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
@@ -33,10 +38,10 @@ class BlogAdmin extends Admin
                     'placeholder' => 'Ajouter des tags',
                 ),
                 'required' => false,
-                'property_path' => false
+                'mapped' => false
             ))
             ->add('tags', 'hidden', array(
-                'property_path' => false
+                'mapped' => false
             ))
 
             ->add('public','checkbox',array(
@@ -57,6 +62,7 @@ class BlogAdmin extends Admin
         $listMapper
             ->addIdentifier('title')
             ->add('created')
+            ->add('updated')
             ->add('public')
         ;
     }
@@ -74,5 +80,39 @@ class BlogAdmin extends Admin
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preUpdate($article) {
+
+        $article->setUpdated(new \DateTime);
+
+        $this->_setLogoTitle($article);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($article)
+    {
+        $article->setCreated(new \DateTime);
+        $article->setUpdated(new \DateTime);
+
+        $this->_setLogoTitle($article);
+    }
+
+    protected function _setLogoTitle($article){
+        $logo = $article->getLogo();
+
+        $logo->setTitle($article->getTitle());
+
+        // Remove old file
+        $logo->storeFilenameForRemove();
+        $logo->removeUpload();
+
+        // Upload
+        $logo->preUpload();
     }
 }

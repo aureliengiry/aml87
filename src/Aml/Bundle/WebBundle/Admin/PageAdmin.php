@@ -14,8 +14,14 @@ class PageAdmin extends Admin
             ->add('title','text',array(
                 'label' => 'Titre'
             ))
-            ->add('body')
-            ->add('public')
+            ->add('body','textarea',array(
+                'required' => false,
+            ))
+            ->add('public','checkbox',array(
+                'label' => 'Publier',
+                'required' => false,
+                'attr' => array('data-help' => 'Signifie que la page sera visible pour tout le monde'),
+            ))
         ;
     }
 

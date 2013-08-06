@@ -22,6 +22,11 @@ class Image extends Media
      */
     protected $partenaire;
 
+    /**
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\BlogBundle\Entity\Blog", mappedBy="logo")
+     */
+    protected $articleBlog;
+
 	/**
 	 * @Assert\File(
 	 *     maxSize = "2M",

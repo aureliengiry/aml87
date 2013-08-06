@@ -15,7 +15,15 @@
 			{% endif %}
 		</span>
 	</div>
-		
+
+    {% if entity.logo.webpath is defined %}
+    <div rel="prettyPhoto" class="blog-visuel">
+        <a rel="prettyPhoto" href="sites/default/files/blog/logoTelim.jpg">
+            <img width="375" height="250" class="imagecache imagecache-visuel_blog_list" title="{{ entity.logo.title }}" src="{{ asset(entity.logo.webpath) }}">
+        </a>
+    </div>
+    {% endif %}
+
 	<p class="container-wysiwyg">
 		{{entity.body|raw}}
 	</p>

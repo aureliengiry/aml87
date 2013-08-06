@@ -37,6 +37,12 @@ class Blog
     private $url;
 
     /**
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="articleBlog" ,cascade={"all"})
+     * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
+     */
+    private $logo;
+
+    /**
      * @var text $body
      *
      * @ORM\Column(name="body", type="text")
@@ -98,6 +104,8 @@ class Blog
 
  	public function __construct()
     {
+      //  var_dump(__METHOD__,$this->get);
+        //exit;
         $this->tags = new ArrayCollection();
         $this->evenements = new ArrayCollection();
        // $this->files = new ArrayCollection();
@@ -121,6 +129,7 @@ class Blog
     public function setTitle($title)
     {
         $this->title = $title;
+        $this->setUrl();
         return $this;
     }
 
@@ -155,6 +164,29 @@ class Blog
     }
 
     /**
+     * Set logo
+     *
+     * @param string $logo
+     * @return Partenaire
+     */
+    public function setLogo( $logo)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return string
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
      * Set body
      *
      * @param text $body
@@ -180,7 +212,7 @@ class Blog
      *
      * @param datetime $created
      */
-    public function setCreated($created)
+    public function setCreated(\DateTime $created=null)
     {
         $this->created = $created;
         return $this;
@@ -201,7 +233,7 @@ class Blog
      *
      * @param datetime $updated
      */
-    public function setUpdated($updated)
+    public function setUpdated(\DateTime $updated = null)
     {
         $this->updated = $updated;
         return $this;
@@ -354,4 +386,5 @@ class Blog
     {
         $this->evenements[] = $evenement;
     }
+
 }

@@ -35,10 +35,10 @@ class BlogType extends AbstractType
                     'placeholder' => 'Ajouter des tags',
                 ),
                 'required' => false,
-                'property_path' => false
+                'mapped' => false
             ))
             ->add('tags', 'hidden', array(
-                'property_path' => false
+                'mapped' => false
             ))
 
             ->add('public','checkbox',array(

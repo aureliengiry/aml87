@@ -15,8 +15,14 @@ class LinkAdmin extends Admin
                 'label' => 'Titre'
             ))
             ->add('url')
-            ->add('description')
-            ->add('public')
+            ->add('description','textarea',array(
+                'required' => false,
+            ))
+            ->add('public','checkbox',array(
+                'label' => 'Publier',
+                'required' => false,
+                'attr' => array('data-help' => 'Signifie que le lien sera visible pour tout le monde'),
+            ))
         ;
     }
 
