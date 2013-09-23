@@ -37,10 +37,10 @@
             {% if entities is not empty  %}
                 {% for entity in entities %}
                     <tr>
-                        <td><a href="{{ path('admin_user_edit', { 'id': entity.id }) }}"> {{ entity.civilite }} {{ entity.prenom }} {{ entity.nom }} (id:{{ entity.id }})</a></td>
+                        <td><a href="{{ path('admin_user_edit', { 'id': entity.id }) }}"> {# entity.civilite #} {{ entity.firstname }} {{ entity.lastname }} (id:{{ entity.id }})</a></td>
                         <td>{{ entity.email }}</td>
-                        <td>{{ entity.login }}</td>
-                        <td>{{ entity.statut }}</td>
+                        <td>{{ entity.username }}</td>
+                        <td>{# entity.statut #}</td>
                         <td>
                             <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}"><i class="icon-folder-open"></i> Voir</a>
                             <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>
