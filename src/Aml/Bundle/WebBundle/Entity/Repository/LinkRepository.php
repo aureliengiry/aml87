@@ -12,7 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class LinkRepository extends EntityRepository
 {
-	public function getPublicLinks(){
+    /**
+     * Function to load public links
+     * @return array
+     */
+    public function getPublicLinks(){
 		$em = $this->getEntityManager();		
 		$qb = $em->createQueryBuilder();
 		

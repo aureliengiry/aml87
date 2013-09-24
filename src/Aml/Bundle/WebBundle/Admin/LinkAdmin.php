@@ -34,15 +34,17 @@ class LinkAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('url')
+            ->add('public')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
-            ->add('url')
-            //->add('statut')
+            ->addIdentifier('title')
+            ->addIdentifier('url')
+            ->add('weight')
+            ->add('public')
         ;
     }
 
