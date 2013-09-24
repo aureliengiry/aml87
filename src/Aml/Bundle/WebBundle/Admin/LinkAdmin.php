@@ -18,6 +18,9 @@ class LinkAdmin extends Admin
             ->add('description','textarea',array(
                 'required' => false,
             ))
+            ->add('weight','text',array(
+                'required' => false,
+            ))
             ->add('public','checkbox',array(
                 'label' => 'Publier',
                 'required' => false,

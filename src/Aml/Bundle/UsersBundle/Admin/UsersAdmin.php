@@ -11,14 +11,40 @@ class UsersAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('email','email',array(
-                'label' => 'Adresse Email'
-            ))
-            ->add('username')
-            ->add('password','password')
+            ->with('General')
+                ->add('username')
+                ->add('email')
+                ->add('plainPassword', 'text', array('required' => false))
+            ->end()
+            ->with('Profile')
           //  ->add('civilite')
-            //->add('nom')
-            //->add('prenom')
+                ->add('firstname','text', array(
+                    'required' => false,
+                ))
+                ->add('lastname','text', array(
+                    'required' => false,
+                ))
+                ->add('enabled','checkbox', array(
+                    'label'=> 'Actif',
+                    'required' => false,
+                ))
+            ->end()
+
+         //if ($this->getSubject() && !$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+             //$formMapper
+                 ->with('Management')
+                 /*->add('realRoles', 'sonata_security_roles', array(
+                     'expanded' => true,
+                     'multiple' => true,
+                     'required' => false
+                 ))*/
+               //  ->add('locked', null, array('required' => false))
+               //  ->add('expired', null, array('required' => false))
+                 ->add('enabled', null, array('required' => false))
+               //  ->add('credentialsExpired', null, array('required' => false))
+                 ->end()
+            // ;
+         //}
             //->add('adresse')
            // ->add('avatar')
         ;
@@ -29,6 +55,7 @@ class UsersAdmin extends Admin
         $datagridMapper
             ->add('email')
             ->add('username')
+            ->add('enabled')
         ;
     }
 
