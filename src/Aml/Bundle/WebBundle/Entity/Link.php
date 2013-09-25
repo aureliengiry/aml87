@@ -47,7 +47,7 @@ class Link
      *
      * @ORM\Column(name="weight", type="integer")
      */
-    private $weight;
+    private $weight = 1;
     
     /**
      * @var boolean $public

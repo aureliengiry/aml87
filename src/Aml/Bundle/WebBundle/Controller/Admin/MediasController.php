@@ -33,7 +33,7 @@ class MediasController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AmlWebBundle:File')->findAll();
         
@@ -54,7 +54,7 @@ class MediasController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmlWebBundle:File')->find($id);
 
@@ -127,7 +127,7 @@ class MediasController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
           //  $entity->upload();
             $em->persist($entity);
             $em->flush();
@@ -153,7 +153,7 @@ class MediasController extends Controller
     public function editAction($id)
     {
     	
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmlWebBundle:File')->find($id);
 
@@ -180,7 +180,7 @@ class MediasController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmlWebBundle:File')->find($id);
 
@@ -224,7 +224,7 @@ class MediasController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('AmlWebBundle:File')->find($id);
 
             if (!$entity) {

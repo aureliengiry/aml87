@@ -18,6 +18,9 @@ class LinkAdmin extends Admin
             ->add('description','textarea',array(
                 'required' => false,
             ))
+            ->add('weight','text',array(
+                'required' => false,
+            ))
             ->add('public','checkbox',array(
                 'label' => 'Publier',
                 'required' => false,
@@ -31,15 +34,17 @@ class LinkAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('url')
+            ->add('public')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
-            ->add('url')
-            //->add('statut')
+            ->addIdentifier('title')
+            ->addIdentifier('url')
+            ->add('weight')
+            ->add('public')
         ;
     }
 
