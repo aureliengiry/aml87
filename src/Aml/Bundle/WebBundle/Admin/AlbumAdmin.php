@@ -14,6 +14,9 @@ class AlbumAdmin extends Admin
             ->add('title','text',array(
                 'label' => 'Titre'
             ))
+            ->add('logo',new ImageType() , array(
+                'required' => false,
+            ) )
             ->add('description')
             ->add('date', 'date', array(
                 'label' => 'Date de sortie',
@@ -35,14 +38,16 @@ class AlbumAdmin extends Admin
     {
         $datagridMapper
             ->add('title')
+            ->add('public')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
-            //->add('statut')
+            ->addIdentifier('title')
+            ->add('date')
+            ->add('public')
         ;
     }
 

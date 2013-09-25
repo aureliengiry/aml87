@@ -35,7 +35,7 @@ class PartenaireAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('name')
+           ->addIdentifier('name')
            ->add('url')
         ;
     }
@@ -60,6 +60,7 @@ class PartenaireAdmin extends Admin
     }
 
     protected function _setLogoTitle($partenaire){
+        var_dump(__METHOD__, $partenaire->getName()); exit;
         $logo = $partenaire->getLogo();
 
         $logo->setTitle($partenaire->getName());

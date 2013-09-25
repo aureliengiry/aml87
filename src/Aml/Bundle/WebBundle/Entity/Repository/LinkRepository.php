@@ -23,7 +23,8 @@ class LinkRepository extends EntityRepository
 		$qb
 			->select('l')
 			->from('AmlWebBundle:Link', 'l')
-			->where("l.public = 1")	
+			->where("l.public = 1")
+            ->orderBy('l.weight', 'ASC')
 		;
 
 		$query = $qb->getQuery();

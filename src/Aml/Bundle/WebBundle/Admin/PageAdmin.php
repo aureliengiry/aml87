@@ -30,14 +30,16 @@ class PageAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('url')
+            ->add('public')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
+            ->addIdentifier('title')
             ->add('url')
+            ->add('public')
         ;
     }
 

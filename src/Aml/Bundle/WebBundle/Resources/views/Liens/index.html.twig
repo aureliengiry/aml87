@@ -12,7 +12,10 @@
 		
 		<ul id="list-links">
 		    {% for entity in entities %}
-		        <li>{{ entity.description }} : <a href="http://{{ entity.url }}" target="_blank" title="{{ entity.description }}">{{ entity.url }}</a></li>
+		        <li>
+                    <strong>{{ entity.title }} : </strong><a href="http://{{ entity.url }}" target="_blank" title="{{ entity.title }}">{{ entity.url }}</a>
+                    <br/><span>{{ entity.description }}</span>
+                </li>
 		    {% endfor %}		 
 		 </ul>
 	
