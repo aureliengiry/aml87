@@ -16,7 +16,7 @@
 		
 		<div class="disc-presentation">
 			<div class="disc-pochette-list">
-				image
+                <img src="{{ asset(entity.image.webpath) }}" alt="" title="{{ entity.image.title }}" class="imagecache imagecache-pochette-album" width="500" height="300">
 			</div>
 			<div class="disc-description-list">
 				{{ entity.description|raw }}				

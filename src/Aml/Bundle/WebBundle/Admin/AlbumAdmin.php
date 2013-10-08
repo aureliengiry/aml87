@@ -14,9 +14,7 @@ class AlbumAdmin extends Admin
             ->add('title','text',array(
                 'label' => 'Titre'
             ))
-            ->add('logo',new ImageType() , array(
-                'required' => false,
-            ) )
+            ->add('image','sonata_type_admin')
             ->add('description')
             ->add('date', 'date', array(
                 'label' => 'Date de sortie',

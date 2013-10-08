@@ -56,6 +56,11 @@ class Album
      */
     private $date;
 
+    /**
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="album" ,cascade={"all"})
+     * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
+     */
+    private $image;
 
     /**
      * Get id
@@ -170,5 +175,28 @@ class Album
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Album
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
