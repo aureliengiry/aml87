@@ -9,7 +9,7 @@ services:
             - Aml\Bundle\WebBundle\Entity\Link
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [YourNSAdminBundle]]
+            - [ setTranslationDomain, [AmlWebBundle]]
 
     sonata.admin.album:
         class: Aml\Bundle\WebBundle\Admin\AlbumAdmin
@@ -20,7 +20,7 @@ services:
             - Aml\Bundle\WebBundle\Entity\Album
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [YourNSAdminBundle]]
+            - [ setTranslationDomain, [AmlWebBundle]]
 
     sonata.admin.page:
         class: Aml\Bundle\WebBundle\Admin\PageAdmin
@@ -31,7 +31,7 @@ services:
             - Aml\Bundle\WebBundle\Entity\Page
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [YourNSAdminBundle]]
+            - [ setTranslationDomain, [AmlWebBundle]]
 
     sonata.admin.partner:
         class: Aml\Bundle\WebBundle\Admin\PartenaireAdmin
@@ -42,4 +42,4 @@ services:
             - Aml\Bundle\WebBundle\Entity\Partenaire
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [YourNSAdminBundle]]
+            - [ setTranslationDomain, [AmlWebBundle]]

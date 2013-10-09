@@ -64,7 +64,7 @@ class UsersAdmin extends Admin
         $listMapper
             ->addIdentifier('username')
             ->add('email')
-            ->add(array('firstname','lastname'))
+            ->add('name','string', array('template' => 'AmlUsersBundle::Admin/User/Fields/name.html.twig'))
            //->add('last_login')
             //->add('statut')
         ;

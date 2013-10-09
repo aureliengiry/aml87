@@ -9,7 +9,7 @@ services:
             - Aml\Bundle\BlogBundle\Entity\Blog
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [YourNSAdminBundle]]
+            - [ setTranslationDomain, [AmlBlogBundle]]
 
     sonata.admin.blog.tags:
         class: Aml\Bundle\BlogBundle\Admin\BlogAdmin
@@ -20,7 +20,7 @@ services:
             - Aml\Bundle\BlogBundle\Entity\BlogTags
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [YourNSAdminBundle]]
+            - [ setTranslationDomain, [AmlBlogBundle]]
 
     sonata.admin.blog.categories:
         class: Aml\Bundle\BlogBundle\Admin\CategoriesAdmin
@@ -31,4 +31,4 @@ services:
             - Aml\Bundle\BlogBundle\Entity\BlogCategories
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [YourNSAdminBundle]]
+            - [ setTranslationDomain, [AmlBlogBundle]]

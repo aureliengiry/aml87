@@ -72,3 +72,8 @@ input[type="file"]{
 .uiHeaderSection td{
     padding: 5px;
 }
+
+.btn{
+    color:#333333;
+    text-shadow: none;
+}

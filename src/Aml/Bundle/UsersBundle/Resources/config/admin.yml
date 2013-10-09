@@ -9,4 +9,4 @@ services:
             - Aml\Bundle\UsersBundle\Entity\User
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [YourNSAdminBundle]]
+            - [ setTranslationDomain, [AmlUsersBundle]]
