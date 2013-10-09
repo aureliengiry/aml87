@@ -26,6 +26,10 @@ class Image extends Media
      * @ORM\OneToOne(targetEntity="\Aml\Bundle\BlogBundle\Entity\Blog", mappedBy="logo")
      */
     protected $articleBlog;
+    /**
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Album", mappedBy="image")
+     */
+    protected $album;
 
 	/**
 	 * @Assert\File(

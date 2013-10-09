@@ -29,6 +29,6 @@ class ImageType extends AbstractType
 
     public function getName()
     {
-        return 'aml_bundle_mediasbundle_admin_filetype';
+        return 'aml_bundle_mediasbundle_admin_imagetype';
     }
 }

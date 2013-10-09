@@ -14,9 +14,7 @@ class BlogAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('logo',new ImageType() , array(
-                'required' => false,
-            ) )
+            ->add('logo','sonata_type_admin')
             ->add('body','textarea', array(
                 'label' => 'Texte',
                 'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),

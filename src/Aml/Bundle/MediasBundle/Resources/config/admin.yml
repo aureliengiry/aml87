@@ -1,0 +1,24 @@
+# Aml\Bundle\MediasBundle/Resources/config/admin.yml
+services:
+    sonata.admin.images:
+        class: Aml\Bundle\MediasBundle\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Medias, label: "Images" }
+        arguments:
+            - ~
+            - Aml\Bundle\MediasBundle\Entity\Image
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlMediasBundle]]
+
+    sonata.admin.documents:
+        class: Aml\Bundle\MediasBundle\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Medias, label: "Documents" }
+        arguments:
+            - ~
+            - Aml\Bundle\MediasBundle\Entity\File
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlMediasBundle]]
+

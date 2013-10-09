@@ -14,8 +14,8 @@
 			<span>Publié le 
 				<span class="date-article-block">{% if entity.created %}{{ entity.created|date('d/m/Y à H:i') }}{% endif%}</span>
 			</span>
-		</div>	
-				
+		</div>
+
 		<div class="blog-visuel">
 			<img src="{{ asset(entity.logo.webpath) }}" alt="" title="{{ entity.logo.title }}" class="imagecache imagecache-visuel_blog" width="500" height="300">
 		</div>				

@@ -16,6 +16,7 @@ class PartenaireAdmin extends Admin
             ->add('name','text',array(
                 'label' => 'Nom'
             ))
+            ->add('logo','sonata_type_admin')
             ->add('url')
             ->add('description','textarea',array(
                 'required' => false
@@ -60,7 +61,6 @@ class PartenaireAdmin extends Admin
     }
 
     protected function _setLogoTitle($partenaire){
-        var_dump(__METHOD__, $partenaire->getName()); exit;
         $logo = $partenaire->getLogo();
 
         $logo->setTitle($partenaire->getName());

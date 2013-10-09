@@ -1,7 +1,9 @@
 {% if lastAlbum  %}
 <div id="discographie-last-album-block">
 	<div class="disc-pochette-list">
-		image
+        {% if lastAlbum.image.webpath is defined %}
+            <img src="{{ asset(lastAlbum.image.webpath) }}" alt="" title="{{ lastAlbum.image.title }}" class="imagecache imagecache-pochette-album" width="500" height="300">
+        {% endif %}
 	</div>
 	<div class="disc-description-list">
 		<h3>
