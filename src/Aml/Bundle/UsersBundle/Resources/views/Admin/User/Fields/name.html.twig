@@ -1,7 +1,14 @@
-{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
-gsdsfgsdfgsdfg
 {% block field%}
-    <div>
-        <strong>toto</strong> <br />
-    </div>
+    <td>
+    {% if object.firstname is empty and object.lastname is empty %}
+        {{ object.username }}
+    {% else  %}
+        {% if object.firstname is not empty %}
+            {{ object.firstname }}
+        {% endif %}
+        {% if object.lastname is not empty %}
+            {{ object.lastname }}
+        {% endif %}
+    {% endif  %}
+    </td>
 {% endblock %}
