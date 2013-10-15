@@ -81,12 +81,12 @@ class Evenement
     private $public;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Blog", mappedBy="evenements", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Blog", mappedBy="evenements", cascade={"persist", "remove"})
      */
     protected $articlesBlog;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="evenements", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="evenements", cascade={"all"})
      */
     protected $partenaires;
 

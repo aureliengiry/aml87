@@ -21,29 +21,25 @@ class EvenementAdmin extends Admin
                 'multiple' => false,
                 'empty_value' => 'Sélectionnez le type d\'événement'
             ))
+
+            ->add('dateStart')
+
             ->add('description','textarea', array(
                 'required' => false
             ))
 
             ->with('Articles')
-                ->add('articlesBlog','sonata_type_collection', array(
-                        'type_options' => array('delete' => false),
-                    ),
-                    array(
-                        'edit' => 'inline',
-                        'inline' => 'table',
-                        'sortable' => 'id',
-                ))
+                ->add('articlesBlog','sonata_type_model', array('expanded' => true,'compound' => true,'property' => 'title','multiple' => true))
             ->end()
             ->with('Partenaires')
-                ->add('partenaires','sonata_type_collection', array(
+              /*  ->add('partenaires','sonata_type_collection', array(
                         'type_options' => array('delete' => false),
                     ),
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
                         'sortable' => 'id',
-                ))
+                ))*/
             ->end()
             ->add('archive','checkbox',array(
                 'label' => 'Archiver',
@@ -59,13 +55,18 @@ class EvenementAdmin extends Admin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-
+        $datagridMapper
+            ->add('title')
+            ->add('type')
+        ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('title')
+            ->addIdentifier('type')
+            ->addIdentifier('dateStart')
         ;
     }
 
