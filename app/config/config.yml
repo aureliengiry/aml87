@@ -21,11 +21,11 @@ sonata_admin:
     title:      AML87
     templates:
         # default global templates
-        layout:  AmlWebBundle::Admin/standard_layout.html.twig
+        layout:  AmlAdminBundle::standard_layout.html.twig
         ajax:    SonataAdminBundle::ajax_layout.html.twig
 
         # default actions templates, should extend a global templates
-        list:    SonataAdminBundle:CRUD:list.html.twig
+        list:    AmlAdminBundle:CRUD:list.html.twig
         show:    SonataAdminBundle:CRUD:show.html.twig
         edit:    SonataAdminBundle:CRUD:edit.html.twig
 

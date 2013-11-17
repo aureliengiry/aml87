@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+.form-container{
+	position: relative;
+	margin: 15px 0;
+	padding: 39px 19px 14px;
+	background-color: white;
+	border: 1px solid #DDD;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+input[type="file"]{
+	background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+	
+	
+}
+
+/* Blog Tags */
+.ui-helper-hidden-accessible{
+    display: none;
+}
+
+#blog_tags .tag-item{
+    display: inline-block;
+    margin: 0 3px;
+    padding: 5px 25px 5px 5px;
+}
+
+.manage-tags-container .manage-tags{
+    margin: 0 0 15px;
+}
+
+/* UI Autocomplete */
+.ui-menu {
+    list-style: none;
+    padding: 2px;
+    margin: 0;
+    display: block;
+    outline: none;
+}
+
+.ui-widget-content {
+    border: 1px solid #aaaaaa;
+    border-radius: 0 0 6px 6px;
+    background-color: #F4F4F4;
+    color: #222222;
+}
+.ui-autocomplete{
+    width: 213px;
+}
+
+.tumblr-row-page{
+    position: relative;
+}
+
+
+
+/* Liste Evenement */
+
+.uiHeaderSection, .uiSideHeader {
+    background-color: #f2f2f2;
+    border-bottom: none;
+    border-top: solid 1px #e2e2e2;
+    padding: 4px 6px 5px;
+}
+.uiHeaderSection td{
+    padding: 5px;
+}
+
+.btn{
+    color:#333333;
+    text-shadow: none;
+}
