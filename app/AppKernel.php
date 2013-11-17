@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Aml\Bundle\EvenementsBundle\AmlEvenementsBundle(),
             new Aml\Bundle\MediasBundle\AmlMediasBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Aml\Bundle\AdminBundle\AmlAdminBundle(),
         );
 
 

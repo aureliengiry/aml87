@@ -1,0 +1,43 @@
+{% extends "AmlAdminBundle::layout.html.twig" %}
+
+{% block title -%}
+
+    Default
+
+{%- endblock title %}
+
+{% block body %}
+    <div class="hero-unit">
+        <h1>Administration</h1>
+        <p>Bienvenue dans la partie Administration du site de l'AML.<br> Ici vous trouverez tous les outils pour gérer le contenu du site, la liste des membres et configurer le site.</p>
+    </div>
+
+    <div class="row">
+        <div class="span4">
+            <h2>Gestion des contenus</h2>
+            <p>Permet de gérer tous les contenus du site à savoir, les pages statiques, les articles de blog, les liens et les albums de la discographie.</p>
+            <p><a class="btn" href="#">Gérer les contenus »</a></p>
+        </div>
+        <div class="span4">
+            <h2>Gestion des partenaires</h2>
+            <p>Permet de gérer la liste des partenaires du site.</p>
+            <p><a class="btn" href="{{ path('admin_partenaire') }}">Gérer les partenaires »</a></p>
+        </div>
+        <div class="span4">
+            <h2>Agenda</h2>
+            <p>Permet de gérer les évènements du site : concerts, répétitions et les réunions.</p>
+            <p><a class="btn" href="{{ path('admin_agenda', {mode:'calendar'}) }}">Agenda »</a></p>
+        </div>
+        <div class="span4">
+            <h2>Médias</h2>
+            <p>Permet de gérer le contenu de la rubrique médias. Cela va alimeter le site en photos et vidéos.</p>
+            <p><a class="btn" href="{{ path('admin_medias') }}">Gérer les médias »</a></p>
+        </div>
+        <div class="span4">
+            <h2>Membres</h2>
+            <p>Permet de gérer la liste des membres de l'association, les accès aux contenus et de gérer la liste des gens vont recevoir des informations par mails (prochains concerts).</p>
+            <p><a class="btn" href="{{ path('admin_user') }}">Liste des membres »</a></p>
+        </div>
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <title> {{ project_name }} {% block title %}{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800">
+
+
+    <link href="{{ asset('bundles/amladmin/css/application.css') }}" media="screen" rel="stylesheet" type="text/css"/>
+
+
+    {% block stylesheets %}{% endblock %}
+
+
+
+    <!--[if lt IE 9]>
+    <script src="{{ asset('bundles/amlweb/js/admin/vendor/html5shiv.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/amlweb/js/admin/vendor/excanvas.js') }}" type="text/javascript"></script>
+    <![endif]-->
+
+    <script src="{{ asset('bundles/amlweb/js/admin/application.js') }}" type="text/javascript"></script>
+    {% block headerJs %}{% endblock %}
+</head>
+
+<body>
+
+    {# Barre de navigation top #}
+    {% include "AmlAdminBundle::Navigation/navbar.html.twig" %}
+
+    <div class="sidebar-background">
+        <div class="primary-sidebar-background"></div>
+    </div>
+
+    {# Barre de navigation top #}
+    {% include "AmlAdminBundle::Navigation/primary_sidebar.html.twig" %}
+
+
+
+    <div class="main-content">
+
+        {# Page title #}
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="area-top clearfix">
+                    <div class="pull-left header">
+                        <h3 class="title">
+                            <i class="icon-dashboard"></i>
+                            {{ block('title') }}
+                        </h3>
+                        <h5>
+                            A subtitle can be added here
+                        </h5>
+                    </div>
+                </div>
+            </div>
+         </div>
+
+        {# Breadcrumb line #}
+        <div class="container-fluid padded">
+            <div class="row-fluid">
+
+                <div id="breadcrumbs">
+                    <div class="breadcrumb-button blue">
+                        <span class="breadcrumb-label"><i class="icon-home"></i> Home</span>
+                        <span class="breadcrumb-arrow"><span></span></span>
+                    </div>
+
+                    <div class="breadcrumb-button">
+                      <span class="breadcrumb-label">
+                        <i class="icon-dashboard"></i> Dashboard
+                      </span>
+                        <span class="breadcrumb-arrow"><span></span></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {# Main content #}
+        <div class="container-fluid padded">
+            <!-- CONTENT HERE -->
+            {% if app.session.hasFlash('success') %}
+                <div class="alert alert-success">
+                    {{ app.session.flash('success') }}
+                </div>
+            {% endif %}
+            {% if app.session.hasFlash('notice') %}
+                <div class="alert alert-error">
+                    {{ app.session.flash('notice') }}
+                </div>
+            {% endif %}
+            {% if app.session.hasFlash('info') %}
+                <div class="alert alert-info">
+                    {{ app.session.flash('info') }}
+                </div>
+            {% endif %}
+
+            {% block body %}{% endblock %}
+
+            <hr>
+
+            <footer>
+                <p>© AML 2012</p>
+            </footer>
+        </div>
+
+    </div>
+    <!-- /container -->
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-timepicker.js') }}"></script>
+
+    {% block javascripts %}{% endblock %}
+
+</body>
+</html>
+ 

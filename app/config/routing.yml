@@ -1,3 +1,7 @@
+aml_admin:
+    resource: "@AmlAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
 aml_medias:
     resource: "@AmlMediasBundle/Resources/config/routing.yml"
     prefix:   /
