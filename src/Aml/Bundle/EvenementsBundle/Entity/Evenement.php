@@ -4,6 +4,7 @@ namespace Aml\Bundle\EvenementsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Aml\Bundle\EvenementsBundle\Entity\EvenementBlog;
 
 
 
@@ -80,10 +81,13 @@ class Evenement
      */
     private $public;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Blog", mappedBy="evenements", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="EvenementBlog", mappedBy="evenement", cascade={"all"})
      */
-    protected $articlesBlog;
+    protected $evenementArticle;
+
+    protected $articles;
 
     /**
      * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="evenements", cascade={"all"})
@@ -92,7 +96,9 @@ class Evenement
 
     public function __construct()
     {
-        $this->articlesBlog = new ArrayCollection();
+        $this->evenementArticle = new ArrayCollection();
+        $this->articles = new ArrayCollection();
+
         $this->partenaires = new ArrayCollection();
     }
 
@@ -267,39 +273,46 @@ class Evenement
 
     /* ---------------- ARTICLES LIES ---------------- */
 
-    /**
-     *
-     * @param Blog $articleBlog
-     */
-    public function addArticleBlog($articleBlog) {
-        // var_dump( $tag);exit;
-        $articleBlog->addEvenement($this);
-        $this->articlesBlog[] = $articleBlog;
-        return $this;
-    }
-
-    /**
-     * Fonction to delete articleBlog
-     * @param Blog $articleBlog
-     */
-    public function removeArticleBlog($articleBlog)
+    // Important
+    public function getArticle()
     {
-        $this->articlesBlog->removeElement($articleBlog);
+        $articles = new ArrayCollection();
+
+        foreach($this->evenementArticle as $article)
+        {
+            $articles[] = $article->getArticle();
+        }
+
+        return $articles;
+    }
+    // Important
+    public function setArticle($articles)
+    {
+        foreach($articles as $article)
+        {
+            $evenementArticle = new EvenementBlog();
+
+            $evenementArticle->setEvenement($this);
+            $evenementArticle->setArticle($article);
+
+            $this->addEvenementArticle($evenementArticle);
+        }
+
     }
 
-    /**
-     * @return Evenement
-     */
-    public function getArticlesBlog() {
-        return $this->articlesBlog;
-    }
-
-    /**
-     * @return Evenement
-     */
-    public function setArticlesBlog(ArrayCollection $articlesBlog) {
-        $this->articlesBlog = $articlesBlog;
+    public function getEvenement()
+    {
         return $this;
+    }
+
+    public function addEvenementArticle($evenementArticle)
+    {
+        $this->evenementArticle[] = $evenementArticle;
+    }
+
+    public function removeEvenementArticle($evenementArticle)
+    {
+        return $this->evenementArticle->removeElement($evenementArticle);
     }
 
 
