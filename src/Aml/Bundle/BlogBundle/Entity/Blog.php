@@ -4,6 +4,7 @@ namespace Aml\Bundle\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Aml\Bundle\EvenementsBundle\Entity\EvenementBlog;
 
 /**
  * Aml\Bundle\BlogBundle\Entity\Blog
@@ -94,20 +95,18 @@ class Blog
 	protected $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", inversedBy="articlesBlog")
-     * @ORM\JoinTable(name="evenements_articles_blog",
-     * 		joinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")},
-     * 		inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}
-     * )
+     * @ORM\OneToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\EvenementBlog", mappedBy="article", cascade={"all"})
      */
+    protected $evenementArticle;
+
     protected $evenements;
 
  	public function __construct()
     {
-      //  var_dump(__METHOD__,$this->get);
-        //exit;
-        $this->tags = new ArrayCollection();
+        $this->evenementArticle = new ArrayCollection();
         $this->evenements = new ArrayCollection();
+
+        $this->tags = new ArrayCollection();
        // $this->files = new ArrayCollection();
     }
 
@@ -371,20 +370,52 @@ class Blog
     }
 
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
-    public function getEvenements()
+
+    // Important
+    public function getEvenement()
     {
-        return $this->evenements;
+        $evenements = new ArrayCollection();
+
+        foreach($this->evenementArticle as $evenement)
+        {
+            $evenements[] = $evenement->getEvenement();
+        }
+
+        return $evenements;
+    }
+    // Important
+    public function setEvenement($evenements)
+    {
+        foreach($evenements as $evenement)
+        {
+            $evenementArticle = new EvenementBlog();
+
+            $evenementArticle->setEvenement($evenement);
+            $evenementArticle->setArticle($this);
+
+            $this->addEvenementArticle($evenementArticle);
+        }
+
     }
 
-    public function setEvenements($evenements)
+    public function getArticle()
     {
-        $this->evenements = $evenements;
         return $this;
     }
 
-    public function addEvenement($evenement)
+    public function addEvenementArticle($evenementArticle)
     {
-        $this->evenements[] = $evenement;
+        $this->evenementArticle[] = $evenementArticle;
     }
 
+    public function removeEvenementArticle($evenementArticle)
+    {
+        return $this->evenementArticle->removeElement($evenementArticle);
+    }
+
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }
