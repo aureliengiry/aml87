@@ -23,7 +23,7 @@ class Image extends Media
     protected $partenaire;
 
     /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\BlogBundle\Entity\Blog", mappedBy="logo")
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", mappedBy="logo")
      */
     protected $articleBlog;
     /**

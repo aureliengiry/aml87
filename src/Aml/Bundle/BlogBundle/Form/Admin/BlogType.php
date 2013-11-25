@@ -14,12 +14,12 @@ class BlogType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('body','textarea', array(
-            	'label' => 'Texte',
-            	'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
-            	'required' => false,
+            ->add('body', 'textarea', array(
+                'label' => 'Texte',
+                'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
+                'required' => false,
             ))
-            ->add('category','entity',array(
+            ->add('category', 'entity', array(
                 'label' => 'Catégorie',
                 'class' => 'AmlBlogBundle:BlogCategories',
                 'property' => 'name',
@@ -41,12 +41,11 @@ class BlogType extends AbstractType
                 'mapped' => false
             ))
 
-            ->add('public','checkbox',array(
-            	'label' => 'Publier',
-            	'required' => false,
-            	'attr' => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
-            ))
-        ;
+            ->add('public', 'checkbox', array(
+                'label' => 'Publier',
+                'required' => false,
+                'attr' => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
+            ));
     }
 
     public function getName()

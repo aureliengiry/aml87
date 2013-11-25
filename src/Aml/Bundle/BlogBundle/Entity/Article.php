@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Aml\Bundle\EvenementsBundle\Entity\EvenementBlog;
 
 /**
- * Aml\Bundle\BlogBundle\Entity\Blog
+ * Aml\Bundle\BlogBundle\Entity\Article
  *
  * @ORM\Table(name="blog_articles")
- * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Entity\Repository\BlogRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Entity\Repository\ArticleRepository")
  */
-class Blog
+class Article
 {
     /**
      * @var integer $id
@@ -28,8 +28,8 @@ class Blog
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
-    
+    private $title = '';
+
     /**
      * @var string url
      *
@@ -63,7 +63,7 @@ class Blog
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
-    
+
     /**
      * @var datetime $published
      *
@@ -77,10 +77,10 @@ class Blog
      * @ORM\Column(name="public", type="boolean")
      */
     private $public;
-    	
-	/**
-     * @ORM\ManyToOne(targetEntity="BlogCategories", inversedBy="articles")
-     * @ORM\JoinColumn(name="id_blog_category", referencedColumnName="id_blog_category")
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
+     * @ORM\JoinColumn(name="id_blog_category", referencedColumnName="id_category")
      */
     protected $category;
 
@@ -88,11 +88,11 @@ class Blog
 // 	 * @ORM\ManyToMany(targetEntity="File", mappedBy="articles", cascade={"persist"})
 // 	 */
 // 	protected $files;
-	
-	/**
-	 * @ORM\ManyToMany(targetEntity="BlogTags", mappedBy="articles", cascade={"persist"})
-	 */
-	protected $tags;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Tags", mappedBy="articles", cascade={"all"})
+     */
+    protected $tags;
 
     /**
      * @ORM\OneToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\EvenementBlog", mappedBy="article", cascade={"all"})
@@ -101,19 +101,19 @@ class Blog
 
     protected $evenements;
 
- 	public function __construct()
+    public function __construct()
     {
         $this->evenementArticle = new ArrayCollection();
         $this->evenements = new ArrayCollection();
 
         $this->tags = new ArrayCollection();
-       // $this->files = new ArrayCollection();
+        // $this->files = new ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -135,12 +135,13 @@ class Blog
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
         return $this->title;
     }
+
     /**
      * Set title
      *
@@ -155,7 +156,7 @@ class Blog
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -168,7 +169,7 @@ class Blog
      * @param string $logo
      * @return Partenaire
      */
-    public function setLogo( $logo)
+    public function setLogo($logo)
     {
         $this->logo = $logo;
 
@@ -199,7 +200,7 @@ class Blog
     /**
      * Get body
      *
-     * @return text 
+     * @return text
      */
     public function getBody()
     {
@@ -211,7 +212,7 @@ class Blog
      *
      * @param datetime $created
      */
-    public function setCreated(\DateTime $created=null)
+    public function setCreated(\DateTime $created = null)
     {
         $this->created = $created;
         return $this;
@@ -220,7 +221,7 @@ class Blog
     /**
      * Get created
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreated()
     {
@@ -241,7 +242,7 @@ class Blog
     /**
      * Get updated
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdated()
     {
@@ -262,42 +263,46 @@ class Blog
     /**
      * Get public
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublic()
     {
         return $this->public;
     }
-    
-	/**
-	 * @return the $published
-	 */
-	public function getPublished() {
-		return $this->published;
-	}
 
-	/**
-	 * @param datetime $published
-	 */
-	public function setPublished($published) {
-		$this->published = $published;
-		return $this;
-	}
+    /**
+     * @return the $published
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
 
-	/**
-	 * @return the $id_blog_category
-	 */
-	public function getCategory() {
-		return $this->category;
-	}
+    /**
+     * @param datetime $published
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+        return $this;
+    }
 
-	/**
-	 * @param field_type $id_blog_category
-	 */
-	public function setCategory($id_blog_category) {
-		$this->category = $id_blog_category;
-		return $this;
-	}
+    /**
+     * @return the $id_blog_category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param field_type $id_blog_category
+     */
+    public function setCategory($id_blog_category)
+    {
+        $this->category = $id_blog_category;
+        return $this;
+    }
 
 // 	/**
 // 	 *
@@ -315,28 +320,28 @@ class Blog
 // 	public function getFiles() {
 // 		return $this->files;
 // 	}
-    
-    
-    
-	/**
-	 * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
-	 */
-	protected function _build_SystemName($string)
-	{
-		/**
-		 * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
-		 */
-		$string = str_replace( array('à','á','â','ã','ä', 'ç', 'è','é','ê','ë', 'ì','í','î','ï', 'ñ', 'ò','ó','ô','õ','ö', 'ù','ú','û','ü', 'ý','ÿ', 'À','Á','Â','Ã','Ä', 'Ç', 'È','É','Ê','Ë', 'Ì','Í','Î','Ï', 'Ñ', 'Ò','Ó','Ô','Õ','Ö', 'Ù','Ú','Û','Ü', 'Ý'), array('a','a','a','a','a', 'c', 'e','e','e','e', 'i','i','i','i', 'n', 'o','o','o','o','o', 'u','u','u','u', 'y','y', 'A','A','A','A','A', 'C', 'E','E','E','E', 'I','I','I','I', 'N', 'O','O','O','O','O', 'U','U','U','U', 'Y'), $string);
-		$string = str_replace(array(' ','-','/','?'), array('_','_','_',''),$string);
-	
-		return strtolower($string);
-	}
+
+
+    /**
+     * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
+     */
+    protected function _build_SystemName($string)
+    {
+        /**
+         * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
+         */
+        $string = str_replace(array('à', 'á', 'â', 'ã', 'ä', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý'), array('a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'), $string);
+        $string = str_replace(array(' ', '-', '/', '?'), array('_', '_', '_', ''), $string);
+
+        return strtolower($string);
+    }
 
     /**
      *
      * @param TumblrTag $tag
      */
-    public function addTag($tag) {
+    public function addTag($tag)
+    {
         if (!$this->tags->contains($tag)) {
             $tag->addArticle($this);
             $this->tags[] = $tag;
@@ -357,14 +362,16 @@ class Blog
     /**
      * @return the $tags
      */
-    public function getTags() {
+    public function getTags()
+    {
         return $this->tags;
     }
 
     /**
      * @return the $tags
      */
-    public function setTags(ArrayCollection $tags) {
+    public function setTags(ArrayCollection $tags)
+    {
         $this->tags = $tags;
         return $this;
     }
@@ -376,18 +383,17 @@ class Blog
     {
         $evenements = new ArrayCollection();
 
-        foreach($this->evenementArticle as $evenement)
-        {
+        foreach ($this->evenementArticle as $evenement) {
             $evenements[] = $evenement->getEvenement();
         }
 
         return $evenements;
     }
+
     // Important
     public function setEvenement($evenements)
     {
-        foreach($evenements as $evenement)
-        {
+        foreach ($evenements as $evenement) {
             $evenementArticle = new EvenementBlog();
 
             $evenementArticle->setEvenement($evenement);

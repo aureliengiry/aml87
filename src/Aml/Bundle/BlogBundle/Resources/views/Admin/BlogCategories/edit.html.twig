@@ -5,37 +5,40 @@
 {% block title -%}Blog - Créer une Catégorie{%- endblock title %}
 
 {% block body %}
-<div class="row-fluid">
-    <div class="span3">
-        {# Barre de navigation left #}
-        {% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}
+    <div class="row-fluid">
+        <div class="span3">
+            {# Barre de navigation left #}
+            {% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}
+        </div>
+
+        <div class="span5">
+            <h1>Blog - éditer la catégorie "{{ entity.name }}"</h1>
+
+            <form class="form-horizontal"
+                  action="{{ path('admin_content_blog_categories_update', { 'id': entity.id }) }}"
+                  method="post" {{ form_enctype(edit_form) }}>
+                {{ form_rest(edit_form) }}
+
+                <div class="form-actions">
+                    <a class="btn btn-default" href="{{ path('admin_content_blog_categories') }}">
+                        <i class="icon-arrow-left"></i> Retour à la liste des catégories
+                    </a>
+
+                    <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
+                </div>
+            </form>
+
+            <ul class="record_actions">
+                <li>
+                    <form action="{{ path('admin_content_blog_categories_delete', { 'id': entity.id }) }}"
+                          method="post">
+                        {{ form_widget(delete_form) }}
+                        <button class="btn btn-danger" type="submit">Supprimer</button>
+                    </form>
+                </li>
+            </ul>
+
+        </div>
     </div>
-
-    <div class="span5">
-        <h1>Blog - éditer la catégorie "{{ entity.name }}"</h1>
-
-        <form class="form-horizontal" action="{{ path('admin_content_blog_categories_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-            {{ form_rest(edit_form) }}
-
-            <div class="form-actions">
-                <a class="btn btn-default" href="{{ path('admin_content_blog_categories') }}">
-                    <i class="icon-arrow-left"></i> Retour à la liste des catégories
-                </a>
-
-                <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
-            </div>
-        </form>
-
-        <ul class="record_actions">
-            <li>
-                <form action="{{ path('admin_content_blog_categories_delete', { 'id': entity.id }) }}" method="post">
-                    {{ form_widget(delete_form) }}
-                    <button class="btn btn-danger" type="submit">Supprimer</button>
-                </form>
-            </li>
-        </ul>
-
-    </div>
-</div>
 
 {% endblock body %}

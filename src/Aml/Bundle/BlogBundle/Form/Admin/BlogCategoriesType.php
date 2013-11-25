@@ -11,8 +11,7 @@ class BlogCategoriesType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
-        ;
+            ->add('description');
     }
 
     public function getName()

@@ -35,7 +35,7 @@ class EvenementBlog
     protected $evenement;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Aml\Bundle\BlogBundle\Entity\Blog", inversedBy="evenementArticle")
+     * @ORM\ManyToOne(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", inversedBy="evenementArticle")
      * @ORM\JoinColumn(name="id_article", referencedColumnName="id_article")
      * */
     protected $article;

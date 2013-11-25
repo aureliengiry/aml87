@@ -48,8 +48,7 @@ The <info>blog:import:categories</info> command imports blog categories from web
 
 <info>php app/console blog:import:categories --debug</info>
 EOF
-            )
-        ;
+            );
     }
 
     /**
@@ -57,63 +56,65 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    	var_dump(__METHOD__);
-    	$this->_loadData();
-		var_dump( $this->_oldData );
-		$this->_importContent();
-    }
-    
-	protected function _connectDb(){
-        $dbInfo['database_target'] = $this->getContainer()->getParameter('import_database_host');
-		$dbInfo['database_name'] = $this->getContainer()->getParameter('import_database_name');
-	  	$dbInfo['username'] = $this->getContainer()->getParameter('import_database_user');
-	  	$dbInfo['password'] = $this->getContainer()->getParameter('import_database_password');
-	
-		$dbConnString = "mysql:host=" . $dbInfo['database_target'] . "; dbname=" . $dbInfo['database_name'];
-		$this->dbh = new \PDO($dbConnString, $dbInfo['username'], $dbInfo['password']);
-		$this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-		$error = $this->dbh->errorInfo();
-		if($error[0] != "") {
-			print "<p>DATABASE CONNECTION ERROR:</p>";
-		    print_r($error);
-		}
-    }
-    
-    protected function _loadData() {
-    	
-    	var_dump(__METHOD__);
-    	
-    	$this->_connectDb();
-		
-    	// import vocabulary 2 ( Blog )
-		$queryString = "SELECT * 
-		FROM term_data 		
-		WHERE vid=2";
-		$query = $this->dbh->query($queryString);
-		
-		$this->_oldData = $query->fetchAll();
+        var_dump(__METHOD__);
+        $this->_loadData();
+        var_dump($this->_oldData);
+        $this->_importContent();
     }
 
-    protected function _importContent(){
-    	var_dump(__METHOD__);
-    	$em = $this->getContainer()->get('doctrine')->getEntityManager('default');
-    	
-    	if( !empty($this->_oldData) ){
-    		foreach ($this->_oldData as $item) {    			   		
-		    	$entity = new BlogCategories();
-		    		    	
-		        $entity
-		        	->setName($item['name'])
-		            ->setSystemName($item['name'])
-		            //->setWeight($item['weight'])
-		            ->setDescription($item['description'])
-		         ;
-		         
-		         
-		         $em->persist($entity);
-		         $em->flush();
-    		}
-    	}
+    protected function _connectDb()
+    {
+        $dbInfo['database_target'] = $this->getContainer()->getParameter('import_database_host');
+        $dbInfo['database_name'] = $this->getContainer()->getParameter('import_database_name');
+        $dbInfo['username'] = $this->getContainer()->getParameter('import_database_user');
+        $dbInfo['password'] = $this->getContainer()->getParameter('import_database_password');
+
+        $dbConnString = "mysql:host=" . $dbInfo['database_target'] . "; dbname=" . $dbInfo['database_name'];
+        $this->dbh = new \PDO($dbConnString, $dbInfo['username'], $dbInfo['password']);
+        $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $error = $this->dbh->errorInfo();
+        if ($error[0] != "") {
+            print "<p>DATABASE CONNECTION ERROR:</p>";
+            print_r($error);
+        }
     }
-    
+
+    protected function _loadData()
+    {
+
+        var_dump(__METHOD__);
+
+        $this->_connectDb();
+
+        // import vocabulary 2 ( Blog )
+        $queryString = "SELECT *
+		FROM term_data 		
+		WHERE vid=2";
+        $query = $this->dbh->query($queryString);
+
+        $this->_oldData = $query->fetchAll();
+    }
+
+    protected function _importContent()
+    {
+        var_dump(__METHOD__);
+        $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
+
+        if (!empty($this->_oldData)) {
+            foreach ($this->_oldData as $item) {
+                $entity = new BlogCategories();
+
+                $entity
+                    ->setName($item['name'])
+                    ->setSystemName($item['name'])
+                    //->setWeight($item['weight'])
+                    ->setDescription($item['description']);
+
+
+                $em->persist($entity);
+                $em->flush();
+            }
+        }
+    }
+
 }

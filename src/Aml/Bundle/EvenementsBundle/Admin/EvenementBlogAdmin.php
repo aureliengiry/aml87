@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 
-class EvenementAdmin extends Admin
+class EvenementBlogAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {

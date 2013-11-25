@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Aml\Bundle\BlogBundle\Entity\Blog;
+use Aml\Bundle\BlogBundle\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class BlogController extends Controller
 {
-	protected $_limitPagination = 5;
+    protected $_limitPagination = 5;
 
     /**
      * Lists all Blog entities.
@@ -26,56 +26,57 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request, $page)
     {
-    	$filters = $categories = $tags = array();
+        $filters = $categories = $tags = array();
 
         $category = $request->get('category');
-        if( $category ){
-               $filters['category'] = $category;
+        if ($category) {
+            $filters['category'] = $category;
         }
 
         $tag = $request->get('tag');
-        if( $tag ){
+        if ($tag) {
             $filters['tag'] = $tag;
         }
 
 
         $em = $this->getDoctrine()->getManager();
-        $repositoryBlog = $this->getDoctrine()->getRepository('AmlBlogBundle:Blog');
+        $repositoryArticle = $this->getDoctrine()->getRepository('AmlBlogBundle:Article');
 
         // Get Nb articles
-        $nbEntities = $repositoryBlog->countPublicArticles($filters);
+        $nbEntities = $repositoryArticle->countPublicArticles($filters);
 
         $num_pages = $page; // some calculation of what page you're currently on
-        $entitiesBlog = $repositoryBlog->getPublicArticles(
+        $entitiesBlog = $repositoryArticle->getPublicArticles(
             $this->_limitPagination,
-            $this->_limitPagination * ($num_pages-1)    ,
+            $this->_limitPagination * ($num_pages - 1),
             $filters
         );
 
         //var_dump( $entitiesBlog );exit;
 
-		// Get Liste catégories
-		$categories = $em->getRepository('AmlBlogBundle:BlogCategories')->findAll();
+        // Get Liste catégories
+        // @TODO : charger que les catégories avec les articles liés
+        $categories = $em->getRepository('AmlBlogBundle:Category')->findAll();
 
-		// Get Liste tags
-		$tags = $em->getRepository('AmlBlogBundle:BlogTags')->findAll();
+        // Get Liste tags
+        $tags = $em->getRepository('AmlBlogBundle:Tags')->findAll();
 
-		// Calcul de la pagination
-		$calculLastPage = round($nbEntities/$this->_limitPagination);
-		$pagination = array(
-	        	'nbEntities' => $nbEntities,
-	        	'limit' => $this->_limitPagination,
-	        	'currentPage' => $page,
-	        	'nextPage' => ( $page+1 * $this->_limitPagination < $nbEntities ? $page+1 : false),
-	        	'prevPage' => ( $page-1 > 0 ? $page-1 : false ),
-				'lastPage' => ( $calculLastPage >= 0 ? $calculLastPage : 0)
-        	);
+        // Calcul de la pagination
+        $calculLastPage = round($nbEntities / $this->_limitPagination);
+        $pagination = array(
+            'nbEntities' => $nbEntities,
+            'limit' => $this->_limitPagination,
+            'currentPage' => $page,
+            'nextPage' => ($page + 1 * $this->_limitPagination < $nbEntities ? $page + 1 : false),
+            'prevPage' => ($page - 1 > 0 ? $page - 1 : false),
+            'lastPage' => ($calculLastPage >= 0 ? $calculLastPage : 0)
+        );
 
         return array(
-        	'entities' => $entitiesBlog,
-        	'pagination' => $pagination,
-        	'categories' => $categories,
-        	'tags' => $tags
+            'entities' => $entitiesBlog,
+            'pagination' => $pagination,
+            'categories' => $categories,
+            'tags' => $tags
         );
     }
 
@@ -90,11 +91,10 @@ class BlogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        if( false === $id ){
-        	$entity = $em->getRepository('AmlBlogBundle:Blog')->findOneBy(array('url' => $url_key));
-        }
-        else{
-        	$entity = $em->getRepository('AmlBlogBundle:Blog')->find($id);
+        if (false === $id) {
+            $entity = $em->getRepository('AmlBlogBundle:Blog')->findOneBy(array('url' => $url_key));
+        } else {
+            $entity = $em->getRepository('AmlBlogBundle:Blog')->find($id);
         }
 
         if (!$entity) {
@@ -102,8 +102,8 @@ class BlogController extends Controller
         }
 
         return array(
-            'entity'      => $entity        );
+            'entity' => $entity);
     }
 
-    
+
 }
