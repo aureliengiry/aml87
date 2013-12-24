@@ -6,13 +6,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class CategoriesAdmin extends Admin
+class TagsAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
-            ->add('description');
+            ->add('system_name')
+            ->add('name');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -23,7 +23,9 @@ class CategoriesAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name');
+            ->add('id')
+            ->addIdentifier('system_name')
+            ->add('name');
     }
 
     /**

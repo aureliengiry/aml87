@@ -9,9 +9,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Aml\Bundle\BlogBundle\Entity\Tags
  *
  * @ORM\Table(name="blog_tags")
- * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Entity\Repository\BlogTagsRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Entity\Repository\TagsRepository")
  */
-class BlogTags
+class Tags
 {
     /**
      * @var integer $id
@@ -21,18 +21,18 @@ class BlogTags
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
-    
+
+
     /**
-     * @ORM\ManyToMany(targetEntity="Blog", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Article", inversedBy="tags")
      * @ORM\JoinTable(name="blog_articles_tags",
-     * 		joinColumns={@ORM\JoinColumn(name="id_tag", referencedColumnName="id_tag")},
-     * 		inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
+     *        joinColumns={@ORM\JoinColumn(name="id_tag", referencedColumnName="id_tag")},
+     *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
      * )
      */
     protected $articles;
 
-    
+
     /**
      * @var string $system_name
      *
@@ -53,15 +53,15 @@ class BlogTags
      * @ORM\Column(name="weight", type="smallint", nullable=true)
      */
     private $weight = 0;
-    
-     /**
+
+    /**
      * @var text description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description = '';
 
-	public function __construct()
+    public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
@@ -69,7 +69,7 @@ class BlogTags
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -90,7 +90,7 @@ class BlogTags
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -111,13 +111,13 @@ class BlogTags
     /**
      * Get weight
      *
-     * @return smallint 
+     * @return smallint
      */
     public function getWeight()
     {
         return $this->weight;
     }
-    
+
     /**
      * Set system_name
      *
@@ -132,27 +132,27 @@ class BlogTags
     /**
      * Get system_name
      *
-     * @return string 
+     * @return string
      */
     public function getSystemName()
     {
         return $this->system_name;
     }
-    
-	public function getArticles()
+
+    public function getArticles()
     {
-    	return $this->articles;
+        return $this->articles;
     }
-    
-	public function setArticles($articles)
+
+    public function setArticles($articles)
     {
-    	$this->articles = $articles;
-    	return $this;
+        $this->articles = $articles;
+        return $this;
     }
-    
+
     public function addArticle($article)
     {
-    	$this->articles[] = $article;
+        $this->articles[] = $article;
     }
 
     /**
@@ -164,35 +164,36 @@ class BlogTags
         $this->articles->removeElement($article);
     }
 
-	/**
-	 * @return the $description
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * @return the $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	/**
-	 * @param text $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-		return $this;
-	}
-	
-	/**
+    /**
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
      * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
      */
     protected function _build_SystemName($string)
-    {   	
-    	/**
-	     * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
-	     */
-        $string = str_replace( array('à','á','â','ã','ä', 'ç', 'è','é','ê','ë', 'ì','í','î','ï', 'ñ', 'ò','ó','ô','õ','ö', 'ù','ú','û','ü', 'ý','ÿ', 'À','Á','Â','Ã','Ä', 'Ç', 'È','É','Ê','Ë', 'Ì','Í','Î','Ï', 'Ñ', 'Ò','Ó','Ô','Õ','Ö', 'Ù','Ú','Û','Ü', 'Ý'), array('a','a','a','a','a', 'c', 'e','e','e','e', 'i','i','i','i', 'n', 'o','o','o','o','o', 'u','u','u','u', 'y','y', 'A','A','A','A','A', 'C', 'E','E','E','E', 'I','I','I','I', 'N', 'O','O','O','O','O', 'U','U','U','U', 'Y'), $string);
-        $string = str_replace(array(' ','-'), array('_','_'),$string);
-        
-        return strtolower($string);
-    } 
+    {
+        /**
+         * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
+         */
+        $string = str_replace(array('à', 'á', 'â', 'ã', 'ä', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý'), array('a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'), $string);
+        $string = str_replace(array(' ', '-'), array('_', '_'), $string);
 
-    
-    
+        return strtolower($string);
+    }
+
+
 }

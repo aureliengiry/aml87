@@ -6,6 +6,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+use Aml\Bundle\BlogBundle\Admin\BlogAdmin;
+
 
 class EvenementAdmin extends Admin
 {
@@ -29,13 +31,14 @@ class EvenementAdmin extends Admin
             ))
 
             ->with('Articles')
-                //->add('Article','sonata_type_model', array('expanded' => true,'compound' => true,'property' => 'title','multiple' => true))
+                ->add('Blog1', 'sonata_type_admin')
+              //  ->add('Article','sonata_type_model', array('expanded' => true,'compound' => true,'property' => 'title','multiple' => true))
              // ->add('articles','sonata_type_model')
-                ->add('Article' , 'entity' , array(
+                /*->add('Article' , 'entity' , array(
                     'class'    => 'AmlBlogBundle:Blog' ,
                     'property' => 'title' ,
                     'expanded' => true ,
-                    'multiple' => true , ))
+                    'multiple' => true , ))*/
             ->end()
             ->with('Partenaires')
                 // ->add('partenaires','sonata_type_model', array('expanded' => true,'property' => 'title','multiple' => true))

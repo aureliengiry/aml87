@@ -13,41 +13,38 @@ class BlogAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title')
-            ->add('logo','sonata_type_admin')
-            ->add('body','textarea', array(
+            ->add('title', 'text')
+            // ->add('logo','sonata_type_admin')
+            ->add('body', 'textarea', array(
                 'label' => 'Texte',
                 'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
                 'required' => false,
             ))
-            ->add('category','entity',array(
+            ->add('category', 'entity', array(
                 'label' => 'Catégorie',
-                'class' => 'AmlBlogBundle:BlogCategories',
+                'class' => 'AmlBlogBundle:Category',
                 'property' => 'name',
                 'empty_value' => 'Choisissez une catégorie',
             ))
 
-            ->add('addtags', 'genemu_jqueryautocompleter_entity', array(
-                'route_name' => 'blog_tags_ajax_autocomplete',
-                'class' => 'Aml\Bundle\BlogBundle\Entity\BlogTags',
-                'property' => 'name',
-                'label' => 'Tags',
-                'attr' => array(
-                    'placeholder' => 'Ajouter des tags',
-                ),
-                'required' => false,
-                'mapped' => false
-            ))
-            ->add('tags', 'hidden', array(
-                'mapped' => false
-            ))
+            /* ->add('addtags', 'genemu_jqueryautocompleter_entity', array(
+                 'route_name' => 'blog_tags_ajax_autocomplete',
+                 'class' => 'Aml\Bundle\BlogBundle\Entity\Tags',
+                 'property' => 'name',
+                 'label' => 'Tags',
+                 'attr' => array(
+                     'placeholder' => 'Ajouter des tags',
+                 ),
+                 'required' => false,
+                 'mapped' => false
+             ))*/
+            ->add('tags', 'sonata_type_admin')
 
-            ->add('public','checkbox',array(
+            ->add('public', 'checkbox', array(
                 'label' => 'Publier',
                 'required' => false,
                 'attr' => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
-            ))
-        ;
+            ));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -61,8 +58,7 @@ class BlogAdmin extends Admin
             ->addIdentifier('title')
             ->add('created')
             ->add('updated')
-            ->add('public')
-        ;
+            ->add('public');
     }
 
     /**
@@ -83,11 +79,12 @@ class BlogAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    public function preUpdate($article) {
+    public function preUpdate($article)
+    {
 
         $article->setUpdated(new \DateTime);
 
-        $this->_setLogoTitle($article);
+        // $this->_setLogoTitle($article);
     }
 
     /**
@@ -98,10 +95,11 @@ class BlogAdmin extends Admin
         $article->setCreated(new \DateTime);
         $article->setUpdated(new \DateTime);
 
-        $this->_setLogoTitle($article);
+        //$this->_setLogoTitle($article);
     }
 
-    protected function _setLogoTitle($article){
+    protected function _setLogoTitle($article)
+    {
         $logo = $article->getLogo();
 
         $logo->setTitle($article->getTitle());

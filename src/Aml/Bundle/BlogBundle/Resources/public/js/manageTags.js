@@ -1,24 +1,23 @@
-
 var listTags = new Array();
 var tags = tags || {};
 
-(function($){
+(function ($) {
 
-	
-	tags.observeAddTag = function(){
-		
-		this.addTagButton.bind('click', function(event){
-			event.preventDefault();
 
-            tags.loadTag( tags.autocompleteField.val() );
+    tags.observeAddTag = function () {
+
+        this.addTagButton.bind('click', function (event) {
+            event.preventDefault();
+
+            tags.loadTag(tags.autocompleteField.val());
         });
-	};
+    };
 
 
-    tags.addTag = function(tag){
+    tags.addTag = function (tag) {
 
         // si le mot clé n'appartient pas aux mots clés ajoutés précédemment, on génère "l'ajout"
-		if(jQuery.inArray(tag.id, this.tags) == -1){
+        if (jQuery.inArray(tag.id, this.tags) == -1) {
 
             // Save list tag
             this.tags.push(tag.id);
@@ -38,60 +37,59 @@ var tags = tags || {};
             newTagItem = newTagItem.replace(/__id__/g, tag.id);
 
             var $newFormLi = $('<div class="tag-item alert alert-info"></li>').append(newTagItem);
-            this.collectionHolder.append( $newFormLi );
+            this.collectionHolder.append($newFormLi);
 
             // increase the index with one for the next item
             this.collectionHolder.data('index', index + 1);
 
             this.autocompleteField.val('');
             this.observeRemoveTag();
-            console.log( prototype, index );
-            console.log(  this.tags );
+            console.log(prototype, index);
+            console.log(this.tags);
         }
-        else{
+        else {
             alert('Tag already selected');
         }
 
     };
 
-    tags.observeRemoveTag = function(){
+    tags.observeRemoveTag = function () {
 
         this.removeTagButton = $('#tumblr_tags').find('button.close');
-        this.removeTagButton.bind('click', function(event){
+        this.removeTagButton.bind('click', function (event) {
             event.preventDefault();
-            tags.removeTag( this );
+            tags.removeTag(this);
         });
 
     };
 
-    tags.removeTag = function(element){
+    tags.removeTag = function (element) {
         var tagId = $(element).next('input:hidden').val();
-        this.tags.splice( $.inArray(tagId, this.tags), 1 );
+        this.tags.splice($.inArray(tagId, this.tags), 1);
         $(element).parent().remove();
         return false;
     };
 
-    tags.loadTag = function(tagName){
+    tags.loadTag = function (tagName) {
 
         $.ajax({
             url: tags.urlLoadTag,
             processData: false,
             data: 'tag=' + tagName,
             dataType: 'json',
-            success:  function(tag){
-                 if( tag ){
-                    tags.addTag( tag );
-                 }
-                 else{
+            success: function (tag) {
+                if (tag) {
+                    tags.addTag(tag);
+                }
+                else {
                     alert("error during load tag");
                     return false;
-                 }
+                }
             }
         });
     };
 
-	
-    
+
     // clic sur la fleche pour ajouter un mot clé
 //	$('#bouton_ajouter_mot_cle').bind('click', function(e)
 //	{
@@ -125,6 +123,6 @@ var tags = tags || {};
 //	
 
 //	
-	
+
 
 })(jQuery);

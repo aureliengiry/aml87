@@ -6,7 +6,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: "Articles" }
         arguments:
             - ~
-            - Aml\Bundle\BlogBundle\Entity\Blog
+            - Aml\Bundle\BlogBundle\Entity\Article
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlBlogBundle]]
@@ -17,7 +17,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: "Tags" }
         arguments:
             - ~
-            - Aml\Bundle\BlogBundle\Entity\BlogTags
+            - Aml\Bundle\BlogBundle\Entity\Tags
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlBlogBundle]]
@@ -28,7 +28,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: "Categories" }
         arguments:
             - ~
-            - Aml\Bundle\BlogBundle\Entity\BlogCategories
+            - Aml\Bundle\BlogBundle\Entity\Category
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlBlogBundle]]

@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Aml\Bundle\BlogBundle\Entity\BlogTags;
+
 //use Aml\Bundle\BlogBundle\Form\Admin\TagsType;
 
 /**
@@ -50,8 +51,8 @@ class TagsController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        );
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),);
     }
 
     /**
@@ -63,11 +64,11 @@ class TagsController extends Controller
     public function newAction()
     {
         $entity = new Tags();
-        $form   = $this->createForm(new TagsType(), $entity);
+        $form = $this->createForm(new TagsType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -80,9 +81,9 @@ class TagsController extends Controller
      */
     public function createAction()
     {
-        $entity  = new Tags();
+        $entity = new Tags();
         $request = $this->getRequest();
-        $form    = $this->createForm(new TagsType(), $entity);
+        $form = $this->createForm(new TagsType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -91,12 +92,12 @@ class TagsController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('content_tags_show', array('id' => $entity->getId())));
-            
+
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -120,8 +121,8 @@ class TagsController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -143,7 +144,7 @@ class TagsController extends Controller
             throw $this->createNotFoundException('Unable to find Tags entity.');
         }
 
-        $editForm   = $this->createForm(new TagsType(), $entity);
+        $editForm = $this->createForm(new TagsType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -158,8 +159,8 @@ class TagsController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -196,7 +197,6 @@ class TagsController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
