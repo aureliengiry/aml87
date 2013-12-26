@@ -80,7 +80,7 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
-     * @ORM\JoinColumn(name="id_blog_category", referencedColumnName="id_category")
+     * @ORM\JoinColumn(name="id_category", referencedColumnName="id_category")
      */
     protected $category;
 

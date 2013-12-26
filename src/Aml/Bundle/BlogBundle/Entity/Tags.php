@@ -84,6 +84,7 @@ class Tags
     public function setName($name)
     {
         $this->name = $name;
+        $this->setSystemName($name);
         return $this;
     }
 
@@ -193,6 +194,11 @@ class Tags
         $string = str_replace(array(' ', '-'), array('_', '_'), $string);
 
         return strtolower($string);
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
 
