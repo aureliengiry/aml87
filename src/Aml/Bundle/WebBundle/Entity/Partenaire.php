@@ -186,4 +186,18 @@ class Partenaire
     {
         $this->evenements[] = $evenement;
     }
+
+    /**
+     * Fonction pour supprimer une discussion d'un mot clé
+     * @param Discussion $discussion
+     */
+    public function removeEvenement($evenement)
+    {
+        $this->evenements->removeElement($evenement);
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

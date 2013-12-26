@@ -15,46 +15,34 @@ class ArticleAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('title', 'text')
-                // ->add('logo','sonata_type_admin')
-                ->add('body', 'textarea', array(
-                    'label' => 'Texte',
-                    'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
-                    'required' => false,
-                ))
+
                 ->add('category', 'entity', array(
                     'label' => 'Catégorie',
                     'class' => 'AmlBlogBundle:Category',
                     'property' => 'name',
                     'empty_value' => 'Choisissez une catégorie',
                 ))
-
-                /* ->add('addtags', 'genemu_jqueryautocompleter_entity', array(
-                     'route_name' => 'blog_tags_ajax_autocomplete',
-                     'class' => 'Aml\Bundle\BlogBundle\Entity\Tags',
-                     'property' => 'name',
-                     'label' => 'Tags',
-                     'attr' => array(
-                         'placeholder' => 'Ajouter des tags',
-                     ),
-                     'required' => false,
-                     'mapped' => false
-                 ))*/
-
+                // ->add('logo','sonata_type_admin')
+                ->add('body', 'textarea', array(
+                    'label' => 'Texte',
+                    'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
+                    'required' => false,
+                ))
 
                 ->add('public', 'checkbox', array(
-                                                 'label' => 'Publier',
-                                                 'required' => false,
-                                                 'attr' => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
-                                            ))
+                    'label' => 'Publier',
+                    'required' => false,
+                    'attr' => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
+                ))
             ->end()
             ->with('Tags')
                 ->add('tags', 'sonata_type_model', array(
-                                                        'required' => false,
-                                                        'expanded' => true,
-                                                        'multiple' => true,
-                                                   ))
-            ->end()
-            ;
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'by_reference' => false
+                ))
+            ->end();
 
 
     }

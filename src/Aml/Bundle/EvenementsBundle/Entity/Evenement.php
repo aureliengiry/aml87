@@ -83,10 +83,12 @@ class Evenement
 
 
     /**
-     * @ORM\OneToMany(targetEntity="EvenementBlog", mappedBy="evenement", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", inversedBy="evenements")
+     * @ORM\JoinTable(name="evenements_articles",
+     *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
+     *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
+     * )
      */
-    protected $evenementArticle;
-
     protected $articles;
 
     /**
@@ -96,7 +98,6 @@ class Evenement
 
     public function __construct()
     {
-        $this->evenementArticle = new ArrayCollection();
         $this->articles = new ArrayCollection();
 
         $this->partenaires = new ArrayCollection();
@@ -272,47 +273,29 @@ class Evenement
     }
 
     /* ---------------- ARTICLES LIES ---------------- */
-
-    // Important
-    public function getArticle()
+    public function getArticles()
     {
-        $articles = new ArrayCollection();
-
-        foreach($this->evenementArticle as $article)
-        {
-            $articles[] = $article->getArticle();
-        }
-
-        return $articles;
-    }
-    // Important
-    public function setArticle($articles)
-    {
-        foreach($articles as $article)
-        {
-            $evenementArticle = new EvenementBlog();
-
-            $evenementArticle->setEvenement($this);
-            $evenementArticle->setArticle($article);
-
-            $this->addEvenementArticle($evenementArticle);
-        }
-
+        return $this->articles;
     }
 
-    public function getEvenement()
+    public function setArticles($articles)
     {
+        $this->articles = $articles;
         return $this;
     }
 
-    public function addEvenementArticle($evenementArticle)
+    public function addArticle($article)
     {
-        $this->evenementArticle[] = $evenementArticle;
+        $this->articles[] = $article;
     }
 
-    public function removeEvenementArticle($evenementArticle)
+    /**
+     * Fonction pour supprimer une discussion d'un mot clé
+     * @param Discussion $discussion
+     */
+    public function removeArticle($article)
     {
-        return $this->evenementArticle->removeElement($evenementArticle);
+        $this->articles->removeElement($article);
     }
 
 

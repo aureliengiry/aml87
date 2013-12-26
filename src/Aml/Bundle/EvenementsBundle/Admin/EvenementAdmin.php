@@ -31,26 +31,20 @@ class EvenementAdmin extends Admin
             ))
 
             ->with('Articles')
-                ->add('Blog1', 'sonata_type_admin')
-              //  ->add('Article','sonata_type_model', array('expanded' => true,'compound' => true,'property' => 'title','multiple' => true))
-             // ->add('articles','sonata_type_model')
-                /*->add('Article' , 'entity' , array(
-                    'class'    => 'AmlBlogBundle:Blog' ,
-                    'property' => 'title' ,
-                    'expanded' => true ,
-                    'multiple' => true , ))*/
+                ->add('articles', 'sonata_type_model', array(
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'by_reference' => false
+                ))
             ->end()
             ->with('Partenaires')
-                // ->add('partenaires','sonata_type_model', array('expanded' => true,'property' => 'title','multiple' => true))
-               /*->add('partenaires','sonata_type_collection', array(
-                        'type_options' => array('delete' => false),
-                    ),
-                    array(
-                        'edit' => 'inline',
-                        'inline' => 'table',
-                        'sortable' => 'id',
-                ))*/
-
+                ->add('partenaires', 'sonata_type_model', array(
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'by_reference' => false
+                ))
             ->end()
             ->add('archive','checkbox',array(
                 'label' => 'Archiver',

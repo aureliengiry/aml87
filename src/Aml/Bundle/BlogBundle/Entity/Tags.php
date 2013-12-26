@@ -160,7 +160,7 @@ class Tags
      * Fonction pour supprimer une discussion d'un mot clé
      * @param Discussion $discussion
      */
-    public function deleteArticle($article)
+    public function removeArticle($article)
     {
         $this->articles->removeElement($article);
     }

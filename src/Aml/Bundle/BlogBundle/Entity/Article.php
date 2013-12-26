@@ -95,15 +95,12 @@ class Article
     protected $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\EvenementBlog", mappedBy="article", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", mappedBy="articles", cascade={"all"})
      */
-    protected $evenementArticle;
-
     protected $evenements;
 
     public function __construct()
     {
-        $this->evenementArticle = new ArrayCollection();
         $this->evenements = new ArrayCollection();
 
         $this->tags = new ArrayCollection();
@@ -336,6 +333,7 @@ class Article
         return strtolower($string);
     }
 
+    /** ---------- TAGS ---------- */
     /**
      *
      * @param TumblrTag $tag
@@ -378,45 +376,44 @@ class Article
 
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
 
-    // Important
-    public function getEvenement()
+    /**
+     *
+     * @param TumblrTag $tag
+     */
+    public function addEvenement($evenement)
     {
-        $evenements = new ArrayCollection();
-
-        foreach ($this->evenementArticle as $evenement) {
-            $evenements[] = $evenement->getEvenement();
+        if (!$this->evenements->contains($evenement)) {
+            $evenement->addArticle($this);
+            $this->evenements[] = $evenement;
         }
-
-        return $evenements;
-    }
-
-    // Important
-    public function setEvenement($evenements)
-    {
-        foreach ($evenements as $evenement) {
-            $evenementArticle = new EvenementBlog();
-
-            $evenementArticle->setEvenement($evenement);
-            $evenementArticle->setArticle($this);
-
-            $this->addEvenementArticle($evenementArticle);
-        }
-
-    }
-
-    public function getArticle()
-    {
         return $this;
     }
 
-    public function addEvenementArticle($evenementArticle)
+    /**
+     * Fonction to delete $evenement
+     * @param Evenement $evenement
+     */
+    public function removeEvenement($evenement)
     {
-        $this->evenementArticle[] = $evenementArticle;
+        $this->evenements->removeElement($evenement);
+        $evenement->deleteArticle($this);
     }
 
-    public function removeEvenementArticle($evenementArticle)
+    /**
+     * @return the $evenements
+     */
+    public function getEvenements()
     {
-        return $this->evenementArticle->removeElement($evenementArticle);
+        return $this->evenements;
+    }
+
+    /**
+     * @return the $evenements
+     */
+    public function setEvenements(ArrayCollection $evenements)
+    {
+        $this->evenements = $evenements;
+        return $this;
     }
 
 

@@ -16,12 +16,12 @@ class PartenaireAdmin extends Admin
             ->add('name','text',array(
                 'label' => 'Nom'
             ))
-            ->add('logo','sonata_type_admin')
+           // ->add('logo','sonata_type_admin')
             ->add('url')
             ->add('description','textarea',array(
                 'required' => false
             ))
-            ->add('logo',new ImageType() )
+           // ->add('logo',new ImageType() )
         ;
     }
 
