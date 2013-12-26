@@ -11,7 +11,6 @@ class TagsAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('system_name')
             ->add('name');
     }
 

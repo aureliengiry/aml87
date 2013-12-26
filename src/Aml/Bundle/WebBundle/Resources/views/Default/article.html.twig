@@ -7,7 +7,7 @@
 	<div class="publi-info">
 		<span>Publié le
 			<span class="date-article-block">le {% if lastBlogArticle.created %}{{ lastBlogArticle.created|date('d/m/Y à H:i') }}{% endif %}</span>
-			{% if lastBlogArticle.category.name %}
+			{% if lastBlogArticle.category %}
 				 dans <a href="{{ path('blog',{'category' : lastBlogArticle.category.systemName}) }}" title="{{lastBlogArticle.category.name}}">{{lastBlogArticle.category.name}}</a>
 			{% endif %}
 		</span>

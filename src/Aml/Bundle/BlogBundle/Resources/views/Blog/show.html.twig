@@ -16,10 +16,12 @@
 			</span>
             </div>
 
+            {% if entity.logo %}
             <div class="blog-visuel">
                 <img src="{{ asset(entity.logo.webpath) }}" alt="" title="{{ entity.logo.title }}"
                      class="imagecache imagecache-visuel_blog" width="500" height="300">
             </div>
+            {% endif %}
 
             <div class="article-description">{{ entity.body|raw }}</div>
 

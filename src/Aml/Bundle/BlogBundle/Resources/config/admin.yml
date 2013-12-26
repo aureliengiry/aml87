@@ -1,7 +1,7 @@
 # Aml\Bundle\BlogBundle/Resources/config/admin.yml
 services:
     sonata.admin.blog:
-        class: Aml\Bundle\BlogBundle\Admin\BlogAdmin
+        class: Aml\Bundle\BlogBundle\Admin\ArticleAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: "Articles" }
         arguments:
@@ -12,7 +12,7 @@ services:
             - [ setTranslationDomain, [AmlBlogBundle]]
 
     sonata.admin.blog.tags:
-        class: Aml\Bundle\BlogBundle\Admin\BlogAdmin
+        class: Aml\Bundle\BlogBundle\Admin\TagsAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: "Tags" }
         arguments:
