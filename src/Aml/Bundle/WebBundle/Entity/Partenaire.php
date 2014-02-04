@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Partenaire
  *
- * @ORM\Table(name="partenaires")
+ * @ORM\Table(name="webbundle_partenaires")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\PartenaireRepository")
  */
@@ -41,7 +41,7 @@ class Partenaire
     private $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="partenaires")
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="partenaire", cascade={"persist","remove"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $logo;
@@ -185,5 +185,19 @@ class Partenaire
     public function addEvenement($evenement)
     {
         $this->evenements[] = $evenement;
+    }
+
+    /**
+     * Fonction pour supprimer une discussion d'un mot clé
+     * @param Discussion $discussion
+     */
+    public function removeEvenement($evenement)
+    {
+        $this->evenements->removeElement($evenement);
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

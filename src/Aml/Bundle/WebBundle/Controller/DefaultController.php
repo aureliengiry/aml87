@@ -15,7 +15,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
     	// Dernier article de blog
-    	$repo = $this->getDoctrine()->getRepository('AmlBlogBundle:Blog');
+    	$repo = $this->getDoctrine()->getRepository('AmlBlogBundle:Article');
 		$blogEntity = $repo->findOneBy(
 		    array('public' => "1"),
 		    array('created' => 'DESC')

@@ -23,7 +23,7 @@ class LiensController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AmlWebBundle:Link')->getPublicLinks();
 

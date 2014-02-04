@@ -18,10 +18,18 @@ use Aml\Bundle\MediasBundle\Entity\Media;
 class Image extends Media
 {
     /**
-     * @ORM\OneToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="logo")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id_partenaire")
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="logo")
      */
-    protected $partenaires;
+    protected $partenaire;
+
+    /**
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", mappedBy="logo")
+     */
+    protected $articleBlog;
+    /**
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Album", mappedBy="image")
+     */
+    protected $album;
 
 	/**
 	 * @Assert\File(
@@ -57,17 +65,8 @@ class Image extends Media
     /**
      * @return the $articles
      */
-    public function getPartenaires() {
-        return $this->partenaires;
-    }
-
-    /**
-     *
-     * @param Blog $article
-     */
-    public function addPartenaire($partenaire) {
-        $this->partenaires[] = $partenaire;
-        return $this;
+    public function getPartenaire() {
+        return $this->partenaire;
     }
 
     /**

@@ -26,7 +26,7 @@ class LinkController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AmlWebBundle:Link')->findAll();
 
@@ -88,7 +88,7 @@ class LinkController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmlWebBundle:Link')->find($id);
     
@@ -116,7 +116,7 @@ class LinkController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmlWebBundle:Link')->find($id);
 
@@ -162,7 +162,7 @@ class LinkController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('AmlWebBundle:Link')->find($id);
         
 	        if (!$entity) {            

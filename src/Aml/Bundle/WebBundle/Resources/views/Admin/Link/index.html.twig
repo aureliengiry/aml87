@@ -8,18 +8,11 @@
 
 {% block body %}
 <div class="row-fluid">
-	<div class="span3">
-		{# Barre de navigation left #}
-	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
-	</div>		
 
-
-	<div class="span5">
-	
-		<h1>Gestion des liens</h1>
+	<div class="span12">
 
         <div class="form-actions">
-            <a class="btn btn-link" href="{{ path('content_link_new') }}">
+            <a class="btn btn-default" href="{{ path('content_link_new') }}">
                 <i class="icon-plus"></i> Ajouter un lien
             </a>
         </div>
@@ -43,7 +36,7 @@
                         <td>
                             <ul class="nav">
                                 <li>
-                                    <a class="btn btn-link" href="{{ path('content_link_edit', { 'id': entity.id }) }}" title="Modifier le lien">
+                                    <a class="btn btn-default" href="{{ path('content_link_edit', { 'id': entity.id }) }}" title="Modifier le lien">
                                         <i class="icon-pencil"></i> Modifier
                                     </a>
                                 </li>

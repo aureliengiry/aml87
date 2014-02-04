@@ -1,20 +1,13 @@
 {% extends "AmlWebBundle::Admin/layout.html.twig" %}
 
 {% block title -%}
-    Discrographie
+    Gestion des médias
 {%- endblock title %}
 
 {% block body %}
 <div class="row-fluid">
-	<div class="span3">
-		{# Barre de navigation left #}
-	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
-	</div>		
 
-
-	<div class="span5">
-	
-		<h1>Gestion des médias</h1>
+	<div class="span12">
 
 		<table class="table table-bordered table-striped">
 		    <thead>
@@ -41,7 +34,7 @@
 		            <td>{{ entity.type['label'] }}</td>
 		            <td>
 		             	{# Lien voir/télécharger #}
-                        <a class="btn btn-link" href="{{ asset(entity.webPath) }}" target="_blanck"><i class="icon-download"></i> Voir</a>
+                        <a class="btn btn-default" href="{{ asset(entity.webPath) }}" target="_blanck"><i class="icon-download"></i> Voir</a>
                  
                  		{# Bouton supprimer #}
                         <form action="{{ path('admin_file_delete', { 'id': entity.id }) }}" method="post">

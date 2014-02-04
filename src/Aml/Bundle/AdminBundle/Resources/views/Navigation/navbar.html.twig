@@ -1,0 +1,109 @@
+{# Template de la barre de navigation de l'espace admin #}
+<div class="navbar navbar-top navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            {% if admin_pool is defined %}
+                <div class="navbar-text pull-right">{% include admin_pool.getTemplate('user_block') %}</div>
+
+                {% block logo %}
+                    <a href="{{ url('sonata_admin_dashboard') }}" class="brand">
+                        <img src="{{ asset(admin_pool.titlelogo) }}"  alt="{{ admin_pool.title }}" />
+                        {{ admin_pool.title }}
+                    </a>
+                {% endblock %}
+
+            {% endif %}
+
+            {% block sonata_nav_menu %}
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        {% block top_bar_before_nav %} {% endblock %}
+                        {% block sonata_top_bar_nav %}
+                            {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
+                                {% for group in admin_pool.dashboardgroups %}
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ group.label|trans({}, group.label_catalogue) }} <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            {% for admin in group.items %}
+                                                {% if admin.hasroute('list') and admin.isGranted('LIST') %}
+                                                    <li><a href="{{ admin.generateUrl('list')}}">{{ admin.label|trans({}, admin.translationdomain) }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endblock %}
+                        {% block top_bar_after_nav %} {% endblock %}
+                    </ul>
+                </div>
+            {% endblock %}
+
+            <!-- the new toggle buttons -->
+            <ul class="nav pull-right">
+                <li class="toggle-primary-sidebar hidden-desktop" data-toggle="collapse"
+                    data-target=".nav-collapse-primary">
+                    <button type="button" class="btn btn-navbar"><i class="icon-th-list"></i></button>
+                </li>
+                <li class="hidden-desktop" data-toggle="collapse" data-target=".nav-collapse-top">
+                    <button type="button" class="btn btn-navbar"><i class="icon-align-justify"></i></button>
+                </li>
+            </ul>
+
+            <div class="nav-collapse nav-collapse-top collapse">
+                <ul class="nav full pull-right">
+                    <li class="dropdown user-avatar">
+
+                        <!-- the dropdown has a custom user-avatar class, this is the small avatar with the badge -->
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                          <span>
+                            <img class="menu-avatar" src="../../images/avatars/avatar1.jpg"/>
+                            <span>John Smith <i class="icon-caret-down"></i></span>
+                            <span class="badge badge-dark-red">5</span>
+                          </span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <!-- the first element is the one with the big avatar, add a with-image class to it -->
+
+                            <li class="with-image">
+                                <div class="avatar">
+                                    <img src="../../images/avatars/avatar1.jpg"/>
+                                </div>
+                                <span>John Smith</span>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li><a href="#"><i class="icon-user"></i> <span>Profile</span></a></li>
+                            <li><a href="#"><i class="icon-cog"></i> <span>Settings</span></a></li>
+                            <li><a href="#"><i class="icon-envelope"></i> <span>Messages</span> <span class="label label-dark-red pull-right">5</span></a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i> <span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav pull-right">
+
+                    <li class="active"><a href="{{ path('home') }}" title="Go home"><i class="icon-home"></i> Home</a>
+                    </li>
+                    <li{% if app.request.attributes.get('_route') == 'admin_bundle_users_user_list' %} class="active"{% endif %}>
+                        <a href="{# path('admin_bundle_users_user_list') #}" title="Gestion des membres"><i class="icon-user"></i> Membres</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+
+        </div>
+    </div>
+</div>

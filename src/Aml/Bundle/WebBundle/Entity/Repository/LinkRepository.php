@@ -12,14 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class LinkRepository extends EntityRepository
 {
-	public function getPublicLinks(){
+    /**
+     * Function to load public links
+     * @return array
+     */
+    public function getPublicLinks(){
 		$em = $this->getEntityManager();		
 		$qb = $em->createQueryBuilder();
 		
 		$qb
 			->select('l')
 			->from('AmlWebBundle:Link', 'l')
-			->where("l.public = 1")	
+			->where("l.public = 1")
+            ->orderBy('l.weight', 'ASC')
 		;
 
 		$query = $qb->getQuery();

@@ -4,6 +4,7 @@ namespace Aml\Bundle\EvenementsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Aml\Bundle\EvenementsBundle\Entity\EvenementBlog;
 
 
 
@@ -80,19 +81,25 @@ class Evenement
      */
     private $public;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Blog", mappedBy="evenements", cascade={"persist"})
-     */
-    protected $articlesBlog;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="evenements", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", inversedBy="evenements")
+     * @ORM\JoinTable(name="evenements_articles",
+     *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
+     *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
+     * )
+     */
+    protected $articles;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="evenements", cascade={"all"})
      */
     protected $partenaires;
 
     public function __construct()
     {
-        $this->articlesBlog = new ArrayCollection();
+        $this->articles = new ArrayCollection();
+
         $this->partenaires = new ArrayCollection();
     }
 
@@ -266,40 +273,29 @@ class Evenement
     }
 
     /* ---------------- ARTICLES LIES ---------------- */
-
-    /**
-     *
-     * @param Blog $articleBlog
-     */
-    public function addArticleBlog($articleBlog) {
-        // var_dump( $tag);exit;
-        $articleBlog->addEvenement($this);
-        $this->articlesBlog[] = $articleBlog;
-        return $this;
-    }
-
-    /**
-     * Fonction to delete articleBlog
-     * @param Blog $articleBlog
-     */
-    public function removeArticleBlog($articleBlog)
+    public function getArticles()
     {
-        $this->articlesBlog->removeElement($articleBlog);
+        return $this->articles;
     }
 
-    /**
-     * @return Evenement
-     */
-    public function getArticlesBlog() {
-        return $this->articlesBlog;
-    }
-
-    /**
-     * @return Evenement
-     */
-    public function setArticlesBlog(ArrayCollection $articlesBlog) {
-        $this->articlesBlog = $articlesBlog;
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
         return $this;
+    }
+
+    public function addArticle($article)
+    {
+        $this->articles[] = $article;
+    }
+
+    /**
+     * Fonction pour supprimer une discussion d'un mot clé
+     * @param Discussion $discussion
+     */
+    public function removeArticle($article)
+    {
+        $this->articles->removeElement($article);
     }
 
 

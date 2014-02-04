@@ -6,13 +6,7 @@
 
 <div class="row-fluid">
 
-	<div class="span3">
-		{# Barre de navigation left #}
-	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
-	</div>
-
-	<div class="span5">
-		<h1>Page creation</h1>
+	<div class="span12">
 		
 		<form action="{{ path('admin_content_pages_create') }}" method="post" {{ form_enctype(form) }}>
 		    {{ form_widget(form) }}

@@ -7,11 +7,19 @@
 	<div class="publi-info">
 		<span>Publié le
 			<span class="date-article-block">le {% if lastBlogArticle.created %}{{ lastBlogArticle.created|date('d/m/Y à H:i') }}{% endif %}</span>
-			{% if lastBlogArticle.category.name %}
+			{% if lastBlogArticle.category %}
 				 dans <a href="{{ path('blog',{'category' : lastBlogArticle.category.systemName}) }}" title="{{lastBlogArticle.category.name}}">{{lastBlogArticle.category.name}}</a>
 			{% endif %}
 		</span>
 	</div>
+
+    {% if lastBlogArticle.logo.webpath is defined %}
+        <div rel="prettyPhoto" class="blog-visuel">
+            <a rel="prettyPhoto" href="{{ asset(lastBlogArticle.logo.webpath) }}">
+                <img width="375" height="250" class="imagecache imagecache-visuel_blog_list" title="{{ lastBlogArticle.logo.title }}" src="{{ asset(lastBlogArticle.logo.webpath) }}">
+            </a>
+        </div>
+    {% endif %}
 
 	<p class="container-wysiwyg">
 		{{lastBlogArticle.body|raw}}

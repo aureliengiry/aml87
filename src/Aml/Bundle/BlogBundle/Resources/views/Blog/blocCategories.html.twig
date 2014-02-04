@@ -1,8 +1,11 @@
 {# Bloc des catégories #}
 <h3>Catégories</h3>
 <ul id="bloc-blog-categorie">
-	<li><a class="active" title="Tous les articles" href="{{ path('blog') }}">Tous</a></li>
-	{% for category in categories %}
-		<li><a class="active" title="{{ category.description }}" href="{{ path('blog',{'category' : category.systemName}) }}">{{ category.name }}</a> ({{category.articles|length}})</li>
-	{% endfor %}
+    <li><a class="active" title="Tous les articles" href="{{ path('blog') }}">Tous</a></li>
+    {% for category in categories %}
+        <li><a class="active" title="{{ category.description }}"
+               href="{{ path('blog',{'category' : category.systemName}) }}">{{ category.name }}</a>
+            ({{ category.articles|length }})
+        </li>
+    {% endfor %}
 </ul>

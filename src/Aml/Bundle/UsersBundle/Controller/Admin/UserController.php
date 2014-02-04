@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AmlUsersBundle:User')->findAll();
 
@@ -74,7 +74,7 @@ class UserController extends Controller
 			$entity->setStatut(1);
         	
         	
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -96,7 +96,7 @@ class UserController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmlUsersBundle:User')->find($id);
 
@@ -123,7 +123,7 @@ class UserController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AmlUsersBundle:User')->find($id);
 
@@ -166,7 +166,7 @@ class UserController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('AmlUsersBundle:User')->find($id);
 
             if (!$entity) {

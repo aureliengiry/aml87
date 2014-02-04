@@ -20,8 +20,8 @@ use Aml\Bundle\BlogBundle\Form\Admin\BlogType;
  */
 class BlogController extends Controller
 {
-	protected $_limitPagination = 15;
-	
+    protected $_limitPagination = 15;
+
     /**
      * Lists all Blog entities.
      *
@@ -32,36 +32,36 @@ class BlogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repositoryBlog = $em->getRepository('AmlBlogBundle:Blog');
-        	
+
         $allEntities = $repositoryBlog->findAll();
         $nbEntities = count($allEntities);
         $num_pages = $page; // some calculation of what page you're currently on
-        $nbPages = (int) ceil($nbEntities / $this->_limitPagination);
-		
-		
-		$entities = $repositoryBlog->findBy(
-		    array(),
-		    array('created' => 'DESC'),
-		    $this->_limitPagination,
-		    $this->_limitPagination * ($num_pages-1)		    
-		);
-		
-		
-		// Calcul de la pagination
-		$calculLastPage = round($nbEntities/$this->_limitPagination);
-		$pagination = array(
-                'nbPages' => $nbPages,
-	        	'nbEntities' => $nbEntities,
-	        	'limit' => $this->_limitPagination,
-	        	'currentPage' => $page,
-	        	'nextPage' => ( $page+1 * $this->_limitPagination < $nbEntities ? $page+1 : false),
-	        	'prevPage' => ( $page-1 > 0 ? $page-1 : false ),
-				'lastPage' => ( $calculLastPage >= 0 ? $calculLastPage : 0)
-        	);
+        $nbPages = (int)ceil($nbEntities / $this->_limitPagination);
+
+
+        $entities = $repositoryBlog->findBy(
+            array(),
+            array('created' => 'DESC'),
+            $this->_limitPagination,
+            $this->_limitPagination * ($num_pages - 1)
+        );
+
+
+        // Calcul de la pagination
+        $calculLastPage = round($nbEntities / $this->_limitPagination);
+        $pagination = array(
+            'nbPages' => $nbPages,
+            'nbEntities' => $nbEntities,
+            'limit' => $this->_limitPagination,
+            'currentPage' => $page,
+            'nextPage' => ($page + 1 * $this->_limitPagination < $nbEntities ? $page + 1 : false),
+            'prevPage' => ($page - 1 > 0 ? $page - 1 : false),
+            'lastPage' => ($calculLastPage >= 0 ? $calculLastPage : 0)
+        );
 
         return array(
-        	'entities' => $entities,
-        	'pagination' => $pagination
+            'entities' => $entities,
+            'pagination' => $pagination
         );
     }
 
@@ -74,11 +74,11 @@ class BlogController extends Controller
     public function newAction()
     {
         $entity = new Blog();
-        $form   = $this->createForm(new BlogType(), $entity);
+        $form = $this->createForm(new BlogType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -92,45 +92,43 @@ class BlogController extends Controller
     public function createAction()
     {
         //var_dump( $_POST );
-        $entity  = new Blog();
+        $entity = new Blog();
         $request = $this->getRequest();
 
         //$em = $this->getDoctrine()->getManager();
-      //  $blogRepository = $em->getRepository('AmlBlogBundle:Blog');
+        //  $blogRepository = $em->getRepository('AmlBlogBundle:Blog');
 
-        $form    = $this->createForm(new BlogType(), $entity);
+        $form = $this->createForm(new BlogType(), $entity);
         $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             // Set Tags
-           // var_dump( $form->get('tags')->getData() );
-            if( $form->get('tags')->getData() ){
-                foreach($form->get('tags')->getData() as $tag_id)
-                {
+            // var_dump( $form->get('tags')->getData() );
+            if ($form->get('tags')->getData()) {
+                foreach ($form->get('tags')->getData() as $tag_id) {
                     $entityTag = $em->getRepository('AmlBlogBundle:BlogTags')->find($tag_id);
                     $entityTag->getArticles()->add($entity);
                 }
             }
 
             $entity
-            	->setCreated(new \DateTime())
-            	->setUpdated(new \DateTime())
-            	->setPublished(new \DateTime())
-            	->setUrl()
-            ;
+                ->setCreated(new \DateTime())
+                ->setUpdated(new \DateTime())
+                ->setPublished(new \DateTime())
+                ->setUrl();
             $em->persist($entity);
             $em->flush();
 
             $this->get('session')->setFlash('success', 'L\'article a été créé avec succès');
             return $this->redirect($this->generateUrl('admin_content_blog'));
-            
+
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -154,8 +152,8 @@ class BlogController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -178,7 +176,7 @@ class BlogController extends Controller
             throw $this->createNotFoundException('Unable to find Blog entity.');
         }
 
-        $editForm   = $this->createForm(new BlogType(), $entity);
+        $editForm = $this->createForm(new BlogType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -194,31 +192,28 @@ class BlogController extends Controller
 
 
             // Save tags
-            foreach($editForm->get('tags')->getData() as $tag_id)
-            {
+            foreach ($editForm->get('tags')->getData() as $tag_id) {
                 $entityTag = $em->getRepository('AmlBlogBundle:BlogTags')->find($tag_id);
                 $entityTag->getArticles()->add($entity);
             }
 
 
-        	$entity
-        		->setUpdated(new \DateTime())
-        		->setUrl()
-        	;
+            $entity
+                ->setUpdated(new \DateTime())
+                ->setUrl();
 
             $em->persist($entity);
             $em->flush();
 
             $this->get('session')->setFlash('success', 'L\'article a été mis à jour avec succès');
             return $this->redirect($this->generateUrl('admin_content_blog'));
-        }
-        else{
+        } else {
             $this->get('session')->setFlash('error', 'Une erreur est survenue lors de la mise à jour de l\'article "' . $entity->getTitle() . '".');
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -234,7 +229,7 @@ class BlogController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -255,8 +250,7 @@ class BlogController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 
 
@@ -295,14 +289,13 @@ class BlogController extends Controller
 
         // Check if tag Already exist
         $resultTag = $blogTagsRepository->loadOneTagByName($value);
-        if( false === $resultTag ){
+        if (false === $resultTag) {
 
             // Create a new tag
             $newEntityTag = new \Aml\Bundle\BlogBundle\Entity\BlogTags();
             $newEntityTag
                 ->setName($value)
-                ->setSystemName($value)
-            ;
+                ->setSystemName($value);
             $em->persist($newEntityTag);
             $em->flush();
 

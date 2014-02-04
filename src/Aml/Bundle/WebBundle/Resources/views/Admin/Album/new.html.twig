@@ -1,22 +1,14 @@
 {% extends "AmlWebBundle::Admin/layout.html.twig" %}
 
 {% block title -%}
-    Discrographie
+    Discrographie - Ajouter un album
 {%- endblock title %}
 
 {% block body %}
 <div class="row-fluid">
-	<div class="span3">
-		{# Barre de navigation left #}
-	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
-	</div>		
 
+	<div class="span12">
 
-	<div class="span5">
-
-		<h1>Ajouter un album</h1>
-		
-		
 		<form action="{{ path('content_album_create') }}" method="post" {{ form_enctype(form) }}>
 		    {{ form_row(form.title) }}
 		    

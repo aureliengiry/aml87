@@ -40,11 +40,11 @@ class BlogCategoriesController extends Controller
     public function newAction()
     {
         $entity = new BlogCategories();
-        $form   = $this->createForm(new BlogCategoriesType(), $entity);
+        $form = $this->createForm(new BlogCategoriesType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -57,10 +57,10 @@ class BlogCategoriesController extends Controller
      */
     public function createAction()
     {
-        $entity  = new BlogCategories();
+        $entity = new BlogCategories();
         $request = $this->getRequest();
-        $form    = $this->createForm(new BlogCategoriesType(), $entity);
-        $form->bindRequest($request);
+        $form = $this->createForm(new BlogCategoriesType(), $entity);
+        $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -68,12 +68,12 @@ class BlogCategoriesController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_content_blog_categories'));
-            
+
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -97,8 +97,8 @@ class BlogCategoriesController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -120,12 +120,12 @@ class BlogCategoriesController extends Controller
             throw $this->createNotFoundException('Unable to find BlogCategories entity.');
         }
 
-        $editForm   = $this->createForm(new BlogCategoriesType(), $entity);
+        $editForm = $this->createForm(new BlogCategoriesType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
@@ -135,8 +135,8 @@ class BlogCategoriesController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -152,7 +152,7 @@ class BlogCategoriesController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -173,7 +173,6 @@ class BlogCategoriesController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

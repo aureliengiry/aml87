@@ -11,16 +11,42 @@ class UsersAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('email','email',array(
-                'label' => 'Adresse Email'
-            ))
-            ->add('login')
-            ->add('password','password')
-            ->add('civilite')
-            ->add('nom')
-            ->add('prenom')
-            ->add('adresse')
-            ->add('avatar')
+            ->with('General')
+                ->add('username')
+                ->add('email')
+                ->add('plainPassword', 'text', array('required' => false))
+            ->end()
+            ->with('Profile')
+          //  ->add('civilite')
+                ->add('firstname','text', array(
+                    'required' => false,
+                ))
+                ->add('lastname','text', array(
+                    'required' => false,
+                ))
+                ->add('enabled','checkbox', array(
+                    'label'=> 'Actif',
+                    'required' => false,
+                ))
+            ->end()
+
+         //if ($this->getSubject() && !$this->getSubject()->hasRole('ROLE_SUPER_ADMIN')) {
+             //$formMapper
+                 ->with('Management')
+                 /*->add('realRoles', 'sonata_security_roles', array(
+                     'expanded' => true,
+                     'multiple' => true,
+                     'required' => false
+                 ))*/
+               //  ->add('locked', null, array('required' => false))
+               //  ->add('expired', null, array('required' => false))
+                 ->add('enabled', null, array('required' => false))
+               //  ->add('credentialsExpired', null, array('required' => false))
+                 ->end()
+            // ;
+         //}
+            //->add('adresse')
+           // ->add('avatar')
         ;
     }
 
@@ -28,16 +54,19 @@ class UsersAdmin extends Admin
     {
         $datagridMapper
             ->add('email')
-            ->add('login')
+            ->add('username')
+            ->add('enabled')
         ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('email')
-            ->add('login')
-            ->add('statut')
+            ->addIdentifier('username')
+            ->add('email')
+            ->add('name','string', array('template' => 'AmlUsersBundle::Admin/User/Fields/name.html.twig'))
+           //->add('last_login')
+            //->add('statut')
         ;
     }
 
@@ -48,7 +77,7 @@ class UsersAdmin extends Admin
      */
     public function getTemplate($name)
     {
-        var_dump( $name );
+        //var_dump( $name );
         if (isset($this->templates[$name])) {
             return $this->templates[$name];
         }

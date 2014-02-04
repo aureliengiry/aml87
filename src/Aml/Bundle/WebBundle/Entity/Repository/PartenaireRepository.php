@@ -20,6 +20,21 @@ class PartenaireRepository extends EntityRepository
     public function cleanTags($partenaire)
     {
         $em = $this->getEntityManager();
+        foreach ($partenaire->getTags() as $tag)
+        {
+            $partenaire->removeTag($tag);
+        }
+        $em->flush();
+    }
+
+    /**
+     * Function to delete tumblr/tags relation
+     *
+     * @param MongoboxTumblrBundle:Tumblr $partenaire
+     */
+    public function cleanLogo($partenaire)
+    {
+        $em = $this->getEntityManager();
         foreach ($partenaire->getLogo() as $tag)
         {
             $partenaire->removeTag($tag);

@@ -7,38 +7,38 @@
 {%- endblock title %}
 
 {% block body %}
-<div id="col-left" class="two-cols-content">
+    <div id="col-left" class="two-cols-content">
 
-	<div class="contenu-page">	
+        <div class="contenu-page">
 
-		{% if entities is not empty %}
-			{% for entity in entities %}
-			    	
-				{# articles #}
-	  			{% include "AmlBlogBundle::Blog/article.html.twig" %}
-			        
-			{% endfor %} 
-			 
-			{# Pagination #}
-	  		{% include "AmlBlogBundle::Blog/pagination.html.twig" %}
-		
-		{% else %}	
-			<h1>Blog</h1>
-			<p>Aucun article de blog publié.</p>
-		{% endif %}
-	</div>
-	
-</div>
-<div id="col-right">
+            {% if entities is not empty %}
+                {% for entity in entities %}
 
-	{# Liste des catégories #}
-	<div class="side-bloc no-border">
-		{% include "AmlBlogBundle::Blog/blocCategories.html.twig" %}
-	</div>
-	
-	{# Liste des tags #}
-	<div class="side-bloc">
-		{% include "AmlBlogBundle::Blog/blocTags.html.twig" %}
-	</div>
-</div>
+                    {# articles #}
+                    {% include "AmlBlogBundle::Blog/article.html.twig" %}
+
+                {% endfor %}
+
+                {# Pagination #}
+                {% include "AmlBlogBundle::Blog/pagination.html.twig" %}
+
+            {% else %}
+                <h1>Blog</h1>
+                <p>Aucun article de blog publié.</p>
+            {% endif %}
+        </div>
+
+    </div>
+    <div id="col-right">
+
+        {# Liste des catégories #}
+        <div class="side-bloc no-border">
+            {% include "AmlBlogBundle::Blog/blocCategories.html.twig" %}
+        </div>
+
+        {# Liste des tags #}
+        <div class="side-bloc">
+            {% include "AmlBlogBundle::Blog/blocTags.html.twig" %}
+        </div>
+    </div>
 {% endblock body %}

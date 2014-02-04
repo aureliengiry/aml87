@@ -3,6 +3,10 @@ imports:
     - { resource: security.yml }
     - { resource: @AmlUsersBundle/Resources/config/admin.yml }
     - { resource: @AmlBlogBundle/Resources/config/admin.yml }
+    - { resource: @AmlWebBundle/Resources/config/admin.yml }
+    - { resource: @AmlMediasBundle/Resources/config/admin.yml }
+    - { resource: @AmlEvenementsBundle/Resources/config/admin.yml }
+
 
 sonata_block:
     default_contexts: [cms]
@@ -17,11 +21,11 @@ sonata_admin:
     title:      AML87
     templates:
         # default global templates
-        layout:  SonataAdminBundle::standard_layout.html.twig
+        layout:  AmlAdminBundle::standard_layout.html.twig
         ajax:    SonataAdminBundle::ajax_layout.html.twig
 
         # default actions templates, should extend a global templates
-        list:    SonataAdminBundle:CRUD:list.html.twig
+        list:    AmlAdminBundle:CRUD:list.html.twig
         show:    SonataAdminBundle:CRUD:show.html.twig
         edit:    SonataAdminBundle:CRUD:edit.html.twig
 

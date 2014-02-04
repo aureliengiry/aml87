@@ -8,17 +8,11 @@
 
 {% block body %}
 <div class="row-fluid">
-	<div class="span3">
-		{# Barre de navigation left #}
-	  	{% include "AmlWebBundle::Admin/Navigation/content_subnav.html.twig" %}  
-	</div>		
 
-
-	<div class="span5">
-		<h1>Gestion des pages</h1>
+	<div class="span12">
 
         <div class="form-actions">
-            <a class="btn btn-link" href="{{ path('admin_content_pages_new') }}">
+            <a class="btn btn-default" href="{{ path('admin_content_pages_new') }}">
                 <i class="icon-plus"></i> Créer une nouvelle page
             </a>
         </div>

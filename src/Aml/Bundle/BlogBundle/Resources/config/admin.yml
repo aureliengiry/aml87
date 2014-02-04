@@ -1,12 +1,34 @@
 # Aml\Bundle\BlogBundle/Resources/config/admin.yml
 services:
     sonata.admin.blog:
-        class: Aml\Bundle\BlogBundle\Admin\BlogAdmin
+        class: Aml\Bundle\BlogBundle\Admin\ArticleAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: posts, label: "Blog" }
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Articles" }
         arguments:
             - ~
-            - Aml\Bundle\UsersBundle\Entity\User
+            - Aml\Bundle\BlogBundle\Entity\Article
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [YourNSAdminBundle]]
+            - [ setTranslationDomain, [AmlBlogBundle]]
+
+    sonata.admin.blog.tags:
+        class: Aml\Bundle\BlogBundle\Admin\TagsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Tags" }
+        arguments:
+            - ~
+            - Aml\Bundle\BlogBundle\Entity\Tags
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlBlogBundle]]
+
+    sonata.admin.blog.categories:
+        class: Aml\Bundle\BlogBundle\Admin\CategoriesAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Categories" }
+        arguments:
+            - ~
+            - Aml\Bundle\BlogBundle\Entity\Category
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlBlogBundle]]

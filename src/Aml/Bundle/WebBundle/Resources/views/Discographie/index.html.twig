@@ -15,7 +15,9 @@
 			    	
 			<div class="disc-item{% if loop.last %} last{% endif %}">
 				<div class="disc-pochette-list">
-					image
+                    {% if entity.image.webpath is defined %}
+                        <img src="{{ asset(entity.image.webpath) }}" alt="" title="{{ entity.image.title }}" class="imagecache imagecache-pochette-album" width="500" height="300">
+                    {% endif %}
 				</div>
 				<div class="disc-description-list">
 					<h3>

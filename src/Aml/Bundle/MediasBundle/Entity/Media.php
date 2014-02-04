@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\MediaRepository")
  *
  *
- * @ORM\Table(name="medias")
+ * @ORM\Table(name="mediasbundle_medias")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"file" = "File", "image" = "Image", "music" = "Music"})
