@@ -12,11 +12,12 @@ class ImageAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title')
+            ->add('title','text',array(
+                'required' => false,
+            ))
             ->add('file','file' , array(
                 'required' => false,
-            ) )
-
+            ))
         ;
     }
 
