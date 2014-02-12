@@ -68,6 +68,12 @@ class Evenement
     private $description;
 
     /**
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="articleBlog" ,cascade={"all"})
+     * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
+     */
+    private $picture;
+
+    /**
      * @var boolean $archive
      *
      * @ORM\Column(name="archive", type="boolean")
@@ -197,6 +203,25 @@ class Evenement
     {
         return $this->description;
     }
+
+    /**
+     * @param mixed $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+
 
     /**
      * Set archive

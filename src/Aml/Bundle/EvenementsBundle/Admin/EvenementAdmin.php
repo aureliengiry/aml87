@@ -26,6 +26,11 @@ class EvenementAdmin extends Admin
 
             ->add('dateStart')
 
+            ->add('picture','sonata_type_admin',array(
+                'delete' => false,
+                'required' => false
+            ))
+
             ->add('description','textarea', array(
                 'required' => false
             ))
