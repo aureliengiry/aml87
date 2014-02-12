@@ -41,7 +41,7 @@ class Partenaire
     private $url;
 
     /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="partenaire", cascade={"persist","remove"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="articleBlog" ,cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $logo;
