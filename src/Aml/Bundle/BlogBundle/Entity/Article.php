@@ -38,7 +38,7 @@ class Article
     private $url;
 
     /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="articleBlog" ,cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $logo;
@@ -95,7 +95,7 @@ class Article
     protected $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", mappedBy="articles", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", mappedBy="articles", cascade={"all"})
      */
     protected $evenements;
 
