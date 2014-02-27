@@ -10,6 +10,7 @@ services:
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlMediasBundle]]
+            - [ setTemplate, [edit, AmlMediasBundle:Admin:edit.html.twig]]
 
     sonata.admin.documents:
         class: Aml\Bundle\MediasBundle\Admin\ImageAdmin

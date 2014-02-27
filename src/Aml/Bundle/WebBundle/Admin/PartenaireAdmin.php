@@ -24,7 +24,6 @@ class PartenaireAdmin extends Admin
             ->add('description','textarea',array(
                 'required' => false
             ))
-           // ->add('logo',new ImageType() )
         ;
     }
 

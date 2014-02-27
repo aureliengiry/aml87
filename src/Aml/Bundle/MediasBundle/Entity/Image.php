@@ -17,15 +17,7 @@ use Aml\Bundle\MediasBundle\Entity\Media;
  */
 class Image extends Media
 {
-    /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="logo")
-     */
-    protected $partenaire;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", mappedBy="logo")
-     */
-    protected $articleBlog;
     /**
      * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Album", mappedBy="image")
      */
