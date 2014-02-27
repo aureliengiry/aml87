@@ -1,0 +1,19 @@
+<script src="{{ asset('bundles/amlweb/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+	CKEDITOR.replace( "{{ target }}",
+	{
+		toolbar :
+		[
+			{ name: 'clipboard',   items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+			{ name: 'editing',     items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
+			{ name: 'insert',      items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' ] },
+			'/',
+			{ name: 'styles',      items : [ 'Styles','Format'] },
+			{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
+			{ name: 'paragraph',   items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+			{ name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
+		],
+		filebrowserBrowseUrl : 'upload/liste',
+		filebrowserUploadUrl : 'uploader/upload.php?type=Files'
+	});
+</script>

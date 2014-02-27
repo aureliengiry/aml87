@@ -12,11 +12,13 @@ class ImageAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title')
+            ->add('title','text',array(
+                'required' => false,
+            ))
             ->add('file','file' , array(
                 'required' => false,
-            ) )
-
+                'image_path' => 'webPath'
+            ))
         ;
     }
 
@@ -28,7 +30,7 @@ class ImageAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')
+            ->addIdentifier('title')    
         ;
     }
 

@@ -5,3 +5,12 @@ services:
 #    aml_admin.example:
 #        class: %aml_admin.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+   aml_admin_bundle.image_type_extension:
+          class: Aml\Bundle\AdminBundle\Form\Extension\ImageTypeExtension
+          tags:
+              - { name: form.type_extension, alias: file }
+
+   aml_admin_bundle.wysiwyg_type_extension:
+          class: Aml\Bundle\AdminBundle\Form\Extension\WysiwygTypeExtension
+          tags:
+              - { name: form.type_extension, alias: textarea }

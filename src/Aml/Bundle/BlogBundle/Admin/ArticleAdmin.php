@@ -22,11 +22,15 @@ class ArticleAdmin extends Admin
                     'property' => 'name',
                     'empty_value' => 'Choisissez une catégorie',
                 ))
-                // ->add('logo','sonata_type_admin')
+                ->add('logo','sonata_type_admin',array(
+                    'delete' => false,
+                    'required' => false
+                ))
                 ->add('body', 'textarea', array(
                     'label' => 'Texte',
                     'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
                     'required' => false,
+                    'wysiwyg' => true
                 ))
 
                 ->add('public', 'checkbox', array(

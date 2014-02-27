@@ -24,10 +24,23 @@ class EvenementAdmin extends Admin
                 'empty_value' => 'Sélectionnez le type d\'événement'
             ))
 
-            ->add('dateStart')
+            //->add('dateStart')
+            ->add('dateStart', 'date', array(
+                'label' => 'Date',
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'required' => false,
+                // 'attr' => array('readonly' => 'readonly')
+            ))
+
+            ->add('picture','sonata_type_admin',array(
+                'delete' => false,
+                'required' => false
+            ))
 
             ->add('description','textarea', array(
-                'required' => false
+                'required' => false,
+                'wysiwyg' => true
             ))
 
             ->with('Articles')

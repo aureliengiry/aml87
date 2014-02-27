@@ -18,11 +18,14 @@
                 <div class="uiHeaderSection"><strong><i class="icon-calendar"></i> {{ key | format_datetime(null, 'fr', 'Europe/Paris',  constant('IntlDateFormatter::LONG'), constant('IntlDateFormatter::SHORT')) }}</strong></div>
                 {% for entity in day %}
                     <div class="event-item">
+                        {% if entity.picture %}
                         <div class="event-item-structure event-item-container-thumbnail">
                             <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="{{ entity.title }}" class="thumbnail">
-                                <img data-src="holder.js/160x120" alt="160x120" style="width: 160px; height: 120px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAAB4CAYAAAB1ovlvAAAELklEQVR4Xu3YzUtiUQCG8WNiUdGusF1I29wEYfTvtyoh2kXrcKurgrCP4Rw4cubOvY4zCo90n1kVk77y3B/3w850Ov0O/rMAVKAjQKi8s6mAAIWAFhAgmt9xAWoALSBANL/jAtQAWkCAaH7HBagBtIAA0fyOC1ADaAEBovkdF6AG0AICRPM7LkANoAUEiOZ3XIAaQAsIEM3vuAA1gBYQIJrfcQFqAC0gQDS/4wLUAFpAgGh+xwWoAbSAANH8jgtQA2gBAaL5HRegBtACAkTzOy5ADaAFBIjmd1yAGkALCBDN77gANYAWECCa33EBagAtIEA0v+MC1ABaQIBofscFqAG0gADR/I4LUANoAQGi+R0XoAbQAgJE8zsuQA2gBQSI5ndcgBpACwgQze+4ADWAFhAgmt9xAWoALSBANL/jAtQAWqA1AL++vsLd3V14e3sLNzc3YX9/P4X/+PgIt7e34fPzM/3e7/fDcDhMP0+n0/D4+Bjia+O/i4uLcHp6utIBa9p7eXkJz8/Pi/cYDAbh/Px87b2VPtQW/lErAJbIOp3OAmBGsrOzE0ajUXh4eEjoIrTj4+ME8+DgYPF/EW/8u16vt/RQNu1l0CcnJwn509NTmEwma+9toauVP9KPB1g9w5UAM4izs7PFWSiXy2eqfIbKv0ecu7u76cx4eHiYQNZBymfUcq96VMqN+J7xzFi3t+pZd+WjvkV/2AqA4/E4XF5epjNceQnOAPb29sL7+3s6LFUATb/H95rNZuH6+jrc398vzpQRfNNe9biXcOfzeS3A8hK9RW429lF+PMBcqu6eLAPI933lJTjiipfHJoBNl9lle+VRy/iPjo5+O4s27W3siG/ZG7UaYNNlNiJouiSWZ6QMtnxwWQVgvvTHjXxPueyz5IeULbOzkY/TaoDVe8B/uSfLr40PJPHyXX1C/ttTd3xd+UCz7J7Te8CNWGffpA5E3VNwvPTGr2kikKan4G63m77SiQ8aV1dX6d4y/lyCWrb3+vr6B9h8Sf+fp2627HrrrT4DxnTVp+TyTNb0PWC+d6zer5WX4jqA1e8A86HL77PO947rMeBe3RqAXGKXlxUQoD7QAgJE8zsuQA2gBQSI5ndcgBpACwgQze+4ADWAFhAgmt9xAWoALSBANL/jAtQAWkCAaH7HBagBtIAA0fyOC1ADaAEBovkdF6AG0AICRPM7LkANoAUEiOZ3XIAaQAsIEM3vuAA1gBYQIJrfcQFqAC0gQDS/4wLUAFpAgGh+xwWoAbSAANH8jgtQA2gBAaL5HRegBtACAkTzOy5ADaAFBIjmd1yAGkALCBDN77gANYAWECCa33EBagAtIEA0v+MC1ABaQIBofscFqAG0gADR/I4LUANoAQGi+R0XoAbQAgJE8zsuQA2gBQSI5ndcgBpACwgQze+4ADWAFvgFNNYD7Zg81vEAAAAASUVORK5CYII=">
+                                <img  data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) }}" title="{{ entity.picture.title }}"
+                                      class="imagecache imagecache-visuel_blog" style="width: 160px; height: 120px;">
                             </a>
                         </div>
+                        {% endif %}
                         <div class="event-item-structure event-item-container-description">
                             <h2><a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="{{ entity.title }}">{{ entity.title }}</a></h2>
                             {% set description = entity.description|raw %}

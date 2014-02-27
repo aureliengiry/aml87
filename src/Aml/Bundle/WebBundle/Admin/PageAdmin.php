@@ -16,6 +16,7 @@ class PageAdmin extends Admin
             ))
             ->add('body','textarea',array(
                 'required' => false,
+                'wysiwyg' => true
             ))
             ->add('public','checkbox',array(
                 'label' => 'Publier',

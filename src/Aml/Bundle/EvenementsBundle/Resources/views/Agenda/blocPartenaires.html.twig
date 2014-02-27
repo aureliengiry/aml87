@@ -3,7 +3,14 @@
 <ul id="blocs-evenement-partenaires">
     {% for key,partenaire  in entity.partenaires %}
         <li>
-            {{ partenaire.name }}
+            {% if partenaire.logo %}
+                <div class="blog-visuel">
+                    <img src="{{ asset(partenaire.logo.webpath) }}" alt="{{ partenaire.name }}" title="{{ partenaire.name }}"
+                         class="imagecache imagecache-visuel_blog" width="100">
+                </div>
+            {% else %}
+                {{ partenaire.name }}
+            {% endif %}
         </li>
     {% endfor %}
 </ul>

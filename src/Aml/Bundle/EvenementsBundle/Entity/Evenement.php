@@ -68,6 +68,14 @@ class Evenement
     private $description;
 
     /**
+     * @var integer $picture
+     *
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", cascade={"all"})
+     * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
+     */
+    private $picture;
+
+    /**
      * @var boolean $archive
      *
      * @ORM\Column(name="archive", type="boolean")
@@ -81,9 +89,8 @@ class Evenement
      */
     private $public;
 
-
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", inversedBy="evenements")
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", inversedBy="evenements",cascade={"all"})
      * @ORM\JoinTable(name="evenements_articles",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
@@ -197,6 +204,25 @@ class Evenement
     {
         return $this->description;
     }
+
+    /**
+     * @param mixed $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+
 
     /**
      * Set archive
