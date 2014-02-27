@@ -15,7 +15,12 @@ class AlbumAdmin extends Admin
                 'label' => 'Titre'
             ))
             ->add('image','sonata_type_admin')
-            ->add('description')
+            ->add('description', 'textarea', array(
+                'label' => 'Texte',
+                'attr' => array('size' => 15, 'data-help' => 'Description de l\'album'),
+                'required' => false,
+                'wysiwyg' => true
+            ))
             ->add('date', 'date', array(
                 'label' => 'Date de sortie',
                 'widget' => 'single_text',

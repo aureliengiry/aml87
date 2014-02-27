@@ -30,6 +30,7 @@ class ArticleAdmin extends Admin
                     'label' => 'Texte',
                     'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
                     'required' => false,
+                    'wysiwyg' => true
                 ))
 
                 ->add('public', 'checkbox', array(

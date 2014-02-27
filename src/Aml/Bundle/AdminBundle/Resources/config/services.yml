@@ -9,3 +9,8 @@ services:
           class: Aml\Bundle\AdminBundle\Form\Extension\ImageTypeExtension
           tags:
               - { name: form.type_extension, alias: file }
+
+   aml_admin_bundle.wysiwyg_type_extension:
+          class: Aml\Bundle\AdminBundle\Form\Extension\WysiwygTypeExtension
+          tags:
+              - { name: form.type_extension, alias: textarea }
