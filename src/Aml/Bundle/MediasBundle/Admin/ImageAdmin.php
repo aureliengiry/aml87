@@ -17,6 +17,7 @@ class ImageAdmin extends Admin
             ))
             ->add('file','file' , array(
                 'required' => false,
+                'image_path' => 'webPath'
             ))
         ;
     }
