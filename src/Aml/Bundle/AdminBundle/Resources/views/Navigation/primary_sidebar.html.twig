@@ -7,7 +7,7 @@
 
         <li class="active">
             <span class="glow"></span>
-            <a href="{{ path('aml_admin_homepage') }}">
+            <a href="{{ path('sonata_admin_dashboard') }}">
                 <i class="icon-dashboard icon-2x"></i>
                 <span>Dashboard</span>
             </a>
@@ -16,7 +16,6 @@
         <li class="dark-nav ">
 
             <span class="glow"></span>
-
 
             <a class="accordion-toggle collapsed " data-toggle="collapse" href="#zwz2Ux5SfP">
                 <i class="icon-beaker icon-2x"></i>
@@ -30,7 +29,7 @@
             <ul id="zwz2Ux5SfP" class="collapse ">
 
                 <li class="">
-                    <a href="{{ path('admin_content_pages') }}"><i class="icon-hand-up"></i> Pages</a>
+                    <a href="{{ path('admin_bundle_web_page_list') }}"><i class="icon-hand-up"></i> Pages</a>
                 </li>
 
                 <li class="dark-nav">
@@ -39,9 +38,9 @@
                         <i class="icon-beaker"></i>Blog
                     </a>
                     <ul id="admin_content_blog" class="collapse ">
-                        <li><a href="{{ path('admin_content_blog') }}">Articles</a></li>
-                        <li><a href="{{ path('admin_content_blog_categories') }}">Catégories</a></li>
-                        <li><a href="{{ path('admin_content_blog_categories') }}">Mot-clés</a></li>
+                        <li><a href="{{ path('admin_bundle_blog_article_list') }}">Articles</a></li>
+                        <li><a href="{{ path('admin_bundle_blog_category_list') }}">Catégories</a></li>
+                        <li><a href="{{ path('admin_bundle_blog_tags_list') }}">Mot-clés</a></li>
                     </ul>
                 </li>
 
@@ -61,13 +60,29 @@
             <a href="{{ path('admin_agenda', {mode:'calendar'}) }}" title="Gestion des évènements"> <i
                         class="icon-edit icon-2x"></i> <span>Agenda</span></a>
         </li>
-
         <li class="">
             <span class="glow"></span>
-            <a href="{{ path('admin_medias') }}" title="Gestion des médias">
+            <a href="{{ path('admin_bundle_evenements_evenement_list') }}" title="Gestion des évènements"> <i
+                        class="icon-edit icon-2x"></i> <span>Evènements</span></a>
+        </li>
+
+        <li class="dark-nav">
+            <span class="glow"></span>
+            <a class="accordion-toggle collapsed " data-toggle="collapse" href="#submedias" title="Gestion des médias">
                 <i class="icon-bar-chart icon-2x"></i>
                 <span>Médias</span>
             </a>
+
+            <ul id="submedias" class="collapse">
+
+                <li class="">
+                    <a href="{{ path('admin_bundle_medias_image_list') }}"><i class="icon-hand-up"></i> Images</a>
+                </li>
+                <li class="">
+                    <a href="{{ path('admin_bundle_medias_file_list') }}"><i class="icon-hand-up"></i> Documents</a>
+                </li>
+
+            </ul>
         </li>
 
     </ul>

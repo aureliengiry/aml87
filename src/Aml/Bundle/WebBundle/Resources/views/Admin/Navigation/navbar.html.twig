@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="#">{{ project_name }}</a>
+            <a class="brand" href="{{ url('sonata_admin_dashboard') }}">{{ project_name }}</a>
 
             <!-- the new toggle buttons -->
             <ul class="nav pull-right">
@@ -61,8 +61,8 @@
 
                     <li class="active"><a href="{{ path('home') }}" title="Go home"><i class="icon-home"></i> Home</a>
                     </li>
-                    <li{% if app.request.attributes.get('_route') == 'admin_user' %} class="active"{% endif %}>
-                        <a href="{{ path('admin_user') }}" title="Gestion des membres"><i class="icon-user"></i> Membres</a>
+                    <li{% if app.request.attributes.get('_route') == 'admin_bundle_users_user_list' %} class="active"{% endif %}>
+                        <a href="{{ path('admin_bundle_users_user_list') }}" title="Gestion des membres"><i class="icon-user"></i> Membres</a>
                     </li>
 
                 </ul>
