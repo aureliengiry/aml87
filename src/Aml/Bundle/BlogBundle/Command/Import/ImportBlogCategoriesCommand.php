@@ -1,30 +1,21 @@
 <?php
-
-/*
- * This file is part of the Symfony package.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-namespace Aml\Bundle\BlogBundle\Command\Import;
-
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
-
-use Aml\Bundle\BlogBundle\Entity\BlogCategories;
-
-
 /**
  * Import Blog contents from aml87.fr
  *
  * @author Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+namespace Aml\Bundle\BlogBundle\Command\Import;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Aml\Bundle\BlogBundle\Entity\Category;
+
+/**
+ * Class ImportBlogCategoriesCommand
+ * @package Aml\Bundle\BlogBundle\Command\Import
  */
 class ImportBlogCategoriesCommand extends ContainerAwareCommand
 {
@@ -39,9 +30,6 @@ class ImportBlogCategoriesCommand extends ContainerAwareCommand
     {
         $this
             ->setName('blog:import:categories')
-//            ->setDefinition(array(
-//                new InputOption('no-warmup', '', InputOption::VALUE_NONE, 'Do not warm up the cache'),
-//            ))
             ->setDescription('Import Blog Categories from old website')
             ->setHelp(<<<EOF
 The <info>blog:import:categories</info> command imports blog categories from website aml87.fr and debug mode:
@@ -62,14 +50,18 @@ EOF
         $this->_importContent();
     }
 
+    /**
+     * Connect to database
+     */
     protected function _connectDb()
     {
-        $dbInfo['database_target'] = $this->getContainer()->getParameter('import_database_host');
-        $dbInfo['database_name'] = $this->getContainer()->getParameter('import_database_name');
-        $dbInfo['username'] = $this->getContainer()->getParameter('import_database_user');
-        $dbInfo['password'] = $this->getContainer()->getParameter('import_database_password');
+        $dbInfo['database_target'] = $this->getContainer()->getParameter('database_host');
+        $dbInfo['database_name'] = $this->getContainer()->getParameter('drupal_database_name');
+        $dbInfo['username'] = $this->getContainer()->getParameter('database_user');
+        $dbInfo['password'] = $this->getContainer()->getParameter('database_password');
 
         $dbConnString = "mysql:host=" . $dbInfo['database_target'] . "; dbname=" . $dbInfo['database_name'];
+
         $this->dbh = new \PDO($dbConnString, $dbInfo['username'], $dbInfo['password']);
         $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         $error = $this->dbh->errorInfo();
@@ -79,9 +71,11 @@ EOF
         }
     }
 
+    /**
+     *  Load categories
+     */
     protected function _loadData()
     {
-
         var_dump(__METHOD__);
 
         $this->_connectDb();
@@ -95,6 +89,9 @@ EOF
         $this->_oldData = $query->fetchAll();
     }
 
+    /**
+     * Import Content
+     */
     protected function _importContent()
     {
         var_dump(__METHOD__);
@@ -102,14 +99,13 @@ EOF
 
         if (!empty($this->_oldData)) {
             foreach ($this->_oldData as $item) {
-                $entity = new BlogCategories();
+                $entity = new Category();
 
                 $entity
                     ->setName($item['name'])
                     ->setSystemName($item['name'])
                     //->setWeight($item['weight'])
                     ->setDescription($item['description']);
-
 
                 $em->persist($entity);
                 $em->flush();
