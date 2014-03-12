@@ -1,30 +1,22 @@
 <?php
-
-/*
- * This file is part of the Symfony package.
+/**
+ * Import Blog contens from aml87.fr
  *
- * (c) Fabien Potencier <fabien@symfony.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * @author Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
 namespace Aml\Bundle\BlogBundle\Command\Import;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
-
-use Aml\Bundle\BlogBundle\Entity\Blog;
-
+use Aml\Bundle\BlogBundle\Entity\Article;
 
 /**
- * Import Blog contens from aml87.fr
- *
- * @author Aurélien GIRY <aurelien.giry@gmail.com>
+ * Class ImportBlogCommand
+ * @package Aml\Bundle\BlogBundle\Command\Import
  */
 class ImportBlogCommand extends ContainerAwareCommand
 {
@@ -39,9 +31,6 @@ class ImportBlogCommand extends ContainerAwareCommand
     {
         $this
             ->setName('blog:import:articles')
-//            ->setDefinition(array(
-//                new InputOption('no-warmup', '', InputOption::VALUE_NONE, 'Do not warm up the cache'),
-//            ))
             ->setDescription('Import Blog contents from old website')
             ->setHelp(<<<EOF
 The <info>blog:import:articles</info> command imports blog contents from website aml87.fr and debug mode:
@@ -62,12 +51,15 @@ EOF
         $this->_importContent();
     }
 
+    /**
+     * Connect to database
+     */
     protected function _connectDb()
     {
-        $dbInfo['database_target'] = $this->getContainer()->getParameter('import_database_host');
-        $dbInfo['database_name'] = $this->getContainer()->getParameter('import_database_name');
-        $dbInfo['username'] = $this->getContainer()->getParameter('import_database_user');
-        $dbInfo['password'] = $this->getContainer()->getParameter('import_database_password');
+        $dbInfo['database_target'] = $this->getContainer()->getParameter('database_host');
+        $dbInfo['database_name'] = $this->getContainer()->getParameter('drupal_database_name');
+        $dbInfo['username'] = $this->getContainer()->getParameter('database_user');
+        $dbInfo['password'] = $this->getContainer()->getParameter('database_password');
 
         $dbConnString = "mysql:host=" . $dbInfo['database_target'] . "; dbname=" . $dbInfo['database_name'];
         $this->dbh = new \PDO($dbConnString, $dbInfo['username'], $dbInfo['password']);
@@ -79,10 +71,11 @@ EOF
         }
     }
 
-
+    /**
+     * Load articles
+     */
     protected function _loadBlogArticles()
     {
-
         var_dump(__METHOD__);
 
         $this->_connectDb();
@@ -97,6 +90,12 @@ EOF
         $this->_oldArticles = $query->fetchAll();
     }
 
+    /**
+     * Load Tags of each articles
+     *
+     * @param $idArticle
+     * @return mixed
+     */
     protected function _getArticleTags($idArticle)
     {
         $this->_connectDb();
@@ -107,6 +106,9 @@ EOF
         return $query->fetchAll();
     }
 
+    /**
+     * Import Content
+     */
     protected function _importContent()
     {
         var_dump(__METHOD__);
@@ -114,8 +116,8 @@ EOF
 
         if (!empty($this->_oldArticles)) {
             foreach ($this->_oldArticles as $article) {
-                var_dump($article);
-                $entityBlog = new Blog();
+
+                $entityArticle = new Article();
 
                 $createdDate = new \DateTime();
                 $createdDate->setTimestamp($article['created']);
@@ -123,43 +125,38 @@ EOF
                 $changedDate = new \DateTime();
                 $changedDate->setTimestamp($article['changed']);
 
-
-                $entityBlog
+                $entityArticle
                     ->setCreated($createdDate)
                     ->setUpdated($changedDate)
                     ->setPublic($article['status'])
-                    ->setTitle($article['titre'])
+                    ->setTitle(utf8_encode($article['titre']))
                     ->setBody($article['body']);
 
                 if (isset($article['status']) && $article['status'] == 1) {
-                    $entityBlog->setPublished($changedDate);
+                    $entityArticle->setPublished($changedDate);
                 }
 
 
                 // Set category
                 $buildCategoryName = $this->_build_category_name($article['category']);
-                $entityBlogCategorie = $em->getRepository('AmlBlogBundle:BlogCategories')->findOneBy(array('system_name' => $buildCategoryName));
-                $entityBlog->setCategory($entityBlogCategorie);
+                $entityBlogCategorie = $em->getRepository('AmlBlogBundle:Category')->findOneBy(array('system_name' => $buildCategoryName));
+                $entityArticle->setCategory($entityBlogCategorie);
 
                 // Set Tags
                 $associatedTags = $this->_getArticleTags($article['nodeId']);
-                var_dump($associatedTags);
-                $associatedTagsName = array();
                 foreach ($associatedTags as $tag) {
                     $tagName = $this->_build_category_name($tag['name']);
-                    $entityBlogTags = $em->getRepository('AmlBlogBundle:BlogTags')->findOneBy(array('system_name' => $tagName));
-                    $entityBlog->addTag($entityBlogTags);
+                    $entityBlogTags = $em->getRepository('AmlBlogBundle:Tags')->findOneBy(array('system_name' => $tagName));
+                    $entityArticle->addTag($entityBlogTags);
                 }
 
 
-                // var_dump( $associatedTags,$associatedTagsName,$entityBlogTags );exit;
-                var_dump($entityBlogTags);
-                exit;
+                $em->persist($entityArticle);
 
 
-                $em->persist($entityBlog->getData());
-                $em->flush();
             }
+
+            $em->flush();
         }
     }
 
@@ -168,7 +165,6 @@ EOF
      */
     protected function _build_category_name($string)
     {
-
         $string = str_replace(array('à', 'á', 'â', 'ã', 'ä', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý'), array('a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'), $string);
         $string = str_replace(array(' ', '-'), array('_', '_'), $string);
 
