@@ -44,6 +44,12 @@ class Article
     private $logo;
 
     /**
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Video\Youtube", cascade={"all"})
+     * @ORM\JoinColumn(name="id_video", referencedColumnName="id_video")
+     */
+    private $video;
+
+    /**
      * @var text $body
      *
      * @ORM\Column(name="body", type="text")
@@ -182,6 +188,24 @@ class Article
     {
         return $this->logo;
     }
+
+    /**
+     * @param mixed $video
+     */
+    public function setVideo($video)
+    {
+        $this->video = $video;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVideo()
+    {
+        return $this->video;
+    }
+
 
     /**
      * Set body

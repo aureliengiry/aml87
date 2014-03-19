@@ -19,7 +19,13 @@
 		</span>
     </div>
 
-    {% if entity.logo.webpath is defined %}
+    {% if entity.video %}
+        <iframe id="ytplayer" type="text/html" width="640" height="360"
+                src="https://www.youtube.com/embed/{{ entity.video.providerId }}?html5=1"
+                frameborder="0"
+                allowfullscreen="true">
+        </iframe>
+    {% elseif entity.logo.webpath is defined %}
         <div rel="prettyPhoto" class="blog-visuel">
             <a rel="prettyPhoto" href="{{ asset(entity.logo.webpath) }}">
                 <img width="375" height="250" class="imagecache imagecache-visuel_blog_list"
