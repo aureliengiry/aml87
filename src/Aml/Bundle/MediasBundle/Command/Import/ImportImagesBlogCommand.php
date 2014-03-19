@@ -1,6 +1,6 @@
 <?php
 /**
- * Import Blog contens from aml87.fr
+ * Import Images from old website
  *
  * @author Aurélien GIRY <aurelien.giry@gmail.com>
  */
@@ -12,11 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Aml\Bundle\BlogBundle\Entity\Article;
 
 /**
  * Class ImportBlogCommand
+ *
  * @package Aml\Bundle\BlogBundle\Command\Import
  */
 class ImportImagesBlogCommand extends ContainerAwareCommand
@@ -34,7 +33,7 @@ class ImportImagesBlogCommand extends ContainerAwareCommand
             ->setName('medias:import:imagesBlog')
             ->setDescription('Import Blog images from old website')
             ->setHelp(<<<EOF
-The <info>blog:import:articles</info> command imports blog contents from website aml87.fr and debug mode:
+The <info>blog:import:articles</info> command imports images from old website aml87.fr and debug mode:
 
 <info>php app/console medias:import:imagesBlog --debug</info>
 EOF
@@ -46,9 +45,7 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        var_dump(__METHOD__);
         $this->_loadImagesArticles();
-        var_dump($this->_oldImages);
         $this->_importImages();
     }
 
@@ -77,8 +74,6 @@ EOF
      */
     protected function _loadImagesArticles()
     {
-        var_dump(__METHOD__);
-
         $this->_connectDb();
 
         $queryString = "SELECT filename as title, filename as path
@@ -94,7 +89,6 @@ EOF
      */
     protected function _importImages()
     {
-        var_dump(__METHOD__);
         $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
 
         if (!empty($this->_oldImages)) {
