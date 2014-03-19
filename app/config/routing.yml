@@ -26,7 +26,7 @@ aml_blog:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #    prefix:   /_internal
 
-AmlWebBundle:
+aml_web:
     resource: "@AmlWebBundle/Controller/"
     type:     annotation
     prefix:   /

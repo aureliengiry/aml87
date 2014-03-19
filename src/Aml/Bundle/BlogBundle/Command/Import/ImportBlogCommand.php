@@ -45,9 +45,8 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        var_dump(__METHOD__);
         $this->_loadBlogArticles();
-        var_dump($this->_oldArticles);
+
         $this->_importContent();
     }
 
@@ -76,14 +75,14 @@ EOF
      */
     protected function _loadBlogArticles()
     {
-        var_dump(__METHOD__);
-
         $this->_connectDb();
 
         $queryString = "SELECT n.nid AS nodeId, n.title as titre, n.status, n.created, n.changed, nr.body as body,
-		(SELECT td.name FROM term_node tn INNER JOIN term_data td ON tn.tid=td.tid WHERE tn.nid = nodeId AND td.vid=2) AS category
+		(SELECT td.name FROM term_node tn INNER JOIN term_data td ON tn.tid=td.tid WHERE tn.nid = nodeId AND td.vid=2) AS category,
+		(SELECT f.filename FROM files f WHERE f.fid=cta.field_blog_article_img_fid ) as filename
 		FROM node n 
-		INNER JOIN  node_revisions nr ON n.nid=nr.nid 		
+		INNER JOIN node_revisions nr ON n.nid=nr.nid
+		INNER JOIN content_type_article cta ON n.nid=cta.nid
 		WHERE n.type='article'";
         $query = $this->dbh->query($queryString);
 
@@ -111,7 +110,6 @@ EOF
      */
     protected function _importContent()
     {
-        var_dump(__METHOD__);
         $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
 
         if (!empty($this->_oldArticles)) {
@@ -136,23 +134,35 @@ EOF
                     $entityArticle->setPublished($changedDate);
                 }
 
-
                 // Set category
-                $buildCategoryName = $this->_build_category_name($article['category']);
-                $entityBlogCategorie = $em->getRepository('AmlBlogBundle:Category')->findOneBy(array('system_name' => $buildCategoryName));
+                $buildCategoryName = $this->_build_category_name(utf8_encode($article['category']));
+                $entityBlogCategorie = $em->getRepository('AmlBlogBundle:Category')->findOneBy(
+                    array('system_name' => $buildCategoryName)
+                );
                 $entityArticle->setCategory($entityBlogCategorie);
 
                 // Set Tags
                 $associatedTags = $this->_getArticleTags($article['nodeId']);
                 foreach ($associatedTags as $tag) {
-                    $tagName = $this->_build_category_name($tag['name']);
-                    $entityBlogTags = $em->getRepository('AmlBlogBundle:Tags')->findOneBy(array('system_name' => $tagName));
+                    $tagName = $this->_build_category_name(utf8_encode($tag['name']));
+                    $entityBlogTags = $em->getRepository('AmlBlogBundle:Tags')->findOneBy(
+                        array('system_name' => $tagName)
+                    );
                     $entityArticle->addTag($entityBlogTags);
                 }
 
+                // Set Image
+                if (isset($article['filename']) && !empty($article['filename'])) {
+                    $entityBlogImage = $em->getRepository('AmlMediasBundle:Image')->findOneBy(
+                        array('path' => utf8_encode($article['filename']))
+                    );
+
+                    if ($entityBlogImage) {
+                        $entityArticle->setLogo($entityBlogImage);
+                    }
+                }
 
                 $em->persist($entityArticle);
-
 
             }
 

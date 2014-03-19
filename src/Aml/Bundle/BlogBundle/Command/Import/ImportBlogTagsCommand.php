@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Aml\Bundle\BlogBundle\Entity\Tags;
 
 /**
@@ -45,12 +44,16 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        var_dump(__METHOD__);
+        // Load data
         $this->_loadData();
-        var_dump($this->_oldData);
+
+        // Insert data to current DB
         $this->_importContent();
     }
 
+    /**
+     * Connect to DB of old website
+     */
     protected function _connectDb()
     {
         $dbInfo['database_target'] = $this->getContainer()->getParameter('database_host');
@@ -73,8 +76,6 @@ EOF
      */
     protected function _loadData()
     {
-        var_dump(__METHOD__);
-
         $this->_connectDb();
 
         // import vocabulary 2 ( Blog )
@@ -91,7 +92,6 @@ EOF
      */
     protected function _importContent()
     {
-        var_dump(__METHOD__);
         $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
 
         if (!empty($this->_oldData)) {
@@ -99,10 +99,10 @@ EOF
                 $entity = new Tags();
 
                 $entity
-                    ->setName($item['name'])
-                    ->setSystemName($item['name'])
+                    ->setName(utf8_encode($item['name']))
+                    ->setSystemName(utf8_encode($item['name']))
                     ->setWeight($item['weight'])
-                    ->setDescription($item['description']);
+                    ->setDescription(utf8_encode($item['description']));
 
                 $em->persist($entity);
                 $em->flush();
