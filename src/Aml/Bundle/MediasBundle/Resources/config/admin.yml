@@ -23,3 +23,14 @@ services:
         calls:
             - [ setTranslationDomain, [AmlMediasBundle]]
 
+    sonata.admin.videos:
+        class: Aml\Bundle\MediasBundle\Admin\VideoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Medias, label: "Videos" }
+        arguments:
+            - ~
+            - Aml\Bundle\MediasBundle\Entity\Video\Youtube
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlMediasBundle]]
+

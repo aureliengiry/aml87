@@ -23,13 +23,25 @@
             </div>
             {% endif %}
 
+            {% if entity.video %}
+                <iframe id="ytplayer" type="text/html" width="640" height="360"
+                        src="https://www.youtube.com/embed/{{ entity.video.providerId }}?html5=1"
+                        frameborder="0"
+                        allowfullscreen="true">
+                </iframe>
+            {% endif %}
+
             <div class="article-description">{{ entity.body|raw }}</div>
 
-            <span class="blog-tags">Mots clés : </span>
-            {% for key,tag in entity.tags %}
-                {% if key > 0 %}, {% endif %}<a class="active" title="{{ tag.description }}"
-                                                href="{{ path('blog',{'tag' : tag.systemName}) }}">{{ tag.name }}</a>
-            {% endfor %}
+            {% if entity.tags %}
+                <span class="blog-tags">Mots clés : </span>
+                {% for key,tag in entity.tags %}
+                    {% if key > 0 %}, {% endif %}<a class="active" title="{{ tag.description }}"
+                                                    href="{{ path('blog',{'tag' : tag.systemName}) }}">{{ tag.name }}</a>
+                {% endfor %}
+            {% endif %}
+
+
         </div>
 
     </div>

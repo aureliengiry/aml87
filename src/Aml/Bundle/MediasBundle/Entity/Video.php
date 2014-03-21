@@ -7,42 +7,42 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Aml\Bundle\MediasBundle\Entity\File;
+use Aml\Bundle\MediasBundle\Entity\Video\Youtube;
+use Aml\Bundle\MediasBundle\Entity\Video\Dailymotion;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Video
  *
- * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\VideoRepository")
+ *
+ *
+ * @ORM\Table(name="mediasbundle_videos")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="provider", type="string")
+ * @ORM\DiscriminatorMap({"youtube" = "\Aml\Bundle\MediasBundle\Entity\Video\Youtube", "dailymotion" = "\Aml\Bundle\MediasBundle\Entity\Video\Dailymotion"})
  */
 class Video 
 {
 	/**
 	 * @ORM\Id
-	 * @ORM\Column(type="integer")
+     * @ORM\Column(name="id_video", type="integer")
 	 * @ORM\GeneratedValue(strategy="AUTO")
 	 */
-	public $id;
-    /**
-     * @ORM\Column(name="file", type="string", length=255)
-	 * @Assert\NotBlank( groups={"ajout"} )
-	 * @Assert\File(
-	 *     maxSize = "2M",
-	 *     mimeTypesMessage = "Le fichier choisi ne correspond pas à un fichier valide",
-	 *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
-	 *     uploadErrorMessage = "Erreur dans l'upload du fichier"
-	 * )
-	 */
-    public $file;
+    protected $id;
 
-//     /**
-//      * @ORM\ManyToMany(targetEntity="Blog", inversedBy="files")
-//      * @ORM\JoinTable(name="blog_files",
-//      * 		joinColumns={@ORM\JoinColumn(name="id_file", referencedColumnName="id")},
-//      * 		inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
-//      * )
-//      */
-//     protected $articles;
+    /**
+     * @var string $providerId
+     *
+     * @ORM\Column(name="provider_id", type="string", length=50)
+     */
+    protected $providerId;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=255,nullable=true)
+     */
+    protected $title;
 
 	public function __construct()
     {
@@ -59,99 +59,45 @@ class Video
         return $this->id;
     }
 
-
     /**
-     * Set Filename
-     *
-     * @param string $filename
+     * @param string $providerId
      */
-    public function setFile($file)
+    public function setProviderId($providerId)
     {
-        $this->file = $file;
+        $this->providerId = $providerId;
         return $this;
     }
 
     /**
-     * Get Filename
+     * @return string
+     */
+    public function getProviderId()
+    {
+        return $this->providerId;
+    }
+
+    /**
+     * Set title
      *
-     * @return string 
+     * @param string $title
      */
-    public function getFile()
+    public function setTitle($title)
     {
-        return $this->file;
+        $this->title = $title;
+        return $this;
     }
-    
-  
- 	public function getFullFilePath() {
-        return null === $this->file ? null : $this->getUploadRootDir(). $this->file;
-    }
- 
-    protected function getUploadRootDir() {
-        // the absolute directory path where uploaded documents should be saved
-        return $this->getTmpUploadRootDir().$this->getId()."/";
-    }
- 
-    protected function getTmpUploadRootDir() {
-        // the absolute directory path where uploaded documents should be saved
-        return __DIR__ . '/../../../../../web/upload/images/';
-    }
- 
+
     /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
+     * Get title
+     *
+     * @return string
      */
-    public function uploadFile() {
-    
-        // the file property can be empty if the field is not required
-        if (null === $this->file) {
-            return;
-        }
-        if(!$this->id){
-            $this->file->move($this->getTmpUploadRootDir(), $this->file->getClientOriginalName());
-        }else{
-        		var_dump('rdtezrtzerf');exit;
-            $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
-        }
-        $this->setFile($this->file->getClientOriginalName());
-    }
-     
-    /**
-     * @ORM\PostPersist()
-     */
-    public function moveFile()
+    public function getTitle()
     {
-        if (null === $this->file) {
-            return;
-        }
-        if(!is_dir($this->getUploadRootDir())){
-            mkdir($this->getUploadRootDir());
-        }
-        copy($this->getTmpUploadRootDir().$this->file, $this->getFullFilePath());
-        unlink($this->getTmpUploadRootDir().$this->file);
+        return $this->title;
     }
- 
-    /**
-     * @ORM\PreRemove()
-     */
-    public function removeFile()
-    {
-        unlink($this->getFullFilePath());
-        rmdir($this->getUploadRootDir());
-    }
-    
-// 	public function getArticles()
-//     {
-//     	return $this->articles;
-//     }
-    
-// 	public function setArticles($articles)
-//     {
-//     	$this->articles = $articles;
-//     	return $this;
-//     }
-    
-//     public function addArticle($article)
-//     {
-//     	$this->articles[] = $article;
-//     }
+
+
+
+
 }

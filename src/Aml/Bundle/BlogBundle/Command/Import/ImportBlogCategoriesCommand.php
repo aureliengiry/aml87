@@ -44,9 +44,10 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        var_dump(__METHOD__);
+        // Load data
         $this->_loadData();
-        var_dump($this->_oldData);
+
+        // Insert data to current DB
         $this->_importContent();
     }
 
@@ -76,8 +77,6 @@ EOF
      */
     protected function _loadData()
     {
-        var_dump(__METHOD__);
-
         $this->_connectDb();
 
         // import vocabulary 2 ( Blog )
@@ -94,7 +93,6 @@ EOF
      */
     protected function _importContent()
     {
-        var_dump(__METHOD__);
         $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
 
         if (!empty($this->_oldData)) {
@@ -102,10 +100,11 @@ EOF
                 $entity = new Category();
 
                 $entity
-                    ->setName($item['name'])
-                    ->setSystemName($item['name'])
+                    ->setName(utf8_encode($item['name']))
+                    ->setSystemName(utf8_encode($item['name']))
                     //->setWeight($item['weight'])
-                    ->setDescription($item['description']);
+                    ->setDescription(utf8_encode($item['description']))
+                ;
 
                 $em->persist($entity);
                 $em->flush();
