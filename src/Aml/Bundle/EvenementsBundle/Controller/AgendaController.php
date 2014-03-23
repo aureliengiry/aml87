@@ -15,15 +15,16 @@ use Aml\Bundle\BlogBundle\Entity\Article;
  */
 class AgendaController extends Controller
 {
-    private function _formatEventByDay( $events ){
+    private function _formatEventByDay($events)
+    {
         $eventsByDay = array();
 
-        foreach ( $events as $event ){
+        foreach ($events as $event) {
 
             $dateEvent = $event->getDateStart();
             $dateKey = new \DateTime();
-            $dateKey->setDate($dateEvent->format('Y'), $dateEvent->format('m'), $dateEvent->format('d')  );
-            $dateKey->setTime(0,0);
+            $dateKey->setDate($dateEvent->format('Y'), $dateEvent->format('m'), $dateEvent->format('d'));
+            $dateKey->setTime(0, 0);
 
             $day = $dateKey->getTimestamp();
 
@@ -46,8 +47,12 @@ class AgendaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
-        $events = $evenementRepository->getNextEvenements(array('public' => 1, 'archive' => 0, 'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT ));
-        $entities = $this->_formatEventByDay( $events );
+        $events = $evenementRepository->getNextEvenements(array(
+            'public' => 1,
+            'archive' => 0,
+            'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT)
+        );
+        $entities = $this->_formatEventByDay($events);
 
         return array('entities' => $entities);
     }
@@ -66,15 +71,15 @@ class AgendaController extends Controller
             $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->findOneBy(array('url' => $url_key));
         }
         else{   */
-            $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->find($id);
-       // }
+        $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->find($id);
+        // }
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find AmlEvenementsBundle:Evenement entity.');
         }
 
         return array(
-            'entity'      => $entity        );
+            'entity' => $entity);
     }
 
 

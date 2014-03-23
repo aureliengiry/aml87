@@ -5,7 +5,7 @@
  * @author Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace Aml\Bundle\MediasBundle\Command\Import;
+namespace Tools\Bundle\MigrationBundle\Command\Import\Medias;
 
 use Aml\Bundle\MediasBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -13,15 +13,16 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Tools\Bundle\MigrationBundle\Command\Import\AbstractCommand;
+
 /**
  * Class ImportBlogCommand
  *
  * @package Aml\Bundle\BlogBundle\Command\Import
  */
-class ImportImagesBlogCommand extends ContainerAwareCommand
+class ImagesCommand extends AbstractCommand
 {
     protected $name;
-    protected $dbh;
     protected $_oldImages = array();
 
     /**
@@ -30,12 +31,12 @@ class ImportImagesBlogCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('medias:import:imagesBlog')
+            ->setName('migration:import:blog-images')
             ->setDescription('Import Blog images from old website')
             ->setHelp(<<<EOF
-The <info>blog:import:articles</info> command imports images from old website aml87.fr and debug mode:
+The <info>migration:import:blog-images</info> command imports images from old website aml87.fr and debug mode:
 
-<info>php app/console medias:import:imagesBlog --debug</info>
+<info>php app/console migration:import:blog-images --debug</info>
 EOF
             );
     }
@@ -50,32 +51,11 @@ EOF
     }
 
     /**
-     * Connect to database
-     */
-    protected function _connectDb()
-    {
-        $dbInfo['database_target'] = $this->getContainer()->getParameter('database_host');
-        $dbInfo['database_name'] = $this->getContainer()->getParameter('drupal_database_name');
-        $dbInfo['username'] = $this->getContainer()->getParameter('database_user');
-        $dbInfo['password'] = $this->getContainer()->getParameter('database_password');
-
-        $dbConnString = "mysql:host=" . $dbInfo['database_target'] . "; dbname=" . $dbInfo['database_name'];
-        $this->dbh = new \PDO($dbConnString, $dbInfo['username'], $dbInfo['password']);
-        $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        $error = $this->dbh->errorInfo();
-        if ($error[0] != "") {
-            print "<p>DATABASE CONNECTION ERROR:</p>";
-            print_r($error);
-        }
-    }
-
-    /**
      * Load articles
      */
     protected function _loadImagesArticles()
     {
-        $this->_connectDb();
-
+        $this->output->writeln('<info>Load images of blog</info>');
         $queryString = "SELECT filename as title, filename as path
 		FROM files f
 		WHERE filemime like 'image%'";
@@ -89,6 +69,7 @@ EOF
      */
     protected function _importImages()
     {
+        $this->output->writeln('<info>Import images :</info>');
         $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
 
         if (!empty($this->_oldImages)) {
@@ -98,8 +79,7 @@ EOF
 
                 $entityImage
                     ->setTitle(utf8_encode($image['title']))
-                    ->setPath(utf8_encode($image['path']))
-                ;
+                    ->setPath(utf8_encode($image['path']));
 
                 $em->persist($entityImage);
             }

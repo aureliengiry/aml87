@@ -11,6 +11,12 @@ use Aml\Bundle\BlogBundle\Admin\BlogAdmin;
 
 class EvenementAdmin extends Admin
 {
+    // setup the default sort column and order
+    protected $datagridValues = array(
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'dateStart'
+    );
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper

@@ -19,6 +19,7 @@ sonata_block:
 
 sonata_admin:
     title:      AML87
+    title_logo: /bundles/amladmin/images/logo_title.png
     templates:
         # default global templates
         layout:  AmlAdminBundle::standard_layout.html.twig

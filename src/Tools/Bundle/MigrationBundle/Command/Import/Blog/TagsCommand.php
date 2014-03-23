@@ -5,22 +5,23 @@
  * @author Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace Aml\Bundle\BlogBundle\Command\Import;
+namespace Tools\Bundle\MigrationBundle\Command\Import\Blog;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+
+use Tools\Bundle\MigrationBundle\Command\Import\AbstractCommand;
 use Aml\Bundle\BlogBundle\Entity\Tags;
 
 /**
- * Class ImportBlogTagsCommand
- * @package Aml\Bundle\BlogBundle\Command\Import
+ * Class TagsCommand
+ * @package Tools\Bundle\MigrationBundle\Command\Import\Blog
  */
-class ImportBlogTagsCommand extends ContainerAwareCommand
+class TagsCommand extends AbstractCommand
 {
     protected $name;
-    protected $dbh;
     protected $_oldData = array();
 
     /**
@@ -29,12 +30,12 @@ class ImportBlogTagsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('blog:import:tags')
+            ->setName('migration:import:blog-tags')
             ->setDescription('Import Blog tags from old website')
             ->setHelp(<<<EOF
-The <info>blog:import:tags</info> command imports blog categories from website aml87.fr and debug mode:
+The <info>migration:import:blog-tags</info> command imports blog categories from website aml87.fr and debug mode:
 
-<info>php app/console blog:import:tags --debug</info>
+<info>php app/console migration:import:blog-tags --debug</info>
 EOF
             );
     }
@@ -52,31 +53,11 @@ EOF
     }
 
     /**
-     * Connect to DB of old website
-     */
-    protected function _connectDb()
-    {
-        $dbInfo['database_target'] = $this->getContainer()->getParameter('database_host');
-        $dbInfo['database_name'] = $this->getContainer()->getParameter('drupal_database_name');
-        $dbInfo['username'] = $this->getContainer()->getParameter('database_user');
-        $dbInfo['password'] = $this->getContainer()->getParameter('database_password');
-
-        $dbConnString = "mysql:host=" . $dbInfo['database_target'] . "; dbname=" . $dbInfo['database_name'];
-        $this->dbh = new \PDO($dbConnString, $dbInfo['username'], $dbInfo['password']);
-        $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        $error = $this->dbh->errorInfo();
-        if ($error[0] != "") {
-            print "<p>DATABASE CONNECTION ERROR:</p>";
-            print_r($error);
-        }
-    }
-
-    /**
      *  Load tags
      */
     protected function _loadData()
     {
-        $this->_connectDb();
+        $this->output->writeln('<info>Load tags of blog</info>');
 
         // import vocabulary 2 ( Blog )
         $queryString = "SELECT *
@@ -92,12 +73,12 @@ EOF
      */
     protected function _importContent()
     {
+        $this->output->writeln('<info>Import tags :</info>');
         $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
 
         if (!empty($this->_oldData)) {
             foreach ($this->_oldData as $item) {
                 $entity = new Tags();
-
                 $entity
                     ->setName(utf8_encode($item['name']))
                     ->setSystemName(utf8_encode($item['name']))
@@ -105,8 +86,11 @@ EOF
                     ->setDescription(utf8_encode($item['description']));
 
                 $em->persist($entity);
-                $em->flush();
+
+                $this->output->writeln('<info>-' . utf8_decode($entity->getName()) . ' (' . $entity->getSystemName() . ')</info>');
             }
+
+            $em->flush();
         }
     }
 

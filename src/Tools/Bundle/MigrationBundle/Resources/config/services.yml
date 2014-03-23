@@ -1,0 +1,7 @@
+parameters:
+#    tools_migration.example.class: Tools\Bundle\MigrationBundle\Example
+
+services:
+#    tools_migration.example:
+#        class: %tools_migration.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
