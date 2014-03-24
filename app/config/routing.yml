@@ -1,3 +1,7 @@
+tools_migration:
+    resource: "@ToolsMigrationBundle/Resources/config/routing.yml"
+    prefix:   /
+
 aml_admin:
     resource: "@AmlAdminBundle/Resources/config/routing.yml"
     prefix:   /

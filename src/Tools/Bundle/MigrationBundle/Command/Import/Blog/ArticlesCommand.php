@@ -5,23 +5,24 @@
  * @author Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace Aml\Bundle\BlogBundle\Command\Import;
+namespace Tools\Bundle\MigrationBundle\Command\Import\Blog;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+
+use Tools\Bundle\MigrationBundle\Command\Import\AbstractCommand;
 use Aml\Bundle\BlogBundle\Entity\Article;
 
 /**
- * Class ImportBlogCommand
- * @package Aml\Bundle\BlogBundle\Command\Import
+ * Class ArticlesCommand
+ * @package Tools\Bundle\MigrationBundle\Command\Import\Blog
  */
-class ImportBlogCommand extends ContainerAwareCommand
+class ArticlesCommand extends AbstractCommand
 {
     protected $name;
-    protected $dbh;
     protected $_oldArticles = array();
 
     /**
@@ -30,12 +31,12 @@ class ImportBlogCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('blog:import:articles')
-            ->setDescription('Import Blog contents from old website')
+            ->setName('migration:import:blog-articles')
+            ->setDescription('Import Blog articles from old website')
             ->setHelp(<<<EOF
-The <info>blog:import:articles</info> command imports blog contents from website aml87.fr and debug mode:
+The <info>migration:import:blog-articles</info> command imports blog contents from website aml87.fr and debug mode:
 
-<info>php app/console blog:import:articles --debug</info>
+<info>php app/console migration:import:blog-articles --debug</info>
 EOF
             );
     }
@@ -51,35 +52,16 @@ EOF
     }
 
     /**
-     * Connect to database
-     */
-    protected function _connectDb()
-    {
-        $dbInfo['database_target'] = $this->getContainer()->getParameter('database_host');
-        $dbInfo['database_name'] = $this->getContainer()->getParameter('drupal_database_name');
-        $dbInfo['username'] = $this->getContainer()->getParameter('database_user');
-        $dbInfo['password'] = $this->getContainer()->getParameter('database_password');
-
-        $dbConnString = "mysql:host=" . $dbInfo['database_target'] . "; dbname=" . $dbInfo['database_name'];
-        $this->dbh = new \PDO($dbConnString, $dbInfo['username'], $dbInfo['password']);
-        $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        $error = $this->dbh->errorInfo();
-        if ($error[0] != "") {
-            print "<p>DATABASE CONNECTION ERROR:</p>";
-            print_r($error);
-        }
-    }
-
-    /**
      * Load articles
      */
     protected function _loadBlogArticles()
     {
-        $this->_connectDb();
+        $this->output->writeln('<info>Load articles of blog</info>');
 
         $queryString = "SELECT n.nid AS nodeId, n.title as titre, n.status, n.created, n.changed, nr.body as body,
 		(SELECT td.name FROM term_node tn INNER JOIN term_data td ON tn.tid=td.tid WHERE tn.nid = nodeId AND td.vid=2) AS category,
-		(SELECT f.filename FROM files f WHERE f.fid=cta.field_blog_article_img_fid ) as filename
+		(SELECT f.filename FROM files f WHERE f.fid=cta.field_blog_article_img_fid ) as filename,
+		cta.field_video_value as videoId
 		FROM node n 
 		INNER JOIN node_revisions nr ON n.nid=nr.nid
 		INNER JOIN content_type_article cta ON n.nid=cta.nid
@@ -97,8 +79,7 @@ EOF
      */
     protected function _getArticleTags($idArticle)
     {
-        $this->_connectDb();
-
+        $this->output->writeln('<info>Get Tags of article:' . $idArticle . '</info>');
         $queryString = "SELECT td.name FROM term_node tn INNER JOIN term_data td ON tn.tid=td.tid WHERE tn.nid = $idArticle AND td.vid=3";
         $query = $this->dbh->query($queryString);
 
@@ -162,7 +143,20 @@ EOF
                     }
                 }
 
+                // Set Video
+                if (isset($article['videoId']) && !empty($article['videoId'])) {
+                    $entityBlogVideo= $em->getRepository('AmlMediasBundle:Video')->findOneBy(
+                        array('providerId' => utf8_encode($article['videoId']))
+                    );
+
+                    if ($entityBlogVideo) {
+                        $entityArticle->setVideo($entityBlogVideo);
+                    }
+                }
+
                 $em->persist($entityArticle);
+
+                $this->output->writeln('<info>-' . utf8_decode($entityArticle->getTitle()) . '</info>');
 
             }
 

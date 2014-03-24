@@ -10,6 +10,12 @@ use Aml\Bundle\MediasBundle\Form\Admin\ImageType;
 
 class ArticleAdmin extends Admin
 {
+    // setup the default sort column and order
+    protected $datagridValues = array(
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'id'
+    );
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
@@ -53,7 +59,11 @@ class ArticleAdmin extends Admin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-
+        $datagridMapper
+            ->add('title')
+            ->add('category')
+            ->add('public')
+        ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -62,6 +72,7 @@ class ArticleAdmin extends Admin
             ->addIdentifier('title')
             ->add('created')
             ->add('updated')
+            ->add('category')
             ->add('public');
     }
 

@@ -39,7 +39,7 @@ class EvenementRepository extends EntityRepository
 					'dateStart' => $dateTimeStart,
 					//'date_end' => $dateTimeEnd,
 				 ));
-		
+
 			
 	    return $q->getQuery()->getResult();
 	}
