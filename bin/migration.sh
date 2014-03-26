@@ -19,3 +19,5 @@ php app/console migration:import:links -vvv
 php app/console migration:import:discographie -vvv
 
 php app/console migration:import:evenements -vvv
+
+php app/console cache:clear
