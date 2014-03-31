@@ -24,5 +24,13 @@ class Dailymotion extends Video
         //$this->articles = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
+    public function getProvider()
+    {
+        return 'Dailymotion';
+    }
+
 
 }

@@ -1,83 +1,87 @@
 {# Template de la barre de navigation de l'espace admin #}
-<div class="navbar navbar-top navbar-inverse">
-    <div class="navbar-inner">
-        <div class="container-fluid">
+<nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation">
+    <div class="navbar-header">
+        {% if admin_pool is defined %}
 
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-
-            {% if admin_pool is defined %}
-                <div class="navbar-text pull-right">{% include admin_pool.getTemplate('user_block') %}</div>
-
-                {% block logo %}
-                    <a href="{{ url('sonata_admin_dashboard') }}" class="brand">
-                        <img src="{{ asset(admin_pool.titlelogo) }}"  alt="{{ admin_pool.title }}" />
-                        {{ admin_pool.title }}
-                    </a>
-                {% endblock %}
-
-            {% endif %}
-
-            {% block sonata_nav_menu %}
-                <div class="nav-collapse">
-                    <ul class="nav">
-                        {% block top_bar_before_nav %} {% endblock %}
-                        {% block sonata_top_bar_nav %}
-                            {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
-                                {% for group in admin_pool.dashboardgroups %}
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ group.label|trans({}, group.label_catalogue) }} <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            {% for admin in group.items %}
-                                                {% if admin.hasroute('list') and admin.isGranted('LIST') %}
-                                                    <li><a href="{{ admin.generateUrl('list')}}">{{ admin.label|trans({}, admin.translationdomain) }}</a></li>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% endfor %}
-                            {% endif %}
-                        {% endblock %}
-                        {% block top_bar_after_nav %} {% endblock %}
-                    </ul>
-                </div>
+            {% block logo %}
+                <a href="{{ url('sonata_admin_dashboard') }}" class="navbar-brand">
+                    <img src="{{ asset(admin_pool.titlelogo) }}"  alt="{{ admin_pool.title }}" />
+                    {{ admin_pool.title }}
+                </a>
             {% endblock %}
 
-            <!-- the new toggle buttons -->
-            <ul class="nav pull-right">
-                <li class="toggle-primary-sidebar hidden-desktop" data-toggle="collapse"
-                    data-target=".nav-collapse-primary">
-                    <button type="button" class="btn btn-navbar"><i class="icon-th-list"></i></button>
+        {% endif %}
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-primary">
+            <span class="sr-only">Toggle Side Navigation</span>
+            <i class="icon-th-list"></i>
+        </button>
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-top">
+            <span class="sr-only">Toggle Top Navigation</span>
+            <i class="icon-align-justify"></i>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-top">
+
+        <div class="navbar-right">
+
+            <ul class="nav navbar-nav navbar-left">
+
+                <li class="cdrop active">
+                    <a href="{{ path('home') }}" title="Go home"><i class="icon-home"></i> Home</a>
                 </li>
-                <li class="hidden-desktop" data-toggle="collapse" data-target=".nav-collapse-top">
-                    <button type="button" class="btn btn-navbar"><i class="icon-align-justify"></i></button>
+                <li class="cdrop{% if app.request.attributes.get('_route') == 'admin_bundle_users_user_list' %} active"{% endif %}">
+                    <a href="{{ path('admin_aml_users_user_list') }}" title="Gestion des membres"><i class="icon-user"></i> Membres</a>
                 </li>
+
             </ul>
 
-            <div class="nav-collapse nav-collapse-top collapse">
-                <ul class="nav full pull-right">
-                    {% if app.user %}
-                        {% set userName = app.user.username %}
+            {% block sonata_nav_menu %}
+                <ul class="nav navbar-nav navbar-left">
+                    {% block top_bar_before_nav %} {% endblock %}
+                    {% block sonata_top_bar_nav %}
+                        {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') and admin_pool.dashboardgroups %}
+                            {% for group in admin_pool.dashboardgroups %}
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ group.label|trans({}, group.label_catalogue) }} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        {% for admin in group.items %}
+                                            {% if admin.hasroute('list') and admin.isGranted('LIST') %}
+                                                <li><a href="{{ admin.generateUrl('list')}}">{{ admin.label|trans({}, admin.translationdomain) }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    {% endblock %}
+                    {% block top_bar_after_nav %} {% endblock %}
+                </ul>
+            {% endblock %}
 
-                        {% if app.user.firstname %}
-                            {% set userName = app.user.firstname %}
 
-                            {% if app.user.lastname %}
-                                {% set userName = userName ~ ' ' ~ app.user.lastname %}
-                            {% endif %}
 
+            <ul class="nav navbar-nav navbar-left">
+                {% if app.user %}
+                    {% set userName = app.user.username %}
+
+                    {% if app.user.firstname %}
+                        {% set userName = app.user.firstname %}
+
+                        {% if app.user.lastname %}
+                            {% set userName = userName ~ ' ' ~ app.user.lastname %}
                         {% endif %}
 
-                    <li class="dropdown user-avatar">
+                    {% endif %}
+
+                    <li class="dropdown">
 
                         <!-- the dropdown has a custom user-avatar class, this is the small avatar with the badge -->
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <a href="#" class="dropdown-toggle dropdown-avatar" data-toggle="dropdown">
                           <span>
-                            <!-- <img class="menu-avatar" src="../../images/avatars/avatar1.jpg"/> -->
+                            <img class="menu-avatar" src="{{ asset('bundles/amladmin/images/avatars/avatar1.jpg') }}"/>
 
                             <span>{{ userName }} <i class="icon-caret-down"></i></span>
                             <!-- <span class="badge badge-dark-red">5</span> -->
@@ -90,7 +94,7 @@
 
                             <li class="with-image">
                                 <div class="avatar">
-                                    <img src="../../images/avatars/avatar1.jpg"/>
+                                    <img src="{{ asset('bundles/amladmin/images/avatars/avatar1.jpg') }}"/>
                                 </div>
                                 <span>{{ userName }}</span>
                             </li>
@@ -101,21 +105,11 @@
                             <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i> <span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span></a></li>
                         </ul>
                     </li>
-                    {% endif %}
-                </ul>
+                {% endif %}
+            </ul>
 
-                <ul class="nav pull-right">
-
-                    <li class="active"><a href="{{ path('home') }}" title="Go home"><i class="icon-home"></i> Home</a>
-                    </li>
-                    <li{% if app.request.attributes.get('_route') == 'admin_bundle_users_user_list' %} class="active"{% endif %}>
-                        <a href="{{ path('admin_aml_users_user_list') }}" title="Gestion des membres"><i class="icon-user"></i> Membres</a>
-                    </li>
-
-                </ul>
-            </div>
             <!--/.nav-collapse -->
 
         </div>
     </div>
-</div>
+</nav>

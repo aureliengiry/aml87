@@ -30,6 +30,11 @@ sonata_admin:
         show:    SonataAdminBundle:CRUD:show.html.twig
         edit:    SonataAdminBundle:CRUD:edit.html.twig
 
+        # Block
+        list_block: AmlAdminBundle:Block:block_admin_list.html.twig
+
+        dashboard:  AmlAdminBundle:Core:dashboard.html.twig
+
     dashboard:
         blocks:
             # display a dashboard block

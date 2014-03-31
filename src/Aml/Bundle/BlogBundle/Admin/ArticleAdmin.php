@@ -27,6 +27,7 @@ class ArticleAdmin extends Admin
                     'class' => 'AmlBlogBundle:Category',
                     'property' => 'name',
                     'empty_value' => 'Choisissez une catégorie',
+                    'attr' => array('class'=>'uniform')
                 ))
                 ->add('logo','sonata_type_admin',array(
                     'delete' => false,

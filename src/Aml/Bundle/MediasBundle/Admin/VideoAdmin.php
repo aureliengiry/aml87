@@ -29,7 +29,8 @@ class VideoAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')    
+            ->addIdentifier('title')
+            ->add('provider')
         ;
     }
 

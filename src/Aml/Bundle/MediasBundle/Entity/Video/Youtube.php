@@ -24,5 +24,13 @@ class Youtube extends Video
         //$this->articles = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
 
 }
