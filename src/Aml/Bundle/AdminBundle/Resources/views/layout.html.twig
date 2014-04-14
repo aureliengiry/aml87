@@ -86,22 +86,21 @@
 
         {# Main content #}
         <div class="container-fluid padded">
-            <!-- CONTENT HERE -->
-            {% if app.session.hasFlash('success') %}
-                <div class="alert alert-success">
-                    {{ app.session.flash('success') }}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success flash-notice">
+                    {{ flashMessage }}
                 </div>
-            {% endif %}
-            {% if app.session.hasFlash('notice') %}
-                <div class="alert alert-error">
-                    {{ app.session.flash('notice') }}
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-error flash-notice">
+                    {{ flashMessage }}
                 </div>
-            {% endif %}
-            {% if app.session.hasFlash('info') %}
-                <div class="alert alert-info">
-                    {{ app.session.flash('info') }}
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('info') %}
+                <div class="alert alert-info flash-notice">
+                    {{ flashMessage }}
                 </div>
-            {% endif %}
+            {% endfor %}
 
             {% block body %}{% endblock %}
 

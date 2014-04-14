@@ -1,0 +1,32 @@
+{% extends "AmlWebBundle::layout.html.twig" %}
+
+{% block body %}
+    <div id="col-left" class="two-cols-content">
+
+        <h2>Contactez-nous</h2>
+
+        <p>Nous sommes toujours à la recherche de nouveaux talents, alors n'hésitez pas à nous contacter
+            pour vous joindre à nous ou encore à nous contacter pour organiser des concerts.</p>
+
+        {# Map #}
+        {% include "AmlContactUsBundle::Default/index/google-map.html.twig" %}
+
+        <div id="bloc-coordonnees">
+            <h3>Téléphone</h3>
+            <p>Eric CHAUPITRE<br />au 05.87.75.70.31 ou au 06.14.95.77.80</p>
+
+            <h3>Adresse</h3>
+            <p><strong>Avenir Musical du Limousin</strong><br />16 avenue de la République<br />87170 ISLE</p>
+        </div>
+
+        {# Contact Form #}
+        {% include "AmlContactUsBundle::Default/index/contact-form.html.twig" %}
+
+    </div>
+
+    <div id="col-right">
+
+    </div>
+{%- endblock body %}
+
+

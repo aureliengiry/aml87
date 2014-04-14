@@ -1,0 +1,25 @@
+{# Bloc Google Map #}
+<div id="map"></div>
+
+<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAA7ctIOuf_bRTX5e3s5FML3RTv6REnaDP1HZPJSiWfzG2-frHLHhQHdgyHYK1JRedmw0YKruhurYocog"></script>
+<script type="text/javascript">
+    google.load("maps", "2");
+
+    jQuery(function() {
+        if (GBrowserIsCompatible()) {
+            var map = new GMap2(document.getElementById('map'));
+            var marker = new GMarker(new GLatLng(45.809344,1.226691));
+            var html = '<div style="width:170px; height:30px; padding-right:10px;">'+
+                    '<strong>Avenir Musical du Limousin</strong><br />'+
+                    '16, avenue de la République<br />'+
+                    '87170 ISLE'+
+                    '</div>';
+
+            map.setCenter(new GLatLng(45.809344,1.226691), 13);
+            map.addControl(new GSmallMapControl());
+            map.addOverlay(marker);
+            marker.openInfoWindowHtml(html);
+        }
+    });
+
+</script>
