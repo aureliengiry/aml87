@@ -21,11 +21,36 @@ file that was distributed with this source code.
 
 {% block list_table %}
     {% set batchactions = admin.batchactions %}
+    <div class="box">
+        <div class="box-header">
+            <span class="title">Data Tables</span>
+
+            {% if admin.hasRoute('export') and admin.isGranted("EXPORT") and admin.getExportFormats()|length %}
+                <ul class="box-toolbar">
+                    <li class="toolbar-link">
+                        <a href="#" data-toggle="dropdown"><i class="icon-cog"></i></a>
+                        <ul class="dropdown-menu">
+                        {% for format in admin.getExportFormats() %}
+                            <li>
+                                <a href="{{ admin.generateUrl('export', admin.modelmanager.paginationparameters(admin.datagrid, 0) + {'format' : format}) }}">
+                                    <i class="icon-file"></i>
+                                    {{ "label_export_download"|trans({}, "SonataAdminBundle") }} {{ format }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            {% endif %}
+
+        </div>
+        <div class="box-contents">
     {% if admin.datagrid.results|length > 0 %}
+
         {% if admin.hasRoute('batch') %}
         <form action="{{ admin.generateUrl('batch', {'filter': admin.filterParameters}) }}" method="POST" >
         {% endif %}
-            <table class="table table-bordered table-striped">
+            <table class="dTable responsive">
                 {% block table_header %}
                     <thead>
                         <tr class="sonata-ba-list-field-header">
@@ -108,32 +133,6 @@ file that was distributed with this source code.
                                         <input type="submit" class="btn btn-small btn-primary" value="{{ 'btn_batch'|trans({}, 'SonataAdminBundle') }}"/>
                                     {% endif %}
 
-                                    <div class="pull-right">
-                                        {% if admin.hasRoute('export') and admin.isGranted("EXPORT") and admin.getExportFormats()|length %}
-                                            {{ "label_export_download"|trans({}, "SonataAdminBundle") }}
-                                            {% for format in admin.getExportFormats() %}
-                                                <a href="{{ admin.generateUrl('export', admin.modelmanager.paginationparameters(admin.datagrid, 0) + {'format' : format}) }}">{{ format }}</a>{% if not loop.last %},{% endif %}
-                                            {% endfor %}
-
-                                            &nbsp;-&nbsp;
-                                        {% endif %}
-
-                                        {{ admin.datagrid.pager.page }} / {{ admin.datagrid.pager.lastpage }}
-
-                                        &nbsp;-&nbsp;
-
-                                        {% transchoice admin.datagrid.pager.nbresults with {'%count%': admin.datagrid.pager.nbresults} from 'SonataAdminBundle' %}list_results_count{% endtranschoice %}
-
-                                        &nbsp;-&nbsp;
-                                        <label class="control-label" for="{{ admin.uniqid }}_per_page">{% trans from 'SonataAdminBundle' %}label_per_page{% endtrans %}</label>
-                                        <select class="per-page small" id="{{ admin.uniqid }}_per_page" style="width: auto; height: auto">
-                                            {% for per_page in admin.getperpageoptions %}
-                                                <option {% if per_page == admin.datagrid.pager.maxperpage %}selected="selected"{% endif %} value="{{ admin.generateUrl('list', {'filter': admin.datagrid.values | merge({'_per_page': per_page})}) }}">
-                                                    {{ per_page }}
-                                                </option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
                                 {% endif %}
                             </div>
                         </th>
@@ -182,35 +181,47 @@ file that was distributed with this source code.
             {{ 'no_result'|trans({}, 'SonataAdminBundle') }}
         </p>
     {% endif %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block list_filters %}
     {% if admin.datagrid.filters %}
-        <form class="sonata-filter-form {{ admin.isChild and 1 == admin.datagrid.filters|length ? 'hide' : '' }}" action="{{ admin.generateUrl('list') }}" method="GET">
-            <fieldset class="filter_legend">
-                <legend class="filter_legend {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">{{ 'label_filters'|trans({}, 'SonataAdminBundle') }}</legend>
+    <div class="box">
+        <div class="box-header">
+            <span class="title {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">{{ 'label_filters'|trans({}, 'SonataAdminBundle') }}</span>
+        </div>
+        <div class="box-content">
+            <form class="sonata-filter-form fill-up {{ admin.isChild and 1 == admin.datagrid.filters|length ? 'hide' : '' }}" action="{{ admin.generateUrl('list') }}" method="GET">
 
-                <div class="filter_container {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">
-                    <div>
-                        {% for filter in admin.datagrid.filters %}
-                            <div class="clearfix">
-                                <label for="{{ form.children[filter.formName].children['value'].vars.id }}">{{ admin.trans(filter.label) }}</label>
-                                {{ form_widget(form.children[filter.formName].children['type'], {'attr': {'class': 'span8 sonata-filter-option'}}) }}
-                                {{ form_widget(form.children[filter.formName].children['value'], {'attr': {'class': 'span8'}}) }}
-                            </div>
-                        {% endfor %}
+
+                    <div class="filter_container row {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">
+
+                        <div class="col-lg-6">
+                            <ul class="padded separate-sections">
+                            {% for filter in admin.datagrid.filters %}
+                                <li class="clearfix">
+                                    <label for="{{ form.children[filter.formName].children['value'].vars.id }}">{{ admin.trans(filter.label) }}</label>
+                                    {{ form_widget(form.children[filter.formName].children['type'], {'attr': {'class': 'span8 sonata-filter-option'}}) }}
+                                    {{ form_widget(form.children[filter.formName].children['value'], {'attr': {'class': 'span8'}}) }}
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+
+                        <input type="hidden" name="filter[_page]" id="filter__page" value="1" />
+
+                        {% set foo = form.children['_page'].setRendered() %}
+                        {{ form_rest(form) }}
+
                     </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">{{ 'btn_filter'|trans({}, 'SonataAdminBundle') }}"</button>
 
-                    <input type="hidden" name="filter[_page]" id="filter__page" value="1" />
-
-                    {% set foo = form.children['_page'].setRendered() %}
-                    {{ form_rest(form) }}
-
-                    <input type="submit" class="btn btn-primary" value="{{ 'btn_filter'|trans({}, 'SonataAdminBundle') }}" />
-
-                    <a class="btn" href="{{ admin.generateUrl('list', {filters: 'reset'}) }}">{{ 'link_reset_filter'|trans({}, 'SonataAdminBundle') }}</a>
-                </div>
-            </fieldset>
-        </form>
+                        <a class="btn btn-default" href="{{ admin.generateUrl('list', {filters: 'reset'}) }}">{{ 'link_reset_filter'|trans({}, 'SonataAdminBundle') }}</a>
+                    </div>
+            </form>
+        </div>
+     </div>
     {% endif %}
 {% endblock %}

@@ -28,14 +28,13 @@ file that was distributed with this source code.
             <!-- jQuery code -->
             <link rel="stylesheet" href="{{ asset('bundles/sonatajquery/themes/flick/jquery-ui-1.8.16.custom.css') }}" type="text/css" media="all" />
 
-            <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/bootstrap/css/bootstrap.min.css') }}" type="text/css" media="all"  />
-            <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/bootstrap/css/bootstrap-responsive.min.css') }}" type="text/css" media="all" />
-
             <!-- base application asset -->
             <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/css/layout.css') }}" type="text/css" media="all" />
             <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/css/colors.css') }}" type="text/css" media="all" />
 
-            <link href="{{ asset('bundles/amlweb/css/admin/application.css') }}" media="screen" rel="stylesheet" type="text/css"/>
+
+            <link href="{{ asset('bundles/amladmin/stylesheets/application.css') }}" media="screen" rel="stylesheet" type="text/css" />
+           <!-- <link href="{{ asset('bundles/amlweb/css/admin/application.css') }}" media="screen" rel="stylesheet" type="text/css"/> -->
         {% endblock %}
 
         {% block javascripts %}
@@ -43,10 +42,10 @@ file that was distributed with this source code.
             <script src="{{ asset('bundles/sonatajquery/jquery-ui-1.8.23.js') }}" type="text/javascript"></script>
             <script src="{{ asset('bundles/sonatajquery/jquery-ui-i18n.js') }}" type="text/javascript"></script>
 
-            <script src="{{ asset('bundles/sonataadmin/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
-
             <script src="{{ asset('bundles/sonataadmin/jquery/jquery.form.js') }}" type="text/javascript"></script>
             <script src="{{ asset('bundles/sonataadmin/base.js') }}" type="text/javascript"></script>
+
+            <script src="{{ asset('bundles/amladmin/javascripts/application.js') }}" type="text/javascript"></script>
         {% endblock %}
 
         <title>
@@ -83,8 +82,8 @@ file that was distributed with this source code.
         <div class="main-content">
 
             {# Page title #}
-            <div class="container-fluid">
-                <div class="row-fluid">
+            <div class="container">
+                <div class="row">
                     <div class="area-top clearfix">
                         <div class="pull-left header">
                             <h3 class="title">
@@ -111,8 +110,8 @@ file that was distributed with this source code.
             </div>
 
             {# Breadcrumb line #}
-            <div class="container-fluid padded">
-                <div class="row-fluid">
+            <div class="container padded">
+                <div class="row">
                     {% if _breadcrumb is not empty or action is defined %}
                     <div id="breadcrumbs">
                         {% if _breadcrumb is empty %}
@@ -158,7 +157,7 @@ file that was distributed with this source code.
             </div>
 
             {# Main content #}
-            <div class="container-fluid padded">
+            <div class="container padded">
 
                 {# Alert Message #}
                 {% block notice %}
@@ -172,7 +171,7 @@ file that was distributed with this source code.
                     {% endfor %}
                 {% endblock %}
 
-                <div class="row-fluid">
+                <div class="row">
                     {% if _side_menu is not empty %}
                         <div class="sidebar span2">
                             <div class="well sonata-ba-side-menu" style="padding: 8px 0;">{{ _side_menu|raw }}</div>
@@ -203,12 +202,14 @@ file that was distributed with this source code.
                             {% endif %}
 
                             {% if _list_table is not empty or _list_filters is not empty %}
-                                <div class="row-fluid">
-                                    <div class="sonata-ba-list span10">
-                                        {{ _list_table|raw }}
-                                    </div>
-                                    <div class="sonata-ba-filter span2">
+                                <div class="row">
+                                    <div class="sonata-ba-filter col-md-6">
                                         {{ _list_filters|raw }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="sonata-ba-list col-md-12">
+                                        {{ _list_table|raw }}
                                     </div>
                                 </div>
                             {% endif %}
@@ -217,16 +218,10 @@ file that was distributed with this source code.
                     </div>
                 </div>
             </div>
-            {% block footer %}
-                <div class="row-fluid">
-                    <div class="span2 offset10 pull-right">
-                        <span class="label"><a href="http://sonata-project.org" rel="noreferrer" style="text-decoration: none; color: black">Sonata Project</a></span>
-                    </div>
-                </div>
-            {% endblock %}
+
         </div>
 
-        <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap.js') }}"></script>
+
         <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-datepicker.js') }}"></script>
         <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-timepicker.js') }}"></script>
     </body>
