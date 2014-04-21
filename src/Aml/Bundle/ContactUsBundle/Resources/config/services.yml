@@ -1,0 +1,7 @@
+parameters:
+#    aml_contact_us.example.class: Aml\Bundle\ContactUsBundle\Example
+
+services:
+#    aml_contact_us.example:
+#        class: %aml_contact_us.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

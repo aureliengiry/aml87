@@ -35,6 +35,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Aml\Bundle\AdminBundle\AmlAdminBundle(),
             new Tools\Bundle\MigrationBundle\ToolsMigrationBundle(),
+            new Aml\Bundle\ContactUsBundle\AmlContactUsBundle(),
         );
 
 
