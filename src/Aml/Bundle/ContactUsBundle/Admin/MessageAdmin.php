@@ -22,8 +22,7 @@ class MessageAdmin extends Admin
             ->add('created')
             ->add('email')
             ->add('addressIp')
-            ->add('status')
-        ;
+            ->add('status','string');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -31,7 +30,7 @@ class MessageAdmin extends Admin
         $datagridMapper
             ->add('email')
             ->add('addressIp')
-            ->add('status')
+           // ->add('status')
         ;
     }
 

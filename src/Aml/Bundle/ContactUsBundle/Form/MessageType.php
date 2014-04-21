@@ -20,9 +20,7 @@ class MessageType extends AbstractType
                 'label' => 'Texte',
                 'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
                 'required' => false,
-            ))
-        ;
-
+            ));
 
 
     }

@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Message
 {
+    const MESSAGE_STATUS_SAVE = 1;
+    const MESSAGE_STATUS_SAVE_SEND = 2;
     /**
      * @var integer
      *
@@ -74,7 +76,7 @@ class Message
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -90,14 +92,14 @@ class Message
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -113,14 +115,14 @@ class Message
     public function setEmail($email)
     {
         $this->email = $email;
-    
+
         return $this;
     }
 
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -136,14 +138,14 @@ class Message
     public function setSubject($subject)
     {
         $this->subject = $subject;
-    
+
         return $this;
     }
 
     /**
      * Get subject
      *
-     * @return string 
+     * @return string
      */
     public function getSubject()
     {
@@ -159,14 +161,14 @@ class Message
     public function setBody($body)
     {
         $this->body = $body;
-    
+
         return $this;
     }
 
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -182,14 +184,14 @@ class Message
     public function setAddressIp($addressIp)
     {
         $this->addressIp = $addressIp;
-    
+
         return $this;
     }
 
     /**
      * Get addressIp
      *
-     * @return string 
+     * @return string
      */
     public function getAddressIp()
     {
@@ -205,18 +207,22 @@ class Message
     public function setStatus($status)
     {
         $this->status = $status;
-    
+
         return $this;
     }
 
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
-        return $this->status;
+        $statusOptions = array(
+          self::MESSAGE_STATUS_SAVE => 'Enregistré',
+          self::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé'
+        );
+        return $statusOptions[$this->status];
     }
 
     /**
