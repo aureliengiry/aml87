@@ -1,7 +1,11 @@
 parameters:
-#    aml_contact_us.example.class: Aml\Bundle\ContactUsBundle\Example
+    aml_contact_us.subriber: "%admin_email%"
 
 services:
-#    aml_contact_us.example:
-#        class: %aml_contact_us.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    aml_contactus.message.post:
+            class: Aml\Bundle\ContactUsBundle\EventListener\PostListener
+            arguments:
+                mailer: "@mailer"
+                container: "@service_container"
+            tags:
+                - { name: kernel.event_listener, event: aml_contactus.message.post_sent, method: onPostEvent }

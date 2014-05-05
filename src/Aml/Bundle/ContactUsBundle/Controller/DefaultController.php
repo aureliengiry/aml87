@@ -10,9 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 use Aml\Bundle\ContactUsBundle\Entity\Message;
 use Aml\Bundle\ContactUsBundle\Form\MessageType;
+use Aml\Bundle\ContactUsBundle\Event\PostEvent;
 
 /**
  * Contact Us controller.
@@ -43,6 +43,9 @@ class DefaultController extends Controller
      */
     public function postAction()
     {
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+
         $entity = new Message();
         $request = $this->getRequest();
         $form = $this->createForm(new MessageType(), $entity);
@@ -53,13 +56,15 @@ class DefaultController extends Controller
             $entity
                 ->setAddressIp($request->getClientIp())
                 ->setCreated(new \DateTime())
-                ->setStatus(1)
-            ;
+                ->setStatus(Message::MESSAGE_STATUS_SAVE);
 
             $em->persist($entity);
             $em->flush();
 
-            $this->get('session')->setFlash('success', 'E-mail envoyé avec succès');
+            $dispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($entity));
+
+            $this->get('session')->getFlashBag()->add('success', 'E-mail envoyé avec succès');
+
             return $this->redirect($this->generateUrl('aml_contact_us_index'));
 
         }
