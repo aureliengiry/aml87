@@ -7,13 +7,13 @@
 	</div>
 	<div class="disc-description-list">
 		<h3>
-			<a href="{{ path('discographie_album', { 'id': lastAlbum.id }) }}" title="Voir l'article : {{ lastAlbum.title }}" >{{ lastAlbum.title }}</a>
+			<a href="{{ path('aml_discography_album', { 'id': lastAlbum.id }) }}" title="Voir l'article : {{ lastAlbum.title }}" >{{ lastAlbum.title }}</a>
 		</h3>
 		<span class="disc-date-sortie">Date de sortie : {{ lastAlbum.date|date('d-m-Y') }}</span>	
 		
 		<p>{{ lastAlbum.description|raw }}</p>				
 		
-		<a href="{{ path('discographie_album', { 'id': lastAlbum.id }) }}" title="Voir l'album : {{ lastAlbum.title }}" >lire la suite</a>
+		<a href="{{ path('aml_discography_album', { 'id': lastAlbum.id }) }}" title="Voir l'album : {{ lastAlbum.title }}" >lire la suite</a>
 		
 			
 	</div>	

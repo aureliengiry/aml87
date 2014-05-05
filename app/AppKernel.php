@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Aml\Bundle\AdminBundle\AmlAdminBundle(),
             new Tools\Bundle\MigrationBundle\ToolsMigrationBundle(),
             new Aml\Bundle\ContactUsBundle\AmlContactUsBundle(),
+            new Aml\Bundle\DiscographyBundle\AmlDiscographyBundle(),
         );
 
 

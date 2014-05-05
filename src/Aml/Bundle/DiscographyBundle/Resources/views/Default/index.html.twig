@@ -1,0 +1,48 @@
+{% extends "AmlWebBundle::layout.html.twig" %}
+
+{% block title -%}
+    Discrographie
+{%- endblock title %}
+
+{% block body %}
+<div id="col-left" class="two-cols-content">
+
+	<div class="contenu-page">
+	
+		
+		{% if entities is not empty %}
+			{% for entity in entities %}
+			    	
+			<div class="disc-item{% if loop.last %} last{% endif %}">
+				<div class="disc-pochette-list">
+                    {% if entity.image.webpath is defined %}
+                        <img src="{{ asset(entity.image.webpath) }}" alt="" title="{{ entity.image.title }}" class="imagecache imagecache-pochette-album" width="500" height="300">
+                    {% endif %}
+				</div>
+				<div class="disc-description-list">
+					<h3>
+						<a href="{{ path('aml_discography_album', { 'id': entity.id }) }}" title="Voir l'article : {{ entity.title }}" >{{ entity.title }}</a>
+					</h3>
+					<span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>	
+					
+					<p>{{ entity.description|raw }}</p>				
+					
+					<a href="{{ path('aml_discography_album', { 'id': entity.id }) }}" title="Voir l'album : {{ entity.title }}" >lire la suite</a>
+					
+						
+				</div>	
+			</div>		
+			        
+			{% endfor %} 	
+		
+		{% else %}	
+			<h1>Discographie</h1>
+			<p>Aucun article de blog publié.</p>
+		{% endif %}
+	</div>
+</div>
+
+<div id="col-right">
+
+</div>
+{% endblock body %}

@@ -1,0 +1,40 @@
+{% extends "AmlWebBundle::layout.html.twig" %}
+
+{% block title -%}
+    Discrographie - {{ entity.title }}
+{%- endblock title %}
+
+{% block body %}
+<div id="col-left" class="two-cols-content">
+
+	<div class="contenu-page">
+	
+		<div class="discographie-bloc-titre">
+			<h2 class="discographie">{{ entity.title }}</h2>
+			<span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>
+		</div>
+		
+		<div class="disc-presentation">
+			<div class="disc-pochette-list">
+                <img src="{{ asset(entity.image.webpath) }}" alt="" title="{{ entity.image.title }}" class="imagecache imagecache-pochette-album" width="500" height="300">
+			</div>
+			<div class="disc-description-list">
+				{{ entity.description|raw }}				
+			</div>
+		</div>
+
+        {% if entity.tracks is not empty %}
+		<div class="disc-list-tracks">
+			<h3>Composition du disque</h3>
+			{{ entity.tracks|raw }}
+		</div>
+        {% endif %}
+		
+		
+	</div>
+</div>
+
+<div id="col-right">
+
+</div>
+{% endblock body %}
