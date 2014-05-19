@@ -171,15 +171,15 @@ a.black{ background : url("../images/boutons/btn_view_more_black.png") no-repeat
 	/*height: 171px;*/
 	width:566px;
 	float:right;
-	margin-top:3%;	
+	margin-top:4%;
 	text-align:justify;
 }
 /*  ---  menu ---  */
 #menu {
 	float:right;
 	font-size:18px;
-	height:99px;
-	margin-top:50px;
+	height:80px;
+	margin-top:65px;
 	width:620px;	
 }
 #menu ul{
