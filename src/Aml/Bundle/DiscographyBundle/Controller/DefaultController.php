@@ -1,45 +1,41 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Controller;
+namespace Aml\Bundle\DiscographyBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Aml\Bundle\BlogBundle\Entity\Blog;
 
 /**
- * Blog controller.
- *
- * @Route("/discographie")
+ * Class DefaultController
+ * @package Aml\Bundle\DiscographyBundle\Controller
  */
-class DiscographieController extends Controller
+class DefaultController extends Controller
 {
     /**
-     * Lists all Blog entities.
+     * Lists all Album entities.
      *
      * @Route("/", name="discographie")
      * @Template()
      */
     public function indexAction()
     {
-        
-       	$em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-       	//$entities = $em->getRepository('AmlWebBundle:Album')->findAll();
-       
-       	$repo = $this->getDoctrine()->getRepository('AmlWebBundle:Album');
-		$entities = $repo->findBy(
-		    array('public' => "1"),
-		    array('date' => 'DESC')
-		    
-		);
+        $repo = $this->getDoctrine()->getRepository('AmlDiscographyBundle:Album');
+        $entities = $repo->findBy(
+            array('public' => "1"),
+            array('date' => 'DESC')
+
+        );
 
         return array('entities' => $entities);
     }
-    
-     
-	/**
+
+
+    /**
      * Finds and displays a Album entity.
      *
      * @Route("/{id}", name="discographie_album")
@@ -49,18 +45,16 @@ class DiscographieController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlWebBundle:Album')->find($id);
+        $entity = $em->getRepository('AmlDiscographyBundle:Album')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Album entity.');
         }
 
-       
-
         return array(
             'entity'      => $entity
-         );
+        );
     }
-    
-    
+
+
 }

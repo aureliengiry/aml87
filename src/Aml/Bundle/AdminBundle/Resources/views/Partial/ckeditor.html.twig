@@ -4,7 +4,7 @@
 	{
 		toolbar :
 		[
-			{ name: 'clipboard',   items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+			{ name: 'clipboard',   items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo','sourcedialog' ] },
 			{ name: 'editing',     items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
 			{ name: 'insert',      items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' ] },
 			'/',
@@ -12,6 +12,8 @@
 			{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','-','RemoveFormat' ] },
 			{ name: 'paragraph',   items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
 			{ name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
+
+            {name: "mode", items : ["Source"]}
 		],
 		filebrowserBrowseUrl : 'upload/liste',
 		filebrowserUploadUrl : 'uploader/upload.php?type=Files'

@@ -1,14 +1,14 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Entity;
+namespace Aml\Bundle\DiscographyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Aml\Bundle\WebBundle\Entity\Album
+ * Aml\Bundle\DiscographyBundle\Entity\Album
  *
- * @ORM\Table(name="webbundle_albums")
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\AlbumRepository")
+ * @ORM\Table(name="discography_albums")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\DiscographyBundle\Entity\Repository\AlbumRepository")
  */
 class Album
 {
@@ -61,6 +61,13 @@ class Album
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $image;
+
+    /**
+     * @var text $tracks
+     *
+     * @ORM\Column(name="tracks", type="text")
+     */
+    private $tracks;
 
     /**
      * Get id
@@ -199,4 +206,22 @@ class Album
     {
         return $this->image;
     }
+
+    /**
+     * @param \Aml\Bundle\DiscographyBundle\Entity\text $tracks
+     */
+    public function setTracks($tracks)
+    {
+        $this->tracks = $tracks;
+    }
+
+    /**
+     * @return \Aml\Bundle\DiscographyBundle\Entity\text
+     */
+    public function getTracks()
+    {
+        return $this->tracks;
+    }
+
+
 }

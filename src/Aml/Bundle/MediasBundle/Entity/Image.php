@@ -19,7 +19,7 @@ class Image extends Media
 {
 
     /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Album", mappedBy="image")
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\DiscographyBundle\Entity\Album", mappedBy="image")
      */
     protected $album;
 

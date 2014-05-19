@@ -555,6 +555,13 @@ span.disc-date-sortie{ font-size:11px; }
 	width:100%;
 }
 
+
+tr.even, tr.odd {
+    background-color: #EEEEEE;
+    border-bottom: 1px solid #CCCCCC;
+    padding: 0.1em 0.6em;
+}
+
 /* ------------------- Fin Discographie ------------------- */
 
 /* ------------------- Galerie photo ------------------- */

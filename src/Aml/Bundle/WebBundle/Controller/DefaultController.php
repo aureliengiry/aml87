@@ -23,7 +23,7 @@ class DefaultController extends Controller
 		 
 		
 		// Dernier Album
-		$repo = $this->getDoctrine()->getRepository('AmlWebBundle:Album');
+		$repo = $this->getDoctrine()->getRepository('AmlDiscographyBundle:Album');
 		$albumEntity = $repo->findOneBy(
 		    array('public' => "1"),
 		    array('date' => 'DESC')
