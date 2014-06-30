@@ -25,19 +25,24 @@ class WordWarpExtension extends Twig_Extension
 	 * 
 	 * @return string date plus nice à lire
 	 */
-	function wordWarpFilter($str, $length = 200, $id = null, $wordwarp = true)
+	function wordWarpFilter($str, $length = 500, $id = null, $wordwarp = true)
 	{
-		$str = $this->stripHtmlTags($str);
+        // Delete HTML tags
+        $str = $this->stripHtmlTags($str);
+
+        // Delete \n \r \t
+        $str = str_replace(array("\r\n", "\n", "\r","\t"),'',$str);
+
 		if(strlen($str) > $length)
 		{
 			if($wordwarp) $length = $this->findSpace($str, $length);
-			if(is_null($id)) $id = '';
-			else $id = ' id="wordWarp-'.$id.'"';
-			$text = '<div class="expand"'.$id.'>'.mb_substr($str, 0, $length).' <div class="emphasis">[...]</div> <div class="read-more">';
-			$text .= mb_substr($str, $length, strlen($str)).'</div></div>';
+			$text = '<div class="expand">'. mb_substr($str, 0, $length) . ' ...</div>';
+
 			return $text;
 		}
-		return $str;
+        else{
+		    return $str;
+        }
 	}
 
 	/**

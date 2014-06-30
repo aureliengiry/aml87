@@ -35,13 +35,16 @@
     {% endif %}
 
     <p class="container-wysiwyg">
-        {{ entity.body|raw }}
+        {{ entity.body|raw|wordWarp }}
+        <a href="{{ path('blog_show', { 'id': entity.id }) }}" title="Lire l'article : {{ entity.title }}" >Lire la suite</a>
     </p>
 
-    <span class="blog-tags">Mots clés : </span>
-    {% for key,tag in entity.tags %}
-        {% if key > 0 %}, {% endif %}<a class="active" title="{{ tag.description }}"
-                                        href="{{ path('blog',{'tag' : tag.systemName}) }}">{{ tag.name }}</a>
-    {% endfor %}
+    {% if entity.tags is not empty %}
+        <span class="blog-tags">Mots clés : </span>
+        {% for key,tag in entity.tags %}
+            {% if key > 0 %}, {% endif %}<a class="active" title="{{ tag.description }}"
+                                            href="{{ path('blog',{'tag' : tag.systemName}) }}">{{ tag.name }}</a>
+        {% endfor %}
+    {% endif %}
 
 </div>

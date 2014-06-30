@@ -537,7 +537,7 @@ span.disc-date-sortie{ font-size:11px; }
 
 #discographie-last-album-block{
 	float:left;
-	margin:0 0 15px 0;
+	margin: 15px 0 0 0;
 	padding:0 0 15px 0;
 	width:100%;
 }

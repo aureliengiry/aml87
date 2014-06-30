@@ -8,7 +8,6 @@
 <div id="col-left" class="two-cols-content">
 
 	<div class="contenu-page">
-	
 		
 		{% if entities is not empty %}
 			{% for entity in entities %}
@@ -25,10 +24,9 @@
 					</h3>
 					<span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>	
 					
-					<p>{{ entity.description|raw }}</p>				
+					<p>{{ entity.description|raw|wordWarp }}</p>
 					
-					<a href="{{ path('discographie_album', { 'id': entity.id }) }}" title="Voir l'album : {{ entity.title }}" >lire la suite</a>
-					
+					<a href="{{ path('discographie_album', { 'id': entity.id }) }}" title="Voir l'album : {{ entity.title }}" >Lire la suite</a>
 						
 				</div>	
 			</div>		
