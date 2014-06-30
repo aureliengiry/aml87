@@ -33,7 +33,7 @@
 
             <div class="article-description">{{ entity.body|raw }}</div>
 
-            {% if entity.tags %}
+            {% if entity.tags is not empty %}
                 <span class="blog-tags">Mots clés : </span>
                 {% for key,tag in entity.tags %}
                     {% if key > 0 %}, {% endif %}<a class="active" title="{{ tag.description }}"
@@ -46,6 +46,14 @@
 
     </div>
     <div id="col-right">
+        {# Liste des catégories #}
+        <div class="side-bloc no-border">
+            {% include "AmlBlogBundle::Blog/blocCategories.html.twig" %}
+        </div>
 
+        {# Liste des tags #}
+        <div class="side-bloc">
+            {% include "AmlBlogBundle::Blog/blocTags.html.twig" %}
+        </div>
     </div>
 {% endblock body %}

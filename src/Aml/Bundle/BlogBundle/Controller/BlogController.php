@@ -101,8 +101,18 @@ class BlogController extends Controller
             throw $this->createNotFoundException('Unable to find AmlBlogBundle:Blog entity.');
         }
 
+        // Get Liste catégories
+        // @TODO : charger que les catégories avec les articles liés
+        $categories = $em->getRepository('AmlBlogBundle:Category')->findAll();
+
+        // Get Liste tags
+        $tags = $em->getRepository('AmlBlogBundle:Tags')->findAll();
+
         return array(
-            'entity' => $entity);
+            'entity' => $entity,
+            'categories' => $categories,
+            'tags' => $tags
+        );
     }
 
 
