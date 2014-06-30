@@ -434,6 +434,10 @@ a.black{ background : url("../images/boutons/btn_view_more_black.png") no-repeat
 	text-align:justify;
 }
 
+.blog-article.last{
+    border-bottom: none;
+}
+
 .publi-info {
     color: #999999;
     font-style: italic;
