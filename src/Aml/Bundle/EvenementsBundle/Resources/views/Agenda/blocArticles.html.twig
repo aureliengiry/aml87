@@ -1,5 +1,5 @@
 {# Bloc des articles liés #}
-{% if entity.articles %}
+{% if entity.articles is not empty %}
 <h3>Articles liés</h3>
 <ul id="blocs-evenement-articles">
     {% for key,article in entity.articles %}

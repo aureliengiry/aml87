@@ -10,19 +10,22 @@
         <div class="contenu-page">
             <h1>{{ entity.title }}</h1>
 
+            {# Affiche #}
+            {% if entity.picture %}
+            <div>
+                <a href="#" class="thumbnail">
+                    <img  data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) }}" title="{{ entity.picture.title }}"
+                          class="imagecache imagecache-visuel_blog" width="200" />
+                </a>
+            </div>
+            {% endif %}
+
             <span><strong><i class="icon-calendar"></i> {% if entity.dateStart %}{{ entity.dateStart|date('l d M Y à H:i') }}{% endif%}</strong></span>
             <div><p>{{ entity.description|raw }}</p></div>
         </div>
     </div>
 
     <div id="col-right">
-
-        {% if entity.picture %}
-            <a href="#" class="thumbnail">
-                <img  data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) }}" title="{{ entity.picture.title }}"
-                     class="imagecache imagecache-visuel_blog" width="500" height="300">
-            </a>
-        {% endif %}
 
         {# Liste articles liés #}
         {% include "AmlEvenementsBundle::Agenda/blocArticles.html.twig" %}

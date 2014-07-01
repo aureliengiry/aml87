@@ -8,7 +8,6 @@
 <div id="col-left" class="two-cols-content">
 
 	<div class="contenu-page">
-	
 
 		<h1>Agenda</h1>
 
@@ -21,15 +20,18 @@
                         {% if entity.picture %}
                         <div class="event-item-structure event-item-container-thumbnail">
                             <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="{{ entity.title }}" class="thumbnail">
-                                <img  data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) }}" title="{{ entity.picture.title }}"
-                                      class="imagecache imagecache-visuel_blog" style="width: 160px; height: 120px;">
+                                <img data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) }}" title="{{ entity.picture.title }}"
+                                      class="imagecache imagecache-visuel_blog" style="width: 160px;">
                             </a>
                         </div>
                         {% endif %}
                         <div class="event-item-structure event-item-container-description">
                             <h2><a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="{{ entity.title }}">{{ entity.title }}</a></h2>
-                            {% set description = entity.description|raw %}
-                            <div>{{ description|substring(220) }}</div>
+                            <div>
+                                {{ entity.description|raw|wordWarp }}
+                                </br>
+                                <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="Lire l'article : {{ entity.title }}" >Lire la suite</a>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
