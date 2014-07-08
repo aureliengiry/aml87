@@ -60,7 +60,7 @@ class BlogCategoriesController extends Controller
         $entity = new BlogCategories();
         $request = $this->getRequest();
         $form = $this->createForm(new BlogCategoriesType(), $entity);
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -125,7 +125,7 @@ class BlogCategoriesController extends Controller
 
         $request = $this->getRequest();
 
-        $editForm->bind($request);
+        $editForm->submit($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
@@ -152,7 +152,7 @@ class BlogCategoriesController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

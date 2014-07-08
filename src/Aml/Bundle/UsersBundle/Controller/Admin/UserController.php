@@ -64,7 +64,7 @@ class UserController extends Controller
         $entity  = new User();
         $request = $this->getRequest();
         $form    = $this->createForm(new UserType(), $entity);
-        $form->bindRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
         	$factory = $this->get('security.encoder_factory');
@@ -136,7 +136,7 @@ class UserController extends Controller
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        $editForm->submit($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
@@ -163,7 +163,7 @@ class UserController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

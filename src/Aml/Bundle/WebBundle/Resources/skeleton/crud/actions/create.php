@@ -13,7 +13,7 @@
         $entity  = new {{ entity_class }}();
         $request = $this->getRequest();
         $form    = $this->createForm(new {{ entity_class }}Type(), $entity);
-        $form->bindRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

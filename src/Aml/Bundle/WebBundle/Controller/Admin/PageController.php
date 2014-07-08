@@ -85,7 +85,7 @@ class PageController extends Controller
         $entity  = new Page();
         $request = $this->getRequest();
         $form    = $this->createForm(new PageType(), $entity);
-        $form->bindRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -150,7 +150,7 @@ class PageController extends Controller
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        $editForm->submit($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
@@ -177,7 +177,7 @@ class PageController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

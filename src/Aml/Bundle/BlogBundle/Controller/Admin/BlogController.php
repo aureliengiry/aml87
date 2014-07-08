@@ -99,7 +99,7 @@ class BlogController extends Controller
         //  $blogRepository = $em->getRepository('AmlBlogBundle:Blog');
 
         $form = $this->createForm(new BlogType(), $entity);
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -181,7 +181,7 @@ class BlogController extends Controller
 
         $request = $this->getRequest();
 
-        $editForm->bind($request);
+        $editForm->submit($request);
 
         if ($editForm->isValid()) {
 
@@ -229,7 +229,7 @@ class BlogController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

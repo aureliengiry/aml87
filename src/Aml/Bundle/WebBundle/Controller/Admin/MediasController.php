@@ -124,7 +124,7 @@ class MediasController extends Controller
     	var_dump( get_class($entity));
         $request = $this->getRequest();
         $form    = $this->createForm(new FileType(), $entity);
-        $form->bindRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -193,7 +193,7 @@ class MediasController extends Controller
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        $editForm->submit($request);
 
         if ($editForm->isValid()) {
         	$entity->removeUpload();
@@ -221,7 +221,7 @@ class MediasController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

@@ -49,7 +49,7 @@ class DefaultController extends Controller
         $entity = new Message();
         $request = $this->getRequest();
         $form = $this->createForm(new MessageType(), $entity);
-        $form->bind($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
