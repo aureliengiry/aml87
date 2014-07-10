@@ -1,3 +1,7 @@
+html,body{
+    background-color: transparent !important;
+}
+
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 /* line 22, /home/andrei/core-admin-release/core-admin/source/stylesheets/bootstrap/_normalize.scss */
 article,

@@ -49,9 +49,10 @@ class ArticleAdmin extends Admin
             ->with('Tags')
                 ->add('tags', 'sonata_type_model', array(
                     'required' => false,
-                    'expanded' => true,
+                    'expanded' => false,
                     'multiple' => true,
-                    'by_reference' => false
+                    'by_reference' => false,
+                    'attr'=>array('data-sonata-select2'=>'true')
                 ))
             ->end();
 
