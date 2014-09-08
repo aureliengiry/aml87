@@ -223,5 +223,8 @@ class Album
         return $this->tracks;
     }
 
-
+    public function __toString()
+    {
+        return $this->title ? : 'New Album';
+    }
 }

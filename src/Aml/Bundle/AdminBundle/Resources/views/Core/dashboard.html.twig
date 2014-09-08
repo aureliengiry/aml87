@@ -20,14 +20,22 @@ file that was distributed with this source code.
     <div class="row-fluid">
         {% set has_center = false %}
         {% for block in blocks %}
-            {% if block.position == 'center' %}
+
+            {% if block is empty %}
+                empty Block <pre>{{ dump(block) }}</pre>
+            {% else %}
+                <pre>{{ dump(block) }}</pre>
+            {% endif %}
+
+            {% if block.position is defined and block.position == 'center' %}
                 {% set has_center = true %}
             {% endif %}
+
         {% endfor %}
 
         <div class="{% if has_center %}span3{% else %}span6{% endif %}">
             {% for block in blocks %}
-                {% if block.position == 'left' %}
+                {% if block.position is defined and block.position == 'left' %}
                     {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
                 {% endif %}
             {% endfor %}
@@ -36,7 +44,7 @@ file that was distributed with this source code.
         {% if has_center %}
             <div class="span4">
                 {% for block in blocks %}
-                    {% if block.position == 'center' %}
+                    {% if block.position is defined and block.position == 'center' %}
                         {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
                     {% endif %}
                 {% endfor %}
@@ -45,7 +53,7 @@ file that was distributed with this source code.
 
         <div class="{% if has_center %}span4{% else %}span6{% endif %}">
             {% for block in blocks %}
-                {% if block.position == 'right' %}
+               {% if block.position is defined and block.position == 'right' %}
                     {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
                 {% endif %}
             {% endfor %}

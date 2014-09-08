@@ -157,6 +157,11 @@ class Link
 	public function setDescription($description) {
 		$this->description = $description;
 		return $this; 
-	}    
+	}
+
+    public function __toString()
+    {
+        return $this->title ? : 'New Link';
+    }
     
 }

@@ -198,6 +198,6 @@ class Partenaire
 
     public function __toString()
     {
-        return $this->name;
+        return $this->name ? : 'New Partenaire';
     }
 }

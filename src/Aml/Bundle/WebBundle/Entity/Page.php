@@ -194,4 +194,9 @@ class Page
     {
         return $this->url;
     }
+
+    public function __toString()
+    {
+        return $this->title ? : 'New Page';
+    }
 }

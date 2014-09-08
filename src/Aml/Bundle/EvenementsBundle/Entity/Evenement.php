@@ -361,4 +361,9 @@ class Evenement
         $this->partenaires = $partenaires;
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->title ? : 'New Event';
+    }
 }
