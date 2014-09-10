@@ -19,42 +19,52 @@ file that was distributed with this source code.
 
     <div class="row-fluid">
         {% set has_center = false %}
-        {% for block in blocks %}
-
-            {% if block is empty %}
-                empty Block <pre>{{ dump(block) }}</pre>
-            {% else %}
-                <pre>{{ dump(block) }}</pre>
+        {% for blockList in blocks %}
+            {% if blockList is not empty %}
+                {% for block in blockList %}
+                    {% if block.position is defined and block.position == 'center' %}
+                        {% set has_center = true %}
+                    {% endif %}
+                {% endfor %}
             {% endif %}
-
-            {% if block.position is defined and block.position == 'center' %}
-                {% set has_center = true %}
-            {% endif %}
-
         {% endfor %}
 
         <div class="{% if has_center %}span3{% else %}span6{% endif %}">
-            {% for block in blocks %}
-                {% if block.position is defined and block.position == 'left' %}
-                    {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+            {% for blockList in blocks %}
+                {% if blockList is not empty %}
+                    {% for block in blockList %}
+                        {% if block.position is defined and block.position == 'left' %}
+                            {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+                        {% endif %}
+                    {% endfor %}
                 {% endif %}
             {% endfor %}
         </div>
 
         {% if has_center %}
             <div class="span4">
-                {% for block in blocks %}
-                    {% if block.position is defined and block.position == 'center' %}
-                        {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+                {% for blockList in blocks %}
+                    {% if blockList is not empty %}
+                        {% for block in blockList %}
+                            {% if block.position is defined and block.position == 'center' %}
+                                {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
                 {% endfor %}
             </div>
         {% endif %}
 
         <div class="{% if has_center %}span4{% else %}span6{% endif %}">
-            {% for block in blocks %}
-               {% if block.position is defined and block.position == 'right' %}
-                    {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+            {% for blockList in blocks %}
+                {% if blockList is not empty %}
+                    {% for block in blockList %}
+
+                       {% if block.position is defined and block.position == 'right' %}
+                            {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+                       {% endif %}
+
+                    {% endfor %}
                 {% endif %}
             {% endfor %}
         </div>

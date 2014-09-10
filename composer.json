@@ -29,10 +29,10 @@
         "knplabs/knp-menu-bundle": "~1.1",
         "sonata-project/jquery-bundle": "1.8.*",
         "sonata-project/exporter": "1.*",
-        "sonata-project/block-bundle": "2.2.*@dev",
+        "sonata-project/block-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle":"dev-master",
         "sonata-project/admin-bundle":"dev-master",
-        "sonata-project/core-bundle":"~2.2@dev",
+        "sonata-project/core-bundle":"dev-master",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "winzou/console-bundle": "dev-master"
     },
