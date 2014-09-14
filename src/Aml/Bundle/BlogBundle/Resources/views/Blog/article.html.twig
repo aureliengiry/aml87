@@ -28,7 +28,7 @@
     <div rel="prettyPhoto" class="blog-visuel">
         <a rel="prettyPhoto" href="{{ asset(entity.logo.webpath) }}">
             <img width="375" height="250" class="imagecache imagecache-visuel_blog_list"
-                 title="{{ entity.logo.title }}" src="{{ asset(entity.logo.webpath) }}">
+                 title="{{ entity.logo.title }}" src="{{ entity.logo.webpath | apply_filter('visuel_blog_list') }}">
         </a>
     </div>
 {% endif %}

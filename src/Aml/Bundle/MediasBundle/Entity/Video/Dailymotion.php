@@ -32,5 +32,8 @@ class Dailymotion extends Video
         return 'Dailymotion';
     }
 
-
+    public function __toString()
+    {
+        return $this->title ? : 'New Video Youtube';
+    }
 }

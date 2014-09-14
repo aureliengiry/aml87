@@ -12,13 +12,12 @@ class VideoAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title','text',array(
+            ->add('title', 'text', array(
                 'required' => false,
             ))
-            ->add('provider_id','text' , array(
+            ->add('provider_id', 'text', array(
                 'required' => false,
-            ))
-        ;
+            ));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -29,11 +28,10 @@ class VideoAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')
-            ->add('provider')
-        ;
+            ->add('thumbnail', 'string', array('template' => 'AmlMediasBundle:Admin:list_thumbnail.html.twig'))
+            ->add('title')
+            ->addIdentifier('provider_id');
     }
-
 
 
 }

@@ -152,7 +152,7 @@ services:
 avalanche_imagine:
     web_root:     "%kernel.root_dir%/../web"
     source_root:  "%kernel.root_dir%/../web"
-    cache_prefix: imagine
+    cache_prefix: media/cache
     driver:       gd
     filters:
         #Si renommage ou ajout de filters, penser � modifier les lignes de suppression de cache dans User->upload()
@@ -162,6 +162,9 @@ avalanche_imagine:
         vignette_thumbnail:
             type:    thumbnail
             options: { size: [150, 100], mode: inbox }
+        visuel_blog_list:
+            type:    thumbnail
+            options: { size: [375, 250], mode: outbound }
         avatar_thumbnail:
             type:    thumbnail
             options: { size: [80, 80], mode: inbox }

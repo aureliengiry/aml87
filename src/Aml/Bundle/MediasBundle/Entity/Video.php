@@ -96,8 +96,4 @@ class Video
     {
         return $this->title;
     }
-
-
-
-
 }

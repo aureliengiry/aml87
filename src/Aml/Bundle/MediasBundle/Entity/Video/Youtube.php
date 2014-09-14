@@ -32,5 +32,10 @@ class Youtube extends Video
         return $this->provider;
     }
 
+    public function __toString()
+    {
+        return $this->title ? : 'New Video Youtube';
+    }
+
 
 }
