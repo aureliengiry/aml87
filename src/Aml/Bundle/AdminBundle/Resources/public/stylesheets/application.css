@@ -9089,7 +9089,8 @@ hr.divider, li.divider {
       background-image: -o-linear-gradient(top, #92cff5, #68a6ce);
       background-image: linear-gradient(top, #92cff5, #68a6ce); }
       /* line 10, /home/andrei/core-admin-release/core-admin/source/stylesheets/breadcrumbs.scss */
-      #breadcrumbs .breadcrumb-button.blue .breadcrumb-label {
+      #breadcrumbs .breadcrumb-button.blue .breadcrumb-label,
+      #breadcrumbs .breadcrumb-button.blue .breadcrumb-label a{
         color: white; }
       /* line 15, /home/andrei/core-admin-release/core-admin/source/stylesheets/breadcrumbs.scss */
       #breadcrumbs .breadcrumb-button.blue:hover {

@@ -14,18 +14,16 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800">
 
-
     <link href="{{ asset('bundles/amlweb/css/admin/application.css') }}" media="screen" rel="stylesheet" type="text/css"/>
-
-
     {% block stylesheets %}{% endblock %}
-
 
 
     <!--[if lt IE 9]>
     <script src="{{ asset('bundles/amlweb/js/admin/vendor/html5shiv.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bundles/amlweb/js/admin/vendor/excanvas.js') }}" type="text/javascript"></script>
     <![endif]-->
+
+    <script src="{{ asset('bundles/amladmin/javascript/application.js') }}" type="text/javascript"></script>
 
     <script src="{{ asset('bundles/amlweb/js/admin/application.js') }}" type="text/javascript"></script>
     {% block headerJs %}{% endblock %}
@@ -88,21 +86,21 @@
         {# Main content #}
         <div class="container-fluid padded">
             <!-- CONTENT HERE -->
-            {% if app.session.hasFlash('success') %}
-                <div class="alert alert-success">
-                    {{ app.session.flash('success') }}
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success flash-notice">
+                    {{ flashMessage }}
                 </div>
-            {% endif %}
-            {% if app.session.hasFlash('notice') %}
-                <div class="alert alert-error">
-                    {{ app.session.flash('notice') }}
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-error flash-notice">
+                    {{ flashMessage }}
                 </div>
-            {% endif %}
-            {% if app.session.hasFlash('info') %}
-                <div class="alert alert-info">
-                    {{ app.session.flash('info') }}
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('info') %}
+                <div class="alert alert-info flash-notice">
+                    {{ flashMessage }}
                 </div>
-            {% endif %}
+            {% endfor %}
 
             {% block body %}{% endblock %}
 
