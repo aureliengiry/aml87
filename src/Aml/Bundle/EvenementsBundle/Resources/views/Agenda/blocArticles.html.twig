@@ -4,11 +4,39 @@
 <ul id="blocs-evenement-articles">
     {% for key,article in entity.articles %}
         <li>
-            {% if article.url is defined and article.url is not empty %}
-                <a href="{{ path('blog_show_rewrite', { 'url_key': article.url }) }}" title="Voir l'article : {{ article.title }}" >{{ article.title }}</a>
-            {% else %}
-                <a href="{{ path('blog_show', { 'id': article.id }) }}" title="Voir l'article : {{ article.title }}" >{{ article.title }}</a>
+            {% if article.logo.webpath is defined %}
+                <div rel="prettyPhoto" class="blog-visuel">
+                    <a rel="prettyPhoto" href="{{ asset(article.logo.webpath) }}" class="thumbnail">
+                        <img width="170" height="" class="imagecache imagecache-visuel_blog_list"
+                             title="{{ article.logo.title }}"
+                             src="{{ article.logo.webpath | apply_filter('visuel_blog_list') }}">
+                    </a>
+                </div>
             {% endif %}
+
+            <div class="infos">
+                {% if article.url is defined and article.url is not empty %}
+                    <a href="{{ path('blog_show_rewrite', { 'url_key': article.url }) }}"
+                       class="title"
+                       title="Voir l'article : {{ article.title }}" >{{ article.title }}</a>
+                {% else %}
+                    <a href="{{ path('blog_show', { 'id': article.id }) }}"
+                       class="title"
+                       title="Voir l'article : {{ article.title }}" >{{ article.title }}</a>
+                {% endif %}
+
+                <div class="publi-info">
+                    <span>Publié le
+                        <span class="date-article-block">le {% if article.created %}{{ article.created|date('d/m/Y') }}{% endif %}</span>
+                        {% if article.category %}
+                            dans <a href="{{ path('blog',{'category' : article.category.systemName}) }}"
+                                    title="{{article.category.name}}">{{article.category.name}}</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+
+
         </li>
     {% endfor %}
 </ul>

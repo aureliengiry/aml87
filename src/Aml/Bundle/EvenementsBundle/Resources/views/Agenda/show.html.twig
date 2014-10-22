@@ -5,22 +5,29 @@
 {%- endblock title %}
 
 {% block body %}
-    <div id="col-left" class="two-cols-content">
+    <div id="col-left" class="two-cols-content evenement">
 
         <div class="contenu-page">
             <h1>{{ entity.title }}</h1>
+
+            {# Date #}
+            {% if entity.dateStart %}
+            <span><strong>
+                <i class="icon-calendar"></i>
+                {{ entity.dateStart | format_datetime(null, 'fr', 'Europe/Paris',  constant('IntlDateFormatter::LONG'), constant('IntlDateFormatter::SHORT')) }}
+            </strong></span>
+            {% endif %}
 
             {# Affiche #}
             {% if entity.picture %}
             <div>
                 <a href="#" class="thumbnail">
-                    <img  data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) }}" title="{{ entity.picture.title }}"
-                          class="imagecache imagecache-visuel_blog" width="200" />
+                    <img data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) }}" title="{{ entity.picture.title }}"
+                          class="imagecache imagecache-visuel_blog" />
                 </a>
             </div>
             {% endif %}
 
-            <span><strong><i class="icon-calendar"></i> {% if entity.dateStart %}{{ entity.dateStart|date('l d M Y à H:i') }}{% endif%}</strong></span>
             <div><p>{{ entity.description|raw }}</p></div>
         </div>
     </div>

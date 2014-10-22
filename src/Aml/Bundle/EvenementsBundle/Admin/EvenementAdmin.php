@@ -20,35 +20,44 @@ class EvenementAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title','text',array(
-                'label' => 'Titre'
-            ))
-            ->add('type', 'choice', array(
-                'label' => 'Type d\'événement',
-                'choices'   => \Aml\Bundle\EvenementsBundle\Entity\Evenement::getTypesEvenements(),
-                'multiple' => false,
-                'empty_value' => 'Sélectionnez le type d\'événement'
-            ))
+            ->with('General')
+                ->add('title','text',array(
+                    'label' => 'Titre'
+                ))
+                ->add('type', 'choice', array(
+                    'label' => 'Type d\'événement',
+                    'choices'   => \Aml\Bundle\EvenementsBundle\Entity\Evenement::getTypesEvenements(),
+                    'multiple' => false,
+                    'empty_value' => 'Sélectionnez le type d\'événement'
+                ))
 
-            //->add('dateStart')
-            ->add('dateStart', 'date', array(
-                'label' => 'Date',
-                'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy',
-                'required' => false,
-                // 'attr' => array('readonly' => 'readonly')
-            ))
+                //->add('dateStart')
+                ->add('dateStart', 'date', array(
+                    'label' => 'Date',
+                    'widget' => 'single_text',
+                    'format' => 'dd/MM/yyyy',
+                    'required' => false,
+                    // 'attr' => array('readonly' => 'readonly')
+                ))
 
-            ->add('picture','sonata_type_admin',array(
-                'delete' => false,
-                'required' => false
-            ))
+                ->add('picture','sonata_type_admin',array(
+                    'delete' => false,
+                    'required' => false
+                ))
 
-            ->add('description','textarea', array(
-                'required' => false,
-                'wysiwyg' => true
-            ))
-
+                ->add('description','textarea', array(
+                    'required' => false,
+                    'wysiwyg' => true
+                ))
+                ->add('archive','checkbox',array(
+                    'label' => 'Archiver',
+                    'required' => false
+                ))
+                ->add('public','checkbox',array(
+                    'label' => 'Publier',
+                    'required' => false
+                ))
+            ->end()
             ->with('Articles')
                 ->add('articles', 'sonata_type_model', array(
                     'required' => false,
@@ -65,14 +74,6 @@ class EvenementAdmin extends Admin
                     'by_reference' => false
                 ))
             ->end()
-            ->add('archive','checkbox',array(
-                'label' => 'Archiver',
-                'required' => false
-            ))
-            ->add('public','checkbox',array(
-                'label' => 'Publier',
-                'required' => false
-            ))
 
         ;
     }
