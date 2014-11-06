@@ -6,7 +6,7 @@
             {{ "form_not_available"|trans({}, "SonataAdminBundle") }}
         </div>
     {% else %}
-        <form class="form-horizontal fill-up validatable"
+        <form class="form-horizontal validatable"
               action="{{ admin.generateUrl(url, {'id': admin.id(object), 'uniqid': admin.uniqid, 'subclass': app.request.get('subclass')}) }}" {{ form_enctype(form) }}
               method="POST"
               {% if not admin_pool.getOption('html5_validate') %}novalidate="novalidate"{% endif %}

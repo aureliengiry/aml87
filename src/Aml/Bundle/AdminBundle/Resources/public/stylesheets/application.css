@@ -8248,7 +8248,6 @@ form {
 
 /* line 171, /home/andrei/core-admin-release/core-admin/source/stylesheets/form_elements.scss */
 div.uploader {
-  width: 100%;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -15503,59 +15502,12 @@ a.editable-click.editable-disabled {
   /* line 76, /home/andrei/core-admin-release/core-admin/source/stylesheets/responsive480.scss */
   .chat-box.timeline + .closable-chat-box {
     margin-left: 0; } }
-/*
 
+.sonata-ba-collapsed-fields .field-container ul {
+    list-style: outside none none;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
+.sonata-ba-collapsed-fields .field-container ul li label input {
+    width: 60px;
+}
 
