@@ -97,7 +97,6 @@ class EvenementRepository extends EntityRepository
 			 ->from('AmlEvenementsBundle:Evenement', 'e')
 			 ->where('e.dateStart >= :dateStart')
 			 ->orderBy('e.dateStart', 'ASC')
-			/*               */
         ;
 
         if( !empty($filters) ){
@@ -118,4 +117,42 @@ class EvenementRepository extends EntityRepository
         //var_dump('<pre>', $query->getSQL(),$query->getParameters() );exit;
 	    return $query->getResult();
 	}
+
+    /**
+     * Fonction pour avoir les prochains évènements
+     *
+     * @param int $id_communaute
+     * @param int $limit
+     *
+     * @return ArrayCollection
+     */
+    public function getNextConcert()
+    {
+        $currentDate = new \DateTime();
+        $currentDate->setTime(0, 0);
+
+        $q = $this->getEntityManager()->createQueryBuilder();
+        $q
+            ->select('e')
+            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->where('e.dateStart >= :currentDate')
+            ->orderBy('e.dateStart', 'ASC')
+            ->setMaxResults(1);
+
+        $params = array(
+            'currentDate' => $currentDate,
+        );
+
+        $filters = array(
+            'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT,
+            'archive' => 0,
+            'public' => 1
+        );
+
+        $q = $this->_buildRequestByFilters($q, $params, $filters);
+
+        $query = $q->getQuery();
+
+        return $query->getSingleResult();
+    }
 }

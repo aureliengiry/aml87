@@ -1,7 +1,13 @@
 {% if lastBlogArticle  %}
 <div id="blog-last-article-block" class="blog-article">
 	<h3>
-		<a href="{{ path('blog_show', { 'id': lastBlogArticle.id }) }}" title="Voir l'article : {{ lastBlogArticle.title }}" >{{ lastBlogArticle.title }}</a>
+        {% if lastBlogArticle.url is defined and lastBlogArticle.url is not empty %}
+            <a href="{{ path('blog_show_rewrite', { 'url_key': lastBlogArticle.url }) }}"
+               title="Voir l'article : {{ lastBlogArticle.title }}">{{ lastBlogArticle.title }}</a>
+        {% else %}
+            <a href="{{ path('blog_show', { 'id': lastBlogArticle.id }) }}"
+               title="Voir l'article : {{ lastBlogArticle.title }}">{{ lastBlogArticle.title }}</a>
+        {% endif %}
 	</h3>
 
 	<div class="publi-info">
@@ -25,7 +31,13 @@
 
 	<p class="container-wysiwyg">
 		{{lastBlogArticle.body|wordWarp}}
-        <a href="{{ path('blog_show', { 'id': lastBlogArticle.id }) }}" title="Lire l'article : {{ lastBlogArticle.title }}" >Lire la suite</a>
+        {% if lastBlogArticle.url is defined and lastBlogArticle.url is not empty %}
+            <a href="{{ path('blog_show_rewrite', { 'url_key': lastBlogArticle.url }) }}"
+               title="Lire l'article : {{ lastBlogArticle.title }}">Lire la suite</a>
+        {% else %}
+            <a href="{{ path('blog_show', { 'id': lastBlogArticle.id }) }}"
+               title="Lire l'article : {{ lastBlogArticle.title }}">Lire la suite</a>
+        {% endif %}
 	</p>
 
     {% if lastBlogArticle.tags is not empty %}

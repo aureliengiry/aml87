@@ -69,7 +69,7 @@ ul li{
 	background:transparent url(../images/general/fond-next-concert.png) repeat-x scroll 0 0;
 	color:#FFFFFF;
 	font-weight:bold;
-	padding-left:25px;
+	text-align: center;
 	text-decoration:none;	
 }
 

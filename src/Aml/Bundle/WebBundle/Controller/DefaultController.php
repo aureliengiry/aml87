@@ -14,25 +14,28 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-    	// Dernier article de blog
+    	// Last blog article
     	$repo = $this->getDoctrine()->getRepository('AmlBlogBundle:Article');
 		$blogEntity = $repo->findOneBy(
 		    array('public' => "1"),
 		    array('created' => 'DESC')
 		 );
-		 
-		
-		// Dernier Album
+
+		// Last Album
 		$repo = $this->getDoctrine()->getRepository('AmlDiscographyBundle:Album');
 		$albumEntity = $repo->findOneBy(
 		    array('public' => "1"),
 		    array('date' => 'DESC')
 		 );
-    	
-		
+
+        // getNextConcert
+        $repo = $this->getDoctrine()->getRepository('AmlEvenementsBundle:Evenement');
+        $nextConcert = $repo->getNextConcert();
+
         return array(
         	'lastBlogArticle' => $blogEntity,
-        	'lastAlbum' => $albumEntity
+        	'lastAlbum' => $albumEntity,
+            'nextConcert' => $nextConcert
         );
     }
 }

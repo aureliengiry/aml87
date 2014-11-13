@@ -35,7 +35,13 @@
 
 <p class="container-wysiwyg">
     {{ entity.body|raw|wordWarp }}
-    <a href="{{ path('blog_show', { 'id': entity.id }) }}" title="Lire l'article : {{ entity.title }}" >Lire la suite</a>
+    {% if entity.url is defined and entity.url is not empty %}
+        <a href="{{ path('blog_show_rewrite', { 'url_key': entity.url }) }}"
+           title="Lire l'article : {{ entity.title }}">Lire la suite</a>
+    {% else %}
+        <a href="{{ path('blog_show', { 'id': entity.id }) }}"
+           title="Lire l'article : {{ entity.title }}">Lire la suite</a>
+    {% endif %}
 </p>
 
 {% if entity.tags is not empty %}

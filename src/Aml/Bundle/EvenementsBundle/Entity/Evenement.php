@@ -103,13 +103,18 @@ class Evenement
      */
     protected $partenaires;
 
+    /**
+     * @var string url
+     *
+     * @ORM\Column(name="url", type="string", length=255, unique=true)
+     */
+    private $url;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-
         $this->partenaires = new ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -171,6 +176,7 @@ class Evenement
     public function setTitle($title)
     {
         $this->title = $title;
+        $this->setUrl();
         return $this;
     }
 
@@ -365,5 +371,68 @@ class Evenement
     public function __toString()
     {
         return $this->title ? : 'New Event';
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $url
+     */
+    public function setUrl()
+    {
+        $this->url = $this->_build_SystemName($this->title);
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    protected function _build_SystemName($str, $separator = 'dash', $lowercase = TRUE)
+    {
+        if ($separator == 'dash')
+        {
+            $search     = '_';
+            $replace    = '-';
+        }
+        else
+        {
+            $search     = '-';
+            $replace    = '_';
+        }
+
+        $trans = array(
+            '&\#\d+?;'              => '',
+            '&\S+?;'                => '',
+            '\s+'                   => $replace,
+            '[^a-z0-9\-\._]'        => '',
+            $replace.'+'            => $replace,
+            $replace.'$'            => $replace,
+            '^'.$replace            => $replace,
+            '\.+$'                  => ''
+        );
+
+        $str = strip_tags($str);
+
+        foreach ($trans as $key => $val)
+        {
+            $str = preg_replace("#".$key."#i", $val, $str);
+        }
+
+        if ($lowercase === TRUE)
+        {
+            $str = strtolower($str);
+        }
+
+        $str = trim(stripslashes($str));
+        $str = str_replace(array('.'), array('-'), $str);
+
+        return $str;
     }
 }

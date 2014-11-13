@@ -417,16 +417,22 @@ a.black {
 }
 
 #agenda-concerts-public .event-item-structure {
-    display: inline-block;
+
 }
 
-#agenda-concerts-public .event-item-container-thumbnail {
+#agenda-concerts-public .event-item-container-thumbnail .thumbnail-list{
+    display: block;
+}
 
+#agenda-concerts-public .event-item-container-thumbnail .thumbnail-list > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
 }
 
 #agenda-concerts-public .event-item-container-description {
-    padding: 0 0 0 10px;
-    width: 68%;
+    padding: 5px 0 0 10px;
 }
 
 /* AGENDA - Liste Evenement */

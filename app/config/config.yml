@@ -48,7 +48,7 @@ sonata_admin:
                 type: sonata.block.service.text
                 settings:
                   content: >
-                    <h2>Welcome to the Sonata Admin</h2>
+                    <h2>Bienvenue sur la page d'administration du site</h2>
                     <p>This is a <code>sonata.block.service.text</code> from the Block
                     Bundle, you can create and add new block in these area by configuring
                     the <code>sonata_admin</code> section.</p> <br /> For instance, here
@@ -180,6 +180,13 @@ avalanche_imagine:
         big_thumbnail:
             type:    thumbnail
             options: { size: [300, 300], mode: inbox }
+        # Evenement
+        evenement_view:
+            type:    relative_resize
+            options: { widen: 588, mode: outbound }
+        evenement_list:
+            type:    relative_resize
+            options: { widen: 450, mode: outbound }
 
 sonata_intl:
     timezone:

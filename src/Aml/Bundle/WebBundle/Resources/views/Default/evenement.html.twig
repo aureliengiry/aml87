@@ -1,0 +1,18 @@
+<div id="block-concert">
+    <h3>Prochain concert</h3>
+
+    <span class="date">{{ nextConcert.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }}</span>
+
+    <div class="container-date-description-block">
+        {{ nextConcert.description|raw|wordWarp(300) }}
+        {% if nextConcert.url is defined and nextConcert.url is not empty %}
+            <a href="{{ path('agenda_show_event_rewrite', { 'url_key': nextConcert.url }) }}"
+               title="En savoir plus : {{ nextConcert.title }}">Lire la suite</a>
+        {% else %}
+            <a href="{{ path('agenda_show_event', { 'id': nextConcert.id }) }}"
+               title="En savoir plus : {{ nextConcert.title }}">Lire la suite</a>
+        {% endif %}
+    </div>
+
+    <a title="Voir tous les concerts" class="links-view-all black" href="{{ path('agenda') }}">Voir tous les concerts</a>
+</div>

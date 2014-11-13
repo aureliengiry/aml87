@@ -206,7 +206,6 @@ class Article
         return $this->video;
     }
 
-
     /**
      * Set body
      *

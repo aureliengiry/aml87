@@ -22,8 +22,8 @@
             {% if entity.picture %}
             <div>
                 <a href="#" class="thumbnail">
-                    <img data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) }}" title="{{ entity.picture.title }}"
-                          class="imagecache imagecache-visuel_blog" />
+                    <img data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) | apply_filter('evenement_view') }}" title="{{ entity.picture.title }}"
+                          class="imagecache imagecache-evenement_view" width="588" />
                 </a>
             </div>
             {% endif %}

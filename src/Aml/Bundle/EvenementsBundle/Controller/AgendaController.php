@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Aml\Bundle\BlogBundle\Entity\Article;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Blog controller.
@@ -61,18 +62,23 @@ class AgendaController extends Controller
      * Finds and displays a Evenement entity.
      *
      * @Route("/show/{id}", name="agenda_show_event")
+     * @Route("/evenement/{url_key}.html", name="agenda_show_event_rewrite")
      * @Template()
+     *
+     * @param bool $id
+     * @param string $url_key
+     *
+     * @return array
      */
-    public function showAction($id)
+    public function showAction($id = false, $url_key = null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        /*if( false === $id ){
+        if (false === $id) {
             $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->findOneBy(array('url' => $url_key));
+        } else {
+            $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->find($id);
         }
-        else{   */
-        $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->find($id);
-        // }
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find AmlEvenementsBundle:Evenement entity.');
