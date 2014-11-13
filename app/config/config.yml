@@ -162,9 +162,6 @@ avalanche_imagine:
         vignette_thumbnail:
             type:    thumbnail
             options: { size: [150, 100], mode: inbox }
-        visuel_blog_list:
-            type:    thumbnail
-            options: { size: [375, 250], mode: outbound }
         avatar_thumbnail:
             type:    thumbnail
             options: { size: [80, 80], mode: inbox }
@@ -187,6 +184,16 @@ avalanche_imagine:
         evenement_list:
             type:    relative_resize
             options: { widen: 450, mode: outbound }
+        # Blog
+        blog_list:
+            type:    thumbnail
+            options: { size: [375, 250], mode: outbound }
+        blog_view:
+            type:    relative_resize
+            options: { widen: 500, mode: outbound }
+        blog_thumbnail:
+            type:    relative_resize
+            options: { widen: 170, mode: outbound }
 
 sonata_intl:
     timezone:
