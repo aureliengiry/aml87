@@ -28,14 +28,9 @@ class DefaultController extends Controller
 		    array('date' => 'DESC')
 		 );
 
-        // getNextConcert
-        $repo = $this->getDoctrine()->getRepository('AmlEvenementsBundle:Evenement');
-        $nextConcert = $repo->getNextConcert();
-
         return array(
         	'lastBlogArticle' => $blogEntity,
-        	'lastAlbum' => $albumEntity,
-            'nextConcert' => $nextConcert
+        	'lastAlbum' => $albumEntity
         );
     }
 }

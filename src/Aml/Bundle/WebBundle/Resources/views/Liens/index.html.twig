@@ -11,18 +11,19 @@
 		<h1>Liens</h1>
 		
 		<ul id="list-links">
-		    {% for entity in entities %}
-		        <li>
-                    {{ entity.description }} : <a href="http://{{ entity.url }}" target="_blank" title="{{ entity.title }}">{{ entity.url }}</a>
-                </li>
-		    {% endfor %}		 
+        {% for entity in entities %}
+            <li>
+                {{ entity.description }} : <a href="http://{{ entity.url }}" target="_blank" title="{{ entity.title }}">{{ entity.url }}</a>
+            </li>
+        {% endfor %}
 		 </ul>
 	
 		
 		</div>
 </div>
 <div id="col-right">
-
+    {# Next Concert #}
+    {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
 </div>
 {%- endblock body %}
 

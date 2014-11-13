@@ -16,12 +16,17 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AgendaController extends Controller
 {
+    /**
+     * Function to reorder events by day
+     *
+     * @param $events
+     * @return array
+     */
     private function _formatEventByDay($events)
     {
         $eventsByDay = array();
 
         foreach ($events as $event) {
-
             $dateEvent = $event->getDateStart();
             $dateKey = new \DateTime();
             $dateKey->setDate($dateEvent->format('Y'), $dateEvent->format('m'), $dateEvent->format('d'));
@@ -30,10 +35,8 @@ class AgendaController extends Controller
             $day = $dateKey->getTimestamp();
 
             $eventsByDay[$day][] = $event;
-
         }
 
-        //var_dump('<pre>',$eventsByDay);exit;
         return $eventsByDay;
     }
 
@@ -49,9 +52,9 @@ class AgendaController extends Controller
 
         $evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
         $events = $evenementRepository->getNextEvenements(array(
-            'public' => 1,
-            'archive' => 0,
-            'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT)
+                'public' => 1,
+                'archive' => 0,
+                'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT)
         );
         $entities = $this->_formatEventByDay($events);
 
@@ -86,6 +89,23 @@ class AgendaController extends Controller
 
         return array(
             'entity' => $entity);
+    }
+
+    /**
+     * Action for Next Concert Block
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function nextConcertAction()
+    {
+        // getNextConcert
+        $repo = $this->getDoctrine()->getRepository('AmlEvenementsBundle:Evenement');
+        $nextConcert = $repo->getNextConcert();
+
+        return $this->render(
+            'AmlEvenementsBundle::Blocs/blocNextConcert.html.twig',
+            array('nextConcert' => $nextConcert)
+        );
     }
 
 
