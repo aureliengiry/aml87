@@ -54,7 +54,7 @@ class Partenaire
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", inversedBy="partenaires", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", inversedBy="partenaires")
      * @ORM\JoinTable(name="evenements_partenaires",
      * 		joinColumns={@ORM\JoinColumn(name="id_partenaire", referencedColumnName="id_partenaire")},
      * 		inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}
@@ -198,6 +198,6 @@ class Partenaire
 
     public function __toString()
     {
-        return $this->name ? : 'New Partenaire';
+        return $this->name ? : 'Nouveau Partenaire';
     }
 }
