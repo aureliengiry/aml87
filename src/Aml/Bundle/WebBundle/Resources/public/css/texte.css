@@ -66,7 +66,7 @@ ul li{
 
 
 #block-concert h3, #block-concert h3 a, #block-concert h3 a:visited {
-	background:transparent url(../images/general/fond-next-concert.png) repeat-x scroll 0 0;
+	background:transparent url("/bundles/amlweb/images/general/fond-next-concert.png") repeat-x scroll 0 0;
 	color:#FFFFFF;
 	font-weight:bold;
 	text-align: center;

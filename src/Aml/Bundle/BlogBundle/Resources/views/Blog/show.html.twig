@@ -18,8 +18,9 @@
 
             {% if entity.logo %}
             <div class="blog-visuel">
-                <img src="{{ asset(entity.logo.webpath) | apply_filter('blog_view') }}" alt="" title="{{ entity.logo.title }}"
-                     class="imagecache imagecache-blog_view" width="500">
+                <img src="{{ asset(entity.logo.webpath) | apply_filter('blog_view') }}"
+                     alt="" title="{{ entity.logo.title }}"
+                     class="imagecache imagecache-blog_view" width="500" />
             </div>
             {% endif %}
 
