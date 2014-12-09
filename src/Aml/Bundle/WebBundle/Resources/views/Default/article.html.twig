@@ -24,7 +24,8 @@
             <a rel="prettyPhoto" href="{{ asset(lastBlogArticle.logo.webpath) }}">
                 <img width="375" height="250" class="imagecache imagecache-blog_list"
                      title="{{ lastBlogArticle.logo.title }}"
-                     src="{{ lastBlogArticle.logo.webpath | apply_filter('blog_list') }}">
+                     src="{{ lastBlogArticle.logo.webpath | apply_filter('blog_list') }}"
+                     alt="{{ lastBlogArticle.logo.title }}" />
             </a>
         </div>
     {% endif %}

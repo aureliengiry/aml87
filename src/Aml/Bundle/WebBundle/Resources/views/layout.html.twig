@@ -10,12 +10,13 @@
     	<!-- Le styles -->
     	<link rel="shortcut icon" href="{{ asset('bundles/amlweb/ico/aml_favicon.ico') }}">
 
-    	<link href="{{ asset('bundles/amlweb/css/bootstrap/bootstrap.css') }}" rel="stylesheet">
-    	<link href="{{ asset('bundles/amlweb/css/main.css') }}" rel="stylesheet">
-    	<link href="{{ asset('bundles/amlweb/css/form.css') }}" rel="stylesheet">
-    	<link href="{{ asset('bundles/amlweb/css/texte.css') }}" rel="stylesheet">
+    	<link href="{{ asset('bundles/amlweb/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
 
-        <script src="{{ asset('bundles/amlweb/js/jquery.js') }}" type="text/javascript"></script>
+        {% stylesheets '@AmlWebBundle/Resources/public/css/*' filter='?yui_css' %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        <script src="{{ asset('bundles/amlweb/js/jquery/jquery.1.9.1.min.js') }}" type="text/javascript"></script>
 
     	{% block stylesheets %}{% endblock %}
     	
