@@ -2,22 +2,25 @@
 <div id="discographie-last-album-block">
 	<div class="disc-pochette-list">
         {% if lastAlbum.image.webpath is defined %}
+        <a rel="prettyPhoto" href="{{ asset(lastAlbum.image.webpath) }}" >
             <img src="{{ asset(lastAlbum.image.webpath) }}"
-                 alt="{{ lastAlbum.image.title }}"
-                 title="{{ lastAlbum.image.title }}"
+                 alt="{{ lastAlbum.title }}"
+                 title="{{ lastAlbum.title }}"
                  class="imagecache imagecache-pochette-album" width="500" height="300" />
+        </a>
         {% endif %}
 	</div>
 	<div class="disc-description-list">
 		<h3>
-			<a href="{{ path('aml_discography_album', { 'id': lastAlbum.id }) }}" title="Voir l'article : {{ lastAlbum.title }}" >{{ lastAlbum.title }}</a>
+			<a href="{{ path('aml_discography_album', { 'id': lastAlbum.id }) }}"
+               title="Voir l'article : {{ lastAlbum.title }}" >{{ lastAlbum.title }}</a>
 		</h3>
 		<span class="disc-date-sortie">Date de sortie : {{ lastAlbum.date|date('d-m-Y') }}</span>	
 		
 		<p>{{ lastAlbum.description|raw|wordWarp }}</p>
 		
-		<a href="{{ path('aml_discography_album', { 'id': lastAlbum.id }) }}" title="Voir l'album : {{ lastAlbum.title }}" >Lire la suite</a>
-			
+		<a href="{{ path('aml_discography_album', { 'id': lastAlbum.id }) }}"
+           title="Voir l'album : {{ lastAlbum.title }}" >Lire la suite</a>
 	</div>	
 </div>
 {% endif %}
