@@ -5,10 +5,11 @@
     {% for key,article in entity.articles %}
         <li>
             {% if article.logo.webpath is defined %}
-                <div rel="prettyPhoto" class="blog-visuel">
-                    <a rel="prettyPhoto" href="{{ asset(article.logo.webpath) }}" class="thumbnail">
+                <div class="blog-visuel">
+                    <a rel="prettyPhoto" href="{{ asset(article.logo.webpath) | apply_filter('blog_view')  }}" class="thumbnail">
                         <img width="170" class="imagecache imagecache-blog_thumbnail"
-                             title="{{ article.logo.title }}"
+                             title="{{ article.title }}"
+                             alt="{{ article.title }}"
                              src="{{ article.logo.webpath | apply_filter('blog_thumbnail') }}">
                     </a>
                 </div>

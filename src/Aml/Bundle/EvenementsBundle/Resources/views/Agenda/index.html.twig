@@ -21,7 +21,8 @@
 
                         {% if entity.picture %}
                         <div class="event-item-structure event-item-container-thumbnail">
-                            <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="{{ entity.title }}" class="thumbnail-list">
+                            <a rel="prettyPhoto" href="{{ asset(entity.picture.webpath) | apply_filter('evenement_view') }}"
+                               title="{{ entity.title }}" class="thumbnail-list">
                                 <img data-src="holder.js/450x450" alt="450x450" src="{{ asset(entity.picture.webpath) | apply_filter('evenement_list') }}" title="{{ entity.picture.title }}"
                                       class="imagecache imagecache-evenement_list" width="450">
                             </a>

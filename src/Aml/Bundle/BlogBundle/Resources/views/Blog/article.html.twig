@@ -25,12 +25,12 @@
             allowfullscreen="true">
     </iframe>
 {% elseif entity.logo.webpath is defined %}
-    <div rel="prettyPhoto" class="blog-visuel">
-        <a rel="prettyPhoto" href="{{ asset(entity.logo.webpath) }}">
+    <div class="blog-visuel">
+        <a rel="prettyPhoto" href="{{ asset(entity.logo.webpath) | apply_filter('blog_view') }}">
             <img width="375" height="250" class="imagecache imagecache-blog_list"
-                 title="{{ entity.logo.title }}"
+                 title="{{ entity.title }}"
                  src="{{ entity.logo.webpath | apply_filter('blog_list') }}"
-                 alt="{{ entity.logo.title }}"/>
+                 alt="{{ entity.title }}"/>
         </a>
     </div>
 {% endif %}

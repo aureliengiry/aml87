@@ -8,15 +8,21 @@
     	<meta name="author" content="">
     
     	<!-- Le styles -->
-    	<link rel="shortcut icon" href="{{ asset('bundles/amlweb/ico/aml_favicon.ico') }}">
+    	<link rel="shortcut icon" href="{{ asset('bundles/amlweb/ico/aml_favicon.ico') }}" />
 
-    	<link href="{{ asset('bundles/amlweb/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+    	<link href="{{ asset('bundles/amlweb/css/bootstrap/bootstrap.min.css') }}" rel="stylesheet" />
+
+
 
         {% stylesheets '@AmlWebBundle/Resources/public/css/*' filter='?yui_css' %}
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
         {% endstylesheets %}
 
         <script src="{{ asset('bundles/amlweb/js/jquery/jquery.1.9.1.min.js') }}" type="text/javascript"></script>
+
+        <link href="{{ asset('bundles/amlweb/prettyPhoto/css/prettyPhoto.css') }}" rel="stylesheet" />
+        <script src="{{ asset('bundles/amlweb/prettyPhoto/js/jquery.prettyPhoto.js') }}" type="text/javascript"></script>
+
 
     	{% block stylesheets %}{% endblock %}
     	
@@ -53,8 +59,18 @@
   			{% include "AmlWebBundle::Partial/footer.html.twig" %} 
 		</div>
 		
-		
        	{% block javascripts %}{% endblock %}
+
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function(){
+                $("a[rel^='prettyPhoto']").prettyPhoto({
+                    theme: 'facebook',
+                    deeplinking: false,
+                    social_tools: false,
+                    show_title: false
+                });
+            });
+        </script>
 	</body>
 
 </html>

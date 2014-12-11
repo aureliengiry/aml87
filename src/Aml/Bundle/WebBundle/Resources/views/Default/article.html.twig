@@ -20,12 +20,12 @@
 	</div>
 
     {% if lastBlogArticle.logo.webpath is defined %}
-        <div rel="prettyPhoto" class="blog-visuel">
-            <a rel="prettyPhoto" href="{{ asset(lastBlogArticle.logo.webpath) }}">
+        <div class="blog-visuel">
+            <a rel="prettyPhoto" href="{{ asset(lastBlogArticle.logo.webpath) | apply_filter('blog_view')  }}" >
                 <img width="375" height="250" class="imagecache imagecache-blog_list"
-                     title="{{ lastBlogArticle.logo.title }}"
+                     title="{{ lastBlogArticle.title }}"
                      src="{{ lastBlogArticle.logo.webpath | apply_filter('blog_list') }}"
-                     alt="{{ lastBlogArticle.logo.title }}" />
+                     alt="{{ lastBlogArticle.title }}" />
             </a>
         </div>
     {% endif %}
