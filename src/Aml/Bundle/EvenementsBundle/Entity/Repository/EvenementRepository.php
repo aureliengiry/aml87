@@ -90,7 +90,6 @@ class EvenementRepository extends EntityRepository
 		$dateTimeStart = new \DateTime();
 		$dateTimeStart->setTime(0,0);
 		
-		
 		$q = $this->getEntityManager()->createQueryBuilder();		
 		$q
 			 ->select('e')
@@ -100,10 +99,21 @@ class EvenementRepository extends EntityRepository
         ;
 
         if( !empty($filters) ){
-            $params = array
-            (
-                'dateStart' => $dateTimeStart,
-            );
+            if( isset($filters['dateStart']) && !empty($filters['dateStart']) )
+            {
+                $params = array
+                (
+                    'dateStart' => $filters['dateStart'],
+                );
+            }
+            else{
+                $params = array
+                (
+                    'dateStart' => $dateTimeStart,
+                );
+            }
+
+
             $q = $this->_buildRequestByFilters( $q,$params, $filters );
         }
         else{
@@ -114,7 +124,7 @@ class EvenementRepository extends EntityRepository
         }
 
         $query =  $q->getQuery();
-        //var_dump('<pre>', $query->getSQL(),$query->getParameters() );exit;
+        //var_dump('<pre>', $query->getSQL(),$queryParameters,$queryParameters[0],$filters);exit;
 	    return $query->getResult();
 	}
 
@@ -153,6 +163,11 @@ class EvenementRepository extends EntityRepository
 
         $query = $q->getQuery();
 
-        return $query->getSingleResult();
+        try {
+            return $query->getSingleResult();
+        }
+        catch(\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
     }
 }

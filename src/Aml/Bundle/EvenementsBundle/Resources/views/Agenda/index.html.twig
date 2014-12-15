@@ -17,7 +17,16 @@
                 <div class="uiHeaderSection"><strong><i class="icon-calendar"></i> {{ key | format_datetime(null, 'fr', 'Europe/Paris',  constant('IntlDateFormatter::LONG'), constant('IntlDateFormatter::SHORT')) }}</strong></div>
                 {% for entity in day %}
                     <div class="event-item">
-                        <h2><a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="{{ entity.title }}">{{ entity.title }}</a></h2>
+                        <h2>
+                            {% if entity.url is defined and entity.url is not empty %}
+                                <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url }) }}"
+                                   title="{{ entity.title }}">{{ entity.title }}</a>
+                            {% else %}
+                                <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}"
+                                   title="{{ entity.title }}">{{ entity.title }}</a>
+                            {% endif %}
+                            <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}" title="{{ entity.title }}">{{ entity.title }}</a>
+                        </h2>
 
                         {% if entity.picture %}
                         <div class="event-item-structure event-item-container-thumbnail">
@@ -31,7 +40,13 @@
                         <div class="event-item-structure event-item-container-description">
                             <div>
                                 {{ entity.description|raw|wordWarp }}
-                                <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url }) }}" title="Lire l'article : {{ entity.title }}" >Lire la suite</a>
+                                {% if entity.url is defined and entity.url is not empty %}
+                                    <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url }) }}"
+                                       title="{{ entity.title }}">{{ entity.title }}</a>
+                                {% else %}
+                                    <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}"
+                                       title="{{ entity.title }}">{{ entity.title }}</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

@@ -1,3 +1,4 @@
+{% if nextConcert is defined and nextConcert is not empty %}
 <div id="block-concert">
     <h3>Prochain concert</h3>
 
@@ -16,3 +17,4 @@
 
     <a title="Voir tous les concerts" class="links-view-all black" href="{{ path('agenda') }}">Voir tous les concerts</a>
 </div>
+{% endif %}
