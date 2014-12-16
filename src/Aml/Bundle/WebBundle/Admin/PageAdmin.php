@@ -40,6 +40,8 @@ class PageAdmin extends Admin
         $listMapper
             ->addIdentifier('title')
             ->add('url')
+            ->add('created')
+            ->add('updated')
             ->add('public')
         ;
     }
@@ -56,5 +58,22 @@ class PageAdmin extends Admin
         }
 
         return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preUpdate($article)
+    {
+        $article->setUpdated(new \DateTime);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($article)
+    {
+        $article->setCreated(new \DateTime);
+        $article->setUpdated(new \DateTime);
     }
 }
