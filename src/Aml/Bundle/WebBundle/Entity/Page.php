@@ -83,6 +83,8 @@ class Page
     public function setTitle($title)
     {
         $this->title = $title;
+        $this->setUrl();
+        return $this;
     }
 
     /**
@@ -103,6 +105,7 @@ class Page
     public function setBody($body)
     {
         $this->body = $body;
+        return $this;
     }
 
     /**
@@ -120,9 +123,10 @@ class Page
      *
      * @param datetime $created
      */
-    public function setCreated($created)
+    public function setCreated(\DateTime $created = null)
     {
         $this->created = $created;
+        return $this;
     }
 
     /**
@@ -140,9 +144,10 @@ class Page
      *
      * @param datetime $updated
      */
-    public function setUpdated($updated)
+    public function setUpdated(\DateTime $updated = null)
     {
         $this->updated = $updated;
+        return $this;
     }
 
     /**
@@ -163,6 +168,7 @@ class Page
     public function setPublic($public)
     {
         $this->public = $public;
+        return $this;
     }
 
     /**
@@ -180,9 +186,10 @@ class Page
      *
      * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl()
     {
-        $this->url = $url;
+        $this->url = $this->_build_SystemName($this->title);
+        return $this;
     }
 
     /**
@@ -198,5 +205,47 @@ class Page
     public function __toString()
     {
         return $this->title ? : 'New Page';
+    }
+
+    protected function _build_SystemName($str, $separator = 'dash', $lowercase = TRUE)
+    {
+        if ($separator == 'dash')
+        {
+            $search     = '_';
+            $replace    = '-';
+        }
+        else
+        {
+            $search     = '-';
+            $replace    = '_';
+        }
+
+        $trans = array(
+            '&\#\d+?;'              => '',
+            '&\S+?;'                => '',
+            '\s+'                   => $replace,
+            '[^a-z0-9\-\._]'        => '',
+            $replace.'+'            => $replace,
+            $replace.'$'            => $replace,
+            '^'.$replace            => $replace,
+            '\.+$'                  => ''
+        );
+
+        $str = strip_tags($str);
+
+        foreach ($trans as $key => $val)
+        {
+            $str = preg_replace("#".$key."#i", $val, $str);
+        }
+
+        if ($lowercase === TRUE)
+        {
+            $str = strtolower($str);
+        }
+
+        $str = trim(stripslashes($str));
+        $str = str_replace(array('.'), array('-'), $str);
+
+        return $str;
     }
 }
