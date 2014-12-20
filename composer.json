@@ -33,8 +33,7 @@
         "sonata-project/doctrine-orm-admin-bundle":"dev-master",
         "sonata-project/admin-bundle":"dev-master",
         "sonata-project/core-bundle":"dev-master",
-        "friendsofsymfony/user-bundle": "~2.0@dev",
-        "winzou/console-bundle": "dev-master"
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "scripts": {
         "post-install-cmd": [
