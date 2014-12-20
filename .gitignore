@@ -16,3 +16,4 @@ web/bundles/*
 app/config/parameters.ini
 app/config/parameters.yml
 composer.lock
+composer.phar
