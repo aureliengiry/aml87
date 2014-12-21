@@ -12,37 +12,37 @@ use Doctrine\ORM\EntityRepository;
  */
 class EvenementRepository extends EntityRepository
 {
-	/**
-     * Fonction pour avoir les prochains évènements
-     * 
-     * @param int $id_communaute
-     * @param int $limit
-     * @return ArrayCollection
+    /**
+     * Get events filter by date start and date end
+     *
+     * @param $dateStart
+     * @param $dateEnd
+     * @return array
      */
-	public function getEvenementsCalendar( $dateStart, $dateEnd )
-	{
-		$dateTimeStart = new \DateTime();
-		$dateTimeStart->setTimestamp($dateStart);
-		
-		$dateTimeEnd = new \DateTime();
-		$dateTimeEnd->setTimestamp($dateEnd);
-		
-		$q = $this->getEntityManager()->createQueryBuilder();		
-		$q
-			 ->select('e')
-			 ->from('AmlEvenementsBundle:Evenement', 'e')
-			 ->where('e.dateStart > :dateStart')
-			// ->andWhere('e.date_start < :date_end')
-			 ->orderBy('e.dateStart', 'ASC')
-			 ->setParameters(array
-				 (
-					'dateStart' => $dateTimeStart,
-					//'date_end' => $dateTimeEnd,
-				 ));
+    public function getEvenementsCalendar($dateStart, $dateEnd)
+    {
+        $dateTimeStart = new \DateTime();
+        $dateTimeStart->setTimestamp($dateStart);
 
-			
-	    return $q->getQuery()->getResult();
-	}
+        $dateTimeEnd = new \DateTime();
+        $dateTimeEnd->setTimestamp($dateEnd);
+
+        $q = $this->getEntityManager()->createQueryBuilder();
+        $q
+            ->select('e')
+            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->where('e.dateStart > :dateStart')
+            // ->andWhere('e.date_start < :date_end')
+            ->orderBy('e.dateStart', 'ASC')
+            ->setParameters(array
+            (
+                'dateStart' => $dateTimeStart,
+                //'date_end' => $dateTimeEnd,
+            ))
+        ;
+
+        return $q->getQuery()->getResult();
+    }
 
     /**
      * Function to build request in order to filter blog articles
@@ -52,89 +52,58 @@ class EvenementRepository extends EntityRepository
      * @param array $filters
      * @return mixed
      */
-    private function _buildRequestByFilters( $query, $params = array(), $filters = array() ){
-        if( isset($filters['archive']) ){
+    private function _buildRequestByFilters($query, $params = array(), $filters = array())
+    {
+        if (isset($filters['archive'])) {
             $query
-                ->andWhere("e.archive = :archive")
-            ;
+                ->andWhere("e.archive = :archive");
             $params['archive'] = $filters['archive'];
         }
 
-        if( isset($filters['public']) ){
+        if (isset($filters['public'])) {
             $query
-                ->andWhere("e.public = :public")
-            ;
+                ->andWhere("e.public = :public");
             $params['public'] = $filters['public'];
         }
-        if( isset($filters['type']) && !empty($filters['type']) ){
+        if (isset($filters['type']) && !empty($filters['type'])) {
             $query
-                ->andWhere("e.type = :type")
-            ;
+                ->andWhere("e.type = :type");
             $params['type'] = $filters['type'];
         }
 
-        $query->setParameters( $params );
+        $query->setParameters($params);
 
         return $query;
     }
 
-	/**
-     * Fonction pour avoir les prochains évènements
-     * 
-     * @param int $id_communaute
-     * @param int $limit
-     * @return ArrayCollection
+    /**
+     * Get events not archived
+     *
+     * @param array $filters
+     * @return mixed
      */
-	public function getNextEvenements( $filters = array() )
-	{
-		$dateTimeStart = new \DateTime();
-		$dateTimeStart->setTime(0,0);
-		
-		$q = $this->getEntityManager()->createQueryBuilder();		
-		$q
-			 ->select('e')
-			 ->from('AmlEvenementsBundle:Evenement', 'e')
-			 ->where('e.dateStart >= :dateStart')
-			 ->orderBy('e.dateStart', 'ASC')
-        ;
+    public function getNextEvenements($filters = array())
+    {
+        $dateTimeStart = new \DateTime();
+        $dateTimeStart->setTime(0, 0);
 
-        if( !empty($filters) ){
-            if( isset($filters['dateStart']) && !empty($filters['dateStart']) )
-            {
-                $params = array
-                (
-                    'dateStart' => $filters['dateStart'],
-                );
-            }
-            else{
-                $params = array
-                (
-                    'dateStart' => $dateTimeStart,
-                );
-            }
+        $q = $this->getEntityManager()->createQueryBuilder();
+        $q
+            ->select('e')
+            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->orderBy('e.dateStart', 'ASC');
 
+        $q = $this->_buildRequestByFilters($q, $params = array(), $filters);
 
-            $q = $this->_buildRequestByFilters( $q,$params, $filters );
-        }
-        else{
-            $q->setParameters(array
-            (
-                'dateStart' => $dateTimeStart,
-            ));
-        }
+        $query = $q->getQuery();
 
-        $query =  $q->getQuery();
-        //var_dump('<pre>', $query->getSQL(),$queryParameters,$queryParameters[0],$filters);exit;
-	    return $query->getResult();
-	}
+        return $query->getResult();
+    }
 
     /**
-     * Fonction pour avoir les prochains évènements
+     * Function to load next concert
      *
-     * @param int $id_communaute
-     * @param int $limit
-     *
-     * @return ArrayCollection
+     * @return Evenement|null
      */
     public function getNextConcert()
     {
@@ -165,8 +134,7 @@ class EvenementRepository extends EntityRepository
 
         try {
             return $query->getSingleResult();
-        }
-        catch(\Doctrine\ORM\NoResultException $e) {
+        } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }
     }

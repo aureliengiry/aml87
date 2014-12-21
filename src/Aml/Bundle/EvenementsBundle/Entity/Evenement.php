@@ -7,7 +7,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Aml\Bundle\EvenementsBundle\Entity\EvenementBlog;
 
 
-
 /**
  * Aml\Bundle\EvenementsBundle\Entity\Evenement
  *
@@ -38,14 +37,14 @@ class Evenement
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
     private $type;
-    
+
     /**
      * @var datetime $dateStart
      *
      * @ORM\Column(name="date_start", type="datetime")
      */
     private $dateStart;
-    
+
     /**
      * @var datetime $dateEnd
      *
@@ -110,6 +109,12 @@ class Evenement
      */
     private $url;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Season", inversedBy="evenements")
+     * @ORM\JoinColumn(name="id_season", referencedColumnName="id_season")
+     */
+    protected $season;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -119,7 +124,7 @@ class Evenement
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -140,13 +145,13 @@ class Evenement
     /**
      * Get date
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDateStart()
     {
         return $this->dateStart;
     }
-    
+
     /**
      * Set dateEnd
      *
@@ -161,7 +166,7 @@ class Evenement
     /**
      * Get date
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDateEnd()
     {
@@ -183,7 +188,7 @@ class Evenement
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -204,7 +209,7 @@ class Evenement
     /**
      * Get description
      *
-     * @return text 
+     * @return text
      */
     public function getDescription()
     {
@@ -229,7 +234,6 @@ class Evenement
     }
 
 
-
     /**
      * Set archive
      *
@@ -244,7 +248,7 @@ class Evenement
     /**
      * Get archive
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getArchive()
     {
@@ -265,33 +269,36 @@ class Evenement
     /**
      * Get public
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublic()
     {
         return $this->public;
     }
-    
-	/**
-	 * @return the $type
-	 */
-	public function getType() {
-		return $this->type;
-	}
 
-	/**
-	 * @param string $type
-	 */
-	public function setType($type) {
-		$this->type = $type;
-		return $this;
-	}
+    /**
+     * @return the $type
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
 
     /**
      * Retourne le liste des différents types d'évènement
      * @return array
      */
-    static function getTypesEvenements() {
+    static function getTypesEvenements()
+    {
         $typesEvenement = array();
 
         $typesEvenement[self::EVENEMENT_TYPE_CONCERT] = 'Concert';
@@ -332,13 +339,12 @@ class Evenement
 
 
     /* ---------------- PARTENAIRES ---------------- */
-
     /**
      *
      * @param Partenaire $partenaire
      */
-    public function addPartenaire($partenaire) {
-        // var_dump( $tag);exit;
+    public function addPartenaire($partenaire)
+    {
         $partenaire->addEvenement($this);
         $this->partenaires[] = $partenaire;
         return $this;
@@ -356,21 +362,23 @@ class Evenement
     /**
      * @return Evenement
      */
-    public function getPartenaires() {
+    public function getPartenaires()
+    {
         return $this->partenaires;
     }
 
     /**
      * @return Evenement
      */
-    public function setPartenaires(ArrayCollection $partenaires) {
+    public function setPartenaires(ArrayCollection $partenaires)
+    {
         $this->partenaires = $partenaires;
         return $this;
     }
 
     public function __toString()
     {
-        return $this->title ? : 'New Event';
+        return $this->title ?: 'New Event';
     }
 
     /**
@@ -396,37 +404,32 @@ class Evenement
 
     protected function _build_SystemName($str, $separator = 'dash', $lowercase = TRUE)
     {
-        if ($separator == 'dash')
-        {
-            $search     = '_';
-            $replace    = '-';
-        }
-        else
-        {
-            $search     = '-';
-            $replace    = '_';
+        if ($separator == 'dash') {
+            $search = '_';
+            $replace = '-';
+        } else {
+            $search = '-';
+            $replace = '_';
         }
 
         $trans = array(
-            '&\#\d+?;'              => '',
-            '&\S+?;'                => '',
-            '\s+'                   => $replace,
-            '[^a-z0-9\-\._]'        => '',
-            $replace.'+'            => $replace,
-            $replace.'$'            => $replace,
-            '^'.$replace            => $replace,
-            '\.+$'                  => ''
+            '&\#\d+?;' => '',
+            '&\S+?;' => '',
+            '\s+' => $replace,
+            '[^a-z0-9\-\._]' => '',
+            $replace . '+' => $replace,
+            $replace . '$' => $replace,
+            '^' . $replace => $replace,
+            '\.+$' => ''
         );
 
         $str = strip_tags($str);
 
-        foreach ($trans as $key => $val)
-        {
-            $str = preg_replace("#".$key."#i", $val, $str);
+        foreach ($trans as $key => $val) {
+            $str = preg_replace("#" . $key . "#i", $val, $str);
         }
 
-        if ($lowercase === TRUE)
-        {
+        if ($lowercase === TRUE) {
             $str = strtolower($str);
         }
 
@@ -435,4 +438,27 @@ class Evenement
 
         return $str;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSeason()
+    {
+        return $this->season;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setSeason($season)
+    {
+        $this->season = $season;
+        return $this;
+    }
+
+    public function hasSeason(){
+        return (bool)$this->season;
+    }
+
+
 }

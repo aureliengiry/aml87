@@ -8,7 +8,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 use Aml\Bundle\BlogBundle\Admin\BlogAdmin;
 
-
+/**
+ * Class EvenementAdmin
+ * @package Aml\Bundle\EvenementsBundle\Admin
+ */
 class EvenementAdmin extends Admin
 {
     // setup the default sort column and order
@@ -31,7 +34,14 @@ class EvenementAdmin extends Admin
                     'empty_value' => 'Sélectionnez le type d\'événement'
                 ))
 
-                //->add('dateStart')
+                ->add('season', 'entity', array(
+                    'label' => 'Saison',
+                    'class' => 'AmlEvenementsBundle:Season',
+                    'property' => 'name',
+                    'empty_value' => 'Sélectionnez une saison',
+                    'attr' => array('class'=>'uiform')
+                ))
+
                 ->add('dateStart', 'date', array(
                     'label' => 'Date',
                     'widget' => 'single_text',
