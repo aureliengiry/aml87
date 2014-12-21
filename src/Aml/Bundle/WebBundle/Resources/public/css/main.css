@@ -457,11 +457,13 @@ a.black {
     text-align: left;
 }
 
-#blocs-evenement-articles {
+#blocs-evenement-articles,
+    #blocs-evenement-partenaires {
     margin: 0;
 }
 
-#blocs-evenement-articles li {
+#blocs-evenement-articles li,
+#blocs-evenement-partenaires li {
     padding: 5px 0;
 }
 
@@ -486,6 +488,13 @@ a.black {
     text-transform: capitalize;
 }
 
+#blocs-evenement-partenaires .partenaire-visuel{
+    padding-bottom: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 5px;
+    width: 100%;
+}
 /* ------------------- Pagination --------------- */
 #global .Paginator a:visited:hover, #global .Paginator a:hover, #global .Paginator a:active {
     color: red;
