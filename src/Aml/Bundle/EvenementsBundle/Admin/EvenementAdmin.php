@@ -102,6 +102,8 @@ class EvenementAdmin extends Admin
             ->addIdentifier('title')
             ->addIdentifier('type')
             ->addIdentifier('dateStart')
+            ->add('archive')
+            ->add('public')
         ;
     }
 
