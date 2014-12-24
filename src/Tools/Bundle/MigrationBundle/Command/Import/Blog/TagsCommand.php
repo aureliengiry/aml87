@@ -74,7 +74,7 @@ EOF
     protected function _importContent()
     {
         $this->output->writeln('<info>Import tags :</info>');
-        $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
 
         if (!empty($this->_oldData)) {
             foreach ($this->_oldData as $item) {

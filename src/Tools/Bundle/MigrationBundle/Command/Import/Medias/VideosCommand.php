@@ -70,7 +70,7 @@ EOF
     protected function _importVideos()
     {
         $this->output->writeln('<info>Import videos :</info>');
-        $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
 
         if (!empty($this->_oldVideos)) {
             foreach ($this->_oldVideos as $video) {

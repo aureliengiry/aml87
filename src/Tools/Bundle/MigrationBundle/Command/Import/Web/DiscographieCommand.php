@@ -85,7 +85,7 @@ EOF
     {
         $this->output->writeln('<info>Import Discographie</info>');
 
-        $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
 
         if (!empty($this->_oldDiscs)) {
             foreach ($this->_oldDiscs as $album) {

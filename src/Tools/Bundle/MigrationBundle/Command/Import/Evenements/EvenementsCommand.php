@@ -85,7 +85,7 @@ EOF
 
         $this->output->writeln('<info>Import evenements :</info>');
 
-        $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
 
         if (!empty($this->_oldData)) {
             foreach ($this->_oldData as $item) {

@@ -70,7 +70,7 @@ EOF
     protected function _importImages()
     {
         $this->output->writeln('<info>Import images :</info>');
-        $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
 
         if (!empty($this->_oldImages)) {
             foreach ($this->_oldImages as $image) {

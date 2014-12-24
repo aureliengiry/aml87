@@ -91,7 +91,7 @@ EOF
      */
     protected function _importContent()
     {
-        $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
 
         if (!empty($this->_oldArticles)) {
             foreach ($this->_oldArticles as $article) {
