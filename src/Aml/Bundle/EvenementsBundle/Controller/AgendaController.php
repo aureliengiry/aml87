@@ -49,12 +49,9 @@ class AgendaController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $dateStart  = new \DateTime();
-        $dateStart->setDate('2014','09','01');
 
         $evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
         $events = $evenementRepository->getNextEvenements(array(
-                'dateStart' => $dateStart,
                 'public' => 1,
                 'archive' => 0,
                 'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT)

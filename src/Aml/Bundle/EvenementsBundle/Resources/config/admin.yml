@@ -11,4 +11,15 @@ services:
         calls:
             - [ setTranslationDomain, [AmlEvenementsBundle]]
 
+    sonata.admin.evenement.seasons:
+        class: Aml\Bundle\EvenementsBundle\Admin\SeasonAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Agenda, label: "Saisons" }
+        arguments:
+            - ~
+            - Aml\Bundle\EvenementsBundle\Entity\Season
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlEvenementsBundle]]
+
 

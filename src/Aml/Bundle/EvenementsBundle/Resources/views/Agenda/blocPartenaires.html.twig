@@ -5,7 +5,7 @@
     {% for key,partenaire  in entity.partenaires %}
         <li>
             {% if partenaire.logo %}
-                <div class="blog-visuel">
+                <div class="partenaire-visuel">
                     <img src="{{ asset(partenaire.logo.webpath) }}" alt="{{ partenaire.name }}" title="{{ partenaire.name }}"
                          class="imagecache imagecache-visuel_blog" width="100">
                 </div>
