@@ -105,7 +105,8 @@ class Evenement
     /**
      * @var string url
      *
-     * @ORM\Column(name="url", type="string", length=255, unique=true)
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"})
+     * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;
 
@@ -181,7 +182,6 @@ class Evenement
     public function setTitle($title)
     {
         $this->title = $title;
-        $this->setUrl();
         return $this;
     }
 
@@ -352,6 +352,7 @@ class Evenement
 
     /**
      * Fonction to delete partenaire
+     *
      * @param Partenaire $partenaire
      */
     public function removePartenaire($partenaire)
@@ -386,9 +387,9 @@ class Evenement
      *
      * @param string $url
      */
-    public function setUrl()
+    public function setUrl($url)
     {
-        $this->url = $this->_build_SystemName($this->title);
+        $this->url = $url;
         return $this;
     }
 
@@ -400,43 +401,6 @@ class Evenement
     public function getUrl()
     {
         return $this->url;
-    }
-
-    protected function _build_SystemName($str, $separator = 'dash', $lowercase = TRUE)
-    {
-        if ($separator == 'dash') {
-            $search = '_';
-            $replace = '-';
-        } else {
-            $search = '-';
-            $replace = '_';
-        }
-
-        $trans = array(
-            '&\#\d+?;' => '',
-            '&\S+?;' => '',
-            '\s+' => $replace,
-            '[^a-z0-9\-\._]' => '',
-            $replace . '+' => $replace,
-            $replace . '$' => $replace,
-            '^' . $replace => $replace,
-            '\.+$' => ''
-        );
-
-        $str = strip_tags($str);
-
-        foreach ($trans as $key => $val) {
-            $str = preg_replace("#" . $key . "#i", $val, $str);
-        }
-
-        if ($lowercase === TRUE) {
-            $str = strtolower($str);
-        }
-
-        $str = trim(stripslashes($str));
-        $str = str_replace(array('.'), array('-'), $str);
-
-        return $str;
     }
 
     /**

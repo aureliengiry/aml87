@@ -1,3 +1,7 @@
+aml_url_rewrite:
+    resource: "@AmlUrlRewriteBundle/Resources/config/routing.yml"
+    prefix:   /
+
 aml_discography:
     resource: "@AmlDiscographyBundle/Resources/config/routing.yml"
     prefix:   /

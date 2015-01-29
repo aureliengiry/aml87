@@ -78,7 +78,7 @@ class AgendaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (false === $id) {
-            $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->findOneBy(array('url' => $url_key));
+            $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->getEventByUrlKey($url_key);
         } else {
             $entity = $em->getRepository('AmlEvenementsBundle:Evenement')->find($id);
         }

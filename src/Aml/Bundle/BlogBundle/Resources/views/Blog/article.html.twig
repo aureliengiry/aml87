@@ -1,6 +1,6 @@
 <h2>
-    {% if entity.url is defined and entity.url is not empty %}
-        <a href="{{ path('blog_show_rewrite', { 'url_key': entity.url }) }}"
+    {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+        <a href="{{ path('blog_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
            title="Voir l'article : {{ entity.title }}">{{ entity.title }}</a>
     {% else %}
         <a href="{{ path('blog_show', { 'id': entity.id }) }}"
@@ -37,8 +37,8 @@
 
 <p class="container-wysiwyg">
     {{ entity.body|raw|wordWarp }}
-    {% if entity.url is defined and entity.url is not empty %}
-        <a href="{{ path('blog_show_rewrite', { 'url_key': entity.url }) }}"
+    {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+        <a href="{{ path('blog_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
            title="Lire l'article : {{ entity.title }}">Lire la suite</a>
     {% else %}
         <a href="{{ path('blog_show', { 'id': entity.id }) }}"

@@ -11,6 +11,7 @@
 
 namespace Tools\Bundle\MigrationBundle\Command\Import\Evenements;
 
+use Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 use Tools\Bundle\MigrationBundle\Command\Import\AbstractCommand;
 use Aml\Bundle\EvenementsBundle\Entity\Evenement;
+use Aml\Bundle\UrlRewriteBundle\Entity\Url;
 
 /**
  * Class EvenementsCommand
@@ -78,11 +80,53 @@ EOF
     }
 
     /**
+     * Check if url key already exist and rename if needed
+     *
+     * @param $urlKey
+     *
+     * @return string
+     */
+    protected function _checkAndBuildUrlKey($urlKey)
+    {
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
+
+        $qb = $em->getRepository('AmlUrlRewriteBundle:Url')->createQueryBuilder('e');
+        $qb->select('count(e.id)')
+            ->where('e INSTANCE OF AmlUrlRewriteBundle:UrlEvenement')
+            ->andWhere('e.urlKey like :url_key')
+            ->setParameter('url_key', $urlKey);
+        $nbUrl = $qb->getQuery()->getSingleScalarResult();
+
+        if ($nbUrl > 0) {
+            $i = (int)$nbUrl + 1;
+            $urlAlreadyExist = true;
+            while ($urlAlreadyExist === true) {
+                $updatedUrlKey = $urlKey . '-' . $i;
+
+                $qb = $em->getRepository('AmlUrlRewriteBundle:Url')->createQueryBuilder('e');
+                $qb->select('count(e.id)')
+                    ->where('e INSTANCE OF AmlUrlRewriteBundle:UrlEvenement')
+                    ->andWhere('e.urlKey like :url_key')
+                    ->setParameter('url_key', $updatedUrlKey);
+                $findEntityUrl = $qb->getQuery()->getSingleScalarResult();
+
+                if ($findEntityUrl == 0) {
+                    $urlAlreadyExist = false;
+                    return $updatedUrlKey;
+                } else {
+                    $i++;
+                }
+            }
+        } else {
+            return $urlKey;
+        }
+    }
+
+    /**
      * Import Content
      */
     protected function _importContent()
     {
-
         $this->output->writeln('<info>Import evenements :</info>');
 
         $em = $this->getContainer()->get('doctrine')->getManager('default');
@@ -101,6 +145,21 @@ EOF
                     ->setDateStart($dateStart)
                     ->setArchive(0)
                     ->setType('concert');
+
+                // Set Url
+                if (isset($item['titre']) && !empty($item['titre'])) {
+
+
+                    $newEntityUrl = new UrlEvenement();
+                    $newEntityUrl->setUrlKey(utf8_encode($item['titre']));
+
+                    $urlKey = $newEntityUrl->getUrlKey();
+                    $finalUrlKey = $this->_checkAndBuildUrlKey($urlKey);
+
+                    $newEntityUrl->setUrlKey($finalUrlKey);
+
+                    $entity->setUrl($newEntityUrl);
+                }
 
                 $em->persist($entity);
 

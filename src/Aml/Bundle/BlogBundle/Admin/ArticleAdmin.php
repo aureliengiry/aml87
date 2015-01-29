@@ -21,7 +21,9 @@ class ArticleAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('title', 'text')
-
+                ->add('url', 'text',array(
+                    'required' => false
+                ))
                 ->add('category', 'entity', array(
                     'label' => 'Catégorie',
                     'class' => 'AmlBlogBundle:Category',
@@ -55,8 +57,6 @@ class ArticleAdmin extends Admin
                     'attr'=>array('data-sonata-select2'=>'true')
                 ))
             ->end();
-
-
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -85,7 +85,6 @@ class ArticleAdmin extends Admin
      */
     public function getTemplate($name)
     {
-        //var_dump( $name );
         if (isset($this->templates[$name])) {
             return $this->templates[$name];
         }
@@ -98,7 +97,6 @@ class ArticleAdmin extends Admin
      */
     public function preUpdate($article)
     {
-
         $article->setUpdated(new \DateTime);
 
         // $this->_setLogoTitle($article);
