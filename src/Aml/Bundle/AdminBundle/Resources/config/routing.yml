@@ -1,3 +1,0 @@
-aml_admin_homepage:
-    pattern:  /admin/
-    defaults: { _controller: AmlAdminBundle:Default:index }

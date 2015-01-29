@@ -173,11 +173,17 @@ a.black {
     float: left;
     width: 325px;
     height: 149px;
+    text-align: center;
 }
 
 #logo span {
     position: absolute;
     text-indent: -6999px;
+}
+
+#logo img {
+    height: 152px;
+    width: 210px;
 }
 
 /* --- fin banière --- */

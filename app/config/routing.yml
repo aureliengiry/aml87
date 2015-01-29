@@ -10,10 +10,6 @@ tools_migration:
     resource: "@ToolsMigrationBundle/Resources/config/routing.yml"
     prefix:   /
 
-aml_admin:
-    resource: "@AmlAdminBundle/Resources/config/routing.yml"
-    prefix:   /
-
 aml_medias:
     resource: "@AmlMediasBundle/Resources/config/routing.yml"
     prefix:   /
@@ -51,12 +47,13 @@ aml_web:
 #    pattern:   /login_check
     
 _imagine:
+    host:     medias.aml87.fr
     resource: .
     type:     imagine
 
 admin_sonata:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin-sonata
+    prefix: /admin
 
 _sonata_admin:
     resource: .
