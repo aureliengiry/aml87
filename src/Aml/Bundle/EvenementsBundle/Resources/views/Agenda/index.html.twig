@@ -18,8 +18,8 @@
                 {% for entity in day %}
                     <div class="event-item">
                         <h2>
-                            {% if entity.url is defined and entity.url is not empty %}
-                                <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url }) }}"
+                            {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+                                <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url.urlKey }) }}"
                                    title="{{ entity.title }}">{{ entity.title }}</a>
                             {% else %}
                                 <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}"
@@ -39,8 +39,8 @@
                         <div class="event-item-structure event-item-container-description">
                             <div>
                                 {{ entity.description|raw|wordWarp }}
-                                {% if entity.url is defined and entity.url is not empty %}
-                                    <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url }) }}"
+                                {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+                                    <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url.urlKey }) }}"
                                        title="{{ entity.title }}">{{ entity.title }}</a>
                                 {% else %}
                                     <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}"

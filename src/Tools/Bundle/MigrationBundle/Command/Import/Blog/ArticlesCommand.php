@@ -7,6 +7,7 @@
 
 namespace Tools\Bundle\MigrationBundle\Command\Import\Blog;
 
+use Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 use Tools\Bundle\MigrationBundle\Command\Import\AbstractCommand;
 use Aml\Bundle\BlogBundle\Entity\Article;
+use Aml\Bundle\UrlRewriteBundle\Entity\Url;
 
 /**
  * Class ArticlesCommand
@@ -87,6 +89,49 @@ EOF
     }
 
     /**
+     * Check if url key already exist and rename if needed
+     *
+     * @param $urlKey
+     *
+     * @return string
+     */
+    protected function _checkAndBuildUrlKey($urlKey)
+    {
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
+
+        $qb = $em->getRepository('AmlUrlRewriteBundle:Url')->createQueryBuilder('e');
+        $qb->select('count(e.id)')
+            ->where('e INSTANCE OF AmlUrlRewriteBundle:UrlArticle')
+            ->andWhere('e.urlKey like :url_key')
+            ->setParameter('url_key', $urlKey);
+        $nbUrl = $qb->getQuery()->getSingleScalarResult();
+
+        if ($nbUrl > 0) {
+            $i = (int)$nbUrl + 1;
+            $urlAlreadyExist = true;
+            while ($urlAlreadyExist === true) {
+                $updatedUrlKey = $urlKey . '-' . $i;
+
+                $qb = $em->getRepository('AmlUrlRewriteBundle:Url')->createQueryBuilder('e');
+                $qb->select('count(e.id)')
+                    ->where('e INSTANCE OF AmlUrlRewriteBundle:UrlArticle')
+                    ->andWhere('e.urlKey like :url_key')
+                    ->setParameter('url_key', $updatedUrlKey);
+                $findEntityUrl = $qb->getQuery()->getSingleScalarResult();
+
+                if ($findEntityUrl == 0) {
+                    $urlAlreadyExist = false;
+                    return $updatedUrlKey;
+                } else {
+                    $i++;
+                }
+            }
+        } else {
+            return $urlKey;
+        }
+    }
+
+    /**
      * Import Content
      */
     protected function _importContent()
@@ -113,6 +158,19 @@ EOF
 
                 if (isset($article['status']) && $article['status'] == 1) {
                     $entityArticle->setPublished($changedDate);
+                }
+
+                // Set Url
+                if (isset($article['titre']) && !empty($article['titre'])) {
+                    $newEntityUrl = new UrlArticle();
+                    $newEntityUrl->setUrlKey(utf8_encode($article['titre']));
+
+                    $urlKey = $newEntityUrl->getUrlKey();
+
+                    $finalUrlKey = $this->_checkAndBuildUrlKey($urlKey);
+                    $newEntityUrl->setUrlKey($finalUrlKey);
+
+                    $entityArticle->setUrl($newEntityUrl);
                 }
 
                 // Set category
@@ -145,7 +203,7 @@ EOF
 
                 // Set Video
                 if (isset($article['videoId']) && !empty($article['videoId'])) {
-                    $entityBlogVideo= $em->getRepository('AmlMediasBundle:Video')->findOneBy(
+                    $entityBlogVideo = $em->getRepository('AmlMediasBundle:Video')->findOneBy(
                         array('providerId' => utf8_encode($article['videoId']))
                     );
 
@@ -157,10 +215,10 @@ EOF
                 $em->persist($entityArticle);
 
                 $this->output->writeln('<info>-' . utf8_decode($entityArticle->getTitle()) . '</info>');
+                $em->flush();
 
             }
 
-            $em->flush();
         }
     }
 

@@ -8,8 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Aml\Bundle\WebBundle\Entity\Media
  *
- * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\MediaRepository")
- *
+ * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\MediaRepository") *
  *
  * @ORM\Table(name="mediasbundle_medias")
  * @ORM\InheritanceType("SINGLE_TABLE")

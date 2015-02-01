@@ -92,7 +92,7 @@ class BlogController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (false === $id) {
-            $entity = $em->getRepository('AmlBlogBundle:Article')->findOneBy(array('url' => $url_key));
+            $entity = $em->getRepository('AmlBlogBundle:Article')->getArticleByUrlKey($url_key);
         } else {
             $entity = $em->getRepository('AmlBlogBundle:Article')->find($id);
         }

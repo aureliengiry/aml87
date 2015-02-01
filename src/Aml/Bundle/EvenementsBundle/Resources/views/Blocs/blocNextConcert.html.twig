@@ -6,8 +6,8 @@
 
     <div class="container-date-description-block">
         {{ nextConcert.description|raw|wordWarp(300) }}
-        {% if nextConcert.url is defined and nextConcert.url is not empty %}
-            <a href="{{ path('agenda_show_event_rewrite', { 'url_key': nextConcert.url }) }}"
+        {% if nextConcert.url.urlKey is defined and nextConcert.url.urlKey is not empty %}
+            <a href="{{ path('agenda_show_event_rewrite', { 'url_key': nextConcert.url.urlKey }) }}"
                title="En savoir plus : {{ nextConcert.title }}">Lire la suite</a>
         {% else %}
             <a href="{{ path('agenda_show_event', { 'id': nextConcert.id }) }}"

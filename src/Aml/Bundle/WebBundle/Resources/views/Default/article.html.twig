@@ -1,8 +1,8 @@
 {% if lastBlogArticle  %}
 <div id="blog-last-article-block" class="blog-article">
 	<h3>
-        {% if lastBlogArticle.url is defined and lastBlogArticle.url is not empty %}
-            <a href="{{ path('blog_show_rewrite', { 'url_key': lastBlogArticle.url }) }}"
+        {% if lastBlogArticle.url.urlKey is defined and lastBlogArticle.url.urlKey is not empty %}
+            <a href="{{ path('blog_show_rewrite', { 'url_key': lastBlogArticle.url.urlKey }) }}"
                title="Voir l'article : {{ lastBlogArticle.title }}">{{ lastBlogArticle.title }}</a>
         {% else %}
             <a href="{{ path('blog_show', { 'id': lastBlogArticle.id }) }}"
@@ -32,8 +32,8 @@
 
 	<p class="container-wysiwyg">
 		{{lastBlogArticle.body|wordWarp}}
-        {% if lastBlogArticle.url is defined and lastBlogArticle.url is not empty %}
-            <a href="{{ path('blog_show_rewrite', { 'url_key': lastBlogArticle.url }) }}"
+        {% if lastBlogArticle.url.urlKey is defined and lastBlogArticle.url.urlKey is not empty %}
+            <a href="{{ path('blog_show_rewrite', { 'url_key': lastBlogArticle.url.urlKey }) }}"
                title="Lire l'article : {{ lastBlogArticle.title }}">Lire la suite</a>
         {% else %}
             <a href="{{ path('blog_show', { 'id': lastBlogArticle.id }) }}"
@@ -47,8 +47,6 @@
             {% if key > 0 %}, {% endif %}<a class="active" title="{{ tag.description }}" href="{{ path('blog',{'tag' : tag.systemName}) }}">{{ tag.name }}</a>
         {% endfor %}
     {% endif %}
-
-
 
 </div>
 {% endif %}

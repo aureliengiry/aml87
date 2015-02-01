@@ -138,4 +138,29 @@ class EvenementRepository extends EntityRepository
             return null;
         }
     }
+
+    public function getEventByUrlKey($urlKey){
+
+        $q = $this->getEntityManager()->createQueryBuilder();
+        $q
+            ->select('e')
+            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->join('e.url', 'u')
+            ->where('u.urlKey = :url_key')
+            ->setMaxResults(1);
+
+        $params = array(
+            'url_key' => $urlKey
+        );
+
+        $q->setParameters($params);
+
+        $query = $q->getQuery();
+
+        try {
+            return $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
 }

@@ -16,8 +16,8 @@
             {% endif %}
 
             <div class="infos">
-                {% if article.url is defined and article.url is not empty %}
-                    <a href="{{ path('blog_show_rewrite', { 'url_key': article.url }) }}"
+                {% if article.url.urlKey is defined and article.url.urlKey is not empty %}
+                    <a href="{{ path('blog_show_rewrite', { 'url_key': article.url.urlKey }) }}"
                        class="title"
                        title="Voir l'article : {{ article.title }}" >{{ article.title }}</a>
                 {% else %}
