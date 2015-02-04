@@ -20,13 +20,25 @@
 				</div>
 				<div class="disc-description-list">
 					<h3>
-						<a href="{{ path('aml_discography_album', { 'id': entity.id }) }}" title="Voir l'article : {{ entity.title }}" >{{ entity.title }}</a>
+                        {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+                            <a href="{{ path('discography_album_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
+                               title="Voir l'album : {{ entity.title }}">{{ entity.title }}</a>
+                        {% else %}
+                            <a href="{{ path('discography_album_show', { 'id': entity.id }) }}"
+                               title="Voir l'album : {{ entity.title }}">{{ entity.title }}</a>
+                        {% endif %}
 					</h3>
 					<span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>	
 					
 					<p>{{ entity.description|raw|wordWarp }}</p>
-					
-					<a href="{{ path('aml_discography_album', { 'id': entity.id }) }}" title="Voir l'album : {{ entity.title }}" >lire la suite</a>
+
+                    {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+                        <a href="{{ path('discography_album_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
+                           title="Voir l'album : {{ entity.title }}">Lire la suite</a>
+                    {% else %}
+                        <a href="{{ path('discography_album_show', { 'id': entity.id }) }}"
+                           title="Voir l'album : {{ entity.title }}">Lire la suite</a>
+                    {% endif %}
 						
 				</div>	
 			</div>

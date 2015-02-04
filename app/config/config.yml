@@ -7,6 +7,7 @@ imports:
     - { resource: @AmlMediasBundle/Resources/config/admin.yml }
     - { resource: @AmlEvenementsBundle/Resources/config/admin.yml }
     - { resource: @AmlContactUsBundle/Resources/config/admin.yml }
+    - { resource: @AmlDiscographyBundle/Resources/config/admin.yml }
 
 
 sonata_block:

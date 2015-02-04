@@ -36,11 +36,11 @@ class AlbumAdmin extends Admin
                 ))
             ->end()
             ->with('Tracks')
-                ->add('tracks', 'textarea', array(
-                    'label' => 'Pistes',
-                    'attr' => array('size' => 15, 'data-help' => 'Liste des morceaux de l\'album'),
+                ->add('tracks', 'sonata_type_model', array(
                     'required' => false,
-                    'wysiwyg' => true
+                    'expanded' => true,
+                    'multiple' => true,
+                    'by_reference' => false
                 ))
             ->end()
         ;

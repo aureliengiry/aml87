@@ -24,10 +24,28 @@
 		</div>
 
         {% if entity.tracks is not empty %}
-		<div class="disc-list-tracks">
-			<h3>Composition du disque</h3>
-			{{ entity.tracks|raw }}
-		</div>
+            <div class="disc-list-tracks">
+                <h3>Composition du disque</h3>
+
+                <table class="table table-condensed table-striped">
+                    <thead>
+                    <tr>
+                        <th>N°piste</th>
+                        <th>Titre</th>
+                        <th>Compositeur(s)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for key,track in entity.tracks %}
+                        <tr>
+                            <td>{{ track.number }}</td>
+                            <td>{{ track.title }}</td>
+                            <td>{{ track.composer }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         {% endif %}
 		
 		

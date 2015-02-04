@@ -12,15 +12,25 @@
 	</div>
 	<div class="disc-description-list">
 		<h3>
-			<a href="{{ path('aml_discography_album', { 'id': lastAlbum.id }) }}"
-               title="Voir l'article : {{ lastAlbum.title }}" >{{ lastAlbum.title }}</a>
+            {% if lastAlbum.url.urlKey is defined and lastAlbum.url.urlKey is not empty %}
+                <a href="{{ path('discography_album_show_rewrite', { 'url_key': lastAlbum.url.urlKey }) }}"
+                   title="Voir l'album : {{ lastAlbum.title }}">{{ lastAlbum.title }}</a>
+            {% else %}
+                <a href="{{ path('discography_album_show', { 'id': lastAlbum.id }) }}"
+                   title="Voir l'album : {{ lastAlbum.title }}">{{ lastAlbum.title }}</a>
+            {% endif %}
 		</h3>
 		<span class="disc-date-sortie">Date de sortie : {{ lastAlbum.date|date('d-m-Y') }}</span>	
 		
 		<p>{{ lastAlbum.description|raw|wordWarp }}</p>
-		
-		<a href="{{ path('aml_discography_album', { 'id': lastAlbum.id }) }}"
-           title="Voir l'album : {{ lastAlbum.title }}" >Lire la suite</a>
+
+        {% if lastAlbum.url.urlKey is defined and lastAlbum.url.urlKey is not empty %}
+            <a href="{{ path('discography_album_show_rewrite', { 'url_key': lastAlbum.url.urlKey }) }}"
+               title="Voir l'album : {{ lastAlbum.title }}">Lire la suite</a>
+        {% else %}
+            <a href="{{ path('discography_album_show', { 'id': lastAlbum.id }) }}"
+               title="Voir l'album : {{ lastAlbum.title }}">Lire la suite</a>
+        {% endif %}
 	</div>	
 </div>
 {% endif %}

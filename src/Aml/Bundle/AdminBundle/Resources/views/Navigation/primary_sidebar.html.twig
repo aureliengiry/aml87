@@ -45,10 +45,6 @@
                 </li>
 
                 <li class="">
-                    <a href="{{ path('admin_aml_discography_album_list') }}"> <i class="icon-info-sign"></i> Discrographie</a>
-                </li>
-
-                <li class="">
                     <a href="{{ path('admin_aml_web_link_list') }}"><i class="icon-th-large"></i> Liens</a>
                 </li>
             </ul>
@@ -64,6 +60,23 @@
             <span class="glow"></span>
             <a href="{{ path('admin_aml_evenements_evenement_list') }}" title="Gestion des évènements"> <i
                         class="icon-edit icon-2x"></i> <span>Evènements</span></a>
+        </li>
+
+        <li class="dark-nav">
+            <span class="glow"></span>
+            <a class="accordion-toggle collapsed " data-toggle="collapse" href="#admin_aml_discography" title="Gestion de la discographie">
+                <i class="icon-bar-chart icon-2x"></i>
+                <span>Discographie</span>
+            </a>
+            <ul id="admin_aml_discography" class="collapse ">
+                <li>
+                    <a href="{{ path('admin_aml_discography_album_list') }}"> <i class="icon-info-sign"></i> Albums</a>
+                </li>
+                <li>
+                    <a href="{{ path('admin_aml_discography_track_list') }}"> <i class="icon-info-sign"></i> Titres</a>
+                </li>
+
+            </ul>
         </li>
 
         <li class="dark-nav">

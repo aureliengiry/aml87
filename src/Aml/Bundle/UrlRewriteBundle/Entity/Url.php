@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="entity_source", type="string",length=50)
- * @ORM\DiscriminatorMap({"article" = "UrlArticle", "evenement" = "UrlEvenement"})
+ * @ORM\DiscriminatorMap({"article" = "UrlArticle", "evenement" = "UrlEvenement","discography" = "UrlDiscography"})
  */
 class Url
 {
@@ -109,6 +109,12 @@ class Url
 
         $str = trim(stripslashes($str));
         $str = str_replace(array('.'), array('-'), $str);
+
+        // Check and clean last character
+        $lastCharacter = substr($str, -1);
+        if ($lastCharacter == '-') {
+            $str = substr($str, 0, -1);
+        }
 
         return $str;
     }

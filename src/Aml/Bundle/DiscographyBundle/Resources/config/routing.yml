@@ -1,6 +1,0 @@
-aml_discography_homepage:
-    path:  /discographie
-    defaults: { _controller: AmlDiscographyBundle:Default:index }
-aml_discography_album:
-    path:  /discographie/{id}
-    defaults: { _controller: AmlDiscographyBundle:Default:show }
