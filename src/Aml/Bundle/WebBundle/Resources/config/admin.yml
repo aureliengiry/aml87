@@ -11,17 +11,6 @@ services:
         calls:
             - [ setTranslationDomain, [AmlWebBundle]]
 
-    sonata.admin.album:
-        class: Aml\Bundle\DiscographyBundle\Admin\AlbumAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: Contenus, label: "Album" }
-        arguments:
-            - ~
-            - Aml\Bundle\DiscographyBundle\Entity\Album
-            - 'SonataAdminBundle:CRUD'
-        calls:
-            - [ setTranslationDomain, [AmlWebBundle]]
-
     sonata.admin.page:
         class: Aml\Bundle\WebBundle\Admin\PageAdmin
         tags:

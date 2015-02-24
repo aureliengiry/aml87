@@ -1,23 +1,24 @@
 <?php
-
 namespace Aml\Bundle\DiscographyBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class DefaultController
+ *
  * @package Aml\Bundle\DiscographyBundle\Controller
+ * @Route("/dicographie")
  */
-class DefaultController extends Controller
+class DiscographyController extends Controller
 {
     /**
      * Lists all Album entities.
      *
-     * @Route("/", name="discographie")
+     * @Route("/", name="discography")
      * @Template()
      */
     public function indexAction()
@@ -28,31 +29,34 @@ class DefaultController extends Controller
         $entities = $repo->findBy(
             array('public' => "1"),
             array('date' => 'DESC')
-
         );
 
         return array('entities' => $entities);
     }
 
-
     /**
      * Finds and displays a Album entity.
      *
-     * @Route("/{id}", name="discographie_album")
+     * @Route("/album/id/{id}", name="discography_album_show")
+     * @Route("/album/{url_key}.html", name="discography_album_show_rewrite")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($id = false, $url_key = null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AmlDiscographyBundle:Album')->find($id);
+        if (false === $id || !empty($url_key)) {
+            $entity = $em->getRepository('AmlDiscographyBundle:Album')->getAlbumByUrlKey($url_key);
+        } else {
+            $entity = $em->getRepository('AmlDiscographyBundle:Album')->find($id);
+        }
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Album entity.');
         }
 
         return array(
-            'entity'      => $entity
+            'entity' => $entity
         );
     }
 

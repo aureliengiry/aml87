@@ -2,10 +2,6 @@ aml_url_rewrite:
     resource: "@AmlUrlRewriteBundle/Resources/config/routing.yml"
     prefix:   /
 
-aml_discography:
-    resource: "@AmlDiscographyBundle/Resources/config/routing.yml"
-    prefix:   /
-
 aml_contact_us:
     resource: "@AmlContactUsBundle/Resources/config/routing.yml"
     prefix:   /
@@ -30,6 +26,11 @@ aml_users:
 
 aml_blog:
     resource: "@AmlBlogBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+aml_discography:
+    resource: "@AmlDiscographyBundle/Controller/"
     type:     annotation
     prefix:   /
 

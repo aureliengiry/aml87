@@ -3,6 +3,7 @@
 namespace Aml\Bundle\DiscographyBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Aml\Bundle\DiscographyBundle\Entity\Album
@@ -29,18 +30,19 @@ class Album
     private $title;
 
     /**
+     * @var string url
+     *
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"})
+     * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
+     */
+    private $url;
+
+    /**
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-
-    /**
-     * @var array $titres
-     *
-     * @ORM\Column(name="titres", type="array")
-     */
-    private $titres;
 
     /**
      * @var boolean $public
@@ -63,11 +65,15 @@ class Album
     private $image;
 
     /**
-     * @var text $tracks
-     *
-     * @ORM\Column(name="tracks", type="text")
+     * @ORM\OneToMany(targetEntity="Track", mappedBy="album",cascade={"all"})
+     * @ORM\JoinColumn(name="id_track", referencedColumnName="id_track")
      */
     private $tracks;
+
+    public function __construct()
+    {
+        $this->tracks = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -101,6 +107,28 @@ class Album
     }
 
     /**
+     * Set title
+     *
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+
+    /**
      * Set description
      *
      * @param text $description
@@ -119,27 +147,6 @@ class Album
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set titres
-     *
-     * @param array $titres
-     */
-    public function setTitres($titres)
-    {
-        $this->titres = $titres;
-        return $this;
-    }
-
-    /**
-     * Get titres
-     *
-     * @return array 
-     */
-    public function getTitres()
-    {
-        return $this->titres;
     }
 
     /**
@@ -208,19 +215,30 @@ class Album
     }
 
     /**
-     * @param \Aml\Bundle\DiscographyBundle\Entity\text $tracks
-     */
-    public function setTracks($tracks)
-    {
-        $this->tracks = $tracks;
-    }
-
-    /**
-     * @return \Aml\Bundle\DiscographyBundle\Entity\text
+     * @return mixed
      */
     public function getTracks()
     {
         return $this->tracks;
+    }
+
+    /**
+     * @param mixed $tracks
+     */
+    public function setTracks($tracks)
+    {
+        $this->tracks = $tracks;
+        return $this;
+    }
+
+    /**
+     *
+     * @param Track $track
+     */
+    public function addTrack($track)
+    {
+        $this->tracks[] = $track;
+        return $this;
     }
 
     public function __toString()

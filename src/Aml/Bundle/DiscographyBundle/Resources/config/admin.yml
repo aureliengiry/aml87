@@ -1,0 +1,25 @@
+# Aml\Bundle\UsersBundle/Resources/config/admin.yml
+services:
+    sonata.admin.album:
+        class: Aml\Bundle\DiscographyBundle\Admin\AlbumAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Discography, label: "Album" }
+        arguments:
+            - ~
+            - Aml\Bundle\DiscographyBundle\Entity\Album
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlDiscographyBundle]]
+
+    sonata.admin.album.tracks:
+            class: Aml\Bundle\DiscographyBundle\Admin\TrackAdmin
+            tags:
+                - { name: sonata.admin, manager_type: orm, group: Discography, label: "Tracks" }
+            arguments:
+                - ~
+                - Aml\Bundle\DiscographyBundle\Entity\Track
+                - 'SonataAdminBundle:CRUD'
+            calls:
+                - [ setTranslationDomain, [AmlDiscographyBundle]]
+
+

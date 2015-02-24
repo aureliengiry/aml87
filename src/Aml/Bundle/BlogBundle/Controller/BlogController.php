@@ -1,5 +1,4 @@
 <?php
-
 namespace Aml\Bundle\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

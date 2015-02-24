@@ -11,6 +11,7 @@
 
 namespace Tools\Bundle\MigrationBundle\Command\Import\Web;
 
+use Aml\Bundle\UrlRewriteBundle\Entity\UrlDiscography;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,7 +19,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Aml\Bundle\WebBundle\Entity\Album;
+use Aml\Bundle\DiscographyBundle\Entity\Album;
+use Aml\Bundle\DiscographyBundle\Entity\Track;
 use Tools\Bundle\MigrationBundle\Command\Import\AbstractCommand;
 
 /**
@@ -112,12 +114,100 @@ EOF
                     }
                 }
 
+                // Set Url
+                if (isset($album['titre']) && !empty($album['titre'])) {
+                    $newEntityUrl = new UrlDiscography();
+                    $newEntityUrl->setUrlKey(utf8_encode($album['titre']));
+
+                    $urlKey = $newEntityUrl->getUrlKey();
+
+                    $finalUrlKey = $this->_checkAndBuildUrlKey($urlKey);
+                    $newEntityUrl->setUrlKey($finalUrlKey);
+
+                    $entityDiscographie->setUrl($newEntityUrl);
+                }
+
+                // Set tracks
+                if (isset($album['nid']) && !empty($album['nid'])) {
+                    $this->_getAlbumTracks($album,$entityDiscographie);
+                }
+
                 $em->persist($entityDiscographie);
 
                 $this->output->writeln('<info>-' . utf8_decode($entityDiscographie->getTitle()) . '</info>');
             }
 
             $em->flush();
+        }
+    }
+
+    /**
+     * Check if url key already exist and rename if needed
+     *
+     * @param $urlKey
+     *
+     * @return string
+     */
+    protected function _checkAndBuildUrlKey($urlKey)
+    {
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
+
+        $qb = $em->getRepository('AmlUrlRewriteBundle:Url')->createQueryBuilder('e');
+        $qb->select('count(e.id)')
+            ->where('e INSTANCE OF AmlUrlRewriteBundle:UrlDiscography')
+            ->andWhere('e.urlKey like :url_key')
+            ->setParameter('url_key', $urlKey);
+        $nbUrl = $qb->getQuery()->getSingleScalarResult();
+
+        if ($nbUrl > 0) {
+            $i = (int)$nbUrl + 1;
+            $urlAlreadyExist = true;
+            while ($urlAlreadyExist === true) {
+                $updatedUrlKey = $urlKey . '-' . $i;
+
+                $qb = $em->getRepository('AmlUrlRewriteBundle:Url')->createQueryBuilder('e');
+                $qb->select('count(e.id)')
+                    ->where('e INSTANCE OF AmlUrlRewriteBundle:UrlDiscography')
+                    ->andWhere('e.urlKey like :url_key')
+                    ->setParameter('url_key', $updatedUrlKey);
+                $findEntityUrl = $qb->getQuery()->getSingleScalarResult();
+
+                if ($findEntityUrl == 0) {
+                    $urlAlreadyExist = false;
+                    return $updatedUrlKey;
+                } else {
+                    $i++;
+                }
+            }
+        } else {
+            return $urlKey;
+        }
+    }
+
+    protected function _getAlbumTracks($album,$entityDiscographie){
+
+        $idAlbum = (int)$album['nid'];
+        $this->output->writeln('<info>Load discographie tracks (nid:'.$idAlbum.')</info>');
+
+        $em = $this->getContainer()->get('doctrine')->getManager('default');
+
+        $queryString = "SELECT id_track, title, author
+		FROM disc_tracks
+		WHERE id_disc=$idAlbum";
+        $query = $this->dbh->query($queryString);
+
+        $albumTracks = $query->fetchAll();
+
+        foreach( $albumTracks as $track ){
+            $entityTrack = new Track();
+            $entityTrack
+                ->setNumber($track['id_track'])
+                ->setAlbum($entityDiscographie)
+                ->setTitle(utf8_encode($track['title']))
+                ->setComposer(utf8_encode($track['author']))
+            ;
+
+            $entityDiscographie->addTrack($entityTrack);
         }
     }
 
