@@ -24,12 +24,7 @@ class PageController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (false === $id) {
-            $entity = $em->getRepository('AmlWebBundle:Page')->findOneBy(
-                array(
-                    'url' => $url_key,
-                    'public' => 1
-                )
-            );
+            $entity = $em->getRepository('AmlWebBundle:Page')->getPageByUrlKey($url_key);
         } else {
             $entity = $em->getRepository('AmlWebBundle:Page')->findOneBy(
                 array(

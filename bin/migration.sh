@@ -8,16 +8,25 @@ php app/console doctrine:schema:update --force
 php app/console fos:user:create admin aurelien.giry@gmail.com passwordtest --super-admin
 
 ################ Migration ##################
-php app/console migration:import:blog-categories -vvv    # Import Blog Categories from old website
-php app/console migration:import:blog-tags -vvv          # Import Blog tags from old website
-php app/console migration:import:blog-images -vvv        # Import Blog images from old website
-php app/console migration:import:blog-videos -vvv
-php app/console migration:import:blog-articles -vvv      # Import Blog articles from old website
+# Import Page (content_type=association)
+php app/console migration:import:pages -vvv
 
+# Import Blog
+php app/console migration:import:blog-categories -vvv
+php app/console migration:import:blog-tags -vvv
+php app/console migration:import:blog-images -vvv
+php app/console migration:import:blog-videos -vvv
+php app/console migration:import:blog-articles -vvv
+
+# Import links
 php app/console migration:import:links -vvv
 
+# Import Discography
 php app/console migration:import:discographie -vvv
 
+# Import agenda
 php app/console migration:import:evenements -vvv
 
+# Clear cache
 php app/console cache:clear
+php app/console cache:clear --env=prod
