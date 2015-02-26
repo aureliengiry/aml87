@@ -114,8 +114,8 @@ a.links-view-all {
     color: #FFFFFF !important;
     display: block;
     font-size: 12px;
-    height: 18px;
-    padding: 4px 4px 1px 4px;
+    height: 20px;
+    padding: 2px 4px 1px 7px;
     text-decoration: none;
     float: right;
 }
@@ -167,6 +167,10 @@ a.black {
     width: 100%;
     float: left;
     min-height: 149px;
+}
+
+div#logo{
+    margin: 5px 0 5px 0;
 }
 
 #logo {
@@ -438,7 +442,7 @@ a.black {
 }
 
 #agenda-concerts-public .event-item-container-description {
-    padding: 5px 0 0 10px;
+    padding: 5px 0 10px 0;
 }
 
 /* AGENDA - Liste Evenement */

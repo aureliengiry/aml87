@@ -12,45 +12,45 @@
 		<h1>Agenda</h1>
 
         <div id="agenda-concerts-public">
-        {% for key,day in entities %}
-            <div>
-                <div class="uiHeaderSection"><strong><i class="icon-calendar"></i> {{ key | format_datetime(null, 'fr', 'Europe/Paris',  constant('IntlDateFormatter::LONG'), constant('IntlDateFormatter::SHORT')) }}</strong></div>
-                {% for entity in day %}
-                    <div class="event-item">
-                        <h2>
-                            {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
-                                <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url.urlKey }) }}"
-                                   title="{{ entity.title }}">{{ entity.title }}</a>
-                            {% else %}
-                                <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}"
-                                   title="{{ entity.title }}">{{ entity.title }}</a>
-                            {% endif %}
-                        </h2>
+        {% for key,entity in entities %}
 
-                        {% if entity.picture %}
-                        <div class="event-item-structure event-item-container-thumbnail">
-                            <a rel="prettyPhoto" href="{{ asset(entity.picture.webpath) | apply_filter('evenement_view') }}"
-                               title="{{ entity.title }}" class="thumbnail-list">
-                                <img data-src="holder.js/450x450" alt="450x450" src="{{ asset(entity.picture.webpath) | apply_filter('evenement_list') }}" title="{{ entity.picture.title }}"
-                                      class="imagecache imagecache-evenement_list" width="450">
-                            </a>
-                        </div>
-                        {% endif %}
-                        <div class="event-item-structure event-item-container-description">
-                            <div>
-                                {{ entity.description|raw|wordWarp }}
-                                {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
-                                    <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url.urlKey }) }}"
-                                       title="{{ entity.title }}">{{ entity.title }}</a>
-                                {% else %}
-                                    <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}"
-                                       title="{{ entity.title }}">{{ entity.title }}</a>
-                                {% endif %}
-                            </div>
-                        </div>
+            <div class="event-item">
+                <h2>
+                    {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+                        <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url.urlKey }) }}"
+                           title="{{ entity.title }}">{{ entity.title }}</a>
+                    {% else %}
+                        <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}"
+                           title="{{ entity.title }}">{{ entity.title }}</a>
+                    {% endif %}
+                </h2>
+
+                <span class="date">{{ entity.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }}</span>
+
+                {% if entity.picture %}
+                <div class="event-item-structure event-item-container-thumbnail">
+                    <a rel="prettyPhoto" href="{{ asset(entity.picture.webpath) | apply_filter('evenement_view') }}"
+                       title="{{ entity.title }}" class="thumbnail-list">
+                        <img data-src="holder.js/450x450" alt="450x450" src="{{ asset(entity.picture.webpath) | apply_filter('evenement_list') }}" title="{{ entity.picture.title }}"
+                              class="imagecache imagecache-evenement_list" width="450">
+                    </a>
+                </div>
+                {% endif %}
+
+                <div class="event-item-structure event-item-container-description">
+                    <div>
+                        {{ entity.description|raw|wordWarp }}
                     </div>
-                {% endfor %}
+                    {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+                        <a class="link-view-more" href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url.urlKey }) }}"
+                           title="{{ entity.title }}">En savoir plus</a>
+                    {% else %}
+                        <a class="link-view-more" href="{{ path('agenda_show_event', { 'id': entity.id }) }}"
+                           title="{{ entity.title }}">En savoir plus</a>
+                    {% endif %}
+                </div>
             </div>
+
         {% endfor %}
         </div>
 
