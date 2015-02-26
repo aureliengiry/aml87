@@ -55,15 +55,14 @@ class Page
      * @ORM\Column(name="public", type="boolean")
      */
     private $public;
-    
-    
+
     /**
-     * @var string $url
+     * @var string url
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"})
+     * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;
-
 
     /**
      * Get id
@@ -83,7 +82,6 @@ class Page
     public function setTitle($title)
     {
         $this->title = $title;
-        $this->setUrl();
         return $this;
     }
 
@@ -182,20 +180,20 @@ class Page
     }
 
     /**
-     * Set url
+     * Set title
      *
      * @param string $url
      */
-    public function setUrl()
+    public function setUrl($url)
     {
-        $this->url = $this->_build_SystemName($this->title);
+        $this->url = $url;
         return $this;
     }
 
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -205,47 +203,5 @@ class Page
     public function __toString()
     {
         return $this->title ? : 'New Page';
-    }
-
-    protected function _build_SystemName($str, $separator = 'dash', $lowercase = TRUE)
-    {
-        if ($separator == 'dash')
-        {
-            $search     = '_';
-            $replace    = '-';
-        }
-        else
-        {
-            $search     = '-';
-            $replace    = '_';
-        }
-
-        $trans = array(
-            '&\#\d+?;'              => '',
-            '&\S+?;'                => '',
-            '\s+'                   => $replace,
-            '[^a-z0-9\-\._]'        => '',
-            $replace.'+'            => $replace,
-            $replace.'$'            => $replace,
-            '^'.$replace            => $replace,
-            '\.+$'                  => ''
-        );
-
-        $str = strip_tags($str);
-
-        foreach ($trans as $key => $val)
-        {
-            $str = preg_replace("#".$key."#i", $val, $str);
-        }
-
-        if ($lowercase === TRUE)
-        {
-            $str = strtolower($str);
-        }
-
-        $str = trim(stripslashes($str));
-        $str = str_replace(array('.'), array('-'), $str);
-
-        return $str;
     }
 }

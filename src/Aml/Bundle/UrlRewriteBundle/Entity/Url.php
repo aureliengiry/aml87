@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="entity_source", type="string",length=50)
- * @ORM\DiscriminatorMap({"article" = "UrlArticle", "evenement" = "UrlEvenement","discography" = "UrlDiscography"})
+ * @ORM\DiscriminatorMap({"article" = "UrlArticle", "evenement" = "UrlEvenement","discography" = "UrlDiscography","page" = "UrlPage"})
  */
 class Url
 {
@@ -31,7 +31,6 @@ class Url
      * @ORM\Column(name="url_key", type="string", length=255)
      */
     protected $urlKey;
-
 
     /**
      * Get id
@@ -117,5 +116,10 @@ class Url
         }
 
         return $str;
+    }
+
+    public function __toString()
+    {
+        return $this->urlKey ? : 'Url not define';
     }
 }

@@ -5,7 +5,15 @@
 <div id="menu">						
 	<ul>
 		<li><a{% if app.request.attributes.get('_route') == 'home' %} class="active"{% endif %} href="{{ path('home') }}" title="Accueil">Accueil</a></li>
-		<li><a href="{{ path('home') }}" title="Association">Association</a></li>
+
+        <li>
+            <a{% if app.request.attributes.get('_route') == 'page_show_rewrite'
+            or app.request.attributes.get('_route') == 'page_show' %} class="active"{% endif %}
+                    href="{{ path('page_show_rewrite', { 'url_key': 'laccordon-autrement' }) }}" title="Association">
+                Association
+            </a>
+        </li>
+
 		<li><a{% if app.request.attributes.get('_route') == 'discography' %} class="active"{% endif %} href="{{ path('discography') }}" title="Discographie">Discographie</a></li>
 		<li><a{% if app.request.attributes.get('_route') == 'blog' %} class="active"{% endif %} href="{{ path('blog') }}" title="Blog">Blog</a></li>
 		<li><a{% if app.request.attributes.get('_route') == 'agenda' %} class="active"{% endif %}  href="{{ path('agenda') }}" title="Agenda">Agenda</a></li>
