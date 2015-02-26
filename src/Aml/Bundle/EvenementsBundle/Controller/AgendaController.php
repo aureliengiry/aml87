@@ -56,9 +56,9 @@ class AgendaController extends Controller
                 'archive' => 0,
                 'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT)
         );
-        $entities = $this->_formatEventByDay($events);
+        //$entities = $this->_formatEventByDay($events);
 
-        return array('entities' => $entities);
+        return array('entities' => $events);
     }
 
     /**
