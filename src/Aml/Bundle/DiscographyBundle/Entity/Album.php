@@ -241,8 +241,18 @@ class Album
         return $this;
     }
 
+    /**
+     * Fonction to delete tag
+     * @param Discussion $discussion
+     */
+    public function removeTrack($track)
+    {
+        $this->tracks->removeElement($track);
+        $track->deleteAlbum($this);
+    }
+
     public function __toString()
     {
-        return $this->title ? : 'New Album';
+        return $this->title ? : 'Nouvel Album';
     }
 }

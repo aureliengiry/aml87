@@ -213,7 +213,7 @@ div#logo{
     font-size: 18px;
     height: 80px;
     margin-top: 65px;
-    width: 620px;
+    width: 627px;
 }
 
 #menu ul {
@@ -223,7 +223,7 @@ div#logo{
 }
 
 #menu li a {
-    color: #FF0066;
+    color: red;
     padding: 0 15px;
     text-decoration: none;
 }
@@ -313,7 +313,7 @@ div#logo{
 
 /* --- Footer --- */
 #footer {
-    height: 37px;
+    height: 33px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -321,9 +321,16 @@ div#logo{
     font-size: 12px;
 }
 
+#footer ul{
+    margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
 #footer-social-links {
     float: left;
-    padding: 0 0 0 15px;
+    padding: 0;
 }
 
 #footer-links {
@@ -591,7 +598,7 @@ div#logo{
 }
 
 .side-bloc a, .side-bloc li a, .side-bloc li a.active {
-    color: #FF0066;
+    color: red;
 }
 
 .side-bloc a:hover, .side-bloc a.active:hover {
@@ -655,7 +662,7 @@ h2 a {
 
 h2.discographie {
     margin-bottom: 0px;
-    color: #FF0066;
+    color: red;
 }
 
 span.disc-date-sortie {

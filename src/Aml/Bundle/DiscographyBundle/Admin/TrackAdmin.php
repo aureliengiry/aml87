@@ -16,10 +16,10 @@ class TrackAdmin extends Admin
                     'label' => 'Titre'
                 ))
                 ->add('composer','text',array(
-                    'label' => 'Titre'
+                    'label' => 'Compositeur'
                 ))
                 ->add('number','text',array(
-                    'label' => 'Titre'
+                    'label' => 'Piset N°'
                 ))
                 ->add('album', 'entity', array(
                     'label' => 'Album',
