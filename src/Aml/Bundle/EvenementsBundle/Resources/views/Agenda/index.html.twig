@@ -27,7 +27,7 @@
 
                 <span class="date">{{ entity.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }}</span>
 
-                {% if entity.picture %}
+                {% if entity.picture and entity.picture.webpath %}
                 <div class="event-item-structure event-item-container-thumbnail">
                     <a rel="prettyPhoto" href="{{ asset(entity.picture.webpath) | apply_filter('evenement_view') }}"
                        title="{{ entity.title }}" class="thumbnail-list">

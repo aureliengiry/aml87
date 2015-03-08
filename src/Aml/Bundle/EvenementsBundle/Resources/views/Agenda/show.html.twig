@@ -12,14 +12,11 @@
 
             {# Date #}
             {% if entity.dateStart %}
-            <span><strong>
-                <i class="icon-calendar"></i>
-                {{ entity.dateStart | format_datetime(null, 'fr', 'Europe/Paris',  constant('IntlDateFormatter::LONG'), constant('IntlDateFormatter::SHORT')) }}
-            </strong></span>
+                <span class="date">{{ entity.dateStart | format_date('EEEE d MMMM Y à HH:mm', 'fr', 'Europe/Paris') }}</span>
             {% endif %}
 
             {# Affiche #}
-            {% if entity.picture %}
+            {% if entity.picture and entity.picture.webpath %}
             <div>
                 <a href="#" class="thumbnail">
                     <img data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) | apply_filter('evenement_view') }}" title="{{ entity.picture.title }}"

@@ -58,7 +58,7 @@ class AgendaController extends Controller
         );
         //$entities = $this->_formatEventByDay($events);
 
-        return array('entities' => $events);
+        return array('entities' => $events      );
     }
 
     /**

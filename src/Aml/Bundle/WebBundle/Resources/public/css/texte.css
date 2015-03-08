@@ -28,13 +28,13 @@ h1, h2, h3, h4, h5, h6 {
 /* page */
 h1 {
 	font-size: 24px;
-	color: #FF0167;
+	color: red;
 	text-align: center;	
 }
 h2, h2 a, h2 a:visited {
 	font-size: 20px;
 	/*margin-bottom:2px;*/
-	color:#FF0066;
+	color:red;
 	text-decoration:none;
 }
 h2 a:hover{ color: #B2B2B2; }

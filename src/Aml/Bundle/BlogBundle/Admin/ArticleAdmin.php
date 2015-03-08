@@ -21,9 +21,11 @@ class ArticleAdmin extends Admin
         $formMapper
             ->with('General')
                 ->add('title', 'text')
-                ->add('url', 'text',array(
-                    'required' => false
-                ))
+                /*->add('url', 'text',array(
+                    'required' => false,
+                    'data_class' => '\Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle',
+                    'read_only' => true
+                ))*/
                 ->add('category', 'entity', array(
                     'label' => 'Catégorie',
                     'class' => 'AmlBlogBundle:Category',
@@ -31,21 +33,22 @@ class ArticleAdmin extends Admin
                     'empty_value' => 'Choisissez une catégorie',
                     'attr' => array('class'=>'uniform')
                 ))
-                ->add('logo','sonata_type_admin',array(
-                    'delete' => false,
-                    'required' => false
-                ))
                 ->add('body', 'textarea', array(
                     'label' => 'Texte',
                     'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
                     'required' => false,
                     'wysiwyg' => true
                 ))
-
                 ->add('public', 'checkbox', array(
                     'label' => 'Publier',
                     'required' => false,
                     'attr' => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
+                ))
+            ->end()
+            ->with('Image')
+                ->add('logo','sonata_type_admin',array(
+                    'delete' => false,
+                    'required' => false
                 ))
             ->end()
             ->with('Tags')
