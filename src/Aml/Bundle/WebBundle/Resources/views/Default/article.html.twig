@@ -19,7 +19,7 @@
 		</span>
 	</div>
 
-    {% if lastBlogArticle.logo.webpath is defined %}
+    {% if lastBlogArticle.logo.webpath is defined and lastBlogArticle.logo.webpath is not empty %}
         <div class="blog-visuel">
             <a rel="prettyPhoto" href="{{ asset(lastBlogArticle.logo.webpath) | apply_filter('blog_view')  }}" >
                 <img width="375" height="250" class="imagecache imagecache-blog_list"

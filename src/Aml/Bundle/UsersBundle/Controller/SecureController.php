@@ -9,7 +9,6 @@
 
 namespace Aml\Bundle\UsersBundle\Controller;
 
-//use Ic\Bundle\PslwebBundle\Form\ForgotPasswordType;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -86,6 +85,7 @@ class SecureController extends Controller
 	 */
 	public function loginAction(Request $request)
 	{
+        var_dump(__METHOD__);
 		//on verifie si on est pas deja connecte
 //		$securityContext = $this->get('security.context');
 //		if($securityContext->isGranted('IS_AUTHENTICATED_FULLY'))
