@@ -26,6 +26,7 @@ php app/console migration:import:discographie -vvv
 
 # Import agenda
 php app/console migration:import:evenements -vvv
+php app/console evenements:index:seasons -vvv
 
 # Clear cache
 php app/console cache:clear

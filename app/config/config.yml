@@ -24,18 +24,22 @@ sonata_admin:
     title_logo: /bundles/amladmin/images/logo_title.png
     templates:
         # default global templates
-        layout:  AmlAdminBundle::standard_layout.html.twig
+        #layout:  AmlAdminBundle::standard_layout.html.twig
+        layout:  SonataAdminBundle::standard_layout.html.twig
         ajax:    SonataAdminBundle::ajax_layout.html.twig
 
         # default actions templates, should extend a global templates
-        list:    AmlAdminBundle:CRUD:list.html.twig
+        #list:    AmlAdminBundle:CRUD:list.html.twig
+        list:    SonataAdminBundle:CRUD:list.html.twig
         show:    SonataAdminBundle:CRUD:show.html.twig
         edit:    SonataAdminBundle:CRUD:edit.html.twig
 
         # Block
-        list_block: AmlAdminBundle:Block:block_admin_list.html.twig
+        #list_block: AmlAdminBundle:Block:block_admin_list.html.twig
+        list_block: SonataAdminBundle:Block:block_admin_list.html.twig
 
-        dashboard:  AmlAdminBundle:Core:dashboard.html.twig
+       # dashboard:  AmlAdminBundle:Core:dashboard.html.twig
+        dashboard:  SonataAdminBundle:Core:dashboard.html.twig
 
     dashboard:
         blocks:
@@ -78,6 +82,9 @@ twig:
     globals:
           project_name: "%project_name%"
           site_name: "%site_name%"
+    form:
+          resources:
+              - 'SonataCoreBundle:Form:datepicker.html.twig'
 
 # Assetic Configuration
 assetic:

@@ -15,5 +15,8 @@ web/bundles/*
 # Configuration files
 app/config/parameters.ini
 app/config/parameters.yml
+app/SymfonyRequirements.php
+bin/doctrine*
+web/config.php
 composer.lock
 composer.phar
