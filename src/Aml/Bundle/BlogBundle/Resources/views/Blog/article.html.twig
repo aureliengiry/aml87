@@ -24,7 +24,7 @@
             frameborder="0"
             allowfullscreen="true">
     </iframe>
-{% elseif entity.logo.webpath is defined %}
+{% elseif entity.logo.webpath is defined and entity.logo.webpath is not empty %}
     <div class="blog-visuel">
         <a rel="prettyPhoto" href="{{ asset(entity.logo.webpath) | apply_filter('blog_view') }}">
             <img width="375" height="250" class="imagecache imagecache-blog_list"

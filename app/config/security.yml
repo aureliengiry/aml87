@@ -42,7 +42,6 @@ security:
 
          - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/register, role: ROLE_SUPER_ADMIN }
-         - { path: ^/resetting, role: ROLE_SUPER_ADMIN }
+         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin/, role: ROLE_SUPER_ADMIN }
-         - { path: ^/admin-sonata/, role: ROLE_SUPER_ADMIN }
          - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
