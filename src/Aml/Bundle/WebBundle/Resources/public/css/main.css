@@ -421,20 +421,14 @@ div#logo{
 
 #agenda-concerts-public li {
     list-style: disc outside none;
+    text-align: left;
+    margin: 15px 0;
 }
 
 #agenda-concerts-public h2, #agenda-concerts-public h2 a {
     font-size: 17px;
     line-height: 25px;
-    margin: 0 0 5px;
-}
-
-#agenda-concerts-public .event-item {
-
-}
-
-#agenda-concerts-public .event-item-structure {
-
+    display: inline;
 }
 
 #agenda-concerts-public .event-item-container-thumbnail .thumbnail-list{
