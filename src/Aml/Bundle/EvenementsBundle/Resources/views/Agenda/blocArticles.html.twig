@@ -4,7 +4,7 @@
 <ul id="blocs-evenement-articles">
     {% for key,article in entity.articles %}
         <li>
-            {% if article.logo.webpath is defined %}
+            {% if article.logo.webpath is defined and article.logo.webpath is not empty %}
                 <div class="blog-visuel">
                     <a rel="prettyPhoto" href="{{ asset(article.logo.webpath) | apply_filter('blog_view')  }}" class="thumbnail">
                         <img width="170" class="imagecache imagecache-blog_thumbnail"

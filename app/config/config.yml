@@ -206,6 +206,14 @@ avalanche_imagine:
             type:    relative_resize
             options: { widen: 170, mode: outbound }
 
+        # Partenaires
+        partenaire_view:
+            type:    relative_resize
+            options: { widen: 500, mode: outbound }
+        partenaire_thumbnail:
+            type:    relative_resize
+            options: { widen: 120, mode: outbound }
+
 sonata_intl:
     timezone:
         # default timezone used as fallback
