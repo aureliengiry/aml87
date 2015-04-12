@@ -65,8 +65,10 @@ class UsersAdmin extends Admin
             ->addIdentifier('username')
             ->add('email')
             ->add('name','string', array('template' => 'AmlUsersBundle::Admin/User/Fields/name.html.twig'))
-           //->add('last_login')
-            //->add('statut')
+            ->add('lastLogin')
+            ->add('locked')
+            ->add('enabled')
+
         ;
     }
 
@@ -77,7 +79,6 @@ class UsersAdmin extends Admin
      */
     public function getTemplate($name)
     {
-        //var_dump( $name );
         if (isset($this->templates[$name])) {
             return $this->templates[$name];
         }
