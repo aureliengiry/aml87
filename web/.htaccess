@@ -1,5 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    # Redrect to www.domain-name
+    RewriteCond %{HTTP_HOST} ^aml87\.fr$ [NC]
+    RewriteRule ^(.*)$ http://www.aml87.fr/$1 [L,R=301]
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ app.php [QSA,L]
 </IfModule>
