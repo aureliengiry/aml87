@@ -30,7 +30,8 @@ class ImageAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')    
+            ->add('file', 'string', array('template' => 'AmlMediasBundle:Admin:list_image.html.twig'))
+            ->addIdentifier('title','Image')
         ;
     }
 

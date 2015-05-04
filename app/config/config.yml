@@ -189,6 +189,10 @@ avalanche_imagine:
         big_thumbnail:
             type:    thumbnail
             options: { size: [300, 300], mode: inbox }
+        admin_thumbnail:
+            type:    relative_resize
+            options: { widen: 150, mode: outbound }
+
         # Evenement
         evenement_view:
             type:    relative_resize
