@@ -129,36 +129,9 @@ a.black {
     background: url("/bundles/amlweb/images/boutons/btn_view_more_black.png") no-repeat scroll 127px 0 #000000;
     width: 140px;
 }
-
-/*.all-articles{
-	position:relative;
-	height:22px;
-	float:right;
+.btn {
+    color: #FFFFFF;
 }
-.all-articles a.links-view-all,.all-articles a.links-view-all:visited{	
-	color:#FFFFFF;
-	float:left;
-	height:19px;
-	padding:3px 5px 0;
-	text-decoration:none;
-	font-size:12px;
-}
-.purpule a.links-view-all,.purpule a.links-view-all:visited{
-	background-color:#FF0066;
-}
-.black a.links-view-all,.black a.links-view-all:visited{
-	background-color:#000;
-}
-
-.all-articles a.links-view-all:hover{
-	text-decoration:underline;
-}
-
-.all-articles a img{
-	float:right;
-	height:22px;
-	width:20px;
-}*/
 /*  ---  banniere ---  */
 #banniere {
 
@@ -831,10 +804,23 @@ tr.even, tr.odd {
     width: 500px;
 }
 
+#contact-block form{
+    margin: 0 0 40px;
+}
+
 #bloc-coordonnees {
     width: 220px;
     float: right;
     text-align: left;
+}
+
+#contact-block label {
+    float: left;
+    width: 110px;
+}
+
+#contact-block input, #contact-block textarea {
+    width: 375px;
 }
 
 /* ---- ESPACE MEMBRES ---- */
@@ -961,36 +947,4 @@ ul.espace-membres li a.member-library-link {
 /* Liste des mes présences */
 .list-mes-presences table {
     width: 100%;
-}
-
-#contact-block label {
-    float: left;
-    width: 110px;
-}
-
-#contact-block input, #contact-block textarea {
-    width: 326px;
-}
-
-#aml-contact-form .btn-submit-contact {
-    background: url("/bundles/amlweb/images/boutons/form-submit-newsletter.png") no-repeat scroll 0 0 transparent;
-    border: medium none;
-    float: right;
-    font-size: 12px;
-    height: 22px;
-    padding: 0 0 5px;
-    position: relative;
-    right: 0px;
-    width: 90px;
-    margin: 10px 0 0;
-}
-
-#aml-contact-form input.form-text, #aml-contact-form textarea.form-textarea {
-
-    border: 1px solid #B5B5B5;
-    background: tranparent;
-    -webkit-box-shadow: 1px 1px 4px #AAAAAA inset;
-    -moz-box-shadow: 1px 1px 4px #AAAAAA inset;
-    box-shadow: 1px 1px 4px #AAAAAA inset;
-
 }

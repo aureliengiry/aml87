@@ -3,12 +3,10 @@
 <div id="contact-block">
     <h3>Formulaire de contact</h3>
 
-    <form class="form-horizontal fill-up" id="blog-add-content"
+    <form id="container-form-contact-us"
           action="{{ path('aml_contact_us_post') }}" method="post" {{ form_enctype(form) }}>
 
-        {{ form_widget(form) }}
-
-        <button class="btn btn-primary pull-right" type="submit">Send</button>
+        {{ form(form) }}
 
     </form>
 
