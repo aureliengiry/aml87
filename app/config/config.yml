@@ -18,6 +18,7 @@ sonata_block:
 
         sonata.block.service.text:
         sonata.block.service.rss:
+        sonata.admin.block.search_result:
 
 sonata_admin:
     title:      AML87
