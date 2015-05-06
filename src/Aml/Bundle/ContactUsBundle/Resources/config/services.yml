@@ -2,10 +2,16 @@ parameters:
     aml_contact_us.subriber: "%admin_email%"
 
 services:
+    sonata.block.service.contact_us_messages:
+          class: Aml\Bundle\ContactUsBundle\Block\AdminMessagesBlockService
+          arguments: [ "sonata.block.service.contactUsMessages", @templating, @doctrine.orm.entity_manager ]
+          tags:
+              - { name: sonata.block }
+
     aml_contactus.message.post:
-            class: Aml\Bundle\ContactUsBundle\EventListener\PostListener
-            arguments:
-                mailer: "@mailer"
-                container: "@service_container"
-            tags:
-                - { name: kernel.event_listener, event: aml_contactus.message.post_sent, method: onPostEvent }
+          class: Aml\Bundle\ContactUsBundle\EventListener\PostListener
+          arguments:
+              mailer: "@mailer"
+              container: "@service_container"
+          tags:
+              - { name: kernel.event_listener, event: aml_contactus.message.post_sent, method: onPostEvent }

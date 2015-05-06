@@ -245,4 +245,9 @@ class Message
     {
         return $this->created;
     }
+
+    public function __toString()
+    {
+        return $this->subject ? : 'New message';
+    }
 }
