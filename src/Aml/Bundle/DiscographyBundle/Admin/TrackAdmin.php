@@ -28,7 +28,6 @@ class TrackAdmin extends Admin
                     'empty_value' => 'Choisissez un album',
                     'attr' => array('class'=>'uniform')
                 ))
-
             ->end()
         ;
     }
@@ -36,6 +35,7 @@ class TrackAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('album')
             ->add('title')
             ->add('composer')
         ;
@@ -44,6 +44,7 @@ class TrackAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
+            ->add('album')
             ->addIdentifier('title')
             ->add('composer')
         ;
