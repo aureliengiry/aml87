@@ -18,9 +18,15 @@
 		</div>
 		
 		<div class="disc-presentation">
-			<div class="disc-pochette-list">
-                <img src="{{ asset(entity.image.webpath) }}" alt="" title="{{ entity.image.title }}" class="imagecache imagecache-pochette-album" width="500" height="300">
-			</div>
+
+            <div class="disc-pochette-list">
+                <a rel="prettyPhoto" href="{{ asset(entity.image.webpath) | apply_filter('modal_img') }}">
+                    <img src="{{ asset(entity.image.webpath) | apply_filter('discography_list') }}"
+                         alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
+                         class="imagecache imagecache-pochette-album" width="180" height="160">
+                </a>
+            </div>
+
 			<div class="disc-description-list">
 				{{ entity.description|raw }}				
 			</div>

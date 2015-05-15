@@ -193,13 +193,22 @@ avalanche_imagine:
         evenement_list:
             type:    relative_resize
             options: { widen: 450, mode: outbound }
+
+        # Discography
+        discography_view:
+             type:    relative_resize
+             options: { widen: 588, mode: outbound }
+        discography_list:
+             type:    thumbnail
+             options: { size: [180, 160], mode: outbound }
+
         # Blog
         blog_list:
             type:    thumbnail
-            options: { size: [375, 250], mode: outbound }
+            options: { size: [425, 300], mode: outbound }
         blog_view:
             type:    relative_resize
-            options: { widen: 500, mode: outbound }
+            options: { widen: 588, mode: outbound }
         blog_thumbnail:
             type:    relative_resize
             options: { widen: 170, mode: outbound }
@@ -211,6 +220,10 @@ avalanche_imagine:
         partenaire_thumbnail:
             type:    relative_resize
             options: { widen: 120, mode: outbound }
+
+        modal_img:
+             type:    relative_resize
+             options: { widen: 900, mode: outbound }
 
 sonata_intl:
     timezone:

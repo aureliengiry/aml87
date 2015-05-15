@@ -21,8 +21,9 @@
             {# Affiche #}
             {% if entity.picture and entity.picture.webpath %}
             <div>
-                <a href="#" class="thumbnail">
-                    <img data-src="holder.js/160x120" alt="160x120" src="{{ asset(entity.picture.webpath) | apply_filter('evenement_view') }}" title="{{ entity.picture.title }}"
+                <a rel="prettyPhoto" href="{{ asset(entity.picture.webpath) | apply_filter('modal_img') }}" class="thumbnail">
+                    <img data-src="holder.js/160x120" alt="{{ entity.picture.title }}"
+                         src="{{ asset(entity.picture.webpath) | apply_filter('evenement_view') }}" title="{{ entity.picture.title }}"
                           class="imagecache imagecache-evenement_view" width="588" />
                 </a>
             </div>
@@ -33,7 +34,6 @@
     </div>
 
     <div id="col-right">
-
         {# Liste articles liés #}
         {% include "AmlEvenementsBundle::Agenda/blocArticles.html.twig" %}
 

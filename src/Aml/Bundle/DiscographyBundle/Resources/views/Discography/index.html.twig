@@ -16,11 +16,17 @@
 			{% for entity in entities %}
 			    	
 			<div class="disc-item{% if loop.last %} last{% endif %}">
-				<div class="disc-pochette-list">
-                    {% if entity.image.webpath is defined %}
-                        <img src="{{ asset(entity.image.webpath) }}" alt="" title="{{ entity.image.title }}" class="imagecache imagecache-pochette-album" width="500" height="300">
-                    {% endif %}
-				</div>
+
+                {% if entity.image.webpath is defined %}
+                <div class="disc-pochette-list">
+                    <a rel="prettyPhoto[discography]" href="{{ asset(entity.image.webpath) | apply_filter('modal_img') }}">
+                        <img src="{{ asset(entity.image.webpath) | apply_filter('discography_list') }}"
+                             alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
+                             class="imagecache imagecache-pochette-album" width="180" height="160">
+                    </a>
+                </div>
+                {% endif %}
+
 				<div class="disc-description-list">
 					<h3>
                         {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
