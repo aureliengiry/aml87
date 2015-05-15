@@ -2,3 +2,21 @@
 # www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
 
 User-agent: *
+
+Crawl-delay: 10
+
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.gif$
+
+# Files
+Disallow: /app_dev.php
+Disallow: /config.php
+
+# Paths (clean URLs)
+Disallow: /admin/
+Disallow: /register/
+Disallow: /resetting/
+Disallow: /login/
+Disallow: /logout/
+
