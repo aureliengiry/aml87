@@ -226,3 +226,8 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Aml\Bundle\UsersBundle\Entity\User
+
+knp_menu:
+    providers:
+        builder_alias: false    # disable the builder-based provider
+        container_aware: true   # keep this one enabled. Can be omitted as it is the default

@@ -7,6 +7,9 @@
 {% block body %}
 
     <div id="col-left" class="two-cols-content">
+        {# Breadcrumb #}
+        {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
+
         <div class="blog-article">
             <h2>{{ entity.title }}</h2>
 

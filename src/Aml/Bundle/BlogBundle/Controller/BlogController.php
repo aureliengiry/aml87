@@ -86,8 +86,12 @@ class BlogController extends Controller
      * @Route("/article/{url_key}.html", name="blog_show_rewrite")
      * @Template()
      */
-    public function showAction($id = false, $url_key = null)
+    public function showAction($id = false, $url_key = null, Request $request)
     {
+        // Init Main Menu
+        $menu = $this->get("app.main_menu");
+        $menu->getChild("Blog")->setCurrent(true);
+
         $em = $this->getDoctrine()->getManager();
 
         if (false === $id) {
@@ -99,6 +103,8 @@ class BlogController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find AmlBlogBundle:Blog entity.');
         }
+
+        $request->attributes->set('label', $entity->getTitle());
 
         // Get Liste catégories
         // @TODO : charger que les catégories avec les articles liés

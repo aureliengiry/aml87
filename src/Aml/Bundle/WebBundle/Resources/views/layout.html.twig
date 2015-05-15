@@ -36,6 +36,7 @@
   			{% include "AmlWebBundle::Partial/header.html.twig" %} 
 		
 			<div id="contenu">
+
                 <!-- CONTENT HERE -->
                 {% for flashMessage in app.session.flashbag.get('success') %}
                     <div class="alert alert-success flash-notice">

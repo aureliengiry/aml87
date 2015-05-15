@@ -1,0 +1,22 @@
+services:
+    app.menu_builder:
+        class: Aml\Bundle\WebBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+
+    app.main_menu:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory_service: app.menu_builder
+        factory_method: createMainMenu
+        arguments: ["@request"]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+
+    app.breadcrumb_menu:
+        class: Knp\Menu\MenuItem
+        factory_service: app.menu_builder # the menu builder service above
+        factory_method: createBreadcrumbMenu # the method name to generate the menu
+        arguments: ["@request"]
+        scope: request
+        tags:
+            - { name: knp_menu.menu, alias: breadcrumb } # The alias is used in the template
