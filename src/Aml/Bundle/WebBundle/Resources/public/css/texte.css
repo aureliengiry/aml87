@@ -43,9 +43,6 @@ h3{ font-size:16px; line-height: 23px; }
 h4{ margin:0; padding:0; }
 /* ---------- FIN - TITRES ---------- */
 
-ul li{
-	 list-style:none;
-}
 .text {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 15px;

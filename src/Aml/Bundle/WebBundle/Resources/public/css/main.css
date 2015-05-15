@@ -318,6 +318,10 @@ div#logo{
     padding: 0;
 }
 
+#footer-social-links, #footer-social-links li {
+    list-style: none;
+}
+
 #footer-links {
     float: right;
     margin-right: 10px;
@@ -453,8 +457,13 @@ div#logo{
     text-align: left;
 }
 
+#blocs-evenement-articles, #blocs-evenement-articles li,
+#blocs-evenement-partenaires, #blocs-evenement-partenaires li {
+    list-style: none;
+}
+
 #blocs-evenement-articles,
-    #blocs-evenement-partenaires {
+#blocs-evenement-partenaires {
     margin: 0;
 }
 
