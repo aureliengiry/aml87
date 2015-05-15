@@ -41,7 +41,7 @@ class DiscographyController extends Controller
      * @Route("/album/{url_key}.html", name="discography_album_show_rewrite")
      * @Template()
      */
-    public function showAction($id = false, $url_key = null)
+    public function showAction($id = false, $url_key = null,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -54,6 +54,12 @@ class DiscographyController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Album entity.');
         }
+
+        // Init Main Menu
+        $menu = $this->get("app.main_menu");
+        $menu->getChild("Discographie")->setCurrent(true);
+
+        $request->attributes->set('label', $entity->getTitle());
 
         return array(
             'entity' => $entity

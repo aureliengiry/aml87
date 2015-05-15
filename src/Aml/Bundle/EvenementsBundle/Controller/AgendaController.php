@@ -73,7 +73,7 @@ class AgendaController extends Controller
      *
      * @return array
      */
-    public function showAction($id = false, $url_key = null)
+    public function showAction($id = false, $url_key = null, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -87,8 +87,15 @@ class AgendaController extends Controller
             throw $this->createNotFoundException('Unable to find AmlEvenementsBundle:Evenement entity.');
         }
 
+        // Init Main Menu
+        $menu = $this->get("app.main_menu");
+        $menu->getChild("Agenda")->setCurrent(true);
+
+        $request->attributes->set('label', $entity->getTitle());
+
         return array(
-            'entity' => $entity);
+            'entity' => $entity
+        );
     }
 
     /**

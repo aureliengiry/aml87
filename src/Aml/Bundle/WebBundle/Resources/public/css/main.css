@@ -21,7 +21,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
-    /*	min-height:865px; */
     position: relative;
     width: 952px;
     background-color: #000000;
@@ -106,7 +105,6 @@ div.error, tr.error {
 }
 
 #col-left.two-cols-content, .col-left-631 {
-    /*width:631px;*/
     width: 596px;
 }
 
@@ -201,7 +199,8 @@ div#logo{
     text-decoration: none;
 }
 
-#menu li a.active {
+#menu li a.active,
+#menu li.current a {
     color: #FFFFFF;
 }
 
@@ -211,6 +210,19 @@ div#logo{
     width: auto;
 }
 
+/* ------ BREADCRUMB ------ */
+.breadcrumb {
+    background-color: inherit;
+    padding: 8px 0;
+    margin: 0;
+}
+
+.breadcrumb > li {
+    text-shadow:none;
+}
+.breadcrumb > li > .divider {
+    color: #3F3F3F;
+}
 /* ------------ ONGLETS ------------ */
 #onglets {
     background-color: #000000 !important;
