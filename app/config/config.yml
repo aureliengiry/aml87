@@ -204,8 +204,8 @@ avalanche_imagine:
 
         # Blog
         blog_list:
-            type:    thumbnail
-            options: { size: [425, 300], mode: outbound }
+            type:    relative_resize
+            options: { widen: 425, mode: outbound }
         blog_view:
             type:    relative_resize
             options: { widen: 588, mode: outbound }

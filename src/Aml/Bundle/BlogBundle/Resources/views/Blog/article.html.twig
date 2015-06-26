@@ -27,7 +27,7 @@
 {% elseif entity.logo.webpath is defined and entity.logo.webpath is not empty %}
     <div class="blog-visuel">
         <a rel="prettyPhoto[blog]" href="{{ asset(entity.logo.webpath) | apply_filter('modal_img') }}">
-            <img width="425" height="300" class="imagecache imagecache-blog_list"
+            <img width="425" class="imagecache imagecache-blog_list"
                  title="{{ entity.title }}"
                  src="{{ entity.logo.webpath | apply_filter('blog_list') }}"
                  alt="{{ entity.title }}"/>

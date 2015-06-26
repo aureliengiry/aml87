@@ -22,7 +22,7 @@
     {% if lastBlogArticle.logo.webpath is defined and lastBlogArticle.logo.webpath is not empty %}
         <div class="blog-visuel">
             <a rel="prettyPhoto" href="{{ asset(lastBlogArticle.logo.webpath) | apply_filter('modal_img') }}" >
-                <img width="425" height="300" class="imagecache imagecache-blog_list"
+                <img width="425" class="imagecache imagecache-blog_list"
                      title="{{ lastBlogArticle.title }}"
                      src="{{ lastBlogArticle.logo.webpath | apply_filter('blog_list') }}"
                      alt="{{ lastBlogArticle.title }}" />
