@@ -91,11 +91,6 @@ class Article
      */
     protected $category;
 
-// 	/**
-// 	 * @ORM\ManyToMany(targetEntity="File", mappedBy="articles", cascade={"persist"})
-// 	 */
-// 	protected $files;
-
     /**
      * @ORM\ManyToMany(targetEntity="Tags", mappedBy="articles", cascade={"all"})
      */
@@ -111,7 +106,6 @@ class Article
         $this->evenements = new ArrayCollection();
 
         $this->tags = new ArrayCollection();
-        // $this->files = new ArrayCollection();
     }
 
     /**
@@ -323,23 +317,6 @@ class Article
         $this->category = $id_blog_category;
         return $this;
     }
-
-// 	/**
-// 	 *
-// 	 * @param File $file
-// 	 */
-// 	public function addFiles($file) {
-// 		$tag->addArticle($this);
-// 		$this->files[] = $file;
-// 		return $this;
-// 	}
-
-// 	/**
-// 	 * @return the $files
-// 	 */
-// 	public function getFiles() {
-// 		return $this->files;
-// 	}
 
     /** ---------- TAGS ---------- */
     /**
