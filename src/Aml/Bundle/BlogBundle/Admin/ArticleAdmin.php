@@ -18,6 +18,37 @@ class ArticleAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        // use $thumbnailFieldOptions so we can add other options to the field
+        /*$avatarFieldOptions = array('required' => false,'data_class' => null);
+        if ($user) {
+            $avatar = $user->getAvatar();
+            if( empty($avatar) ){
+                $avatar = $user->getGravatar();
+            }
+            else{
+                $avatar = '/' . $user->getAvatarWebPath();
+            }
+            // add a 'help' option containing the preview's img tag
+            $avatarFieldOptions['help'] = '<img src="'.$avatar.'" class="admin-preview" />';
+        }
+
+        $formMapper
+            ->with('General')
+            ->add('login')
+            ->add('email')
+            //->add('plainPassword', 'text', array('required' => false))
+            ->end()
+            ->with('Profile')
+            ->add('avatar','file',$avatarFieldOptions)
+            ->add('firstname','text', array(
+                'required' => false,
+            ))
+            ->add('lastname','text', array(
+                'required' => false,
+            ))
+            ->add('nsfw_mode', null, array('required' => false))
+            ->end()
+*/
         $formMapper
             ->with('General')
                 ->add('title', 'text')
@@ -59,7 +90,16 @@ class ArticleAdmin extends Admin
                     'by_reference' => false,
                     'attr'=>array('data-sonata-select2'=>'true')
                 ))
-            ->end();
+            ->end()
+            ->with('Evenements')
+            ->add('evenements', 'sonata_type_model', array(
+                'required' => false,
+                'expanded' => true,
+                'multiple' => true,
+                'by_reference' => false
+            ))
+            ->end()
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
