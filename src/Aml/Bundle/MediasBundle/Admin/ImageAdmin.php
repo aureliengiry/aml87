@@ -11,14 +11,26 @@ class ImageAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $image = $this->getSubject();
+
+        $fileFieldOptions = array(
+            'required' => false,
+            'image_path' => 'webPath'
+        );
+        if ($image) {
+            $path = $image->getPath();
+
+            if ($path) {
+                // add a 'help' option containing the preview's img tag
+                $fileFieldOptions['help'] =
+                    '<img style="max-width:100%;" src="/' . $image->getWebPath() . '" class="admin-preview" />';
+            }
+        }
         $formMapper
             ->add('title','text',array(
                 'required' => false,
             ))
-            ->add('file','file' , array(
-                'required' => false,
-                'image_path' => 'webPath'
-            ))
+            ->add('file','file' , $fileFieldOptions)
         ;
     }
 

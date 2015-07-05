@@ -11,13 +11,25 @@ class VideoAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        // get the current Post instance
+        $video = $this->getSubject();
+
+        // use $thumbnailFieldOptions so we can add other options to the field
+        $thumbnailFieldOptions = array('required' => false);
+        if ($video) {
+            // add a 'help' option containing the preview's img tag
+            $providerId = $video->getProviderId();
+
+            $urlVideo = "https://www.youtube.com/embed/{$providerId}";
+            $thumbnailFieldOptions['help'] = '<iframe width="500" height="369"
+src="'.$urlVideo.'" frameborder="0" allowfullscreen></iframe>';
+        }
+
         $formMapper
             ->add('title', 'text', array(
                 'required' => false,
             ))
-            ->add('provider_id', 'text', array(
-                'required' => false,
-            ));
+            ->add('provider_id', 'text', $thumbnailFieldOptions);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

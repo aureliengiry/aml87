@@ -46,10 +46,15 @@ class ArticleAdmin extends Admin
                 ))
             ->end()
             ->with('Image')
-                ->add('logo','sonata_type_admin',array(
-                    'delete' => false,
-                    'required' => false
-                ))
+                ->add(
+                    'logo',
+                    'sonata_type_admin',
+                    array(
+                        'delete'   => false,
+                        'required' => false
+                    )
+
+                )
             ->end()
             ->with('Tags')
                 ->add('tags', 'sonata_type_model', array(
@@ -59,7 +64,16 @@ class ArticleAdmin extends Admin
                     'by_reference' => false,
                     'attr'=>array('data-sonata-select2'=>'true')
                 ))
-            ->end();
+            ->end()
+            ->with('Evenements')
+            ->add('evenements', 'sonata_type_model', array(
+                'required' => false,
+                'expanded' => true,
+                'multiple' => true,
+                'by_reference' => false
+            ))
+            ->end()
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
