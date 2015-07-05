@@ -3,7 +3,7 @@ services:
     sonata.admin.album:
         class: Aml\Bundle\DiscographyBundle\Admin\AlbumAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Discography, label: "Album" }
+            - { name: sonata.admin, manager_type: orm, group: Discographie, label: "Albums" }
         arguments:
             - ~
             - Aml\Bundle\DiscographyBundle\Entity\Album
@@ -14,7 +14,7 @@ services:
     sonata.admin.album.tracks:
             class: Aml\Bundle\DiscographyBundle\Admin\TrackAdmin
             tags:
-                - { name: sonata.admin, manager_type: orm, group: Discography, label: "Tracks" }
+                - { name: sonata.admin, manager_type: orm, group: Discographie, label: "Pistes" }
             arguments:
                 - ~
                 - Aml\Bundle\DiscographyBundle\Entity\Track

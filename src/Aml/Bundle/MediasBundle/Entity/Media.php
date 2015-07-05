@@ -110,5 +110,9 @@ class Media
         }
         return $name;
     }
-    
+
+    public function __toString()
+    {
+        return $this->title ? : 'New media';
+    }
 }

@@ -459,15 +459,3 @@ file that was distributed with this source code.
         {% endif %}
     {% endspaceless %}
 {% endblock %}
-
-{% block file_widget %}
-    {% spaceless %}
-        {{ block('form_widget') }}
-        {% if image_url is not null %}
-            <div class="widget-preview">
-                <img src="{{ asset(image_url) }}" width="150" />
-            </div>
-        {% endif %}
-
-    {% endspaceless %}
-{% endblock %}

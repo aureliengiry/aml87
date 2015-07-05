@@ -3,7 +3,7 @@ services:
     sonata.admin.contactus:
         class: Aml\Bundle\ContactUsBundle\Admin\MessageAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Contenus, label: "Formulaire de contact" }
+            - { name: sonata.admin, manager_type: orm, group: Administration, label: "Formulaire de contact" }
         arguments:
             - ~
             - Aml\Bundle\ContactUsBundle\Entity\Message
