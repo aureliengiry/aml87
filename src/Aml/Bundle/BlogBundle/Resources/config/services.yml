@@ -1,0 +1,7 @@
+services:
+    aml_blog.sitemap.generate:
+        class: Aml\Bundle\BlogBundle\EventListener\SitemapListener
+        arguments:
+            container: "@service_container"
+        tags:
+            - { name: kernel.event_listener, event: aml_web.sitemap.generate_start, method: onGenerateSitemapEvent }

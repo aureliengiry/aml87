@@ -20,3 +20,4 @@ services:
         scope: request
         tags:
             - { name: knp_menu.menu, alias: breadcrumb } # The alias is used in the template
+
