@@ -44,6 +44,11 @@ class SitemapListener
         );
 
         foreach ($agendaEvents as $agendaEvent) {
+
+            if(!$agendaEvent->getUrl()){
+                continue;
+            }
+
             $urlEvent = $router->generate(
                 'agenda_show_event_rewrite',
                 array('url_key' => $agendaEvent->getUrl()->getUrlKey())

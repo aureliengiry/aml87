@@ -42,6 +42,11 @@ class SitemapListener
 
         // add some urls blog
         foreach ($entitiesBlog as $article) {
+
+            if(!$article->getUrl()){
+                continue;
+            }
+
             $urlArticle = $router->generate(
                 'blog_show_rewrite',
                 array('url_key' => $article->getUrl()->getUrlKey())

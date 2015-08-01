@@ -41,6 +41,11 @@ class SitemapListener
         );
 
         foreach ($entities as $album) {
+
+            if(!$album->getUrl()){
+                continue;
+            }
+
             $urlAlbum = $router->generate(
                 'discography_album_show_rewrite',
                 array('url_key' => $album->getUrl()->getUrlKey())
