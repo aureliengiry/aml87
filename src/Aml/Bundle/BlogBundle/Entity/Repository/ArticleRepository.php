@@ -95,9 +95,6 @@ class ArticleRepository extends EntityRepository
 
         $query = $qb->getQuery();
 
-        // echo $query->getSql();
-        //var_dump($query->getParameters());
-
         return $query->getResult();
     }
 

@@ -15,3 +15,10 @@ services:
               container: "@service_container"
           tags:
               - { name: kernel.event_listener, event: aml_contactus.message.post_sent, method: onPostEvent }
+
+    aml_contactus.sitemap.generate:
+          class: Aml\Bundle\ContactUsBundle\EventListener\SitemapListener
+          arguments:
+              container: "@service_container"
+          tags:
+              - { name: kernel.event_listener, event: aml_web.sitemap.generate_start, method: onGenerateSitemapEvent }
