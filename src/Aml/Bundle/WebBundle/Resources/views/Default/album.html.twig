@@ -1,5 +1,5 @@
 {% if lastAlbum  %}
-<div id="discographie-last-album-block">
+<article id="discographie-last-album-block">
 	<div class="disc-pochette-list">
         {% if lastAlbum.image.webpath is defined %}
         <a rel="prettyPhoto" href="{{ asset(lastAlbum.image.webpath) }}" >
@@ -32,5 +32,4 @@
                title="Voir l'album : {{ lastAlbum.title }}">Lire la suite</a>
         {% endif %}
 	</div>	
-</div>
-{% endif %}
+</article>

@@ -5,6 +5,11 @@
     	<title>{% block title %}{% endblock %} {{site_name}}</title>
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     	<meta name="description" content="{{ block('title') }} {{site_name}}">
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+        </script>
+        <![endif]-->
     
     	<!-- Le styles -->
     	<link rel="shortcut icon" href="{{ asset('bundles/amlweb/ico/aml_favicon.ico') }}" />
@@ -31,7 +36,7 @@
 			{# Header #}
   			{% include "AmlWebBundle::Partial/header.html.twig" %} 
 		
-			<div id="contenu">
+			<section id="contenu">
 
                 <!-- CONTENT HERE -->
                 {% for flashMessage in app.session.flashbag.get('success') %}
@@ -51,7 +56,7 @@
                 {% endfor %}
 
                 {% block body %}{% endblock %}
-	   		</div>
+	   		</section>
 	   		<div class="clearfooter"></div>
 	   		
 	   		{# Footer #}
@@ -71,5 +76,4 @@
             });
         </script>
 	</body>
-
 </html>

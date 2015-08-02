@@ -1,6 +1,5 @@
 <!-- footer -->
-<div id="footer">
-
+<footer id="footer">
     <ul id="footer-social-links">
         <li>
             <a href="http://www.facebook.com/pages/Avenir-Musical-du-Limousin/203218471224" id="link-page-fb"
@@ -13,5 +12,4 @@
         <li>- <a{% if app.request.attributes.get('_route') == 'liens' %} class="active"{% endif %}
                     href="{{ path('liens') }}" title="Liens">Liens</a></li>
     </ul>
-
-</div>
+</footer>

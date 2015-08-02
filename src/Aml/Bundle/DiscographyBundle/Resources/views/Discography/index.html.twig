@@ -15,7 +15,7 @@
 		{% if entities is not empty %}
 			{% for entity in entities %}
 			    	
-			<div class="disc-item{% if loop.last %} last{% endif %}">
+			<article class="disc-item{% if loop.last %} last{% endif %}">
 
                 {% if entity.image.webpath is defined %}
                 <div class="disc-pochette-list">
@@ -50,7 +50,7 @@
                     {% endif %}
 						
 				</div>	
-			</div>
+			</article>
 			        
 			{% endfor %} 	
 		

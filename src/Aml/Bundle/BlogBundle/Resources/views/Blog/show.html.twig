@@ -11,7 +11,7 @@
         {# Breadcrumb #}
         {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
 
-        <div class="blog-article">
+        <article class="blog-article">
             <h2>{{ entity.title }}</h2>
 
             <div class="publi-info">
@@ -47,9 +47,7 @@
                                                     href="{{ path('blog',{'tag' : tag.systemName}) }}">{{ tag.name }}</a>
                 {% endfor %}
             {% endif %}
-
-
-        </div>
+        </article>
 
     </div>
     <div id="col-right">
