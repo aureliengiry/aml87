@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 use Aml\Bundle\BlogBundle\Admin\BlogAdmin;
+use Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement;
 
 /**
  * Class EvenementAdmin
@@ -97,6 +98,34 @@ class EvenementAdmin extends Admin
             ->addIdentifier('dateStart')
             ->add('archive')
             ->add('public');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preUpdate($evenement)
+    {
+        $urlKey = $evenement->getUrl();
+        if(empty($urlKey)){
+            $entityUrl = new UrlEvenement();
+            $entityUrl->setUrlKey($evenement->getTitle());
+
+            $evenement->setUrl($entityUrl);
+        }
+        else {
+            $urlKey->setUrlKey($evenement->getTitle());
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($evenement)
+    {
+        $entityUrl = new UrlEvenement();
+        $entityUrl->setUrlKey($evenement->getTitle());
+
+        $evenement->setUrl($entityUrl);
     }
 
 

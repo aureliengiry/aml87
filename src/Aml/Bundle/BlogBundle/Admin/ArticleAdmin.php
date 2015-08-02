@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 use Aml\Bundle\MediasBundle\Form\Admin\ImageType;
+use Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle;
 
 class ArticleAdmin extends Admin
 {
@@ -116,7 +117,16 @@ class ArticleAdmin extends Admin
     {
         $article->setUpdated(new \DateTime);
 
-        // $this->_setLogoTitle($article);
+        $urlKey = $article->getUrl();
+        if(empty($urlKey)){
+            $entityUrl = new UrlArticle();
+            $entityUrl->setUrlKey($article->getTitle());
+
+            $article->setUrl($entityUrl);
+        }
+        else {
+            $urlKey->setUrlKey($article->getTitle());
+        }
     }
 
     /**
@@ -124,10 +134,14 @@ class ArticleAdmin extends Admin
      */
     public function prePersist($article)
     {
-        $article->setCreated(new \DateTime);
-        $article->setUpdated(new \DateTime);
+        $entityUrl = new UrlArticle();
+        $entityUrl->setUrlKey($article->getTitle());
 
-        //$this->_setLogoTitle($article);
+        $article
+            ->setCreated(new \DateTime)
+            ->setUpdated(new \DateTime)
+            ->setUrl($entityUrl)
+        ;
     }
 
     protected function _setLogoTitle($article)

@@ -6,6 +6,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+use Aml\Bundle\UrlRewriteBundle\Entity\UrlDiscography;
+
 class AlbumAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -74,4 +76,33 @@ class AlbumAdmin extends Admin
 
         return null;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preUpdate($album)
+    {
+        $urlKey = $album->getUrl();
+        if(empty($urlKey)){
+            $entityUrl = new UrlDiscography();
+            $entityUrl->setUrlKey($album->getTitle());
+
+            $album->setUrl($entityUrl);
+        }
+        else {
+            $urlKey->setUrlKey($album->getTitle());
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($album)
+    {
+        $entityUrl = new UrlDiscography();
+        $entityUrl->setUrlKey($album->getTitle());
+
+        $album->setUrl($entityUrl);
+    }
+
 }
