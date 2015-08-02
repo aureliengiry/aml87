@@ -10,7 +10,7 @@
     {# Breadcrumb #}
     {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
 
-	<div class="contenu-page">
+	<article class="contenu-page">
 
 		<h1>Agenda</h1>
 
@@ -34,8 +34,7 @@
         {% endfor %}
         </ul>
 
-
-	</div>
+	</article>
 </div>
 
 <div id="col-right">
@@ -43,4 +42,5 @@
     {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
 </div>
 {% endblock body %}
+
 

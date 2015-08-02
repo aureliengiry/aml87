@@ -1,5 +1,5 @@
 <!-- Header -->
-<div id="banniere">
+<header id="banniere">
 
 	{% if app.request.attributes.get('_route') == 'home' %} 			
 	<h1 id="logo">
@@ -20,7 +20,7 @@
 	{# Menu #}
   	{% include "AmlWebBundle::Partial/menu.html.twig" %} 
 	
-</div><!-- /Header -->	
+</header><!-- /Header -->
 
 {% if app.request.attributes.get('_route') == 'home' %} 		
 <div id="intro">
@@ -32,4 +32,3 @@
 	</div>
 </div>
 {% endif %}
-

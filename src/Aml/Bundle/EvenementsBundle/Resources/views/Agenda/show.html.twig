@@ -10,7 +10,7 @@
         {# Breadcrumb #}
         {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
 
-        <div class="contenu-page">
+        <article class="contenu-page">
             <h1>{{ entity.title }}</h1>
 
             {# Date #}
@@ -30,7 +30,7 @@
             {% endif %}
 
             <div><p>{{ entity.description|raw }}</p></div>
-        </div>
+        </article>
     </div>
 
     <div id="col-right">

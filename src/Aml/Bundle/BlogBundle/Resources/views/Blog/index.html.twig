@@ -18,9 +18,9 @@
                 {% for entity in entities %}
 
                     {# articles #}
-                    <div class="blog-article{% if loop.first %} first{% endif %}{% if loop.last %} last{% endif %}">
+                    <article class="blog-article{% if loop.first %} first{% endif %}{% if loop.last %} last{% endif %}">
                         {% include "AmlBlogBundle::Blog/article.html.twig" %}
-                    </div>
+                    </article>
 
                 {% endfor %}
 
