@@ -6,6 +6,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+use Aml\Bundle\UrlRewriteBundle\Entity\UrlPage;
+
 class PageAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -63,17 +65,34 @@ class PageAdmin extends Admin
     /**
      * {@inheritdoc}
      */
-    public function preUpdate($article)
+    public function preUpdate($page)
     {
-        $article->setUpdated(new \DateTime);
+        $page->setUpdated(new \DateTime);
+
+        $urlKey = $page->getUrl();
+        if(empty($urlKey)){
+            $entityUrl = new UrlPage();
+            $entityUrl->setUrlKey($page->getTitle());
+
+            $page->setUrl($entityUrl);
+        }
+        else {
+            $urlKey->setUrlKey($page->getTitle());
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function prePersist($article)
+    public function prePersist($page)
     {
-        $article->setCreated(new \DateTime);
-        $article->setUpdated(new \DateTime);
+        $entityUrl = new UrlPage();
+        $entityUrl->setUrlKey($page->getTitle());
+
+        $page
+            ->setCreated(new \DateTime)
+            ->setUpdated(new \DateTime)
+            ->setUrl($entityUrl)
+        ;
     }
 }
