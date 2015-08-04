@@ -38,6 +38,9 @@ class AppKernel extends Kernel
             new Aml\Bundle\DiscographyBundle\AmlDiscographyBundle(),
             new Aml\Bundle\UrlRewriteBundle\AmlUrlRewriteBundle(),
             new Tools\Bundle\GoogleAnalyticsBundle\ToolsGoogleAnalyticsBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
         );
 
 
