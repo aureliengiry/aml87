@@ -126,6 +126,7 @@ class Article
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -147,6 +148,7 @@ class Article
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -170,6 +172,7 @@ class Article
     public function setLogo($logo)
     {
         $this->logo = $logo;
+
         return $this;
     }
 
@@ -189,6 +192,7 @@ class Article
     public function setVideo($video)
     {
         $this->video = $video;
+
         return $this;
     }
 
@@ -208,6 +212,7 @@ class Article
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
@@ -229,6 +234,7 @@ class Article
     public function setCreated(\DateTime $created = null)
     {
         $this->created = $created;
+
         return $this;
     }
 
@@ -250,6 +256,7 @@ class Article
     public function setUpdated(\DateTime $updated = null)
     {
         $this->updated = $updated;
+
         return $this;
     }
 
@@ -271,6 +278,7 @@ class Article
     public function setPublic($public)
     {
         $this->public = $public;
+
         return $this;
     }
 
@@ -298,6 +306,7 @@ class Article
     public function setPublished($published)
     {
         $this->published = $published;
+
         return $this;
     }
 
@@ -315,6 +324,7 @@ class Article
     public function setCategory($id_blog_category)
     {
         $this->category = $id_blog_category;
+
         return $this;
     }
 
@@ -329,6 +339,7 @@ class Article
             $tag->addArticle($this);
             $this->tags[] = $tag;
         }
+
         return $this;
     }
 
@@ -356,6 +367,7 @@ class Article
     public function setTags(ArrayCollection $tags)
     {
         $this->tags = $tags;
+
         return $this;
     }
 
@@ -371,6 +383,7 @@ class Article
             $evenement->addArticle($this);
             $this->evenements[] = $evenement;
         }
+
         return $this;
     }
 
@@ -398,12 +411,13 @@ class Article
     public function setEvenements(ArrayCollection $evenements)
     {
         $this->evenements = $evenements;
+
         return $this;
     }
 
 
     public function __toString()
     {
-        return $this->title ? : 'New Article';
+        return $this->title ?: 'New Article';
     }
 }

@@ -21,60 +21,79 @@ class ArticleAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('title', 'text')
-                /*->add('url', 'text',array(
-                    'required' => false,
-                    'data_class' => '\Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle',
-                    'read_only' => true
-                ))*/
-                ->add('category', 'entity', array(
+            ->add('title', 'text')
+            /*->add('url', 'text',array(
+                'required' => false,
+                'data_class' => '\Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle',
+                'read_only' => true
+            ))*/
+            ->add(
+                'category',
+                'entity',
+                array(
                     'label' => 'Catégorie',
                     'class' => 'AmlBlogBundle:Category',
                     'property' => 'name',
                     'empty_value' => 'Choisissez une catégorie',
-                    'attr' => array('class'=>'uniform')
-                ))
-                ->add('body', 'textarea', array(
+                    'attr' => array('class' => 'uniform')
+                )
+            )
+            ->add(
+                'body',
+                'textarea',
+                array(
                     'label' => 'Texte',
                     'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
                     'required' => false,
                     'wysiwyg' => true
-                ))
-                ->add('public', 'checkbox', array(
+                )
+            )
+            ->add(
+                'public',
+                'checkbox',
+                array(
                     'label' => 'Publier',
                     'required' => false,
                     'attr' => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
-                ))
+                )
+            )
             ->end()
             ->with('Image')
-                ->add(
-                    'logo',
-                    'sonata_type_admin',
-                    array(
-                        'delete'   => false,
-                        'required' => false
-                    )
-
+            ->add(
+                'logo',
+                'sonata_type_admin',
+                array(
+                    'delete' => false,
+                    'required' => false
                 )
+
+            )
             ->end()
             ->with('Tags')
-                ->add('tags', 'sonata_type_model', array(
+            ->add(
+                'tags',
+                'sonata_type_model',
+                array(
                     'required' => false,
                     'expanded' => false,
                     'multiple' => true,
                     'by_reference' => false,
-                    'attr'=>array('data-sonata-select2'=>'true')
-                ))
+                    'attr' => array('data-sonata-select2' => 'true')
+                )
+            )
             ->end()
             ->with('Evenements')
-            ->add('evenements', 'sonata_type_model', array(
-                'required' => false,
-                'expanded' => true,
-                'multiple' => true,
-                'by_reference' => false
-            ))
-            ->end()
-        ;
+            ->add(
+                'evenements',
+                'sonata_type_model',
+                array(
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'by_reference' => false
+                )
+            )
+            ->end();
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -82,8 +101,7 @@ class ArticleAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('category')
-            ->add('public')
-        ;
+            ->add('public');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -118,13 +136,12 @@ class ArticleAdmin extends Admin
         $article->setUpdated(new \DateTime);
 
         $urlKey = $article->getUrl();
-        if(empty($urlKey)){
+        if (empty($urlKey)) {
             $entityUrl = new UrlArticle();
             $entityUrl->setUrlKey($article->getTitle());
 
             $article->setUrl($entityUrl);
-        }
-        else {
+        } else {
             $urlKey->setUrlKey($article->getTitle());
         }
     }
@@ -140,8 +157,7 @@ class ArticleAdmin extends Admin
         $article
             ->setCreated(new \DateTime)
             ->setUpdated(new \DateTime)
-            ->setUrl($entityUrl)
-        ;
+            ->setUrl($entityUrl);
     }
 
     protected function _setLogoTitle($article)

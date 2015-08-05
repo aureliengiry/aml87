@@ -5,64 +5,65 @@
 {%- endblock title %}
 
 {% block body %}
-<div id="col-left" class="two-cols-content">
+    <div id="col-left" class="two-cols-content">
 
-    {# Breadcrumb #}
-    {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
+        {# Breadcrumb #}
+        {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
 
-	<div class="contenu-page">
-		
-		{% if entities is not empty %}
-			{% for entity in entities %}
-			    	
-			<article class="disc-item{% if loop.last %} last{% endif %}">
+        <div class="contenu-page">
 
-                {% if entity.image.webpath is defined %}
-                <div class="disc-pochette-list">
-                    <a rel="prettyPhoto[discography]" href="{{ asset(entity.image.webpath) | apply_filter('modal_img') }}">
-                        <img src="{{ asset(entity.image.webpath) | apply_filter('discography_list') }}"
-                             alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
-                             class="imagecache imagecache-pochette-album" width="180" height="160">
-                    </a>
-                </div>
-                {% endif %}
+            {% if entities is not empty %}
+                {% for entity in entities %}
 
-				<div class="disc-description-list">
-					<h3>
-                        {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
-                            <a href="{{ path('discography_album_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
-                               title="Voir l'album : {{ entity.title }}">{{ entity.title }}</a>
-                        {% else %}
-                            <a href="{{ path('discography_album_show', { 'id': entity.id }) }}"
-                               title="Voir l'album : {{ entity.title }}">{{ entity.title }}</a>
+                    <article class="disc-item{% if loop.last %} last{% endif %}">
+
+                        {% if entity.image.webpath is defined %}
+                            <div class="disc-pochette-list">
+                                <a rel="prettyPhoto[discography]"
+                                   href="{{ asset(entity.image.webpath) | apply_filter('modal_img') }}">
+                                    <img src="{{ asset(entity.image.webpath) | apply_filter('discography_list') }}"
+                                         alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
+                                         class="imagecache imagecache-pochette-album" width="180" height="160">
+                                </a>
+                            </div>
                         {% endif %}
-					</h3>
-					<span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>	
-					
-					<p>{{ entity.description|raw|wordWarp }}</p>
 
-                    {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
-                        <a href="{{ path('discography_album_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
-                           title="Voir l'album : {{ entity.title }}">Lire la suite</a>
-                    {% else %}
-                        <a href="{{ path('discography_album_show', { 'id': entity.id }) }}"
-                           title="Voir l'album : {{ entity.title }}">Lire la suite</a>
-                    {% endif %}
-						
-				</div>	
-			</article>
-			        
-			{% endfor %} 	
-		
-		{% else %}	
-			<h1>Discographie</h1>
-			<p>Aucun album n'a été publié.</p>
-		{% endif %}
-	</div>
-</div>
+                        <div class="disc-description-list">
+                            <h3>
+                                {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+                                    <a href="{{ path('discography_album_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
+                                       title="Voir l'album : {{ entity.title }}">{{ entity.title }}</a>
+                                {% else %}
+                                    <a href="{{ path('discography_album_show', { 'id': entity.id }) }}"
+                                       title="Voir l'album : {{ entity.title }}">{{ entity.title }}</a>
+                                {% endif %}
+                            </h3>
+                            <span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>
 
-<div id="col-right">
-    {# Next Concert #}
-    {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
-</div>
+                            <p>{{ entity.description|raw|wordWarp }}</p>
+
+                            {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+                                <a href="{{ path('discography_album_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
+                                   title="Voir l'album : {{ entity.title }}">Lire la suite</a>
+                            {% else %}
+                                <a href="{{ path('discography_album_show', { 'id': entity.id }) }}"
+                                   title="Voir l'album : {{ entity.title }}">Lire la suite</a>
+                            {% endif %}
+
+                        </div>
+                    </article>
+
+                {% endfor %}
+
+            {% else %}
+                <h1>Discographie</h1>
+                <p>Aucun album n'a été publié.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div id="col-right">
+        {# Next Concert #}
+        {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
+    </div>
 {% endblock body %}

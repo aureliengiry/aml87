@@ -75,7 +75,7 @@ class Url
      *
      * @return mixed|string
      */
-    protected function _build_SystemName($str, $separator = 'dash', $lowercase = TRUE)
+    protected function _build_SystemName($str, $separator = 'dash', $lowercase = true)
     {
         if ($separator == 'dash') {
             $search = '_';
@@ -90,19 +90,19 @@ class Url
             '&\S+?;' => '',
             '\s+' => $replace,
             '[^a-z0-9\-\._]' => '',
-            $replace . '+' => $replace,
-            $replace . '$' => $replace,
-            '^' . $replace => $replace,
+            $replace.'+' => $replace,
+            $replace.'$' => $replace,
+            '^'.$replace => $replace,
             '\.+$' => ''
         );
 
         $str = strip_tags($str);
 
         foreach ($trans as $key => $val) {
-            $str = preg_replace("#" . $key . "#i", $val, $str);
+            $str = preg_replace("#".$key."#i", $val, $str);
         }
 
-        if ($lowercase === TRUE) {
+        if ($lowercase === true) {
             $str = strtolower($str);
         }
 
@@ -120,6 +120,6 @@ class Url
 
     public function __toString()
     {
-        return $this->urlKey ? : 'Url not define';
+        return $this->urlKey ?: 'Url not define';
     }
 }

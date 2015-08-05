@@ -219,9 +219,10 @@ class Message
     public function getStatus()
     {
         $statusOptions = array(
-          self::MESSAGE_STATUS_SAVE => 'Enregistré',
-          self::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé'
+            self::MESSAGE_STATUS_SAVE => 'Enregistré',
+            self::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé'
         );
+
         return $statusOptions[$this->status];
     }
 
@@ -233,6 +234,7 @@ class Message
     public function setCreated(\DateTime $created = null)
     {
         $this->created = $created;
+
         return $this;
     }
 
@@ -248,6 +250,6 @@ class Message
 
     public function __toString()
     {
-        return $this->subject ? : 'New message';
+        return $this->subject ?: 'New message';
     }
 }

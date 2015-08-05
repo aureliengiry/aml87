@@ -14,30 +14,38 @@ class PartenaireType extends AbstractType
     {
         /**
          * ->add('title','text',array(
-        'label' => 'Titre',
-        'attr' => array('placeholder' => 'Saisir le titre')
-        ))
+         * 'label' => 'Titre',
+         * 'attr' => array('placeholder' => 'Saisir le titre')
+         * ))
          */
         $builder
             ->add('name')
             ->add('url')
-            ->add('logo',new ImageType(),array(
-
-            ))
-            ->add('description','textarea', array(
-                'required' => false
-            ))
-           // ->add('description')
+            ->add(
+                'logo',
+                new ImageType(),
+                array()
+            )
+            ->add(
+                'description',
+                'textarea',
+                array(
+                    'required' => false
+                )
+            )
+            // ->add('description')
             //->add('evenements')
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Aml\Bundle\WebBundle\Entity\Partenaire',
-            'cascade_validation' => true,
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Aml\Bundle\WebBundle\Entity\Partenaire',
+                'cascade_validation' => true,
+            )
+        );
     }
 
     public function getName()

@@ -29,5 +29,5 @@ class LiensController extends Controller
 
         return array('entities' => $entities);
     }
-    
+
 }

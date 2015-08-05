@@ -11,22 +11,37 @@ class LinkAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title','text',array(
-                'label' => 'Titre'
-            ))
+            ->add(
+                'title',
+                'text',
+                array(
+                    'label' => 'Titre'
+                )
+            )
             ->add('url')
-            ->add('description','textarea',array(
-                'required' => false,
-            ))
-            ->add('weight','text',array(
-                'required' => false,
-            ))
-            ->add('public','checkbox',array(
-                'label' => 'Publier',
-                'required' => false,
-                'attr' => array('data-help' => 'Signifie que le lien sera visible pour tout le monde'),
-            ))
-        ;
+            ->add(
+                'description',
+                'textarea',
+                array(
+                    'required' => false,
+                )
+            )
+            ->add(
+                'weight',
+                'text',
+                array(
+                    'required' => false,
+                )
+            )
+            ->add(
+                'public',
+                'checkbox',
+                array(
+                    'label' => 'Publier',
+                    'required' => false,
+                    'attr' => array('data-help' => 'Signifie que le lien sera visible pour tout le monde'),
+                )
+            );
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -34,8 +49,7 @@ class LinkAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('url')
-            ->add('public')
-        ;
+            ->add('public');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -44,8 +58,7 @@ class LinkAdmin extends Admin
             ->addIdentifier('title')
             ->addIdentifier('url')
             ->add('weight')
-            ->add('public')
-        ;
+            ->add('public');
     }
 
     /**

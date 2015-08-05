@@ -15,8 +15,7 @@ class PageType extends AbstractType
             ->add('created')
             ->add('updated')
             ->add('public')
-            ->add('url')
-        ;
+            ->add('url');
     }
 
     public function getName()

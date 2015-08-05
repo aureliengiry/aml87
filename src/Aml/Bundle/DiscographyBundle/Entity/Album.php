@@ -78,7 +78,7 @@ class Album
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -93,13 +93,14 @@ class Album
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -114,6 +115,7 @@ class Album
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -136,13 +138,14 @@ class Album
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
     /**
      * Get description
      *
-     * @return text 
+     * @return text
      */
     public function getDescription()
     {
@@ -157,13 +160,14 @@ class Album
     public function setPublic($public)
     {
         $this->public = $public;
+
         return $this;
     }
 
     /**
      * Get public
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublic()
     {
@@ -178,13 +182,14 @@ class Album
     public function setDate($date)
     {
         $this->date = $date;
+
         return $this;
     }
 
     /**
      * Get date
      *
-     * @return date 
+     * @return date
      */
     public function getDate()
     {
@@ -228,6 +233,7 @@ class Album
     public function setTracks($tracks)
     {
         $this->tracks = $tracks;
+
         return $this;
     }
 
@@ -238,6 +244,7 @@ class Album
     public function addTrack($track)
     {
         $this->tracks[] = $track;
+
         return $this;
     }
 
@@ -253,6 +260,6 @@ class Album
 
     public function __toString()
     {
-        return $this->title ? : 'Nouvel Album';
+        return $this->title ?: 'Nouvel Album';
     }
 }

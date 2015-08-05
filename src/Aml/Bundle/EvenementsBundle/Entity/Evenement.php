@@ -140,6 +140,7 @@ class Evenement
     public function setDateStart($dateStart)
     {
         $this->dateStart = $dateStart;
+
         return $this;
     }
 
@@ -161,6 +162,7 @@ class Evenement
     public function setDateEnd($dateEnd)
     {
         $this->dateEnd = $dateEnd;
+
         return $this;
     }
 
@@ -182,6 +184,7 @@ class Evenement
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -203,6 +206,7 @@ class Evenement
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -222,6 +226,7 @@ class Evenement
     public function setPicture($picture)
     {
         $this->picture = $picture;
+
         return $this;
     }
 
@@ -242,6 +247,7 @@ class Evenement
     public function setArchive($archive)
     {
         $this->archive = $archive;
+
         return $this;
     }
 
@@ -263,6 +269,7 @@ class Evenement
     public function setPublic($public)
     {
         $this->public = $public;
+
         return $this;
     }
 
@@ -290,6 +297,7 @@ class Evenement
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -320,6 +328,7 @@ class Evenement
     public function setArticles($articles)
     {
         $this->articles = $articles;
+
         return $this;
     }
 
@@ -347,6 +356,7 @@ class Evenement
     {
         $partenaire->addEvenement($this);
         $this->partenaires[] = $partenaire;
+
         return $this;
     }
 
@@ -374,6 +384,7 @@ class Evenement
     public function setPartenaires(ArrayCollection $partenaires)
     {
         $this->partenaires = $partenaires;
+
         return $this;
     }
 
@@ -390,6 +401,7 @@ class Evenement
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -417,10 +429,12 @@ class Evenement
     public function setSeason($season)
     {
         $this->season = $season;
+
         return $this;
     }
 
-    public function hasSeason(){
+    public function hasSeason()
+    {
         return (bool)$this->season;
     }
 

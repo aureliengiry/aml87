@@ -56,8 +56,8 @@ class Partenaire
     /**
      * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", inversedBy="partenaires")
      * @ORM\JoinTable(name="evenements_partenaires",
-     * 		joinColumns={@ORM\JoinColumn(name="id_partenaire", referencedColumnName="id_partenaire")},
-     * 		inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}
+     *        joinColumns={@ORM\JoinColumn(name="id_partenaire", referencedColumnName="id_partenaire")},
+     *        inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}
      * )
      */
     protected $evenements;
@@ -71,7 +71,7 @@ class Partenaire
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -87,14 +87,14 @@ class Partenaire
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -110,14 +110,14 @@ class Partenaire
     public function setUrl($url)
     {
         $this->url = $url;
-    
+
         return $this;
     }
 
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -130,17 +130,17 @@ class Partenaire
      * @param string $logo
      * @return Partenaire
      */
-    public function setLogo( $logo)
+    public function setLogo($logo)
     {
         $this->logo = $logo;
-    
+
         return $this;
     }
 
     /**
      * Get logo
      *
-     * @return string 
+     * @return string
      */
     public function getLogo()
     {
@@ -156,14 +156,14 @@ class Partenaire
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -179,6 +179,7 @@ class Partenaire
     public function setEvenements($evenements)
     {
         $this->evenements = $evenements;
+
         return $this;
     }
 
@@ -198,6 +199,6 @@ class Partenaire
 
     public function __toString()
     {
-        return $this->name ? : 'Nouveau Partenaire';
+        return $this->name ?: 'Nouveau Partenaire';
     }
 }

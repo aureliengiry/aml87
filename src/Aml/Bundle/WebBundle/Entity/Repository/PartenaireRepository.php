@@ -15,13 +15,12 @@ class PartenaireRepository extends EntityRepository
     /**
      * Function to delete tumblr/tags relation
      *
-     * @param MongoboxTumblrBundle:Tumblr $partenaire
+     * @param MongoboxTumblrBundle :Tumblr $partenaire
      */
     public function cleanTags($partenaire)
     {
         $em = $this->getEntityManager();
-        foreach ($partenaire->getTags() as $tag)
-        {
+        foreach ($partenaire->getTags() as $tag) {
             $partenaire->removeTag($tag);
         }
         $em->flush();
@@ -30,13 +29,12 @@ class PartenaireRepository extends EntityRepository
     /**
      * Function to delete tumblr/tags relation
      *
-     * @param MongoboxTumblrBundle:Tumblr $partenaire
+     * @param MongoboxTumblrBundle :Tumblr $partenaire
      */
     public function cleanLogo($partenaire)
     {
         $em = $this->getEntityManager();
-        foreach ($partenaire->getLogo() as $tag)
-        {
+        foreach ($partenaire->getLogo() as $tag) {
             $partenaire->removeTag($tag);
         }
         $em->flush();

@@ -11,7 +11,7 @@ use Aml\Bundle\MediasBundle\Entity\Media;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Image
- * 
+ *
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\ImageRepository")
  */
@@ -23,16 +23,16 @@ class Image extends Media
      */
     protected $album;
 
-	/**
-	 * @Assert\File(
-	 *     maxSize = "2M",
-	 *     mimeTypes = {"image/jpeg","image/gif","image/png"},
-	 *     mimeTypesMessage = "L'image choisie jjj ne correspond pas à un type de fichier valide",
-	 *     notFoundMessage = "L'image n'a pas été trouvée sur le disque",
-	 *     uploadErrorMessage = "Erreur dans l'upload de l'image"
-	 * )
-	 */
-	private $file;
+    /**
+     * @Assert\File(
+     *     maxSize = "2M",
+     *     mimeTypes = {"image/jpeg","image/gif","image/png"},
+     *     mimeTypesMessage = "L'image choisie jjj ne correspond pas à un type de fichier valide",
+     *     notFoundMessage = "L'image n'a pas été trouvée sur le disque",
+     *     uploadErrorMessage = "Erreur dans l'upload de l'image"
+     * )
+     */
+    private $file;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -47,9 +47,10 @@ class Image extends Media
     {
         $this->partenaires = new ArrayCollection();
     }
-    
-    public function getType(){
-    	return array('label' => 'Image', 'key' => 'image' );
+
+    public function getType()
+    {
+        return array('label' => 'Image', 'key' => 'image');
     }
 
 
@@ -57,7 +58,8 @@ class Image extends Media
     /**
      * @return the $articles
      */
-    public function getPartenaire() {
+    public function getPartenaire()
+    {
         return $this->partenaire;
     }
 
@@ -69,6 +71,7 @@ class Image extends Media
     public function setFile($file)
     {
         $this->file = $file;
+
         return $this;
     }
 
@@ -90,6 +93,7 @@ class Image extends Media
     public function setPath($path)
     {
         $this->path = $path;
+
         return $this;
     }
 
@@ -129,8 +133,8 @@ class Image extends Media
     {
         if (null !== $this->file) {
 
-            $cleanName = $this->_build_SystemName(  $this->file->getClientOriginalName() );
-            $name = $this->_renameIfFileExist( $cleanName );
+            $cleanName = $this->_build_SystemName($this->file->getClientOriginalName());
+            $name = $this->_renameIfFileExist($cleanName);
             $this->path = $name;
 
         }
@@ -149,7 +153,7 @@ class Image extends Media
         // vous devez lancer une exception ici si le fichier ne peut pas
         // être déplacé afin que l'entité ne soit pas persistée dans la
         // base de données comme le fait la méthode move() de UploadedFile
-        $this->file->move($this->getUploadRootDir(), $this->path );
+        $this->file->move($this->getUploadRootDir(), $this->path);
 
         unset($this->file);
 
@@ -174,9 +178,9 @@ class Image extends Media
      */
     public function removeUpload()
     {
-        if ($this->filenameForRemove && true === file_exists($this->filenameForRemove) ) {
+        if ($this->filenameForRemove && true === file_exists($this->filenameForRemove)) {
             unlink($this->filenameForRemove);
         }
     }
-   
+
 }

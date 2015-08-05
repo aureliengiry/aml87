@@ -32,7 +32,7 @@ class DefaultController extends Controller
 
         return array(
             'lastBlogArticle' => $blogEntity,
-            'lastAlbum'       => $albumEntity
+            'lastAlbum' => $albumEntity
         );
     }
 
@@ -48,13 +48,13 @@ class DefaultController extends Controller
         $dispatcher = $this->container->get('event_dispatcher');
 
         $request = $this->getRequest();
-        $hostname = 'http://' . $request->getHost();
+        $hostname = 'http://'.$request->getHost();
 
         // add some urls homepage
         $urls[] = array(
-            'loc'        => $this->get('router')->generate('home'),
+            'loc' => $this->get('router')->generate('home'),
             'changefreq' => 'weekly',
-            'priority'   => '1.0'
+            'priority' => '1.0'
         );
 
         $sitemapGenerationEvent = new GenerateEvent($urls);

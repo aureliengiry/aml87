@@ -37,15 +37,15 @@ class SitemapListener
         $evenementRepository = $doctrine->getManager('default')->getRepository('AmlEvenementsBundle:Evenement');
         $agendaEvents = $evenementRepository->getNextEvenements(
             array(
-                'public'  => 1,
+                'public' => 1,
                 'archive' => 0,
-                'type'    => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT
+                'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT
             )
         );
 
         foreach ($agendaEvents as $agendaEvent) {
 
-            if(!$agendaEvent->getUrl()){
+            if (!$agendaEvent->getUrl()) {
                 continue;
             }
 

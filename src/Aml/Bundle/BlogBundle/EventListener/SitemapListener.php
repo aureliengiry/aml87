@@ -43,7 +43,7 @@ class SitemapListener
         // add some urls blog
         foreach ($entitiesBlog as $article) {
 
-            if(!$article->getUrl()){
+            if (!$article->getUrl()) {
                 continue;
             }
 

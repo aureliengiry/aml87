@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert; // pour la validation
 use FOS\UserBundle\Model\User as BaseUser;
 
 
-
 /**
  * Aml\Bundle\UsersBundle\Entity\User
  *
@@ -90,7 +89,6 @@ class User extends BaseUser
     {
         return $this->lastname;
     }
-
 
 
 }

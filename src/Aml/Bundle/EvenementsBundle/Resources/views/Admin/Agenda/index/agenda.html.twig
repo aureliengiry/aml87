@@ -1,56 +1,55 @@
 {# Template de la vue en mode calendrier #}
 
 
-
 <div id='calendar'></div>
 
 
 {% block endJS %}
-<script type='text/javascript'>
-$(document).ready(function() {
-	var date = new Date();
-	var d = date.getDate();
-	var m = date.getMonth();
-	var y = date.getFullYear();
-	
-	$('#calendar').fullCalendar({
-		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
-		},
-		editable: true,
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
 
-		events: {
-	        url: '{{ path('admin_agenda_ajax_feed') }}',
-	        type: 'POST',
-	        data: {
-	            custom_param1: 'something',
-	            custom_param2: 'somethingelse'
-	        },
-	        error: function() {
-	            alert('there was an error while fetching events!');
-	        }
-	    },
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                editable: true,
 
-        monthNames: ['Janvier','F\u00e9vrier','Mars','Avril','Mai','Juin','Juillet','Ao\u00fbt','Septembre','Octobre','Novembre','D\u00e9cembre'],
-        monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Juin','Juil','Aout','Sep','Oct','Nov','Dec'],
-        dayNames:['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'],
-        dayNamesShort: ['Lun','Mar','Mer','Jeu','Thu','Ven','Sam','Dim'],
+                events: {
+                    url: '{{ path('admin_agenda_ajax_feed') }}',
+                    type: 'POST',
+                    data: {
+                        custom_param1: 'something',
+                        custom_param2: 'somethingelse'
+                    },
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    }
+                },
 
-        buttonText: {
-            prev: '&nbsp;&#9668;&nbsp;',
-            next: '&nbsp;&#9658;&nbsp;',
-            prevYear: '&nbsp;&lt;&lt;&nbsp;',
-            nextYear: '&nbsp;&gt;&gt;&nbsp;',
-            today: 'Aujourd\'hui',
-            month: 'mois',
-            week: 'semaine',
-            day: 'journée'
-        },
-	});
-	
-});
+                monthNames: ['Janvier', 'F\u00e9vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Ao\u00fbt', 'Septembre', 'Octobre', 'Novembre', 'D\u00e9cembre'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aout', 'Sep', 'Oct', 'Nov', 'Dec'],
+                dayNames: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+                dayNamesShort: ['Lun', 'Mar', 'Mer', 'Jeu', 'Thu', 'Ven', 'Sam', 'Dim'],
 
-</script>
+                buttonText: {
+                    prev: '&nbsp;&#9668;&nbsp;',
+                    next: '&nbsp;&#9658;&nbsp;',
+                    prevYear: '&nbsp;&lt;&lt;&nbsp;',
+                    nextYear: '&nbsp;&gt;&gt;&nbsp;',
+                    today: 'Aujourd\'hui',
+                    month: 'mois',
+                    week: 'semaine',
+                    day: 'journée'
+                },
+            });
+
+        });
+
+    </script>
 {% endblock endJS %}

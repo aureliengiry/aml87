@@ -13,18 +13,23 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file','file',array(
-            		'label' => 'Image',
+            ->add(
+                'file',
+                'file',
+                array(
+                    'label' => 'Image',
                     'required' => false
-            ))
-        ;
+                )
+            );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Aml\Bundle\MediasBundle\Entity\Image'
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Aml\Bundle\MediasBundle\Entity\Image'
+            )
+        );
     }
 
     public function getName()

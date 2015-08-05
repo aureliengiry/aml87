@@ -19,28 +19,28 @@ use Aml\Bundle\MediasBundle\Entity\Media;
  */
 class File extends Media
 {
-    
-	/**
-	 * @Assert\File(
-	 *     maxSize = "2M",
-	 *     mimeTypes = {"application/pdf", "application/x-pdf"},
-	 *     mimeTypesMessage = "Le fichier choisi ne correspond pas à un type de fichier valide",
-	 *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
-	 *     uploadErrorMessage = "Erreur dans l'upload du fichier"
-	 * )
-	 */
+
+    /**
+     * @Assert\File(
+     *     maxSize = "2M",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage = "Le fichier choisi ne correspond pas à un type de fichier valide",
+     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
+     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
+     * )
+     */
     private $file;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $path;
-    
+
     // propriété utilisé temporairement pour la suppression
     private $filenameForRemove;
-    
-  //  private $filename;
-    
+
+    //  private $filename;
+
     /**
      * Get id
      *
@@ -48,9 +48,9 @@ class File extends Media
      */
     public function getId()
     {
-    	return $this->id;
+        return $this->id;
     }
-        
+
     /**
      * Set file
      *
@@ -58,10 +58,11 @@ class File extends Media
      */
     public function setFile($file)
     {
-    	$this->file = $file;
-    	return $this;
+        $this->file = $file;
+
+        return $this;
     }
-    
+
     /**
      * Get file
      *
@@ -69,8 +70,9 @@ class File extends Media
      */
     public function getFile()
     {
-    	return $this->file;
+        return $this->file;
     }
+
     /**
      * Set path
      *
@@ -78,10 +80,11 @@ class File extends Media
      */
     public function setPath($path)
     {
-    	$this->path = $path;
-    	return $this;
+        $this->path = $path;
+
+        return $this;
     }
-    
+
     /**
      * Get path
      *
@@ -89,7 +92,7 @@ class File extends Media
      */
     public function getPath()
     {
-    	return $this->path;
+        return $this->path;
     }
 
     public function getWebPath()
@@ -109,71 +112,71 @@ class File extends Media
         // le document/image dans la vue.
         return 'uploads/documents';
     }
-    
+
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
     public function preUpload()
     {
-    	if (null !== $this->file) {
+        if (null !== $this->file) {
 
-    			$cleanName = $this->_build_SystemName(  $this->file->getClientOriginalName() );
-    			$name = $this->_renameIfFileExist( $cleanName );    		
-    			$this->path = $name;
-    		
-    	}
+            $cleanName = $this->_build_SystemName($this->file->getClientOriginalName());
+            $name = $this->_renameIfFileExist($cleanName);
+            $this->path = $name;
+
+        }
     }
-    
+
     /**
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
      */
     public function upload()
     {
-    	if (null === $this->file) {
-    		return;
-    	}
+        if (null === $this->file) {
+            return;
+        }
 
-    	// vous devez lancer une exception ici si le fichier ne peut pas
-    	// être déplacé afin que l'entité ne soit pas persistée dans la
-    	// base de données comme le fait la méthode move() de UploadedFile
-    	$this->file->move($this->getUploadRootDir(), $this->path );
+        // vous devez lancer une exception ici si le fichier ne peut pas
+        // être déplacé afin que l'entité ne soit pas persistée dans la
+        // base de données comme le fait la méthode move() de UploadedFile
+        $this->file->move($this->getUploadRootDir(), $this->path);
 
-    	unset($this->file);
+        unset($this->file);
 
 
     }
-    
 
-    
+
     /**
      * @ORM\PreRemove()
      */
     public function storeFilenameForRemove()
     {
-    	$this->filenameForRemove = $this->getAbsolutePath();
+        $this->filenameForRemove = $this->getAbsolutePath();
     }
-    
+
     /**
      * @ORM\PostRemove()
      */
     public function removeUpload()
     {
-    	if ($this->filenameForRemove && true === file_exists($this->filenameForRemove) ) {
-    		unlink($this->filenameForRemove);
-    	}
-    }
-    
-    
-    public function getAbsolutePath()
-    {
-    	return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+        if ($this->filenameForRemove && true === file_exists($this->filenameForRemove)) {
+            unlink($this->filenameForRemove);
+        }
     }
 
-    public function getType(){
-    	return array('label' => 'Fichier', 'key' => 'file' );
+
+    public function getAbsolutePath()
+    {
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
-    
-    
+
+    public function getType()
+    {
+        return array('label' => 'Fichier', 'key' => 'file');
+    }
+
+
 }

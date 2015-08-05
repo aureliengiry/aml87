@@ -1,20 +1,20 @@
 {% extends "AmlWebBundle::layout.html.twig" %}
 
 {% block body %}
-<div id="col-left" class="two-cols-content">
-	
-	{# Dernier article du blog #}
-	{% include "AmlWebBundle::Default/article.html.twig" %} 
-	
-	{# Dernier Album #}
-	{% include "AmlWebBundle::Default/album.html.twig" %} 
+    <div id="col-left" class="two-cols-content">
 
-</div>
+        {# Dernier article du blog #}
+        {% include "AmlWebBundle::Default/article.html.twig" %}
 
-<div id="col-right">
-    <div class="side-bloc no-border">
-        {# Next Concert #}
-        {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
+        {# Dernier Album #}
+        {% include "AmlWebBundle::Default/album.html.twig" %}
+
     </div>
-</div>
+
+    <div id="col-right">
+        <div class="side-bloc no-border">
+            {# Next Concert #}
+            {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
+        </div>
+    </div>
 {%- endblock body %}

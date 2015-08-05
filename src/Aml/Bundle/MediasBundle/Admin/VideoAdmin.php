@@ -26,9 +26,13 @@ src="'.$urlVideo.'" frameborder="0" allowfullscreen></iframe>';
         }
 
         $formMapper
-            ->add('title', 'text', array(
-                'required' => false,
-            ))
+            ->add(
+                'title',
+                'text',
+                array(
+                    'required' => false,
+                )
+            )
             ->add('provider_id', 'text', $thumbnailFieldOptions);
     }
 

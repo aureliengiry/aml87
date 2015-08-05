@@ -12,7 +12,8 @@ use Doctrine\ORM\EntityRepository;
  */
 class SeasonRepository extends EntityRepository
 {
-    public function getSeasonByDateStart(\DateTime $eventDateStart){
+    public function getSeasonByDateStart(\DateTime $eventDateStart)
+    {
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('s')
@@ -26,14 +27,13 @@ class SeasonRepository extends EntityRepository
             'eventDateStart' => $eventDateStart,
         );
 
-        $q->setParameters( $params );
+        $q->setParameters($params);
 
         $query = $q->getQuery();
 
         try {
             return $query->getSingleResult();
-        }
-        catch(\Doctrine\ORM\NoResultException $e) {
+        } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }
     }

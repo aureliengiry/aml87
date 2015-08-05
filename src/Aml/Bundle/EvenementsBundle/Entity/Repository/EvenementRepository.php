@@ -34,12 +34,13 @@ class EvenementRepository extends EntityRepository
             ->where('e.dateStart > :dateStart')
             // ->andWhere('e.date_start < :date_end')
             ->orderBy('e.dateStart', 'ASC')
-            ->setParameters(array
-            (
-                'dateStart' => $dateTimeStart,
-                //'date_end' => $dateTimeEnd,
-            ))
-        ;
+            ->setParameters(
+                array
+                (
+                    'dateStart' => $dateTimeStart,
+                    //'date_end' => $dateTimeEnd,
+                )
+            );
 
         return $q->getQuery()->getResult();
     }
@@ -139,7 +140,8 @@ class EvenementRepository extends EntityRepository
         }
     }
 
-    public function getEventByUrlKey($urlKey){
+    public function getEventByUrlKey($urlKey)
+    {
 
         $q = $this->getEntityManager()->createQueryBuilder();
         $q

@@ -20,28 +20,30 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AgendaController extends Controller
 {
-	protected $_limitPagination = 5;
-	
-	
-	private function _formatEventByDay( $events ){
-		$eventsByDay = array();
-		
-		foreach ( $events as $event ){
-			
-			$dateEvent = $event->getDateStart();
-			$dateKey = new \DateTime();
-			$dateKey->setDate($dateEvent->format('Y'), $dateEvent->format('m'), $dateEvent->format('d')  );
-			$dateKey->setTime(0,0);			
-		
-			$day = $dateKey->getTimestamp();
-			
-			$eventsByDay[$day][] = $event;
-			
-		}
-		
-		//var_dump('<pre>',$eventsByDay);exit;
-		return $eventsByDay;
-	}
+    protected $_limitPagination = 5;
+
+
+    private function _formatEventByDay($events)
+    {
+        $eventsByDay = array();
+
+        foreach ($events as $event) {
+
+            $dateEvent = $event->getDateStart();
+            $dateKey = new \DateTime();
+            $dateKey->setDate($dateEvent->format('Y'), $dateEvent->format('m'), $dateEvent->format('d'));
+            $dateKey->setTime(0, 0);
+
+            $day = $dateKey->getTimestamp();
+
+            $eventsByDay[$day][] = $event;
+
+        }
+
+        //var_dump('<pre>',$eventsByDay);exit;
+        return $eventsByDay;
+    }
+
     /**
      * Lists all Concert entities.
      *
@@ -50,35 +52,32 @@ class AgendaController extends Controller
      */
     public function indexAction(Request $request)
     {
-    	$em = $this->getDoctrine()->getManager();
-    	$evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
+        $em = $this->getDoctrine()->getManager();
+        $evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
 
         // Init Display mode
-    	$requestMode = $request->query->get('mode');
-    	if( isset($requestMode) && !empty($requestMode) ){
-			$mode = $requestMode;    		
-    	}
-    	else{
-    		$mode = 'calendar';
-    	}
+        $requestMode = $request->query->get('mode');
+        if (isset($requestMode) && !empty($requestMode)) {
+            $mode = $requestMode;
+        } else {
+            $mode = 'calendar';
+        }
 
-    	if( 'list' === $mode ){
-    		//$events = $evenementRepository->getNextEvenements();
-    		$events = $evenementRepository->findAll();
-    		$entities = $this->_formatEventByDay( $events );
-    	}
-    	else{
-    		$entities = $evenementRepository->findAll();
-    	}
-        
-        
-       
+        if ('list' === $mode) {
+            //$events = $evenementRepository->getNextEvenements();
+            $events = $evenementRepository->findAll();
+            $entities = $this->_formatEventByDay($events);
+        } else {
+            $entities = $evenementRepository->findAll();
+        }
+
 
         return array(
-        		'entities' => $entities,
-        		'mode' => $mode
+            'entities' => $entities,
+            'mode' => $mode
         );
     }
+
     /**
      * Lists all Concert entities.
      *
@@ -87,23 +86,26 @@ class AgendaController extends Controller
      */
     public function ajaxGetFeedAction(Request $request)
     {
-    	$eventsArray = array();
-    	$data = $request->request->all();
-    	
-    	$em = $this->getDoctrine()->getManager();
-    	$entities = $em->getRepository('AmlEvenementsBundle:Evenement')->getEvenementsCalendar($data['start'], $data['end']);
-    	
-    	
-    	foreach( $entities as $entity ){
-    		$eventsArray[] = array(
-    			'id' => $entity->getId(),
-    			'title' => $entity->getTitle(),
-    			'start' => $entity->getDateStart()->format('Y-m-d'),
-    			'description' => $entity->getDescription()
-    		);
-    	}
-			
-		return new Response( json_encode( $eventsArray ) );
+        $eventsArray = array();
+        $data = $request->request->all();
+
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('AmlEvenementsBundle:Evenement')->getEvenementsCalendar(
+            $data['start'],
+            $data['end']
+        );
+
+
+        foreach ($entities as $entity) {
+            $eventsArray[] = array(
+                'id' => $entity->getId(),
+                'title' => $entity->getTitle(),
+                'start' => $entity->getDateStart()->format('Y-m-d'),
+                'description' => $entity->getDescription()
+            );
+        }
+
+        return new Response(json_encode($eventsArray));
         //var_dump($data,$entities);exit;
     }
 
@@ -116,11 +118,11 @@ class AgendaController extends Controller
     public function newAction()
     {
         $entity = new Evenement();
-        $form   = $this->createForm(new EvenementType(), $entity);
+        $form = $this->createForm(new EvenementType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -133,9 +135,9 @@ class AgendaController extends Controller
      */
     public function createAction()
     {
-        $entity  = new Evenement();
+        $entity = new Evenement();
         $request = $this->getRequest();
-        $form    = $this->createForm(new EvenementType(), $entity);
+        $form = $this->createForm(new EvenementType(), $entity);
         $form->submit($request);
 
         if ($form->isValid()) {
@@ -144,12 +146,12 @@ class AgendaController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('admin_agenda'));
-            
+
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -173,8 +175,8 @@ class AgendaController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -196,7 +198,7 @@ class AgendaController extends Controller
             throw $this->createNotFoundException('Unable to find Concert entity.');
         }
 
-        $editForm   = $this->createForm(new EvenementType(), $entity);
+        $editForm = $this->createForm(new EvenementType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -211,8 +213,8 @@ class AgendaController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -249,7 +251,6 @@ class AgendaController extends Controller
     {
         return $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

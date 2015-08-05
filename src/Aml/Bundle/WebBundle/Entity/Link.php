@@ -41,14 +41,14 @@ class Link
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-    
+
     /**
      * @var boolean weight
      *
      * @ORM\Column(name="weight", type="integer")
      */
     private $weight = 1;
-    
+
     /**
      * @var boolean $public
      *
@@ -60,7 +60,7 @@ class Link
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -75,13 +75,14 @@ class Link
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -96,13 +97,14 @@ class Link
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -117,51 +119,59 @@ class Link
     public function setPublic($public)
     {
         $this->public = $public;
+
         return $this;
     }
 
     /**
      * Get public
      *
-     * @return boolean 
+     * @return boolean
      */
-    public function getPublic(){
+    public function getPublic()
+    {
         return $this->public;
     }
-    
-	/**
-	 * @return the $weight
-	 */
-	public function getWeight() {
-		return $this->weight;
-	}
 
-	/**
-	 * @param boolean $weight
-	 */
-	public function setWeight($weight) {
-		$this->weight = $weight;
-		return $this;
-	}
-	
-	/**
-	 * @return the $description
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * @return the $weight
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
 
-	/**
-	 * @param text $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-		return $this; 
-	}
+    /**
+     * @param boolean $weight
+     */
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return the $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
 
     public function __toString()
     {
-        return $this->title ? : 'New Link';
+        return $this->title ?: 'New Link';
     }
-    
+
 }

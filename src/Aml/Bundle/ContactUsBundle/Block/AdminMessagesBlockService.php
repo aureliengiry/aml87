@@ -58,10 +58,12 @@ class AdminMessagesBlockService extends BaseBlockService
      */
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'title'    => 'Messages du formulaire de contact',
-            'template' => 'AmlContactUsBundle:Block:messagesListDashboard.html.twig'
-        ));
+        $resolver->setDefaults(
+            array(
+                'title' => 'Messages du formulaire de contact',
+                'template' => 'AmlContactUsBundle:Block:messagesListDashboard.html.twig'
+            )
+        );
     }
 
     public function getDefaultSettings()
@@ -103,10 +105,14 @@ class AdminMessagesBlockService extends BaseBlockService
             5
         );
 
-        return $this->renderResponse($blockContext->getTemplate(), array(
-            'block'     => $blockContext->getBlock(),
-            'settings'  => $settings,
-            'messages'  => $messages
-        ), $response);
+        return $this->renderResponse(
+            $blockContext->getTemplate(),
+            array(
+                'block' => $blockContext->getBlock(),
+                'settings' => $settings,
+                'messages' => $messages
+            ),
+            $response
+        );
     }
 }

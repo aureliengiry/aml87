@@ -2,20 +2,23 @@
 
 
 <table class="table table-bordered table-striped">
-{% for key,day in entities %}
+    {% for key,day in entities %}
 
-	 <tr class="uiHeaderSection"> <td colspan="5"><strong>{{ key|format_date }}</strong></td></tr>
-	{% for entity in day %}
-	        <tr>
-	            <td><strong>{% if entity.dateStart %}{{ entity.dateStart|date('H:i') }}{% endif %}</strong></td>
+        <tr class="uiHeaderSection">
+            <td colspan="5"><strong>{{ key|format_date }}</strong></td>
+        </tr>
+        {% for entity in day %}
+            <tr>
+                <td><strong>{% if entity.dateStart %}{{ entity.dateStart|date('H:i') }}{% endif %}</strong></td>
                 <td>{{ entity.title }}</td>
                 {% set description = entity.description|raw %}
                 <td>{{ description|substring(220) }}</td>
-	            <td>{{ entity.public|publicStatus }}</td>
-	            <td>
-	                <a class="btn btn-link" href="{{ path('admin_agenda_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i> Modifier</a>		                   
-	            </td>
-	        </tr>
-	{% endfor %}
-{% endfor %}
+                <td>{{ entity.public|publicStatus }}</td>
+                <td>
+                    <a class="btn btn-link" href="{{ path('admin_agenda_edit', { 'id': entity.id }) }}"><i
+                                class="icon-pencil"></i> Modifier</a>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
 </table>

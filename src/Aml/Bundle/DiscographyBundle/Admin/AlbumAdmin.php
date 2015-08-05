@@ -14,35 +14,55 @@ class AlbumAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('title', 'text', array(
+            ->add(
+                'title',
+                'text',
+                array(
                     'label' => 'Titre'
-                ))
-                ->add('image', 'sonata_type_admin')
-                ->add('description', 'textarea', array(
+                )
+            )
+            ->add('image', 'sonata_type_admin')
+            ->add(
+                'description',
+                'textarea',
+                array(
                     'label' => 'Texte',
                     'attr' => array('size' => 15, 'data-help' => 'Description de l\'album'),
                     'required' => false,
                     'wysiwyg' => true
-                ))
-                ->add('date', 'sonata_type_date_picker', array(
+                )
+            )
+            ->add(
+                'date',
+                'sonata_type_date_picker',
+                array(
                     'dp_side_by_side' => true,
                     'dp_use_current' => false,
                     'dp_language' => 'fr',
                     'format' => 'dd/MM/yyyy'
-                ))
-                ->add('public', 'checkbox', array(
+                )
+            )
+            ->add(
+                'public',
+                'checkbox',
+                array(
                     'label' => 'Publier',
                     'required' => false,
                     'attr' => array('data-help' => 'Signifie que l\'album sera visible pour tout le monde'),
-                ))
+                )
+            )
             ->end()
             ->with('Titres')
-                ->add('tracks', 'sonata_type_model', array(
+            ->add(
+                'tracks',
+                'sonata_type_model',
+                array(
                     'required' => false,
                     'expanded' => true,
                     'multiple' => true,
                     'by_reference' => false
-                ))
+                )
+            )
             ->end();
     }
 
@@ -50,8 +70,7 @@ class AlbumAdmin extends Admin
     {
         $datagridMapper
             ->add('title')
-            ->add('public')
-        ;
+            ->add('public');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -59,8 +78,7 @@ class AlbumAdmin extends Admin
         $listMapper
             ->addIdentifier('title')
             ->add('date')
-            ->add('public')
-        ;
+            ->add('public');
     }
 
     /**
@@ -83,13 +101,12 @@ class AlbumAdmin extends Admin
     public function preUpdate($album)
     {
         $urlKey = $album->getUrl();
-        if(empty($urlKey)){
+        if (empty($urlKey)) {
             $entityUrl = new UrlDiscography();
             $entityUrl->setUrlKey($album->getTitle());
 
             $album->setUrl($entityUrl);
-        }
-        else {
+        } else {
             $urlKey->setUrlKey($album->getTitle());
         }
     }

@@ -41,7 +41,7 @@ class DiscographyController extends Controller
      * @Route("/album/{url_key}.html", name="discography_album_show_rewrite")
      * @Template()
      */
-    public function showAction($id = false, $url_key = null,Request $request)
+    public function showAction($id = false, $url_key = null, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 

@@ -26,7 +26,7 @@ class TagsRepository extends EntityRepository
             ->from('AmlBlogBundle:Tags', 't')
             ->where("t.name LIKE :tag")
             ->orderBy('t.name', 'ASC')
-            ->setParameter('tag', $value . '%');
+            ->setParameter('tag', $value.'%');
 
         $query = $qb->getQuery();
         $tags = $query->getResult();
@@ -56,6 +56,7 @@ class TagsRepository extends EntityRepository
 
         try {
             $result = $query->getSingleResult();
+
             return $result;
 
         } catch (\Doctrine\ORM\NoResultException $e) {

@@ -13,11 +13,13 @@ class FileAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('file','file' , array(
-                'required' => false,
-            ) )
-
-        ;
+            ->add(
+                'file',
+                'file',
+                array(
+                    'required' => false,
+                )
+            );
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -28,10 +30,8 @@ class FileAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')
-        ;
+            ->addIdentifier('title');
     }
-
 
 
 }

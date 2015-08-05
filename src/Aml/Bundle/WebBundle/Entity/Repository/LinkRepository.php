@@ -16,23 +16,22 @@ class LinkRepository extends EntityRepository
      * Function to load public links
      * @return array
      */
-    public function getPublicLinks(){
-		$em = $this->getEntityManager();		
-		$qb = $em->createQueryBuilder();
-		
-		$qb
-			->select('l')
-			->from('AmlWebBundle:Link', 'l')
-			->where("l.public = 1")
-            ->orderBy('l.weight', 'ASC')
-		;
+    public function getPublicLinks()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
 
-		$query = $qb->getQuery();
-		
-		//echo $query->getSql(); var_dump($query->getParameters());exit;
-		
-		
-		
-		return $query->getResult();
-	}
+        $qb
+            ->select('l')
+            ->from('AmlWebBundle:Link', 'l')
+            ->where("l.public = 1")
+            ->orderBy('l.weight', 'ASC');
+
+        $query = $qb->getQuery();
+
+        //echo $query->getSql(); var_dump($query->getParameters());exit;
+
+
+        return $query->getResult();
+    }
 }

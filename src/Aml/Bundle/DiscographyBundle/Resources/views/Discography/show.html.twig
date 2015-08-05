@@ -5,64 +5,64 @@
 {%- endblock title %}
 
 {% block body %}
-<div id="col-left" class="two-cols-content">
+    <div id="col-left" class="two-cols-content">
 
-    {# Breadcrumb #}
-    {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
+        {# Breadcrumb #}
+        {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
 
-	<article class="contenu-page">
-	
-		<div class="discographie-bloc-titre">
-			<h2 class="discographie">{{ entity.title }}</h2>
-			<span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>
-		</div>
-		
-		<div class="disc-presentation">
+        <article class="contenu-page">
 
-            <div class="disc-pochette-list">
-                <a rel="prettyPhoto" href="{{ asset(entity.image.webpath) | apply_filter('modal_img') }}">
-                    <img src="{{ asset(entity.image.webpath) | apply_filter('discography_list') }}"
-                         alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
-                         class="imagecache imagecache-pochette-album" width="180" height="160">
-                </a>
+            <div class="discographie-bloc-titre">
+                <h2 class="discographie">{{ entity.title }}</h2>
+                <span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>
             </div>
 
-			<div class="disc-description-list">
-				{{ entity.description|raw }}				
-			</div>
-		</div>
+            <div class="disc-presentation">
 
-        {% if entity.tracks is not empty %}
-            <div class="disc-list-tracks">
-                <h3>Composition du disque</h3>
+                <div class="disc-pochette-list">
+                    <a rel="prettyPhoto" href="{{ asset(entity.image.webpath) | apply_filter('modal_img') }}">
+                        <img src="{{ asset(entity.image.webpath) | apply_filter('discography_list') }}"
+                             alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
+                             class="imagecache imagecache-pochette-album" width="180" height="160">
+                    </a>
+                </div>
 
-                <table class="table table-condensed table-striped">
-                    <thead>
-                    <tr>
-                        <th>N°piste</th>
-                        <th>Titre</th>
-                        <th>Compositeur(s)</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for key,track in entity.tracks %}
+                <div class="disc-description-list">
+                    {{ entity.description|raw }}
+                </div>
+            </div>
+
+            {% if entity.tracks is not empty %}
+                <div class="disc-list-tracks">
+                    <h3>Composition du disque</h3>
+
+                    <table class="table table-condensed table-striped">
+                        <thead>
                         <tr>
-                            <td>{{ track.number }}</td>
-                            <td>{{ track.title }}</td>
-                            <td>{{ track.composer }}</td>
+                            <th>N°piste</th>
+                            <th>Titre</th>
+                            <th>Compositeur(s)</th>
                         </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        {% endif %}
-		
-		
-	</article>
-</div>
+                        </thead>
+                        <tbody>
+                        {% for key,track in entity.tracks %}
+                            <tr>
+                                <td>{{ track.number }}</td>
+                                <td>{{ track.title }}</td>
+                                <td>{{ track.composer }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
 
-<div id="col-right">
-    {# Next Concert #}
-    {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
-</div>
+
+        </article>
+    </div>
+
+    <div id="col-right">
+        {# Next Concert #}
+        {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
+    </div>
 {% endblock body %}

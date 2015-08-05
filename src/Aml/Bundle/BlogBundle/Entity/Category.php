@@ -72,6 +72,7 @@ class Category
     public function setSystemName($title)
     {
         $this->system_name = $this->_build_SystemName($title);
+
         return $this;
     }
 
@@ -94,6 +95,7 @@ class Category
     {
         $this->name = $name;
         $this->setSystemName($name);
+
         return $this;
     }
 
@@ -121,6 +123,7 @@ class Category
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -132,7 +135,115 @@ class Category
         /**
          * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
          */
-        $string = str_replace(array('à', 'á', 'â', 'ã', 'ä', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý'), array('a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'), $string);
+        $string = str_replace(
+            array(
+                'à',
+                'á',
+                'â',
+                'ã',
+                'ä',
+                'ç',
+                'è',
+                'é',
+                'ê',
+                'ë',
+                'ì',
+                'í',
+                'î',
+                'ï',
+                'ñ',
+                'ò',
+                'ó',
+                'ô',
+                'õ',
+                'ö',
+                'ù',
+                'ú',
+                'û',
+                'ü',
+                'ý',
+                'ÿ',
+                'À',
+                'Á',
+                'Â',
+                'Ã',
+                'Ä',
+                'Ç',
+                'È',
+                'É',
+                'Ê',
+                'Ë',
+                'Ì',
+                'Í',
+                'Î',
+                'Ï',
+                'Ñ',
+                'Ò',
+                'Ó',
+                'Ô',
+                'Õ',
+                'Ö',
+                'Ù',
+                'Ú',
+                'Û',
+                'Ü',
+                'Ý'
+            ),
+            array(
+                'a',
+                'a',
+                'a',
+                'a',
+                'a',
+                'c',
+                'e',
+                'e',
+                'e',
+                'e',
+                'i',
+                'i',
+                'i',
+                'i',
+                'n',
+                'o',
+                'o',
+                'o',
+                'o',
+                'o',
+                'u',
+                'u',
+                'u',
+                'u',
+                'y',
+                'y',
+                'A',
+                'A',
+                'A',
+                'A',
+                'A',
+                'C',
+                'E',
+                'E',
+                'E',
+                'E',
+                'I',
+                'I',
+                'I',
+                'I',
+                'N',
+                'O',
+                'O',
+                'O',
+                'O',
+                'O',
+                'U',
+                'U',
+                'U',
+                'U',
+                'Y'
+            ),
+            $string
+        );
         $string = str_replace(array(' ', '-'), array('_', '_'), $string);
 
         return strtolower($string);
@@ -153,12 +264,13 @@ class Category
     public function addArticle($article)
     {
         $this->articles[] = $article;
+
         return $this;
     }
 
     public function __toString()
     {
-        return $this->name ? : 'New Category';
+        return $this->name ?: 'New Category';
     }
 
 

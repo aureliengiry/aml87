@@ -68,10 +68,10 @@ class PostListener
     {
         $message = array();
 
-        $message['subject'] = $post->getName() . ' cherche à vous contacter';
-        $message['body'] = 'Bonjour,' . "\n\n"
-            . $post->getName() . ' vous ecrit par l\'intermediaire du formulaire de contact : ' . "\n\n"
-            . $post->getBody();
+        $message['subject'] = $post->getName().' cherche à vous contacter';
+        $message['body'] = 'Bonjour,'."\n\n"
+            .$post->getName().' vous ecrit par l\'intermediaire du formulaire de contact : '."\n\n"
+            .$post->getBody();
 
         return $message;
     }

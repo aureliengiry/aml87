@@ -13,34 +13,43 @@ class PartenaireAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name','text',array(
-                'label' => 'Nom'
-            ))
-            ->add('logo','sonata_type_admin',array(
-                'delete' => false,
-                'required' => false
-            ))
+            ->add(
+                'name',
+                'text',
+                array(
+                    'label' => 'Nom'
+                )
+            )
+            ->add(
+                'logo',
+                'sonata_type_admin',
+                array(
+                    'delete' => false,
+                    'required' => false
+                )
+            )
             ->add('url')
-            ->add('description','textarea',array(
-                'required' => false
-            ))
-        ;
+            ->add(
+                'description',
+                'textarea',
+                array(
+                    'required' => false
+                )
+            );
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('name')
-            ->add('url')
-        ;
+            ->add('url');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-           ->addIdentifier('name')
-           ->add('url')
-        ;
+            ->addIdentifier('name')
+            ->add('url');
     }
 
     /**
@@ -57,12 +66,14 @@ class PartenaireAdmin extends Admin
         return null;
     }
 
-    public function preUpdate($partenaire) {
+    public function preUpdate($partenaire)
+    {
 
         $this->_setLogoTitle($partenaire);
     }
 
-    protected function _setLogoTitle($partenaire){
+    protected function _setLogoTitle($partenaire)
+    {
         $logo = $partenaire->getLogo();
 
         $logo->setTitle($partenaire->getName());

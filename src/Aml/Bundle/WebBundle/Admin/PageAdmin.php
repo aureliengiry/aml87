@@ -13,19 +13,30 @@ class PageAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title','text',array(
-                'label' => 'Titre'
-            ))
-            ->add('body','textarea',array(
-                'required' => false,
-                'wysiwyg' => true
-            ))
-            ->add('public','checkbox',array(
-                'label' => 'Publier',
-                'required' => false,
-                'attr' => array('data-help' => 'Signifie que la page sera visible pour tout le monde'),
-            ))
-        ;
+            ->add(
+                'title',
+                'text',
+                array(
+                    'label' => 'Titre'
+                )
+            )
+            ->add(
+                'body',
+                'textarea',
+                array(
+                    'required' => false,
+                    'wysiwyg' => true
+                )
+            )
+            ->add(
+                'public',
+                'checkbox',
+                array(
+                    'label' => 'Publier',
+                    'required' => false,
+                    'attr' => array('data-help' => 'Signifie que la page sera visible pour tout le monde'),
+                )
+            );
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -33,8 +44,7 @@ class PageAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('url')
-            ->add('public')
-        ;
+            ->add('public');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -44,8 +54,7 @@ class PageAdmin extends Admin
             ->add('url')
             ->add('created')
             ->add('updated')
-            ->add('public')
-        ;
+            ->add('public');
     }
 
     /**
@@ -70,13 +79,12 @@ class PageAdmin extends Admin
         $page->setUpdated(new \DateTime);
 
         $urlKey = $page->getUrl();
-        if(empty($urlKey)){
+        if (empty($urlKey)) {
             $entityUrl = new UrlPage();
             $entityUrl->setUrlKey($page->getTitle());
 
             $page->setUrl($entityUrl);
-        }
-        else {
+        } else {
             $urlKey->setUrlKey($page->getTitle());
         }
     }
@@ -92,7 +100,6 @@ class PageAdmin extends Admin
         $page
             ->setCreated(new \DateTime)
             ->setUpdated(new \DateTime)
-            ->setUrl($entityUrl)
-        ;
+            ->setUrl($entityUrl);
     }
 }

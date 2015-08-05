@@ -21,13 +21,13 @@ use Aml\Bundle\MediasBundle\Entity\Video\Dailymotion;
  * @ORM\DiscriminatorColumn(name="provider", type="string")
  * @ORM\DiscriminatorMap({"youtube" = "\Aml\Bundle\MediasBundle\Entity\Video\Youtube", "dailymotion" = "\Aml\Bundle\MediasBundle\Entity\Video\Dailymotion"})
  */
-class Video 
+class Video
 {
-	/**
-	 * @ORM\Id
+    /**
+     * @ORM\Id
      * @ORM\Column(name="id_video", type="integer")
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     protected $id;
 
     /**
@@ -44,15 +44,15 @@ class Video
      */
     protected $title;
 
-	public function __construct()
+    public function __construct()
     {
         //$this->articles = new ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -65,6 +65,7 @@ class Video
     public function setProviderId($providerId)
     {
         $this->providerId = $providerId;
+
         return $this;
     }
 
@@ -84,6 +85,7 @@ class Video
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 

@@ -66,6 +66,7 @@ class Season
     public function setDateEnd($dateEnd)
     {
         $this->dateEnd = $dateEnd;
+
         return $this;
     }
 
@@ -83,6 +84,7 @@ class Season
     public function setDateStart($dateStart)
     {
         $this->dateStart = $dateStart;
+
         return $this;
     }
 
@@ -101,6 +103,7 @@ class Season
     public function setEvenements($evenements)
     {
         $this->evenements = $evenements;
+
         return $this;
     }
 
@@ -111,6 +114,7 @@ class Season
     public function addEvenement($evenement)
     {
         $this->evenements[] = $evenement;
+
         return $this;
     }
 
@@ -128,6 +132,7 @@ class Season
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -145,12 +150,13 @@ class Season
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
     public function __toString()
     {
-        return $this->name ? : 'New Season';
+        return $this->name ?: 'New Season';
     }
 
 

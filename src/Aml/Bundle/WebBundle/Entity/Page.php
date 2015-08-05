@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Page
 {
-     /**
+    /**
      * @var integer $id
      *
      * @ORM\Column(name="id", type="integer")
@@ -67,7 +67,7 @@ class Page
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -82,13 +82,14 @@ class Page
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -103,13 +104,14 @@ class Page
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
     /**
      * Get body
      *
-     * @return text 
+     * @return text
      */
     public function getBody()
     {
@@ -124,13 +126,14 @@ class Page
     public function setCreated(\DateTime $created = null)
     {
         $this->created = $created;
+
         return $this;
     }
 
     /**
      * Get created
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreated()
     {
@@ -145,13 +148,14 @@ class Page
     public function setUpdated(\DateTime $updated = null)
     {
         $this->updated = $updated;
+
         return $this;
     }
 
     /**
      * Get updated
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdated()
     {
@@ -166,13 +170,14 @@ class Page
     public function setPublic($public)
     {
         $this->public = $public;
+
         return $this;
     }
 
     /**
      * Get public
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublic()
     {
@@ -187,6 +192,7 @@ class Page
     public function setUrl($url)
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -202,6 +208,6 @@ class Page
 
     public function __toString()
     {
-        return $this->title ? : 'New Page';
+        return $this->title ?: 'New Page';
     }
 }

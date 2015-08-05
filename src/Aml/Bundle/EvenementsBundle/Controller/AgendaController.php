@@ -51,14 +51,17 @@ class AgendaController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
-        $events = $evenementRepository->getNextEvenements(array(
+        $events = $evenementRepository->getNextEvenements(
+            array(
                 'public' => 1,
                 'archive' => 0,
-                'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT)
+                'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT
+            )
         );
+
         //$entities = $this->_formatEventByDay($events);
 
-        return array('entities' => $events      );
+        return array('entities' => $events);
     }
 
     /**

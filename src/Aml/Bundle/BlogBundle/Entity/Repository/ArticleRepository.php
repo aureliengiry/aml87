@@ -34,7 +34,7 @@ class ArticleRepository extends EntityRepository
             $query
                 ->innerJoin('a.tags', 't')
                 ->andWhere("t.system_name LIKE :tag");
-            $params['tag'] = '%' . $filters['tag'] . '%';
+            $params['tag'] = '%'.$filters['tag'].'%';
         }
 
         $query->setParameters($params);
@@ -111,7 +111,8 @@ class ArticleRepository extends EntityRepository
         $em->flush();
     }
 
-    public function getArticleByUrlKey($urlKey){
+    public function getArticleByUrlKey($urlKey)
+    {
 
         $q = $this->getEntityManager()->createQueryBuilder();
         $q

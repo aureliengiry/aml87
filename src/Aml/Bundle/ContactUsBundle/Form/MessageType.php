@@ -16,14 +16,21 @@ class MessageType extends AbstractType
             ->add('name')
             ->add('email')
             ->add('subject')
-            ->add('body', 'textarea', array(
-                'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
-                'required' => false,
-            ))
-            ->add('send', 'submit',array(
-                'attr' => array('class' => 'btn btn-primary pull-right'),
-            ))
-        ;
+            ->add(
+                'body',
+                'textarea',
+                array(
+                    'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'send',
+                'submit',
+                array(
+                    'attr' => array('class' => 'btn btn-primary pull-right'),
+                )
+            );
 
 
     }

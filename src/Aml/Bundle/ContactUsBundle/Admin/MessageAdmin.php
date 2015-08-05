@@ -19,23 +19,27 @@ class MessageAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name','text', array('required' => false,'read_only' => true))
-            ->add('subject','text', array('required' => false,'read_only' => true))
-            ->add('body','textarea', array('required' => false,'read_only' => true))
-            ->add('created','datetime', array('widget' => 'single_text','required' => false,'read_only' => true))
-            ->add('email','email', array('required' => false,'read_only' => true))
-            ->add('addressIp','text', array('required' => false,'read_only' => true))
-            ->add('status','choice', array(
-                'choices'     => array(
-                    Message::MESSAGE_STATUS_SAVE => 'Enregistré',
-                    Message::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé'
-                ),
-                'required'    => false,
-                'empty_value' => 'Choose status',
-                'empty_data'  => null
-            ))
-        ;
+            ->add('name', 'text', array('required' => false, 'read_only' => true))
+            ->add('subject', 'text', array('required' => false, 'read_only' => true))
+            ->add('body', 'textarea', array('required' => false, 'read_only' => true))
+            ->add('created', 'datetime', array('widget' => 'single_text', 'required' => false, 'read_only' => true))
+            ->add('email', 'email', array('required' => false, 'read_only' => true))
+            ->add('addressIp', 'text', array('required' => false, 'read_only' => true))
+            ->add(
+                'status',
+                'choice',
+                array(
+                    'choices' => array(
+                        Message::MESSAGE_STATUS_SAVE => 'Enregistré',
+                        Message::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé'
+                    ),
+                    'required' => false,
+                    'empty_value' => 'Choose status',
+                    'empty_data' => null
+                )
+            );
     }
+
     public function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create');
@@ -49,15 +53,14 @@ class MessageAdmin extends Admin
             ->add('created')
             ->add('email')
             ->add('addressIp')
-            ->add('status','string');
+            ->add('status', 'string');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('email')
-            ->add('addressIp')
-           // ->add('status')
+            ->add('addressIp')// ->add('status')
         ;
     }
 

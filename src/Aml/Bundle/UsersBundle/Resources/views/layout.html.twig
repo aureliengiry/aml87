@@ -7,26 +7,26 @@
 {%- endblock title %}
 
 {% block body %}
-<div id="col-left" class="two-cols-content">
+    <div id="col-left" class="two-cols-content">
 
-    <div class="contenu-page">
+        <div class="contenu-page">
 
-        {% for type, messages in app.session.flashbag.all() %}
-            {% for message in messages %}
-                <div class="flash-{{ type }}">
-                    {{ message }}
-                </div>
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
 
-        <div>
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
+            <div>
+                {% block fos_user_content %}
+                {% endblock fos_user_content %}
+            </div>
         </div>
+
     </div>
+    <div id="col-right">
 
-</div>
-<div id="col-right">
-
-</div>
+    </div>
 {%- endblock body %}

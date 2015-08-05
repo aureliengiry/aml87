@@ -13,9 +13,13 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email','email',array(
-            	'label' => 'Adresse Email'
-            ))
+            ->add(
+                'email',
+                'email',
+                array(
+                    'label' => 'Adresse Email'
+                )
+            )
             ->add('login')
 //            ->add('password', 'repeated', array(
 //            	'type' => 'password',
@@ -27,13 +31,12 @@ class UserType extends AbstractType
 //                ),
 //				'attr' => array('data-help' => 'Veuillez renseigner un mot de passe pour pouvoir accéder à votre espace. Tout caractère sauf l\'espace.')
 //            ))
-			->add('password','password')
+            ->add('password', 'password')
             ->add('civilite')
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
-            ->add('avatar')
-        ;
+            ->add('avatar');
     }
 
     public function getName()

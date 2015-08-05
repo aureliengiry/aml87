@@ -23,15 +23,18 @@ class ImageAdmin extends Admin
             if ($path) {
                 // add a 'help' option containing the preview's img tag
                 $fileFieldOptions['help'] =
-                    '<img style="max-width:100%;" src="/' . $image->getWebPath() . '" class="admin-preview" />';
+                    '<img style="max-width:100%;" src="/'.$image->getWebPath().'" class="admin-preview" />';
             }
         }
         $formMapper
-            ->add('title','text',array(
-                'required' => false,
-            ))
-            ->add('file','file' , $fileFieldOptions)
-        ;
+            ->add(
+                'title',
+                'text',
+                array(
+                    'required' => false,
+                )
+            )
+            ->add('file', 'file', $fileFieldOptions);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -43,10 +46,8 @@ class ImageAdmin extends Admin
     {
         $listMapper
             ->add('file', 'string', array('template' => 'AmlMediasBundle:Admin:list_image.html.twig'))
-            ->addIdentifier('title','Image')
-        ;
+            ->addIdentifier('title', 'Image');
     }
-
 
 
 }

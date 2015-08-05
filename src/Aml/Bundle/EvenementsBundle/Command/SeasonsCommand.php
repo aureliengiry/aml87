@@ -65,8 +65,9 @@ class SeasonsCommand extends ContainerAwareCommand
         $this
             ->setName('evenements:index:seasons')
             ->setDescription('Index seasons for all events')
-            ->setHelp(<<<EOF
-The <info>evenements:index:seasons</info> Index seasons for all events and debug mode:
+            ->setHelp(
+                <<<EOF
+                The <info>evenements:index:seasons</info> Index seasons for all events and debug mode:
 
 <info>php app/console evenements:index:seasons -vvv</info>
 EOF
@@ -130,7 +131,7 @@ EOF
                 $event->setSeason($estimateSeason);
             }
         } else {
-            $this->output->writeln('<info>Date Start is empty for this event: ' . $event->getId() . '</info>');
+            $this->output->writeln('<info>Date Start is empty for this event: '.$event->getId().'</info>');
         }
     }
 

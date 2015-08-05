@@ -53,7 +53,7 @@ class Track
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -76,7 +76,7 @@ class Track
     /**
      * Get number
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumber()
     {
@@ -99,7 +99,7 @@ class Track
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -122,7 +122,7 @@ class Track
     /**
      * Get composer
      *
-     * @return string 
+     * @return string
      */
     public function getComposer()
     {
@@ -154,6 +154,6 @@ class Track
 
     public function __toString()
     {
-        return $this->title ? : 'New Track';
+        return $this->title ?: 'New Track';
     }
 }

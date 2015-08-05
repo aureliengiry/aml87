@@ -23,30 +23,41 @@ class SeasonAdmin extends Admin
         $formMapper
             ->with('General')
             ->add('name')
-            ->add('dateStart', 'date', array(
-                'label' => 'Date de début de saison',
-                'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy',
-                'required' => false,
-                // 'attr' => array('readonly' => 'readonly')
-            ))
-            ->add('dateEnd', 'date', array(
-                'label' => 'Date de fin de saison',
-                'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy',
-                'required' => false,
-                // 'attr' => array('readonly' => 'readonly')
-            ))
+            ->add(
+                'dateStart',
+                'date',
+                array(
+                    'label' => 'Date de début de saison',
+                    'widget' => 'single_text',
+                    'format' => 'dd/MM/yyyy',
+                    'required' => false,
+                    // 'attr' => array('readonly' => 'readonly')
+                )
+            )
+            ->add(
+                'dateEnd',
+                'date',
+                array(
+                    'label' => 'Date de fin de saison',
+                    'widget' => 'single_text',
+                    'format' => 'dd/MM/yyyy',
+                    'required' => false,
+                    // 'attr' => array('readonly' => 'readonly')
+                )
+            )
             ->end()
             ->with('Evenements')
-            ->add('evenements', 'sonata_type_model', array(
-                'required' => false,
-                'expanded' => true,
-                'multiple' => true,
-                'by_reference' => false
-            ))
-            ->end()
-        ;
+            ->add(
+                'evenements',
+                'sonata_type_model',
+                array(
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'by_reference' => false
+                )
+            )
+            ->end();
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -59,10 +70,8 @@ class SeasonAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('dateStart')
-            ->add('dateEnd')
-        ;
+            ->add('dateEnd');
     }
-
 
 
 }

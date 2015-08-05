@@ -1,22 +1,24 @@
 {% if nextConcert is defined and nextConcert is not empty %}
-<div id="block-concert">
-    <h3>Prochain concert</h3>
+    <div id="block-concert">
+        <h3>Prochain concert</h3>
 
-    <span class="date">{{ nextConcert.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }}</span>
+        <span class="date">{{ nextConcert.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }}</span>
 
-    <div class="container-date-description-block">
-        <div>
-            {{ nextConcert.title }}
+        <div class="container-date-description-block">
+            <div>
+                {{ nextConcert.title }}
+            </div>
+            {% if nextConcert.url.urlKey is defined and nextConcert.url.urlKey is not empty %}
+                <a class="link-view-more"
+                   href="{{ path('agenda_show_event_rewrite', { 'url_key': nextConcert.url.urlKey }) }}"
+                   title="En savoir plus : {{ nextConcert.title }}">En savoir plus</a>
+            {% else %}
+                <a class="link-view-more" href="{{ path('agenda_show_event', { 'id': nextConcert.id }) }}"
+                   title="En savoir plus : {{ nextConcert.title }}">En savoir plus</a>
+            {% endif %}
         </div>
-        {% if nextConcert.url.urlKey is defined and nextConcert.url.urlKey is not empty %}
-            <a class="link-view-more" href="{{ path('agenda_show_event_rewrite', { 'url_key': nextConcert.url.urlKey }) }}"
-               title="En savoir plus : {{ nextConcert.title }}">En savoir plus</a>
-        {% else %}
-            <a class="link-view-more" href="{{ path('agenda_show_event', { 'id': nextConcert.id }) }}"
-               title="En savoir plus : {{ nextConcert.title }}">En savoir plus</a>
-        {% endif %}
-    </div>
 
-    <a title="Voir tous les concerts" class="links-view-all black" href="{{ path('agenda') }}">Voir tous les concerts</a>
-</div>
+        <a title="Voir tous les concerts" class="links-view-all black" href="{{ path('agenda') }}">Voir tous les
+            concerts</a>
+    </div>
 {% endif %}

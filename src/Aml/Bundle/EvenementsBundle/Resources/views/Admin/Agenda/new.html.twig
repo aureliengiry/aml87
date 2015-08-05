@@ -7,76 +7,77 @@
 {%- endblock title %}
 
 {% block body %}
-<div class="row-fluid">
-	<div class="span3">
-	</div>		
+    <div class="row-fluid">
+        <div class="span3">
+        </div>
 
-	<div class="span5">
-	
-	<h1>Créer un évènement</h1>
+        <div class="span5">
 
-	<form class="form-horizontal" action="{{ path('content_agenda_create') }}" method="post" {{ form_enctype(form) }}>
-	    {{ form_errors(form) }}
-	    {{ form_widget(form) }}
-	   <div class="form-actions">
-	   		<a href="{{ path('admin_agenda') }}" class="btn btn-link" title="Retourner à la liste des évènements">
-	        	<i class="icon-arrow-left"></i>
-	            retour à la liste des évènements
-	        </a>
-	        
-	        <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
-	    </div>
-	</form>
-	
+            <h1>Créer un évènement</h1>
 
-	       
+            <form class="form-horizontal" action="{{ path('content_agenda_create') }}"
+                  method="post" {{ form_enctype(form) }}>
+                {{ form_errors(form) }}
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <a href="{{ path('admin_agenda') }}" class="btn btn-link"
+                       title="Retourner à la liste des évènements">
+                        <i class="icon-arrow-left"></i>
+                        retour à la liste des évènements
+                    </a>
 
-	</div>
-</div>
+                    <button class="btn btn-primary pull-right" type="submit">Enregistrer</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
     {# CONFIG CKEDITOR #}
-    {% include "AmlWebBundle::Admin/Partial/ckeditor.html.twig" with {'target': 'aml_bundle_evenementsbundle_concerttype_description'}  %}
+    {% include "AmlWebBundle::Admin/Partial/ckeditor.html.twig" with {'target': 'aml_bundle_evenementsbundle_concerttype_description'} %}
 {% endblock body %}
 
 {% block javascripts %}
 
-	<script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-datepicker.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('bundles/amlweb/js/bootstrap/locales/bootstrap-datepicker.fr.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-timepicker.js') }}" type="text/javascript"></script>
-	<script type="text/javascript">
-		$('#aml_bundle_evenementsbundle_concerttype_dateStart_date').datepicker({
-            'format' : 'dd/mm/yyyy',
-            'weekStart' : 1,
-            'language' : 'fr'
-        }).on('changeDate', function(ev){
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/locales/bootstrap-datepicker.fr.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('bundles/amlweb/js/bootstrap/bootstrap-timepicker.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $('#aml_bundle_evenementsbundle_concerttype_dateStart_date').datepicker({
+            'format': 'dd/mm/yyyy',
+            'weekStart': 1,
+            'language': 'fr'
+        }).on('changeDate', function (ev) {
             $('#aml_bundle_evenementsbundle_concerttype_dateStart_date').datepicker('hide');
         });
 
-	    $('#aml_bundle_evenementsbundle_concerttype_dateStart_time').timepicker({
-	        template : 'dropdown',
-	        showInputs: false,
-		   defaultTime: 'value',
-	        showMeridian: false
-	    });
-
-      /*  $('#date_evenement').datepicker({'format' : 'dd/mm/yyyy', 'weekStart' : 1, 'language' : 'fr'}).on('changeDate', function(ev){
-            $('#date_evenement').datepicker('hide');
-        });
-
-        $('#creation_evenement_date_time').timepicker({
-            template : 'dropdown',
+        $('#aml_bundle_evenementsbundle_concerttype_dateStart_time').timepicker({
+            template: 'dropdown',
             showInputs: false,
             defaultTime: 'value',
             showMeridian: false
-        });      */
+        });
+
+        /*  $('#date_evenement').datepicker({'format' : 'dd/mm/yyyy', 'weekStart' : 1, 'language' : 'fr'}).on('changeDate', function(ev){
+         $('#date_evenement').datepicker('hide');
+         });
+
+         $('#creation_evenement_date_time').timepicker({
+         template : 'dropdown',
+         showInputs: false,
+         defaultTime: 'value',
+         showMeridian: false
+         });      */
 
     </script>
-    
+
 {% endblock %}
 
 {% block stylesheets %}
 
-	<link href="{{ asset('bundles/amlweb/css/bootstrap/datepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/amlweb/css/bootstrap/datepicker.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/amlweb/css/bootstrap/timepicker.css') }}" rel="stylesheet">
-	
+
 {% endblock %}
 

@@ -85,6 +85,7 @@ class Tags
     {
         $this->name = $name;
         $this->setSystemName($name);
+
         return $this;
     }
 
@@ -106,6 +107,7 @@ class Tags
     public function setWeight($weight)
     {
         $this->weight = $weight;
+
         return $this;
     }
 
@@ -127,6 +129,7 @@ class Tags
     public function setSystemName($systemName)
     {
         $this->system_name = $this->_build_SystemName($systemName);
+
         return $this;
     }
 
@@ -148,6 +151,7 @@ class Tags
     public function setArticles($articles)
     {
         $this->articles = $articles;
+
         return $this;
     }
 
@@ -179,6 +183,7 @@ class Tags
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -190,7 +195,115 @@ class Tags
         /**
          * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
          */
-        $string = str_replace(array('à', 'á', 'â', 'ã', 'ä', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ù', 'ú', 'û', 'ü', 'ý', 'ÿ', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ù', 'Ú', 'Û', 'Ü', 'Ý'), array('a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'n', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'y', 'A', 'A', 'A', 'A', 'A', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'N', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y'), $string);
+        $string = str_replace(
+            array(
+                'à',
+                'á',
+                'â',
+                'ã',
+                'ä',
+                'ç',
+                'è',
+                'é',
+                'ê',
+                'ë',
+                'ì',
+                'í',
+                'î',
+                'ï',
+                'ñ',
+                'ò',
+                'ó',
+                'ô',
+                'õ',
+                'ö',
+                'ù',
+                'ú',
+                'û',
+                'ü',
+                'ý',
+                'ÿ',
+                'À',
+                'Á',
+                'Â',
+                'Ã',
+                'Ä',
+                'Ç',
+                'È',
+                'É',
+                'Ê',
+                'Ë',
+                'Ì',
+                'Í',
+                'Î',
+                'Ï',
+                'Ñ',
+                'Ò',
+                'Ó',
+                'Ô',
+                'Õ',
+                'Ö',
+                'Ù',
+                'Ú',
+                'Û',
+                'Ü',
+                'Ý'
+            ),
+            array(
+                'a',
+                'a',
+                'a',
+                'a',
+                'a',
+                'c',
+                'e',
+                'e',
+                'e',
+                'e',
+                'i',
+                'i',
+                'i',
+                'i',
+                'n',
+                'o',
+                'o',
+                'o',
+                'o',
+                'o',
+                'u',
+                'u',
+                'u',
+                'u',
+                'y',
+                'y',
+                'A',
+                'A',
+                'A',
+                'A',
+                'A',
+                'C',
+                'E',
+                'E',
+                'E',
+                'E',
+                'I',
+                'I',
+                'I',
+                'I',
+                'N',
+                'O',
+                'O',
+                'O',
+                'O',
+                'O',
+                'U',
+                'U',
+                'U',
+                'U',
+                'Y'
+            ),
+            $string
+        );
         $string = str_replace(array(' ', '-'), array('_', '_'), $string);
 
         return strtolower($string);
@@ -198,7 +311,7 @@ class Tags
 
     public function __toString()
     {
-        return $this->name ? : 'New Tag';
+        return $this->name ?: 'New Tag';
     }
 
 

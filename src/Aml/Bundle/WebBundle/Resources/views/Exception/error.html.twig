@@ -5,10 +5,11 @@
 {%- endblock title %}
 
 {% block body %}
-<div id="col-left" class="full-content">
-    <h1>Oops! {% trans %}An Error Occurred{% endtrans %}</h1>
-    <h2>{% trans %}The server returned a{% endtrans %} "{{ status_code }} {{ status_text }}".</h2>
+    <div id="col-left" class="full-content">
+        <h1>Oops! {% trans %}An Error Occurred{% endtrans %}</h1>
 
-    <div>{% trans %}error_details{% endtrans %}</div>
-</div>
+        <h2>{% trans %}The server returned a{% endtrans %} "{{ status_code }} {{ status_text }}".</h2>
+
+        <div>{% trans %}error_details{% endtrans %}</div>
+    </div>
 {% endblock body %}

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 class MenuBuilder
 {
     private $factory;
+
     /**
      * @param FactoryInterface $factory
      */
@@ -21,10 +22,13 @@ class MenuBuilder
 
         $menu->addChild('Accueil', array('route' => 'home'));
 
-        $menu->addChild('Association', array(
-            'route' => 'page_show_rewrite',
-            'routeParameters' => array('url_key'=> 'laccordon-autrement')
-        ));
+        $menu->addChild(
+            'Association',
+            array(
+                'route' => 'page_show_rewrite',
+                'routeParameters' => array('url_key' => 'laccordon-autrement')
+            )
+        );
 
         $menu->addChild('Discographie', array('route' => 'discography'));
         $menu->addChild('Blog', array('route' => 'blog'));
@@ -48,34 +52,34 @@ class MenuBuilder
         $menu->addChild('Accueil', array('route' => 'home'));
 
         // create the menu according to the route
-        switch($request->get('_route')){
+        switch ($request->get('_route')) {
             /* ----- AGENDA ----- */
             case 'agenda':
                 $menu
                     ->addChild('Agenda')
-                    ->setCurrent(true)
-                ;
+                    ->setCurrent(true);
                 break;
 
             case 'agenda_show_event':
             case 'agenda_show_event_rewrite':
-                $menu->addChild('Agenda', array(
-                    'route' => 'agenda'
-                ));
+                $menu->addChild(
+                    'Agenda',
+                    array(
+                        'route' => 'agenda'
+                    )
+                );
 
                 $menu
                     ->addChild('label.view.post')
                     ->setCurrent(true)
-                    ->setLabel($request->get('label'))
-                ;
+                    ->setLabel($request->get('label'));
                 break;
 
             /* ----- Blog ----- */
             case 'blog':
                 $menu
                     ->addChild('Blog')
-                    ->setCurrent(true)
-                ;
+                    ->setCurrent(true);
                 break;
             case 'blog_show':
             case 'blog_show_rewrite':
@@ -83,8 +87,7 @@ class MenuBuilder
                 $menu
                     ->addChild('label.discography.show')
                     ->setCurrent(true)
-                    ->setLabel($request->get('label'))
-                ;
+                    ->setLabel($request->get('label'));
                 break;
 
             /* ----- Page ----- */
@@ -93,15 +96,13 @@ class MenuBuilder
                 $menu
                     ->addChild('label.page.show')
                     ->setCurrent(true)
-                    ->setLabel($request->get('label'))
-                ;
+                    ->setLabel($request->get('label'));
                 break;
             /* ----- Discography ----- */
             case 'discography':
                 $menu
                     ->addChild('Discographie')
-                    ->setCurrent(true)
-                ;
+                    ->setCurrent(true);
                 break;
             case 'discography_album_show':
             case 'discography_album_show_rewrite':
@@ -109,15 +110,13 @@ class MenuBuilder
                 $menu
                     ->addChild('label.discography.show')
                     ->setCurrent(true)
-                    ->setLabel($request->get('label'))
-                ;
+                    ->setLabel($request->get('label'));
                 break;
             /* ----- Contact us ----- */
             case 'aml_contact_us_index':
                 $menu
                     ->addChild('Contactez-nous  ')
-                    ->setCurrent(true)
-                ;
+                    ->setCurrent(true);
                 break;
         }
 

@@ -12,24 +12,39 @@ class TrackAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('title','text',array(
+            ->add(
+                'title',
+                'text',
+                array(
                     'label' => 'Titre'
-                ))
-                ->add('composer','text',array(
+                )
+            )
+            ->add(
+                'composer',
+                'text',
+                array(
                     'label' => 'Compositeur'
-                ))
-                ->add('number','text',array(
+                )
+            )
+            ->add(
+                'number',
+                'text',
+                array(
                     'label' => 'Piset N°'
-                ))
-                ->add('album', 'entity', array(
+                )
+            )
+            ->add(
+                'album',
+                'entity',
+                array(
                     'label' => 'Album',
                     'class' => 'AmlDiscographyBundle:Album',
                     'property' => 'title',
                     'empty_value' => 'Choisissez un album',
-                    'attr' => array('class'=>'uniform')
-                ))
-            ->end()
-        ;
+                    'attr' => array('class' => 'uniform')
+                )
+            )
+            ->end();
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -37,8 +52,7 @@ class TrackAdmin extends Admin
         $datagridMapper
             ->add('album')
             ->add('title')
-            ->add('composer')
-        ;
+            ->add('composer');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -46,8 +60,7 @@ class TrackAdmin extends Admin
         $listMapper
             ->add('album')
             ->addIdentifier('title')
-            ->add('composer')
-        ;
+            ->add('composer');
     }
 
     /**

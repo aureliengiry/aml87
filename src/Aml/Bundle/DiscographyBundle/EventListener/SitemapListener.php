@@ -42,7 +42,7 @@ class SitemapListener
 
         foreach ($entities as $album) {
 
-            if(!$album->getUrl()){
+            if (!$album->getUrl()) {
                 continue;
             }
 

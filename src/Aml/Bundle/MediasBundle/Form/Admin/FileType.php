@@ -13,14 +13,21 @@ class FileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title','text',array(
-            		'label' => 'Titre',
-            		'attr' => array('placeholder' => 'Saisir le titre')
-            ))   
-            ->add('file','file',array(
-            		'label' => 'Fichier'
-            ))
-        ;
+            ->add(
+                'title',
+                'text',
+                array(
+                    'label' => 'Titre',
+                    'attr' => array('placeholder' => 'Saisir le titre')
+                )
+            )
+            ->add(
+                'file',
+                'file',
+                array(
+                    'label' => 'Fichier'
+                )
+            );
     }
 
     public function getName()
