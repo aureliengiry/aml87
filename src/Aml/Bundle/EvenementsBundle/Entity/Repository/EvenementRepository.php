@@ -53,7 +53,7 @@ class EvenementRepository extends EntityRepository
      * @param array $filters
      * @return mixed
      */
-    private function _buildRequestByFilters($query, $params = array(), $filters = array())
+    private function buildRequestByFilters($query, $params = array(), $filters = array())
     {
         if (isset($filters['archive'])) {
             $query
@@ -94,7 +94,7 @@ class EvenementRepository extends EntityRepository
             ->from('AmlEvenementsBundle:Evenement', 'e')
             ->orderBy('e.dateStart', 'ASC');
 
-        $q = $this->_buildRequestByFilters($q, $params = array(), $filters);
+        $q = $this->buildRequestByFilters($q, $params = array(), $filters);
 
         $query = $q->getQuery();
 
@@ -129,7 +129,7 @@ class EvenementRepository extends EntityRepository
             'public' => 1
         );
 
-        $q = $this->_buildRequestByFilters($q, $params, $filters);
+        $q = $this->buildRequestByFilters($q, $params, $filters);
 
         $query = $q->getQuery();
 

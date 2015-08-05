@@ -171,7 +171,7 @@ class Link
 
     public function __toString()
     {
-        return $this->title ?: 'New Link';
+        return $this->title ? $this->title : 'New Link';
     }
 
 }

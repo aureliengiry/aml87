@@ -52,5 +52,4 @@ class ImageTypeExtension extends AbstractTypeExtension
             $view->vars['image_url'] = $imageUrl;
         }
     }
-
 }

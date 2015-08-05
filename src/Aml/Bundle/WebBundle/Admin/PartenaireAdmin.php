@@ -6,8 +6,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-use Aml\Bundle\MediasBundle\Form\Admin\ImageType;
-
 class PartenaireAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -68,11 +66,10 @@ class PartenaireAdmin extends Admin
 
     public function preUpdate($partenaire)
     {
-
-        $this->_setLogoTitle($partenaire);
+        $this->setLogoTitle($partenaire);
     }
 
-    protected function _setLogoTitle($partenaire)
+    protected function setLogoTitle($partenaire)
     {
         $logo = $partenaire->getLogo();
 

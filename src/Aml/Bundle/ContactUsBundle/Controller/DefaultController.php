@@ -7,9 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-
 use Aml\Bundle\ContactUsBundle\Entity\Message;
 use Aml\Bundle\ContactUsBundle\Form\MessageType;
 use Aml\Bundle\ContactUsBundle\Event\PostEvent;

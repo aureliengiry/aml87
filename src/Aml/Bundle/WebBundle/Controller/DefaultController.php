@@ -40,7 +40,7 @@ class DefaultController extends Controller
      * @Route("/sitemap.{_format}", name="sitemap", Requirements={"_format" = "xml"})
      * @Template("AmlWebBundle:Default:sitemap.xml.twig")
      */
-    public function sitemap()
+    public function sitemapAction()
     {
         $urls = array();
 

@@ -1,11 +1,8 @@
 <?php
 namespace Tools\Bundle\MigrationBundle\Command\Import\Page;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 use Tools\Bundle\MigrationBundle\Command\Import\AbstractCommand;
 use Aml\Bundle\WebBundle\Entity\Page;

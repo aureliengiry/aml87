@@ -3,7 +3,6 @@
 namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Media
@@ -193,9 +192,8 @@ class Media
      * @param unknown_type $name
      * @return string
      */
-    protected function _renameIfFileExist($name)
+    protected function renameIfFileExist($name)
     {
-
         $filename = $this->getUploadRootDir().'/'.$name;
         if (true === file_exists($filename)) {
             $nameExplode = explode('.', $name);

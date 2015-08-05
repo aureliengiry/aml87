@@ -3,7 +3,6 @@ namespace Aml\Bundle\WebBundle\Twig;
 
 use Twig_Extension;
 use Twig_Filter_Method;
-use Twig_Function_Method;
 
 class PublicStatusExtension extends Twig_Extension
 {

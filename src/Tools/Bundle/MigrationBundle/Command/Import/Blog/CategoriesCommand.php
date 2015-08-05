@@ -6,11 +6,8 @@
  */
 namespace Tools\Bundle\MigrationBundle\Command\Import\Blog;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 use Tools\Bundle\MigrationBundle\Command\Import\AbstractCommand;
 use Aml\Bundle\BlogBundle\Entity\Category;

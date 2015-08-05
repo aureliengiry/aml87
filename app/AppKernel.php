@@ -47,7 +47,6 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
-      //  $bundles[] = new Aml\Bundle\GdataBundle\AmlGdataBundle();
         $bundles[] = new Aml\Bundle\WebBundle\AmlWebBundle();
         
         return $bundles;

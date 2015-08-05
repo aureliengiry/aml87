@@ -154,6 +154,6 @@ class Track
 
     public function __toString()
     {
-        return $this->title ?: 'New Track';
+        return $this->title ? $this->title : 'New Track';
     }
 }

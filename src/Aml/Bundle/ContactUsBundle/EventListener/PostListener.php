@@ -37,7 +37,7 @@ class PostListener
     {
         $post = $event->getPost();
 
-        $formatedMessage = $this->_formatMessage($post);
+        $formatedMessage = $this->formatMessage($post);
 
         if ($this->container->hasParameter('aml_contact_us.subriber')) {
             $getSubscribers = $this->container->getParameter('aml_contact_us.subriber');
@@ -53,8 +53,9 @@ class PostListener
                 $post->setStatus(Message::MESSAGE_STATUS_SAVE_SEND);
                 $em = $this->container->get('doctrine')->getManager('default');
                 $em->persist($post);
-                $em->flush();
             }
+
+            $em->flush();
         }
     }
 
@@ -64,7 +65,7 @@ class PostListener
      * @param $post
      * @return array
      */
-    private function _formatMessage($post)
+    private function formatMessage(Message $post)
     {
         $message = array();
 

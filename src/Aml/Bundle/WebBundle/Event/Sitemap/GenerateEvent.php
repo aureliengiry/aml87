@@ -2,7 +2,6 @@
 namespace Aml\Bundle\WebBundle\Event\Sitemap;
 
 use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class GenerateEvent

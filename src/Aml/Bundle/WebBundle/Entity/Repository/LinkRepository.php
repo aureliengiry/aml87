@@ -29,9 +29,6 @@ class LinkRepository extends EntityRepository
 
         $query = $qb->getQuery();
 
-        //echo $query->getSql(); var_dump($query->getParameters());exit;
-
-
         return $query->getResult();
     }
 }

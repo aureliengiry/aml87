@@ -6,9 +6,14 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-use Aml\Bundle\MediasBundle\Form\Admin\ImageType;
 use Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle;
 
+/**
+ * Class ArticleAdmin
+ *
+ * @package     Aml\Bundle\BlogBundle\Admin
+ * @author      Aurélien GIRY <aurelien.giry@gmail.com>
+ */
 class ArticleAdmin extends Admin
 {
     // setup the default sort column and order
@@ -22,11 +27,6 @@ class ArticleAdmin extends Admin
         $formMapper
             ->with('General')
             ->add('title', 'text')
-            /*->add('url', 'text',array(
-                'required' => false,
-                'data_class' => '\Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle',
-                'read_only' => true
-            ))*/
             ->add(
                 'category',
                 'entity',
@@ -158,19 +158,5 @@ class ArticleAdmin extends Admin
             ->setCreated(new \DateTime)
             ->setUpdated(new \DateTime)
             ->setUrl($entityUrl);
-    }
-
-    protected function _setLogoTitle($article)
-    {
-        $logo = $article->getLogo();
-
-        $logo->setTitle($article->getTitle());
-
-        // Remove old file
-        $logo->storeFilenameForRemove();
-        $logo->removeUpload();
-
-        // Upload
-        $logo->preUpload();
     }
 }

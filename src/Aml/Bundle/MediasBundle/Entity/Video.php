@@ -4,17 +4,11 @@ namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Doctrine\Common\Collections\ArrayCollection;
-
-use Aml\Bundle\MediasBundle\Entity\Video\Youtube;
-use Aml\Bundle\MediasBundle\Entity\Video\Dailymotion;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Video
  *
  * @ORM\Entity(repositoryClass="Aml\Bundle\MediasBundle\Entity\Repository\VideoRepository")
- *
  *
  * @ORM\Table(name="mediasbundle_videos")
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -43,11 +37,6 @@ class Video
      * @ORM\Column(name="title", type="string", length=255,nullable=true)
      */
     protected $title;
-
-    public function __construct()
-    {
-        //$this->articles = new ArrayCollection();
-    }
 
     /**
      * Get id

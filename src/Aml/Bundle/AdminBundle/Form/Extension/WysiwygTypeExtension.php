@@ -38,8 +38,6 @@ class WysiwygTypeExtension extends AbstractTypeExtension
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if ( !array_key_exists('wysiwyg', $options) ) {
-            $parentData = $form->getParent()->getData();
-
             // set an "wysiwyg" variable that will be available when rendering this field
             $view->vars['wysiwyg'] = false;
         }

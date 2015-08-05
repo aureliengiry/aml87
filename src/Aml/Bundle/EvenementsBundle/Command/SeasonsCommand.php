@@ -8,10 +8,8 @@
 namespace Aml\Bundle\EvenementsBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 use Aml\Bundle\EvenementsBundle\Entity\Evenement;
 use Aml\Bundle\EvenementsBundle\Entity\Season;
@@ -91,7 +89,6 @@ EOF
         $evenements = $this->evenementRepo->findAll();
 
         foreach ($evenements as $event) {
-            $dateEvent = $event->getDateStart();
             $this->getSeasonByEvent($event);
 
             // Archive event

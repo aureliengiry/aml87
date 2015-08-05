@@ -2,7 +2,6 @@
 namespace Aml\Bundle\DiscographyBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,8 +22,6 @@ class DiscographyController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
         $repo = $this->getDoctrine()->getRepository('AmlDiscographyBundle:Album');
         $entities = $repo->findBy(
             array('public' => "1"),
@@ -65,6 +62,4 @@ class DiscographyController extends Controller
             'entity' => $entity
         );
     }
-
-
 }

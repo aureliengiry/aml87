@@ -3,11 +3,6 @@
 namespace Aml\Bundle\UsersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-
-use Symfony\Component\Validator\Constraints as Assert; // pour la validation
-
-
 use FOS\UserBundle\Model\User as BaseUser;
 
 

@@ -4,9 +4,6 @@ namespace Aml\Bundle\ContactUsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\CallbackValidator;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormError;
 
 class MessageType extends AbstractType
 {
@@ -31,8 +28,6 @@ class MessageType extends AbstractType
                     'attr' => array('class' => 'btn btn-primary pull-right'),
                 )
             );
-
-
     }
 
     public function getName()

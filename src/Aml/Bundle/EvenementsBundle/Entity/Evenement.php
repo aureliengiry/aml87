@@ -4,8 +4,8 @@ namespace Aml\Bundle\EvenementsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Aml\Bundle\EvenementsBundle\Entity\EvenementBlog;
-
+use Aml\Bundle\BlogBundle\Entity\Article;
+use Aml\Bundle\WebBundle\Entity\Partenaire;
 
 /**
  * Aml\Bundle\EvenementsBundle\Entity\Evenement
@@ -325,14 +325,14 @@ class Evenement
         return $this->articles;
     }
 
-    public function setArticles($articles)
+    public function setArticles(ArrayCollection $articles)
     {
         $this->articles = $articles;
 
         return $this;
     }
 
-    public function addArticle($article)
+    public function addArticle(Article $article)
     {
         $this->articles[] = $article;
     }
@@ -341,7 +341,7 @@ class Evenement
      * Fonction pour supprimer une discussion d'un mot clé
      * @param Discussion $discussion
      */
-    public function removeArticle($article)
+    public function removeArticle(Article $article)
     {
         $this->articles->removeElement($article);
     }
@@ -352,7 +352,7 @@ class Evenement
      *
      * @param Partenaire $partenaire
      */
-    public function addPartenaire($partenaire)
+    public function addPartenaire(Partenaire $partenaire)
     {
         $partenaire->addEvenement($this);
         $this->partenaires[] = $partenaire;
@@ -365,7 +365,7 @@ class Evenement
      *
      * @param Partenaire $partenaire
      */
-    public function removePartenaire($partenaire)
+    public function removePartenaire(Partenaire $partenaire)
     {
         $this->partenaires->removeElement($partenaire);
     }

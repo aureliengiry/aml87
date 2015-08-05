@@ -3,10 +3,8 @@
 namespace Aml\Bundle\EvenementsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Aml\Bundle\BlogBundle\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,30 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AgendaController extends Controller
 {
-    /**
-     * Function to reorder events by day
-     *
-     * @param $events
-     * @return array
-     */
-    private function _formatEventByDay($events)
-    {
-        $eventsByDay = array();
-
-        foreach ($events as $event) {
-            $dateEvent = $event->getDateStart();
-            $dateKey = new \DateTime();
-            $dateKey->setDate($dateEvent->format('Y'), $dateEvent->format('m'), $dateEvent->format('d'));
-            $dateKey->setTime(0, 0);
-
-            $day = $dateKey->getTimestamp();
-
-            $eventsByDay[$day][] = $event;
-        }
-
-        return $eventsByDay;
-    }
-
     /**
      * Lists all Blog entities.
      *
@@ -58,8 +32,6 @@ class AgendaController extends Controller
                 'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT
             )
         );
-
-        //$entities = $this->_formatEventByDay($events);
 
         return array('entities' => $events);
     }

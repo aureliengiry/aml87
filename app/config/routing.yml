@@ -23,11 +23,6 @@ aml_evenements:
     type:     annotation
     prefix:   /
 
-aml_users:
-    resource: "@AmlUsersBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 aml_blog:
     resource: "@AmlBlogBundle/Controller/"
     type:     annotation

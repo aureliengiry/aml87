@@ -6,12 +6,13 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-use Aml\Bundle\BlogBundle\Admin\BlogAdmin;
 use Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement;
 
 /**
  * Class EvenementAdmin
+ *
  * @package Aml\Bundle\EvenementsBundle\Admin
+ * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
 class EvenementAdmin extends Admin
 {

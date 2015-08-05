@@ -2,8 +2,6 @@
 
 namespace Aml\Bundle\MediasBundle\Entity\Repository\Video;
 
-use Doctrine\ORM\EntityRepository;
-
 use Aml\Bundle\MediasBundle\Entity\Repository\VideoRepository;
 
 /**

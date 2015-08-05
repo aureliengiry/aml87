@@ -4,7 +4,7 @@ namespace Aml\Bundle\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Aml\Bundle\EvenementsBundle\Entity\EvenementBlog;
+use Aml\Bundle\EvenementsBundle\Entity\Evenement;
 
 /**
  * Aml\Bundle\BlogBundle\Entity\Article
@@ -333,7 +333,7 @@ class Article
      *
      * @param TumblrTag $tag
      */
-    public function addTag($tag)
+    public function addTag(Tags $tag)
     {
         if (!$this->tags->contains($tag)) {
             $tag->addArticle($this);
@@ -347,7 +347,7 @@ class Article
      * Fonction to delete tag
      * @param Discussion $discussion
      */
-    public function removeTag($tag)
+    public function removeTag(Tags $tag)
     {
         $this->tags->removeElement($tag);
         $tag->deleteArticle($this);
@@ -372,12 +372,11 @@ class Article
     }
 
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
-
     /**
-     *
-     * @param TumblrTag $tag
+     * @param EvenementBlog $evenement
+     * @return $this
      */
-    public function addEvenement($evenement)
+    public function addEvenement(Evenement $evenement)
     {
         if (!$this->evenements->contains($evenement)) {
             $evenement->addArticle($this);
@@ -391,7 +390,7 @@ class Article
      * Fonction to delete $evenement
      * @param Evenement $evenement
      */
-    public function removeEvenement($evenement)
+    public function removeEvenement(Evenement $evenement)
     {
         $this->evenements->removeElement($evenement);
         $evenement->deleteArticle($this);
@@ -418,6 +417,6 @@ class Article
 
     public function __toString()
     {
-        return $this->title ?: 'New Article';
+        return $this->title ? $this->title : 'New Article';
     }
 }

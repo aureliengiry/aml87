@@ -241,7 +241,7 @@ class Album
      *
      * @param Track $track
      */
-    public function addTrack($track)
+    public function addTrack(Track $track)
     {
         $this->tracks[] = $track;
 
@@ -252,7 +252,7 @@ class Album
      * Fonction to delete tag
      * @param Discussion $discussion
      */
-    public function removeTrack($track)
+    public function removeTrack(Track $track)
     {
         $this->tracks->removeElement($track);
         $track->deleteAlbum($this);
@@ -260,6 +260,6 @@ class Album
 
     public function __toString()
     {
-        return $this->title ?: 'Nouvel Album';
+        return $this->title ? $this->title : 'Nouvel Album';
     }
 }

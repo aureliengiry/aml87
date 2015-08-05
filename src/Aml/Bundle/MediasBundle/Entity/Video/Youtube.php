@@ -3,12 +3,7 @@
 namespace Aml\Bundle\MediasBundle\Entity\Video;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Doctrine\Common\Collections\ArrayCollection;
-
 use Aml\Bundle\MediasBundle\Entity\Video;
-
 
 /**
  * Aml\Bundle\MediasBundle\Entity\Video\Youtube
@@ -21,7 +16,6 @@ class Youtube extends Video
     public function __construct()
     {
         parent::__construct();
-        //$this->articles = new ArrayCollection();
     }
 
     /**
@@ -34,8 +28,6 @@ class Youtube extends Video
 
     public function __toString()
     {
-        return $this->title ?: 'New Video Youtube';
+        return $this->title ? $this->title : 'New Video Youtube';
     }
-
-
 }

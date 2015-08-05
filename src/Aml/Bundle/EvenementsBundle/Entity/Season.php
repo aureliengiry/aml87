@@ -2,8 +2,6 @@
 namespace Aml\Bundle\EvenementsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-
 
 /**
  * Aml\Bundle\EvenementsBundle\Entity\Season
@@ -156,8 +154,6 @@ class Season
 
     public function __toString()
     {
-        return $this->name ?: 'New Season';
+        return $this->name ? $this->name : 'New Season';
     }
-
-
 }

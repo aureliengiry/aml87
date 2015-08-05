@@ -7,9 +7,7 @@
 
 namespace Tools\Bundle\MigrationBundle\Command\Import\Blog;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Tools\Bundle\MigrationBundle\Command\Import\AbstractCommand;

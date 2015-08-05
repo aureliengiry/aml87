@@ -4,10 +4,6 @@ namespace Aml\Bundle\MediasBundle\Form\Admin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-use Symfony\Component\Form\CallbackValidator;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormError;
-
 class FileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

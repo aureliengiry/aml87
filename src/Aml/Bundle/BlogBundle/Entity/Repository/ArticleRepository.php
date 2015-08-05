@@ -12,7 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class ArticleRepository extends EntityRepository
 {
-
     /**
      * Function to build request in order to filter blog articles
      *
@@ -21,7 +20,7 @@ class ArticleRepository extends EntityRepository
      * @param array $filters
      * @return mixed
      */
-    private function _buildRequestByFilters($query, $params = array(), $filters = array())
+    private function buildRequestByFilters($query, $params = array(), $filters = array())
     {
         if (isset($filters['category']) && !empty($filters['category'])) {
             $query
@@ -44,6 +43,7 @@ class ArticleRepository extends EntityRepository
 
     /**
      * Function to count public articles
+     *
      * @return mixed
      */
     public function countPublicArticles($filters = array())
@@ -57,11 +57,9 @@ class ArticleRepository extends EntityRepository
             ->where("a.public = 1");
 
         if (!empty($filters)) {
-            $qb = $this->_buildRequestByFilters($qb, array(), $filters);
+            $qb = $this->buildRequestByFilters($qb, array(), $filters);
         }
         $query = $qb->getQuery();
-
-        //echo $query->getSql(); var_dump($query->getParameters());exit;
 
         return $query->getSingleScalarResult();
     }
@@ -90,7 +88,7 @@ class ArticleRepository extends EntityRepository
             ->setFirstResult($offset);
 
         if (!empty($filters)) {
-            $qb = $this->_buildRequestByFilters($qb, array(), $filters);
+            $qb = $this->buildRequestByFilters($qb, array(), $filters);
         }
 
         $query = $qb->getQuery();
@@ -100,6 +98,7 @@ class ArticleRepository extends EntityRepository
 
     /**
      * Fonction qui permet de supprimer les mots clés libres d'une discussion pour les rajouter proprement
+     *
      * @param unknown_type $blog
      */
     public function cleanTags($blog)
@@ -111,9 +110,15 @@ class ArticleRepository extends EntityRepository
         $em->flush();
     }
 
+    /**
+     * Find article by url key
+     *
+     * @param $urlKey
+     * @return mixed|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getArticleByUrlKey($urlKey)
     {
-
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('e')
@@ -136,5 +141,4 @@ class ArticleRepository extends EntityRepository
             return null;
         }
     }
-
 }

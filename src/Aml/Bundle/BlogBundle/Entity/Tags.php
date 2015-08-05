@@ -155,7 +155,7 @@ class Tags
         return $this;
     }
 
-    public function addArticle($article)
+    public function addArticle(Article $article)
     {
         $this->articles[] = $article;
     }
@@ -164,7 +164,7 @@ class Tags
      * Fonction pour supprimer une discussion d'un mot clé
      * @param Discussion $discussion
      */
-    public function removeArticle($article)
+    public function removeArticle(Article $article)
     {
         $this->articles->removeElement($article);
     }
@@ -311,7 +311,7 @@ class Tags
 
     public function __toString()
     {
-        return $this->name ?: 'New Tag';
+        return $this->name ? $this->name : 'New Tag';
     }
 
 

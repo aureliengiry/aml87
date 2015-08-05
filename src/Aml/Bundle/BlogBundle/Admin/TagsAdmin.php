@@ -6,6 +6,12 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+/**
+ * Class TagsAdmin
+ *
+ * @package     Aml\Bundle\BlogBundle\Admin
+ * @author      Aurélien GIRY <aurelien.giry@gmail.com>
+ */
 class TagsAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -34,7 +40,6 @@ class TagsAdmin extends Admin
      */
     public function getTemplate($name)
     {
-        //var_dump( $name );
         if (isset($this->templates[$name])) {
             return $this->templates[$name];
         }

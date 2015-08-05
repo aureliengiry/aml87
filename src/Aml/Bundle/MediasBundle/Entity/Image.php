@@ -134,7 +134,7 @@ class Image extends Media
         if (null !== $this->file) {
 
             $cleanName = $this->_build_SystemName($this->file->getClientOriginalName());
-            $name = $this->_renameIfFileExist($cleanName);
+            $name = $this->renameIfFileExist($cleanName);
             $this->path = $name;
 
         }
@@ -182,5 +182,4 @@ class Image extends Media
             unlink($this->filenameForRemove);
         }
     }
-
 }

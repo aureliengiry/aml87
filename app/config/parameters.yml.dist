@@ -1,0 +1,26 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     ~
+    database_port:     ~
+    database_name:     ~
+    database_user:     ~
+    database_password: ~
+    drupal_database_name:   ~
+
+    mailer_transport:  ~
+    mailer_user:       ~
+    mailer_password:   ~
+    mailer_host:       ~
+
+    locale:            fr
+    secret:            ThisTokenIsNotSoSecretChangeIt
+    project_name:      AML87
+    site_name:         AML87
+
+    admin_email:      ~
+
+    ga_account_id:    ~
+
+twig:
+    globals:      
+        project_name: AML87

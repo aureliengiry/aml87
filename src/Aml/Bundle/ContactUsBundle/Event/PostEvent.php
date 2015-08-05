@@ -8,7 +8,6 @@
 namespace Aml\Bundle\ContactUsBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class PostEvent

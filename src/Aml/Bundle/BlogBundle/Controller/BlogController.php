@@ -2,10 +2,8 @@
 namespace Aml\Bundle\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Aml\Bundle\BlogBundle\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -50,8 +48,6 @@ class BlogController extends Controller
             $this->_limitPagination * ($num_pages - 1),
             $filters
         );
-
-        //var_dump( $entitiesBlog );exit;
 
         // Get Liste catégories
         // @TODO : charger que les catégories avec les articles liés

@@ -4,11 +4,6 @@ namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Doctrine\Common\Collections\ArrayCollection;
-
-// Entities
-use Aml\Bundle\MediasBundle\Entity\Media;
 
 /**
  * Aml\Bundle\WebBundle\Entity\File
@@ -38,8 +33,6 @@ class File extends Media
 
     // propriété utilisé temporairement pour la suppression
     private $filenameForRemove;
-
-    //  private $filename;
 
     /**
      * Get id
@@ -122,7 +115,7 @@ class File extends Media
         if (null !== $this->file) {
 
             $cleanName = $this->_build_SystemName($this->file->getClientOriginalName());
-            $name = $this->_renameIfFileExist($cleanName);
+            $name = $this->renameIfFileExist($cleanName);
             $this->path = $name;
 
         }
@@ -144,10 +137,7 @@ class File extends Media
         $this->file->move($this->getUploadRootDir(), $this->path);
 
         unset($this->file);
-
-
     }
-
 
     /**
      * @ORM\PreRemove()
@@ -177,6 +167,5 @@ class File extends Media
     {
         return array('label' => 'Fichier', 'key' => 'file');
     }
-
 
 }
