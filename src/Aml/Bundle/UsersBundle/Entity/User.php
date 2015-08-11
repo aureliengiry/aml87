@@ -5,7 +5,6 @@ namespace Aml\Bundle\UsersBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
-
 /**
  * Aml\Bundle\UsersBundle\Entity\User
  *
@@ -36,6 +35,41 @@ class User extends BaseUser
      * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
      */
     protected $lastname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=20, nullable=true)
+     */
+    protected $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mobile", type="string", length=20, nullable=true)
+     */
+    protected $mobile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="birthdate", type="datetime", nullable=true)
+     */
+    protected $birthdate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="text", nullable=true)
+     */
+    protected $adresse;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="job", type="string", length=255, nullable=true)
+     */
+    protected $job;
 
     public function __construct()
     {
@@ -85,5 +119,113 @@ class User extends BaseUser
         return $this->lastname;
     }
 
+    /**
+     * Function to get value of $phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
 
+    /**
+     * Function to set value of $phone
+     *
+     * @param string $phone
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Function to get value of $mobile
+     *
+     * @return string
+     */
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * Function to set value of $mobile
+     *
+     * @param string $mobile
+     */
+    public function setMobile($mobile)
+    {
+        $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    /**
+     * Function to get value of $birthdate
+     *
+     * @return string
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * Function to set value of $birthdate
+     *
+     * @param string $birthdate
+     */
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    /**
+     * Function to get value of $adresse
+     *
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * Function to set value of $adresse
+     *
+     * @param string $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    /**
+     * Function to get value of $job
+     *
+     * @return string
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
+
+    /**
+     * Function to set value of $job
+     *
+     * @param string $job
+     */
+    public function setJob($job)
+    {
+        $this->job = $job;
+
+        return $this;
+    }
 }

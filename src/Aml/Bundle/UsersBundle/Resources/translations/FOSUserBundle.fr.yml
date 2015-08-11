@@ -24,6 +24,13 @@ profile:
     show:
         username: Nom d'utilisateur
         email: Adresse e-mail
+        firstname: Prénom
+        lastname:  Nom
+        phone: N° Téléphone
+        mobile: N° Portable
+        birthdate: Date de naissance
+        adresse: Adresse
+        job: Activité
     edit:
         submit: Mettre à jour
     flash:
@@ -81,6 +88,7 @@ layout:
     login: Connexion
     register: Inscription
     logged_in_as: Connecté en tant que %username%
+    welcome_as: Bonjour %username%
 
 # Form field labels
 form:
