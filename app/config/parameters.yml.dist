@@ -13,7 +13,7 @@ parameters:
     mailer_host:       ~
 
     locale:            fr
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            5c35b51cb4b84b2d8abff501b13297cb48049429
     project_name:      AML87
     site_name:         AML87
 
