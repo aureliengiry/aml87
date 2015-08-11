@@ -1,21 +1,14 @@
-{% extends "AmlWebBundle::layout.html.twig" %}
+{% extends "AmlUsersBundle::members-layout.html.twig" %}
 
 {% block title -%}
-    Connexion -
+    Espace membres - Edit Profile
 {%- endblock title %}
 
 {% block body %}
-    <div id="col-left" class="two-cols-content">
-
-        <div class="contenu-page">
-
-            {% block fos_user_content %}
-                {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-            {% endblock fos_user_content %}
-
-        </div>
-    </div>
-    <div id="col-right">
-
+    <h1 class="page-header">Edit Profile</h1>
+    <div class="row">
+        {% block fos_user_content %}
+            {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+        {% endblock fos_user_content %}
     </div>
 {%- endblock body %}

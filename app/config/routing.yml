@@ -43,6 +43,11 @@ aml_web:
     type:     annotation
     prefix:   /
 
+aml_users:
+    resource: "@AmlUsersBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 #login:
 #    pattern:   /connexion
 #    defaults:  { _controller: AmlUsersBundle:Secure:login }
@@ -70,7 +75,7 @@ fos_user_security:
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /profile
+    prefix: /espace-membres/profile
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"

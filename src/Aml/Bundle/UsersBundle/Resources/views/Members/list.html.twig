@@ -1,0 +1,35 @@
+{% extends "AmlUsersBundle::members-layout.html.twig" %}
+
+{% block title -%}
+    Espace membres - Listes des membres
+{%- endblock title %}
+
+{% block body %}
+    <h1 class="page-header">Listes des membres</h1>
+
+{% if users is not empty %}
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>NOM</th>
+                <th>Email</th>
+                <th>Dernière connexion</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for user in users %}
+            <tr>
+                <td>{{ user.firstname }} {{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.lastLogin|date('d/m/Y à H:i') }}</td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+{% endblock body %}
