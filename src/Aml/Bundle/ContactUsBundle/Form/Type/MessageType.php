@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\ContactUsBundle\Form;
+namespace Aml\Bundle\ContactUsBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;

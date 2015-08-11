@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Aml\Bundle\ContactUsBundle\Entity\Message;
-use Aml\Bundle\ContactUsBundle\Form\MessageType;
+use Aml\Bundle\ContactUsBundle\Form\Type\MessageType;
 use Aml\Bundle\ContactUsBundle\Event\PostEvent;
 
 /**
