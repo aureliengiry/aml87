@@ -18,36 +18,71 @@ class UsersAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('username')
-                ->add('email')
-                ->add('plainPassword', 'text', array('required' => false))
+            ->add('username')
+            ->add('email')
+            ->add('plainPassword', 'text', array('required' => false))
             ->end()
             ->with('Profile')
-                ->add(
-                    'firstname',
-                    'text',
-                    array(
-                        'required' => false,
-                    )
+            ->add(
+                'firstname',
+                'text',
+                array(
+                    'required' => false,
                 )
-                ->add(
-                    'lastname',
-                    'text',
-                    array(
-                        'required' => false,
-                    )
+            )
+            ->add(
+                'lastname',
+                'text',
+                array(
+                    'required' => false,
                 )
-                ->add(
-                    'enabled',
-                    'checkbox',
-                    array(
-                        'label' => 'Actif',
-                        'required' => false,
-                    )
+            )
+            ->add(
+                'phone',
+                'text',
+                array(
+                    'required' => false,
                 )
+            )
+            ->add(
+                'mobile',
+                'text',
+                array(
+                    'required' => false,
+                )
+            )
+            ->add(
+                'birthdate',
+                'date',
+                array(
+                    'required' => false,
+                )
+            )
+            ->add(
+                'job',
+                'text',
+                array(
+                    'required' => false,
+                )
+            )
+            ->add(
+                'adresse',
+                'textarea',
+                array(
+                    'required' => false,
+                )
+            )
+            ->add(
+                'enabled',
+                'checkbox',
+                array(
+                    'label' => 'Actif',
+                    'required' => false,
+                )
+            )
             ->end()
             ->with('Management')
-                ->add('enabled', null, array('required' => false))
+            ->add('enabled', null, array('required' => false))
             ->end();
     }
 
