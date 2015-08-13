@@ -17,7 +17,6 @@ use Aml\Bundle\MediasBundle\Entity\Media;
  */
 class Image extends Media
 {
-
     /**
      * @ORM\OneToOne(targetEntity="\Aml\Bundle\DiscographyBundle\Entity\Album", mappedBy="image")
      */

@@ -26,6 +26,7 @@ src="'.$urlVideo.'" frameborder="0" allowfullscreen></iframe>';
         }
 
         $formMapper
+            ->with('General')
             ->add(
                 'title',
                 'text',
@@ -33,7 +34,20 @@ src="'.$urlVideo.'" frameborder="0" allowfullscreen></iframe>';
                     'required' => false,
                 )
             )
-            ->add('provider_id', 'text', $thumbnailFieldOptions);
+            ->add('provider_id', 'text', $thumbnailFieldOptions)
+            ->end()
+            ->with('Evénements')
+            ->add(
+                'evenements',
+                'sonata_type_model',
+                array(
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'by_reference' => false
+                )
+            )
+            ->end();
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

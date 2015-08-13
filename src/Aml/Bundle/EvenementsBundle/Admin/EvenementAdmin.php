@@ -110,6 +110,18 @@ class EvenementAdmin extends Admin
                 )
             )
             ->end()
+            ->with('Vidéos')
+            ->add(
+                'videos',
+                'sonata_type_model',
+                array(
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
+                    'by_reference' => false
+                )
+            )
+            ->end()
             ->with('Partenaires')
             ->add(
                 'partenaires',
