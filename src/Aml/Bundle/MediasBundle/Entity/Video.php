@@ -47,8 +47,6 @@ class Video
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->evenements = new ArrayCollection();
     }
 
