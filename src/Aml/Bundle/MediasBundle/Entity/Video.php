@@ -4,6 +4,8 @@ namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Aml\Bundle\EvenementsBundle\Entity\Evenement;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Video
@@ -37,6 +39,18 @@ class Video
      * @ORM\Column(name="title", type="string", length=255,nullable=true)
      */
     protected $title;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", mappedBy="videos", cascade={"all"})
+     */
+    protected $evenements;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->evenements = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -87,4 +101,49 @@ class Video
     {
         return $this->title;
     }
+
+
+    /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
+    /**
+     * @param Evenement $evenement
+     * @return $this
+     */
+    public function addEvenement(Evenement $evenement)
+    {
+        if (!$this->evenements->contains($evenement)) {
+            $evenement->addVideo($this);
+            $this->evenements[] = $evenement;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Fonction to delete $evenement
+     * @param Evenement $evenement
+     */
+    public function removeEvenement(Evenement $evenement)
+    {
+        $this->evenements->removeElement($evenement);
+        $evenement->removeVideo($this);
+    }
+
+    /**
+     * @return the $evenements
+     */
+    public function getEvenements()
+    {
+        return $this->evenements;
+    }
+
+    /**
+     * @return the $evenements
+     */
+    public function setEvenements(ArrayCollection $evenements)
+    {
+        $this->evenements = $evenements;
+
+        return $this;
+    }
+
 }

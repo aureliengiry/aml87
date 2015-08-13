@@ -1,0 +1,27 @@
+{# Bloc des vidéos liées #}
+{% if entity.videos is not empty %}
+    <div id="blocs-evenement-videos">
+        <h2>Vidéos</h2>
+        <ul>
+            {% for key,video in entity.videos %}
+                <li>
+                    <div class="video-lockup">
+                        <div class="video-lockup-thumbnail">
+                            <a href="http://www.youtube.com/watch?v={{ video.providerId }}&width=800&height=500" rel="prettyPhoto"
+                               title="{{ video.title }}">
+                                <img width="185" src="http://i.ytimg.com/vi/{{ video.providerId }}/default.jpg"
+                                     title="{{ video.title }}"/>
+                            </a>
+                        </div>
+                        <div class="video-lockup-content">
+                            <a href="http://www.youtube.com/watch?v={{ video.providerId }}&width=800&height=500" rel="prettyPhoto"
+                               title="{{ video.title }}">
+                                {{ video.title }}
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

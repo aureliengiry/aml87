@@ -29,7 +29,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Medias, label: "Videos" }
         arguments:
             - ~
-            - Aml\Bundle\MediasBundle\Entity\Video\Youtube
+            - Aml\Bundle\MediasBundle\Entity\Video
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlMediasBundle]]

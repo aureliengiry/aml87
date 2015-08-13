@@ -33,6 +33,9 @@
 
             <div><p>{{ entity.description|raw }}</p></div>
         </article>
+
+        {# Liste vidéos liées #}
+        {% include "AmlEvenementsBundle:Agenda:blocVideos.html.twig" %}
     </div>
 
     <div id="col-right">

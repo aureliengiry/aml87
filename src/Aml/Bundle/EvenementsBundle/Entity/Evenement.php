@@ -2,6 +2,7 @@
 
 namespace Aml\Bundle\EvenementsBundle\Entity;
 
+use Aml\Bundle\MediasBundle\Entity\Video;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Aml\Bundle\BlogBundle\Entity\Article;
@@ -115,6 +116,15 @@ class Evenement
      * @ORM\JoinColumn(name="id_season", referencedColumnName="id_season")
      */
     protected $season;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\MediasBundle\Entity\Video", inversedBy="evenements",cascade={"all"})
+     * @ORM\JoinTable(name="evenements_videos",
+     *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
+     *        inverseJoinColumns={@ORM\JoinColumn(name="id_video", referencedColumnName="id_video")}
+     * )
+     */
+    protected $videos;
 
     public function __construct()
     {
@@ -346,7 +356,6 @@ class Evenement
         $this->articles->removeElement($article);
     }
 
-
     /* ---------------- PARTENAIRES ---------------- */
     /**
      *
@@ -386,6 +395,33 @@ class Evenement
         $this->partenaires = $partenaires;
 
         return $this;
+    }
+
+    /* ---------------- VIDEOS LIEES ---------------- */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    public function setVideos(ArrayCollection $videos)
+    {
+        $this->videos = $videos;
+
+        return $this;
+    }
+
+    public function addVideo(Video $video)
+    {
+        $this->videos[] = $video;
+    }
+
+    /**
+     * Fonction pour supprimer une discussion d'un mot clé
+     * @param Discussion $discussion
+     */
+    public function removeVideo(Video $video)
+    {
+        $this->videos->removeElement($video);
     }
 
     public function __toString()
@@ -437,6 +473,5 @@ class Evenement
     {
         return (bool)$this->season;
     }
-
 
 }

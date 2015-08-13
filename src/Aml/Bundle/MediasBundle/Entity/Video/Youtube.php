@@ -5,6 +5,7 @@ namespace Aml\Bundle\MediasBundle\Entity\Video;
 use Doctrine\ORM\Mapping as ORM;
 use Aml\Bundle\MediasBundle\Entity\Video;
 
+
 /**
  * Aml\Bundle\MediasBundle\Entity\Video\Youtube
  *
@@ -12,12 +13,6 @@ use Aml\Bundle\MediasBundle\Entity\Video;
  */
 class Youtube extends Video
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * @return string
      */

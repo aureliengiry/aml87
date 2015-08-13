@@ -373,7 +373,7 @@ class Article
 
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
     /**
-     * @param EvenementBlog $evenement
+     * @param Evenement $evenement
      * @return $this
      */
     public function addEvenement(Evenement $evenement)
@@ -393,7 +393,7 @@ class Article
     public function removeEvenement(Evenement $evenement)
     {
         $this->evenements->removeElement($evenement);
-        $evenement->deleteArticle($this);
+        $evenement->removeArticle($this);
     }
 
     /**
@@ -413,7 +413,6 @@ class Article
 
         return $this;
     }
-
 
     public function __toString()
     {
