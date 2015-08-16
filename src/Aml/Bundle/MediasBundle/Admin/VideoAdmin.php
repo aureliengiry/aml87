@@ -15,13 +15,16 @@ class VideoAdmin extends Admin
         $video = $this->getSubject();
 
         // use $thumbnailFieldOptions so we can add other options to the field
-        $thumbnailFieldOptions = array('required' => false);
+        $thumbnailFieldOptions = array(
+            'required' => false,
+            'label' => 'Référence Youtube'
+        );
         if ($video) {
             // add a 'help' option containing the preview's img tag
             $providerId = $video->getProviderId();
 
             $urlVideo = "https://www.youtube.com/embed/{$providerId}";
-            $thumbnailFieldOptions['help'] = '<iframe width="500" height="369"
+            $thumbnailFieldOptions['help'] = '<p>Lien Youtube: https://www.youtube.com/watch?v=<strong>'.$providerId.'</strong></p><iframe width="500" height="369"
 src="'.$urlVideo.'" frameborder="0" allowfullscreen></iframe>';
         }
 

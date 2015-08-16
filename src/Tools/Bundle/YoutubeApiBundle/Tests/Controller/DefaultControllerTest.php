@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\GdataBundle\Tests\Controller;
+namespace Tools\Bundle\YoutubeApiBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
