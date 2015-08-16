@@ -1,0 +1,12 @@
+parameters:
+#    tools_youtube_api.example.class: Tools\Bundle\YoutubeApiBundle\Example
+
+services:
+#    tools_youtube_api.example:
+#        class: %tools_youtube_api.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    tools_youtube_api.init_client:
+         class: Tools\Bundle\YoutubeApiBundle\Api\Youtube
+         arguments:
+            - @service_container
+

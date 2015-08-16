@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\GdataBundle\DependencyInjection;
+namespace Tools\Bundle\YoutubeApiBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('aml_gdata');
+        $rootNode = $treeBuilder->root('tools_youtube_api');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
