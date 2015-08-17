@@ -118,7 +118,7 @@ class Evenement
     protected $season;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\MediasBundle\Entity\Video", inversedBy="evenements",cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\MediasBundle\Entity\Video\Youtube", inversedBy="evenements",cascade={"all"})
      * @ORM\JoinTable(name="evenements_videos",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_video", referencedColumnName="id_video")}
