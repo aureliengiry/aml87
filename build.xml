@@ -18,30 +18,30 @@
 
     <target name="get-composer">
         <if>
-            <available file="${project.basedir}/bin/composer.phar"
+            <available file="${project.basedir}/composer.phar"
                     property="composer.exists"
                     value="true"
                     />
             <then>
-                <composer command="selfupdate" composer="${project.basedir}/bin/composer.phar">
+                <composer command="selfupdate" composer="${project.basedir}/composer.phar">
                 </composer>
             </then>
             <else>
                 <httpget
                         url="http://getcomposer.org/composer.phar"
-                        dir="${project.basedir}/bin/" filename="composer.phar"/>
+                        dir="${project.basedir}/" filename="composer.phar"/>
 
             </else>
         </if>
         <if>
             <not>
-                <available file="${project.basedir}/bin/composer.phar"
+                <available file="${project.basedir}/composer.phar"
                         property="composer.exists"
                         value="true"
                         />
             </not>
             <then>
-                <fail message="Unable to upload composer into ${project.basedir}/bin/composer.phar"/>
+                <fail message="Unable to upload composer into ${project.basedir}/composer.phar"/>
             </then>
         </if>
     </target>
@@ -49,7 +49,7 @@
     <target name="composer">
         <if>
             <not>
-                <available file="${project.basedir}/bin/composer.phar"
+                <available file="${project.basedir}/composer.phar"
                         property="composer.exists"
                         value="true"
                         />
@@ -58,14 +58,14 @@
                 <phingcall target="get-composer"/>
             </then>
         </if>
-        <composer command="update" composer="${project.basedir}/bin/composer.phar">
+        <composer command="update" composer="${project.basedir}/composer.phar">
             <arg value="--no-dev"/>
             <arg value="--working-dir=${release.realpath}"/>
             <arg value="--no-progress"/>
             <arg value="--optimize-autoloader"/>
         </composer>
-        <delete dir="${release.realpath}/pulsar/app/cache/*" includeemptydirs="true" verbose="true" failonerror="false"/>
-        <delete dir="${release.realpath}/pulsar/app/logs/*" includeemptydirs="true" verbose="true" failonerror="false"/>
+        <delete dir="${release.realpath}/app/cache/*" includeemptydirs="true" verbose="true" failonerror="false"/>
+        <delete dir="${release.realpath}/app/logs/*" includeemptydirs="true" verbose="true" failonerror="false"/>
 
     </target>
 
