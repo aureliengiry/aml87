@@ -1,6 +1,20 @@
-<project name="Aml87" basedir="." default="get-composer">
+<project name="Aml87" basedir="." default="prepare-release">
     <property file="${project.basedir}/build.properties" />
     <property name="release.realpath" value="${project.basedir}/${release.dir}"/>
+
+    <target name="prepare-release">
+        <delete dir="${release.realpath}" />
+        <mkdir dir="${release.realpath}" />
+
+        <copy todir="${release.realpath}" overwrite="true">
+            <fileset dir="${project.basedir}">
+                <include name="**/*" />
+                <exclude name=".git/**" />
+                <exclude name="build.*" />
+                <exclude name="${release.dir}/**" />
+            </fileset>
+        </copy>
+    </target>
 
     <target name="get-composer">
         <if>
