@@ -2,7 +2,7 @@
 namespace Aml\Bundle\WebBundle\Twig;
 
 use Twig_Extension;
-use Twig_Filter_Method;
+use Twig_SimpleFilter;
 
 class PublicStatusExtension extends Twig_Extension
 {
@@ -10,7 +10,7 @@ class PublicStatusExtension extends Twig_Extension
     {
         return array
         (
-            'publicStatus' => new Twig_Filter_Method($this, 'publicStatusFilter'),
+            new Twig_SimpleFilter('publicStatus',array($this, 'publicStatusFilter'))
         );
     }
 

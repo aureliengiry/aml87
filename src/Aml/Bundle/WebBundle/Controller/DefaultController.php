@@ -40,14 +40,13 @@ class DefaultController extends Controller
      * @Route("/sitemap.{_format}", name="sitemap", Requirements={"_format" = "xml"})
      * @Template("AmlWebBundle:Default:sitemap.xml.twig")
      */
-    public function sitemapAction()
+    public function sitemapAction(Request $request)
     {
         $urls = array();
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
 
-        $request = $this->getRequest();
         $hostname = 'http://'.$request->getHost();
 
         // add some urls homepage

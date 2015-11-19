@@ -32,9 +32,9 @@ class AdminMessagesBlockService extends BaseBlockService
 {
 
     /**
-     * @var SecurityContextInterface
+     * @var Security
      */
-    protected $securityContext;
+    protected $security;
 
     /**
      * @var Pool

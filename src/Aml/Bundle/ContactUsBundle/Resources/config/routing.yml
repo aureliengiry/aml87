@@ -1,6 +1,6 @@
 aml_contact_us_index:
-    pattern:  /contact-us
+    path:  /contact-us
     defaults: { _controller: AmlContactUsBundle:Default:index }
 aml_contact_us_post:
-    pattern:  /contact-us/post
+    path:  /contact-us/post
     defaults: { _controller: AmlContactUsBundle:Default:post }

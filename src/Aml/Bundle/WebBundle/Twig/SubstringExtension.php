@@ -2,7 +2,7 @@
 namespace Aml\Bundle\WebBundle\Twig;
 
 use Twig_Extension;
-use Twig_Filter_Method;
+use Twig_SimpleFilter;
 
 class SubstringExtension extends Twig_Extension
 {
@@ -10,7 +10,7 @@ class SubstringExtension extends Twig_Extension
     public function getFilters()
     {
         return array(
-            'substring' => new Twig_Filter_Method($this, 'substringFilter'),
+            new Twig_SimpleFilter('substring',array($this, 'substringFilter'))
         );
     }
 

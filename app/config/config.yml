@@ -24,7 +24,7 @@ sonata_block:
 
 sonata_admin:
     title:      AML87
-    title_logo: /bundles/amladmin/images/logo_title.png
+    title_logo: /bundles/amlweb/images/logo_aml87.png
     templates:
         # default global templates
         #layout:  AmlAdminBundle::standard_layout.html.twig
@@ -79,7 +79,7 @@ twig:
     form:
           resources:
               - 'SonataCoreBundle:Form:datepicker.html.twig'
-              - 'bootstrap_3_layout.html.twig'
+              #- 'bootstrap_3_layout.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -136,24 +136,20 @@ services:
         tags:
            - { name: twig.extension }
 
-    debug.twig.extension:
-        class: Twig_Extensions_Extension_Debug
-        tags: [{ name: 'twig.extension' }]
-          
-    aml.twig.niceDate_extension:
+    aml.twig.word_warp_extension:
+        class: Aml\Bundle\WebBundle\Twig\WordWarpExtension
+        tags:
+          - { name: twig.extension }
+
+    aml.twig.nice_date_extension:
         class: Aml\Bundle\WebBundle\Twig\PublicStatusExtension
         tags:
             - { name: twig.extension }
 
-    aml.twig.wordWarp_extension:
-            class: Aml\Bundle\WebBundle\Twig\WordWarpExtension
-            tags:
-              - { name: twig.extension }
-
     aml.twig.substring_extension:
-            class: Aml\Bundle\WebBundle\Twig\SubstringExtension
-            tags:
-              - { name: twig.extension }
+        class: Aml\Bundle\WebBundle\Twig\SubstringExtension
+        tags:
+          - { name: twig.extension }
 
 avalanche_imagine:
     web_root:     "%kernel.root_dir%/../web"

@@ -53,11 +53,11 @@ aml_users:
     prefix:   /
 
 #login:
-#    pattern:   /connexion
+#    path:   /connexion
 #    defaults:  { _controller: AmlUsersBundle:Secure:login }
     
 #login_check:
-#    pattern:   /login_check
+#    path:   /login_check
     
 _imagine:
     host:     medias.aml87.fr

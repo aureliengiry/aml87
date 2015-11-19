@@ -2,7 +2,7 @@
 namespace Aml\Bundle\WebBundle\Twig;
 
 use Twig_Extension;
-use Twig_Filter_Method;
+use Twig_SimpleFilter;
 
 class WordWarpExtension extends Twig_Extension
 {
@@ -10,8 +10,8 @@ class WordWarpExtension extends Twig_Extension
     {
         return array
         (
-            'wordWarp' => new Twig_Filter_Method($this, 'wordWarpFilter', array('is_safe' => array('html'))),
-            'isWordWarp' => new Twig_Filter_Method($this, 'isWordWarpFilter')
+            new Twig_SimpleFilter('wordWarp',array($this, 'wordWarpFilter'), array('is_safe' => array('html'))),
+            new Twig_SimpleFilter('isWordWarp',array($this, 'isWordWarpFilter'))
         );
     }
 
