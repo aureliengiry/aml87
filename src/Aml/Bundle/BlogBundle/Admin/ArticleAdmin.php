@@ -90,7 +90,8 @@ class ArticleAdmin extends Admin
                     'required' => false,
                     'expanded' => true,
                     'multiple' => true,
-                    'by_reference' => false
+                    'by_reference' => false,
+
                 )
             )
             ->end();

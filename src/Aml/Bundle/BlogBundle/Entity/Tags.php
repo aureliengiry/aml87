@@ -128,7 +128,7 @@ class Tags
      */
     public function setSystemName($systemName)
     {
-        $this->system_name = $this->_build_SystemName($systemName);
+        $this->system_name = $this->buildSystemName($systemName);
 
         return $this;
     }
@@ -190,7 +190,7 @@ class Tags
     /**
      * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
      */
-    protected function _build_SystemName($string)
+    protected function buildSystemName($string)
     {
         /**
          * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html

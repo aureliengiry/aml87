@@ -14,10 +14,6 @@ aml_contact_us:
     resource: "@AmlContactUsBundle/Resources/config/routing.yml"
     prefix:   /
 
-tools_migration:
-    resource: "@ToolsMigrationBundle/Resources/config/routing.yml"
-    prefix:   /
-
 aml_medias:
     resource: "@AmlMediasBundle/Resources/config/routing.yml"
     prefix:   /

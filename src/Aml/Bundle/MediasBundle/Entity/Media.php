@@ -68,7 +68,7 @@ class Media
     /**
      * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
      */
-    protected function _build_SystemName($string)
+    protected function buildSystemName($string)
     {
         /**
          * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html

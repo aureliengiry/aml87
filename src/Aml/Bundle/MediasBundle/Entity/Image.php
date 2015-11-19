@@ -132,7 +132,7 @@ class Image extends Media
     {
         if (null !== $this->file) {
 
-            $cleanName = $this->_build_SystemName($this->file->getClientOriginalName());
+            $cleanName = $this->buildSystemName($this->file->getClientOriginalName());
             $name = $this->renameIfFileExist($cleanName);
             $this->path = $name;
 

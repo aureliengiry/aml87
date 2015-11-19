@@ -1,3 +1,0 @@
-tools_migration_homepage:
-    path:  /hello/{name}
-    defaults: { _controller: ToolsMigrationBundle:Default:index }

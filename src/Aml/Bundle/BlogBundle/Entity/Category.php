@@ -71,7 +71,7 @@ class Category
      */
     public function setSystemName($title)
     {
-        $this->system_name = $this->build_SystemName($title);
+        $this->system_name = $this->buildSystemName($title);
 
         return $this;
     }
@@ -130,7 +130,7 @@ class Category
     /**
      * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
      */
-    protected function build_SystemName($string)
+    protected function buildSystemName($string)
     {
         /**
          * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html

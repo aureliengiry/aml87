@@ -51,7 +51,7 @@ class Url
      */
     public function setUrlKey($urlKey)
     {
-        $this->urlKey = $this->_build_SystemName($urlKey);
+        $this->urlKey = $this->buildSystemName($urlKey);
 
         return $this;
     }
@@ -75,7 +75,7 @@ class Url
      *
      * @return mixed|string
      */
-    protected function _build_SystemName($str, $separator = 'dash', $lowercase = true)
+    protected function buildSystemName($str, $separator = 'dash', $lowercase = true)
     {
         if ($separator == 'dash') {
             $search = '_';
