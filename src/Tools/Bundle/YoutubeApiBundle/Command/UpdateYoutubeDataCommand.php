@@ -11,7 +11,6 @@ use Monolog\Logger;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
 
-
 // Google API
 use Google_Client;
 use Google_Service_YouTube;
@@ -29,10 +28,16 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
     const YOUTUBE_STATUS_PUBLIC = 'public';
     const YOUTUBE_STATUS_UNLISTED = 'unlisted';
 
-    protected $debug;
+    /** @var bool debug mode */
+    private $debug = false;
 
+    /** @var Logger command logger */
+    private $logger;
+
+    /** @var EntityManager */
     private $em;
 
+    /** @var array list of videos */
     private $videosList = array();
 
 
@@ -74,7 +79,6 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
         if ($this->debug === true) {
             $this->logger->pushProcessor(new MemoryPeakUsageProcessor());
             $this->logger->pushProcessor(new MemoryUsageProcessor());
-            $this->logger->pushHandler(new CliHandler($this->output));
         }
 
         $this->em = $this->getContainer()->get('doctrine')->getManager('default');
@@ -118,7 +122,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
                         ->setProviderId($idYoutube);
                     $this->em->persist($video);
 
-                    $output->writeln('Youtube ID: '.$contentDetails->getVideoId().' imported.');
+                    $output->writeln('Youtube ID: ' . $contentDetails->getVideoId() . ' imported.');
 
                     $compteurVideo++;
                 }
@@ -126,7 +130,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
             }
             $this->em->flush();
         } catch (Exception $e) {
-            $output->writeln('<bg=red;fg=white>Error: '.$e->getMessage().'</>');
+            $output->writeln('<bg=red;fg=white>Error: ' . $e->getMessage() . '</>');
         }
 
         $this->output->writeln("New videos: {$compteurVideo}");

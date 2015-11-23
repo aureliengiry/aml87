@@ -4,7 +4,7 @@ namespace Aml\Bundle\AdminBundle\Form\Extension;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WysiwygTypeExtension extends AbstractTypeExtension
 {
@@ -23,9 +23,9 @@ class WysiwygTypeExtension extends AbstractTypeExtension
      *
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setOptional(array('wysiwyg'));
+        $resolver->setDefined(array('wysiwyg'));
     }
 
     /**

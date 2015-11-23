@@ -33,8 +33,8 @@ class ArticleAdmin extends Admin
                 array(
                     'label' => 'Catégorie',
                     'class' => 'AmlBlogBundle:Category',
-                    'property' => 'name',
-                    'empty_value' => 'Choisissez une catégorie',
+                    'choice_label' => 'name',
+                    'placeholder' => 'Choisissez une catégorie',
                     'attr' => array('class' => 'uniform')
                 )
             )

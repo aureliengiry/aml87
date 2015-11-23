@@ -68,6 +68,7 @@ framework:
     default_locale:  "%locale%"
     session:
         gc_maxlifetime:    10800
+        save_path: "%kernel.root_dir%/sessions"
 
 # Twig Configuration
 twig:

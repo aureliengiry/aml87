@@ -39,8 +39,8 @@ class TrackAdmin extends Admin
                 array(
                     'label' => 'Album',
                     'class' => 'AmlDiscographyBundle:Album',
-                    'property' => 'title',
-                    'empty_value' => 'Choisissez un album',
+                    'choice_label' => 'title',
+                    'placeholder' => 'Choisissez un album',
                     'attr' => array('class' => 'uniform')
                 )
             )

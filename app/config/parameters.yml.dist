@@ -19,7 +19,12 @@ parameters:
 
     admin_email:      ~
 
+    # Google Analytics
     ga_account_id:    ~
+
+    # Google API
+    google_app_name: ~
+    google_developer_key: ~
 
 twig:
     globals:      

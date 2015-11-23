@@ -49,8 +49,8 @@ class EvenementAdmin extends Admin
                 array(
                     'label' => 'Saison',
                     'class' => 'AmlEvenementsBundle:Season',
-                    'property' => 'name',
-                    'empty_value' => 'Sélectionnez une saison',
+                    'choice_label' => 'name',
+                    'placeholder' => 'Sélectionnez une saison',
                     'attr' => array('class' => 'uiform')
                 )
             )
