@@ -12,9 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="entity_source", type="string",length=50)
- * @ORM\DiscriminatorMap({"article" = "UrlArticle", "evenement" = "UrlEvenement","discography" = "UrlDiscography","page" = "UrlPage"})
+ * @ORM\DiscriminatorMap({
+ *     "article" = "Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle",
+ *     "evenement" = "Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement",
+ *     "discography" = "Aml\Bundle\UrlRewriteBundle\Entity\UrlDiscography",
+ *     "page" = "Aml\Bundle\UrlRewriteBundle\Entity\UrlPage"
+ * })
  */
-class Url
+abstract class Url
 {
     /**
      * @var integer

@@ -15,9 +15,12 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="mediasbundle_videos")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="provider", type="string")
- * @ORM\DiscriminatorMap({"youtube" = "\Aml\Bundle\MediasBundle\Entity\Video\Youtube", "dailymotion" = "\Aml\Bundle\MediasBundle\Entity\Video\Dailymotion"})
+ * @ORM\DiscriminatorMap({
+ *     "youtube" = "\Aml\Bundle\MediasBundle\Entity\Video\Youtube",
+ *     "dailymotion" = "\Aml\Bundle\MediasBundle\Entity\Video\Dailymotion"
+ * })
  */
-class Video
+abstract class Video
 {
     /**
      * @ORM\Id

@@ -12,9 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="mediasbundle_medias")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"file" = "File", "image" = "Image", "music" = "Music"})
+ * @ORM\DiscriminatorMap({
+ *     "file" = "File",
+ *     "image" = "Image",
+ *     "music" = "Music"
+ * })
  */
-class Media
+abstract class Media
 {
     /**
      * @var integer $id

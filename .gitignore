@@ -5,6 +5,7 @@ app/bootstrap*
 vendor/*
 */logs/*
 */cache/*
+*/sessions/*
 web/uploads/*
 web/bundles/*
 
@@ -12,6 +13,8 @@ web/bundles/*
 app/config/parameters.ini
 app/config/parameters.yml
 app/SymfonyRequirements.php
+bin/security-checker
+bin/sql-formatter
 bin/doctrine*
 web/config.php
 composer.lock

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the FOSUserBundle package.
  *
@@ -14,9 +13,13 @@ namespace Aml\Bundle\UsersBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
+/**
+ * Class ProfileFormType
+ *
+ * @package Aml\Bundle\UsersBundle\Form\Type
+ */
 class ProfileFormType extends AbstractType
 {
     public function getName()
@@ -87,5 +90,13 @@ class ProfileFormType extends AbstractType
     public function getParent()
     {
         return 'fos_user_profile';
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            // Ici, une clé unique par formulaire pour la génération du jeton CSRF
+            'intention' => 'aml_user_profile_form',
+        ));
     }
 }
