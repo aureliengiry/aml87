@@ -1,72 +1,162 @@
-<project name="Aml87" basedir="." default="prepare-release">
-    <property file="${project.basedir}/build.properties" />
-    <property name="release.realpath" value="${project.basedir}/${release.dir}"/>
+<?xml version="1.0" encoding="UTF-8"?>
 
-    <target name="prepare-release">
-        <delete dir="${release.realpath}" />
-        <mkdir dir="${release.realpath}" />
+<project name="Aml87" default="build">
+    <property name="workspace" value="${project.basedir}" />
+    <property name="sourcedir" value="${project.basedir}/src" />
+    <property name="builddir" value="${workspace}/app/build" />
 
-        <copy todir="${release.realpath}" overwrite="true">
-            <fileset dir="${project.basedir}">
-                <include name="**/*" />
-                <exclude name=".git/**" />
-                <exclude name="build.*" />
-                <exclude name="${release.dir}/**" />
+    <target name="build"
+            depends="prepare,vendors,parameters,lint,phploc,pdepend,phpcpd,phpmd-ci,phpcs-ci,phpdoc,phpunit,phpcb"/>
+
+    <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit,phpcb"/>
+
+    <!-- By default, we assume all tools to be on the $PATH -->
+    <property name="pdepend" value="pdepend"/>
+    <property name="phpcpd"  value="phpcpd"/>
+    <property name="phpcs"   value="phpcs"/>
+    <property name="phpdox"  value="phpdox"/>
+    <property name="phploc"  value="phploc"/>
+    <property name="phpmd"   value="phpmd"/>
+    <property name="phpunit" value="phpunit"/>
+
+    <target name="tools-parallel" description="Run tools in parallel">
+        <parallel threadCount="2">
+            <sequential>
+                <antcall target="pdepend"/>
+                <antcall target="phpmd-ci"/>
+            </sequential>
+            <antcall target="phpcpd"/>
+            <antcall target="phpcs-ci"/>
+            <antcall target="phploc"/>
+            <antcall target="phpdoc"/>
+        </parallel>
+    </target>
+
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${builddir}/api"/>
+        <delete dir="${builddir}/code-browser"/>
+        <delete dir="${builddir}/coverage"/>
+        <delete dir="${builddir}/logs"/>
+        <delete dir="${builddir}/pdepend"/>
+        <delete dir="${builddir}/docs/*"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${builddir}/api"/>
+        <mkdir dir="${builddir}/code-browser"/>
+        <mkdir dir="${builddir}/coverage"/>
+        <mkdir dir="${builddir}/logs"/>
+        <mkdir dir="${builddir}/pdepend"/>
+    </target>
+
+    <target name="lint" description="Perform syntax check of sourcecode files">
+        <apply executable="php" failonerror="true">
+            <arg value="-l" />
+            <fileset dir="${sourcedir}">
+                <include name="**/*.php" />
+
             </fileset>
-        </copy>
+            <fileset dir="${workspace}/src/">
+                <include name="**/*Test.php" />
+
+            </fileset>
+        </apply>
     </target>
 
-    <target name="get-composer">
-        <if>
-            <available file="${project.basedir}/composer.phar"
-                    property="composer.exists"
-                    value="true"
-                    />
-            <then>
-                <composer command="selfupdate" composer="${project.basedir}/composer.phar">
-                </composer>
-            </then>
-            <else>
-                <httpget
-                        url="http://getcomposer.org/composer.phar"
-                        dir="${project.basedir}/" filename="composer.phar"/>
-
-            </else>
-        </if>
-        <if>
-            <not>
-                <available file="${project.basedir}/composer.phar"
-                        property="composer.exists"
-                        value="true"
-                        />
-            </not>
-            <then>
-                <fail message="Unable to upload composer into ${project.basedir}/composer.phar"/>
-            </then>
-        </if>
+    <target name="phploc" description="Measure project size using PHPLOC">
+        <exec executable="phploc">
+            <arg value="--log-csv" />
+            <arg value="${builddir}/logs/phploc.csv" />
+            <arg path="${sourcedir}" />
+        </exec>
     </target>
 
-    <target name="composer">
-        <if>
-            <not>
-                <available file="${project.basedir}/composer.phar"
-                        property="composer.exists"
-                        value="true"
-                        />
-            </not>
-            <then>
-                <phingcall target="get-composer"/>
-            </then>
-        </if>
-        <composer command="update" composer="${project.basedir}/composer.phar">
-            <arg value="--no-dev"/>
-            <arg value="--working-dir=${release.realpath}"/>
-            <arg value="--no-progress"/>
-            <arg value="--optimize-autoloader"/>
-        </composer>
-        <delete dir="${release.realpath}/app/cache/*" includeemptydirs="true" verbose="true" failonerror="false"/>
-        <delete dir="${release.realpath}/app/logs/*" includeemptydirs="true" verbose="true" failonerror="false"/>
-
+    <target name="pdepend" description="Calculate software metrics using PHP_Depend">
+        <exec executable="pdepend">
+            <arg value="--jdepend-xml=${builddir}/logs/jdepend.xml" />
+            <arg value="--jdepend-chart=${builddir}/pdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${builddir}/pdepend/overview-pyramid.svg" />
+            <arg path="${sourcedir}" />
+        </exec>
     </target>
 
-  </project>
+    <target name="phpmd" description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="phpmd">
+            <arg path="${workspace}/src" />
+            <arg value="text" />
+            <arg value="${workspace}/app/phpmd.xml" />
+        </exec>
+    </target>
+
+    <target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
+        <exec executable="phpmd">
+            <arg path="${sourcedir}" />
+            <arg value="xml" />
+            <arg value="${workspace}/app/phpmd.xml" />
+            <arg value="--reportfile" />
+            <arg value="${builddir}/logs/pmd.xml" />
+        </exec>
+    </target>
+
+    <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="phpcs">
+            <arg value="--standard=Symfony2" />
+            <arg path="${sourcedir}" />
+        </exec>
+    </target>
+
+    <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
+        <exec executable="phpcs" output="/dev/null">
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${builddir}/logs/checkstyle.xml" />
+            <arg value="--standard=Symfony2" />
+            <arg path="${sourcedir}" />
+        </exec>
+    </target>
+
+    <target name="phpcpd" description="Find duplicate code using PHPCPD">
+        <exec executable="phpcpd">
+            <arg value="--log-pmd" />
+            <arg value="${builddir}/logs/pmd-cpd.xml" />
+            <arg path="${sourcedir}" />
+        </exec>
+    </target>
+
+    <target name="phpdoc" description="Generate API documentation using phpDox">
+        <exec executable="phpdoc">
+            <arg line="-d '${sourcedir}' -t '${builddir}/docs' --title='Tempo' " />
+        </exec>
+    </target>
+
+    <target name="phpunit" description="Run unit tests with PHPUnit">
+        <exec executable="phpunit">
+            <arg value="-c" />
+            <arg path="${workspace}/app/phpunit.xml" />
+        </exec>
+    </target>
+
+    <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
+        <exec executable="phpcb">
+            <arg value="--log" />
+            <arg path="${builddir}/logs" />
+            <arg value="--source" />
+            <arg path="${sourcedir}" />
+            <arg value="--output" />
+            <arg path="${builddir}/code-browser" />
+        </exec>
+    </target>
+
+    <target name="vendors" description="Update vendors">
+        <exec executable="composer">
+            <arg value="update" />
+        </exec>
+    </target>
+
+    <target name="parameters" description="Copy parameters">
+        <exec executable="cp">
+            <arg path="app/config/parameters.jenkins.yml" />
+            <arg path="app/config/parameters.yml" />
+        </exec>
+    </target>
+
+</project>

@@ -1,21 +1,21 @@
 # Bootstrap
-app/bootstrap*
-
 # Symfony directories
-vendor/*
-*/logs/*
-*/cache/*
-*/sessions/*
-web/uploads/*
-web/bundles/*
+/web/uploads/*
 
 # Configuration files
-app/config/parameters.ini
-app/config/parameters.yml
-app/SymfonyRequirements.php
-bin/security-checker
-bin/sql-formatter
-bin/doctrine*
-web/config.php
-composer.lock
-composer.phar
+/app/SymfonyRequirements.php
+/bin/security-checker
+/bin/sql-formatter
+/bin/doctrine*
+/web/config.php
+/composer.lock
+/composer.phar
+
+
+/web/bundles/
+/app/bootstrap*
+/app/cache/*
+/app/logs/*
+/app/sessions/*
+/vendor/
+/app/config/parameters.yml
