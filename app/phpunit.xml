@@ -20,11 +20,9 @@
         </testsuite>
     </testsuites>
 
-    <!--
     <php>
-        <server name="KERNEL_DIR" value="/path/to/your/app/" />
+        <server name="KERNEL_DIR" value="/var/www/aml87/" />
     </php>
-    -->
 
     <filter>
         <whitelist>

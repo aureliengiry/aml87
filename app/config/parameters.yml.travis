@@ -1,0 +1,14 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_port: 3306
+    database_name: aml87
+    database_user: travis
+    database_password:
+    locale: fr
+    secret: ThisTokenIsNotSoSecretChangeIt
+    project_name: AML87
+    site_name: AML87
+twig:
+    globals:
+        project_name: AML87

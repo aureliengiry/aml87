@@ -1,4 +1,12 @@
-aml87
+Aml87
 =====
 
-Site internet aml87 (Symfony2)
+Site de l'association AML87 développé avec le framework PHP Symfony2.
+ - Utilisation de Sonata Admin pour le Back office
+ - Synchronisation avec la chaine Youtube de l'association
+ - Synchronisation avec Gmail
+ - Espace membres
+
+## SensioLabs Insight
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/61142e18-d054-4a78-965f-521dd162f800/big.png)](https://insight.sensiolabs.com/projects/61142e18-d054-4a78-965f-521dd162f800)
+
