@@ -21,7 +21,7 @@
     </testsuites>
 
     <php>
-        <server name="KERNEL_DIR" value="/var/www/aml87/" />
+        <server name="KERNEL_DIR" value="/var/www/aml87/app/" />
     </php>
 
     <filter>
