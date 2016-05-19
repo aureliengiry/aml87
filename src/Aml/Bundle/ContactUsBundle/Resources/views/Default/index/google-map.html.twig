@@ -9,14 +9,12 @@
     jQuery(function () {
         if (GBrowserIsCompatible()) {
             var map = new GMap2(document.getElementById('map'));
-            var marker = new GMarker(new GLatLng(45.809344, 1.226691));
-            var html = '<div style="width:170px; height:30px; padding-right:10px;">' +
-                    '<strong>Avenir Musical du Limousin</strong><br />' +
-                    '16, avenue de la République<br />' +
-                    '87170 ISLE' +
+            var marker = new GMarker(new GLatLng(45.8093292, 1.2218343));
+            var html = '<div>' +
+                    '<strong>AML87</strong>' +
                     '</div>';
 
-            map.setCenter(new GLatLng(45.809344, 1.226691), 13);
+            map.setCenter(new GLatLng(45.8093292, 1.2218343), 13);
             map.addControl(new GSmallMapControl());
             map.addOverlay(marker);
             marker.openInfoWindowHtml(html);
