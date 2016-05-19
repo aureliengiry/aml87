@@ -156,11 +156,6 @@ div#logo{
     text-indent: -6999px;
 }
 
-#logo img {
-    height: 152px;
-    width: 210px;
-}
-
 /* --- fin banière --- */
 #intro {
     background: url("/bundles/amlweb/images/general/fond-intro-2.png") no-repeat scroll 0 0 #000000;
