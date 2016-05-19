@@ -23,8 +23,8 @@ monolog:
             level:              debug
         swift:
             type:               swift_mailer
-            from_email:         "%admin_email%"
-            to_email:           "%mailer_user%"
+            from_email:         "notification@aml87.fr"
+            to_email:           "aurelien.giry+aml87_sf@gmail.com"
             subject:            "%project_name% - OOps"
             level:              debug
         login:
