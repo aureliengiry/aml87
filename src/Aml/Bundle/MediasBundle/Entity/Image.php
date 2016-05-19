@@ -65,9 +65,9 @@ class Image extends Media
     /**
      * Set file
      *
-     * @param string $file
+     * @param UploadedFile $file
      */
-    public function setFile($file)
+    public function setFile(UploadedFile $file)
     {
         $this->file = $file;
 
