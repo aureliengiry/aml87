@@ -4,11 +4,18 @@ namespace Aml\Bundle\WebBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class MenuBuilder
+ *
+ * @package Aml\Bundle\WebBundle\Menu
+ */
 class MenuBuilder
 {
     private $factory;
 
     /**
+     * Init factory
+     *
      * @param FactoryInterface $factory
      */
     public function __construct(FactoryInterface $factory)
@@ -16,6 +23,13 @@ class MenuBuilder
         $this->factory = $factory;
     }
 
+    /**
+     * Generate main menu
+     *
+     * @param Request $requestStack
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
     public function createMainMenu(Request $requestStack)
     {
         $menu = $this->factory->createItem('root');
@@ -25,8 +39,8 @@ class MenuBuilder
         $menu->addChild(
             'Association',
             array(
-                'route' => 'page_show_rewrite',
-                'routeParameters' => array('url_key' => 'laccordon-autrement')
+                'route'           => 'page_show_rewrite',
+                'routeParameters' => array('url_key' => 'accordeon-autrement')
             )
         );
 
@@ -38,6 +52,13 @@ class MenuBuilder
         return $menu;
     }
 
+    /**
+     * Generate breadcrumb
+     *
+     * @param Request $request
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
     public function createBreadcrumbMenu(Request $request)
     {
         $menu = $this->factory->createItem(
@@ -115,7 +136,7 @@ class MenuBuilder
             /* ----- Contact us ----- */
             case 'aml_contact_us_index':
                 $menu
-                    ->addChild('Contactez-nous  ')
+                    ->addChild('Contactez-nous')
                     ->setCurrent(true);
                 break;
         }

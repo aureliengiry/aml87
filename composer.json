@@ -6,7 +6,8 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "": "src/"
+      "Aml\\": "src/Aml",
+      "Tools\\": "src/Tools"
     },
     "classmap": [
       "vendor/google/apiclient/src"

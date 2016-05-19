@@ -5,8 +5,7 @@ services:
 
     app.main_menu:
         class: Knp\Menu\MenuItem # the service definition requires setting the class
-        factory_service: app.menu_builder
-        factory_method: createMainMenu
+        factory: [@app.menu_builder, createMainMenu]
         arguments: ["@request"]
         scope: request
         tags:
@@ -14,8 +13,7 @@ services:
 
     app.breadcrumb_menu:
         class: Knp\Menu\MenuItem
-        factory_service: app.menu_builder # the menu builder service above
-        factory_method: createBreadcrumbMenu # the method name to generate the menu
+        factory: [@app.menu_builder, createBreadcrumbMenu]
         arguments: ["@request"]
         scope: request
         tags:
