@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Aurélien
- * Date: 21/04/14
- * Time: 20:24
- */
+
 namespace Aml\Bundle\ContactUsBundle\EventListener;
 
 use Aml\Bundle\ContactUsBundle\Event\PostEvent;
@@ -69,10 +64,10 @@ class PostListener
     {
         $message = array();
 
-        $message['subject'] = $post->getName().' cherche à vous contacter';
-        $message['body'] = 'Bonjour,'."\n\n"
-            .$post->getName().' vous ecrit par l\'intermediaire du formulaire de contact : '."\n\n"
-            .$post->getBody();
+        $message['subject'] = 'AML87 - ' . $post->getName() . ' cherche à vous contacter';
+        $message['body'] = 'Bonjour,' . "\n\n"
+            . $post->getName() . '(' . $post->getEmail() . ') vous ecrit par l\'intermediaire du formulaire de contact : ' . "\n\n"
+            . $post->getBody();
 
         return $message;
     }

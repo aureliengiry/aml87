@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 use Aml\Bundle\ContactUsBundle\Entity\Message;
 use Aml\Bundle\ContactUsBundle\Form\Type\MessageType;
@@ -19,7 +20,7 @@ use Aml\Bundle\ContactUsBundle\Event\PostEvent;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="contact_us")
+     * @Route("/")
      * @Template()
      */
     public function indexAction()
@@ -34,17 +35,16 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/post", name="contact_us_post")
+     * @Route("/post")
      * @Method("post")
      * @Template("AmlContactUsBundle:Default:index.html.twig")
      */
-    public function postAction()
+    public function postAction(Request $request)
     {
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
 
         $entity = new Message();
-        $request = $this->getRequest();
         $form = $this->createForm(new MessageType(), $entity);
         $form->submit($request);
 
