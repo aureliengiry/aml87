@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Class DefaultController
  *
  * @package Aml\Bundle\DiscographyBundle\Controller
- * @Route("/dicographie")
+ * @Route("/discographie")
  */
 class DiscographyController extends Controller
 {
