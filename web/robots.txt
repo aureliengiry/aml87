@@ -14,7 +14,6 @@ Disallow: /app_dev.php
 Disallow: /config.php
 
 # Paths (clean URLs)
-Disallow: /admin/
 Disallow: /register/
 Disallow: /resetting/
 Disallow: /login/
