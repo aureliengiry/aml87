@@ -7,6 +7,7 @@ php:
   - '7.0'
 
 before_install:
+  - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - cp app/config/parameters.yml.travis app/config/parameters.yml
   - composer self-update
 
