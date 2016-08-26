@@ -26,7 +26,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $entity = new Message();
-        $form = $this->createForm(new MessageType(), $entity);
+        $form = $this->createForm(MessageType::class, $entity);
 
         return array(
             'entity' => $entity,
@@ -45,8 +45,8 @@ class DefaultController extends Controller
         $dispatcher = $this->container->get('event_dispatcher');
 
         $entity = new Message();
-        $form = $this->createForm(new MessageType(), $entity);
-        $form->submit($request);
+        $form = $this->createForm(MessageType::class, $entity);
+        $form->submit($request->request->get($form->getName()));
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

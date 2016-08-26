@@ -5,6 +5,7 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class WysiwygTypeExtension extends AbstractTypeExtension
 {
@@ -15,7 +16,7 @@ class WysiwygTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'textarea';
+        return TextareaType::class;
     }
 
     /**

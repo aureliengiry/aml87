@@ -2,7 +2,7 @@
 namespace Aml\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class MenuBuilder
@@ -30,7 +30,7 @@ class MenuBuilder
      *
      * @return \Knp\Menu\ItemInterface
      */
-    public function createMainMenu(Request $requestStack)
+    public function createMainMenu(RequestStack $requestStack)
     {
         $menu = $this->factory->createItem('root');
 
@@ -59,7 +59,7 @@ class MenuBuilder
      *
      * @return \Knp\Menu\ItemInterface
      */
-    public function createBreadcrumbMenu(Request $request)
+    public function createBreadcrumbMenu(RequestStack $request)
     {
         $menu = $this->factory->createItem(
             'root',
@@ -73,7 +73,9 @@ class MenuBuilder
         $menu->addChild('Accueil', array('route' => 'home'));
 
         // create the menu according to the route
-        switch ($request->get('_route')) {
+        $currentRequest = $request->getCurrentRequest('_route');
+        $route = $currentRequest->get('_route');
+        switch ($route) {
             /* ----- AGENDA ----- */
             case 'agenda':
                 $menu
@@ -93,7 +95,7 @@ class MenuBuilder
                 $menu
                     ->addChild('label.view.post')
                     ->setCurrent(true)
-                    ->setLabel($request->get('label'));
+                    ->setLabel($currentRequest->get('label'));
                 break;
             case 'agenda_archives':
                 $menu->addChild(
@@ -106,7 +108,7 @@ class MenuBuilder
                 $menu
                     ->addChild('label.archives.post')
                     ->setCurrent(true)
-                    ->setLabel($request->get('label'));
+                    ->setLabel($currentRequest->get('label'));
                 break;
 
             /* ----- Blog ----- */
@@ -121,7 +123,9 @@ class MenuBuilder
                 $menu
                     ->addChild('label.discography.show')
                     ->setCurrent(true)
-                    ->setLabel($request->get('label'));
+                    ->setLabel($currentRequest->get('label'));
+
+                $tset = 'tt';
                 break;
 
             /* ----- Page ----- */
@@ -130,7 +134,7 @@ class MenuBuilder
                 $menu
                     ->addChild('label.page.show')
                     ->setCurrent(true)
-                    ->setLabel($request->get('label'));
+                    ->setLabel($currentRequest->get('label'));
                 break;
             /* ----- Discography ----- */
             case 'discography':
@@ -144,7 +148,7 @@ class MenuBuilder
                 $menu
                     ->addChild('label.discography.show')
                     ->setCurrent(true)
-                    ->setLabel($request->get('label'));
+                    ->setLabel($currentRequest->get('label'));
                 break;
             /* ----- Contact us ----- */
             case 'aml_contact_us_index':

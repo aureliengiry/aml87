@@ -1,14 +1,14 @@
 <?php
 namespace Aml\Bundle\DiscographyBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 use Aml\Bundle\UrlRewriteBundle\Entity\UrlDiscography;
 
-class AlbumAdmin extends Admin
+class AlbumAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {

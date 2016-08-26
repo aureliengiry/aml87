@@ -1,7 +1,7 @@
 <?php
 namespace Aml\Bundle\BlogBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -12,7 +12,7 @@ use Sonata\AdminBundle\Form\FormMapper;
  * @package     Aml\Bundle\BlogBundle\Admin
  * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
-class TagsAdmin extends Admin
+class TagsAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {

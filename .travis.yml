@@ -17,7 +17,7 @@ install:
   - php app/console doctrine:schema:create --env=test
 
 script:
-  - phpunit -c app
+  - phpunit
 
 notifications:
   email:

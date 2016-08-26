@@ -4,7 +4,10 @@ parameters:
 services:
     sonata.block.service.contact_us_messages:
           class: Aml\Bundle\ContactUsBundle\Block\AdminMessagesBlockService
-          arguments: [ "sonata.block.service.contactUsMessages", @templating, @doctrine.orm.entity_manager ]
+          arguments:
+              - "sonata.block.service.contactUsMessages"
+              - "@templating"
+              - "@doctrine.orm.entity_manager"
           tags:
               - { name: sonata.block }
 

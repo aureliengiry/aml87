@@ -1,21 +1,43 @@
-# Bootstrap
-# Symfony directories
-/web/uploads/*
+# Cache and logs (Symfony3)
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/logs
+/var/logs/*
+!var/logs/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
+!var/SymfonyRequirements.php
 
-# Configuration files
-/app/SymfonyRequirements.php
-/bin/security-checker
-/bin/sql-formatter
-/bin/doctrine*
-/web/config.php
-/composer.lock
-/composer.phar
-
-
-/web/bundles/
-/app/bootstrap*
-/app/cache/*
-/app/logs/*
-/app/sessions/*
-/vendor/
+# Parameters
 /app/config/parameters.yml
+/app/config/parameters.ini
+
+# Managed by Composer
+/var/bootstrap.php.cache
+/bin/*
+!bin/console
+!bin/symfony_requirements
+/vendor/
+
+# Assets and user uploads
+/web/bundles/
+/web/uploads/
+/web/media/
+/web/css/
+
+# Assets managed by Bower
+/web/assets/vendor/
+
+# PHPUnit
+/app/phpunit.xml
+/phpunit.xml
+
+# Build data
+/build/
+
+# Composer PHAR
+/composer.phar
+/composer.lock

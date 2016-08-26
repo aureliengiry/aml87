@@ -23,8 +23,8 @@
             {% if entity.logo %}
                 <div class="blog-visuel">
                     <a class="thumbnail" rel="prettyPhoto"
-                       href="{{ asset(entity.logo.webpath) | apply_filter('modal_img') }}">
-                        <img src="{{ asset(entity.logo.webpath) | apply_filter('blog_view') }}"
+                       href="{{ asset(entity.logo.webpath) | imagine_filter('modal_img') }}">
+                        <img src="{{ asset(entity.logo.webpath) | imagine_filter('blog_view') }}"
                              alt="" title="{{ entity.logo.title }}"
                              class="imagecache imagecache-blog_view" width="588"/>
                     </a>

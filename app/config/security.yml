@@ -1,6 +1,6 @@
-jms_security_extra:
-    secure_all_services: false
-    expressions: true
+#jms_security_extra:
+#    secure_all_services: false
+#    expressions: true
 
 security:
     encoders:
@@ -15,35 +15,24 @@ security:
             id: fos_user.user_provider.username
 
     firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
         main:
             pattern: ^/
             form_login:
                 provider: fos_userbundle
-                csrf_provider: security.csrf.token_manager
+                csrf_token_generator: security.csrf.token_manager
             logout:       true
-            anonymous:    true
-
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-
-            #http_basic:
-            #    realm: "Secured Demo Area"
+            anonymous:    ~
 
     access_control:
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
-        #- { path: ^/connexion, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        
-        #- { path: ^/admin, roles: [ROLE_ADMIN,ROLE_SUPER_ADMIN,IS_AUTHENTICATED_REMEMBERED] }
-        #- { path: ^/zend, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
-         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/register, role: ROLE_SUPER_ADMIN }
-         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/admin/, role: ROLE_SUPER_ADMIN }
-         - { path: ^/espace-membres/, role: [ROLE_ADMIN,ROLE_SUPER_ADMIN,IS_AUTHENTICATED_REMEMBERED] }
-         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_SONATA_ADMIN }
+        - { path: ^/espace-membres/, role: ROLE_USER }
+        #- { path: ^/, roles: ROLE_USER }
 

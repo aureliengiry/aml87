@@ -6,12 +6,12 @@
             <li>
                 {% if article.logo.webpath is defined and article.logo.webpath is not empty %}
                     <div class="blog-visuel">
-                        <a rel="prettyPhoto" href="{{ asset(article.logo.webpath) | apply_filter('blog_view') }}"
+                        <a rel="prettyPhoto" href="{{ asset(article.logo.webpath) | imagine_filter('blog_view') }}"
                            class="thumbnail">
                             <img width="170" class="imagecache imagecache-blog_thumbnail"
                                  title="{{ article.title }}"
                                  alt="{{ article.title }}"
-                                 src="{{ article.logo.webpath | apply_filter('blog_thumbnail') }}">
+                                 src="{{ article.logo.webpath | imagine_filter('blog_thumbnail') }}">
                         </a>
                     </div>
                 {% endif %}

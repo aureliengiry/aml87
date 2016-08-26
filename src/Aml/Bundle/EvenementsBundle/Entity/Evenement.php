@@ -315,7 +315,7 @@ class Evenement
      * Retourne le liste des différents types d'évènement
      * @return array
      */
-    static function getTypesEvenements()
+    public static function getTypesEvenements()
     {
         $typesEvenement = array();
 

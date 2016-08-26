@@ -24,13 +24,13 @@ class DefaultControllerTest extends WebTestCase
         $this->assertCount(1, $crawler->filter('form'));
 
         // Select form
-        $form = $crawler->selectButton('aml_bundle_ContactUsBundle_messagetype[send]')->form();
+        $form = $crawler->selectButton('message[send]')->form();
 
         // set some values
-        $form['aml_bundle_ContactUsBundle_messagetype[name]'] = 'Aurelien';
-        $form['aml_bundle_ContactUsBundle_messagetype[email]'] = 'aurelien.giry@gmail.com';
-        $form['aml_bundle_ContactUsBundle_messagetype[subject]'] = 'test';
-        $form['aml_bundle_ContactUsBundle_messagetype[body]'] = 'test dsmljf msldjsqdlm jfmsljfqslf';
+        $form['message[name]'] = 'Aurelien';
+        $form['message[email]'] = 'aurelien.giry@gmail.com';
+        $form['message[subject]'] = 'test';
+        $form['message[body]'] = 'test dsmljf msldjsqdlm jfmsljfqslf';
 
         // submit the form
         $crawler = $client->submit($form);
