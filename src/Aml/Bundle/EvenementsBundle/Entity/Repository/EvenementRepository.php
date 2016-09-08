@@ -2,7 +2,9 @@
 
 namespace Aml\Bundle\EvenementsBundle\Entity\Repository;
 
+use Aml\Bundle\EvenementsBundle\Entity\Season;
 use Doctrine\ORM\EntityRepository;
+use Proxies\__CG__\Aml\Bundle\EvenementsBundle\Entity\Evenement;
 
 /**
  * Evenement
@@ -95,6 +97,43 @@ class EvenementRepository extends EntityRepository
             ->orderBy('e.dateStart', 'ASC');
 
         $q = $this->buildRequestByFilters($q, $params = array(), $filters);
+
+        $query = $q->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
+     * Retrieve archived concerts filter by season
+     *
+     * @param Season $season
+     *
+     * @return mixed
+     */
+    public function getArchivedConcertBySeason(Season $season)
+    {
+        $dateTimeStart = new \DateTime();
+        $dateTimeStart->setTime(0, 0);
+
+        $q = $this->getEntityManager()->createQueryBuilder();
+        $q
+            ->select('e')
+            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->where("e.archive = :archive")
+            ->andWhere("e.public = :public")
+            ->andWhere("e.season = :season")
+            ->andWhere("e.type = :type")
+            ->orderBy('e.dateStart', 'ASC');
+
+        $params = array(
+            'archive' => 1,
+            'public' => 1,
+            'season' => $season,
+            'type' => Evenement::EVENEMENT_TYPE_CONCERT
+
+        );
+
+        $q->setParameters($params);
 
         $query = $q->getQuery();
 

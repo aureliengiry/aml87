@@ -1,7 +1,7 @@
 {% extends "AmlWebBundle::layout.html.twig" %}
 
 {% block title -%}
-    Agenda
+    Archives
 {%- endblock title %}
 
 {% block body %}
@@ -12,14 +12,15 @@
 
         <article class="contenu-page">
 
-            <h1>Agenda</h1>
+            <h1>Archives - {{ currentSeason.name }}</h1>
 
             <ul id="agenda-concerts-public">
                 {% for key,entity in entities %}
 
                     <li class="event-item">
-                        <span class="date">{{ entity.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }}
-                            :</span>
+                        <span class="date">
+                            {{ entity.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }} :
+                        </span>
 
                         <h2>
                             {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
@@ -37,7 +38,6 @@
 
         </article>
     </div>
-
     <div id="col-right">
         {# Next Concert #}
         {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
@@ -46,5 +46,3 @@
         {% include "AmlEvenementsBundle::Agenda/archives/seasons.html.twig" %}
     </div>
 {% endblock body %}
-
-

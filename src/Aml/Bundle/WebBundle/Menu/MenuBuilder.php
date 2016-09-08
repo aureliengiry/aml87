@@ -95,6 +95,19 @@ class MenuBuilder
                     ->setCurrent(true)
                     ->setLabel($request->get('label'));
                 break;
+            case 'agenda_archives':
+                $menu->addChild(
+                    'Agenda',
+                    array(
+                        'route' => 'agenda'
+                    )
+                );
+
+                $menu
+                    ->addChild('label.archives.post')
+                    ->setCurrent(true)
+                    ->setLabel($request->get('label'));
+                break;
 
             /* ----- Blog ----- */
             case 'blog':

@@ -12,6 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class SeasonRepository extends EntityRepository
 {
+    /**
+     * Laod seasons by date start
+     *
+     * @param \DateTime $eventDateStart
+     *
+     * @return mixed|null
+     */
     public function getSeasonByDateStart(\DateTime $eventDateStart)
     {
         $q = $this->getEntityManager()->createQueryBuilder();
@@ -36,5 +43,57 @@ class SeasonRepository extends EntityRepository
         } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }
+    }
+
+    /**
+     * Retrieve last past season
+     *
+     * @return mixed|null
+     */
+    public function getLastSeason()
+    {
+        $q = $this->getEntityManager()->createQueryBuilder();
+        $q
+            ->select('s')
+            ->from('AmlEvenementsBundle:Season', 's')
+            ->where('s.dateEnd < CURRENT_DATE()')
+            ->orderBy('s.dateStart', 'DESC')
+            ->setMaxResults(1);
+
+        $query = $q->getQuery();
+
+        try {
+            return $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Load past seasons
+     *
+     * @return array|null
+     */
+    public function getPastSeasons()
+    {
+        $q = $this->getEntityManager()->createQueryBuilder();
+        $q
+            ->select('s.id', 's.name', 'COUNT(e.id) as nb_events')
+            ->from('AmlEvenementsBundle:Season', 's')
+            ->where('s.dateEnd < CURRENT_DATE()')
+            ->leftJoin('s.evenements', 'e', 'WITH', 'e.archive=:archive AND e.public=:public')
+            ->groupBy('s.id')
+            ->orderBy('s.dateStart', 'DESC');
+
+        $params = array(
+            'archive' => 1,
+            'public'  => 1
+        );
+
+        $q->setParameters($params);
+
+        $query = $q->getQuery();
+
+        return $query->getResult();
     }
 }
