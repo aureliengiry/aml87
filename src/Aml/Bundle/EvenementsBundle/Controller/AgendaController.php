@@ -27,13 +27,21 @@ class AgendaController extends Controller
         $evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
         $events = $evenementRepository->getNextEvenements(
             array(
-                'public' => 1,
+                'public'  => 1,
                 'archive' => 0,
-                'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT
+                'type'    => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT
             )
         );
 
-        return array('entities' => $events);
+        $seasonsRepository = $em->getRepository('AmlEvenementsBundle:Season');
+        $seasons = $seasonsRepository->getPastSeasons();
+        $lastSeason = $seasonsRepository->getLastSeason();
+
+        return array(
+            'entities'      => $events,
+            'seasons'       => $seasons,
+            'currentSeason' => $lastSeason,
+        );
     }
 
     /**
@@ -87,6 +95,45 @@ class AgendaController extends Controller
         return $this->render(
             'AmlEvenementsBundle::Blocs/blocNextConcert.html.twig',
             array('nextConcert' => $nextConcert)
+        );
+    }
+
+    /**
+     * Lists all archived event.
+     *
+     * @Route("/archives/{season_id}", name="agenda_archives")
+     * @Template()
+     */
+    public function archivesAction($season_id = false, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $seasonsRepository = $em->getRepository('AmlEvenementsBundle:Season');
+        $evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
+        if ($season_id) {
+            $season = $em->getRepository('AmlEvenementsBundle:Season')->find($season_id);
+
+            if (!$season) {
+                throw $this->createNotFoundException('Unable to find AmlEvenementsBundle:Season entity.');
+            }
+        } else {
+            $season = $seasonsRepository->getLastSeason();
+        }
+
+
+        // Init Main Menu
+        $menu = $this->get("app.main_menu");
+        $menu->getChild("Agenda")->setCurrent(true);
+
+        $request->attributes->set('label', $season->getName());
+
+        $events = $evenementRepository->getArchivedConcertBySeason($season);
+        $seasons = $seasonsRepository->getPastSeasons();
+
+        return array(
+            'currentSeason' => $season,
+            'entities'      => $events,
+            'seasons'       => $seasons
         );
     }
 

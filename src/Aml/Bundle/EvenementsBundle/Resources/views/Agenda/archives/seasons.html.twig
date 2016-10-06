@@ -1,0 +1,17 @@
+{% if seasons %}
+    <h3>Archives</h3>
+    <ul id="agenda-concerts-public">
+        {% for key,season in seasons %}
+            {% if season.nb_events > 0 %}
+                <li>
+                    {% if season != currentSeason %}
+                        <a href="{{ path('agenda_archives', { 'season_id': season.id }) }}">
+                            {{ season.name }} ({{ season.nb_events }})</a>
+                    {% else %}
+                        <span>{{ season.name }} ({{ season.nb_events }})</span>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
