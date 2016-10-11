@@ -2,8 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    #- { resource: "@AmlUsersBundle/Resources/config/services.yml" }
-    #- { resource: "@AdminBundle/Resources/config/services.yml" }
 
 framework:
     #esi:             ~
@@ -71,10 +69,10 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts:   [admin]
 
-        sonata.block.service.text:
-        sonata.block.service.rss:
-        sonata.admin.block.search_result:
-        sonata.block.service.contact_us_messages:
+        sonata.block.service.text: ~
+        sonata.block.service.rss: ~
+        sonata.admin.block.search_result: ~
+        sonata.block.service.contact_us_messages: ~
 
 sonata_admin:
     title:      AML87
@@ -102,7 +100,7 @@ sonata_admin:
         blocks:
             - { position: right, type: sonata.admin.block.admin_list }
             - { position: left, type: sonata.block.service.text, settings: { content: '<div class="box"><div class="box-header with-border"><h2>Bienvenue !</h2></div><div class="box-body">Bienvenue dans la partie administrable du site.</div></div>'} }
-            #- { position: left, type: sonata.block.service.contact_us_messages }
+            - { position: left, type: sonata.block.service.contact_us_messages }
             #- { position: center, type: sonata.timeline.block.timeline, settings: { context: SONATA_ADMIN, max_per_page: 25 }}
             #- { position: right, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 7, mode: admin }}
             #- { position: right, type: sonata.news.block.recent_comments, settings: { title: Recent Comments, number: 7, mode: admin }}
