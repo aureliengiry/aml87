@@ -36,7 +36,7 @@ class MembersController extends Controller
         $doctine = $this->getDoctrine();
         $em = $doctine->getManager();
 
-        $users = $em->getRepository('AmlUsersBundle:User')->findAll();
+        $users = $em->getRepository('Aml\Bundle\UsersBundle:User')->findAll();
 
 
         return array(

@@ -8,5 +8,5 @@ services:
     tools_youtube_api.init_client:
          class: Tools\Bundle\YoutubeApiBundle\Api\Youtube
          arguments:
-            - @service_container
+            - "@service_container"
 

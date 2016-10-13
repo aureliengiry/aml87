@@ -1,23 +1,9 @@
 <?php
-/**
- * Andromeda
- *
- * NOTICE OF LICENSE
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Andromeda to newer
- * versions in the future.
- *
- * @category    Andromeda
- * @package     Andromeda_${NAME}
- * @copyright   Copyright (c) 2011-2015 Brady. (http://www.brady.com)
- */
 
-namespace Aml\Bundle\ContactUsBundle\Block;
+namespace Aml\Bundle\ContactUsBundle\Block\Service;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Sonata\BlockBundle\Model\BlockInterface;
 use Sonata\BlockBundle\Block\BlockContextInterface;
@@ -26,16 +12,16 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Sonata\BlockBundle\Block\BaseBlockService;
 
+use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+
 use Doctrine\ORM\EntityManager;
 
+/**
+ * Class AdminMessagesBlockService
+ * @package Aml\Bundle\ContactUsBundle\Block\Service
+ */
 class AdminMessagesBlockService extends BaseBlockService
 {
-
-    /**
-     * @var Security
-     */
-    protected $security;
-
     /**
      * @var Pool
      */
@@ -46,7 +32,14 @@ class AdminMessagesBlockService extends BaseBlockService
      */
     protected $em;
 
-    public function __construct($name, $templating, EntityManager $em)
+    /**
+     * AdminMessagesBlockService constructor.
+     *
+     * @param string $name
+     * @param EngineInterface $templating
+     * @param EntityManager $em
+     */
+    public function __construct($name, EngineInterface $templating, EntityManager $em)
     {
         parent::__construct($name, $templating);
 
@@ -56,19 +49,14 @@ class AdminMessagesBlockService extends BaseBlockService
     /**
      * {@inheritdoc}
      */
-    public function setDefaultSettings(OptionsResolverInterface $resolver)
+    public function configureSettings(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'title' => 'Messages du formulaire de contact',
-                'template' => 'AmlContactUsBundle:Block:messagesListDashboard.html.twig'
+                'template' => 'AmlContactUsBundle:Block:block_messages.html.twig'
             )
         );
-    }
-
-    public function getDefaultSettings()
-    {
-        return array();
     }
 
     /**

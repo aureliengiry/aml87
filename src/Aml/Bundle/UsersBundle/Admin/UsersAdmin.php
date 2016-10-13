@@ -1,7 +1,7 @@
 <?php
 namespace Aml\Bundle\UsersBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -12,7 +12,7 @@ use Sonata\AdminBundle\Form\FormMapper;
  * @package     Aml\Bundle\UsersBundle\Admin
  * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
-class UsersAdmin extends Admin
+class UsersAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -99,7 +99,7 @@ class UsersAdmin extends Admin
         $listMapper
             ->addIdentifier('username')
             ->add('email')
-            ->add('name', 'string', array('template' => 'AmlUsersBundle::Admin/User/Fields/name.html.twig'))
+            ->add('name', 'string', array('template' => 'Aml\Bundle\UsersBundle::Admin/User/Fields/name.html.twig'))
             ->add('lastLogin')
             ->add('locked')
             ->add('enabled');

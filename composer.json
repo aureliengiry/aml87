@@ -3,47 +3,60 @@
   "license": "proprietary",
   "type": "project",
   "description": "AML87 Website",
-  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "Aml\\": "src/Aml",
       "Tools\\": "src/Tools"
     },
     "classmap": [
-      "vendor/google/apiclient/src"
+      "vendor/google/apiclient/src",
+      "app/AppKernel.php",
+      "app/AppCache.php"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
   "require": {
-    "php": ">=5.3.9",
-    "symfony/symfony": "2.7.*@stable",
-    "doctrine/orm": "^2.4.8",
+    "php": ">=5.5.9",
+    "symfony/symfony": "3.1.*",
+    "symfony/swiftmailer-bundle": "^2.3",
+    "symfony/monolog-bundle": "^2.11",
+    "symfony/dependency-injection": "^3.1",
+    "symfony/framework-bundle": "^3.1",
+    "symfony/assetic-bundle": "^2.8",
+    "symfony/security-bundle": "^3.0",
+    "symfony/security-acl": "^3.0",
     "doctrine/dbal": "^2.5",
-    "doctrine/doctrine-bundle": "~1.4",
-    "symfony/assetic-bundle": "~2.3",
-    "symfony/swiftmailer-bundle": "~2.3",
-    "symfony/monolog-bundle": "~2.4",
-    "sensio/distribution-bundle": "~4.0",
+    "doctrine/orm": "^2.5",
+    "doctrine/doctrine-bundle": "^1.6",
+    "doctrine/doctrine-cache-bundle": "^1.2",
+    "sensio/distribution-bundle": "^5.0",
     "sensio/framework-extra-bundle": "^3.0.2",
     "incenteev/composer-parameter-handler": "~2.0",
-    "twig/extensions": "^1.3",
-    "jms/security-extra-bundle": "1.5.*",
-    "jms/di-extra-bundle": "1.4.*",
-    "kriswallsmith/assetic": "1.1.*@dev",
-    "knplabs/knp-menu-bundle": "2.1.1",
+    "kriswallsmith/assetic": "^1.3",
     "friendsofsymfony/user-bundle": "~2.0@dev",
     "google/apiclient": "1.1.*@dev",
-    "avalanche123/imagine-bundle": "^2.1",
     "dms/dms-filter-bundle": "^2.0",
-    "sonata-project/core-bundle": "^2.3",
-    "sonata-project/exporter": "1.*",
-    "sonata-project/block-bundle": "^2.3",
-    "sonata-project/doctrine-orm-admin-bundle": "^2.3",
+    "sonata-project/doctrine-orm-admin-bundle": "^3.0",
     "sonata-project/intl-bundle": "^2.2",
-    "sonata-project/cache-bundle": "^2.2",
-    "sonata-project/admin-bundle": "^2.3"
+    "sonata-project/core-bundle": "^3.1",
+    "sonata-project/cache": "^1.0",
+    "sonata-project/block-bundle": "^3.1",
+    "sonata-project/exporter": "^1.4",
+    "sonata-project/admin-bundle": "^3.1",
+    "jms/serializer": "^1.3",
+    "knplabs/knp-menu": "^2.1",
+    "knplabs/knp-menu-bundle": "^2.1",
+    "twig/extensions": "^1.3",
+    "twig/twig": "^1.24",
+    "liip/imagine-bundle": "^1.6"
   },
   "require-dev": {
-    "sensio/generator-bundle": "~2.3"
+    "sensio/generator-bundle": "^3.0",
+    "symfony/phpunit-bridge": "^3.0"
   },
   "scripts": {
     "post-install-cmd": [
@@ -63,12 +76,12 @@
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
     ]
   },
-  "config": {
-    "bin-dir": "bin"
-  },
   "extra": {
     "symfony-app-dir": "app",
+    "symfony-bin-dir": "bin",
+    "symfony-var-dir": "var",
     "symfony-web-dir": "web",
+    "symfony-tests-dir": "tests",
     "symfony-assets-install": "symlink",
     "incenteev-parameters": {
       "file": "app/config/parameters.yml"

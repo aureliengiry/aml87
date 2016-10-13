@@ -6,6 +6,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ImageTypeExtension extends AbstractTypeExtension
 {
@@ -16,7 +17,7 @@ class ImageTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'file';
+        return FileType::class;
     }
 
     /**
@@ -42,7 +43,7 @@ class ImageTypeExtension extends AbstractTypeExtension
             $parentData = $form->getParent()->getData();
 
             if (null !== $parentData) {
-                $accessor = PropertyAccess::getPropertyAccessor();
+                $accessor = PropertyAccess::createPropertyAccessor();
                 $imageUrl = $accessor->getValue($parentData, $options['image_path']);
             } else {
                 $imageUrl = null;

@@ -3,10 +3,10 @@ services:
     sonata.admin.users:
         class: Aml\Bundle\UsersBundle\Admin\UsersAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Administration, label: "Membres" }
+            - { name: sonata.admin, manager_type: orm, group: "Administration", label: "Membres" }
         arguments:
             - ~
             - Aml\Bundle\UsersBundle\Entity\User
             - 'SonataAdminBundle:CRUD'
         calls:
-            - [ setTranslationDomain, [AmlUsersBundle]]
+            - [ setTranslationDomain, [Aml\Bundle\UsersBundle]]

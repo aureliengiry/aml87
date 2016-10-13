@@ -2,13 +2,13 @@
 namespace Aml\Bundle\ContactUsBundle\Admin;
 
 use Aml\Bundle\ContactUsBundle\Entity\Message;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class MessageAdmin extends Admin
+class MessageAdmin extends AbstractAdmin
 {
     // setup the default sort column and order
     protected $datagridValues = array(
@@ -19,12 +19,36 @@ class MessageAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'text', array('required' => false, 'read_only' => true))
-            ->add('subject', 'text', array('required' => false, 'read_only' => true))
-            ->add('body', 'textarea', array('required' => false, 'read_only' => true))
-            ->add('created', 'datetime', array('widget' => 'single_text', 'required' => false, 'read_only' => true))
-            ->add('email', 'email', array('required' => false, 'read_only' => true))
-            ->add('addressIp', 'text', array('required' => false, 'read_only' => true))
+            ->add('name', 'text',
+                array(
+                    'required' => false,
+                    'disabled' => true
+                ))
+            ->add('subject', 'text',
+                array(
+                    'required' => false,
+                    'disabled' => true
+                ))
+            ->add('body', 'textarea',
+                array(
+                    'required' => false,
+                    'disabled' => true
+                ))
+            ->add('created', 'datetime',
+                array(
+                    'widget' => 'single_text',
+                    'required' => false,
+                    'disabled' => true
+                ))
+            ->add('email', 'email',
+                array(
+                    'required' => false,
+                    'disabled' => true
+                ))
+            ->add('addressIp', 'text', array(
+                'required' => false,
+                'disabled' => true
+            ))
             ->add(
                 'status',
                 'choice',
@@ -34,8 +58,7 @@ class MessageAdmin extends Admin
                         Message::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé'
                     ),
                     'required' => false,
-                    'empty_value' => 'Choose status',
-                    'empty_data' => null
+                    'placeholder' => 'Choose status'
                 )
             );
     }

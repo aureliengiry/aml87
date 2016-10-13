@@ -7,7 +7,7 @@
                 <div class="partenaire-visuel">
                     <a href="{{ partenaire.url }}" target="_blank">
                         {% if partenaire.logo.webpath is defined and partenaire.logo.webpath is not empty %}
-                            <img src="{{ asset(partenaire.logo.webpath) | apply_filter('partenaire_thumbnail') }}"
+                            <img src="{{ asset(partenaire.logo.webpath) | imagine_filter('partenaire_thumbnail') }}"
                                  alt="{{ partenaire.name }}" title="{{ partenaire.name }}"
                                  class="imagecache imagecache-visuel_blog" width="120">
                         {% else %}

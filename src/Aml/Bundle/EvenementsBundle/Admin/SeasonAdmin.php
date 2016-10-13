@@ -1,7 +1,7 @@
 <?php
 namespace Aml\Bundle\EvenementsBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
  * Class SeasonAdmin
  * @package Aml\Bundle\EvenementsBundle\Admin
  */
-class SeasonAdmin extends Admin
+class SeasonAdmin extends AbstractAdmin
 {
     // setup the default sort column and order
     protected $datagridValues = array(

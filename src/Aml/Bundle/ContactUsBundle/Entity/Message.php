@@ -87,6 +87,7 @@ class Message
      * Set name
      *
      * @param string $name
+     *
      * @return Message
      */
     public function setName($name)
@@ -110,6 +111,7 @@ class Message
      * Set email
      *
      * @param string $email
+     *
      * @return Message
      */
     public function setEmail($email)
@@ -133,6 +135,7 @@ class Message
      * Set subject
      *
      * @param string $subject
+     *
      * @return Message
      */
     public function setSubject($subject)
@@ -156,6 +159,7 @@ class Message
      * Set body
      *
      * @param string $body
+     *
      * @return Message
      */
     public function setBody($body)
@@ -179,6 +183,7 @@ class Message
      * Set addressIp
      *
      * @param string $addressIp
+     *
      * @return Message
      */
     public function setAddressIp($addressIp)
@@ -202,6 +207,7 @@ class Message
      * Set status
      *
      * @param integer $status
+     *
      * @return Message
      */
     public function setStatus($status)
@@ -219,7 +225,8 @@ class Message
     public function getStatus()
     {
         $statusOptions = array(
-            self::MESSAGE_STATUS_SAVE => 'Enregistré',
+            0                              => "NC",
+            self::MESSAGE_STATUS_SAVE      => 'Enregistré',
             self::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé'
         );
 

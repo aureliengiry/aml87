@@ -13,15 +13,15 @@ web_profiler:
 swiftmailer:
     disable_delivery: true
 
-doctrine:
-    dbal:
-        driver: pdo_sqlite
-        host: localhost
-        port: ~
-        dbname: aml87_test
-        user: root
-        password: ~
-        path: %kernel.root_dir%/cache/database.db
-        charset: UTF8
-        memory: true
+#doctrine:
+#    dbal:
+#        driver: pdo_sqlite
+#        host: localhost
+#        port: ~
+#        dbname: aml87_test
+#        user: root
+#        password: ~
+#        path: %kernel.root_dir%/cache/database.db
+#        charset: UTF8
+#        memory: true
 

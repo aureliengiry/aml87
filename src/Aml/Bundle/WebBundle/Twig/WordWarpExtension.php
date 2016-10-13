@@ -25,7 +25,7 @@ class WordWarpExtension extends Twig_Extension
      *
      * @return string date plus nice à lire
      */
-    function wordWarpFilter($str, $length = 500, $id = null, $wordwarp = true)
+    public function wordWarpFilter($str, $length = 500, $id = null, $wordwarp = true)
     {
         // Delete HTML tags
         $str = $this->stripHtmlTags($str);
@@ -55,7 +55,7 @@ class WordWarpExtension extends Twig_Extension
      *
      * @return string date plus nice à lire
      */
-    function isWordWarpFilter($str, $length = 200)
+    public function isWordWarpFilter($str, $length = 200)
     {
         $str = $this->stripHtmlTags($str);
         if (strlen($str) > $length) {
@@ -70,7 +70,7 @@ class WordWarpExtension extends Twig_Extension
      * script code, and embedded objects.  Add line breaks around
      * block-level tags to prevent word joining after tag removal.
      */
-    function stripHtmlTags($text)
+    public function stripHtmlTags($text)
     {
         $allowedTags = '<strong><em>';
 

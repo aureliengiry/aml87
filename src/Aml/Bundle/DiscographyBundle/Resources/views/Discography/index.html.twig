@@ -20,8 +20,8 @@
                         {% if entity.image.webpath is defined %}
                             <div class="disc-pochette-list">
                                 <a rel="prettyPhoto[discography]"
-                                   href="{{ asset(entity.image.webpath) | apply_filter('modal_img') }}">
-                                    <img src="{{ asset(entity.image.webpath) | apply_filter('discography_list') }}"
+                                   href="{{ asset(entity.image.webpath) | imagine_filter('modal_img') }}">
+                                    <img src="{{ asset(entity.image.webpath) | imagine_filter('discography_list') }}"
                                          alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
                                          class="imagecache imagecache-pochette-album" width="180" height="160">
                                 </a>
