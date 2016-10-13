@@ -79,8 +79,8 @@ sonata_admin:
     title_logo: /bundles/amlweb/images/logo_aml87_black.png
     templates:
         # default global templates
-        #layout:  AmlAdminBundle::standard_layout.html.twig
-        layout:  SonataAdminBundle::standard_layout.html.twig
+        layout:  AmlAdminBundle::standard_layout.html.twig
+        #layout:  SonataAdminBundle::standard_layout.html.twig
         ajax:    SonataAdminBundle::ajax_layout.html.twig
 
         # default actions templates, should extend a global templates
@@ -100,7 +100,7 @@ sonata_admin:
         blocks:
             - { position: right, type: sonata.admin.block.admin_list }
             - { position: left, type: sonata.block.service.text, settings: { content: '<div class="box"><div class="box-header with-border"><h2>Bienvenue !</h2></div><div class="box-body">Bienvenue dans la partie administrable du site.</div></div>'} }
-            - { position: left, type: sonata.block.service.contact_us_messages }
+            -  { position: left, type: sonata.block.service.contact_us_messages }
             #- { position: center, type: sonata.timeline.block.timeline, settings: { context: SONATA_ADMIN, max_per_page: 25 }}
             #- { position: right, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 7, mode: admin }}
             #- { position: right, type: sonata.news.block.recent_comments, settings: { title: Recent Comments, number: 7, mode: admin }}
