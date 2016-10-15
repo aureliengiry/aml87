@@ -1,7 +1,7 @@
 Aml87
 =====
 
-Site de l'association AML87 développé avec le framework PHP Symfony2.
+Site de l'association AML87 développé avec le framework PHP Symfony3.
  - Utilisation de Sonata Admin pour le Back office
  - Synchronisation avec la chaine Youtube de l'association
  - Synchronisation avec Gmail
