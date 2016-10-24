@@ -60,7 +60,12 @@ class MessageAdmin extends AbstractAdmin
                     'required' => false,
                     'placeholder' => 'Choose status'
                 )
-            );
+            )
+            ->add('spam', 'text', array(
+                'required' => false,
+                'disabled' => true
+            ))
+        ;
     }
 
     public function configureRoutes(RouteCollection $collection)
@@ -76,14 +81,17 @@ class MessageAdmin extends AbstractAdmin
             ->add('created')
             ->add('email')
             ->add('addressIp')
-            ->add('status', 'string');
+            ->add('status', 'string')
+            ->add('spam')
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('email')
-            ->add('addressIp')// ->add('status')
+            ->add('addressIp')
+            ->add('spam')
         ;
     }
 

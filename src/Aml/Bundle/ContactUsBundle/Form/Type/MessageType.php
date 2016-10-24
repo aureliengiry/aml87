@@ -2,9 +2,11 @@
 namespace Aml\Bundle\ContactUsBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Class MessageType
@@ -21,15 +23,19 @@ class MessageType extends AbstractType
             ->add('subject')
             ->add(
                 'body',
-                'textarea',
+                TextareaType::class,
                 array(
                     'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
                     'required' => false,
                 )
             )
+            ->add('spam', TextType::class, array(
+                'required' => false,
+                'attr' => array('style' => 'display:none')
+            ))
             ->add(
                 'send',
-                'submit',
+                SubmitType::class,
                 array(
                     'attr' => array('class' => 'btn btn-primary pull-right'),
                 )

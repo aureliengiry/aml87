@@ -88,7 +88,7 @@ class AdminMessagesBlockService extends BaseBlockService
         $settings = $blockContext->getSettings();
 
         $messages = $this->em->getRepository('AmlContactUsBundle:Message')->findBy(
-            array(),
+            array('spam' => 0),
             array('created' => 'DESC'),
             5
         );
