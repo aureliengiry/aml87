@@ -4,7 +4,7 @@
     <h3>Formulaire de contact</h3>
 
     {{ form_start(form, {'method': 'POST','action': path('aml_contact_us_post'), 'id':'container-form-contact-us'}) }}
-
+        {{ form_widget(form.spam) }}
         {{ form_widget(form) }}
 
     {{ form_end(form) }}

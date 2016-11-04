@@ -72,6 +72,13 @@ class Message
      */
     private $created;
 
+    /**
+     * @var boolean $spam
+     *
+     * @ORM\Column(name="spam", type="boolean")
+     */
+    private $spam;
+
 
     /**
      * Get id
@@ -253,6 +260,26 @@ class Message
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Check if it's a spam
+     *
+     * @return boolean
+     */
+    public function isSpam()
+    {
+        return $this->spam;
+    }
+
+    /**
+     * Set spam
+     *
+     * @param boolean $spam
+     */
+    public function setSpam($spam)
+    {
+        $this->spam = $spam;
     }
 
     public function __toString()

@@ -20,6 +20,8 @@ use Aml\Bundle\ContactUsBundle\Event\PostEvent;
 class DefaultController extends Controller
 {
     /**
+     * Index Action to display contact form
+     *
      * @Route("/")
      * @Template()
      */
@@ -35,6 +37,8 @@ class DefaultController extends Controller
     }
 
     /**
+     * Post action to submit contact form
+     *
      * @Route("/post")
      * @Method("post")
      * @Template("AmlContactUsBundle:Default:index.html.twig")
@@ -46,19 +50,27 @@ class DefaultController extends Controller
 
         $entity = new Message();
         $form = $this->createForm(MessageType::class, $entity);
-        $form->submit($request->request->get($form->getName()));
+        $data = $request->request->get($form->getName());
+        $form->submit($data);
 
         if ($form->isValid()) {
+
+            $isSpam = (!empty($data['spam']));
+
             $em = $this->getDoctrine()->getManager();
             $entity
                 ->setAddressIp($request->getClientIp())
                 ->setCreated(new \DateTime())
-                ->setStatus(Message::MESSAGE_STATUS_SAVE);
+                ->setStatus(Message::MESSAGE_STATUS_SAVE)
+                ->setSpam($isSpam)
+            ;
 
             $em->persist($entity);
             $em->flush();
 
-            $dispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($entity));
+            if(false === $isSpam) {
+                $dispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($entity));
+            }
 
             $this->get('session')->getFlashBag()->add('success', 'E-mail envoyé avec succès');
 
