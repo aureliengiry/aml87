@@ -4,6 +4,7 @@ namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
 
 /**
  * Aml\Bundle\WebBundle\Entity\File
@@ -113,11 +114,10 @@ class File extends Media
     public function preUpload()
     {
         if (null !== $this->file) {
-
-            $cleanName = $this->buildSystemName($this->file->getClientOriginalName());
+            $slugger = new Slugger();
+            $cleanName = $slugger->slugify($this->file->getClientOriginalName(), '_');
             $name = $this->renameIfFileExist($cleanName);
             $this->path = $name;
-
         }
     }
 

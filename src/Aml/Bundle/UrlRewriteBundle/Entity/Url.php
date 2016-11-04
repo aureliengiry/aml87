@@ -2,6 +2,8 @@
 
 namespace Aml\Bundle\UrlRewriteBundle\Entity;
 
+use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,7 +58,8 @@ abstract class Url
      */
     public function setUrlKey($urlKey)
     {
-        $this->urlKey = $this->buildSystemName($urlKey);
+        $slugger = new Slugger();
+        $this->urlKey = $slugger->slugify($urlKey);
 
         return $this;
     }
@@ -71,57 +74,6 @@ abstract class Url
         return $this->urlKey;
     }
 
-    /**
-     * Format string to a valid URL
-     *
-     * @param $str
-     * @param string $separator
-     * @param bool $lowercase
-     *
-     * @return mixed|string
-     */
-    protected function buildSystemName($str, $separator = 'dash', $lowercase = true)
-    {
-        if ($separator == 'dash') {
-            $search = '_';
-            $replace = '-';
-        } else {
-            $search = '-';
-            $replace = '_';
-        }
-
-        $trans = array(
-            '&\#\d+?;' => '',
-            '&\S+?;' => '',
-            '\s+' => $replace,
-            '[^a-z0-9\-\._]' => '',
-            $replace.'+' => $replace,
-            $replace.'$' => $replace,
-            '^'.$replace => $replace,
-            '\.+$' => ''
-        );
-
-        $str = strip_tags($str);
-
-        foreach ($trans as $key => $val) {
-            $str = preg_replace("#".$key."#i", $val, $str);
-        }
-
-        if ($lowercase === true) {
-            $str = strtolower($str);
-        }
-
-        $str = trim(stripslashes($str));
-        $str = str_replace(array('.'), array('-'), $str);
-
-        // Check and clean last character
-        $lastCharacter = substr($str, -1);
-        if ($lastCharacter == '-') {
-            $str = substr($str, 0, -1);
-        }
-
-        return $str;
-    }
 
     public function __toString()
     {

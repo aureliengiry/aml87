@@ -4,6 +4,7 @@ namespace Aml\Bundle\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
 
 /**
  * Aml\Bundle\BlogBundle\Entity\Tags
@@ -128,7 +129,8 @@ class Tags
      */
     public function setSystemName($systemName)
     {
-        $this->system_name = $this->buildSystemName($systemName);
+        $slugger = new Slugger();
+        $this->system_name = $slugger->slugify($systemName, '_');
 
         return $this;
     }
@@ -162,6 +164,7 @@ class Tags
 
     /**
      * Fonction pour supprimer une discussion d'un mot clé
+     *
      * @param Discussion $discussion
      */
     public function removeArticle(Article $article)
@@ -187,132 +190,9 @@ class Tags
         return $this;
     }
 
-    /**
-     * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
-     */
-    protected function buildSystemName($string)
-    {
-        /**
-         * http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
-         */
-        $string = str_replace(
-            array(
-                'à',
-                'á',
-                'â',
-                'ã',
-                'ä',
-                'ç',
-                'è',
-                'é',
-                'ê',
-                'ë',
-                'ì',
-                'í',
-                'î',
-                'ï',
-                'ñ',
-                'ò',
-                'ó',
-                'ô',
-                'õ',
-                'ö',
-                'ù',
-                'ú',
-                'û',
-                'ü',
-                'ý',
-                'ÿ',
-                'À',
-                'Á',
-                'Â',
-                'Ã',
-                'Ä',
-                'Ç',
-                'È',
-                'É',
-                'Ê',
-                'Ë',
-                'Ì',
-                'Í',
-                'Î',
-                'Ï',
-                'Ñ',
-                'Ò',
-                'Ó',
-                'Ô',
-                'Õ',
-                'Ö',
-                'Ù',
-                'Ú',
-                'Û',
-                'Ü',
-                'Ý'
-            ),
-            array(
-                'a',
-                'a',
-                'a',
-                'a',
-                'a',
-                'c',
-                'e',
-                'e',
-                'e',
-                'e',
-                'i',
-                'i',
-                'i',
-                'i',
-                'n',
-                'o',
-                'o',
-                'o',
-                'o',
-                'o',
-                'u',
-                'u',
-                'u',
-                'u',
-                'y',
-                'y',
-                'A',
-                'A',
-                'A',
-                'A',
-                'A',
-                'C',
-                'E',
-                'E',
-                'E',
-                'E',
-                'I',
-                'I',
-                'I',
-                'I',
-                'N',
-                'O',
-                'O',
-                'O',
-                'O',
-                'O',
-                'U',
-                'U',
-                'U',
-                'U',
-                'Y'
-            ),
-            $string
-        );
-        $string = str_replace(array(' ', '-'), array('_', '_'), $string);
-
-        return strtolower($string);
-    }
 
     public function __toString()
     {
         return $this->name ? $this->name : 'New Tag';
     }
-
-
 }
