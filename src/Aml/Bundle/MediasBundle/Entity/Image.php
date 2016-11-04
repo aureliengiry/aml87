@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Aml\Bundle\MediasBundle\Entity\Media;
+use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Image
@@ -108,13 +109,13 @@ class Image extends Media
 
     public function getWebPath()
     {
-        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
     }
 
     protected function getUploadRootDir()
     {
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
-        return __DIR__.'/../../../../../web/'.$this->getUploadDir();
+        return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
     }
 
     protected function getUploadDir()
@@ -131,11 +132,10 @@ class Image extends Media
     public function preUpload()
     {
         if (null !== $this->file) {
-
-            $cleanName = $this->buildSystemName($this->file->getClientOriginalName());
+            $slugger = new Slugger();
+            $cleanName = $slugger->slugify($this->file->getClientOriginalName(), '_');
             $name = $this->renameIfFileExist($cleanName);
             $this->path = $name;
-
         }
     }
 
@@ -155,13 +155,11 @@ class Image extends Media
         $this->file->move($this->getUploadRootDir(), $this->path);
 
         unset($this->file);
-
-
     }
 
     public function getAbsolutePath()
     {
-        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
     }
 
     /**

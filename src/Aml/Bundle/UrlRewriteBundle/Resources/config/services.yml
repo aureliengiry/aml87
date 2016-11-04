@@ -1,7 +1,11 @@
 parameters:
-#    aml_url_rewrite.example.class: Aml\Bundle\UrlRewriteBundle\Example
+    aml_url_rewrite.slugger.class: Aml\Bundle\UrlRewriteBundle\Utils\Slugger
 
-services:
+#services:
 #    aml_url_rewrite.example:
 #        class: %aml_url_rewrite.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+services:
+    # keep your service names short
+    aml_url_rewrite.slugger:
+        class: '%aml_url_rewrite.slugger.class%'
