@@ -10,9 +10,10 @@ before_install:
   - composer self-update
 
 install:
-  - composer install -o
-  - php app/console doctrine:database:create --env=test
-  - php app/console doctrine:schema:create --env=test
+  - composer install -o --no-scripts
+  - php bin/console doctrine:database:create --env=test
+  - php bin/console doctrine:schema:create --env=test
+  - php bin/console doctrine:schema:update --force --env=test
 
 script:
   - phpunit

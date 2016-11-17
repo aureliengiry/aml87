@@ -5,18 +5,14 @@ use Aml\Bundle\ContactUsBundle\Command\SendMessageCommand;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Tester\CommandTester;
-
-use Symfony\Component\Console\Exception\RuntimeException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SendMessageCommandTest extends KernelTestCase
 {
     /**
      * Test command without argument
      *
-     * @expectedException RuntimeException
+     * @expectedException Symfony\Component\Console\Exception\RuntimeException
      * @expectedExceptionMessage Not enough arguments (missing: "id-message").
      */
     public function testEmptyIdMessage()
@@ -37,7 +33,7 @@ class SendMessageCommandTest extends KernelTestCase
     /**
      * Test command with wrong id message
      *
-     * @expectedException NotFoundHttpException
+     * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage Unable to find ContactUsBundle:Message entity
      */
     public function testWrongIdMessage(){
@@ -51,10 +47,8 @@ class SendMessageCommandTest extends KernelTestCase
         $commandTester->execute(
             array(
                 'command' => $command->getName(),
-                'id-message' => 5
+                'id-message' => 999
             )
         );
     }
-
-
 }

@@ -31,10 +31,6 @@
 # Assets managed by Bower
 /web/assets/vendor/
 
-# PHPUnit
-/app/phpunit.xml
-/phpunit.xml
-
 # Build data
 /build/
 

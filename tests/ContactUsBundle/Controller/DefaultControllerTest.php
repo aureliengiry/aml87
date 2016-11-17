@@ -1,24 +1,42 @@
 <?php
-
 namespace Aml\Bundle\ContactUsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Class DefaultControllerTest
+ *
  * @package Aml\Bundle\ContactUsBundle\Tests\Controller
  */
 class DefaultControllerTest extends WebTestCase
 {
+    private $client = null;
+
+    public function setUp()
+    {
+        $this->client = static::createClient();
+    }
+
+    /**
+     * Test contact Page
+     */
     public function testIndex()
     {
-        $client = static::createClient();
-
-        $url = $client->getContainer()->get('router')->generate('aml_contact_us_index');
-        $crawler = $client->request('GET', $url);
+        $url = $this->client->getContainer()->get('router')->generate('aml_contact_us_index');
+        $crawler = $this->client->request('GET', $url);
 
         // Check status code
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertContains('Contactez-nous', $crawler->filter('title')->text());
+    }
+
+    /**
+     * Test post contact form
+     */
+    public function testPostForm()
+    {
+        $url = $this->client->getContainer()->get('router')->generate('aml_contact_us_index');
+        $crawler = $this->client->request('GET', $url);
 
         // Check if form exist
         $this->assertCount(1, $crawler->filter('form'));
@@ -33,13 +51,13 @@ class DefaultControllerTest extends WebTestCase
         $form['message[body]'] = 'test dsmljf msldjsqdlm jfmsljfqslf';
 
         // submit the form
-        $crawler = $client->submit($form);
+        $this->client->submit($form);
 
         // Follow Redirection
-        $crawler = $client->followRedirect();
+        $crawler = $this->client->followRedirect();
 
         // Check status code
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         // Check success message
         $this->assertContains('E-mail envoyé avec succès', $crawler->filter('#contenu .alert')->text());
