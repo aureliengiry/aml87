@@ -40,7 +40,7 @@ class EvenementAdmin extends AbstractAdmin
                     'label' => 'Type d\'événement',
                     'choices' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::getTypesEvenements(),
                     'multiple' => false,
-                    'empty_value' => 'Sélectionnez le type d\'événement'
+                    'placeholder' => 'Sélectionnez le type d\'événement'
                 )
             )
             ->add(
