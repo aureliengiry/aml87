@@ -2,9 +2,11 @@
 
 namespace Tests\UrlRewriteBundle\Utils;
 
+use PHPUnit\Framework\TestCase;
+
 use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
 
-class SluggerTest extends \PHPUnit_Framework_TestCase
+class SluggerTest extends TestCase
 {
     public function testSluggify()
     {
