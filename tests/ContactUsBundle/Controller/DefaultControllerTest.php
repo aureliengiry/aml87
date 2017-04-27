@@ -2,6 +2,7 @@
 namespace Aml\Bundle\ContactUsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class DefaultControllerTest
@@ -26,7 +27,7 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', $url);
 
         // Check status code
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         $this->assertContains('Contactez-nous', $crawler->filter('title')->text());
     }
 
@@ -57,7 +58,7 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
 
         // Check status code
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         // Check success message
         $this->assertContains('E-mail envoyé avec succès', $crawler->filter('#contenu .alert')->text());
