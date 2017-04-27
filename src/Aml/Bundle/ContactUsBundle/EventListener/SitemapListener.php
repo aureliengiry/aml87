@@ -29,7 +29,7 @@ class SitemapListener
 
         // Add main url
         $mainUrl = array(
-            'loc' => $router->generate('aml_contact_us_index'),
+            'loc' => $router->generate('aml_contactus_default_index'),
             'changefreq' => 'weekly',
             'priority' => '0.80'
         );

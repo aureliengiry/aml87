@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Aml\Bundle\ContactUsBundle\Entity\Message;
 use Aml\Bundle\ContactUsBundle\Form\Type\MessageType;
-use Aml\Bundle\ContactUsBundle\Event\PostEvent;
 
 /**
  * Contact Us controller.
@@ -22,66 +21,31 @@ class DefaultController extends Controller
     /**
      * Index Action to display contact form
      *
-     * @Route("/")
+     * @Route("/", name="aml_contactus_default_index")
      * @Template()
+     * @Method("GET|POST")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $entity = new Message();
-        $form = $this->createForm(MessageType::class, $entity);
+        $contactMessage = new Message();
+        $form = $this->createForm(MessageType::class, $contactMessage)->handleRequest($request);
 
-        return array(
-            'entity' => $entity,
-            'form' => $form->createView()
-        );
-    }
+        if ($form->isSubmitted() && $form->isValid()) {
 
-    /**
-     * Post action to submit contact form
-     *
-     * @Route("/post")
-     * @Method("post")
-     * @Template("AmlContactUsBundle:Default:index.html.twig")
-     */
-    public function postAction(Request $request)
-    {
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->container->get('event_dispatcher');
-
-        $entity = new Message();
-        $form = $this->createForm(MessageType::class, $entity);
-        $data = $request->request->get($form->getName());
-        $form->submit($data);
-
-        if ($form->isValid()) {
-
-            $isSpam = (!empty($data['spam']));
-
-            $em = $this->getDoctrine()->getManager();
-            $entity
+            $contactMessage
                 ->setAddressIp($request->getClientIp())
-                ->setCreated(new \DateTime())
-                ->setStatus(Message::MESSAGE_STATUS_SAVE)
-                ->setSpam($isSpam)
-            ;
+                ->setStatus(Message::MESSAGE_STATUS_SAVE);
 
-            $em->persist($entity);
-            $em->flush();
-
-            if(false === $isSpam) {
-                $dispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($entity));
-            }
+            $this->get('aml_contactus.contact.contact_message')->save($contactMessage);
 
             $this->get('session')->getFlashBag()->add('success', 'E-mail envoyé avec succès');
 
-            return $this->redirect($this->generateUrl('aml_contact_us_index'));
-
+            return $this->redirectToRoute('aml_contactus_default_index');
         }
 
-        return array(
-            'entity' => $entity,
-            'form' => $form->createView()
-        );
-
+        return [
+            'entity'       => $contactMessage,
+            'contact_form' => $form->createView(),
+        ];
     }
 }

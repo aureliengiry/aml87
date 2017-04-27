@@ -47,7 +47,7 @@ class MenuBuilder
         $menu->addChild('Discographie', array('route' => 'discography'));
         $menu->addChild('Blog', array('route' => 'blog'));
         $menu->addChild('Agenda', array('route' => 'agenda'));
-        $menu->addChild('Contact', array('route' => 'aml_contact_us_index'));
+        $menu->addChild('Contact', array('route' => 'aml_contactus_default_index'));
 
         return $menu;
     }
@@ -151,7 +151,7 @@ class MenuBuilder
                     ->setLabel($currentRequest->get('label'));
                 break;
             /* ----- Contact us ----- */
-            case 'aml_contact_us_index':
+            case 'aml_contactus_default_index':
                 $menu
                     ->addChild('Contactez-nous')
                     ->setCurrent(true);
