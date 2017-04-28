@@ -27,9 +27,9 @@ class AgendaController extends Controller
         $evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
         $events = $evenementRepository->getNextEvenements(
             array(
-                'public'  => 1,
+                'public' => 1,
                 'archive' => 0,
-                'type'    => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT
+                'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT
             )
         );
 
@@ -38,8 +38,8 @@ class AgendaController extends Controller
         $lastSeason = $seasonsRepository->getLastSeason();
 
         return array(
-            'entities'      => $events,
-            'seasons'       => $seasons,
+            'entities' => $events,
+            'seasons' => $seasons,
             'currentSeason' => $lastSeason,
         );
     }
@@ -112,14 +112,13 @@ class AgendaController extends Controller
         $evenementRepository = $em->getRepository('AmlEvenementsBundle:Evenement');
         if ($season_id) {
             $season = $em->getRepository('AmlEvenementsBundle:Season')->find($season_id);
-
-            if (!$season) {
-                throw $this->createNotFoundException('Unable to find AmlEvenementsBundle:Season entity.');
-            }
         } else {
             $season = $seasonsRepository->getLastSeason();
         }
 
+        if (!$season) {
+            throw $this->createNotFoundException('Unable to find AmlEvenementsBundle:Season entity.');
+        }
 
         // Init Main Menu
         $menu = $this->get("app.main_menu");
@@ -132,8 +131,8 @@ class AgendaController extends Controller
 
         return array(
             'currentSeason' => $season,
-            'entities'      => $events,
-            'seasons'       => $seasons
+            'entities' => $events,
+            'seasons' => $seasons
         );
     }
 
