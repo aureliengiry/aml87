@@ -3,6 +3,7 @@
 namespace Aml\Bundle\ContactUsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Message
@@ -26,30 +27,47 @@ class Message
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
+     * @Assert\Length(max=255)
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    private $name = '';
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     * @Assert\Type("string")
+     * @Assert\Length(max=255)
      *
      * @ORM\Column(name="email", type="string", length=255)
      */
-    private $email;
+    private $email = '';
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
+     * @Assert\Length(max=255)
      *
      * @ORM\Column(name="subject", type="string", length=255)
      */
-    private $subject;
+    private $subject = '';
 
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
+     * @Assert\Length(min=10, max=1000)
+     *
      * @ORM\Column(name="body", type="text")
      */
-    private $body;
+    private $body = '';
 
     /**
      * @var string
@@ -77,111 +95,82 @@ class Message
      *
      * @ORM\Column(name="spam", type="boolean")
      */
-    private $spam;
+    private $spam = false;
 
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
 
     /**
      * Get id
-     *
-     * @return integer
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
      * Set name
-     *
-     * @param string $name
-     *
-     * @return Message
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * Get name
-     *
-     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * Set email
-     *
-     * @param string $email
-     *
-     * @return Message
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
 
-        return $this;
     }
 
     /**
      * Get email
-     *
-     * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
      * Set subject
-     *
-     * @param string $subject
-     *
-     * @return Message
      */
-    public function setSubject($subject)
+    public function setSubject(string $subject)
     {
         $this->subject = $subject;
-
-        return $this;
     }
 
     /**
      * Get subject
-     *
-     * @return string
      */
-    public function getSubject()
+    public function getSubject(): string
     {
         return $this->subject;
     }
 
     /**
      * Set body
-     *
-     * @param string $body
-     *
-     * @return Message
      */
-    public function setBody($body)
+    public function setBody(string $body)
     {
         $this->body = $body;
-
-        return $this;
     }
 
     /**
      * Get body
-     *
-     * @return string
      */
-    public function getBody()
+    public function getBody(): string
     {
         return $this->body;
     }
@@ -193,7 +182,7 @@ class Message
      *
      * @return Message
      */
-    public function setAddressIp($addressIp)
+    public function setAddressIp(string $addressIp)
     {
         $this->addressIp = $addressIp;
 
@@ -202,39 +191,29 @@ class Message
 
     /**
      * Get addressIp
-     *
-     * @return string
      */
-    public function getAddressIp()
+    public function getAddressIp(): string
     {
         return $this->addressIp;
     }
 
     /**
      * Set status
-     *
-     * @param integer $status
-     *
-     * @return Message
      */
-    public function setStatus($status)
+    public function setStatus(int $status)
     {
         $this->status = $status;
-
-        return $this;
     }
 
     /**
      * Get status
-     *
-     * @return integer
      */
-    public function getStatus()
+    public function getStatus(): int
     {
         $statusOptions = array(
             0                              => "NC",
             self::MESSAGE_STATUS_SAVE      => 'Enregistré',
-            self::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé'
+            self::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé',
         );
 
         return $statusOptions[$this->status];
@@ -248,26 +227,20 @@ class Message
     public function setCreated(\DateTime $created = null)
     {
         $this->created = $created;
-
-        return $this;
     }
 
     /**
      * Get created
-     *
-     * @return datetime
      */
-    public function getCreated()
+    public function getCreated(): \DateTime
     {
         return $this->created;
     }
 
     /**
      * Check if it's a spam
-     *
-     * @return boolean
      */
-    public function isSpam()
+    public function isSpam(): bool
     {
         return $this->spam;
     }
@@ -279,6 +252,14 @@ class Message
      */
     public function setSpam($spam)
     {
+        if (!empty($spam)) {
+            $spam = true;
+        }
+
+        if (is_null($spam)) {
+            $spam = false;
+        }
+
         $this->spam = $spam;
     }
 

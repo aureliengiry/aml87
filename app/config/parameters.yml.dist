@@ -2,7 +2,7 @@ parameters:
     database_driver:   pdo_mysql
     database_host:     ~
     database_port:     ~
-    database_name:     ~
+    database_name:     aml87_test
     database_user:     ~
     database_password: ~
 

@@ -23,7 +23,7 @@ class DefaultControllerTest extends WebTestCase
      */
     public function testIndex()
     {
-        $url = $this->client->getContainer()->get('router')->generate('aml_contact_us_index');
+        $url = $this->client->getContainer()->get('router')->generate('aml_contactus_default_index');
         $crawler = $this->client->request('GET', $url);
 
         // Check status code
@@ -36,7 +36,7 @@ class DefaultControllerTest extends WebTestCase
      */
     public function testPostForm()
     {
-        $url = $this->client->getContainer()->get('router')->generate('aml_contact_us_index');
+        $url = $this->client->getContainer()->get('router')->generate('aml_contactus_default_index');
         $crawler = $this->client->request('GET', $url);
 
         // Check if form exist

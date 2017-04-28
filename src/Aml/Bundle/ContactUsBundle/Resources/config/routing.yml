@@ -1,6 +1,3 @@
-aml_contact_us_index:
-    path:  /contact-us
-    defaults: { _controller: AmlContactUsBundle:Default:index }
-aml_contact_us_post:
-    path:  /contact-us/post
-    defaults: { _controller: AmlContactUsBundle:Default:post }
+aml_contact_us:
+    resource: '@AmlContactUsBundle/Controller'
+    type: annotation

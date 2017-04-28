@@ -3,6 +3,7 @@
 namespace Aml\Bundle\ContactUsBundle\EventListener;
 
 use Aml\Bundle\ContactUsBundle\Event\PostEvent;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use Aml\Bundle\ContactUsBundle\Entity\Message;
 
@@ -12,17 +13,22 @@ use Aml\Bundle\ContactUsBundle\Entity\Message;
  */
 class PostListener
 {
-    protected $mailer;
-    private $container;
+    private $mailer;
+    private $em;
+    private $subscribers;
 
     /**
+     * PostListener constructor.
+     *
      * @param \Swift_Mailer $mailer
-     * @param Container $container
+     * @param EntityManager $entityManager
+     * @param string $subscribers
      */
-    public function __construct(\Swift_Mailer $mailer, Container $container)
+    public function __construct(\Swift_Mailer $mailer, EntityManager $entityManager, string $subscribers)
     {
         $this->mailer = $mailer;
-        $this->container = $container;
+        $this->em = $entityManager;
+        $this->subscribers = $subscribers;
     }
 
     /**
@@ -34,40 +40,38 @@ class PostListener
 
         $formatedMessage = $this->formatMessage($post);
 
-        if ($this->container->hasParameter('aml_contact_us.subriber')) {
-            $getSubscribers = $this->container->getParameter('aml_contact_us.subriber');
+        if (!empty($this->subscribers)) {
 
-            foreach (explode(',', $getSubscribers) as $subscriber) {
-                $message = \Swift_Message::newInstance()
+            foreach (explode(',', $this->subscribers) as $subscriber) {
+                $mail = \Swift_Message::newInstance()
                     ->setSubject($formatedMessage['subject'])
-                    ->setFrom($post->getEmail())
+                    ->setFrom($post->getEmail(), $post->getName())
                     ->setTo($subscriber)
                     ->setBody($formatedMessage['body']);
-                $this->mailer->send($message);
+                $this->mailer->send($mail);
 
                 $post->setStatus(Message::MESSAGE_STATUS_SAVE_SEND);
-                $em = $this->container->get('doctrine')->getManager('default');
-                $em->persist($post);
+                $this->em->persist($post);
             }
 
-            $em->flush();
+            $this->em->flush();
         }
     }
 
     /**
-     * Fonction to format email
+     * Function to format email
      *
-     * @param $post
-     * @return array
+     * @param Message $post
      */
-    private function formatMessage(Message $post)
+    private function formatMessage(Message $post): array
     {
         $message = array();
 
-        $message['subject'] = 'AML87 - ' . $post->getName() . ' cherche à vous contacter';
-        $message['body'] = 'Bonjour,' . "\n\n"
-            . $post->getName() . '(' . $post->getEmail() . ') vous ecrit par l\'intermediaire du formulaire de contact : ' . "\n\n"
-            . $post->getBody();
+        $message['subject'] = 'AML87 - '.$post->getName().' cherche à vous contacter';
+        $message['body'] = 'Bonjour,'."\n\n"
+            .$post->getName().'('.$post->getEmail(
+            ).') vous ecrit par l\'intermediaire du formulaire de contact : '."\n\n"
+            .$post->getBody();
 
         return $message;
     }

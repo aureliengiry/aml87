@@ -22,18 +22,6 @@ doctrine:
         charset:  UTF8
         path:   "%kernel.root_dir%/../var/cache/%kernel.environment%/%database_name%.db"
 
-#doctrine:
-#    dbal:
-#        driver: pdo_sqlite
-#        host: localhost
-#        port: ~
-#        dbname: aml87_test
-#        user: root
-#        password: ~
-#       # path: %kernel.root_dir%/cache/database.db
-#        charset: UTF8
-#        memory: true
-
 security:
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
