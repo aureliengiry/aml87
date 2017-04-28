@@ -3,6 +3,7 @@
 namespace Tests\Aml\Bundle\EvenementsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class AgendaControllerTest extends WebTestCase
 {
