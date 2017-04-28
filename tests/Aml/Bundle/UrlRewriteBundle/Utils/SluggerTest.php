@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\UrlRewriteBundle\Utils;
+namespace Tests\Aml\Bundle\UrlRewriteBundle\Utils;
 
 use PHPUnit\Framework\TestCase;
 
