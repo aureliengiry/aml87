@@ -1,0 +1,13 @@
+Name: Nom
+Email: Adresse email
+Subject: Titre
+Body: Message
+Send: Envoyer
+No message available: Aucun message disponible
+View all messages: Voir tous les messages
+An Error Occurred: Une erreur est survenue
+The server returned a: Le serveur a retourné une erreur
+error_details: Une erreur est survenue. Nous allons y remédier dès que possible. Désolé pour la gêne occasionnée.
+Page not found: Page introuvable
+404_subtitle: Nous sommes désolés, mais la page que vous recherchez n'existe pas.
+error404_details: <ul><li>Si vous avez tapé l'URL directement, veuillez vous assurez que l'orthographe est correcte.</li><li>Si vous avez cliqué sur un lien pour arriver ici, le contenu a dû être déplacé ou supprimé.</li><li>Si vous n'êtes pas sûr de savoir comment vous êtes arrivé ici, retournez à la <a href="http://www.aml87.fr/">page d'accueil</a>.</li></ul>

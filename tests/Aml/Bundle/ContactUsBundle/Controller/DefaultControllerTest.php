@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\ContactUsBundle\Tests\Controller;
+namespace Tests\Aml\Bundle\ContactUsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;

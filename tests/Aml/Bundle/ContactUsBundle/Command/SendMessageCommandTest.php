@@ -1,5 +1,5 @@
 <?php
-namespace Tests\ContactUsBundle\Command;
+namespace Tests\Aml\Bundle\ContactUsBundle\Command;
 
 use Aml\Bundle\ContactUsBundle\Command\SendMessageCommand;
 
