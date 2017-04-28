@@ -208,7 +208,7 @@ class Message
     /**
      * Get status
      */
-    public function getStatus(): int
+    public function getStatus(): string
     {
         $statusOptions = array(
             0                              => "NC",
