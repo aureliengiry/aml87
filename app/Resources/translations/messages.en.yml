@@ -1,3 +1,0 @@
-error_details: Something is broken. Please let us know what you were doing when this error occurred. We will fix it as soon as possible. Sorry for any inconvenience caused.
-404_subtitle: Sorry, the page you are looking for cannot be found.
-error404_details: <ul><li>If you typed the URL directly, please make sure the spelling is correct.</li><li>If you clicked on a link to get here, we must have moved or deleted the content.</li><li>If you are not sure how you got here, <a onclick="history.go(-1);" href="#">go back</a> to the previous page or return to our <a href="http://www.aml87.fr/">store homepage</a>.</li></ul>
