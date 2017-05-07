@@ -1,6 +1,7 @@
 <?php
 namespace Aml\Bundle\BlogBundle\Admin;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -19,7 +20,7 @@ class ArticleAdmin extends AbstractAdmin
     // setup the default sort column and order
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
-        '_sort_by' => 'id'
+        '_sort_by'    => 'id',
     );
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -31,30 +32,30 @@ class ArticleAdmin extends AbstractAdmin
                 'category',
                 'entity',
                 array(
-                    'label' => 'Catégorie',
-                    'class' => 'AmlBlogBundle:Category',
+                    'label'        => 'Catégorie',
+                    'class'        => 'AmlBlogBundle:Category',
                     'choice_label' => 'name',
-                    'placeholder' => 'Choisissez une catégorie',
-                    'attr' => array('class' => 'uniform')
+                    'placeholder'  => 'Choisissez une catégorie',
+                    'attr'         => array('class' => 'uniform'),
                 )
             )
             ->add(
                 'body',
-                'textarea',
+                CKEditorType::class,
                 array(
-                    'label' => 'Texte',
-                    'attr' => array('size' => 15, 'data-help' => 'Texte de l\'article'),
-                    'required' => false,
-                    'wysiwyg' => true
+                    'label'       => 'Texte',
+                    'required'    => false,
+                    'attr'        => array('size' => 15, 'data-help' => 'Texte de l\'article'),
+                    'config_name' => 'aml_config',
                 )
             )
             ->add(
                 'public',
                 'checkbox',
                 array(
-                    'label' => 'Publier',
+                    'label'    => 'Publier',
                     'required' => false,
-                    'attr' => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
+                    'attr'     => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
                 )
             )
             ->end()
@@ -63,8 +64,8 @@ class ArticleAdmin extends AbstractAdmin
                 'logo',
                 'sonata_type_admin',
                 array(
-                    'delete' => false,
-                    'required' => false
+                    'delete'   => false,
+                    'required' => false,
                 )
 
             )
@@ -74,11 +75,11 @@ class ArticleAdmin extends AbstractAdmin
                 'tags',
                 'sonata_type_model',
                 array(
-                    'required' => false,
-                    'expanded' => false,
-                    'multiple' => true,
+                    'required'     => false,
+                    'expanded'     => false,
+                    'multiple'     => true,
                     'by_reference' => false,
-                    'attr' => array('data-sonata-select2' => 'true')
+                    'attr'         => array('data-sonata-select2' => 'true'),
                 )
             )
             ->end()
@@ -87,9 +88,9 @@ class ArticleAdmin extends AbstractAdmin
                 'evenements',
                 'sonata_type_model',
                 array(
-                    'required' => false,
-                    'expanded' => true,
-                    'multiple' => true,
+                    'required'     => false,
+                    'expanded'     => true,
+                    'multiple'     => true,
                     'by_reference' => false,
 
                 )

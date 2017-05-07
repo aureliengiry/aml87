@@ -1,6 +1,7 @@
 <?php
 namespace Aml\Bundle\DiscographyBundle\Admin;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -24,12 +25,12 @@ class AlbumAdmin extends AbstractAdmin
             ->add('image', 'sonata_type_admin')
             ->add(
                 'description',
-                'textarea',
+                CKEditorType::class,
                 array(
                     'label' => 'Texte',
                     'attr' => array('size' => 15, 'data-help' => 'Description de l\'album'),
                     'required' => false,
-                    'wysiwyg' => true
+                    'config_name' => 'aml_config',
                 )
             )
             ->add(

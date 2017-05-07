@@ -39,6 +39,7 @@ twig:
 #              - 'SonataCoreBundle:Form:datepicker.html.twig'
               #- 'bootstrap_3_layout.html.twig'
 
+
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -100,7 +101,7 @@ sonata_admin:
         blocks:
             - { position: right, type: sonata.admin.block.admin_list }
             - { position: left, type: sonata.block.service.text, settings: { content: '<div class="box"><div class="box-header with-border"><h2>Bienvenue !</h2></div><div class="box-body">Bienvenue dans la partie administrable du site.</div></div>'} }
-            -  { position: left, type: sonata.block.service.contact_us_messages }
+            - { position: left, type: sonata.block.service.contact_us_messages }
             #- { position: center, type: sonata.timeline.block.timeline, settings: { context: SONATA_ADMIN, max_per_page: 25 }}
             #- { position: right, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 7, mode: admin }}
             #- { position: right, type: sonata.news.block.recent_comments, settings: { title: Recent Comments, number: 7, mode: admin }}
@@ -174,28 +175,14 @@ fos_user:
      #   form:
       #      type: aml_user_profile
 
-#fos_user:
-#    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-#    firewall_name: main
-#    user_class: Mongobox\Bundle\UsersBundle\Entity\User
-#    group:
-#        group_class: Mongobox\Bundle\GroupBundle\Entity\Group
-#    registration:
-#        form:
-            #type: AppBundle\Form\RegistrationType
-            # if you are using Symfony < 2.8 you should use the type name instead
- #           type: mongobox_user_registration
- #       confirmation:
-#            enabled:    true
- #   profile:
-  #      form:
-            #type: AppBundle\Form\RegistrationType
-            # if you are using Symfony < 2.8 you should use the type name instead
-   #         type: mongobox_user_profile
-
-#    from_email:
- #       address:        noreply@mongobox.fr
-  #      sender_name:    Mongobox
+ivory_ck_editor:
+   # autoload: true
+    configs:
+        aml_config:
+            toolbar: full
+            uiColor:                "#ffffff"
+            #filebrowserUploadRoute: ~
+            #extraPlugins:           "wordcount"
 
 # KNP Menu
 knp_menu:
