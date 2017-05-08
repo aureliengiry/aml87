@@ -129,7 +129,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
             }
             $this->em->flush();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $output->writeln('<bg=red;fg=white>Error: ' . $e->getMessage() . '</>');
         }
 
