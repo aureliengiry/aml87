@@ -1,6 +1,7 @@
 <?php
 namespace Aml\Bundle\EvenementsBundle\Admin;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -75,10 +76,10 @@ class EvenementAdmin extends AbstractAdmin
             )
             ->add(
                 'description',
-                'textarea',
+                CKEditorType::class,
                 array(
                     'required' => false,
-                    'wysiwyg' => true
+                    'config_name' => 'aml_config',
                 )
             )
             ->add(

@@ -1,6 +1,7 @@
 <?php
 namespace Aml\Bundle\WebBundle\Admin;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -22,10 +23,10 @@ class PageAdmin extends AbstractAdmin
             )
             ->add(
                 'body',
-                'textarea',
+                CKEditorType::class,
                 array(
                     'required' => false,
-                    'wysiwyg' => true
+                    'config_name' => 'aml_config',
                 )
             )
             ->add(

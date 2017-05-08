@@ -503,19 +503,3 @@ file that was distributed with this source code.
         });
     </script>
 {% endblock %}
-
-{% block textarea_widget %}
-    {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
-    {{ parent() }}
-    {% spaceless %}
-        <div class="textarea_widget">
-            <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
-        </div>
-        {% if wysiwyg %}
-            {% block javascripts %}
-                {# CONFIG CKEDITOR #}
-                {% include "AmlAdminBundle::Partial/ckeditor.html.twig" with {'target':  id }  %}
-            {% endblock %}
-        {% endif %}
-    {% endspaceless %}
-{% endblock %}

@@ -10,18 +10,18 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
     project_name: AML87
     site_name: AML87
-    admin_email:      ~
+    admin_email:      noreply@test.com
     mailer_transport:  smtp
     mailer_host:       ~
     mailer_user:       ~
     mailer_password:   ~
 
     # Google Analytics
-    ga_account_id:    ~
+    ga_account_id:    null
 
     # Google API
-    google_app_name: ~
-    google_developer_key: ~
+    google_app_name: null
+    google_developer_key: null
 twig:
     globals:
         project_name: AML87
