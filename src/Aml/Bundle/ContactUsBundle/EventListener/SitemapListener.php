@@ -2,7 +2,7 @@
 namespace Aml\Bundle\ContactUsBundle\EventListener;
 
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use Symfony\Component\Routing\Router;
 
 /**
  * Class PostListener
@@ -10,29 +10,27 @@ use Symfony\Component\DependencyInjection\ContainerInterface as Container;
  */
 class SitemapListener
 {
-    private $container;
+    private $router;
 
     /**
-     * @param Container $container
+     * @param Router $router
      */
-    public function __construct(Container $container)
+    public function __construct(Router $router)
     {
-        $this->container = $container;
+        $this->router = $router;
     }
 
     /**
-     * @param PostEvent $event
+     * @param GenerateEvent $event
      */
     public function onGenerateSitemapEvent(GenerateEvent $event)
     {
-        $router = $this->container->get('router');
-
         // Add main url
-        $mainUrl = array(
-            'loc' => $router->generate('aml_contactus_default_index'),
+        $mainUrl = [
+            'loc'        => $this->router->generate('aml_contactus_default_index'),
             'changefreq' => 'weekly',
-            'priority' => '0.80'
-        );
+            'priority'   => '0.80',
+        ];
         $event->addUrls($mainUrl);
     }
 }

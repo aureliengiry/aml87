@@ -20,7 +20,7 @@ services:
     aml_contactus.sitemap.generate:
           class: Aml\Bundle\ContactUsBundle\EventListener\SitemapListener
           arguments:
-              container: "@service_container"
+            - '@router'
           tags:
               - { name: kernel.event_listener, event: aml_web.sitemap.generate_start, method: onGenerateSitemapEvent }
 

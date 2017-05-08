@@ -2,7 +2,8 @@
 namespace Aml\Bundle\EvenementsBundle\EventListener;
 
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Routing\Router;
 
 /**
  * Class PostListener
@@ -10,36 +11,35 @@ use Symfony\Component\DependencyInjection\ContainerInterface as Container;
  */
 class SitemapListener
 {
-    private $container;
+    private $em;
+    private $router;
 
     /**
-     * @param Container $container
+     * @param EntityManager $entityManager
+     * @param Router $router
      */
-    public function __construct(Container $container)
+    public function __construct(EntityManager $entityManager, Router $router)
     {
-        $this->container = $container;
+        $this->em = $entityManager;
+        $this->router = $router;
     }
 
     /**
-     * @param PostEvent $event
+     * @param GenerateEvent $event
      */
     public function onGenerateSitemapEvent(GenerateEvent $event)
     {
-        $router = $this->container->get('router');
-
         // add main url
-        $mainUrl = array('loc' => $router->generate('agenda'), 'changefreq' => 'weekly', 'priority' => '0.80');
+        $mainUrl = array('loc' => $this->router->generate('agenda'), 'changefreq' => 'weekly', 'priority' => '0.80');
         $event->addUrls($mainUrl);
 
         // add some urls fo agenda events
-        $doctrine = $this->container->get('doctrine');
-
-        $evenementRepository = $doctrine->getManager('default')->getRepository('AmlEvenementsBundle:Evenement');
+        $evenementRepository = $this->em->getRepository('AmlEvenementsBundle:Evenement');
         $agendaEvents = $evenementRepository->getNextEvenements(
             array(
-                'public' => 1,
+                'public'  => 1,
                 'archive' => 0,
-                'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT
+                'type'    => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT,
             )
         );
 
@@ -49,12 +49,12 @@ class SitemapListener
                 continue;
             }
 
-            $urlEvent = $router->generate(
+            $urlEvent = $this->router->generate(
                 'agenda_show_event_rewrite',
                 array('url_key' => $agendaEvent->getUrl()->getUrlKey())
             );
             if (empty($urlEvent)) {
-                $urlEvent = $router->generate('agenda_show_event', array('id' => $agendaEvent->getId()));
+                $urlEvent = $this->router->generate('agenda_show_event', array('id' => $agendaEvent->getId()));
             }
 
             $urlEventAgenda = array('loc' => $urlEvent, 'changefreq' => 'weekly', 'priority' => '0.50');

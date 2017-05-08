@@ -3,7 +3,8 @@
 namespace Aml\Bundle\DiscographyBundle\EventListener;
 
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Routing\Router;
 
 /**
  * Class PostListener
@@ -11,30 +12,34 @@ use Symfony\Component\DependencyInjection\ContainerInterface as Container;
  */
 class SitemapListener
 {
-    private $container;
+    private $em;
+    private $router;
 
     /**
-     * @param Container $container
+     * @param EntityManager $entityManager
+     * @param Router $router
      */
-    public function __construct(Container $container)
+    public function __construct(EntityManager $entityManager, Router $router)
     {
-        $this->container = $container;
+        $this->em = $entityManager;
+        $this->router = $router;
     }
 
     /**
-     * @param PostEvent $event
+     * @param GenerateEvent $event
      */
     public function onGenerateSitemapEvent(GenerateEvent $event)
     {
-        $router = $this->container->get('router');
-
         // Add main url
-        $mainUrl = array('loc' => $router->generate('discography'), 'changefreq' => 'weekly', 'priority' => '0.80');
+        $mainUrl = [
+            'loc'        => $this->router->generate('discography'),
+            'changefreq' => 'weekly',
+            'priority'   => '0.80',
+        ];
         $event->addUrls($mainUrl);
 
         // add some urls of discography
-        $doctrine = $this->container->get('doctrine');
-        $repo = $doctrine->getManager('default')->getRepository('AmlDiscographyBundle:Album');
+        $repo = $this->em->getRepository('AmlDiscographyBundle:Album');
         $entities = $repo->findBy(
             array('public' => "1"),
             array('date' => 'DESC')
@@ -46,12 +51,12 @@ class SitemapListener
                 continue;
             }
 
-            $urlAlbum = $router->generate(
+            $urlAlbum = $this->router->generate(
                 'discography_album_show_rewrite',
                 array('url_key' => $album->getUrl()->getUrlKey())
             );
             if (empty($urlAlbum)) {
-                $urlAlbum = $router->generate('discography_album_show', array('id' => $album->getId()));
+                $urlAlbum = $this->router->generate('discography_album_show', array('id' => $album->getId()));
             }
 
             $urlAlbumDiscography = array('loc' => $urlAlbum, 'changefreq' => 'weekly', 'priority' => '0.50');

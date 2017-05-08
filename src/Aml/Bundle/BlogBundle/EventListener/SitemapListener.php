@@ -2,7 +2,8 @@
 namespace Aml\Bundle\BlogBundle\EventListener;
 
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\Routing\Router;
 
 /**
  * Class PostListener
@@ -10,30 +11,30 @@ use Symfony\Component\DependencyInjection\ContainerInterface as Container;
  */
 class SitemapListener
 {
-    private $container;
+    private $em;
+    private $router;
 
     /**
-     * @param Container $container
+     * @param EntityManager $entityManager
+     * @param Router $router
      */
-    public function __construct(Container $container)
+    public function __construct(EntityManager $entityManager, Router $router)
     {
-        $this->container = $container;
+        $this->em = $entityManager;
+        $this->router = $router;
     }
 
     /**
-     * @param PostEvent $event
+     * @param GenerateEvent $event
      */
     public function onGenerateSitemapEvent(GenerateEvent $event)
     {
-        $router = $this->container->get('router');
-
         // add blog url
-        $mainUrl = array('loc' => $router->generate('blog'), 'changefreq' => 'weekly', 'priority' => '0.80');
+        $mainUrl = array('loc' => $this->router->generate('blog'), 'changefreq' => 'weekly', 'priority' => '0.80');
         $event->addUrls($mainUrl);
 
         // add some urls blog
-        $doctrine = $this->container->get('doctrine');
-        $repositoryArticle = $doctrine->getManager('default')->getRepository('AmlBlogBundle:Article');
+        $repositoryArticle = $this->em->getRepository('AmlBlogBundle:Article');
         $entitiesBlog = $repositoryArticle->getPublicArticles(
             100,
             0,
@@ -47,12 +48,12 @@ class SitemapListener
                 continue;
             }
 
-            $urlArticle = $router->generate(
+            $urlArticle = $this->router->generate(
                 'blog_show_rewrite',
                 array('url_key' => $article->getUrl()->getUrlKey())
             );
             if (empty($urlArticle)) {
-                $urlArticle = $router->generate('blog_show', array('id' => $article->getId()));
+                $urlArticle = $this->router->generate('blog_show', array('id' => $article->getId()));
             }
 
             $urlArticleBlog = array('loc' => $urlArticle, 'changefreq' => 'weekly', 'priority' => '0.50');
