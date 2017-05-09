@@ -1,4 +1,4 @@
-{% extends "AmlWebBundle::layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block title -%}
     {{ entity.title }} - Agenda
@@ -8,7 +8,7 @@
     <div id="col-left" class="two-cols-content evenement">
 
         {# Breadcrumb #}
-        {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
+        {% include "_includes/breadcrumb.html.twig" %}
 
         <article class="contenu-page">
             <h1>{{ entity.title }}</h1>
