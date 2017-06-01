@@ -2,64 +2,90 @@
 
 namespace Aml\Bundle\WebBundle\Controller;
 
+use Aml\Bundle\BlogBundle\Entity\Article;
+use Aml\Bundle\DiscographyBundle\Entity\Album;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
 
+/**
+ * Class DefaultController
+ * @package Aml\Bundle\WebBundle\Controller
+ */
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="home")
+     * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
         // Last blog article
-        $repo = $this->getDoctrine()->getRepository('AmlBlogBundle:Article');
+        $repo = $this->getDoctrine()->getRepository(Article::class);
         $blogEntity = $repo->findOneBy(
-            array('public' => "1"),
-            array('created' => 'DESC')
+            ['public' => 1],
+            ['created' => 'DESC']
         );
 
         // Last Album
-        $repo = $this->getDoctrine()->getRepository('AmlDiscographyBundle:Album');
+        $repo = $this->getDoctrine()->getRepository(Album::class);
         $albumEntity = $repo->findOneBy(
-            array('public' => "1"),
-            array('date' => 'DESC')
+            ['public' => 1],
+            ['date' => 'DESC']
         );
 
-        return array(
+        return [
             'lastBlogArticle' => $blogEntity,
-            'lastAlbum' => $albumEntity
-        );
+            'lastAlbum'       => $albumEntity,
+        ];
     }
 
     /**
      * @Route("/sitemap.{_format}", name="sitemap", Requirements={"_format" = "xml"})
+     * @Method("GET")
      * @Template("AmlWebBundle:Default:sitemap.xml.twig")
      */
     public function sitemapAction(Request $request)
     {
-        $urls = array();
+        $urls = [];
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
 
-        $hostname = 'http://'.$request->getHost();
+        $hostname = 'http://' . $request->getHost();
 
         // add some urls homepage
-        $urls[] = array(
-            'loc' => $this->get('router')->generate('home'),
+        $urls[] = [
+            'loc'        => $this->get('router')->generate('home'),
             'changefreq' => 'weekly',
-            'priority' => '1.0'
-        );
+            'priority'   => '1.0',
+        ];
 
         $sitemapGenerationEvent = new GenerateEvent($urls);
         $dispatcher->dispatch('aml_web.sitemap.generate_start', $sitemapGenerationEvent);
 
-        return array('urls' => $sitemapGenerationEvent->getUrls(), 'hostname' => $hostname);
+        return [
+            'urls'     => $sitemapGenerationEvent->getUrls(),
+            'hostname' => $hostname,
+        ];
+    }
+
+    /**
+     * @Route("/google-analytics", name="google-analytics")
+     * @Method("GET")
+     */
+    public function googleAnalyticsAction()
+    {
+        $accountGa = $this->container->getParameter('app_google_analytics.account_id');
+
+        return $this->render(
+            'main/googleAnalytics.html.twig',
+            ['ga_id' => $accountGa]
+        );
     }
 }

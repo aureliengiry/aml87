@@ -2,10 +2,6 @@ tools_youtube_api:
     resource: "@ToolsYoutubeApiBundle/Resources/config/routing.yml"
     prefix:   /
 
-tools_google_analytics:
-    resource: "@ToolsGoogleAnalyticsBundle/Resources/config/routing.yml"
-    prefix:   /
-
 aml_url_rewrite:
     resource: "@AmlUrlRewriteBundle/Resources/config/routing.yml"
     prefix:   /

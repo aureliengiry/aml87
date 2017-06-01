@@ -32,7 +32,6 @@ class AppKernel extends Kernel
             new Aml\Bundle\ContactUsBundle\AmlContactUsBundle(),
             new Aml\Bundle\DiscographyBundle\AmlDiscographyBundle(),
             new Aml\Bundle\UrlRewriteBundle\AmlUrlRewriteBundle(),
-            new Tools\Bundle\GoogleAnalyticsBundle\ToolsGoogleAnalyticsBundle(),
             new Tools\Bundle\YoutubeApiBundle\ToolsYoutubeApiBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
         ];
