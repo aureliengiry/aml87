@@ -1,4 +1,4 @@
-{% extends "AmlWebBundle::layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block title -%}
     Blog - {{ entity.title }}
@@ -9,7 +9,7 @@
     <div id="col-left" class="two-cols-content">
 
         {# Breadcrumb #}
-        {% include "AmlWebBundle::Partial/breadcrumb.html.twig" %}
+        {% include "_includes/breadcrumb.html.twig" %}
 
         <article class="blog-article">
             <h2>{{ entity.title }}</h2>
