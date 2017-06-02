@@ -1,3 +1,0 @@
-tools_youtube_api_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: ToolsYoutubeApiBundle:Default:index }
