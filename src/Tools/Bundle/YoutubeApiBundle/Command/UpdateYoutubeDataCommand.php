@@ -68,9 +68,6 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
     {
         $this->debug = $input->getOption('debug');
 
-        $this->googleAppName = $this->getContainer()->getParameter('google_app_name');
-        $this->googleDeveloperKey = $this->getContainer()->getParameter('google_developer_key');
-
         $this->input = $input;
         $this->output = $output;
 
@@ -90,9 +87,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
         $this->initVideoslist();
 
-        $client = new Google_Client();
-        $client->setApplicationName($this->googleAppName);
-        $client->setDeveloperKey($this->googleDeveloperKey);
+        $client =  $this->getContainer()->get('aml_medias.google.client')->get();
 
         $youtube = new Google_Service_YouTube($client);
 
@@ -148,7 +143,6 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
         $nbVideos = count($this->videosList);
         $this->output->writeln("Init videos: {$nbVideos}");
-
     }
 
 }

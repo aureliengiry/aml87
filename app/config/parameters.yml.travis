@@ -22,6 +22,9 @@ parameters:
     # Google API
     google_app_name: null
     google_developer_key: null
+
+    # Youtube Username
+    youtube_username: ~
 twig:
     globals:
         project_name: AML87
