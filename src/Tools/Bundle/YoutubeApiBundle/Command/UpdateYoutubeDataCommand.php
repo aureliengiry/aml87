@@ -12,10 +12,7 @@ use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
 
 // Google API
-use Google_Client;
 use Google_Service_YouTube;
-
-use Aml\Bundle\MediasBundle\Entity\Video\Youtube;
 
 /**
  * Class UpdateYoutubeDataCommand
@@ -106,18 +103,13 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
             );
             foreach ($videos->getItems() as $youtubeVideo) {
 
-                $snippet = $youtubeVideo->getSnippet();
-                $contentDetails = $youtubeVideo->getContentDetails();
-
-                $idYoutube = $contentDetails->getVideoId();
+                $idYoutube = $youtubeVideo->getContentDetails()->getVideoId();
                 if (!in_array($idYoutube, $this->videosList)) {
-                    $video = new Youtube();
-                    $video
-                        ->setTitle($snippet->getTitle())
-                        ->setProviderId($idYoutube);
+                    $video = $this->getContainer()->get('aml_medias.video.video_factory')->createVideoFromYoutube($youtubeVideo);
+
                     $this->em->persist($video);
 
-                    $output->writeln('Youtube ID: ' . $contentDetails->getVideoId() . ' imported.');
+                    $output->writeln('Youtube ID: ' . $idYoutube . ' imported.');
 
                     $compteurVideo++;
                 }
@@ -136,7 +128,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
     private function initVideoslist()
     {
-        $videos = $this->em->getRepository('AmlMediasBundle:Video\Youtube')->findAll();
+        $videos = $this->getContainer()->get('aml_medias.video.video_manager')->findAllVideosYoutube();
         foreach ($videos as $video) {
             $this->videosList[$video->getId()] = $video->getProviderId();
         }

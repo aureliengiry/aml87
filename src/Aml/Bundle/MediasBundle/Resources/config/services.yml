@@ -8,3 +8,11 @@ services:
           - '@logger'
           - '%google_app_name%'
           - '%google_developer_key%'
+
+    aml_medias.video.video_manager:
+        class: Aml\Bundle\MediasBundle\Video\VideoManager
+        arguments:
+          - '@doctrine.orm.entity_manager'
+
+    aml_medias.video.video_factory:
+        class: Aml\Bundle\MediasBundle\Video\VideoFactory
