@@ -2,6 +2,8 @@
 
 namespace Aml\Bundle\ContactUsBundle\Block\Service;
 
+use Aml\Bundle\ContactUsBundle\Entity\Message;
+use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -10,7 +12,6 @@ use Sonata\BlockBundle\Block\BlockContextInterface;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Sonata\BlockBundle\Block\BaseBlockService;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
@@ -20,7 +21,7 @@ use Doctrine\ORM\EntityManager;
  * Class AdminMessagesBlockService
  * @package Aml\Bundle\ContactUsBundle\Block\Service
  */
-class AdminMessagesBlockService extends BaseBlockService
+class AdminMessagesBlockService extends AbstractBlockService
 {
     /**
      * @var Pool
@@ -53,8 +54,8 @@ class AdminMessagesBlockService extends BaseBlockService
     {
         $resolver->setDefaults(
             array(
-                'title' => 'Messages du formulaire de contact',
-                'template' => 'AmlContactUsBundle:Block:block_messages.html.twig'
+                'title'    => 'Messages du formulaire de contact',
+                'template' => 'AmlContactUsBundle:Block:block_messages.html.twig',
             )
         );
     }
@@ -87,19 +88,19 @@ class AdminMessagesBlockService extends BaseBlockService
         // merge settings
         $settings = $blockContext->getSettings();
 
-        $messages = $this->em->getRepository('AmlContactUsBundle:Message')->findBy(
-            array('spam' => 0),
-            array('created' => 'DESC'),
+        $messages = $this->em->getRepository(Message::class)->findBy(
+            ['spam' => 0],
+            ['created' => 'DESC'],
             5
         );
 
         return $this->renderResponse(
             $blockContext->getTemplate(),
-            array(
-                'block' => $blockContext->getBlock(),
+            [
+                'block'    => $blockContext->getBlock(),
                 'settings' => $settings,
-                'messages' => $messages
-            ),
+                'messages' => $messages,
+            ],
             $response
         );
     }

@@ -13,10 +13,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 class SeasonAdmin extends AbstractAdmin
 {
     // setup the default sort column and order
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'dateStart'
-    );
+        '_sort_by'    => 'dateStart',
+    ];
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -26,36 +26,34 @@ class SeasonAdmin extends AbstractAdmin
             ->add(
                 'dateStart',
                 'date',
-                array(
-                    'label' => 'Date de début de saison',
-                    'widget' => 'single_text',
-                    'format' => 'dd/MM/yyyy',
+                [
+                    'label'    => 'Date de début de saison',
+                    'widget'   => 'single_text',
+                    'format'   => 'dd/MM/yyyy',
                     'required' => false,
-                    // 'attr' => array('readonly' => 'readonly')
-                )
+                ]
             )
             ->add(
                 'dateEnd',
                 'date',
-                array(
-                    'label' => 'Date de fin de saison',
-                    'widget' => 'single_text',
-                    'format' => 'dd/MM/yyyy',
+                [
+                    'label'    => 'Date de fin de saison',
+                    'widget'   => 'single_text',
+                    'format'   => 'dd/MM/yyyy',
                     'required' => false,
-                    // 'attr' => array('readonly' => 'readonly')
-                )
+                ]
             )
             ->end()
             ->with('Evenements')
             ->add(
                 'evenements',
                 'sonata_type_model',
-                array(
-                    'required' => false,
-                    'expanded' => true,
-                    'multiple' => true,
-                    'by_reference' => false
-                )
+                [
+                    'required'     => false,
+                    'expanded'     => true,
+                    'multiple'     => true,
+                    'by_reference' => false,
+                ]
             )
             ->end();
     }
@@ -72,6 +70,4 @@ class SeasonAdmin extends AbstractAdmin
             ->add('dateStart')
             ->add('dateEnd');
     }
-
-
 }

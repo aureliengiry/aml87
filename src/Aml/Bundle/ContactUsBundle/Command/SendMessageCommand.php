@@ -1,10 +1,4 @@
 <?php
-/**
- * Import Blog contens from aml87.fr
- *
- * @author Aurélien GIRY <aurelien.giry@gmail.com>
- */
-
 namespace Aml\Bundle\ContactUsBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -24,11 +18,6 @@ use Aml\Bundle\ContactUsBundle\Event\PostEvent;
  */
 class SendMessageCommand extends ContainerAwareCommand
 {
-    /**
-     * @var Symfony\Component\Console\Input\InputInterface
-     */
-    protected $input = null;
-
     /**
      * @var Symfony\Component\Console\Output\OutputInterface
      */
@@ -55,19 +44,14 @@ class SendMessageCommand extends ContainerAwareCommand
 EOF
             );
 
-        $this->addArgument('id-message', InputArgument::REQUIRED,'ID Message');
+        $this->addArgument('id-message', InputArgument::REQUIRED, 'ID Message');
     }
 
     /**
-     * Validate entry
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @throws \RunTimeException
+     * {@inheritdoc}
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
         $this->output = $output;
 
         $this->doctrine = $this->getContainer()->get('doctrine');
@@ -91,7 +75,7 @@ EOF
             throw new NotFoundHttpException('Unable to find ContactUsBundle:Message entity.');
         }
 
-        $this->output->writeln('<info>' . $message->getName() . ' - ' . $message->getSubject() .'</info>');
+        $this->output->writeln('<info>' . $message->getName() . ' - ' . $message->getSubject() . '</info>');
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->getContainer()->get('event_dispatcher');

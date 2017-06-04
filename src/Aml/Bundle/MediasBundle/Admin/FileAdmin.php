@@ -6,7 +6,10 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-
+/**
+ * Class FileAdmin
+ * @package Aml\Bundle\MediasBundle\Admin
+ */
 class FileAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -16,9 +19,9 @@ class FileAdmin extends AbstractAdmin
             ->add(
                 'file',
                 'file',
-                array(
+                [
                     'required' => false,
-                )
+                ]
             );
     }
 
@@ -32,6 +35,4 @@ class FileAdmin extends AbstractAdmin
         $listMapper
             ->addIdentifier('title');
     }
-
-
 }
