@@ -8,64 +8,90 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Form\FormMapper;
 
+/**
+ * Class MessageAdmin
+ * @package Aml\Bundle\ContactUsBundle\Admin
+ */
 class MessageAdmin extends AbstractAdmin
 {
     // setup the default sort column and order
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'created'
-    );
+        '_sort_by'    => 'created',
+    ];
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'text',
-                array(
+            ->add(
+                'name',
+                'text',
+                [
                     'required' => false,
-                    'disabled' => true
-                ))
-            ->add('subject', 'text',
-                array(
+                    'disabled' => true,
+                ]
+            )
+            ->add(
+                'subject',
+                'text',
+                [
                     'required' => false,
-                    'disabled' => true
-                ))
-            ->add('body', 'textarea',
-                array(
+                    'disabled' => true,
+                ]
+            )
+            ->add(
+                'body',
+                'textarea',
+                [
                     'required' => false,
-                    'disabled' => true
-                ))
-            ->add('created', 'datetime',
-                array(
-                    'widget' => 'single_text',
+                    'disabled' => true,
+                ]
+            )
+            ->add(
+                'created',
+                'datetime',
+                [
+                    'widget'   => 'single_text',
                     'required' => false,
-                    'disabled' => true
-                ))
-            ->add('email', 'email',
-                array(
+                    'disabled' => true,
+                ]
+            )
+            ->add(
+                'email',
+                'email',
+                [
                     'required' => false,
-                    'disabled' => true
-                ))
-            ->add('addressIp', 'text', array(
-                'required' => false,
-                'disabled' => true
-            ))
+                    'disabled' => true,
+                ]
+            )
+            ->add(
+                'addressIp',
+                'text',
+                [
+                    'required' => false,
+                    'disabled' => true,
+                ]
+            )
             ->add(
                 'status',
                 'choice',
                 array(
-                    'choices' => array(
-                        Message::MESSAGE_STATUS_SAVE => 'Enregistré',
-                        Message::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé'
-                    ),
-                    'required' => false,
-                    'placeholder' => 'Choose status'
+                    'choices'     => [
+                        Message::MESSAGE_STATUS_SAVE      => 'Enregistré',
+                        Message::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé',
+                    ],
+                    'required'    => false,
+                    'placeholder' => 'Choose status',
                 )
             )
-            ->add('spam', 'text', array(
-                'required' => false,
-                'disabled' => true
-            ))
-        ;
+            ->add(
+                'spam',
+                'text',
+                [
+                    'required' => false,
+                    'disabled' => true,
+                ]
+            );
     }
 
     public function configureRoutes(RouteCollection $collection)
@@ -82,8 +108,7 @@ class MessageAdmin extends AbstractAdmin
             ->add('email')
             ->add('addressIp')
             ->add('status', 'string')
-            ->add('spam')
-        ;
+            ->add('spam');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -91,8 +116,6 @@ class MessageAdmin extends AbstractAdmin
         $datagridMapper
             ->add('email')
             ->add('addressIp')
-            ->add('spam')
-        ;
+            ->add('spam');
     }
-
 }

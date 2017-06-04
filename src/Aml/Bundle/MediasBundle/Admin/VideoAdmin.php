@@ -6,7 +6,10 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-
+/**
+ * Class VideoAdmin
+ * @package Aml\Bundle\MediasBundle\Admin
+ */
 class VideoAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -65,6 +68,4 @@ src="'.$urlVideo.'" frameborder="0" allowfullscreen></iframe>';
             ->add('title')
             ->addIdentifier('provider_id');
     }
-
-
 }

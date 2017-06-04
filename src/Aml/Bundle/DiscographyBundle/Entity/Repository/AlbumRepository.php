@@ -2,6 +2,7 @@
 
 namespace Aml\Bundle\DiscographyBundle\Entity\Repository;
 
+use Aml\Bundle\DiscographyBundle\Entity\Album;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -17,14 +18,12 @@ class AlbumRepository extends EntityRepository
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('e')
-            ->from('AmlDiscographyBundle:Album', 'e')
+            ->from(Album::class, 'e')
             ->join('e.url', 'u')
             ->where('u.urlKey = :url_key')
             ->setMaxResults(1);
 
-        $params = array(
-            'url_key' => $urlKey
-        );
+        $params = ['url_key' => $urlKey];
 
         $q->setParameters($params);
 

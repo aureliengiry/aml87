@@ -6,6 +6,10 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+/**
+ * Class TrackAdmin
+ * @package Aml\Bundle\DiscographyBundle\Admin
+ */
 class TrackAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -15,34 +19,34 @@ class TrackAdmin extends AbstractAdmin
             ->add(
                 'title',
                 'text',
-                array(
-                    'label' => 'Titre'
-                )
+                [
+                    'label' => 'Titre',
+                ]
             )
             ->add(
                 'composer',
                 'text',
-                array(
-                    'label' => 'Compositeur'
-                )
+                [
+                    'label' => 'Compositeur',
+                ]
             )
             ->add(
                 'number',
                 'text',
-                array(
-                    'label' => 'Piset N°'
-                )
+                [
+                    'label' => 'Piset N°',
+                ]
             )
             ->add(
                 'album',
                 'entity',
-                array(
-                    'label' => 'Album',
-                    'class' => 'AmlDiscographyBundle:Album',
+                [
+                    'label'        => 'Album',
+                    'class'        => 'AmlDiscographyBundle:Album',
                     'choice_label' => 'title',
-                    'placeholder' => 'Choisissez un album',
-                    'attr' => array('class' => 'uniform')
-                )
+                    'placeholder'  => 'Choisissez un album',
+                    'attr'         => ['class' => 'uniform'],
+                ]
             )
             ->end();
     }

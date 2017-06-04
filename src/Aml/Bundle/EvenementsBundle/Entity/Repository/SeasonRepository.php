@@ -2,6 +2,7 @@
 
 namespace Aml\Bundle\EvenementsBundle\Entity\Repository;
 
+use Aml\Bundle\EvenementsBundle\Entity\Season;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -24,15 +25,15 @@ class SeasonRepository extends EntityRepository
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('s')
-            ->from('AmlEvenementsBundle:Season', 's')
+            ->from(Season::class, 's')
             ->where('s.dateStart <= :eventDateStart')
             ->andWhere('s.dateEnd >= :eventDateStart')
             ->orderBy('s.dateStart', 'ASC')
             ->setMaxResults(1);
 
-        $params = array(
+        $params = [
             'eventDateStart' => $eventDateStart,
-        );
+        ];
 
         $q->setParameters($params);
 
@@ -55,7 +56,7 @@ class SeasonRepository extends EntityRepository
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('s')
-            ->from('AmlEvenementsBundle:Season', 's')
+            ->from(Season::class, 's')
             ->where('s.dateEnd < CURRENT_DATE()')
             ->orderBy('s.dateStart', 'DESC')
             ->setMaxResults(1);
@@ -79,16 +80,16 @@ class SeasonRepository extends EntityRepository
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('s.id', 's.name', 'COUNT(e.id) as nb_events')
-            ->from('AmlEvenementsBundle:Season', 's')
+            ->from(Season::class, 's')
             ->where('s.dateEnd < CURRENT_DATE()')
             ->leftJoin('s.evenements', 'e', 'WITH', 'e.archive=:archive AND e.public=:public')
             ->groupBy('s.id')
             ->orderBy('s.dateStart', 'DESC');
 
-        $params = array(
+        $params = [
             'archive' => 1,
-            'public'  => 1
-        );
+            'public'  => 1,
+        ];
 
         $q->setParameters($params);
 

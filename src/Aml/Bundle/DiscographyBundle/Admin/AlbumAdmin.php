@@ -9,6 +9,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 use Aml\Bundle\UrlRewriteBundle\Entity\UrlDiscography;
 
+/**
+ * Class AlbumAdmin
+ * @package Aml\Bundle\DiscographyBundle\Admin
+ */
 class AlbumAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
@@ -18,51 +22,51 @@ class AlbumAdmin extends AbstractAdmin
             ->add(
                 'title',
                 'text',
-                array(
-                    'label' => 'Titre'
-                )
+                [
+                    'label' => 'Titre',
+                ]
             )
             ->add('image', 'sonata_type_admin')
             ->add(
                 'description',
                 CKEditorType::class,
-                array(
-                    'label' => 'Texte',
-                    'attr' => array('size' => 15, 'data-help' => 'Description de l\'album'),
-                    'required' => false,
+                [
+                    'label'       => 'Texte',
+                    'attr'        => ['size' => 15, 'data-help' => 'Description de l\'album'],
+                    'required'    => false,
                     'config_name' => 'aml_config',
-                )
+                ]
             )
             ->add(
                 'date',
                 'sonata_type_date_picker',
-                array(
+                [
                     'dp_side_by_side' => true,
-                    'dp_use_current' => false,
-                    'dp_language' => 'fr',
-                    'format' => 'dd/MM/yyyy'
-                )
+                    'dp_use_current'  => false,
+                    'dp_language'     => 'fr',
+                    'format'          => 'dd/MM/yyyy',
+                ]
             )
             ->add(
                 'public',
                 'checkbox',
-                array(
-                    'label' => 'Publier',
+                [
+                    'label'    => 'Publier',
                     'required' => false,
-                    'attr' => array('data-help' => 'Signifie que l\'album sera visible pour tout le monde'),
-                )
+                    'attr'     => ['data-help' => 'Signifie que l\'album sera visible pour tout le monde'],
+                ]
             )
             ->end()
             ->with('Titres')
             ->add(
                 'tracks',
                 'sonata_type_model',
-                array(
-                    'required' => false,
-                    'expanded' => true,
-                    'multiple' => true,
-                    'by_reference' => false
-                )
+                [
+                    'required'     => false,
+                    'expanded'     => true,
+                    'multiple'     => true,
+                    'by_reference' => false,
+                ]
             )
             ->end();
     }
@@ -122,5 +126,4 @@ class AlbumAdmin extends AbstractAdmin
 
         $album->setUrl($entityUrl);
     }
-
 }
