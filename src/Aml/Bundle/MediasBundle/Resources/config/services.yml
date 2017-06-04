@@ -9,6 +9,12 @@ services:
           - '%google_app_name%'
           - '%google_developer_key%'
 
+    aml_medias.google.youtube_provider:
+        class: Aml\Bundle\MediasBundle\Google\YoutubeProvider
+        arguments:
+          - '@aml_medias.google.client'
+          - '%youtube_username%'
+
     aml_medias.video.video_manager:
         class: Aml\Bundle\MediasBundle\Video\VideoManager
         arguments:

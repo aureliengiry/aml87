@@ -1,5 +1,5 @@
 <?php
-namespace Tools\Bundle\YoutubeApiBundle\Command;
+namespace Aml\Bundle\MediasBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,14 +11,9 @@ use Monolog\Logger;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
 
-// Google API
-use Google_Service_YouTube;
-
 /**
  * Class UpdateYoutubeDataCommand
- *
- * @category    Mongobox
- * @package     Mongobox\Bundle\JukeboxBundle\Command
+ * @package Aml\Bundle\MediasBundle\Command
  */
 class UpdateYoutubeDataCommand extends ContainerAwareCommand
 {
@@ -27,6 +22,8 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
     /** @var bool debug mode */
     private $debug = false;
+    
+    private $output;
 
     /** @var Logger command logger */
     private $logger;
@@ -44,7 +41,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('tools:youtubeApi:update')
+            ->setName('medias:youtube:update-videos')
             ->setDescription('Update videos data from Youtube.')
             ->setHelp('');
 
@@ -56,16 +53,12 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
     }
 
     /**
-     * Call before execute
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * {@inheritdoc}
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->debug = $input->getOption('debug');
 
-        $this->input = $input;
         $this->output = $output;
 
         // Logger
@@ -78,44 +71,38 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
         $this->em = $this->getContainer()->get('doctrine')->getManager('default');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<bg=cyan;fg=red>Start treatment </>');
 
         $this->initVideoslist();
 
-        $client =  $this->getContainer()->get('aml_medias.google.client')->get();
-
-        $youtube = new Google_Service_YouTube($client);
+        $youtubeProvider = $this->getContainer()->get('aml_medias.google.youtube_provider');
 
         $compteurVideo = 0;
 
         try {
-            $playlists = $youtube->channels->listChannels("contentDetails", array('forUsername' => 'aml87170'));
-            foreach ($playlists->getItems() as $item) {
-                $playlistId = $item['contentDetails']['relatedPlaylists']['uploads'];
-                break;
-            }
+            if ($playlistId = $youtubeProvider->getPlaylistUploadId()) {
+                $videos = $youtubeProvider->getVideosPlaylist($playlistId);
+                foreach ($videos->getItems() as $youtubeVideo) {
+                    $idYoutube = $youtubeVideo->getContentDetails()->getVideoId();
+                    if (!in_array($idYoutube, $this->videosList)) {
+                        $video = $this->getContainer()->get('aml_medias.video.video_factory')->createVideoFromYoutube(
+                            $youtubeVideo
+                        );
 
-            $videos = $youtube->playlistItems->listPlaylistItems(
-                "snippet,contentDetails",
-                array('playlistId' => $playlistId, 'maxResults' => 50)
-            );
-            foreach ($videos->getItems() as $youtubeVideo) {
+                        $this->em->persist($video);
+                        $output->writeln('Youtube ID: ' . $idYoutube . ' imported.');
 
-                $idYoutube = $youtubeVideo->getContentDetails()->getVideoId();
-                if (!in_array($idYoutube, $this->videosList)) {
-                    $video = $this->getContainer()->get('aml_medias.video.video_factory')->createVideoFromYoutube($youtubeVideo);
+                        $compteurVideo++;
+                    }
 
-                    $this->em->persist($video);
-
-                    $output->writeln('Youtube ID: ' . $idYoutube . ' imported.');
-
-                    $compteurVideo++;
                 }
-
+                $this->em->flush();
             }
-            $this->em->flush();
         } catch (\Exception $e) {
             $output->writeln('<bg=red;fg=white>Error: ' . $e->getMessage() . '</>');
         }
@@ -126,6 +113,9 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
         $output->writeln('<bg=cyan;fg=red>Fin du traitement</>');
     }
 
+    /**
+     * Get videos list
+     */
     private function initVideoslist()
     {
         $videos = $this->getContainer()->get('aml_medias.video.video_manager')->findAllVideosYoutube();
@@ -136,5 +126,4 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
         $nbVideos = count($this->videosList);
         $this->output->writeln("Init videos: {$nbVideos}");
     }
-
 }
