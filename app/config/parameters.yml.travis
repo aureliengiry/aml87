@@ -26,6 +26,9 @@ parameters:
     # Youtube Username
     youtube_username: ~
 
+    # Google Calandar Id
+    google_calendar_id: ~
+
     # Sentry
     sentry_dsn: ~
 

@@ -15,7 +15,7 @@ class Client
     private $googleAppName;
     private $googleDevKey;
 
-    private $client;
+    protected $client;
 
     /**
      * Client constructor.

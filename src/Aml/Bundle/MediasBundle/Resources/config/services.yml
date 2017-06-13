@@ -15,6 +15,12 @@ services:
           - '@aml_medias.google.client'
           - '%youtube_username%'
 
+    aml_medias.google.google_calendar_provider:
+        class: Aml\Bundle\MediasBundle\Google\GoogleCalendarProvider
+        arguments:
+          - '@aml_medias.google.client'
+          - '%google_calendar_id%'
+
     aml_medias.video.video_manager:
         class: Aml\Bundle\MediasBundle\Video\VideoManager
         arguments:
