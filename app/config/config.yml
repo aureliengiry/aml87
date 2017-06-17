@@ -284,3 +284,7 @@ liip_imagine:
              quality: 75
              filters:
                    relative_resize: {  widen: 900, mode: outbound }
+
+## Sentry
+sentry:
+    dsn: "%sentry_dsn%"

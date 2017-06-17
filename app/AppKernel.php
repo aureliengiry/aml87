@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new Aml\Bundle\DiscographyBundle\AmlDiscographyBundle(),
             new Aml\Bundle\UrlRewriteBundle\AmlUrlRewriteBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Sentry\SentryBundle\SentryBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
