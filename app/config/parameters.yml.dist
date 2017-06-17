@@ -28,6 +28,9 @@ parameters:
     # Youtube Username
     youtube_username: ~
 
+    # Sentry
+    sentry_dsn: ~
+
 twig:
     globals:      
         project_name: AML87
