@@ -28,6 +28,10 @@ parameters:
 
     # Sentry
     sentry_dsn: ~
+
+    # Liip Imagine
+    liip_imagine_loaders_default_filesystem_data_root: "%kernel.root_dir%/../web"
+
 twig:
     globals:
         project_name: AML87
