@@ -194,9 +194,10 @@ knp_menu:
 # Liip Imagine
 liip_imagine:
     resolvers:
-       default:
-          web_path: ~
-
+        default:
+            web_path:
+                web_root: "%kernel.root_dir%/../web"
+                cache_prefix: media/cache
     filter_sets:
         cache: ~
         thumbnail:
@@ -284,6 +285,12 @@ liip_imagine:
              quality: 75
              filters:
                    relative_resize: {  widen: 900, mode: outbound }
+    loaders:
+        default:
+            filesystem:
+                locator: filesystem
+                data_root:
+                    - "%liip_imagine_loaders_default_filesystem_data_root%"
 
 ## Sentry
 sentry:
