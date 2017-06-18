@@ -288,3 +288,17 @@ liip_imagine:
 ## Sentry
 sentry:
     dsn: "%sentry_dsn%"
+    app_path: "%kernel.root_dir%/.."
+    client: Sentry\SentryBundle\SentrySymfonyClient
+    environment: "%kernel.environment%"
+    error_types: E_ALL & ~E_DEPRECATED & ~E_NOTICE
+    exception_listener: Sentry\SentryBundle\EventListener\ExceptionListener
+    skip_capture:
+        - "Symfony\\Component\\HttpKernel\\Exception\\HttpExceptionInterface"
+    prefixes:
+        - "%kernel.root_dir%/.."
+    excluded_app_paths:
+        - "%kernel.root_dir%/../vendor"
+        - "%kernel.root_dir%/../var/cache"
+
+
