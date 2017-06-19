@@ -126,6 +126,13 @@ class Evenement
      */
     protected $videos;
 
+    /**
+     * @var string $googleCalendarEventId
+     *
+     * @ORM\Column(name="$google_calendar_event_id", type="string", length=255, nullable=true)
+     */
+    protected $googleCalendarEventId;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
