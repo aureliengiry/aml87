@@ -21,7 +21,7 @@
   },
   "require": {
     "php": ">=5.5.9",
-    "symfony/symfony": "3.2.*",
+    "symfony/symfony": "3.3.*",
     "symfony/swiftmailer-bundle": "^2.3.10",
     "symfony/monolog-bundle": "^3.0.2",
     "symfony/dependency-injection": "^3.1",
