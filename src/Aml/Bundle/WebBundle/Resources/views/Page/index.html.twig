@@ -5,22 +5,14 @@
 {%- endblock title %}
 
 {% block body %}
+    
+    {# Breadcrumb #}
+    {% include "_includes/breadcrumb.html.twig" %}
 
-    <div id="col-left" class="two-cols-content">
-        {# Breadcrumb #}
-        {% include "_includes/breadcrumb.html.twig" %}
+    <article class="blog-article">
+        <h2>{{ entity.title }}</h2>
 
-        <article class="blog-article">
-            <h2>{{ entity.title }}</h2>
+        <div class="article-description">{{ entity.body|raw }}</div>
+    </article>
 
-            <div class="article-description">{{ entity.body|raw }}</div>
-        </article>
-
-    </div>
-    <div id="col-right">
-        <div class="side-bloc no-border">
-            {# Next Concert #}
-            {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
-        </div>
-    </div>
 {% endblock body %}

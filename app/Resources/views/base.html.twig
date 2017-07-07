@@ -55,7 +55,23 @@
             </div>
         {% endfor %}
 
-        {% block body %}{% endblock %}
+        <div id="col-left" class="two-cols-content">
+            {% block body %}{% endblock %}
+        </div>
+
+        <div id="col-right">
+            <div class="side-bloc no-border">
+            {% block columnRight %}
+
+                {# Next Concert #}
+                {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
+
+                {# Block Facebook #}
+                {% include ":blocs:facebook-page-plugin.html.twig" %}
+
+            {% endblock %}
+            </div>
+        </div>
     </section>
     <div class="clearfooter"></div>
 
