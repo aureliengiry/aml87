@@ -34,7 +34,7 @@
 <body>
 <div id="global">
     {# Header #}
-    {% include "_includes/header.html.twig" %}
+    {{ include '_includes/header.html.twig' }}
 
     <section id="contenu">
 
@@ -61,22 +61,22 @@
 
         <div id="col-right">
             <div class="side-bloc no-border">
-            {% block columnRight %}
+                {% block columnRight %}
 
-                {# Next Concert #}
-                {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
+                    {# Next Concert #}
+                    {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
 
-                {# Block Facebook #}
-                {% include ":blocs:facebook-page-plugin.html.twig" %}
+                    {# Block Facebook #}
+                    {{ include('blocs/facebook-page-plugin.html.twig') }}
 
-            {% endblock %}
+                {% endblock %}
             </div>
         </div>
     </section>
     <div class="clearfooter"></div>
 
     {# Footer #}
-    {% include "_includes/footer.html.twig" %}
+    {{ include '_includes/footer.html.twig' }}
 </div>
 
 {% block javascripts %}{% endblock %}
