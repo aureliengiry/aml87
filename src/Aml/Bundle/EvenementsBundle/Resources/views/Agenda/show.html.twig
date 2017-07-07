@@ -5,7 +5,7 @@
 {%- endblock title %}
 
 {% block body %}
-    <div id="col-left" class="two-cols-content evenement">
+    {#<div id="col-left" class="two-cols-content evenement">#}
 
         {# Breadcrumb #}
         {% include "_includes/breadcrumb.html.twig" %}
@@ -36,14 +36,15 @@
 
         {# Liste vidéos liées #}
         {% include "AmlEvenementsBundle:Agenda:blocVideos.html.twig" %}
-    </div>
-
-    <div id="col-right">
-        {# Liste articles liés #}
-        {% include "AmlEvenementsBundle::Agenda/blocArticles.html.twig" %}
-
-        {# Liste des partenaires de l'évènement #}
-        {% include "AmlEvenementsBundle::Agenda/blocPartenaires.html.twig" %}
-    </div>
 
 {% endblock body %}
+
+{% block columnRight %}
+
+    {# Liste articles liés #}
+    {% include "AmlEvenementsBundle::Agenda/blocArticles.html.twig" %}
+
+    {# Liste des partenaires de l'évènement #}
+    {% include "AmlEvenementsBundle::Agenda/blocPartenaires.html.twig" %}
+
+{% endblock columnRight %}

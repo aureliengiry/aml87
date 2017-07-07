@@ -22,7 +22,7 @@ body {
     margin-right: auto;
     margin-top: 10px;
     position: relative;
-    width: 952px;
+    width: 1024px;
     background-color: #000000;
 }
 
@@ -48,7 +48,6 @@ body {
     padding: 0px 0px 15px 0px;
     position: relative;
     text-align: justify;
-    width: 100%;
     float: left;
 }
 
@@ -70,10 +69,10 @@ div.error, tr.error {
 #col-right {
     float: right;
     background: #FFFFFF url("/bundles/amlweb/images/general/fond-col-droite.png") no-repeat scroll 0 0;
-    width: 240px;
+    width: 25%;
     min-height: 471px;
     font-size: 12px;
-    padding-left: 77px;
+    padding-left: 7%;
 }
 
 .col-right-blog {
@@ -105,7 +104,7 @@ div.error, tr.error {
 }
 
 #col-left.two-cols-content, .col-left-631 {
-    width: 596px;
+    width: 64%;
 }
 
 a.links-view-all {
@@ -127,9 +126,11 @@ a.black {
     background: url("/bundles/amlweb/images/boutons/btn_view_more_black.png") no-repeat scroll 127px 0 #000000;
     width: 140px;
 }
+
 .btn {
     color: #FFFFFF;
 }
+
 /*  ---  banniere ---  */
 #banniere {
 
@@ -140,7 +141,7 @@ a.black {
     min-height: 149px;
 }
 
-div#logo{
+div#logo {
     margin: 5px 0 5px 0;
 }
 
@@ -166,8 +167,7 @@ div#logo{
 }
 
 #intro .intro-content {
-    /*height: 171px;*/
-    width: 566px;
+    width: 60%;
     float: right;
     margin-top: 4%;
     text-align: justify;
@@ -179,7 +179,7 @@ div#logo{
     font-size: 18px;
     height: 80px;
     margin-top: 65px;
-    width: 627px;
+    width: 63%;
 }
 
 #menu ul {
@@ -213,11 +213,13 @@ div#logo{
 }
 
 .breadcrumb > li {
-    text-shadow:none;
+    text-shadow: none;
 }
+
 .breadcrumb > li > .divider {
     color: #3F3F3F;
 }
+
 /* ------------ ONGLETS ------------ */
 #onglets {
     background-color: #000000 !important;
@@ -301,7 +303,7 @@ div#logo{
     font-size: 12px;
 }
 
-#footer ul{
+#footer ul {
     margin-bottom: 5px;
     margin-left: 10px;
     margin-right: 10px;
@@ -415,7 +417,7 @@ div#logo{
     display: inline;
 }
 
-#agenda-concerts-public .event-item-container-thumbnail .thumbnail-list{
+#agenda-concerts-public .event-item-container-thumbnail .thumbnail-list {
     display: block;
 }
 
@@ -488,7 +490,7 @@ div#logo{
     text-transform: capitalize;
 }
 
-#blocs-evenement-partenaires .partenaire-visuel{
+#blocs-evenement-partenaires .partenaire-visuel {
     padding-bottom: 5px;
     padding-left: 0;
     padding-right: 0;
@@ -501,14 +503,15 @@ div#logo{
     position: relative;
 }
 
-.video-lockup-content{
+.video-lockup-content {
     overflow: hidden;
     position: relative;
 }
 
-#blocs-evenement-videos ul{
+#blocs-evenement-videos ul {
     margin: 0;
 }
+
 #blocs-evenement-videos ul li {
     display: inline-block;
     margin-right: 10px;
@@ -516,6 +519,7 @@ div#logo{
     width: 185px;
     word-wrap: break-word;
 }
+
 /* ------------------- Pagination --------------- */
 #global .Paginator a:visited:hover, #global .Paginator a:hover, #global .Paginator a:active {
     color: red;
@@ -562,7 +566,6 @@ div#logo{
 .blog-article {
     border-bottom: 1px solid #CCCCCC;
     padding: 0 0 20px 0px;
-    width: 600px;
     text-align: justify;
 }
 
@@ -659,7 +662,6 @@ h2 a {
     margin: 10px 0;
     padding: 0 0 15px;
     position: relative;
-    width: 100%;
     float: left;
 }
 
@@ -829,7 +831,7 @@ tr.even, tr.odd {
 #map {
     border: 1px solid;
     height: 260px;
-    width: 340px;
+    width: 60%;
     float: left;
 }
 
@@ -837,15 +839,14 @@ tr.even, tr.odd {
     clear: both;
     float: left;
     margin-top: 5px;
-    width: 500px;
 }
 
-#contact-block form{
+#contact-block form {
     margin: 0 0 40px;
 }
 
 #bloc-coordonnees {
-    width: 220px;
+    width: 36%;
     float: right;
     text-align: left;
 }

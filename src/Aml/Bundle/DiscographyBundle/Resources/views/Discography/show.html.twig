@@ -5,64 +5,57 @@
 {%- endblock title %}
 
 {% block body %}
-    <div id="col-left" class="two-cols-content">
 
-        {# Breadcrumb #}
-        {% include "_includes/breadcrumb.html.twig" %}
+    {# Breadcrumb #}
+    {% include "_includes/breadcrumb.html.twig" %}
 
-        <article class="contenu-page">
+    <article class="contenu-page">
 
-            <div class="discographie-bloc-titre">
-                <h2 class="discographie">{{ entity.title }}</h2>
-                <span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>
+        <div class="discographie-bloc-titre">
+            <h2 class="discographie">{{ entity.title }}</h2>
+            <span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>
+        </div>
+
+        <div class="disc-presentation">
+
+            <div class="disc-pochette-list">
+                <a rel="prettyPhoto" href="{{ asset(entity.image.webpath) | imagine_filter('modal_img') }}">
+                    <img src="{{ asset(entity.image.webpath) | imagine_filter('discography_list') }}"
+                         alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
+                         class="imagecache imagecache-pochette-album" width="180" height="160">
+                </a>
             </div>
 
-            <div class="disc-presentation">
-
-                <div class="disc-pochette-list">
-                    <a rel="prettyPhoto" href="{{ asset(entity.image.webpath) | imagine_filter('modal_img') }}">
-                        <img src="{{ asset(entity.image.webpath) | imagine_filter('discography_list') }}"
-                             alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
-                             class="imagecache imagecache-pochette-album" width="180" height="160">
-                    </a>
-                </div>
-
-                <div class="disc-description-list">
-                    {{ entity.description|raw }}
-                </div>
+            <div class="disc-description-list">
+                {{ entity.description|raw }}
             </div>
+        </div>
 
-            {% if entity.tracks is not empty %}
-                <div class="disc-list-tracks">
-                    <h3>Composition du disque</h3>
+        {% if entity.tracks is not empty %}
+            <div class="disc-list-tracks">
+                <h3>Composition du disque</h3>
 
-                    <table class="table table-condensed table-striped">
-                        <thead>
+                <table class="table table-condensed table-striped">
+                    <thead>
                         <tr>
                             <th>N°piste</th>
                             <th>Titre</th>
                             <th>Compositeur(s)</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for key,track in entity.tracks %}
-                            <tr>
-                                <td>{{ track.number }}</td>
-                                <td>{{ track.title }}</td>
-                                <td>{{ track.composer }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            {% endif %}
+                    </thead>
+                    <tbody>
+                    {% for key,track in entity.tracks %}
+                        <tr>
+                            <td>{{ track.number }}</td>
+                            <td>{{ track.title }}</td>
+                            <td>{{ track.composer }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
 
+    </article>
 
-        </article>
-    </div>
-
-    <div id="col-right">
-        {# Next Concert #}
-        {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
-    </div>
 {% endblock body %}

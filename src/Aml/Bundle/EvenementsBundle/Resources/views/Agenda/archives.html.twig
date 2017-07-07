@@ -5,44 +5,44 @@
 {%- endblock title %}
 
 {% block body %}
-    <div id="col-left" class="two-cols-content">
 
-        {# Breadcrumb #}
-        {% include "_includes/breadcrumb.html.twig" %}
+    {# Breadcrumb #}
+    {% include "_includes/breadcrumb.html.twig" %}
 
-        <article class="contenu-page">
+    <article class="contenu-page">
 
-            <h1>Archives - {{ currentSeason.name }}</h1>
+        <h1>Archives - {{ currentSeason.name }}</h1>
 
-            <ul id="agenda-concerts-public">
-                {% for key,entity in entities %}
+        <ul id="agenda-concerts-public">
+            {% for key,entity in entities %}
 
-                    <li class="event-item">
+                <li class="event-item">
                         <span class="date">
                             {{ entity.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }} :
                         </span>
 
-                        <h2>
-                            {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
-                                <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url.urlKey }) }}"
-                                   title="{{ entity.title }}">{{ entity.title }}</a>
-                            {% else %}
-                                <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}"
-                                   title="{{ entity.title }}">{{ entity.title }}</a>
-                            {% endif %}
-                        </h2>
-                    </li>
+                    <h2>
+                        {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
+                            <a href="{{ path('agenda_show_event_rewrite', { 'url_key': entity.url.urlKey }) }}"
+                               title="{{ entity.title }}">{{ entity.title }}</a>
+                        {% else %}
+                            <a href="{{ path('agenda_show_event', { 'id': entity.id }) }}"
+                               title="{{ entity.title }}">{{ entity.title }}</a>
+                        {% endif %}
+                    </h2>
+                </li>
 
-                {% endfor %}
-            </ul>
+            {% endfor %}
+        </ul>
 
-        </article>
-    </div>
-    <div id="col-right">
-        {# Next Concert #}
-        {{ render(controller('AmlEvenementsBundle:Agenda:nextConcert')) }}
-
-        {# Seasons list #}
-        {% include "AmlEvenementsBundle::Agenda/archives/seasons.html.twig" %}
-    </div>
+    </article>
 {% endblock body %}
+
+{% block columnRight %}
+
+    {{ parent() }}
+
+    {# Seasons list #}
+    {% include "AmlEvenementsBundle::Agenda/archives/seasons.html.twig" %}
+
+{% endblock columnRight %}
