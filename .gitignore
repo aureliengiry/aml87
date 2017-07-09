@@ -28,8 +28,9 @@
 /web/media/
 /web/css/
 
-# Assets managed by Bower
-/web/assets/vendor/
+# Assets managed by webpack
+/web/build/*
+!web/build/.gitkeep
 
 # Build data
 /build/
@@ -37,3 +38,9 @@
 # Composer PHAR
 /composer.phar
 /composer.lock
+
+# node modules
+/node_modules
+
+
+
