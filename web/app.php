@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 $loader = require __DIR__.'/../app/autoload.php';
 
 $kernel = new AppKernel('prod', false);
-$kernel->loadClassCache();
 $kernel = new AppCache($kernel);
 
 $request = Request::createFromGlobals();
