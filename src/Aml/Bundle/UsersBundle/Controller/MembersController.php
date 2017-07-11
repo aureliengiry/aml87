@@ -2,6 +2,7 @@
 
 namespace Aml\Bundle\UsersBundle\Controller;
 
+use Aml\Bundle\UsersBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -21,7 +22,7 @@ class MembersController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -32,15 +33,11 @@ class MembersController extends Controller
      */
     public function listAction()
     {
-
         $doctine = $this->getDoctrine();
         $em = $doctine->getManager();
 
-        $users = $em->getRepository('Aml\Bundle\UsersBundle:User')->findAll();
-
-
-        return array(
-            'users' => $users
-        );
+        return [
+            'users' => $em->getRepository(User::class)->findAll(),
+        ];
     }
 }
