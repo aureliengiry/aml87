@@ -1,5 +1,0 @@
-services:
-#    aml_users.form.profile:
-#         class: Aml\Bundle\UsersBundle\Form\Type\ProfileFormType
-#         tags:
-#             - { name: form.type, alias: aml_user_profile }

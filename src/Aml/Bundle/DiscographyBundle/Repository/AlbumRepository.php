@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\DiscographyBundle\Entity\Repository;
+namespace Aml\Bundle\DiscographyBundle\Repository;
 
 use Aml\Bundle\DiscographyBundle\Entity\Album;
 use Doctrine\ORM\EntityRepository;
