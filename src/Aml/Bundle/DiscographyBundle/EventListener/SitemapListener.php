@@ -2,8 +2,8 @@
 
 namespace Aml\Bundle\DiscographyBundle\EventListener;
 
+use Aml\Bundle\DiscographyBundle\Discography\DiscographyManager;
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
-use Doctrine\ORM\EntityManager;
 use Symfony\Component\Routing\Router;
 
 /**
@@ -12,17 +12,19 @@ use Symfony\Component\Routing\Router;
  */
 class SitemapListener
 {
-    private $em;
     private $router;
+    private $discographyManager;
 
     /**
-     * @param EntityManager $entityManager
+     * SitemapListener constructor.
+     *
      * @param Router $router
+     * @param DiscographyManager $discographyManager
      */
-    public function __construct(EntityManager $entityManager, Router $router)
+    public function __construct(Router $router, DiscographyManager $discographyManager)
     {
-        $this->em = $entityManager;
         $this->router = $router;
+        $this->discographyManager = $discographyManager;
     }
 
     /**
@@ -38,14 +40,8 @@ class SitemapListener
         ];
         $event->addUrls($mainUrl);
 
-        // add some urls of discography
-        $repo = $this->em->getRepository('AmlDiscographyBundle:Album');
-        $entities = $repo->findBy(
-            array('public' => "1"),
-            array('date' => 'DESC')
-        );
-
-        foreach ($entities as $album) {
+        // Add some urls of discography
+        foreach ($this->discographyManager->getPublicAlbums() as $album) {
 
             if (!$album->getUrl()) {
                 continue;
@@ -53,13 +49,17 @@ class SitemapListener
 
             $urlAlbum = $this->router->generate(
                 'discography_album_show_rewrite',
-                array('url_key' => $album->getUrl()->getUrlKey())
+                ['url_key' => $album->getUrl()->getUrlKey()]
             );
             if (empty($urlAlbum)) {
-                $urlAlbum = $this->router->generate('discography_album_show', array('id' => $album->getId()));
+                $urlAlbum = $this->router->generate('discography_album_show', ['id' => $album->getId()]);
             }
 
-            $urlAlbumDiscography = array('loc' => $urlAlbum, 'changefreq' => 'weekly', 'priority' => '0.50');
+            $urlAlbumDiscography = [
+                'loc'        => $urlAlbum,
+                'changefreq' => 'weekly',
+                'priority'   => '0.50',
+            ];
             $event->addUrls($urlAlbumDiscography);
         }
     }

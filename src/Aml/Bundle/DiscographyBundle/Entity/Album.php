@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Aml\Bundle\DiscographyBundle\Entity\Album
  *
  * @ORM\Table(name="discography_albums")
- * @ORM\Entity(repositoryClass="Aml\Bundle\DiscographyBundle\Entity\Repository\AlbumRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\DiscographyBundle\Repository\AlbumRepository")
  */
 class Album
 {

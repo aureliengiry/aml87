@@ -1,6 +1,8 @@
 <?php
 namespace Aml\Bundle\DiscographyBundle\Controller;
 
+use Aml\Bundle\DiscographyBundle\Discography\DiscographyManager;
+use Aml\Bundle\DiscographyBundle\Entity\Album;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -22,13 +24,7 @@ class DiscographyController extends Controller
      */
     public function indexAction()
     {
-        $repo = $this->getDoctrine()->getRepository('AmlDiscographyBundle:Album');
-        $entities = $repo->findBy(
-            array('public' => "1"),
-            array('date' => 'DESC')
-        );
-
-        return array('entities' => $entities);
+        return ['entities' => $this->container->get(DiscographyManager::class)->getPublicAlbums()];
     }
 
     /**
@@ -42,10 +38,11 @@ class DiscographyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $albumRepository = $em->getRepository(Album::class);
         if (false === $id || !empty($url_key)) {
-            $entity = $em->getRepository('AmlDiscographyBundle:Album')->getAlbumByUrlKey($url_key);
+            $entity = $albumRepository->getAlbumByUrlKey($url_key);
         } else {
-            $entity = $em->getRepository('AmlDiscographyBundle:Album')->find($id);
+            $entity = $albumRepository->find($id);
         }
 
         if (!$entity) {
@@ -58,8 +55,8 @@ class DiscographyController extends Controller
 
         $request->attributes->set('label', $entity->getTitle());
 
-        return array(
-            'entity' => $entity
-        );
+        return [
+            'entity' => $entity,
+        ];
     }
 }
