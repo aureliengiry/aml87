@@ -1,8 +1,10 @@
 <?php
 
-namespace Aml\Bundle\BlogBundle\Entity\Repository;
+namespace Aml\Bundle\BlogBundle\Repository;
 
+use Aml\Bundle\BlogBundle\Entity\Article;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * ArticleRepository
@@ -18,9 +20,10 @@ class ArticleRepository extends EntityRepository
      * @param $query
      * @param array $params
      * @param array $filters
-     * @return mixed
+     *
+     * @return array
      */
-    private function buildRequestByFilters($query, $params = array(), $filters = array())
+    private function buildRequestByFilters($query, array $params = [], array $filters = []): array
     {
         if (isset($filters['category']) && !empty($filters['category'])) {
             $query
@@ -33,7 +36,7 @@ class ArticleRepository extends EntityRepository
             $query
                 ->innerJoin('a.tags', 't')
                 ->andWhere("t.system_name LIKE :tag");
-            $params['tag'] = '%'.$filters['tag'].'%';
+            $params['tag'] = '%' . $filters['tag'] . '%';
         }
 
         $query->setParameters($params);
@@ -42,58 +45,36 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * Function to count public articles
+     * Retrieves public articles
      *
-     * @return mixed
-     */
-    public function countPublicArticles($filters = array())
-    {
-        $em = $this->getEntityManager();
-        $qb = $em->createQueryBuilder();
-
-        $qb
-            ->select('COUNT(a.id)')
-            ->from('AmlBlogBundle:Article', 'a')
-            ->where("a.public = 1");
-
-        if (!empty($filters)) {
-            $qb = $this->buildRequestByFilters($qb, array(), $filters);
-        }
-        $query = $qb->getQuery();
-
-        return $query->getSingleScalarResult();
-    }
-
-    /**
-     * Function to load articles blog
-     *
-     * @param $limit
-     * @param int $offset
+     * @param int $page
      * @param array $filters
-     * @return mixed
+     * @param int $limit
+     *
+     * @return Paginator
      */
-    public function getPublicArticles($limit, $offset = 0, $filters = array())
+    public function getPublicArticles(int $page = 1, array $filters = [], int $limit = 5): Paginator
     {
-
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
 
+        $firstResult = ($page - 1) * $limit;
         $qb
             ->select('a')
-            ->from('AmlBlogBundle:Article', 'a')
+            ->from(Article::class, 'a')
             ->leftJoin('a.logo', 'm')
             ->where("a.public = 1")
-            ->orderBy('a.created', 'DESC')
-            ->setMaxResults($limit)
-            ->setFirstResult($offset);
+            ->orderBy('a.created', 'DESC');
 
         if (!empty($filters)) {
-            $qb = $this->buildRequestByFilters($qb, array(), $filters);
+            $qb = $this->buildRequestByFilters($qb, [], $filters);
         }
 
-        $query = $qb->getQuery();
+        $qb
+            ->setFirstResult($firstResult)
+            ->setMaxResults($limit);
 
-        return $query->getResult();
+        return new Paginator($qb->getQuery());
     }
 
     /**
@@ -122,14 +103,14 @@ class ArticleRepository extends EntityRepository
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('e')
-            ->from('AmlBlogBundle:Article', 'e')
+            ->from(Article::class, 'e')
             ->join('e.url', 'u')
             ->where('u.urlKey = :url_key')
             ->setMaxResults(1);
 
-        $params = array(
-            'url_key' => $urlKey
-        );
+        $params = [
+            'url_key' => $urlKey,
+        ];
 
         $q->setParameters($params);
 

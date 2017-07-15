@@ -2,6 +2,7 @@
 
 namespace Aml\Bundle\ContactUsBundle\Controller;
 
+use Aml\Bundle\ContactUsBundle\Contact\ContactMessage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -36,9 +37,9 @@ class DefaultController extends Controller
                 ->setAddressIp($request->getClientIp())
                 ->setStatus(Message::MESSAGE_STATUS_SAVE);
 
-            $this->get('aml_contactus.contact.contact_message')->save($contactMessage);
+            $this->get(ContactMessage::class)->save($contactMessage);
 
-            $this->get('session')->getFlashBag()->add('success', 'E-mail envoyé avec succès');
+            $this->addFlash('success', 'E-mail envoyé avec succès');
 
             return $this->redirectToRoute('aml_contactus_default_index');
         }

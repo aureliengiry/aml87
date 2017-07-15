@@ -10,7 +10,7 @@ use Aml\Bundle\EvenementsBundle\Entity\Evenement;
  * Aml\Bundle\BlogBundle\Entity\Article
  *
  * @ORM\Table(name="blog_articles")
- * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Entity\Repository\ArticleRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Repository\ArticleRepository")
  */
 class Article
 {
@@ -417,5 +417,15 @@ class Article
     public function __toString()
     {
         return $this->title ? $this->title : 'New Article';
+    }
+
+    public function getSlug()
+    {
+        $slug = $this->id;
+        if ($this->getUrl() && !empty($this->getUrl()->getUrlKey())) {
+            $slug = $this->getUrl()->getUrlKey();
+        }
+
+        return $slug;
     }
 }

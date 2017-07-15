@@ -1,6 +1,10 @@
 <?php
 namespace Aml\Bundle\BlogBundle\Controller;
 
+use Aml\Bundle\BlogBundle\Article\ArticleManager;
+use Aml\Bundle\BlogBundle\Entity\Article;
+use Aml\Bundle\BlogBundle\Entity\Category;
+use Aml\Bundle\BlogBundle\Entity\Tags;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -23,7 +27,7 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request, $page)
     {
-        $filters = $categories = $tags = array();
+        $filters = [];
 
         $category = $request->get('category');
         if ($category) {
@@ -35,86 +39,56 @@ class BlogController extends Controller
             $filters['tag'] = $tag;
         }
 
-
         $em = $this->getDoctrine()->getManager();
-        $repositoryArticle = $this->getDoctrine()->getRepository('AmlBlogBundle:Article');
 
-        // Get Nb articles
-        $nbEntities = $repositoryArticle->countPublicArticles($filters);
-
-        $num_pages = $page; // some calculation of what page you're currently on
-        $entitiesBlog = $repositoryArticle->getPublicArticles(
-            $this->_limitPagination,
-            $this->_limitPagination * ($num_pages - 1),
-            $filters
-        );
-
-        // Get Liste catégories
-        // @TODO : charger que les catégories avec les articles liés
-        $categories = $em->getRepository('AmlBlogBundle:Category')->findAll();
-
-        // Get Liste tags
-        $tags = $em->getRepository('AmlBlogBundle:Tags')->findAll();
+        $publicArticles = $this->get(ArticleManager::class)->getPublicArticlesWithPagination($page, $filters);
+        $nbPublicArticles = count($publicArticles);
 
         // Calcul de la pagination
-        $calculLastPage = round($nbEntities / $this->_limitPagination);
-        $pagination = array(
-            'nbEntities' => $nbEntities,
-            'limit' => $this->_limitPagination,
+        $calculLastPage = round($nbPublicArticles / $this->_limitPagination);
+        $pagination = [
+            'nbEntities'  => $nbPublicArticles,
+            'nbPages'     => ceil($nbPublicArticles / $this->_limitPagination),
+            'limit'       => $this->_limitPagination,
             'currentPage' => $page,
-            'nextPage' => ($page + 1 * $this->_limitPagination < $nbEntities ? $page + 1 : false),
-            'prevPage' => ($page - 1 > 0 ? $page - 1 : false),
-            'lastPage' => ($calculLastPage >= 0 ? $calculLastPage : 0)
-        );
+            'nextPage'    => ($page + 1 * $this->_limitPagination < $nbPublicArticles ? $page + 1 : false),
+            'prevPage'    => ($page - 1 > 0 ? $page - 1 : false),
+            'lastPage'    => ($calculLastPage >= 0 ? $calculLastPage : 0),
+        ];
 
-        return array(
-            'entities' => $entitiesBlog,
+        return [
+            'entities'   => $publicArticles,
             'pagination' => $pagination,
-            'categories' => $categories,
-            'tags' => $tags
-        );
+            'categories' => $em->getRepository(Category::class)->findAll(),
+            'tags'       => $em->getRepository(Tags::class)->findAll(),
+        ];
     }
 
     /**
      * Finds and displays a Blog entity.
      *
-     * @Route("/id/{id}", name="blog_show")
-     * @Route("/article/{url_key}.html", name="blog_show_rewrite")
+     * @Route("/article/{slug}.html", name="blog_show")
      * @Template()
      */
-    public function showAction($id = false, $url_key = null, Request $request)
+    public function showAction($slug, Request $request)
     {
         // Init Main Menu
         $menu = $this->get("app.main_menu");
         $menu->getChild("Blog")->setCurrent(true);
 
-        $em = $this->getDoctrine()->getManager();
-
-        if (false === $id) {
-            $entity = $em->getRepository('AmlBlogBundle:Article')->getArticleByUrlKey($url_key);
-        } else {
-            $entity = $em->getRepository('AmlBlogBundle:Article')->find($id);
-        }
-
-        if (!$entity) {
+        $article = $this->get(ArticleManager::class)->getArticleByIdOrUrl($slug);
+        if (!$article) {
             throw $this->createNotFoundException('Unable to find AmlBlogBundle:Blog entity.');
         }
 
-        $request->attributes->set('label', $entity->getTitle());
+        $request->attributes->set('label', $article->getTitle());
 
-        // Get Liste catégories
-        // @TODO : charger que les catégories avec les articles liés
-        $categories = $em->getRepository('AmlBlogBundle:Category')->findAll();
+        $em = $this->getDoctrine()->getManager();
 
-        // Get Liste tags
-        $tags = $em->getRepository('AmlBlogBundle:Tags')->findAll();
-
-        return array(
-            'entity' => $entity,
-            'categories' => $categories,
-            'tags' => $tags
-        );
+        return [
+            'entity'     => $article,
+            'categories' => $em->getRepository(Category::class)->findAll(),
+            'tags'       => $em->getRepository(Tags::class)->findAll(),
+        ];
     }
-
-
 }
