@@ -123,8 +123,6 @@ class MenuBuilder
                     ->addChild('label.discography.show')
                     ->setCurrent(true)
                     ->setLabel($currentRequest->get('label'));
-
-                $tset = 'tt';
                 break;
 
             /* ----- Page ----- */
