@@ -1,6 +1,3 @@
-parameters:
-#    aml_admin.example.class: Aml\Bundle\AdminBundle\Example
-
 services:
    aml_admin_bundle.image_type_extension:
           class: Aml\Bundle\AdminBundle\Form\Extension\ImageTypeExtension
