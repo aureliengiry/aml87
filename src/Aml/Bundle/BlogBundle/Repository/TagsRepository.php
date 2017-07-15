@@ -1,7 +1,8 @@
 <?php
 
-namespace Aml\Bundle\BlogBundle\Entity\Repository;
+namespace Aml\Bundle\BlogBundle\Repository;
 
+use Aml\Bundle\BlogBundle\Entity\Tags;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,7 +13,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class TagsRepository extends EntityRepository
 {
-
     /**
      * Function pour récupérer les mots clés pour l'autocomplétion
      * @param string $value
@@ -23,20 +23,20 @@ class TagsRepository extends EntityRepository
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
         $qb->select('t')
-            ->from('AmlBlogBundle:Tags', 't')
+            ->from(Tags::class, 't')
             ->where("t.name LIKE :tag")
             ->orderBy('t.name', 'ASC')
-            ->setParameter('tag', $value.'%');
+            ->setParameter('tag', $value . '%');
 
         $query = $qb->getQuery();
         $tags = $query->getResult();
 
-        $json = array();
+        $json = [];
         foreach ($tags as $mot) {
-            $json[] = array(
+            $json[] = [
                 'label' => $mot->getName(),
-                'value' => $mot->getId()
-            );
+                'value' => $mot->getId(),
+            ];
         }
 
         return $json;
@@ -55,10 +55,7 @@ class TagsRepository extends EntityRepository
             ->setParameter('tag', $tag);
 
         try {
-            $result = $query->getSingleResult();
-
-            return $result;
-
+            return $query->getSingleResult();
         } catch (\Doctrine\ORM\NoResultException $e) {
             return false;
         }

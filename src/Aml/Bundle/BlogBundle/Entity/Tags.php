@@ -10,7 +10,7 @@ use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
  * Aml\Bundle\BlogBundle\Entity\Tags
  *
  * @ORM\Table(name="blog_tags")
- * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Entity\Repository\TagsRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Repository\TagsRepository")
  */
 class Tags
 {

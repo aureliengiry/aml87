@@ -30,16 +30,16 @@ class SitemapListener
     public function onGenerateSitemapEvent(GenerateEvent $event)
     {
         // add blog url
-        $mainUrl = array('loc' => $this->router->generate('blog'), 'changefreq' => 'weekly', 'priority' => '0.80');
+        $mainUrl = [
+            'loc'        => $this->router->generate('blog'),
+            'changefreq' => 'weekly',
+            'priority'   => '0.80',
+        ];
         $event->addUrls($mainUrl);
 
         // add some urls blog
         $repositoryArticle = $this->em->getRepository('AmlBlogBundle:Article');
-        $entitiesBlog = $repositoryArticle->getPublicArticles(
-            100,
-            0,
-            array()
-        );
+        $entitiesBlog = $repositoryArticle->getPublicArticles(1, [], 100);
 
         // add some urls blog
         foreach ($entitiesBlog as $article) {
@@ -48,15 +48,12 @@ class SitemapListener
                 continue;
             }
 
-            $urlArticle = $this->router->generate(
-                'blog_show_rewrite',
-                array('url_key' => $article->getUrl()->getUrlKey())
-            );
-            if (empty($urlArticle)) {
-                $urlArticle = $this->router->generate('blog_show', array('id' => $article->getId()));
-            }
-
-            $urlArticleBlog = array('loc' => $urlArticle, 'changefreq' => 'weekly', 'priority' => '0.50');
+            $urlArticle = $this->router->generate('blog_show', ['slug' => $article->getSlug()]);
+            $urlArticleBlog = [
+                'loc'        => $urlArticle,
+                'changefreq' => 'weekly',
+                'priority'   => '0.50',
+            ];
             $event->addUrls($urlArticleBlog);
         }
     }

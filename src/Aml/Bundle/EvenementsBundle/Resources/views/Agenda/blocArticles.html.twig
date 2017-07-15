@@ -17,15 +17,9 @@
                 {% endif %}
 
                 <div class="infos">
-                    {% if article.url.urlKey is defined and article.url.urlKey is not empty %}
-                        <a href="{{ path('blog_show_rewrite', { 'url_key': article.url.urlKey }) }}"
-                           class="title"
-                           title="Voir l'article : {{ article.title }}">{{ article.title }}</a>
-                    {% else %}
-                        <a href="{{ path('blog_show', { 'id': article.id }) }}"
-                           class="title"
-                           title="Voir l'article : {{ article.title }}">{{ article.title }}</a>
-                    {% endif %}
+
+                    <a href="{{ path('blog_show', {'slug': article.slug}) }}" class="title"
+                       title="Voir l'article : {{ article.title }}">{{ article.title }}</a>
 
                     <div class="publi-info">
                     <span>Publié le

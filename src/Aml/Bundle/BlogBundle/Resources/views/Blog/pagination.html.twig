@@ -9,12 +9,12 @@
                                 href="{{ path('blog', { 'page': pagination.prevPage }) }}">‹&nbsp;précédente</a></li>
             {% endif %}
 
-            {% for i in 1..pagination.lastPage %}
-                {% if i == pagination.currentPage %}
-                    <li class="disabled"><a href="#">{{ i }}</a></li>
+            {% for p in range(max(pagination.currentPage-3, 1), min(pagination.currentPage+3, pagination.nbPages))%}
+                {% if p == pagination.currentPage %}
+                    <li class="disabled"><a href="#">{{ p }}</a></li>
                 {% else %}
-                    <li class=""><a class="active" title="Aller à la page {{ i }}"
-                                    href="{{ path('blog', { 'page': i }) }}">{{ i }}</a></li>
+                    <li class=""><a class="active" title="Aller à la page {{ p }}"
+                                    href="{{ path('blog', { 'page': p }) }}">{{ p }}</a></li>
                 {% endif %}
             {% endfor %}
 

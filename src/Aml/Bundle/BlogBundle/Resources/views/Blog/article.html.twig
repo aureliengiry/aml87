@@ -1,18 +1,13 @@
 <h2>
-    {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
-        <a href="{{ path('blog_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
-           title="Voir l'article : {{ entity.title }}">{{ entity.title }}</a>
-    {% else %}
-        <a href="{{ path('blog_show', { 'id': entity.id }) }}"
-           title="Voir l'article : {{ entity.title }}">{{ entity.title }}</a>
-    {% endif %}
+    <a href="{{ path('blog_show', {'slug': entity.slug }) }}"
+       title="Voir l'article : {{ entity.title }}">{{ entity.title }}</a>
 </h2>
 
 <div class="publi-info">
     <span>Publié le
         <span class="date-article-block">le {% if entity.created %}{{ entity.created|date('d/m/Y à H:i') }}{% endif %}</span>
         {% if entity.category.name %}
-            dans <a href="{{ path('blog',{'category' : entity.category.systemName}) }}"
+            dans <a href="{{ path('blog', {'category' : entity.category.systemName}) }}"
                     title="{{ entity.category.name }}">{{ entity.category.name }}</a>
         {% endif %}
     </span>
@@ -37,13 +32,10 @@
 
 <p class="container-wysiwyg">
     {{ entity.body|raw|wordWarp }}
-    {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
-        <a href="{{ path('blog_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
-           title="Lire l'article : {{ entity.title }}">Lire la suite</a>
-    {% else %}
-        <a href="{{ path('blog_show', { 'id': entity.id }) }}"
-           title="Lire l'article : {{ entity.title }}">Lire la suite</a>
-    {% endif %}
+
+    <a href="{{ path('blog_show', {'slug': entity.slug }) }}"
+       title="Lire l'article : {{ entity.title }}">Lire la suite</a>
+
 </p>
 
 {% if entity.tags is not empty %}

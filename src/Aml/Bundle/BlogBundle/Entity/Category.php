@@ -10,7 +10,7 @@ use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
  * Aml\Bundle\BlogBundle\Entity\Category
  *
  * @ORM\Table(name="blog_categories")
- * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Entity\Repository\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Repository\CategoryRepository")
  */
 class Category
 {
