@@ -118,7 +118,6 @@ class MenuBuilder
                     ->setCurrent(true);
                 break;
             case 'blog_show':
-            case 'blog_show_rewrite':
                 $menu->addChild('Blog', array('route' => 'blog'));
                 $menu
                     ->addChild('label.discography.show')
