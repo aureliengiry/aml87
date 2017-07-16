@@ -6,3 +6,8 @@ services:
             - '@router'
         tags:
             - { name: kernel.event_listener, event: aml_web.sitemap.generate_start, method: onGenerateSitemapEvent }
+
+    Aml\Bundle\EvenementsBundle\Evenement\EvenementManager:
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            

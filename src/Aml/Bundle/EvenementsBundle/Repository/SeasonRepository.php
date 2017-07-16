@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\EvenementsBundle\Entity\Repository;
+namespace Aml\Bundle\EvenementsBundle\Repository;
 
 use Aml\Bundle\EvenementsBundle\Entity\Season;
 use Doctrine\ORM\EntityRepository;

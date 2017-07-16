@@ -1,8 +1,9 @@
 <?php
 namespace Aml\Bundle\BlogBundle\EventListener;
 
+use Aml\Bundle\BlogBundle\Entity\Article;
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Router;
 
 /**
@@ -15,10 +16,10 @@ class SitemapListener
     private $router;
 
     /**
-     * @param EntityManager $entityManager
+     * @param EntityManagerInterface $entityManager
      * @param Router $router
      */
-    public function __construct(EntityManager $entityManager, Router $router)
+    public function __construct(EntityManagerInterface $entityManager, Router $router)
     {
         $this->em = $entityManager;
         $this->router = $router;
@@ -38,7 +39,7 @@ class SitemapListener
         $event->addUrls($mainUrl);
 
         // add some urls blog
-        $repositoryArticle = $this->em->getRepository('AmlBlogBundle:Article');
+        $repositoryArticle = $this->em->getRepository(Article::class);
         $entitiesBlog = $repositoryArticle->getPublicArticles(1, [], 100);
 
         // add some urls blog
@@ -48,9 +49,8 @@ class SitemapListener
                 continue;
             }
 
-            $urlArticle = $this->router->generate('blog_show', ['slug' => $article->getSlug()]);
             $urlArticleBlog = [
-                'loc'        => $urlArticle,
+                'loc'        => $this->router->generate('blog_show', ['slug' => $article->getSlug()]),
                 'changefreq' => 'weekly',
                 'priority'   => '0.50',
             ];

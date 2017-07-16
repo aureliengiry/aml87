@@ -12,7 +12,7 @@ use Aml\Bundle\WebBundle\Entity\Partenaire;
  * Aml\Bundle\EvenementsBundle\Entity\Evenement
  *
  * @ORM\Table(name="evenements")
- * @ORM\Entity(repositoryClass="Aml\Bundle\EvenementsBundle\Entity\Repository\EvenementRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\EvenementsBundle\Repository\EvenementRepository")
  */
 class Evenement
 {
@@ -474,4 +474,13 @@ class Evenement
         return (bool)$this->season;
     }
 
+    public function getSlug()
+    {
+        $slug = $this->id;
+        if ($this->getUrl() && !empty($this->getUrl()->getUrlKey())) {
+            $slug = $this->getUrl()->getUrlKey();
+        }
+
+        return $slug;
+    }
 }
