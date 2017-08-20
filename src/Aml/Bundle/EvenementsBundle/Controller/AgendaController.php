@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Blog controller.
@@ -23,7 +24,7 @@ class AgendaController extends Controller
      * @Route("/", name="agenda")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(): array
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -41,14 +42,17 @@ class AgendaController extends Controller
     /**
      * Finds and displays a Evenement entity.
      *
-     * @Route("/evenement/{slug}.html", name="agenda_show_event")
+     * @Route(
+     *     "/evenement/{slug}.html",
+     *     name="agenda_show_event"
+     *     )
      * @Template()
      *
      * @param int|string $slug
      *
      * @return array
      */
-    public function showAction($slug, Request $request)
+    public function showAction(string $slug, Request $request): array
     {
         $event = $this->get(EvenementManager::class)->getEventByIdOrUrl($slug);
         if (!$event) {
@@ -69,36 +73,30 @@ class AgendaController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function nextConcertAction()
+    public function nextConcertAction(): Response
     {
-        // getNextConcert
-        $repo = $this->getDoctrine()->getRepository(Evenement::class);
-        $nextConcert = $repo->getNextConcert();
-
         return $this->render(
             'AmlEvenementsBundle::Blocs/blocNextConcert.html.twig',
-            array('nextConcert' => $nextConcert)
+            ['nextConcert' => $this->get(EvenementManager::class)->getNextConcert()]
         );
     }
 
     /**
      * Lists all archived event.
      *
-     * @Route("/archives/{season_id}", name="agenda_archives")
+     * @Route(
+     *     "/archives/{season_id}",
+     *     name="agenda_archives",
+     *     requirements={"season_id"="\d+"}
+     *     )
      * @Template()
      */
-    public function archivesAction($season_id = false, Request $request)
+    public function archivesAction(int $season_id, Request $request): array
     {
         $em = $this->getDoctrine()->getManager();
-
         $seasonsRepository = $em->getRepository(Season::class);
-        $evenementRepository = $em->getRepository(Evenement::class);
-        if ($season_id) {
-            $season = $seasonsRepository->find($season_id);
-        } else {
-            $season = $seasonsRepository->getLastSeason();
-        }
 
+        $season = $seasonsRepository->find($season_id);
         if (!$season) {
             throw $this->createNotFoundException('Unable to find AmlEvenementsBundle:Season entity.');
         }
@@ -109,13 +107,10 @@ class AgendaController extends Controller
 
         $request->attributes->set('label', $season->getName());
 
-        $events = $evenementRepository->getArchivedConcertBySeason($season);
-        $seasons = $seasonsRepository->getPastSeasons();
-
         return [
             'currentSeason' => $season,
-            'entities'      => $events,
-            'seasons'       => $seasons,
+            'entities'      => $this->get(EvenementManager::class)->getArchivedConcertBySeason($season),
+            'seasons'       => $seasonsRepository->getPastSeasons(),
         ];
     }
 }

@@ -110,7 +110,7 @@ class EvenementRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getArchivedConcertBySeason(Season $season)
+    public function findArchivedConcertBySeason(Season $season)
     {
         $dateTimeStart = new \DateTime();
         $dateTimeStart->setTime(0, 0);
@@ -145,7 +145,7 @@ class EvenementRepository extends EntityRepository
      *
      * @return Evenement|null
      */
-    public function getNextConcert()
+    public function findNextConcert()
     {
         $currentDate = new \DateTime();
         $currentDate->setTime(0, 0);

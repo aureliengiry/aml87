@@ -3,6 +3,7 @@
 namespace Aml\Bundle\EvenementsBundle\Evenement;
 
 use Aml\Bundle\EvenementsBundle\Entity\Evenement;
+use Aml\Bundle\EvenementsBundle\Entity\Season;
 use Doctrine\ORM\EntityManagerInterface;
 
 class EvenementManager
@@ -16,7 +17,7 @@ class EvenementManager
 
     public function getPublicEventsInCurrentSeason()
     {
-        return $this->getEventepository()->getNextEvenements(
+        return $this->getEventRepository()->getNextEvenements(
             [
                 'public'  => 1,
                 'archive' => 0,
@@ -25,17 +26,25 @@ class EvenementManager
         );
     }
 
-    public function getEventByIdOrUrl($urlKey)
+    public function getEventByIdOrUrl(string $urlKey)
     {
         if (is_int($urlKey)) {
-            return $this->getEventepository()->find($urlKey);
+            return $this->getEventRepository()->find($urlKey);
         } else {
-            return $this->getEventepository()->getEventByUrlKey($urlKey);
+            return $this->getEventRepository()->getEventByUrlKey($urlKey);
         }
     }
 
-    private function getEventepository()
+    private function getEventRepository()
     {
         return $this->em->getRepository(Evenement::class);
+    }
+
+    public function getNextConcert(){
+        return $this->getEventRepository()->findNextConcert();
+    }
+
+    public function getArchivedConcertBySeason(Season $season){
+        return $this->getEventRepository()->findArchivedConcertBySeason($season);
     }
 }
