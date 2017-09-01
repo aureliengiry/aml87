@@ -4,6 +4,8 @@ namespace Aml\Bundle\EvenementsBundle\Repository;
 
 use Aml\Bundle\EvenementsBundle\Entity\Evenement;
 use Aml\Bundle\EvenementsBundle\Entity\Season;
+use Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -92,15 +94,15 @@ class EvenementRepository extends EntityRepository
 
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
-            ->select('e')
+            ->select('e.title','e.dateStart')
+            ->addSelect("eurl.urlKey as slug")
             ->from(Evenement::class, 'e')
+            ->leftJoin(UrlEvenement::class, 'eurl','WITH', 'eurl.id=e.url')
             ->orderBy('e.dateStart', 'ASC');
 
         $q = $this->buildRequestByFilters($q, $params = [], $filters);
 
-        $query = $q->getQuery();
-
-        return $query->getResult();
+        return $q->getQuery()->execute();
     }
 
     /**
@@ -117,8 +119,10 @@ class EvenementRepository extends EntityRepository
 
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
-            ->select('e')
+            ->select('e.title','e.dateStart')
+            ->addSelect("eurl.urlKey as slug")
             ->from(Evenement::class, 'e')
+            ->leftJoin(UrlEvenement::class, 'eurl','WITH', 'eurl.id=e.url')
             ->where("e.archive = :archive")
             ->andWhere("e.public = :public")
             ->andWhere("e.season = :season")

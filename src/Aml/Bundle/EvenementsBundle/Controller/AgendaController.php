@@ -30,12 +30,10 @@ class AgendaController extends Controller
 
         $seasonsRepository = $em->getRepository(Season::class);
         $seasons = $seasonsRepository->getPastSeasons();
-        $lastSeason = $seasonsRepository->getLastSeason();
 
         return [
             'entities'      => $this->get(EvenementManager::class)->getPublicEventsInCurrentSeason(),
-            'seasons'       => $seasons,
-            'currentSeason' => $lastSeason,
+            'seasons'       => $seasons
         ];
     }
 

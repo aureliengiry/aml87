@@ -14,15 +14,15 @@
         <h1>Archives - {{ currentSeason.name }}</h1>
 
         <ul id="agenda-concerts-public">
-            {% for key,entity in entities %}
+            {% for event in entities %}
                 <li class="event-item">
                     <span class="date">
-                        {{ entity.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }} :
+                        {{ event.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }} :
                     </span>
 
                     <h2>
-                        <a href="{{ path('agenda_show_event', { 'slug': entity.slug }) }}"
-                               title="{{ entity.title }}">{{ entity.title }}</a>
+                        <a href="{{ path('agenda_show_event', { 'slug': event.slug }) }}"
+                           title="{{ event.title }}">{{ event.title }}</a>
                     </h2>
                 </li>
             {% endfor %}

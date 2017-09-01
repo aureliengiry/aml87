@@ -90,7 +90,7 @@ class Evenement
     private $public;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", inversedBy="evenements",cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
      * @ORM\JoinTable(name="evenements_articles",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
@@ -99,14 +99,14 @@ class Evenement
     protected $articles;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="evenements", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Partenaire", mappedBy="evenements", cascade={"all"}, fetch="LAZY")
      */
     protected $partenaires;
 
     /**
      * @var string url
      *
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"}, fetch="EAGER")
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;
@@ -118,7 +118,7 @@ class Evenement
     protected $season;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\MediasBundle\Entity\Video\Youtube", inversedBy="evenements",cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\MediasBundle\Entity\Video\Youtube", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
      * @ORM\JoinTable(name="evenements_videos",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_video", referencedColumnName="id_video")}

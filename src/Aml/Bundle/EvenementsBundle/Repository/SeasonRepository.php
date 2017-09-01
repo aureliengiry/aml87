@@ -37,13 +37,9 @@ class SeasonRepository extends EntityRepository
 
         $q->setParameters($params);
 
-        $query = $q->getQuery();
 
-        try {
-            return $query->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            return null;
-        }
+        return $q->getQuery()->getOneOrNullResult();
+
     }
 
     /**
@@ -61,13 +57,7 @@ class SeasonRepository extends EntityRepository
             ->orderBy('s.dateStart', 'DESC')
             ->setMaxResults(1);
 
-        $query = $q->getQuery();
-
-        try {
-            return $query->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            return null;
-        }
+        return $q->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -93,8 +83,6 @@ class SeasonRepository extends EntityRepository
 
         $q->setParameters($params);
 
-        $query = $q->getQuery();
-
-        return $query->getResult();
+        return $q->getQuery()->getResult();
     }
 }
