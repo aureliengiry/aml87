@@ -5,17 +5,10 @@
         <span class="date">{{ nextConcert.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }}</span>
 
         <div class="container-date-description-block">
-            <div>
-                {{ nextConcert.title }}
-            </div>
-            {% if nextConcert.url.urlKey is defined and nextConcert.url.urlKey is not empty %}
-                <a class="link-view-more"
-                   href="{{ path('agenda_show_event_rewrite', { 'url_key': nextConcert.url.urlKey }) }}"
-                   title="En savoir plus : {{ nextConcert.title }}">En savoir plus</a>
-            {% else %}
-                <a class="link-view-more" href="{{ path('agenda_show_event', { 'id': nextConcert.id }) }}"
-                   title="En savoir plus : {{ nextConcert.title }}">En savoir plus</a>
-            {% endif %}
+            <div>{{ nextConcert.title }} </div>
+
+            <a class="link-view-more" href="{{ path('agenda_show_event', { 'slug': nextConcert.slug }) }}"
+               title="En savoir plus : {{ nextConcert.title }}">En savoir plus</a>
         </div>
 
         <a title="Voir tous les concerts" class="links-view-all black" href="{{ path('agenda') }}">Voir tous les

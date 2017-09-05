@@ -7,11 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AgendaControllerTest extends WebTestCase
 {
+
     public function testArchivesWithoutSeason()
     {
         $client = static::createClient();
 
-        $url = $client->getContainer()->get('router')->generate('agenda_archives');
+        $url = $client->getContainer()->get('router')->generate('agenda_archives', ['season_id' => 0]);
         $crawler = $client->request('GET', $url);
 
         // Check status code

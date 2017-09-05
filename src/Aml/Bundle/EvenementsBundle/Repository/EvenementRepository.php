@@ -1,10 +1,12 @@
 <?php
 
-namespace Aml\Bundle\EvenementsBundle\Entity\Repository;
+namespace Aml\Bundle\EvenementsBundle\Repository;
 
+use Aml\Bundle\EvenementsBundle\Entity\Evenement;
 use Aml\Bundle\EvenementsBundle\Entity\Season;
+use Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
-use Proxies\__CG__\Aml\Bundle\EvenementsBundle\Entity\Evenement;
 
 /**
  * Evenement
@@ -32,16 +34,16 @@ class EvenementRepository extends EntityRepository
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('e')
-            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->from(Evenement::class, 'e')
             ->where('e.dateStart > :dateStart')
             // ->andWhere('e.date_start < :date_end')
             ->orderBy('e.dateStart', 'ASC')
             ->setParameters(
-                array
-                (
+                [
+
                     'dateStart' => $dateTimeStart,
                     //'date_end' => $dateTimeEnd,
-                )
+                ]
             );
 
         return $q->getQuery()->getResult();
@@ -55,7 +57,7 @@ class EvenementRepository extends EntityRepository
      * @param array $filters
      * @return mixed
      */
-    private function buildRequestByFilters($query, $params = array(), $filters = array())
+    private function buildRequestByFilters($query, $params = [], $filters = [])
     {
         if (isset($filters['archive'])) {
             $query
@@ -85,22 +87,22 @@ class EvenementRepository extends EntityRepository
      * @param array $filters
      * @return mixed
      */
-    public function getNextEvenements($filters = array())
+    public function getNextEvenements($filters = [])
     {
         $dateTimeStart = new \DateTime();
         $dateTimeStart->setTime(0, 0);
 
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
-            ->select('e')
-            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->select('e.title','e.dateStart')
+            ->addSelect("eurl.urlKey as slug")
+            ->from(Evenement::class, 'e')
+            ->leftJoin(UrlEvenement::class, 'eurl','WITH', 'eurl.id=e.url')
             ->orderBy('e.dateStart', 'ASC');
 
-        $q = $this->buildRequestByFilters($q, $params = array(), $filters);
+        $q = $this->buildRequestByFilters($q, $params = [], $filters);
 
-        $query = $q->getQuery();
-
-        return $query->getResult();
+        return $q->getQuery()->execute();
     }
 
     /**
@@ -110,28 +112,30 @@ class EvenementRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getArchivedConcertBySeason(Season $season)
+    public function findArchivedConcertBySeason(Season $season)
     {
         $dateTimeStart = new \DateTime();
         $dateTimeStart->setTime(0, 0);
 
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
-            ->select('e')
-            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->select('e.title','e.dateStart')
+            ->addSelect("eurl.urlKey as slug")
+            ->from(Evenement::class, 'e')
+            ->leftJoin(UrlEvenement::class, 'eurl','WITH', 'eurl.id=e.url')
             ->where("e.archive = :archive")
             ->andWhere("e.public = :public")
             ->andWhere("e.season = :season")
             ->andWhere("e.type = :type")
             ->orderBy('e.dateStart', 'ASC');
 
-        $params = array(
+        $params = [
             'archive' => 1,
-            'public' => 1,
-            'season' => $season,
-            'type' => Evenement::EVENEMENT_TYPE_CONCERT
+            'public'  => 1,
+            'season'  => $season,
+            'type'    => Evenement::EVENEMENT_TYPE_CONCERT,
 
-        );
+        ];
 
         $q->setParameters($params);
 
@@ -145,7 +149,7 @@ class EvenementRepository extends EntityRepository
      *
      * @return Evenement|null
      */
-    public function getNextConcert()
+    public function findNextConcert()
     {
         $currentDate = new \DateTime();
         $currentDate->setTime(0, 0);
@@ -153,20 +157,20 @@ class EvenementRepository extends EntityRepository
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('e')
-            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->from(Evenement::class, 'e')
             ->where('e.dateStart >= :currentDate')
             ->orderBy('e.dateStart', 'ASC')
             ->setMaxResults(1);
 
-        $params = array(
+        $params = [
             'currentDate' => $currentDate,
-        );
+        ];
 
-        $filters = array(
-            'type' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::EVENEMENT_TYPE_CONCERT,
+        $filters = [
+            'type'    => Evenement::EVENEMENT_TYPE_CONCERT,
             'archive' => 0,
-            'public' => 1
-        );
+            'public'  => 1,
+        ];
 
         $q = $this->buildRequestByFilters($q, $params, $filters);
 
@@ -181,18 +185,17 @@ class EvenementRepository extends EntityRepository
 
     public function getEventByUrlKey($urlKey)
     {
-
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
             ->select('e')
-            ->from('AmlEvenementsBundle:Evenement', 'e')
+            ->from(Evenement::class, 'e')
             ->join('e.url', 'u')
             ->where('u.urlKey = :url_key')
             ->setMaxResults(1);
 
-        $params = array(
-            'url_key' => $urlKey
-        );
+        $params = [
+            'url_key' => $urlKey,
+        ];
 
         $q->setParameters($params);
 

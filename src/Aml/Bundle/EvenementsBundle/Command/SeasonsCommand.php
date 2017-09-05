@@ -51,8 +51,8 @@ class SeasonsCommand extends ContainerAwareCommand
         $this->doctrine = $this->getContainer()->get('doctrine');
         $this->entityManager = $this->doctrine->getManager('default');
 
-        $this->evenementRepo = $this->doctrine->getRepository('AmlEvenementsBundle:Evenement');
-        $this->seasonRepo = $this->doctrine->getRepository('AmlEvenementsBundle:Season');
+        $this->evenementRepo = $this->doctrine->getRepository(Evenement::class);
+        $this->seasonRepo = $this->doctrine->getRepository(Season::class);
     }
 
     /**
