@@ -42,5 +42,6 @@
 # node modules
 /node_modules
 
-
-
+# Docker
+docker-env
+docker-compose.yml
