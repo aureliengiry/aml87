@@ -156,4 +156,10 @@ class Season
     {
         return $this->name ? $this->name : 'New Season';
     }
+
+    public function createStartDate($year){
+
+        $str = sprintf(self::SEASON_DEFAULT_DATE_START,$year);
+        return new \DateTime($str);
+    }
 }

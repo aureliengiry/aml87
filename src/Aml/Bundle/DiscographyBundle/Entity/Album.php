@@ -255,7 +255,6 @@ class Album
     public function removeTrack(Track $track)
     {
         $this->tracks->removeElement($track);
-        $track->deleteAlbum($this);
     }
 
     public function __toString()
