@@ -9,7 +9,6 @@
 !/var/sessions
 /var/sessions/*
 !var/sessions/.gitkeep
-!var/SymfonyRequirements.php
 
 # Parameters
 /app/config/parameters.yml
