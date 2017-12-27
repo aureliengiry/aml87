@@ -15,6 +15,7 @@ install:
   - php bin/console doctrine:schema:drop --force --env=test
   - php bin/console doctrine:database:create --env=test
   - php bin/console doctrine:schema:update --force --env=test
+  - php bin/console doctrine:fixtures:load --env=test --purge-with-truncate -n
 
 script:
   - phpunit

@@ -82,6 +82,8 @@ tu-init: vendor
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:drop --force --env=test
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:create --env=test
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:schema:update --force --env=test
+	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:fixtures:load --env=test --purge-with-truncate -n
+
 
 tu:             ## Run the PHP unit tests
 tu:
