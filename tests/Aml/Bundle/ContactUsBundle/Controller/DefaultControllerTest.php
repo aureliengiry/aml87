@@ -2,6 +2,7 @@
 namespace Tests\Aml\Bundle\ContactUsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -24,7 +25,7 @@ class DefaultControllerTest extends WebTestCase
     public function testIndex()
     {
         $url = $this->client->getContainer()->get('router')->generate('aml_contactus_default_index');
-        $crawler = $this->client->request('GET', $url);
+        $crawler = $this->client->request(Request::METHOD_GET, $url);
 
         // Check status code
         $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());

@@ -59,8 +59,8 @@ class BlogController extends Controller
         return [
             'entities'   => $publicArticles,
             'pagination' => $pagination,
-            'categories' => $em->getRepository(Category::class)->findAll(),
-            'tags'       => $em->getRepository(Tags::class)->findAll(),
+            'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
+            'tags'       => $this->get(ArticleManager::class)->getTagsWithNbArticles(),
         ];
     }
 

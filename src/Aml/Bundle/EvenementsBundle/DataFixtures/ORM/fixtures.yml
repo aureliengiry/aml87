@@ -1,9 +1,8 @@
 Aml\Bundle\EvenementsBundle\Entity\Season:
     season_{1..5}:
         name: "Season_<current()>"
-        dateStart: '<(createStartDate(2014)>'
+        dateStart: '<dateTimeBetween("-5 years", "now")>'
         dateEnd: '<dateTimeBetween($dateStart, "+1 years")>'
-
 
 Aml\Bundle\EvenementsBundle\Entity\Evenement:
     event_{1..50}:

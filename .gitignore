@@ -9,7 +9,6 @@
 !/var/sessions
 /var/sessions/*
 !var/sessions/.gitkeep
-!var/SymfonyRequirements.php
 
 # Parameters
 /app/config/parameters.yml
@@ -43,5 +42,6 @@
 /node_modules
 
 # Docker
-docker-env
-docker-compose.yml
+/docker-env
+/docker-compose.yml
+

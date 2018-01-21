@@ -28,14 +28,14 @@ class ArticleRepository extends EntityRepository
         if (isset($filters['category']) && !empty($filters['category'])) {
             $query
                 ->innerJoin('a.category', 'c')
-                ->andWhere("c.system_name LIKE :category");
+                ->andWhere("c.systemName LIKE :category");
             $params['category'] = $filters['category'];
         }
 
         if (isset($filters['tag']) && !empty($filters['tag'])) {
             $query
                 ->innerJoin('a.tags', 't')
-                ->andWhere("t.system_name LIKE :tag");
+                ->andWhere("t.systemName LIKE :tag");
             $params['tag'] = '%' . $filters['tag'] . '%';
         }
 
@@ -63,6 +63,7 @@ class ArticleRepository extends EntityRepository
             ->select('a')
             ->from(Article::class, 'a')
             ->leftJoin('a.logo', 'm')
+            ->leftJoin('a.url', 'u')
             ->where("a.public = 1")
             ->orderBy('a.created', 'DESC');
 

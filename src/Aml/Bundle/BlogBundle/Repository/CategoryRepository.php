@@ -2,6 +2,8 @@
 
 namespace Aml\Bundle\BlogBundle\Repository;
 
+use Aml\Bundle\BlogBundle\Entity\Article;
+use Aml\Bundle\BlogBundle\Entity\Category;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +14,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+
+    /**
+     * Function pour récupérer les mots clés pour l'autocomplétion
+     * @param string $value
+     * @return array
+     */
+    public function getCategoriesWithNbArticles()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $qb
+            ->select('c.systemName','c.name','count(a.id) as nbArticles','c.description')
+            ->from(Article::class, 'a')
+            ->innerJoin(Category::class, 'c','WITH', 'c.id=a.category')
+            ->where('a.public = 1')
+            ->groupBy('c.id')
+            ->orderBy('c.name', 'ASC')
+        ;
+
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
 }
