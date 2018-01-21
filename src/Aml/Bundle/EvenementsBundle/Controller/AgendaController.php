@@ -2,12 +2,12 @@
 
 namespace Aml\Bundle\EvenementsBundle\Controller;
 
-use Aml\Bundle\EvenementsBundle\Entity\Evenement;
 use Aml\Bundle\EvenementsBundle\Entity\Season;
 use Aml\Bundle\EvenementsBundle\Evenement\EvenementManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,7 +22,8 @@ class AgendaController extends Controller
      * Lists all Blog entities.
      *
      * @Route("/", name="agenda")
-     * @Template()
+     * @Template("agenda/index.html.twig")
+     * @Method("GET")
      */
     public function indexAction(): array
     {
@@ -32,8 +33,8 @@ class AgendaController extends Controller
         $seasons = $seasonsRepository->getPastSeasons();
 
         return [
-            'entities'      => $this->get(EvenementManager::class)->getPublicEventsInCurrentSeason(),
-            'seasons'       => $seasons
+            'entities' => $this->get(EvenementManager::class)->getPublicEventsInCurrentSeason(),
+            'seasons'  => $seasons
         ];
     }
 
@@ -44,7 +45,8 @@ class AgendaController extends Controller
      *     "/evenement/{slug}.html",
      *     name="agenda_show_event"
      *     )
-     * @Template()
+     * @Template("agenda/show.html.twig")
+     * @Method("GET")
      *
      * @param int|string $slug
      *
@@ -74,9 +76,9 @@ class AgendaController extends Controller
     public function nextConcertAction(): Response
     {
         return $this->render(
-            'AmlEvenementsBundle::Blocs/blocNextConcert.html.twig',
-            ['nextConcert' => $this->get(EvenementManager::class)->getNextConcert()]
-        );
+            'agenda/blocs/blocNextConcert.html.twig', [
+            'nextConcert' => $this->get(EvenementManager::class)->getNextConcert()
+        ]);
     }
 
     /**
@@ -87,7 +89,8 @@ class AgendaController extends Controller
      *     name="agenda_archives",
      *     requirements={"season_id"="\d+"}
      *     )
-     * @Template()
+     * @Template("agenda/archives.html.twig")
+     * @Method("GET")
      */
     public function archivesAction(int $season_id, Request $request): array
     {

@@ -1,6 +1,11 @@
 <?php
+
 namespace Aml\Bundle\UrlRewriteBundle\Utils;
 
+/**
+ * Class Slugger
+ * @package Aml\Bundle\UrlRewriteBundle\Utils
+ */
 class Slugger
 {
     protected $outputString = '';
@@ -15,7 +20,7 @@ class Slugger
     protected function removeAccent()
     {
         $this->outputString = str_replace(
-            array(
+            [
                 'à',
                 'á',
                 'â',
@@ -66,9 +71,9 @@ class Slugger
                 'Ú',
                 'Û',
                 'Ü',
-                'Ý'
-            ),
-            array(
+                'Ý',
+            ],
+            [
                 'a',
                 'a',
                 'a',
@@ -119,8 +124,8 @@ class Slugger
                 'U',
                 'U',
                 'U',
-                'Y'
-            ),
+                'Y',
+            ],
             $this->outputString
         );
     }
@@ -134,22 +139,22 @@ class Slugger
      *
      * @return mixed|string
      */
-    public function slugify($str, $replace = '-', $lowercase = true)
+    public function slugify(string $str, string $replace = '-', bool $lowercase = true)
     {
         $this->outputString = $str;
 
         $this->removeAccent();
 
-        $trans = array(
-            '&\#\d+?;' => '',
-            '&\S+?;' => '',
-            '\s+' => $replace,
+        $trans = [
+            '&\#\d+?;'       => '',
+            '&\S+?;'         => '',
+            '\s+'            => $replace,
             '[^a-z0-9\-\._]' => '',
-            $replace . '+' => $replace,
-            $replace . '$' => $replace,
-            '^' . $replace => $replace,
-            '\.+$' => ''
-        );
+            $replace . '+'   => $replace,
+            $replace . '$'   => $replace,
+            '^' . $replace   => $replace,
+            '\.+$'           => '',
+        ];
 
         $this->outputString = strip_tags($this->outputString);
 
@@ -162,11 +167,11 @@ class Slugger
         }
 
         $this->outputString = trim(stripslashes($this->outputString));
-        $this->outputString = str_replace(array('.'), array('-'), $this->outputString);
+        $this->outputString = str_replace(['.'], ['-'], $this->outputString);
 
         // Check and clean last character
         $lastCharacter = substr($this->outputString, -1);
-        if ($lastCharacter == '-') {
+        if ($lastCharacter === '-') {
             $this->outputString = substr($this->outputString, 0, -1);
         }
 

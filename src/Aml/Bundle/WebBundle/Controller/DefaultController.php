@@ -21,21 +21,21 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="home")
      * @Method("GET")
-     * @Template()
+     * @Template("default/index.html.twig")
      */
     public function indexAction()
     {
         // Last blog article
         $repo = $this->getDoctrine()->getRepository(Article::class);
         $blogEntity = $repo->findOneBy(
-            ['public' => 1],
+            ['public' => Article::ARTICLE_IS_PUBLIC],
             ['created' => 'DESC']
         );
 
         // Last Album
         $repo = $this->getDoctrine()->getRepository(Album::class);
         $albumEntity = $repo->findOneBy(
-            ['public' => 1],
+            ['public' => Album::ALBUM_IS_PUBLIC],
             ['date' => 'DESC']
         );
 
@@ -48,7 +48,7 @@ class DefaultController extends Controller
     /**
      * @Route("/sitemap.{_format}", name="sitemap", Requirements={"_format" = "xml"})
      * @Method("GET")
-     * @Template("AmlWebBundle:Default:sitemap.xml.twig")
+     * @Template("default/sitemap.xml.twig")
      */
     public function sitemapAction(Request $request)
     {
@@ -78,14 +78,10 @@ class DefaultController extends Controller
     /**
      * @Route("/google-analytics", name="google-analytics")
      * @Method("GET")
+     * @Template("main/googleAnalytics.html.twig")
      */
     public function googleAnalyticsAction()
     {
-        $accountGa = $this->container->getParameter('app_google_analytics.account_id');
-
-        return $this->render(
-            'main/googleAnalytics.html.twig',
-            ['ga_id' => $accountGa]
-        );
+        return  ['ga_id' => $this->container->getParameter('app_google_analytics.account_id')];
     }
 }

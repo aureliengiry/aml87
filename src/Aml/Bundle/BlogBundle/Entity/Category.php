@@ -70,7 +70,7 @@ class Category
      *
      * @param string $systemName
      */
-    public function setSystemName($title)
+    public function setSystemName(string $title)
     {
         $slugger = new Slugger();
         $this->systemName = $slugger->slugify($title, '_');
@@ -93,7 +93,7 @@ class Category
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
         $this->setSystemName($name);
@@ -112,7 +112,7 @@ class Category
     }
 
     /**
-     * @return the $description
+     * @return text $description
      */
     public function getDescription()
     {
@@ -120,9 +120,11 @@ class Category
     }
 
     /**
-     * @param text $description
+     * @param string $description
+     *
+     * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -130,7 +132,7 @@ class Category
     }
 
     /**
-     * @return the $articles
+     * @return ArrayCollection
      */
     public function getArticles()
     {
