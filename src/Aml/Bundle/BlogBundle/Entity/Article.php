@@ -33,7 +33,7 @@ class Article
     /**
      * @var string url
      *
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"}, fetch="EAGER")s
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;
@@ -287,7 +287,7 @@ class Article
      *
      * @return boolean
      */
-    public function getPublic()
+    public function isPublic()
     {
         return $this->public;
     }

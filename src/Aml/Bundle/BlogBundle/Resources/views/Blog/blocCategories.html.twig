@@ -5,7 +5,7 @@
     {% for category in categories %}
         <li><a class="active" title="{{ category.description }}"
                href="{{ path('blog',{'category' : category.systemName}) }}">{{ category.name }}</a>
-            ({{ category.articles|length }})
+            ({{ category.nbArticles }})
         </li>
     {% endfor %}
 </ul>

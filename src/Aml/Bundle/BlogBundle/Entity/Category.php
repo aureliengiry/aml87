@@ -24,11 +24,11 @@ class Category
     private $id;
 
     /**
-     * @var string $system_name
+     * @var string $systemName
      *
      * @ORM\Column(name="system_name", type="string", length=255,unique=true)
      */
-    private $system_name;
+    private $systemName;
 
     /**
      * @var string $name
@@ -73,7 +73,7 @@ class Category
     public function setSystemName($title)
     {
         $slugger = new Slugger();
-        $this->system_name = $slugger->slugify($title, '_');
+        $this->systemName = $slugger->slugify($title, '_');
 
         return $this;
     }
@@ -85,7 +85,7 @@ class Category
      */
     public function getSystemName()
     {
-        return $this->system_name;
+        return $this->systemName;
     }
 
     /**

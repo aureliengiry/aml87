@@ -12,13 +12,18 @@ before_install:
 
 install:
   - composer install -o -n
+  - php bin/console cache:clear --env=test --no-warmup
+  - php bin/console cache:warmup --env=test
   - php bin/console doctrine:schema:drop --force --env=test
   - php bin/console doctrine:database:create --env=test
   - php bin/console doctrine:schema:update --force --env=test
   - php bin/console doctrine:fixtures:load --env=test --purge-with-truncate -n
 
+
+
 script:
   - phpunit
+  - cat var/logs/test.log
 
 notifications:
   email:

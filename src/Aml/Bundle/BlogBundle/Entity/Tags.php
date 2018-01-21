@@ -39,7 +39,7 @@ class Tags
      *
      * @ORM\Column(name="system_name", type="string", length=255)
      */
-    private $system_name;
+    private $systemName;
 
     /**
      * @var string $title
@@ -130,7 +130,7 @@ class Tags
     public function setSystemName($systemName)
     {
         $slugger = new Slugger();
-        $this->system_name = $slugger->slugify($systemName, '_');
+        $this->systemName = $slugger->slugify($systemName, '_');
 
         return $this;
     }
@@ -142,7 +142,7 @@ class Tags
      */
     public function getSystemName()
     {
-        return $this->system_name;
+        return $this->systemName;
     }
 
     public function getArticles()

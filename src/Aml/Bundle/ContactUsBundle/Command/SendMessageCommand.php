@@ -13,8 +13,8 @@ use Aml\Bundle\ContactUsBundle\Entity\Message;
 use Aml\Bundle\ContactUsBundle\Event\PostEvent;
 
 /**
- * Class SeasonsCommand
- * @package Aml\Bundle\EvenementsBundle\Command
+ * Class SendMessageCommand
+ * @package Aml\Bundle\ContactUsBundle\Command
  */
 class SendMessageCommand extends ContainerAwareCommand
 {

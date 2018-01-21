@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SCRIPT_PATH=$(readlink -f "$0")
+DIRECTORY_PATH=$(dirname "${SCRIPT_PATH}")
+
 function init_server()
 {
     APP_IP="$(/sbin/ifconfig eth0| grep "inet addr:" | awk {"print $2"} | cut -d ":" -f 2)"
@@ -15,6 +18,14 @@ function init_configuration()
     #sed -i -e "s|80.conf|8080.conf|g" /etc/apache2/sites-enabled/000-default.conf
 
     a2enmod ssl expires headers rewrite
+
+    # PHP INI
+    echo "Config - PHP INI"
+    CONFIG_FILE="${DIRECTORY_PATH}/extra/conf/php.ini"
+    if [[ -e "${CONFIG_FILE}" ]]; then
+        cp -f "${CONFIG_FILE}" /usr/local/etc/php/php.ini
+        echo "File \"${CONFIG_FILE}\" successfully imported."
+    fi
 
     echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
 }
@@ -101,16 +112,16 @@ LOCK_FILE="/var/docker.lock"
 if [[ ! -e "${LOCK_FILE}" ]]; then
 
     init_server
-    init_configuration
+
     # init_opcache
     init_xdebug
-    #init_blackfire
+    init_blackfire
 
-    service apache2 restart
 
     touch "${LOCK_FILE}"
 fi
 
+init_configuration
 init_vhosts
 composer self-update
 service apache2 start

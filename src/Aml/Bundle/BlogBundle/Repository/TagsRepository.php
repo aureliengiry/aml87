@@ -2,6 +2,7 @@
 
 namespace Aml\Bundle\BlogBundle\Repository;
 
+use Aml\Bundle\BlogBundle\Entity\Article;
 use Aml\Bundle\BlogBundle\Entity\Tags;
 use Doctrine\ORM\EntityRepository;
 
@@ -60,5 +61,27 @@ class TagsRepository extends EntityRepository
             return false;
         }
 
+    }
+
+    /**
+     * Function pour récupérer les mots clés pour l'autocomplétion
+     * @param string $value
+     * @return array
+     */
+    public function getTagsWithNbArticles()
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $qb
+            ->select('t')
+            ->from(Tags::class, 't')
+            ->join('t.articles', 'a')
+            ->where('a.public = 1')
+            ->groupBy('t.id')
+            ->orderBy('t.name', 'ASC')
+        ;
+
+        $query = $qb->getQuery();
+        return $query->getResult();
     }
 }

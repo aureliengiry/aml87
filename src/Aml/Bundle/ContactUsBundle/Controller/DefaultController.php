@@ -24,7 +24,7 @@ class DefaultController extends Controller
      *
      * @Route("/", name="aml_contactus_default_index")
      * @Template()
-     * @Method("GET|POST")
+     * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request)
     {

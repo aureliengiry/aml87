@@ -5,34 +5,6 @@ MAINTAINER Aurélien GIRY <aurelien.giry@gmail.com>
 COPY . /usr/local/docker
 RUN chmod -R 777 /usr/local/docker
 
-
-# # PHP 7.1
-# RUN apt-get update --fix-missing && apt-get install -y autoconf \
-#     php7.1 \
-#     libapache2-mod-php7.1 \
-#     php7.1-apcu \
-#     php7.1-apcu-bc \
-#     php7.1-cli \
-#     php7.1-mysql \
-#     php7.1-curl \
-#     php7.1-json \
-#     php7.1-gd \
-#     php7.1-mcrypt \
-#     php7.1-msgpack \
-#     php7.1-intl \
-#     php7.1-sqlite3 \
-#     php7.1-gmp \
-#     php7.1-geoip \
-#     php7.1-mbstring \
-#     php7.1-xml \
-#     php7.1-zip \
-#     php7.1-mongodb \
-#     php7.1-xdebug \
-#     php7.1-xmlrpc \
-#     php7.1-xsl \
-#     php7.1-dev \
-#     php-pear
-
 RUN apt-get update && apt-get install -y \
         php-soap \
         php-http-request \
@@ -84,12 +56,21 @@ RUN \
 
 RUN pecl update-channels
 
-RUN \
-    export PHP_VERSION=`/usr/bin/php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;"` && \
-    curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/${PHP_VERSION} && \
-    export PHP_EXT_DIR=`/usr/bin/php -r "echo ini_get('extension_dir');"` && \
-    tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp && mv /tmp/blackfire-*.so ${PHP_EXT_DIR}/blackfire.so && \
-    chown root ${PHP_EXT_DIR}/blackfire.so && chown :root ${PHP_EXT_DIR}/blackfire.so && chmod 0755 ${PHP_EXT_DIR}/blackfire.so
+# Blackfire extension
+RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
+    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
+    && mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
+    && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini
+
+# Blackfire CLI
+RUN mkdir -p /tmp/blackfire \
+    && curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux_static/amd64 | tar zxp -C /tmp/blackfire \
+    && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
+    && rm -Rf /tmp/blackfire
+
+RUN usermod -u 1000 www-data
+
 
 RUN usermod -u 1000 www-data
 

@@ -3,6 +3,7 @@ namespace Aml\Bundle\BlogBundle\Article;
 
 
 use Aml\Bundle\BlogBundle\Entity\Article;
+use Aml\Bundle\BlogBundle\Entity\Tags;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ArticleManager
@@ -31,5 +32,14 @@ class ArticleManager
     private function getArticleRepository()
     {
         return $this->em->getRepository(Article::class);
+    }
+
+    private function getTagsRepository()
+    {
+        return $this->em->getRepository(Tags::class);
+    }
+
+    public function getTagsWithNbArticles(){
+        return $this->getTagsRepository()->getTagsWithNbArticles();
     }
 }
