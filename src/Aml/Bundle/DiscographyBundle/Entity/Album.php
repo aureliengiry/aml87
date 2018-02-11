@@ -13,6 +13,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Album
 {
+    const ALBUM_IS_PUBLIC = 1;
+    const ALBUM_IS_PRIVATE = 2;
     /**
      * @var integer $id
      *

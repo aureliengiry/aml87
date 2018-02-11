@@ -14,6 +14,9 @@ use Aml\Bundle\EvenementsBundle\Entity\Evenement;
  */
 class Article
 {
+    const ARTICLE_IS_PUBLIC = 1;
+    const ARTICLE_IS_PRIVATE = 0;
+
     /**
      * @var integer $id
      *

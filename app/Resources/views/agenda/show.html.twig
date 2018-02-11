@@ -35,16 +35,16 @@
         </article>
 
         {# Liste vidéos liées #}
-        {% include "AmlEvenementsBundle:Agenda:blocVideos.html.twig" %}
+        {% include "agenda/blocs/blocVideos.html.twig" %}
 
 {% endblock body %}
 
 {% block columnRight %}
 
     {# Liste articles liés #}
-    {% include "AmlEvenementsBundle::Agenda/blocArticles.html.twig" %}
+    {% include "agenda/blocs/blocArticles.html.twig" %}
 
     {# Liste des partenaires de l'évènement #}
-    {% include "AmlEvenementsBundle::Agenda/blocPartenaires.html.twig" %}
+    {% include "agenda/blocs/blocPartenaires.html.twig" %}
 
 {% endblock columnRight %}

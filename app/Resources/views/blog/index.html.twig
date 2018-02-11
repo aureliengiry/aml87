@@ -18,13 +18,13 @@
 
                 {# articles #}
                 <article class="blog-article{% if loop.first %} first{% endif %}{% if loop.last %} last{% endif %}">
-                    {% include "AmlBlogBundle::Blog/article.html.twig" %}
+                    {% include "blog/blocs/article.html.twig" %}
                 </article>
 
             {% endfor %}
 
             {# Pagination #}
-            {% include "AmlBlogBundle::Blog/pagination.html.twig" %}
+            {% include "blog/blocs/pagination.html.twig" %}
 
         {% else %}
             <h1>Blog</h1>
@@ -37,11 +37,11 @@
 {% block columnRight %}
     {# Liste des catégories #}
     <div class="side-bloc no-border">
-        {% include "AmlBlogBundle::Blog/blocCategories.html.twig" %}
+        {% include "blog/blocs/blocCategories.html.twig" %}
     </div>
 
     {# Liste des tags #}
     <div class="side-bloc">
-        {% include "AmlBlogBundle::Blog/blocTags.html.twig" %}
+        {% include "blog/blocs/blocTags.html.twig" %}
     </div>
 {% endblock columnRight %}

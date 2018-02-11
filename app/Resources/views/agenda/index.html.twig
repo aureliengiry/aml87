@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title -%}
-    Archives
+    Agenda
 {%- endblock title %}
 
 {% block body %}
@@ -10,16 +10,12 @@
     {% include "_includes/breadcrumb.html.twig" %}
 
     <article class="contenu-page">
-
-        <h1>Archives - {{ currentSeason.name }}</h1>
+        <h1>Agenda</h1>
 
         <ul id="agenda-concerts-public">
             {% for event in entities %}
                 <li class="event-item">
-                    <span class="date">
-                        {{ event.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }} :
-                    </span>
-
+                    <span class="date">{{ event.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }} :</span>
                     <h2>
                         <a href="{{ path('agenda_show_event', { 'slug': event.slug }) }}"
                            title="{{ event.title }}">{{ event.title }}</a>
@@ -36,6 +32,6 @@
     {{ parent() }}
 
     {# Seasons list #}
-    {% include "AmlEvenementsBundle::Agenda/archives/seasons.html.twig" %}
+    {% include "agenda/blocs/blocSeasons.html.twig" %}
 
 {% endblock columnRight %}

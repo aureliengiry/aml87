@@ -2,9 +2,11 @@
 
 namespace Aml\Bundle\WebBundle\Controller;
 
+use Aml\Bundle\WebBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -17,21 +19,20 @@ class PageController extends Controller
     /**
      * @Route("/page/{id}", name="page_show")
      * @Route("/{url_key}.html", name="page_show_rewrite")
-     * @Template("AmlWebBundle:Page:index.html.twig"))
+     * @Template("page/index.html.twig"))
+     * @Method("GET")
      */
     public function indexAction($id = false, $url_key = null, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         if (false === $id) {
-            $entity = $em->getRepository('AmlWebBundle:Page')->getPageByUrlKey($url_key);
+            $entity = $em->getRepository(Page::class)->getPageByUrlKey($url_key);
         } else {
-            $entity = $em->getRepository('AmlWebBundle:Page')->findOneBy(
-                array(
-                    'id' => $id,
-                    'public' => 1
-                )
-            );
+            $entity = $em->getRepository(Page::class)->findOneBy([
+                'id'     => $id,
+                'public' => Page::PAGE_IS_PUBLIC
+            ]);
         }
 
         if (!$entity) {
@@ -40,8 +41,8 @@ class PageController extends Controller
 
         $request->attributes->set('label', $entity->getTitle());
 
-        return array(
+        return [
             'entity' => $entity,
-        );
+        ];
     }
 }

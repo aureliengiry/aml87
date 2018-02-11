@@ -6,6 +6,7 @@ use Aml\Bundle\DiscographyBundle\Entity\Album;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -20,7 +21,8 @@ class DiscographyController extends Controller
      * Lists all Album entities.
      *
      * @Route("/", name="discography")
-     * @Template()
+     * @Template("discography/index.html.twig")
+     * @Method("GET")
      */
     public function indexAction()
     {
@@ -32,7 +34,8 @@ class DiscographyController extends Controller
      *
      * @Route("/album/id/{id}", name="discography_album_show")
      * @Route("/album/{url_key}.html", name="discography_album_show_rewrite")
-     * @Template()
+     * @Template("discography/show.html.twig")
+     * @Method("GET")
      */
     public function showAction($id = false, $url_key = null, Request $request)
     {

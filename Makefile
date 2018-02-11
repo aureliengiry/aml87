@@ -25,13 +25,13 @@ docker-init:          ## Init and start docker of Relight & Dimipro
 docker-init: up
 
 docker-start:         ## Start docker
-docker-start: docker-start
+docker-start: docker-cmd-start
 
 docker-stop:          ## Stop docker
-docker-stop: docker-stop
+docker-stop: docker-cmd-stop
 
 docker-restart:       ## Restart project
-docker-restart: docker-stop docker-start
+docker-restart: docker-cmd-stop docker-cmd-start
 
 apache-restart:       ## Restart apache of web container
 apache-restart:
@@ -74,6 +74,18 @@ sf-cc:
 	@$(EXEC_WEB) $(SYMFONY_CONSOLE) cache:warmup
 
 ##
+## Database
+##---------------------------------------------------------------------------
+
+db-init-dev:        ## Init Database, fixtures for dev
+db-init-dev: vendor
+	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:drop --force --env=dev
+	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:create --env=dev
+	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:schema:update --force --env=dev
+	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:fixtures:load --env=dev -n
+
+
+##
 ## Tests
 ##---------------------------------------------------------------------------
 
@@ -104,10 +116,10 @@ build:
 up:
 	$(FIG) up -d && $(FIG) logs
 
-docker-start:
+docker-cmd-start:
 	$(FIG) start
 
-docker-stop:
+docker-cmd-stop:
 	$(FIG) stop
 
 perm:

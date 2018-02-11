@@ -14,10 +14,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
-
     /**
-     * Function pour récupérer les mots clés pour l'autocomplétion
+     * Function retrieves all categories with nb articles by category
+     *
      * @param string $value
+     *
      * @return array
      */
     public function getCategoriesWithNbArticles()
@@ -25,15 +26,15 @@ class CategoryRepository extends EntityRepository
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
         $qb
-            ->select('c.systemName','c.name','count(a.id) as nbArticles','c.description')
+            ->select('c.systemName', 'c.name', 'count(a.id) as nbArticles', 'c.description')
             ->from(Article::class, 'a')
-            ->innerJoin(Category::class, 'c','WITH', 'c.id=a.category')
-            ->where('a.public = 1')
+            ->innerJoin(Category::class, 'c', 'WITH', 'c.id=a.category')
+            ->where('a.public = :public')
             ->groupBy('c.id')
-            ->orderBy('c.name', 'ASC')
-        ;
+            ->orderBy('c.name', 'ASC');
 
-        $query = $qb->getQuery();
-        return $query->getResult();
+        $qb->setParameter('public', Article::ARTICLE_IS_PUBLIC);
+
+        return $qb->getQuery()->getResult();
     }
 }

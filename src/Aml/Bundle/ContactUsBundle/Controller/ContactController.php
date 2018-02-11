@@ -17,13 +17,13 @@ use Aml\Bundle\ContactUsBundle\Form\Type\MessageType;
  *
  * @Route("/contact-us")
  */
-class DefaultController extends Controller
+class ContactController extends Controller
 {
     /**
      * Index Action to display contact form
      *
      * @Route("/", name="aml_contactus_default_index")
-     * @Template()
+     * @Template("contact/index.html.twig")
      * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request)

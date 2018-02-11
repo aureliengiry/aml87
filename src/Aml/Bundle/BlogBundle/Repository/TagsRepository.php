@@ -64,8 +64,10 @@ class TagsRepository extends EntityRepository
     }
 
     /**
-     * Function pour récupérer les mots clés pour l'autocomplétion
+     * Function retrieves all tags with nb articles by tag
+     *
      * @param string $value
+     *
      * @return array
      */
     public function getTagsWithNbArticles()
@@ -73,15 +75,16 @@ class TagsRepository extends EntityRepository
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
         $qb
-            ->select('t')
+            ->select('t.systemName', 't.name', 'count(a.id) as nbArticles')
             ->from(Tags::class, 't')
             ->join('t.articles', 'a')
-            ->where('a.public = 1')
+            ->where('a.public = :public')
             ->groupBy('t.id')
             ->orderBy('t.name', 'ASC')
         ;
 
-        $query = $qb->getQuery();
-        return $query->getResult();
+        $qb->setParameter('public', Article::ARTICLE_IS_PUBLIC);
+
+        return $qb->getQuery()->getResult();
     }
 }

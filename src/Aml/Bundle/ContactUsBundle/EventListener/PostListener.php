@@ -24,7 +24,7 @@ class PostListener
      * @param EntityManager $entityManager
      * @param string $subscribers
      */
-    public function __construct(\Swift_Mailer $mailer, EntityManager $entityManager, string $subscribers)
+    public function __construct(\Swift_Mailer $mailer, EntityManager $entityManager, string $subscribers = null)
     {
         $this->mailer = $mailer;
         $this->em = $entityManager;

@@ -2,22 +2,22 @@ version: '2'
 
 services:
   web:
-    build: web
+    build: docker/dev/web
     env_file: docker-env
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ~/www:/var/www/html
+      - /etc/apache2/sites-available
+      - /var/www/aml87
     tty: true
 
   mysql:
-    build: mysql
+    image: mariadb:10.2
     env_file: docker-env
     ports:
       - "3306:3306"
     volumes:
-      - /etc/mysql
       - /var/lib/mysql
     tty: true
 
@@ -28,7 +28,7 @@ services:
       - "8707:8707"
 
   nodejs:
-    build: nodejs
+    build: docker/dev/nodejs
     env_file: docker-env
     ports:
      - "8888:8888"
@@ -48,4 +48,4 @@ services:
       - "15672:15672"
     tty: true
     restart: always
-    
+

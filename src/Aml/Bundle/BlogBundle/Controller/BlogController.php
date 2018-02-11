@@ -2,12 +2,12 @@
 namespace Aml\Bundle\BlogBundle\Controller;
 
 use Aml\Bundle\BlogBundle\Article\ArticleManager;
-use Aml\Bundle\BlogBundle\Entity\Article;
 use Aml\Bundle\BlogBundle\Entity\Category;
 use Aml\Bundle\BlogBundle\Entity\Tags;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -23,7 +23,8 @@ class BlogController extends Controller
      * Lists all Blog entities.
      *
      * @Route("/{page}", name="blog",requirements={"page" = "\d+"}, defaults={"page" = 1})
-     * @Template()
+     * @Template("blog/index.html.twig")
+     * @Method("GET")
      */
     public function indexAction(Request $request, $page)
     {
@@ -68,7 +69,8 @@ class BlogController extends Controller
      * Finds and displays a Blog entity.
      *
      * @Route("/article/{slug}.html", name="blog_show")
-     * @Template()
+     * @Template("blog/show.html.twig")
+     * @Method("GET")
      */
     public function showAction($slug, Request $request)
     {
