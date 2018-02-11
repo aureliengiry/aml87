@@ -125,6 +125,43 @@ services:
         calls:
             - [ setTranslationDomain, [AmlWebBundle]]
 
+    ## Medias
+    sonata.admin.images:
+          class: Aml\Bundle\WebBundle\Admin\ImageAdmin
+          tags:
+              - { name: sonata.admin, manager_type: orm, group: Medias, label: "Images" }
+          arguments:
+              - ~
+              - Aml\Bundle\WebBundle\Entity\Image
+              - 'SonataAdminBundle:CRUD'
+          calls:
+              - [ setTranslationDomain, [AmlWebBundle]]
+             # - [ setTemplate, [edit, AmlWebBundle:Admin:edit.html.twig]]
+
+    sonata.admin.documents:
+        class: Aml\Bundle\WebBundle\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Medias, label: "Documents" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\File
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+
+    sonata.admin.videos:
+        class: Aml\Bundle\WebBundle\Admin\VideoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Medias, label: "Videos" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Video\Youtube
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+
+
+
 
 
 

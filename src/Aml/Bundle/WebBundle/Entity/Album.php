@@ -61,7 +61,7 @@ class Album
     private $date;
 
     /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", inversedBy="album" ,cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Image", inversedBy="album" ,cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $image;

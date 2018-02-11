@@ -42,13 +42,13 @@ class Article
     private $url;
 
     /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Image", cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $logo;
 
     /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Video\Youtube", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Video\Youtube", cascade={"all"})
      * @ORM\JoinColumn(name="id_video", referencedColumnName="id_video")
      */
     private $video;

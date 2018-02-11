@@ -2,7 +2,7 @@
 
 namespace Aml\Bundle\WebBundle\Entity;
 
-use Aml\Bundle\MediasBundle\Entity\Video;
+use Aml\Bundle\WebBundle\Entity\Video;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Aml\Bundle\WebBundle\Entity\Article;
@@ -70,7 +70,7 @@ class Evenement
     /**
      * @var integer $picture
      *
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Image", cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $picture;
@@ -118,7 +118,7 @@ class Evenement
     protected $season;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\MediasBundle\Entity\Video\Youtube", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Video\Youtube", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
      * @ORM\JoinTable(name="evenements_videos",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_video", referencedColumnName="id_video")}

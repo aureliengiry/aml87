@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Aml\Bundle\UsersBundle\AmlUsersBundle(),
-            new Aml\Bundle\MediasBundle\AmlMediasBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Aml\Bundle\AdminBundle\AmlAdminBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
