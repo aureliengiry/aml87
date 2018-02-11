@@ -7,8 +7,12 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-use Aml\Bundle\AdminBundle\Entity\UrlPage;
+use Aml\Bundle\WebBundle\Entity\UrlPage;
 
+/**
+ * Class PageAdmin
+ * @package Aml\Bundle\AdminBundle\Admin
+ */
 class PageAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)

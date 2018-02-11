@@ -78,7 +78,7 @@ class DefaultController extends Controller
     /**
      * @Route("/google-analytics", name="google-analytics")
      * @Method("GET")
-     * @Template("main/googleAnalytics.html.twig")
+     * @Template("main/google_analytics.html.twig")
      */
     public function googleAnalyticsAction()
     {

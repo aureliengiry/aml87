@@ -76,7 +76,7 @@ class AgendaController extends Controller
     public function nextConcertAction(): Response
     {
         return $this->render(
-            'agenda/blocs/blocNextConcert.html.twig', [
+            'agenda/blocs/bloc_next_concert.html.twig', [
             'nextConcert' => $this->get(EvenementManager::class)->getNextConcert()
         ]);
     }

@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title -%}
-
     Blog - Liste des articles
-
 {%- endblock title %}
 
 {% block body %}
@@ -37,11 +35,11 @@
 {% block columnRight %}
     {# Liste des catégories #}
     <div class="side-bloc no-border">
-        {% include "blog/blocs/blocCategories.html.twig" %}
+        {% include "blog/blocs/bloc_categories.html.twig" %}
     </div>
 
     {# Liste des tags #}
     <div class="side-bloc">
-        {% include "blog/blocs/blocTags.html.twig" %}
+        {% include "blog/blocs/bloc_tags.html.twig" %}
     </div>
 {% endblock columnRight %}

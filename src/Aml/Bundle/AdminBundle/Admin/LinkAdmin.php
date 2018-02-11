@@ -6,6 +6,10 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
+/**
+ * Class LinkAdmin
+ * @package Aml\Bundle\AdminBundle\Admin
+ */
 class LinkAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
