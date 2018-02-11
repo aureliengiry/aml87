@@ -8,18 +8,6 @@ aml_web:
     type:     annotation
     prefix:   /
 
-aml_users:
-    resource: "@AmlUsersBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-#login:
-#    path:   /connexion
-#    defaults:  { _controller: AmlUsersBundle:Secure:login }
-    
-#login_check:
-#    path:   /login_check
-    
 #_imagine:
 #    host:     medias.aml87.fr
 #    resource: .

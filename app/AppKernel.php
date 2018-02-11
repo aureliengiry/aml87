@@ -23,9 +23,7 @@ class AppKernel extends Kernel
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new Aml\Bundle\UsersBundle\AmlUsersBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Aml\Bundle\AdminBundle\AmlAdminBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Sentry\SentryBundle\SentryBundle(),
         ];
@@ -39,6 +37,7 @@ class AppKernel extends Kernel
             $bundles[] = new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle();
         }
 
+        $bundles[] = new Aml\Bundle\AdminBundle\AmlAdminBundle();
         $bundles[] = new Aml\Bundle\WebBundle\AmlWebBundle();
 
         return $bundles;
