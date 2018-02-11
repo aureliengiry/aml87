@@ -2,7 +2,7 @@
 
 namespace Aml\Bundle\WebBundle\Repository;
 
-use Aml\Bundle\UrlRewriteBundle\Entity\UrlPage;
+use Aml\Bundle\WebBundle\Entity\UrlPage;
 use Aml\Bundle\WebBundle\Entity\Page;
 use Doctrine\ORM\EntityRepository;
 

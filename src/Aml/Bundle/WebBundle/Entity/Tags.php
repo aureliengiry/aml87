@@ -4,7 +4,7 @@ namespace Aml\Bundle\WebBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
+use Aml\Bundle\WebBundle\Utils\Slugger;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Tags

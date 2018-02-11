@@ -1,5 +1,5 @@
 
-Aml\Bundle\UrlRewriteBundle\Entity\UrlPage:
+Aml\Bundle\WebBundle\Entity\UrlPage:
     url_page_1:
         urlKey: 'accordeon-autrement'
 

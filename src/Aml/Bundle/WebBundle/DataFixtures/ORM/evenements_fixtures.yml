@@ -14,7 +14,7 @@ Aml\Bundle\WebBundle\Entity\Evenement:
         season: '@season_<numberBetween(1, 5)>'
         url: '@url_event_<current()>'
 
-Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement:
+Aml\Bundle\WebBundle\Entity\UrlEvenement:
     url_event_{1..50}:
         urlKey (unique): 'setUrlKey(<text(10)>)'
 

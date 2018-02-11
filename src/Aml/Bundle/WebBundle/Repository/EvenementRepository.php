@@ -4,7 +4,7 @@ namespace Aml\Bundle\WebBundle\Repository;
 
 use Aml\Bundle\WebBundle\Entity\Evenement;
 use Aml\Bundle\WebBundle\Entity\Season;
-use Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement;
+use Aml\Bundle\WebBundle\Entity\UrlEvenement;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 

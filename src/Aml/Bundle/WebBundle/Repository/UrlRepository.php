@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\UrlRewriteBundle\Entity\Repository;
+namespace Aml\Bundle\WebBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -12,4 +12,5 @@ use Doctrine\ORM\EntityRepository;
  */
 class UrlRepository extends EntityRepository
 {
+
 }

@@ -106,7 +106,7 @@ class Evenement
     /**
      * @var string url
      *
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"}, fetch="EAGER")
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Url", cascade={"all"}, fetch="EAGER")
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;

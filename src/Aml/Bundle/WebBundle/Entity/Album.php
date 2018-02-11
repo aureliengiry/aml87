@@ -34,7 +34,7 @@ class Album
     /**
      * @var string url
      *
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Url", cascade={"all"})
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;

@@ -23,6 +23,6 @@ Aml\Bundle\WebBundle\Entity\Article:
         url: '@url_article_<current()>'
 
 
-Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle:
+Aml\Bundle\WebBundle\Entity\UrlArticle:
     url_article_{1..50}:
         urlKey (unique): 'setUrlKey(<text(10)>)'

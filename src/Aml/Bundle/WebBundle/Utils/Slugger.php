@@ -1,10 +1,10 @@
 <?php
 
-namespace Aml\Bundle\UrlRewriteBundle\Utils;
+namespace Aml\Bundle\WebBundle\Utils;
 
 /**
  * Class Slugger
- * @package Aml\Bundle\UrlRewriteBundle\Utils
+ * @package Aml\Bundle\WebBundle\Utils
  */
 class Slugger
 {

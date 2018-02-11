@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-use Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement;
+use Aml\Bundle\WebBundle\Entity\UrlEvenement;
 
 /**
  * Class EvenementAdmin

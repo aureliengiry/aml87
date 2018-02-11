@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Aml\Bundle\MediasBundle\Entity\Media;
-use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
+use Aml\Bundle\WebBundle\Utils\Slugger;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Image

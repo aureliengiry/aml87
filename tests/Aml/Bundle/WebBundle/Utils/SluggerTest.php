@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Aml\Bundle\UrlRewriteBundle\Utils;
+namespace Tests\Aml\Bundle\WebBundle\Utils;
 
 use PHPUnit\Framework\TestCase;
 
-use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
+use Aml\Bundle\WebBundle\Utils\Slugger;
 
 class SluggerTest extends TestCase
 {

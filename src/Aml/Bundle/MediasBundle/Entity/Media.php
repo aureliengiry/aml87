@@ -3,7 +3,7 @@
 namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
+use Aml\Bundle\WebBundle\Utils\Slugger;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Media

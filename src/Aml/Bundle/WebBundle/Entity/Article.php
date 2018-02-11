@@ -36,7 +36,7 @@ class Article
     /**
      * @var string url
      *
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\UrlRewriteBundle\Entity\Url", cascade={"all"}, fetch="EAGER")s
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Url", cascade={"all"}, fetch="EAGER")s
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;

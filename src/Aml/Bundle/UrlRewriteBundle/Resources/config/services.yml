@@ -1,3 +1,0 @@
-services:
-    Aml\Bundle\UrlRewriteBundle\Utils\Slugger:
-        autowire: true

@@ -1,8 +1,8 @@
 <?php
 
-namespace Aml\Bundle\UrlRewriteBundle\Entity;
+namespace Aml\Bundle\WebBundle\Entity;
 
-use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
+use Aml\Bundle\WebBundle\Utils\Slugger;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,15 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
  * Url
  *
  * @ORM\Table(name="core_url")
- * @ORM\Entity(repositoryClass="Aml\Bundle\UrlRewriteBundle\Entity\Repository\UrlRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\UrlRepository")
  *
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="entity_source", type="string",length=50)
  * @ORM\DiscriminatorMap({
- *     "article" = "Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle",
- *     "evenement" = "Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement",
- *     "discography" = "Aml\Bundle\UrlRewriteBundle\Entity\UrlDiscography",
- *     "page" = "Aml\Bundle\UrlRewriteBundle\Entity\UrlPage"
+ *     "article" = "Aml\Bundle\WebBundle\Entity\UrlArticle",
+ *     "evenement" = "Aml\Bundle\WebBundle\Entity\UrlEvenement",
+ *     "discography" = "Aml\Bundle\WebBundle\Entity\UrlDiscography",
+ *     "page" = "Aml\Bundle\WebBundle\Entity\UrlPage"
  * })
  */
 abstract class Url
