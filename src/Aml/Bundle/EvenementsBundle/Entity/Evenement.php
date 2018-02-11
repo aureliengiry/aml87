@@ -5,7 +5,7 @@ namespace Aml\Bundle\EvenementsBundle\Entity;
 use Aml\Bundle\MediasBundle\Entity\Video;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Aml\Bundle\BlogBundle\Entity\Article;
+use Aml\Bundle\WebBundle\Entity\Article;
 use Aml\Bundle\WebBundle\Entity\Partenaire;
 
 /**
@@ -90,7 +90,7 @@ class Evenement
     private $public;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\BlogBundle\Entity\Article", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Article", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
      * @ORM\JoinTable(name="evenements_articles",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}

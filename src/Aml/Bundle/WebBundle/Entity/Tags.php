@@ -1,16 +1,16 @@
 <?php
 
-namespace Aml\Bundle\BlogBundle\Entity;
+namespace Aml\Bundle\WebBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Aml\Bundle\UrlRewriteBundle\Utils\Slugger;
 
 /**
- * Aml\Bundle\BlogBundle\Entity\Tags
+ * Aml\Bundle\WebBundle\Entity\Tags
  *
  * @ORM\Table(name="blog_tags")
- * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Repository\TagsRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\TagsRepository")
  */
 class Tags
 {

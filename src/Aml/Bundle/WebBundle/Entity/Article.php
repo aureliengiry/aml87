@@ -1,16 +1,16 @@
 <?php
 
-namespace Aml\Bundle\BlogBundle\Entity;
+namespace Aml\Bundle\WebBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Aml\Bundle\EvenementsBundle\Entity\Evenement;
 
 /**
- * Aml\Bundle\BlogBundle\Entity\Article
+ * Aml\Bundle\WebBundle\Entity\Article
  *
  * @ORM\Table(name="blog_articles")
- * @ORM\Entity(repositoryClass="Aml\Bundle\BlogBundle\Repository\ArticleRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\ArticleRepository")
  */
 class Article
 {

@@ -32,6 +32,40 @@ services:
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlWebBundle]]
+    ## Blog
+    sonata.admin.blog:
+        class: Aml\Bundle\WebBundle\Admin\ArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Articles" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Article
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+
+    sonata.admin.blog.tags:
+        class: Aml\Bundle\WebBundle\Admin\TagsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Tags" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Tags
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+
+    sonata.admin.blog.categories:
+        class: Aml\Bundle\WebBundle\Admin\CategoriesAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Categories" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Category
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+
 
     ## Contact
     sonata.admin.contactus:

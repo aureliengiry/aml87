@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Aml\Bundle\BlogBundle\Controller;
+namespace Tests\Aml\Bundle\WebBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Class BlogControllerTest
- * @package Aml\Bundle\BlogBundle\Tests\Controller
+ * @package Aml\Bundle\WebBundle\Tests\Controller
  */
 class BlogControllerTest extends WebTestCase
 {

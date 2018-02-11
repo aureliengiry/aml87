@@ -1,9 +1,9 @@
 <?php
 
-namespace Aml\Bundle\BlogBundle\Repository;
+namespace Aml\Bundle\WebBundle\Repository;
 
-use Aml\Bundle\BlogBundle\Entity\Article;
-use Aml\Bundle\BlogBundle\Entity\Tags;
+use Aml\Bundle\WebBundle\Entity\Article;
+use Aml\Bundle\WebBundle\Entity\Tags;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -52,7 +52,7 @@ class TagsRepository extends EntityRepository
     public function loadOneTagByName($tag)
     {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT bt.id,bt.name FROM AmlBlogBundle:Tags bt WHERE bt.name LIKE :tag')
+            ->createQuery('SELECT bt.id,bt.name FROM AmlWebBundle:Tags bt WHERE bt.name LIKE :tag')
             ->setParameter('tag', $tag);
 
         try {

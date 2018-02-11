@@ -1,9 +1,9 @@
 <?php
-namespace Aml\Bundle\BlogBundle\Article;
+namespace Aml\Bundle\WebBundle\Article;
 
 
-use Aml\Bundle\BlogBundle\Entity\Article;
-use Aml\Bundle\BlogBundle\Entity\Tags;
+use Aml\Bundle\WebBundle\Entity\Article;
+use Aml\Bundle\WebBundle\Entity\Tags;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ArticleManager

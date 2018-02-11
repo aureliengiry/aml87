@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new Aml\Bundle\BlogBundle\AmlBlogBundle(),
             new Aml\Bundle\UsersBundle\AmlUsersBundle(),
             new Aml\Bundle\EvenementsBundle\AmlEvenementsBundle(),
             new Aml\Bundle\MediasBundle\AmlMediasBundle(),

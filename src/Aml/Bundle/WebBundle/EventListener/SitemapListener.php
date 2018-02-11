@@ -2,8 +2,10 @@
 
 namespace Aml\Bundle\WebBundle\EventListener;
 
+use Aml\Bundle\WebBundle\Entity\Article;
 use Aml\Bundle\WebBundle\Discography\DiscographyManager;
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Router;
 
 /**
@@ -12,6 +14,7 @@ use Symfony\Component\Routing\Router;
  */
 class SitemapListener
 {
+    private $em;
     private $router;
     private $discographyManager;
 
@@ -21,10 +24,11 @@ class SitemapListener
      * @param Router $router
      * @param DiscographyManager $discographyManager
      */
-    public function __construct(Router $router, DiscographyManager $discographyManager)
+    public function __construct(Router $router, DiscographyManager $discographyManager, ObjectManager $entityManager)
     {
         $this->router = $router;
         $this->discographyManager = $discographyManager;
+        $this->em = $entityManager;
     }
 
     /**
@@ -32,6 +36,34 @@ class SitemapListener
      */
     public function onGenerateSitemapEvent(GenerateEvent $event)
     {
+        /** Blog */
+        // Add blog url
+        $mainUrl = [
+            'loc'        => $this->router->generate('blog'),
+            'changefreq' => 'weekly',
+            'priority'   => '0.80',
+        ];
+        $event->addUrls($mainUrl);
+
+        // add some urls blog
+        $repositoryArticle = $this->em->getRepository(Article::class);
+        $entitiesBlog = $repositoryArticle->getPublicArticles(1, [], 100);
+
+        // add some urls blog
+        foreach ($entitiesBlog as $article) {
+
+            if (!$article->getUrl()) {
+                continue;
+            }
+
+            $urlArticleBlog = [
+                'loc'        => $this->router->generate('blog_show', ['slug' => $article->getSlug()]),
+                'changefreq' => 'weekly',
+                'priority'   => '0.50',
+            ];
+            $event->addUrls($urlArticleBlog);
+        }
+
         /** Contact */
         // Add main url
         $mainUrl = [

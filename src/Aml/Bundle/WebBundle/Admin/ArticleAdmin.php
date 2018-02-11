@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\BlogBundle\Admin;
+namespace Aml\Bundle\WebBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -12,7 +12,7 @@ use Aml\Bundle\UrlRewriteBundle\Entity\UrlArticle;
 /**
  * Class ArticleAdmin
  *
- * @package     Aml\Bundle\BlogBundle\Admin
+ * @package     Aml\Bundle\WebBundle\Admin
  * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
 class ArticleAdmin extends AbstractAdmin
@@ -33,7 +33,7 @@ class ArticleAdmin extends AbstractAdmin
                 'entity',
                 array(
                     'label'        => 'Catégorie',
-                    'class'        => 'AmlBlogBundle:Category',
+                    'class'        => 'AmlWebBundle:Category',
                     'choice_label' => 'name',
                     'placeholder'  => 'Choisissez une catégorie',
                     'attr'         => array('class' => 'uniform'),

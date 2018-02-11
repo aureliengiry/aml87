@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\BlogBundle\Admin;
+namespace Aml\Bundle\WebBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -9,7 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 /**
  * Class TagsAdmin
  *
- * @package     Aml\Bundle\BlogBundle\Admin
+ * @package     Aml\Bundle\WebBundle\Admin
  * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
 class TagsAdmin extends AbstractAdmin

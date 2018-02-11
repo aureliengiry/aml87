@@ -1,9 +1,9 @@
 <?php
-namespace Aml\Bundle\BlogBundle\Controller;
+namespace Aml\Bundle\WebBundle\Controller;
 
-use Aml\Bundle\BlogBundle\Article\ArticleManager;
-use Aml\Bundle\BlogBundle\Entity\Category;
-use Aml\Bundle\BlogBundle\Entity\Tags;
+use Aml\Bundle\WebBundle\Article\ArticleManager;
+use Aml\Bundle\WebBundle\Entity\Category;
+use Aml\Bundle\WebBundle\Entity\Tags;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -80,7 +80,7 @@ class BlogController extends Controller
 
         $article = $this->get(ArticleManager::class)->getArticleByIdOrUrl($slug);
         if (!$article) {
-            throw $this->createNotFoundException('Unable to find AmlBlogBundle:Blog entity.');
+            throw $this->createNotFoundException('Unable to find AmlWebBundle:Blog entity.');
         }
 
         $request->attributes->set('label', $article->getTitle());
@@ -89,8 +89,8 @@ class BlogController extends Controller
 
         return [
             'entity'     => $article,
-            'categories' => $em->getRepository(Category::class)->findAll(),
-            'tags'       => $em->getRepository(Tags::class)->findAll(),
+            'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
+            'tags'       => $this->get(ArticleManager::class)->getTagsWithNbArticles(),
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Aml\Bundle\WebBundle\Controller;
 
-use Aml\Bundle\BlogBundle\Entity\Article;
+use Aml\Bundle\WebBundle\Entity\Article;
 use Aml\Bundle\WebBundle\Entity\Album;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;

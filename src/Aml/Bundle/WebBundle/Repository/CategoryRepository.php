@@ -1,9 +1,9 @@
 <?php
 
-namespace Aml\Bundle\BlogBundle\Repository;
+namespace Aml\Bundle\WebBundle\Repository;
 
-use Aml\Bundle\BlogBundle\Entity\Article;
-use Aml\Bundle\BlogBundle\Entity\Category;
+use Aml\Bundle\WebBundle\Entity\Article;
+use Aml\Bundle\WebBundle\Entity\Category;
 use Doctrine\ORM\EntityRepository;
 
 /**
