@@ -1,4 +1,4 @@
-Aml\Bundle\DiscographyBundle\Entity\Track:
+Aml\Bundle\WebBundle\Entity\Track:
     track_{1..30}:
         number: <numberBetween(1, 20)>
         title: <text(10)>
@@ -6,7 +6,7 @@ Aml\Bundle\DiscographyBundle\Entity\Track:
         album: '@album_<numberBetween(1, 5)>'
 
 
-Aml\Bundle\DiscographyBundle\Entity\Album:
+Aml\Bundle\WebBundle\Entity\Album:
     album_{1..5}:
         title: <text(10)>
         description: <text(100)>

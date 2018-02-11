@@ -27,7 +27,7 @@ class PageController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (false === $id) {
-            $entity = $em->getRepository(Page::class)->getPageByUrlKey($url_key);
+            $entity = $em->getRepository(Page::class)->getPublicPageByUrlKey($url_key);
         } else {
             $entity = $em->getRepository(Page::class)->findOneBy([
                 'id'     => $id,

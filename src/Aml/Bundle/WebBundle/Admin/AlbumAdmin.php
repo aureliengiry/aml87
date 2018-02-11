@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\DiscographyBundle\Admin;
+namespace Aml\Bundle\WebBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -11,7 +11,7 @@ use Aml\Bundle\UrlRewriteBundle\Entity\UrlDiscography;
 
 /**
  * Class AlbumAdmin
- * @package Aml\Bundle\DiscographyBundle\Admin
+ * @package Aml\Bundle\WebBundle\Admin
  */
 class AlbumAdmin extends AbstractAdmin
 {

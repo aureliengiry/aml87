@@ -1,15 +1,15 @@
 <?php
 
-namespace Aml\Bundle\DiscographyBundle\Entity;
+namespace Aml\Bundle\WebBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Aml\Bundle\DiscographyBundle\Entity\Album
+ * Aml\Bundle\WebBundle\Entity\Album
  *
  * @ORM\Table(name="discography_albums")
- * @ORM\Entity(repositoryClass="Aml\Bundle\DiscographyBundle\Repository\AlbumRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\AlbumRepository")
  */
 class Album
 {

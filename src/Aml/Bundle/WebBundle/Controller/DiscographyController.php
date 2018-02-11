@@ -1,8 +1,8 @@
 <?php
-namespace Aml\Bundle\DiscographyBundle\Controller;
+namespace Aml\Bundle\WebBundle\Controller;
 
-use Aml\Bundle\DiscographyBundle\Discography\DiscographyManager;
-use Aml\Bundle\DiscographyBundle\Entity\Album;
+use Aml\Bundle\WebBundle\Discography\DiscographyManager;
+use Aml\Bundle\WebBundle\Entity\Album;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class DefaultController
  *
- * @package Aml\Bundle\DiscographyBundle\Controller
+ * @package Aml\Bundle\WebBundle\Controller
  * @Route("/discographie")
  */
 class DiscographyController extends Controller

@@ -1,13 +1,13 @@
 <?php
 
-namespace Aml\Bundle\DiscographyBundle\Discography;
+namespace Aml\Bundle\WebBundle\Discography;
 
-use Aml\Bundle\DiscographyBundle\Entity\Album;
+use Aml\Bundle\WebBundle\Entity\Album;
 use Doctrine\ORM\EntityManager;
 
 /**
  * Class DiscographyManager
- * @package Aml\Bundle\DiscographyBundle\Discography
+ * @package Aml\Bundle\WebBundle\Discography
  */
 class DiscographyManager
 {

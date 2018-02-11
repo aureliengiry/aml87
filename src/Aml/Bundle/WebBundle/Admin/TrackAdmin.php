@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\DiscographyBundle\Admin;
+namespace Aml\Bundle\WebBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 /**
  * Class TrackAdmin
- * @package Aml\Bundle\DiscographyBundle\Admin
+ * @package Aml\Bundle\WebBundle\Admin
  */
 class TrackAdmin extends AbstractAdmin
 {
@@ -42,7 +42,7 @@ class TrackAdmin extends AbstractAdmin
                 'entity',
                 [
                     'label'        => 'Album',
-                    'class'        => 'AmlDiscographyBundle:Album',
+                    'class'        => 'AmlWebBundle:Album',
                     'choice_label' => 'title',
                     'placeholder'  => 'Choisissez un album',
                     'attr'         => ['class' => 'uniform'],

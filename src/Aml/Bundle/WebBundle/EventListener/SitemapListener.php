@@ -1,14 +1,14 @@
 <?php
 
-namespace Aml\Bundle\DiscographyBundle\EventListener;
+namespace Aml\Bundle\WebBundle\EventListener;
 
-use Aml\Bundle\DiscographyBundle\Discography\DiscographyManager;
+use Aml\Bundle\WebBundle\Discography\DiscographyManager;
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
 use Symfony\Component\Routing\Router;
 
 /**
  * Class PostListener
- * @package Aml\Bundle\DiscographyBundle\EventListener
+ * @package Aml\Bundle\WebBundle\EventListener
  */
 class SitemapListener
 {

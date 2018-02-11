@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="webbundle_partenaires")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\PartenaireRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\PartenaireRepository")
  */
 class Partenaire
 {

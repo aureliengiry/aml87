@@ -32,3 +32,27 @@ services:
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlWebBundle]]
+
+    ## Discography
+    sonata.admin.album:
+        class: Aml\Bundle\WebBundle\Admin\AlbumAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Discographie, label: "Albums" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Album
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+
+    sonata.admin.album.tracks:
+        class: Aml\Bundle\WebBundle\Admin\TrackAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Discographie, label: "Pistes" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Track
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+

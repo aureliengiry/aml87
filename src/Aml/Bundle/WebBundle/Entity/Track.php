@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\DiscographyBundle\Entity;
+namespace Aml\Bundle\WebBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Track
  *
  * @ORM\Table(name="discography_tracks")
- * @ORM\Entity(repositoryClass="Aml\Bundle\DiscographyBundle\Repository\TrackRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\TrackRepository")
  */
 class Track
 {

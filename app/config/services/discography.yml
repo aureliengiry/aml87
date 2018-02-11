@@ -1,12 +1,12 @@
 services:
-    Aml\Bundle\DiscographyBundle\EventListener\SitemapListener:
+    Aml\Bundle\WebBundle\EventListener\SitemapListener:
         autowire: true
         arguments:
             - '@router'
         tags:
             - { name: kernel.event_listener, event: aml_web.sitemap.generate_start, method: onGenerateSitemapEvent }
 
-    Aml\Bundle\DiscographyBundle\Discography\DiscographyManager:
+    Aml\Bundle\WebBundle\Discography\DiscographyManager:
         arguments:
             - '@doctrine.orm.default_entity_manager'
 

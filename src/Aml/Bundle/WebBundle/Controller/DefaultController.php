@@ -3,7 +3,7 @@
 namespace Aml\Bundle\WebBundle\Controller;
 
 use Aml\Bundle\BlogBundle\Entity\Article;
-use Aml\Bundle\DiscographyBundle\Entity\Album;
+use Aml\Bundle\WebBundle\Entity\Album;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
