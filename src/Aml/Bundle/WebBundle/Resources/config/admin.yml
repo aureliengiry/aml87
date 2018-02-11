@@ -102,3 +102,29 @@ services:
         calls:
             - [ setTranslationDomain, [AmlWebBundle]]
 
+    ## Evenements
+    sonata.admin.evenement:
+        class: Aml\Bundle\WebBundle\Admin\EvenementAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Agenda, label: "Evenements" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Evenement
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+
+    sonata.admin.evenement.seasons:
+        class: Aml\Bundle\WebBundle\Admin\SeasonAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Agenda, label: "Saisons" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Season
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+
+
+
+

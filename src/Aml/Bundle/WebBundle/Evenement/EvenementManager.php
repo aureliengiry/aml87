@@ -1,9 +1,9 @@
 <?php
 
-namespace Aml\Bundle\EvenementsBundle\Evenement;
+namespace Aml\Bundle\WebBundle\Evenement;
 
-use Aml\Bundle\EvenementsBundle\Entity\Evenement;
-use Aml\Bundle\EvenementsBundle\Entity\Season;
+use Aml\Bundle\WebBundle\Entity\Evenement;
+use Aml\Bundle\WebBundle\Entity\Season;
 use Doctrine\ORM\EntityManagerInterface;
 
 class EvenementManager

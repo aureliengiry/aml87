@@ -1,13 +1,13 @@
 <?php
-namespace Aml\Bundle\EvenementsBundle\Entity;
+namespace Aml\Bundle\WebBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Aml\Bundle\EvenementsBundle\Entity\Season
+ * Aml\Bundle\WebBundle\Entity\Season
  *
  * @ORM\Table(name="evenements_seasons")
- * @ORM\Entity(repositoryClass="Aml\Bundle\EvenementsBundle\Repository\SeasonRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\SeasonRepository")
  */
 class Season
 {

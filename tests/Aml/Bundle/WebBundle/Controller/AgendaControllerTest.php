@@ -1,10 +1,14 @@
 <?php
 
-namespace Tests\Aml\Bundle\EvenementsBundle\Controller;
+namespace Tests\Aml\Bundle\WebBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class AgendaControllerTest
+ * @package Tests\Aml\Bundle\WebBundle\Controller
+ */
 class AgendaControllerTest extends WebTestCase
 {
 

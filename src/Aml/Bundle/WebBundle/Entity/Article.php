@@ -4,7 +4,7 @@ namespace Aml\Bundle\WebBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Aml\Bundle\EvenementsBundle\Entity\Evenement;
+use Aml\Bundle\WebBundle\Entity\Evenement;
 
 /**
  * Aml\Bundle\WebBundle\Entity\Article
@@ -100,7 +100,7 @@ class Article
     protected $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", mappedBy="articles", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Evenement", mappedBy="articles", cascade={"all"})
      */
     protected $evenements;
 

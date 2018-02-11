@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\EvenementsBundle\Admin;
+namespace Aml\Bundle\WebBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -12,7 +12,7 @@ use Aml\Bundle\UrlRewriteBundle\Entity\UrlEvenement;
 /**
  * Class EvenementAdmin
  *
- * @package Aml\Bundle\EvenementsBundle\Admin
+ * @package Aml\Bundle\WebBundle\Admin
  * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
 class EvenementAdmin extends AbstractAdmin
@@ -39,7 +39,7 @@ class EvenementAdmin extends AbstractAdmin
                 'choice',
                 array(
                     'label' => 'Type d\'événement',
-                    'choices' => \Aml\Bundle\EvenementsBundle\Entity\Evenement::getTypesEvenements(),
+                    'choices' => \Aml\Bundle\WebBundle\Entity\Evenement::getTypesEvenements(),
                     'multiple' => false,
                     'placeholder' => 'Sélectionnez le type d\'événement'
                 )
@@ -49,7 +49,7 @@ class EvenementAdmin extends AbstractAdmin
                 'entity',
                 array(
                     'label' => 'Saison',
-                    'class' => 'AmlEvenementsBundle:Season',
+                    'class' => 'AmlWebBundle:Season',
                     'choice_label' => 'name',
                     'placeholder' => 'Sélectionnez une saison',
                     'attr' => array('class' => 'uiform')

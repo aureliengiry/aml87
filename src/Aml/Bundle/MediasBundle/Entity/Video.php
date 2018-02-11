@@ -4,7 +4,7 @@ namespace Aml\Bundle\MediasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Aml\Bundle\EvenementsBundle\Entity\Evenement;
+use Aml\Bundle\WebBundle\Entity\Evenement;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -44,7 +44,7 @@ abstract class Video
     protected $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", mappedBy="videos", cascade={"all"})
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Evenement", mappedBy="videos", cascade={"all"})
      */
     protected $evenements;
 

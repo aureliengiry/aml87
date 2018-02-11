@@ -2,6 +2,7 @@
 
 namespace Aml\Bundle\WebBundle\EventListener;
 
+use Aml\Bundle\WebBundle\Entity\Evenement;
 use Aml\Bundle\WebBundle\Entity\Article;
 use Aml\Bundle\WebBundle\Discography\DiscographyManager;
 use Aml\Bundle\WebBundle\Event\Sitemap\GenerateEvent;
@@ -104,5 +105,37 @@ class SitemapListener
             ];
             $event->addUrls($urlAlbumDiscography);
         }
+
+        /** Evenements */
+        // add main url
+        $mainUrl = [
+            'loc'        => $this->router->generate('agenda'),
+            'changefreq' => 'weekly',
+            'priority'   => '0.80',
+        ];
+        $event->addUrls($mainUrl);
+
+        // add some urls fo agenda events
+        $evenementRepository = $this->em->getRepository(Evenement::class);
+        $agendaEvents = $evenementRepository->getNextEvenements([
+            'public'  => 1,
+            'archive' => 0,
+            'type'    => Evenement::EVENEMENT_TYPE_CONCERT,
+        ]);
+
+        foreach ($agendaEvents as $agendaEvent) {
+
+            if (!$agendaEvent->getUrl()) {
+                continue;
+            }
+
+            $urlEventAgenda = [
+                'loc'        => $this->router->generate('agenda_show_event', ['slug' => $agendaEvent->getSlug()]),
+                'changefreq' => 'weekly',
+                'priority'   => '0.50',
+            ];
+            $event->addUrls($urlEventAgenda);
+        }
+
     }
 }

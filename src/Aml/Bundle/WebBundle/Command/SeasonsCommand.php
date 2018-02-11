@@ -5,19 +5,19 @@
  * @author Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace Aml\Bundle\EvenementsBundle\Command;
+namespace Aml\Bundle\WebBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use Aml\Bundle\EvenementsBundle\Entity\Evenement;
-use Aml\Bundle\EvenementsBundle\Entity\Season;
+use Aml\Bundle\WebBundle\Entity\Evenement;
+use Aml\Bundle\WebBundle\Entity\Season;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Class SeasonsCommand
- * @package Aml\Bundle\EvenementsBundle\Command
+ * @package Aml\Bundle\WebBundle\Command
  */
 class SeasonsCommand extends ContainerAwareCommand
 {

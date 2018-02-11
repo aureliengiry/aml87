@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\EvenementsBundle\Admin;
+namespace Aml\Bundle\WebBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -8,7 +8,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 /**
  * Class SeasonAdmin
- * @package Aml\Bundle\EvenementsBundle\Admin
+ * @package Aml\Bundle\WebBundle\Admin
  */
 class SeasonAdmin extends AbstractAdmin
 {

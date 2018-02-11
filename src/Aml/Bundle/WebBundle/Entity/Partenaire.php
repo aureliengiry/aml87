@@ -51,7 +51,7 @@ class Partenaire
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", inversedBy="partenaires")
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Evenement", inversedBy="partenaires")
      * @ORM\JoinTable(name="evenements_partenaires",
      *        joinColumns={@ORM\JoinColumn(name="id_partenaire", referencedColumnName="id_partenaire")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}

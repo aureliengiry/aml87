@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\EvenementsBundle\Entity;
+namespace Aml\Bundle\WebBundle\Entity;
 
 use Aml\Bundle\MediasBundle\Entity\Video;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,10 +9,10 @@ use Aml\Bundle\WebBundle\Entity\Article;
 use Aml\Bundle\WebBundle\Entity\Partenaire;
 
 /**
- * Aml\Bundle\EvenementsBundle\Entity\Evenement
+ * Aml\Bundle\WebBundle\Entity\Evenement
  *
  * @ORM\Table(name="evenements")
- * @ORM\Entity(repositoryClass="Aml\Bundle\EvenementsBundle\Repository\EvenementRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\EvenementRepository")
  */
 class Evenement
 {

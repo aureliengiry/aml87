@@ -1,8 +1,8 @@
 <?php
 
-namespace Aml\Bundle\EvenementsBundle\Repository;
+namespace Aml\Bundle\WebBundle\Repository;
 
-use Aml\Bundle\EvenementsBundle\Entity\Season;
+use Aml\Bundle\WebBundle\Entity\Season;
 use Doctrine\ORM\EntityRepository;
 
 /**

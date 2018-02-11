@@ -6,11 +6,6 @@ aml_medias:
     resource: "@AmlMediasBundle/Resources/config/routing.yml"
     prefix:   /
 
-aml_evenements:
-    resource: "@AmlEvenementsBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 # Internal routing configuration to handle ESI
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"

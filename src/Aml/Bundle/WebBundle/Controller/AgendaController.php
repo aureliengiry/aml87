@@ -1,9 +1,9 @@
 <?php
 
-namespace Aml\Bundle\EvenementsBundle\Controller;
+namespace Aml\Bundle\WebBundle\Controller;
 
-use Aml\Bundle\EvenementsBundle\Entity\Season;
-use Aml\Bundle\EvenementsBundle\Evenement\EvenementManager;
+use Aml\Bundle\WebBundle\Entity\Season;
+use Aml\Bundle\WebBundle\Evenement\EvenementManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -56,7 +56,7 @@ class AgendaController extends Controller
     {
         $event = $this->get(EvenementManager::class)->getEventByIdOrUrl($slug);
         if (!$event) {
-            throw $this->createNotFoundException('Unable to find AmlEvenementsBundle:Evenement entity.');
+            throw $this->createNotFoundException('Unable to find AmlWebBundle:Evenement entity.');
         }
 
         // Init Main Menu
@@ -99,7 +99,7 @@ class AgendaController extends Controller
 
         $season = $seasonsRepository->find($season_id);
         if (!$season) {
-            throw $this->createNotFoundException('Unable to find AmlEvenementsBundle:Season entity.');
+            throw $this->createNotFoundException('Unable to find AmlWebBundle:Season entity.');
         }
 
         // Init Main Menu
