@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Aml\Bundle\ContactUsBundle\Controller;
+namespace Tests\Aml\Bundle\WebBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class DefaultControllerTest
  *
- * @package Aml\Bundle\ContactUsBundle\Tests\Controller
+ * @package Aml\Bundle\WebBundle\Tests\Controller
  */
-class DefaultControllerTest extends WebTestCase
+class ContactControllerTest extends WebTestCase
 {
     private $client = null;
 

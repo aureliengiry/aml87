@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\ContactUsBundle\Command;
+namespace Aml\Bundle\WebBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -9,12 +9,12 @@ use Symfony\Component\Console\Input\InputOption;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use Aml\Bundle\ContactUsBundle\Entity\Message;
-use Aml\Bundle\ContactUsBundle\Event\PostEvent;
+use Aml\Bundle\WebBundle\Entity\Message;
+use Aml\Bundle\WebBundle\Event\PostEvent;
 
 /**
  * Class SendMessageCommand
- * @package Aml\Bundle\ContactUsBundle\Command
+ * @package Aml\Bundle\WebBundle\Command
  */
 class SendMessageCommand extends ContainerAwareCommand
 {
@@ -57,7 +57,7 @@ EOF
         $this->doctrine = $this->getContainer()->get('doctrine');
         $this->entityManager = $this->doctrine->getManager('default');
 
-        $this->messageRepo = $this->doctrine->getRepository('AmlContactUsBundle:Message');
+        $this->messageRepo = $this->doctrine->getRepository('AmlWebBundle:Message');
 
         $this->messageId = $input->getArgument('id-message');
     }
@@ -72,7 +72,7 @@ EOF
         // Load contact message
         $message = $this->messageRepo->find($this->messageId);
         if (!$message) {
-            throw new NotFoundHttpException('Unable to find ContactUsBundle:Message entity.');
+            throw new NotFoundHttpException('Unable to find WebBundle:Message entity.');
         }
 
         $this->output->writeln('<info>' . $message->getName() . ' - ' . $message->getSubject() . '</info>');

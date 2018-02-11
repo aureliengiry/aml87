@@ -2,6 +2,13 @@ parameters:
     app_google_analytics.account_id: "%ga_account_id%"
 
 services:
+    Aml\Bundle\WebBundle\EventListener\SitemapListener:
+        autowire: true
+        arguments:
+            - '@router'
+        tags:
+            - { name: kernel.event_listener, event: aml_web.sitemap.generate_start, method: onGenerateSitemapEvent }
+
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

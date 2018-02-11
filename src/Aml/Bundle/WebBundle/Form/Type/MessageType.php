@@ -1,5 +1,5 @@
 <?php
-namespace Aml\Bundle\ContactUsBundle\Form\Type;
+namespace Aml\Bundle\WebBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class MessageType
  *
- * @package Aml\Bundle\ContactUsBundle\Form\Type
+ * @package Aml\Bundle\WebBundle\Form\Type
  */
 class MessageType extends AbstractType
 {
@@ -52,7 +52,7 @@ class MessageType extends AbstractType
 
     public function getName()
     {
-        return 'aml_bundle_ContactUsBundle_messagetype';
+        return 'aml_bundle_WebBundle_messagetype';
     }
 
     public function configureOptions(OptionsResolver $resolver)

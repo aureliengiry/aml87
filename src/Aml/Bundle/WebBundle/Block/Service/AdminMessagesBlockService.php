@@ -1,8 +1,8 @@
 <?php
 
-namespace Aml\Bundle\ContactUsBundle\Block\Service;
+namespace Aml\Bundle\WebBundle\Block\Service;
 
-use Aml\Bundle\ContactUsBundle\Entity\Message;
+use Aml\Bundle\WebBundle\Entity\Message;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +19,7 @@ use Doctrine\ORM\EntityManager;
 
 /**
  * Class AdminMessagesBlockService
- * @package Aml\Bundle\ContactUsBundle\Block\Service
+ * @package Aml\Bundle\WebBundle\Block\Service
  */
 class AdminMessagesBlockService extends AbstractBlockService
 {
@@ -52,12 +52,10 @@ class AdminMessagesBlockService extends AbstractBlockService
      */
     public function configureSettings(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            array(
-                'title'    => 'Messages du formulaire de contact',
-                'template' => 'AmlContactUsBundle:Block:block_messages.html.twig',
-            )
-        );
+        $resolver->setDefaults([
+            'title'    => 'Messages du formulaire de contact',
+            'template' => 'AmlWebBundle:Block:block_messages.html.twig',
+        ]);
     }
 
     /**

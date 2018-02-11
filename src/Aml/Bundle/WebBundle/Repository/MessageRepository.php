@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\ContactUsBundle\Entity\Repository;
+namespace Aml\Bundle\WebBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

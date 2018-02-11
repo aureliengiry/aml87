@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\ContactUsBundle\Entity;
+namespace Aml\Bundle\WebBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Message
  *
  * @ORM\Table(name="contact_us_messages")
- * @ORM\Entity(repositoryClass="Aml\Bundle\ContactUsBundle\Entity\Repository\MessageRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\MessageRepository")
  */
 class Message
 {

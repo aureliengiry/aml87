@@ -1,7 +1,7 @@
 <?php
-namespace Aml\Bundle\ContactUsBundle\Admin;
+namespace Aml\Bundle\WebBundle\Admin;
 
-use Aml\Bundle\ContactUsBundle\Entity\Message;
+use Aml\Bundle\WebBundle\Entity\Message;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 /**
  * Class MessageAdmin
- * @package Aml\Bundle\ContactUsBundle\Admin
+ * @package Aml\Bundle\WebBundle\Admin
  */
 class MessageAdmin extends AbstractAdmin
 {

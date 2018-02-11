@@ -1,15 +1,14 @@
 <?php
 
-namespace Aml\Bundle\ContactUsBundle\EventListener;
+namespace Aml\Bundle\WebBundle\EventListener;
 
-use Aml\Bundle\ContactUsBundle\Event\PostEvent;
+use Aml\Bundle\WebBundle\Event\Contact\PostEvent;
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
-use Aml\Bundle\ContactUsBundle\Entity\Message;
+use Aml\Bundle\WebBundle\Entity\Message;
 
 /**
  * Class PostListener
- * @package Aml\Bundle\ContactUsBundle\EventListener
+ * @package Aml\Bundle\WebBundle\EventListener
  */
 class PostListener
 {

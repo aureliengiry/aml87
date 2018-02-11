@@ -1,18 +1,19 @@
 <?php
 
-namespace Aml\Bundle\ContactUsBundle\Contact;
+namespace Aml\Bundle\WebBundle\Contact;
 
-use Aml\Bundle\ContactUsBundle\Entity\Message;
-use Aml\Bundle\ContactUsBundle\Event\PostEvent;
+use Aml\Bundle\WebBundle\Entity\Message;
+use Aml\Bundle\WebBundle\Event\Contact\PostEvent;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Class ContactMessage
- * @package Aml\Bundle\ContactUsBundle\Contact
+ * @package Aml\Bundle\WebBundle\Contact
  */
 class ContactMessage
 {
+    /** @var EntityManager  */
     private $em;
     private $mailer;
     private $eventDispatcher;

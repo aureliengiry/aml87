@@ -1,7 +1,7 @@
 <?php
-namespace Tests\Aml\Bundle\ContactUsBundle\Command;
+namespace Tests\Aml\Bundle\WebBundle\Command;
 
-use Aml\Bundle\ContactUsBundle\Command\SendMessageCommand;
+use Aml\Bundle\WebBundle\Command\SendMessageCommand;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -34,7 +34,7 @@ class SendMessageCommandTest extends KernelTestCase
      * Test command with wrong id message
      *
      * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Unable to find ContactUsBundle:Message entity
+     * @expectedExceptionMessage Unable to find WebBundle:Message entity
      */
     public function testWrongIdMessage(){
 

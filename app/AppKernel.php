@@ -29,7 +29,6 @@ class AppKernel extends Kernel
             new Aml\Bundle\MediasBundle\AmlMediasBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Aml\Bundle\AdminBundle\AmlAdminBundle(),
-            new Aml\Bundle\ContactUsBundle\AmlContactUsBundle(),
             new Aml\Bundle\UrlRewriteBundle\AmlUrlRewriteBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Sentry\SentryBundle\SentryBundle(),

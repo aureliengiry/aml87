@@ -1,16 +1,16 @@
 <?php
 
-namespace Aml\Bundle\ContactUsBundle\Controller;
+namespace Aml\Bundle\WebBundle\Controller;
 
-use Aml\Bundle\ContactUsBundle\Contact\ContactMessage;
+use Aml\Bundle\WebBundle\Contact\ContactMessage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-use Aml\Bundle\ContactUsBundle\Entity\Message;
-use Aml\Bundle\ContactUsBundle\Form\Type\MessageType;
+use Aml\Bundle\WebBundle\Entity\Message;
+use Aml\Bundle\WebBundle\Form\Type\MessageType;
 
 /**
  * Contact Us controller.

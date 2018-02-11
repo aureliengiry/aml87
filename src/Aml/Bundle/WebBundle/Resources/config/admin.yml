@@ -33,6 +33,18 @@ services:
         calls:
             - [ setTranslationDomain, [AmlWebBundle]]
 
+    ## Contact
+    sonata.admin.contactus:
+        class: Aml\Bundle\WebBundle\Admin\MessageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Administration, label: "Formulaire de contact" }
+        arguments:
+            - ~
+            - Aml\Bundle\WebBundle\Entity\Message
+            - 'SonataAdminBundle:CRUD'
+        calls:
+            - [ setTranslationDomain, [AmlWebBundle]]
+
     ## Discography
     sonata.admin.album:
         class: Aml\Bundle\WebBundle\Admin\AlbumAdmin

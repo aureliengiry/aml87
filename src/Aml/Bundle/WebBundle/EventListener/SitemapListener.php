@@ -32,6 +32,16 @@ class SitemapListener
      */
     public function onGenerateSitemapEvent(GenerateEvent $event)
     {
+        /** Contact */
+        // Add main url
+        $mainUrl = [
+            'loc'        => $this->router->generate('aml_contactus_default_index'),
+            'changefreq' => 'weekly',
+            'priority'   => '0.80',
+        ];
+        $event->addUrls($mainUrl);
+
+        /** Discography */
         // Add main url
         $mainUrl = [
             'loc'        => $this->router->generate('discography'),
@@ -47,10 +57,10 @@ class SitemapListener
                 continue;
             }
 
-            $urlAlbum = $this->router->generate(
-                'discography_album_show_rewrite',
-                ['url_key' => $album->getUrl()->getUrlKey()]
-            );
+            $urlAlbum = $this->router->generate('discography_album_show_rewrite', [
+                'url_key' => $album->getUrl()->getUrlKey()
+            ]);
+
             if (empty($urlAlbum)) {
                 $urlAlbum = $this->router->generate('discography_album_show', ['id' => $album->getId()]);
             }
