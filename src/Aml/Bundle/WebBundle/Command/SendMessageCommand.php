@@ -5,12 +5,10 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputOption;
-
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use Aml\Bundle\WebBundle\Entity\Message;
-use Aml\Bundle\WebBundle\Event\PostEvent;
+use Aml\Bundle\WebBundle\Event\Contact\PostEvent;
 
 /**
  * Class SendMessageCommand
@@ -57,7 +55,7 @@ EOF
         $this->doctrine = $this->getContainer()->get('doctrine');
         $this->entityManager = $this->doctrine->getManager('default');
 
-        $this->messageRepo = $this->doctrine->getRepository('AmlWebBundle:Message');
+        $this->messageRepo = $this->doctrine->getRepository(Message::class);
 
         $this->messageId = $input->getArgument('id-message');
     }

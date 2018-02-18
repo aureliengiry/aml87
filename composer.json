@@ -5,8 +5,7 @@
   "description": "AML87 Website",
   "autoload": {
     "psr-4": {
-      "Aml\\": "src/Aml",
-      "Tools\\": "src/Tools"
+      "Aml\\": "src/Aml"
     },
     "classmap": [
       "vendor/google/apiclient/src",
@@ -20,8 +19,8 @@
     }
   },
   "require": {
-    "php": ">=5.5.9",
-    "symfony/symfony": "3.3.*",
+    "php": ">=7.0.0",
+    "symfony/symfony": "3.4.*",
     "symfony/swiftmailer-bundle": "^2.3.10",
     "symfony/monolog-bundle": "^3.1",
     "symfony/dependency-injection": "^3.1",
