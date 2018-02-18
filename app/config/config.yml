@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: services.yml }
+    - { resource: services/ }
 
 framework:
     #esi:             ~
@@ -117,36 +117,6 @@ assetic:
     filters:
         cssrewrite: ~
 
-# Service Configuration
-services:
-    twig.extension.text:
-        class: Twig_Extensions_Extension_Text
-        tags:
-           - { name: twig.extension }
-
-    twig.extension.intl:
-        class: Twig_Extensions_Extension_Intl
-        tags:
-           - { name: twig.extension }
-
-    aml.twig.word_warp_extension:
-        class: Aml\Bundle\WebBundle\Twig\WordWarpExtension
-        tags:
-          - { name: twig.extension }
-
-    aml.twig.nice_date_extension:
-        class: Aml\Bundle\WebBundle\Twig\PublicStatusExtension
-        tags:
-            - { name: twig.extension }
-
-    aml.twig.substring_extension:
-        class: Aml\Bundle\WebBundle\Twig\SubstringExtension
-        tags:
-          - { name: twig.extension }
-
-    fos_user.doctrine_registry:
-        alias: doctrine
-
 sonata_intl:
     timezone:
         # default timezone used as fallback
@@ -161,7 +131,7 @@ sonata_intl:
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
-    user_class: Aml\Bundle\UsersBundle\Entity\User
+    user_class: Aml\Bundle\WebBundle\Entity\User
     from_email:
       address:        noreply@aml87.fr
       sender_name:    "%site_name%"

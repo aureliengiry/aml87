@@ -1,30 +1,3 @@
-aml_url_rewrite:
-    resource: "@AmlUrlRewriteBundle/Resources/config/routing.yml"
-    prefix:   /
-
-aml_contact_us:
-    resource: "@AmlContactUsBundle/Resources/config/routing.yml"
-    prefix:   /
-
-aml_medias:
-    resource: "@AmlMediasBundle/Resources/config/routing.yml"
-    prefix:   /
-
-aml_evenements:
-    resource: "@AmlEvenementsBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-aml_blog:
-    resource: "@AmlBlogBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-aml_discography:
-    resource: "@AmlDiscographyBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 # Internal routing configuration to handle ESI
 #_internal:
 #    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
@@ -35,18 +8,6 @@ aml_web:
     type:     annotation
     prefix:   /
 
-aml_users:
-    resource: "@AmlUsersBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-#login:
-#    path:   /connexion
-#    defaults:  { _controller: AmlUsersBundle:Secure:login }
-    
-#login_check:
-#    path:   /login_check
-    
 #_imagine:
 #    host:     medias.aml87.fr
 #    resource: .
@@ -55,6 +16,7 @@ aml_users:
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
+# SONATA ADMIN
 admin_sonata:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin

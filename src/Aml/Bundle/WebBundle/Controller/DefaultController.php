@@ -2,8 +2,8 @@
 
 namespace Aml\Bundle\WebBundle\Controller;
 
-use Aml\Bundle\BlogBundle\Entity\Article;
-use Aml\Bundle\DiscographyBundle\Entity\Album;
+use Aml\Bundle\WebBundle\Entity\Article;
+use Aml\Bundle\WebBundle\Entity\Album;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -78,7 +78,7 @@ class DefaultController extends Controller
     /**
      * @Route("/google-analytics", name="google-analytics")
      * @Method("GET")
-     * @Template("main/googleAnalytics.html.twig")
+     * @Template("main/google_analytics.html.twig")
      */
     public function googleAnalyticsAction()
     {

@@ -1,16 +1,21 @@
 <?php
+
 namespace Aml\Bundle\WebBundle\Twig;
 
 use Twig_Extension;
 use Twig_SimpleFilter;
 
+/**
+ * Class PublicStatusExtension
+ * @package Aml\Bundle\WebBundle\Twig
+ */
 class PublicStatusExtension extends Twig_Extension
 {
     public function getFilters()
     {
         return array
         (
-            new Twig_SimpleFilter('publicStatus',array($this, 'publicStatusFilter'))
+            new Twig_SimpleFilter('publicStatus', [$this, 'publicStatusFilter'])
         );
     }
 

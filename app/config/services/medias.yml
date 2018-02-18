@@ -1,0 +1,24 @@
+parameters:
+#    aml_medias.example.class: Aml\Bundle\WebBundle\Example
+
+services:
+    aml_medias.google.client:
+        class: Aml\Bundle\WebBundle\Google\Client
+        arguments:
+          - '@logger'
+          - '%google_app_name%'
+          - '%google_developer_key%'
+
+    aml_medias.google.youtube_provider:
+        class: Aml\Bundle\WebBundle\Google\YoutubeProvider
+        arguments:
+          - '@aml_medias.google.client'
+          - '%youtube_username%'
+
+    aml_medias.video.video_manager:
+        class: Aml\Bundle\WebBundle\Video\VideoManager
+        arguments:
+          - '@doctrine.orm.entity_manager'
+
+    aml_medias.video.video_factory:
+        class: Aml\Bundle\WebBundle\Video\VideoFactory

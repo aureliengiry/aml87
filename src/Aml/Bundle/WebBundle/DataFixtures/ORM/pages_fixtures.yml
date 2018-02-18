@@ -1,0 +1,13 @@
+
+Aml\Bundle\WebBundle\Entity\UrlPage:
+    url_page_1:
+        urlKey: 'accordeon-autrement'
+
+Aml\Bundle\WebBundle\Entity\Page:
+    page_1:
+        title: 'L''accordéon autrement'
+        body: <text(500)>
+        created: '<dateTimeBetween("-200 days", "now")>'
+        updated: '<dateTimeBetween($created, "now")>'
+        public: true
+        url: '@url_page_1'

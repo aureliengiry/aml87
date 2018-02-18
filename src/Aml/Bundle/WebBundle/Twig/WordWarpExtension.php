@@ -1,18 +1,22 @@
 <?php
+
 namespace Aml\Bundle\WebBundle\Twig;
 
 use Twig_Extension;
 use Twig_SimpleFilter;
 
+/**
+ * Class WordWarpExtension
+ * @package Aml\Bundle\WebBundle\Twig
+ */
 class WordWarpExtension extends Twig_Extension
 {
     public function getFilters()
     {
-        return array
-        (
-            new Twig_SimpleFilter('wordWarp',array($this, 'wordWarpFilter'), array('is_safe' => array('html'))),
-            new Twig_SimpleFilter('isWordWarp',array($this, 'isWordWarpFilter'))
-        );
+        return [
+            new Twig_SimpleFilter('wordWarp', [$this, 'wordWarpFilter'], ['is_safe' => ['html']]),
+            new Twig_SimpleFilter('isWordWarp', [$this, 'isWordWarpFilter']),
+        ];
     }
 
     /**
@@ -31,13 +35,13 @@ class WordWarpExtension extends Twig_Extension
         $str = $this->stripHtmlTags($str);
 
         // Delete \n \r \t
-        $str = str_replace(array("\r\n", "\n", "\r", "\t"), '', $str);
+        $str = str_replace(["\r\n", "\n", "\r", "\t"], '', $str);
 
         if (strlen($str) > $length) {
             if ($wordwarp) {
                 $length = $this->findSpace($str, $length);
             }
-            $text = '<div class="expand">'.mb_substr($str, 0, $length).' ...</div>';
+            $text = '<div class="expand">' . mb_substr($str, 0, $length) . ' ...</div>';
 
             return $text;
         } else {

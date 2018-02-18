@@ -1,3 +1,0 @@
-aml_contact_us:
-    resource: '@AmlContactUsBundle/Controller'
-    type: annotation

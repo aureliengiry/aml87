@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Aml\Bundle\WebBundle\Entity\Link
  *
  * @ORM\Table(name="webbundle_links")
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\LinkRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\LinkRepository")
  */
 class Link
 {

@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="webbundle_partenaires")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Entity\Repository\PartenaireRepository")
+ * @ORM\Entity(repositoryClass="Aml\Bundle\WebBundle\Repository\PartenaireRepository")
  */
 class Partenaire
 {
@@ -38,7 +38,7 @@ class Partenaire
     private $url;
 
     /**
-     * @ORM\OneToOne(targetEntity="\Aml\Bundle\MediasBundle\Entity\Image", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\Aml\Bundle\WebBundle\Entity\Image", cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private $logo;
@@ -51,7 +51,7 @@ class Partenaire
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\EvenementsBundle\Entity\Evenement", inversedBy="partenaires")
+     * @ORM\ManyToMany(targetEntity="\Aml\Bundle\WebBundle\Entity\Evenement", inversedBy="partenaires")
      * @ORM\JoinTable(name="evenements_partenaires",
      *        joinColumns={@ORM\JoinColumn(name="id_partenaire", referencedColumnName="id_partenaire")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}

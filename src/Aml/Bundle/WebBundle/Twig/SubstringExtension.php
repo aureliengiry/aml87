@@ -1,16 +1,21 @@
 <?php
+
 namespace Aml\Bundle\WebBundle\Twig;
 
 use Twig_Extension;
 use Twig_SimpleFilter;
 
+/**
+ * Class SubstringExtension
+ * @package Aml\Bundle\WebBundle\Twig
+ */
 class SubstringExtension extends Twig_Extension
 {
 
     public function getFilters()
     {
         return array(
-            new Twig_SimpleFilter('substring',array($this, 'substringFilter'))
+            new Twig_SimpleFilter('substring', [$this, 'substringFilter'])
         );
     }
 
@@ -27,11 +32,11 @@ class SubstringExtension extends Twig_Extension
     {
 
         $substring = $tmpString = '';
-        $tmpArray = array();
+        $tmpArray = [];
         if (strlen($longString) > $nbChar) {
             $tmpString = wordwrap($longString, $nbChar, '#@@#', false);
             $tmpArray = explode('#@@#', $tmpString);
-            $substring = $tmpArray[0].' '.$endString;
+            $substring = $tmpArray[0] . ' ' . $endString;
         } else {
             $substring = $longString;
         }
