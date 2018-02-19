@@ -115,12 +115,6 @@ class ArticleRepository extends EntityRepository
 
         $q->setParameters($params);
 
-        $query = $q->getQuery();
-
-        try {
-            return $query->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            return null;
-        }
+        return $q->getQuery()->getOneOrNullResult();
     }
 }

@@ -27,12 +27,7 @@ class AlbumRepository extends EntityRepository
 
         $q->setParameters($params);
 
-        $query = $q->getQuery();
+        return $q->getQuery()->getOneOrNullResult();
 
-        try {
-            return $query->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            return null;
-        }
     }
 }
