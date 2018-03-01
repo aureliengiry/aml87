@@ -19,11 +19,8 @@ install:
   - php bin/console doctrine:schema:update --force --env=test
   - php bin/console doctrine:fixtures:load --env=test --purge-with-truncate -n
 
-
-
 script:
   - phpunit
-  - cat var/logs/test.log
 
 notifications:
   email:

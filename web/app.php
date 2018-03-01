@@ -6,7 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 $loader = require __DIR__.'/../app/autoload.php';
 
 $kernel = new AppKernel('prod', false);
-$kernel = new AppCache($kernel);
+//$kernel = new AppCache($kernel);
+Request::setTrustedProxies([], Request::HEADER_X_FORWARDED_ALL);$response = $kernel->handle($request);
 
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
