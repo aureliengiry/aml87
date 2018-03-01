@@ -1,6 +1,6 @@
 Aml\Bundle\WebBundle\Entity\Track:
     track_{1..30}:
-        number: <numberBetween(1, 20)>
+        number: <current()>
         title: <text(10)>
         composer: <name(10)>
         album: '@album_<numberBetween(1, 5)>'
