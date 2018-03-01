@@ -1,5 +1,0 @@
-services:
-    Aml\Bundle\WebBundle\Discography\DiscographyManager:
-        arguments:
-            - '@doctrine.orm.default_entity_manager'
-
