@@ -1,4 +1,5 @@
 services:
     Aml\Bundle\WebBundle\Evenement\EvenementManager:
+        public: true
         arguments:
             - '@doctrine.orm.default_entity_manager'

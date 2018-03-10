@@ -21,6 +21,7 @@ services:
             - '%aml_contact_us.subribers%'
 
     Aml\Bundle\WebBundle\Contact\ContactMessage:
+        public: true
         arguments:
           - '@doctrine.orm.entity_manager'
           - '@mailer'

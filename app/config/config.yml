@@ -112,13 +112,13 @@ sonata_core:
       enabled: false
 
 # Assetic Configuration
-assetic:
-    debug:          "%kernel.debug%"
-    write_to:       "%kernel.root_dir%/../web"
-    use_controller: false
-    bundles:        [AmlWebBundle, TwigBundle]
-    filters:
-        cssrewrite: ~
+#assetic:
+#    debug:          "%kernel.debug%"
+#    write_to:       "%kernel.root_dir%/../web"
+#    use_controller: false
+#    bundles:        [AmlWebBundle, TwigBundle]
+#    filters:
+#        cssrewrite: ~
 
 sonata_intl:
     timezone:
@@ -142,14 +142,14 @@ fos_user:
      #   form:
       #      type: aml_user_profile
 
-ivory_ck_editor:
-   # autoload: true
-    configs:
-        aml_config:
-            toolbar: full
-            uiColor:                "#ffffff"
-            #filebrowserUploadRoute: ~
-            #extraPlugins:           "wordcount"
+#ivory_ck_editor:
+#   # autoload: true
+#    configs:
+#        aml_config:
+#            toolbar: full
+#            uiColor:                "#ffffff"
+#            #filebrowserUploadRoute: ~
+#            #extraPlugins:           "wordcount"
 
 # KNP Menu
 knp_menu:
@@ -158,120 +158,123 @@ knp_menu:
         container_aware: true   # keep this one enabled. Can be omitted as it is the default
 
 # Liip Imagine
-liip_imagine:
-    resolvers:
-        default:
-            web_path:
-                web_root: "%kernel.root_dir%/../web"
-                cache_prefix: media/cache
-    filter_sets:
-        cache: ~
-        thumbnail:
-            quality: 75
-            filters:
-                thumbnail: { size: [150, 150], mode: inset }
-        vignette_thumbnail:
-            quality: 75
-            filters:
-                thumbnail: { size: [150, 100], mode: inbox }
-        avatar_thumbnail:
-            quality: 75
-            filters:
-                thumbnail: { size: [80, 80], mode: inbox }
-        moyen_thumbnail:
-            quality: 75
-            filters:
-                thumbnail: { size: [50, 50], mode: inbox }
-        mini_thumbnail:
-            quality: 75
-            filters:
-                thumbnail: { size: [28, 28], mode: inbox }
-        micro_thumbnail:
-            quality: 75
-            filters:
-                thumbnail: { size: [14, 14], mode: inbox }
-        big_thumbnail:
-            quality: 75
-            filters:
-                thumbnail: { size: [300, 300], mode: inbox }
-        admin_thumbnail:
-            quality: 75
-            filters:
-                relative_resize: {  widen: 150, mode: outbound }
-
-        # Evenement
-        evenement_view:
-             quality: 75
-             filters:
-                relative_resize: {  widen: 588, mode: outbound }
-
-        evenement_list:
-             quality: 75
-             filters:
-                   relative_resize: {  widen: 450, mode: outbound }
-
-        # Discography
-        discography_view:
-             quality: 75
-             filters:
-                   relative_resize: {  widen: 588, mode: outbound }
-
-        discography_list:
-             quality: 75
-             filters:
-                  thumbnail: { size: [180, 160], mode: outbound }
-
-        # Blog
-        blog_list:
-             quality: 75
-             filters:
-                   relative_resize: {  widen: 588, mode: outbound }
-        blog_view:
-             quality: 75
-             filters:
-                   relative_resize: {  widen: 170, mode: outbound }
-        blog_thumbnail:
-             quality: 75
-             filters:
-                   relative_resize: {  widen: 425, mode: outbound }
-
-        # Partenaires
-        partenaire_view:
-             quality: 75
-             filters:
-                   relative_resize: {  widen: 500, mode: outbound }
-
-        partenaire_thumbnail:
-             quality: 75
-             filters:
-                   relative_resize: {  widen: 120, mode: outbound }
-
-        # Modal
-        modal_img:
-             quality: 75
-             filters:
-                   relative_resize: {  widen: 900, mode: outbound }
-    loaders:
-        default:
-            filesystem:
-                locator: filesystem
-                data_root:
-                    - "%liip_imagine_loaders_default_filesystem_data_root%"
+#liip_imagine:
+#    resolvers:
+#        default:
+#            web_path:
+#                web_root: "%kernel.root_dir%/../web"
+#                cache_prefix: media/cache
+#    filter_sets:
+#        cache: ~
+#        thumbnail:
+#            quality: 75
+#            filters:
+#                thumbnail: { size: [150, 150], mode: inset }
+#        vignette_thumbnail:
+#            quality: 75
+#            filters:
+#                thumbnail: { size: [150, 100], mode: inbox }
+#        avatar_thumbnail:
+#            quality: 75
+#            filters:
+#                thumbnail: { size: [80, 80], mode: inbox }
+#        moyen_thumbnail:
+#            quality: 75
+#            filters:
+#                thumbnail: { size: [50, 50], mode: inbox }
+#        mini_thumbnail:
+#            quality: 75
+#            filters:
+#                thumbnail: { size: [28, 28], mode: inbox }
+#        micro_thumbnail:
+#            quality: 75
+#            filters:
+#                thumbnail: { size: [14, 14], mode: inbox }
+#        big_thumbnail:
+#            quality: 75
+#            filters:
+#                thumbnail: { size: [300, 300], mode: inbox }
+#        admin_thumbnail:
+#            quality: 75
+#            filters:
+#                relative_resize: {  widen: 150, mode: outbound }
+#
+#        # Evenement
+#        evenement_view:
+#             quality: 75
+#             filters:
+#                relative_resize: {  widen: 588, mode: outbound }
+#
+#        evenement_list:
+#             quality: 75
+#             filters:
+#                   relative_resize: {  widen: 450, mode: outbound }
+#
+#        # Discography
+#        discography_view:
+#             quality: 75
+#             filters:
+#                   relative_resize: {  widen: 588, mode: outbound }
+#
+#        discography_list:
+#             quality: 75
+#             filters:
+#                  thumbnail: { size: [180, 160], mode: outbound }
+#
+#        # Blog
+#        blog_list:
+#             quality: 75
+#             filters:
+#                   relative_resize: {  widen: 588, mode: outbound }
+#        blog_view:
+#             quality: 75
+#             filters:
+#                   relative_resize: {  widen: 170, mode: outbound }
+#        blog_thumbnail:
+#             quality: 75
+#             filters:
+#                   relative_resize: {  widen: 425, mode: outbound }
+#
+#        # Partenaires
+#        partenaire_view:
+#             quality: 75
+#             filters:
+#                   relative_resize: {  widen: 500, mode: outbound }
+#
+#        partenaire_thumbnail:
+#             quality: 75
+#             filters:
+#                   relative_resize: {  widen: 120, mode: outbound }
+#
+#        # Modal
+#        modal_img:
+#             quality: 75
+#             filters:
+#                   relative_resize: {  widen: 900, mode: outbound }
+#    loaders:
+#        default:
+#            filesystem:
+#                locator: filesystem
+#                data_root:
+#                    - "%liip_imagine_loaders_default_filesystem_data_root%"
 
 ## Sentry
 sentry:
     dsn: "%sentry_dsn%"
     app_path: "%kernel.root_dir%/.."
     client: Sentry\SentryBundle\SentrySymfonyClient
-    environment: "%kernel.environment%"
-    error_types: E_ALL & ~E_DEPRECATED & ~E_NOTICE
+    options:
+        environment: "%kernel.environment%"
+        error_types: E_ALL & ~E_DEPRECATED & ~E_NOTICE
+        prefixes:
+            - "%kernel.root_dir%/.."
+        excluded_app_paths:
+            - "%kernel.root_dir%/../vendor"
+            - "%kernel.root_dir%/../var/cache"
     exception_listener: Sentry\SentryBundle\EventListener\ExceptionListener
     skip_capture:
         - "Symfony\\Component\\HttpKernel\\Exception\\HttpExceptionInterface"
-    prefixes:
-        - "%kernel.root_dir%/.."
-    excluded_app_paths:
-        - "%kernel.root_dir%/../vendor"
-        - "%kernel.root_dir%/../var/cache"
+
+
 
 

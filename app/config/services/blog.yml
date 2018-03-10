@@ -1,3 +1,4 @@
 services:
     Aml\Bundle\WebBundle\Article\ArticleManager:
         autowire: true
+        public: true
