@@ -1,6 +1,6 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Google;
+namespace App\Google;
 
 use Monolog\Logger;
 use Google_Client;

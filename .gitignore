@@ -27,10 +27,6 @@
 /web/media/
 /web/css/
 
-# Assets managed by webpack
-/web/build/*
-!web/build/.gitkeep
-
 # Build data
 /build/
 
@@ -63,7 +59,8 @@
 
 ###> symfony/webpack-encore-pack ###
 /node_modules/
-/public/build/
+/public/assets/*
+!public/assets/.gitkeep
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-pack ###

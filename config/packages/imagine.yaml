@@ -1,0 +1,125 @@
+#liip_imagine:
+#    # valid drivers options include "gd" or "gmagick" or "imagick"
+#    driver: "gd"
+#
+#    # define your filter sets under this option
+#    filter_sets:
+#
+#        # an example thumbnail transformation definition
+#        # https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html#create-thumbnails
+#        squared_thumbnail:
+#
+#            # set your image quality defaults
+#            jpeg_quality:          85
+#            png_compression_level: 8
+#
+#            # setup the filter steps to apply for this transformation
+#            filters:
+#
+#                # auto rotate the image using EXIF metadata
+#                auto_rotate: ~
+#
+#                # strip the image of all metadata
+#                strip: ~
+#
+#                # scale and square the image to the given dimensions
+#                thumbnail:
+#                    size:          [253, 253]
+#                    mode:          outbound
+#                    allow_upscale: true
+#
+#                # create border by placing image on larger black background
+#                background:
+#                    size:     [256, 256]
+#                    position: center
+#
+#                    color:    '#fff'
+# Liip Imagine
+liip_imagine:
+    filter_sets:
+        cache: ~
+        thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [150, 150], mode: inset }
+        vignette_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [150, 100], mode: inbox }
+        avatar_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [80, 80], mode: inbox }
+        moyen_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [50, 50], mode: inbox }
+        mini_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [28, 28], mode: inbox }
+        micro_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [14, 14], mode: inbox }
+        big_thumbnail:
+            quality: 75
+            filters:
+                thumbnail: { size: [300, 300], mode: inbox }
+        admin_thumbnail:
+            quality: 75
+            filters:
+                relative_resize: {  widen: 150, mode: outbound }
+
+        # Evenement
+        evenement_view:
+             quality: 75
+             filters:
+                relative_resize: {  widen: 588, mode: outbound }
+
+        evenement_list:
+             quality: 75
+             filters:
+                   relative_resize: {  widen: 450, mode: outbound }
+
+        # Discography
+        discography_view:
+             quality: 75
+             filters:
+                   relative_resize: {  widen: 588, mode: outbound }
+
+        discography_list:
+             quality: 75
+             filters:
+                  thumbnail: { size: [180, 160], mode: outbound }
+
+        # Blog
+        blog_list:
+             quality: 75
+             filters:
+                   relative_resize: {  widen: 588, mode: outbound }
+        blog_view:
+             quality: 75
+             filters:
+                   relative_resize: {  widen: 170, mode: outbound }
+        blog_thumbnail:
+             quality: 75
+             filters:
+                   relative_resize: {  widen: 425, mode: outbound }
+
+        # Partenaires
+        partenaire_view:
+             quality: 75
+             filters:
+                   relative_resize: {  widen: 500, mode: outbound }
+
+        partenaire_thumbnail:
+             quality: 75
+             filters:
+                   relative_resize: {  widen: 120, mode: outbound }
+
+        # Modal
+        modal_img:
+             quality: 75
+             filters:
+                   relative_resize: {  widen: 900, mode: outbound }

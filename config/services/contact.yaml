@@ -1,15 +1,15 @@
 parameters:
-    aml_contact_us.subribers: "%admin_email%"
+    aml_contact_us.subribers: '%env(APP_ADMIN_EMAIL)%'
 
 services:
-    sonata.block.service.contact_us_messages:
-          class: App\Block\Service\AdminMessagesBlockService
-          arguments:
-              - 'sonata.block.service.contact_us_messages'
-              - '@templating'
-              - '@doctrine.orm.entity_manager'
-          tags:
-              - { name: sonata.block }
+#    sonata.block.service.contact_us_messages:
+#          class: App\Bundle\AdminBundle\Block\Service\AdminMessagesBlockService
+#          arguments:
+#              - 'sonata.block.service.contact_us_messages'
+#              - '@templating'
+#              - '@doctrine.orm.entity_manager'
+#          tags:
+#              - { name: sonata.block }
 
     aml_contactus.message.post:
         class: App\EventListener\PostListener

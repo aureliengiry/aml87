@@ -22,7 +22,7 @@ help:
 ##---------------------------------------------------------------------------
 
 docker-init:          ## Init and start docker of Relight & Dimipro
-docker-init: up
+docker-init: docker-cmd-up
 
 docker-start:         ## Start docker
 docker-start: docker-cmd-start
@@ -56,9 +56,17 @@ mysql-shell:
 ##
 ## Assets
 ##---------------------------------------------------------------------------
-assets-compile-dev:   ## Compile assets for dev
+assets-compile-dev:         ## Compile assets for dev
 assets-compile-dev:
-	$(EXEC_NODEJS) $(PROJECT_PATH)/node_modules/.bin/encore dev
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn run encore dev"
+
+assets-compile-dev-watch:   ## Compile assets for dev with watch mode
+assets-compile-dev-watch:
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn run encore dev --watch"
+
+assets-compile-prod:        ## Compile assets for prod
+assets-compile-prod:
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn run encore production"
 
 ##
 ## Symfony
@@ -72,6 +80,14 @@ sf-cc:        ## Clear the cache in dev env
 sf-cc:
 	@$(EXEC_WEB) $(SYMFONY_CONSOLE) cache:clear --no-warmup
 	@$(EXEC_WEB) $(SYMFONY_CONSOLE) cache:warmup
+
+composer-install:   ## Install vendor
+composer-install:
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 /usr/local/bin/composer install -o"
+
+composer-update:    ## Update vendor
+composer-update:
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 /usr/local/bin/composer update -o"
 
 ##
 ## Database
@@ -89,17 +105,20 @@ db-init-dev: vendor
 ## Tests
 ##---------------------------------------------------------------------------
 
-tu-init:        ## Init Database, fixtures for the PHP unit tests
-tu-init: vendor
+tests-init:        ## Init Database, fixtures for the PHP unit tests
+tests-init: vendor
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:drop --force --env=test
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:create --env=test
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:schema:update --force --env=test
-	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:fixtures:load --env=test --purge-with-truncate -n
+	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:fixtures:load --env=test -n
 
+tests-ut:             ## Run the phpunit on unit tests and exclude functional tests
+tests-ut:
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit --exclude-group functional"
 
-tu:             ## Run the PHP unit tests
-tu:
-	$(EXEC_WEB) phpunit $(PROJECT_PATH)
+tests-functional:  ## Run the phpunit on functionnal tests
+tests-functional:
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit --group functional"
 
 ##
 ## Dependencies
@@ -113,7 +132,7 @@ deps: vendor
 build:
 	$(FIG) build
 
-up:
+docker-cmd-up:
 	$(FIG) up -d && $(FIG) logs
 
 docker-cmd-start:

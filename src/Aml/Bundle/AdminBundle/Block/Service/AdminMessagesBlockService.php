@@ -1,8 +1,8 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Block\Service;
+namespace App\Bundle\AdminBundle\Block\Service;
 
-use Aml\Bundle\WebBundle\Entity\Message;
+use App\Entity\Message;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +19,7 @@ use Doctrine\ORM\EntityManager;
 
 /**
  * Class AdminMessagesBlockService
- * @package Aml\Bundle\WebBundle\Block\Service
+ * @package App\Bundle\AdminBundle\Block\Service
  */
 class AdminMessagesBlockService extends AbstractBlockService
 {

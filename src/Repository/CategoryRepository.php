@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use Aml\Bundle\WebBundle\Entity\Article;
-use Aml\Bundle\WebBundle\Entity\Category;
+use App\Entity\Article;
+use App\Entity\Category;
 use Doctrine\ORM\EntityRepository;
 
 /**

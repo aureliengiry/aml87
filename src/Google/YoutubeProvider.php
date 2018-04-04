@@ -1,9 +1,13 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Google;
+namespace App\Google;
 
 use Google_Service_YouTube;
 
+/**
+ * Class YoutubeProvider
+ * @package App\Google
+ */
 class YoutubeProvider
 {
     /** @var Client  */

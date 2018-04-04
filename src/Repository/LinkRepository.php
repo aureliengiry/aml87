@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Link;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -23,7 +24,7 @@ class LinkRepository extends EntityRepository
 
         $qb
             ->select('l')
-            ->from('AmlWebBundle:Link', 'l')
+            ->from(Link::class, 'l')
             ->where("l.public = 1")
             ->orderBy('l.weight', 'ASC');
 

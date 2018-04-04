@@ -6,7 +6,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: "Autres contenus", label: "Liens" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Link
+            - App\Entity\Link
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -17,7 +17,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: "Autres contenus", label: "Page" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Page
+            - App\Entity\Page
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -28,7 +28,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: "Autres contenus", label: "Partenaires" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Partenaire
+            - App\Entity\Partenaire
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -39,7 +39,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: "Articles" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Article
+            - App\Entity\Article
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -50,7 +50,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: "Tags" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Tags
+            - App\Entity\Tags
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -61,7 +61,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: "Categories" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Category
+            - App\Entity\Category
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -74,7 +74,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Administration, label: "Formulaire de contact" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Message
+            - App\Entity\Message
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -86,7 +86,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Discographie, label: "Albums" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Album
+            - App\Entity\Album
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -97,7 +97,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Discographie, label: "Pistes" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Track
+            - App\Entity\Track
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -109,7 +109,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Agenda, label: "Evenements" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Evenement
+            - App\Entity\Evenement
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -120,7 +120,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Agenda, label: "Saisons" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Season
+            - App\Entity\Season
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -132,7 +132,7 @@ services:
               - { name: sonata.admin, manager_type: orm, group: Medias, label: "Images" }
           arguments:
               - ~
-              - Aml\Bundle\WebBundle\Entity\Image
+              - App\Entity\Image
               - 'SonataAdminBundle:CRUD'
           calls:
               - [ setTranslationDomain, [AmlAdminBundle]]
@@ -144,7 +144,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Medias, label: "Documents" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\File
+            - App\Entity\File
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -155,7 +155,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Medias, label: "Videos" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\Video\Youtube
+            - App\Entity\Video\Youtube
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [AmlAdminBundle]]
@@ -167,7 +167,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: "Administration", label: "Membres" }
         arguments:
             - ~
-            - Aml\Bundle\WebBundle\Entity\User
+            - App\Entity\User
             - 'SonataAdminBundle:CRUD'
         calls:
             - [ setTranslationDomain, [Aml\Bundle\AdminBundle]]

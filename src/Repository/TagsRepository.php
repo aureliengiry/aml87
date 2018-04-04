@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use Aml\Bundle\WebBundle\Entity\Article;
-use Aml\Bundle\WebBundle\Entity\Tags;
+use App\Entity\Article;
+use App\Entity\Tags;
 use Doctrine\ORM\EntityRepository;
 
 /**

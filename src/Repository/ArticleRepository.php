@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use Aml\Bundle\WebBundle\Entity\Article;
+use App\Entity\Article;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -23,7 +23,7 @@ class ArticleRepository extends EntityRepository
      *
      * @return array
      */
-    private function buildRequestByFilters($query, array $params = [], array $filters = []): array
+    private function buildRequestByFilters($query, array $params = [], array $filters = [])
     {
         if (isset($filters['category']) && !empty($filters['category'])) {
             $query

@@ -2,7 +2,7 @@
 
 namespace App\Contact;
 
-use App\Message;
+use App\Entity\Message;
 use App\Event\Contact\PostEvent;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

@@ -2,7 +2,6 @@ imports:
     - { resource: parameters.yaml }
     - { resource: security.yaml }
     - { resource: services.yaml }
-    - { resource: services/ }
 
 framework:
     #esi:             ~
@@ -132,13 +131,13 @@ sonata_intl:
             en_UK: Europe/London
 
 # FOS User Bundle
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: Aml\Bundle\WebBundle\Entity\User
-    from_email:
-      address:        noreply@aml87.fr
-      sender_name:    "%site_name%"
+#fos_user:
+#    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+#    firewall_name: main
+#    user_class: App\Entity\User
+#    from_email:
+#      address:        noreply@aml87.fr
+#      sender_name:    "%site_name%"
     #profile:
      #   form:
       #      type: aml_user_profile

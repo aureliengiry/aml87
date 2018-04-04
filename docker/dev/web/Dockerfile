@@ -6,8 +6,6 @@ COPY . /usr/local/docker
 RUN chmod -R 777 /usr/local/docker
 
 RUN apt-get update && apt-get install -y \
-        php-soap \
-        php-http-request \
         libxml2-dev \
         libxml2-utils \
         libfreetype6-dev \

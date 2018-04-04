@@ -1,10 +1,10 @@
 <?php
 
-namespace Aml\Bundle\WebBundle\Utils;
+namespace App\Utils;
 
 /**
  * Class Slugger
- * @package Aml\Bundle\WebBundle\Utils
+ * @package App\Utils
  */
 class Slugger
 {

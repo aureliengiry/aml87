@@ -6,14 +6,14 @@ services:
         class: App\Google\Client
         arguments:
           - '@logger'
-          - '%google_app_name%'
-          - '%google_developer_key%'
+          - '%env(GOOGLE_APP_NAME)%'
+          - '%env(GOOGLE_DEVELOPER_KEY)%'
 
     aml_medias.google.youtube_provider:
         class: App\Google\YoutubeProvider
         arguments:
           - '@aml_medias.google.client'
-          - '%youtube_username%'
+          - '%env(YOUTUBE_USERNAME)%'
 
     aml_medias.video.video_manager:
         class: App\Video\VideoManager

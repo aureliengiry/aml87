@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use Aml\Bundle\WebBundle\Entity\Season;
+use App\Entity\Season;
 use Doctrine\ORM\EntityRepository;
 
 /**

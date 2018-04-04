@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * App\Entity\User
@@ -11,7 +10,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table(name="usersbundle_users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User extends BaseUser
+class User
 {
     /**
      * @var integer $id

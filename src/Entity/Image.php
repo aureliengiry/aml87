@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Aml\Bundle\WebBundle\Utils\Slugger;
+use App\Utils\Slugger;
 
 /**
  * App\Entity\Image

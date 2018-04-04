@@ -1,6 +1,9 @@
+imports:
+    - { resource: services/ }
+
 parameters:
-    app_google_analytics.account_id: "%ga_account_id%"
-    locale: 'en'
+    app_google_analytics.account_id: '%env(GOOGLE_ANALYTICS_ACCOUNT_ID)%'
+    locale: 'fr'
 
 services:
     App\Utils\Slugger:
@@ -62,3 +65,16 @@ services:
             - "@request_stack"
         tags:
             - { name: knp_menu.menu, alias: breadcrumb } # The alias is used in the template
+
+    ## Data Fixtures
+    App\DataFixtures\PageFixtures:
+        tags: ['doctrine.fixture.orm']
+
+    App\DataFixtures\BlogFixtures:
+        tags: ['doctrine.fixture.orm']
+
+    App\DataFixtures\DiscographyFixtures:
+        tags: ['doctrine.fixture.orm']
+
+    App\DataFixtures\EvenementFixtures:
+        tags: ['doctrine.fixture.orm']

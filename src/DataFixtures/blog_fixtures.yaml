@@ -1,0 +1,28 @@
+
+App\Entity\Category:
+    category_{1..4}:
+        name: <text(10)>
+        description: <text(100)>
+
+App\Entity\Tags:
+    tag_{1..20}:
+        name (unique): <text(10)>
+        description: <text(100)>
+        weight: <numberBetween(1, 10)>
+
+App\Entity\Article:
+    article_{1..50}:
+        title: <text(50)>
+        body: <text(500)>
+        created: '<dateTimeBetween("-200 days", "now")>'
+        updated: '<dateTimeBetween($created, "now")>'
+        published: '<dateTimeBetween($updated, "now")>'
+        public: <boolean()>
+        category: '@category_<numberBetween(1, 4)>'
+        tags: '<numberBetween(1, 20)>x @tag_*'
+        url: '@url_article_<current()>'
+
+
+App\Entity\UrlArticle:
+    url_article_{1..50}:
+        urlKey (unique): 'setUrlKey(<text(10)>)'

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Aml\Bundle\WebBundle\Utils\Slugger;
+use App\Utils\Slugger;
 
 use Doctrine\ORM\Mapping as ORM;
 

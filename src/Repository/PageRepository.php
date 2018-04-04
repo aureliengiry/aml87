@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use Aml\Bundle\WebBundle\Entity\UrlPage;
-use Aml\Bundle\WebBundle\Entity\Page;
+use App\Entity\UrlPage;
+use App\Entity\Page;
 use Doctrine\ORM\EntityRepository;
 
 /**

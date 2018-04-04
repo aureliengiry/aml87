@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
-use Aml\Bundle\WebBundle\Entity\Evenement;
-use Aml\Bundle\WebBundle\Entity\Season;
-use Aml\Bundle\WebBundle\Entity\UrlEvenement;
+use App\Entity\Evenement;
+use App\Entity\Season;
+use App\Entity\UrlEvenement;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 
