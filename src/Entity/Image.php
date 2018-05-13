@@ -114,7 +114,7 @@ class Image extends Media
     protected function getUploadRootDir()
     {
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
-        return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
+        return __DIR__ . '/../../public/' . $this->getUploadDir();
     }
 
     protected function getUploadDir()

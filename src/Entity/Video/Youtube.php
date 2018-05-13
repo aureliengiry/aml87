@@ -9,7 +9,7 @@ use App\Entity\Video;
 /**
  * App\Entity\Video\Youtube
  *
- * @ORM\Entity(repositoryClass="App\Entity\Repository\Video\YoutubeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\Video\YoutubeRepository")
  */
 class Youtube extends Video
 {

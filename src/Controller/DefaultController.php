@@ -19,7 +19,7 @@ use App\Event\Sitemap\GenerateEvent;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="app_main_index")
      * @Method("GET")
      * @Template("default/index.html.twig")
      */

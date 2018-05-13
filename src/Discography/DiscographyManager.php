@@ -3,7 +3,7 @@
 namespace App\Discography;
 
 use App\Entity\Album;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Class DiscographyManager
@@ -11,12 +11,14 @@ use Doctrine\ORM\EntityManager;
  */
 class DiscographyManager
 {
+    /**
+     * @var ObjectManager
+     */
     private $em;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(ObjectManager $entityManager)
     {
         $this->em = $entityManager;
-
     }
 
     public function getPublicAlbums()

@@ -33,7 +33,7 @@ class SeasonsCommand extends ContainerAwareCommand
 
     protected $evenementRepo;
     protected $seasonRepo;
-    protected $doctine;
+    protected $doctrine;
     protected $entityManager;
 
     /**

@@ -2,10 +2,10 @@
 
 namespace App\Video;
 
-use App\Entity\Repository\Video\YoutubeRepository;
-use App\Entity\Repository\VideoRepository;
+use App\Repository\Video\YoutubeRepository;
+use App\Repository\VideoRepository;
 use App\Entity\Video;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Class VideoManager
@@ -13,9 +13,12 @@ use Doctrine\ORM\EntityManager;
  */
 class VideoManager
 {
+    /**
+     * @var ObjectManager
+     */
     private $em;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(ObjectManager $entityManager)
     {
         $this->em = $entityManager;
     }

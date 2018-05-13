@@ -4,26 +4,31 @@ namespace App\Evenement;
 
 use App\Entity\Evenement;
 use App\Entity\Season;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
+/**
+ * Class EvenementManager
+ * @package App\Evenement
+ */
 class EvenementManager
 {
+    /**
+     * @var ObjectManager
+     */
     private $em;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(ObjectManager $entityManager)
     {
         $this->em = $entityManager;
     }
 
     public function getPublicEventsInCurrentSeason()
     {
-        return $this->getEventRepository()->getNextEvenements(
-            [
-                'public'  => 1,
-                'archive' => 0,
-                'type'    => Evenement::EVENEMENT_TYPE_CONCERT,
-            ]
-        );
+        return $this->getEventRepository()->getNextEvenements([
+            'public'  => 1,
+            'archive' => 0,
+            'type'    => Evenement::EVENEMENT_TYPE_CONCERT,
+        ]);
     }
 
     public function getEventByIdOrUrl(string $urlKey)

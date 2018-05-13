@@ -22,9 +22,14 @@
 /vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
-/web/media/
+/public/bundles/
+!public/bundles/.gitkeep
+/public/uploads/
+!public/uploads/documents/.gitkeep
+!public/uploads/music/.gitkeep
+!public/uploads/images/.gitkeep
+/public/media/
+!public/media/.gitkeep
 /web/css/
 
 # Build data

@@ -106,10 +106,7 @@ sonata_admin:
             #- { position: right, type: sonata.news.block.recent_comments, settings: { title: Recent Comments, number: 7, mode: admin }}
             #- { position: right, type: sonata.block.service.rss, settings: { title: Sonata Project's Feeds, url: http://sonata-project.org/blog/archive.rss }}
 
-sonata_core:
-  form:
-    mapping:
-      enabled: false
+
 
 # Assetic Configuration
 #assetic:
@@ -142,14 +139,7 @@ sonata_intl:
      #   form:
       #      type: aml_user_profile
 
-#ivory_ck_editor:
-#   # autoload: true
-#    configs:
-#        aml_config:
-#            toolbar: full
-#            uiColor:                "#ffffff"
-#            #filebrowserUploadRoute: ~
-#            #extraPlugins:           "wordcount"
+
 
 # KNP Menu
 knp_menu:
@@ -157,106 +147,6 @@ knp_menu:
         builder_alias: false    # disable the builder-based provider
         container_aware: true   # keep this one enabled. Can be omitted as it is the default
 
-# Liip Imagine
-#liip_imagine:
-#    resolvers:
-#        default:
-#            web_path:
-#                web_root: "%kernel.root_dir%/../web"
-#                cache_prefix: media/cache
-#    filter_sets:
-#        cache: ~
-#        thumbnail:
-#            quality: 75
-#            filters:
-#                thumbnail: { size: [150, 150], mode: inset }
-#        vignette_thumbnail:
-#            quality: 75
-#            filters:
-#                thumbnail: { size: [150, 100], mode: inbox }
-#        avatar_thumbnail:
-#            quality: 75
-#            filters:
-#                thumbnail: { size: [80, 80], mode: inbox }
-#        moyen_thumbnail:
-#            quality: 75
-#            filters:
-#                thumbnail: { size: [50, 50], mode: inbox }
-#        mini_thumbnail:
-#            quality: 75
-#            filters:
-#                thumbnail: { size: [28, 28], mode: inbox }
-#        micro_thumbnail:
-#            quality: 75
-#            filters:
-#                thumbnail: { size: [14, 14], mode: inbox }
-#        big_thumbnail:
-#            quality: 75
-#            filters:
-#                thumbnail: { size: [300, 300], mode: inbox }
-#        admin_thumbnail:
-#            quality: 75
-#            filters:
-#                relative_resize: {  widen: 150, mode: outbound }
-#
-#        # Evenement
-#        evenement_view:
-#             quality: 75
-#             filters:
-#                relative_resize: {  widen: 588, mode: outbound }
-#
-#        evenement_list:
-#             quality: 75
-#             filters:
-#                   relative_resize: {  widen: 450, mode: outbound }
-#
-#        # Discography
-#        discography_view:
-#             quality: 75
-#             filters:
-#                   relative_resize: {  widen: 588, mode: outbound }
-#
-#        discography_list:
-#             quality: 75
-#             filters:
-#                  thumbnail: { size: [180, 160], mode: outbound }
-#
-#        # Blog
-#        blog_list:
-#             quality: 75
-#             filters:
-#                   relative_resize: {  widen: 588, mode: outbound }
-#        blog_view:
-#             quality: 75
-#             filters:
-#                   relative_resize: {  widen: 170, mode: outbound }
-#        blog_thumbnail:
-#             quality: 75
-#             filters:
-#                   relative_resize: {  widen: 425, mode: outbound }
-#
-#        # Partenaires
-#        partenaire_view:
-#             quality: 75
-#             filters:
-#                   relative_resize: {  widen: 500, mode: outbound }
-#
-#        partenaire_thumbnail:
-#             quality: 75
-#             filters:
-#                   relative_resize: {  widen: 120, mode: outbound }
-#
-#        # Modal
-#        modal_img:
-#             quality: 75
-#             filters:
-#                   relative_resize: {  widen: 900, mode: outbound }
-#    loaders:
-#        default:
-#            filesystem:
-#                locator: filesystem
-#                data_root:
-#                    - "%liip_imagine_loaders_default_filesystem_data_root%"
 
 ## Sentry
 sentry:

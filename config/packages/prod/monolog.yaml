@@ -15,3 +15,8 @@ monolog:
             type:   console
             process_psr_3_messages: false
             channels: ["!event", "!doctrine"]
+        login:
+            type:               stream
+            path:               "%kernel.logs_dir%/auth.log"
+            level:              info
+            channels:           security

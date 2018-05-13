@@ -13,9 +13,11 @@ Encore
 
     // will output as web/build/app.js
     .addEntry('app', './assets/js/main.js')
+    .addEntry('members-area', './assets/js/members-area.js')
 
     // will output as web/build/main.css
     .addStyleEntry('global', './assets/css/main.sass')
+    .addStyleEntry('membersarea', './assets/css/members-area.sass')
 
     // allow sass/scss files to be processed
     // .enableSassLoader(function(sassOptions) {}, {

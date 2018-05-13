@@ -1,17 +1,17 @@
 <!-- Header -->
 <header id="banniere">
 
-    {% if app.request.attributes.get('_route') == 'home' %}
+    {% if app.request.attributes.get('_route') == 'app_main_index' %}
         <h1 id="logo">
             <span>Avenir Musical du Limousin</span>
-            <a href="{{ path('home') }}" title="AML 87">
+            <a href="{{ path('app_main_index') }}" title="AML 87">
                 <img src="{{ asset('images/logo_aml87.png') }}" height="149" alt="AML 87"/>
             </a>
         </h1>
     {% else %}
         <div id="logo">
             <span>Avenir Musical du Limousin</span>
-            <a href="{{ path('home') }}" title="AML 87">
+            <a href="{{ path('app_main_index') }}" title="AML 87">
                 <img src="{{ asset('images/logo_aml87.png') }}" height="149" alt="AML 87"/>
             </a>
         </div>
@@ -22,7 +22,7 @@
 
 </header><!-- /Header -->
 
-{% if app.request.attributes.get('_route') == 'home' %}
+{% if app.request.attributes.get('_route') == 'app_main_index' %}
     <div id="intro">
         <div class="intro-content">
             <div class="accueil-intro">

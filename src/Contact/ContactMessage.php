@@ -4,7 +4,7 @@ namespace App\Contact;
 
 use App\Entity\Message;
 use App\Event\Contact\PostEvent;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -13,18 +13,21 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class ContactMessage
 {
-    /** @var EntityManager  */
+    /**
+     * @var ObjectManager
+     */
     private $em;
-    private $mailer;
+
+    /**
+     * @var EventDispatcherInterface
+     */
     private $eventDispatcher;
 
     public function __construct(
-        EntityManager $entityManager,
-        \Swift_Mailer $mailer,
+        ObjectManager $entityManager,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->em = $entityManager;
-        $this->mailer = $mailer;
         $this->eventDispatcher = $eventDispatcher;
     }
 

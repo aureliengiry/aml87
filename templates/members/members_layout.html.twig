@@ -14,10 +14,6 @@
     <!-- Le styles -->
     <link rel="shortcut icon" href="{{ asset('bundles/amlweb/ico/aml_favicon.ico') }}"/>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-
     <style>
         /*
         * Base structure
@@ -127,8 +123,7 @@
     </style>
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="{{ asset('bundles/amlweb/js/jquery/jquery.1.9.1.min.js') }}" type="text/javascript"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="{{ asset('assets/membersarea.css') }}" rel="stylesheet"/>
 
     {% block stylesheets %}{% endblock %}
 
@@ -151,10 +146,12 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
+                        {% if app.user %}
                         <a href="#">{{ 'layout.welcome_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a>
+                        {% endif %}
                     </li>
                     <li>
-                        <a href="{{ path('fos_user_security_logout') }}">
+                        <a href="{{ path('app_members_area_logout') }}">
                             {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                         </a>
                     </li>
@@ -168,15 +165,18 @@
 
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li><a href="{{ path('fos_user_profile_show') }}">View profile</a></li>
-                    <li><a href="{{ path('fos_user_profile_edit') }}">Edit profile</a></li>
+                    <li><a href="{{ path('fos_user_profile_show') }}">Vérifier mes informations</a></li>
+                    <li><a href="{{ path('fos_user_profile_edit') }}">Mettre à jour mes informations</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="#">Agenda</a></li>
                     <li><a href="#">Bibliothèque de partitions</a></li>
                     <li><a href="#">Documents AML</a></li>
                     <li><a href="#">Mes présences</a></li>
-                    <li><a href="{{ path('aml_users_members_list') }}">Member list</a></li>
+                    <li><a href="{{ path('aml_users_members_list') }}">Liste des membres</a></li>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li><a href="{{ path('sonata_admin_redirect') }}">Admin</a></li>
+                    {% endif %}
                 </ul>
             </div>
 
@@ -202,5 +202,6 @@
         </div>
     </div>
 
+    <script src="{{ asset('assets/members-area.js') }}" type="text/javascript"></script>
 </body>
 </html>

@@ -1,4 +1,0 @@
-services:
-    App\Article\ArticleManager:
-        autowire: true
-        public: true

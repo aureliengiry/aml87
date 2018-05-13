@@ -3,7 +3,7 @@
 namespace App\EventListener;
 
 use App\Event\Contact\PostEvent;
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Message;
 
 /**
@@ -12,18 +12,29 @@ use App\Entity\Message;
  */
 class PostListener
 {
+    /**
+     * @var \Swift_Mailer
+     */
     private $mailer;
+
+    /**
+     * @var ObjectManager
+     */
     private $em;
+
+    /**
+     * @var string
+     */
     private $subscribers;
 
     /**
      * PostListener constructor.
      *
      * @param \Swift_Mailer $mailer
-     * @param EntityManager $entityManager
+     * @param ObjectManager $entityManager
      * @param string $subscribers
      */
-    public function __construct(\Swift_Mailer $mailer, EntityManager $entityManager, string $subscribers = null)
+    public function __construct(\Swift_Mailer $mailer, ObjectManager $entityManager, string $subscribers = null)
     {
         $this->mailer = $mailer;
         $this->em = $entityManager;
@@ -64,7 +75,7 @@ class PostListener
      */
     private function formatMessage(Message $post): array
     {
-        $message = array();
+        $message = [];
 
         $message['subject'] = 'AML87 - '.$post->getName().' cherche à vous contacter';
         $message['body'] = 'Bonjour,'."\n\n"

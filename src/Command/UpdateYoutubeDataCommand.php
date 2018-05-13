@@ -1,6 +1,9 @@
 <?php
 namespace App\Command;
 
+use App\Google\YoutubeProvider;
+use App\Video\VideoFactory;
+use App\Video\VideoManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -80,7 +83,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
         $this->initVideoslist();
 
-        $youtubeProvider = $this->getContainer()->get('aml_medias.google.youtube_provider');
+        $youtubeProvider = $this->getContainer()->get(YoutubeProvider::class);
 
         $compteurVideo = 0;
 
@@ -90,7 +93,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
                 foreach ($videos->getItems() as $youtubeVideo) {
                     $idYoutube = $youtubeVideo->getContentDetails()->getVideoId();
                     if (!in_array($idYoutube, $this->videosList)) {
-                        $video = $this->getContainer()->get('aml_medias.video.video_factory')->createVideoFromYoutube(
+                        $video = $this->getContainer()->get(VideoFactory::class)->createVideoFromYoutube(
                             $youtubeVideo
                         );
 
@@ -118,7 +121,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
      */
     private function initVideoslist()
     {
-        $videos = $this->getContainer()->get('aml_medias.video.video_manager')->findAllVideosYoutube();
+        $videos = $this->getContainer()->get(VideoManager::class)->findAllVideosYoutube();
         foreach ($videos as $video) {
             $this->videosList[$video->getId()] = $video->getProviderId();
         }

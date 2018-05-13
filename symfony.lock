@@ -83,6 +83,12 @@
     "firebase/php-jwt": {
         "version": "v5.0.0"
     },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "1.1.0"
+    },
+    "friendsofsymfony/user-bundle": {
+        "version": "v2.1.2"
+    },
     "fzaninotto/faker": {
         "version": "v1.7.1"
     },
@@ -214,9 +220,6 @@
             "version": "4.7",
             "ref": "c276fa48d4713de91eb410289b3b1834acb7e403"
         }
-    },
-    "phpunit/phpunit-mock-objects": {
-        "version": "5.0.6"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -451,6 +454,9 @@
     },
     "symfony/polyfill-apcu": {
         "version": "v1.7.0"
+    },
+    "symfony/polyfill-ctype": {
+        "version": "v1.8.0"
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.7.0"

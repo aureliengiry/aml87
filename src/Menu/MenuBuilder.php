@@ -35,7 +35,7 @@ class MenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $menu->addChild('Accueil', ['route' => 'home']);
+        $menu->addChild('Accueil', ['route' => 'app_main_index']);
 
         $menu->addChild(
             'Association',
@@ -69,7 +69,7 @@ class MenuBuilder
         ]);
 
         // this item will always be displayed
-        $menu->addChild('Accueil', ['route' => 'home']);
+        $menu->addChild('Accueil', ['route' => 'app_main_index']);
 
         // create the menu according to the route
         $currentRequest = $request->getCurrentRequest('_route');

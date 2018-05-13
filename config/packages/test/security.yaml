@@ -1,0 +1,7 @@
+# config/packages/test/security.yaml
+security:
+    firewalls:
+        # replace 'main' by the name of your own firewall
+        main:
+            anonymous: true
+            http_basic: ~

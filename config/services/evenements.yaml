@@ -1,5 +1,0 @@
-services:
-    App\Evenement\EvenementManager:
-        public: true
-        arguments:
-            - '@doctrine.orm.default_entity_manager'
