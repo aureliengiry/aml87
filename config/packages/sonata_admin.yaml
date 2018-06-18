@@ -1,0 +1,17 @@
+sonata_admin:
+    title: 'AML87'
+    title_logo: /images/logo_aml87_black.png
+
+    dashboard:
+        blocks:
+            - { type: sonata.admin.block.admin_list, position: right }
+            - { position: left, type: sonata.block.service.text, settings: { content: '<div class="box"><div class="box-header with-border"><h2>Bienvenue !</h2></div><div class="box-body">Bienvenue dans la partie administrable du site.</div></div>'} }
+            - { position: left, type: sonata.block.service.contact_us_messages }
+
+sonata_block:
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        sonata.block.service.contact_us_messages: ~
+        sonata.block.service.text: ~
+

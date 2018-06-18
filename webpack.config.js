@@ -3,19 +3,21 @@ var Encore = require('@symfony/webpack-encore');
 
 Encore
 // directory where all compiled assets will be stored
-    .setOutputPath('web/build/')
+    .setOutputPath('public/assets/')
 
     // what's the public path to this directory (relative to your project's document root dir)
-    .setPublicPath('/build')
+    .setPublicPath('/assets')
 
     // empty the outputPath dir before each build
     .cleanupOutputBeforeBuild()
 
     // will output as web/build/app.js
-    .addEntry('app', './app/Resources/assets/js/main.js')
+    .addEntry('app', './assets/js/main.js')
+    .addEntry('members-area', './assets/js/members-area.js')
 
     // will output as web/build/main.css
-    .addStyleEntry('global', './app/Resources/assets/css/main.sass')
+    .addStyleEntry('global', './assets/css/main.sass')
+    .addStyleEntry('membersarea', './assets/css/members-area.sass')
 
     // allow sass/scss files to be processed
     // .enableSassLoader(function(sassOptions) {}, {

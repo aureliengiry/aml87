@@ -1,0 +1,186 @@
+services:
+    sonata.admin.link:
+        class: App\Admin\LinkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Autres contenus", label: "Liens" }
+        arguments:
+            - ~
+            - App\Entity\Link
+            - ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    sonata.admin.page:
+        class: App\Admin\PageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Autres contenus", label: "Page" }
+        arguments:
+            - ~
+            - App\Entity\Page
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    sonata.admin.partner:
+        class: App\Admin\PartenaireAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Autres contenus", label: "Partenaires" }
+        arguments:
+            - ~
+            - App\Entity\Partenaire
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+    ## Blog
+    sonata.admin.blog:
+        class: App\Admin\ArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Articles" }
+        arguments:
+            - ~
+            - App\Entity\Article
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    sonata.admin.blog.tags:
+        class: App\Admin\TagsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Tags" }
+        arguments:
+            - ~
+            - App\Entity\Tags
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    sonata.admin.blog.categories:
+        class: App\Admin\CategoriesAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: "Categories" }
+        arguments:
+            - ~
+            - App\Entity\Category
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+
+    ## Contact
+    sonata.admin.contactus:
+        class: App\Admin\MessageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Administration, label: "Formulaire de contact" }
+        arguments:
+            - ~
+            - App\Entity\Message
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    sonata.block.service.contact_us_messages:
+        class: App\Block\Service\AdminMessagesBlockService
+        arguments:
+            - ~
+            - '@sonata.templating'
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: sonata.block }
+
+    ## Discography
+    sonata.admin.album:
+        class: App\Admin\AlbumAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Discographie, label: "Albums" }
+        arguments:
+            - ~
+            - App\Entity\Album
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    sonata.admin.album.tracks:
+        class: App\Admin\TrackAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Discographie, label: "Pistes" }
+        arguments:
+            - ~
+            - App\Entity\Track
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    ## Evenements
+    sonata.admin.evenement:
+        class: App\Admin\EvenementAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Agenda, label: "Evenements" }
+        arguments:
+            - ~
+            - App\Entity\Evenement
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    sonata.admin.evenement.seasons:
+        class: App\Admin\SeasonAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Agenda, label: "Saisons" }
+        arguments:
+            - ~
+            - App\Entity\Season
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    ## Medias
+    sonata.admin.images:
+          class: App\Admin\ImageAdmin
+          tags:
+              - { name: sonata.admin, manager_type: orm, group: Medias, label: "Images" }
+          arguments:
+              - ~
+              - App\Entity\Image
+              -  ~
+          calls:
+              - [ setTranslationDomain, [AmlAdminBundle]]
+             # - [ setTemplate, [edit, AmlAdminBundle:Admin:edit.html.twig]]
+
+    sonata.admin.documents:
+        class: App\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Medias, label: "Documents" }
+        arguments:
+            - ~
+            - App\Entity\File
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    sonata.admin.videos:
+        class: App\Admin\VideoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Medias, label: "Videos" }
+        arguments:
+            - ~
+            - App\Entity\Video\Youtube
+            -  ~
+        calls:
+            - [ setTranslationDomain, [AmlAdminBundle]]
+
+    ## Users
+    sonata.admin.users:
+        class: App\Admin\UsersAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Administration", label: "Membres" }
+        arguments:
+            - ~
+            - App\Entity\User
+            -  ~
+        calls:
+            - [ setTranslationDomain, [Aml\Bundle\AdminBundle]]
+
+    aml_admin_bundle.image_type_extension:
+        class: App\Form\Extension\ImageTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }

@@ -1,0 +1,21 @@
+App\Entity\Track:
+    track_{1..30}:
+        number: <current()>
+        title: <text(10)>
+        composer: <name(10)>
+        album: '@album_<numberBetween(1, 5)>'
+
+
+App\Entity\Album:
+    album_{1..5}:
+        title: <text(10)>
+        description: <text(100)>
+        public: <boolean()>
+        date: '<dateTime()>'
+        tracks: '<numberBetween(1, 30)>x @track_*'
+        url: '@url_album_<current()>'
+
+App\Entity\UrlDiscography:
+    url_album_{1..5}:
+        urlKey (unique): 'setUrlKey(<text(10)>)'
+

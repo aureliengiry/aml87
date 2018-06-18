@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title -%}
+    Agenda
+{%- endblock title %}
+
+{% block body %}
+
+    {# Breadcrumb #}
+    {% include "_includes/breadcrumb.html.twig" %}
+
+    <article class="contenu-page">
+        <h1>Agenda</h1>
+
+        <ul id="agenda-concerts-public">
+            {% for event in entities %}
+                <li class="event-item">
+                    <span class="date">{{ event.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }} :</span>
+                    <h2>
+                        <a href="{{ path('agenda_show_event', { 'slug': event.slug }) }}"
+                           title="{{ event.title }}">{{ event.title }}</a>
+                    </h2>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </article>
+{% endblock body %}
+
+{% block columnRight %}
+
+    {{ parent() }}
+
+    {# Seasons list #}
+    {% include "agenda/blocs/bloc_seasons.html.twig" %}
+
+{% endblock columnRight %}

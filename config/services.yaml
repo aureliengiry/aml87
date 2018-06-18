@@ -1,0 +1,148 @@
+imports:
+    - { resource: services_admin.yml}
+
+parameters:
+    app_google_analytics.account_id: '%env(GOOGLE_ANALYTICS_ACCOUNT_ID)%'
+    locale: 'fr'
+    aml_contact_us.subribers: '%env(APP_ADMIN_EMAIL)%'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+
+    App\Utils\Slugger:
+        autowire: true
+
+    App\EventListener\SitemapListener:
+        autowire: true
+        arguments:
+            - '@router'
+        tags:
+            - { name: kernel.event_listener, event: aml_web.sitemap.generate_start, method: onGenerateSitemapEvent }
+
+    # Service Configuration
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+           - { name: twig.extension }
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+           - { name: twig.extension }
+
+#    aml.twig.word_warp_extension:
+#        class: App\Twig\WordWarpExtension
+#        tags:
+#          - { name: twig.extension }
+
+#    aml.twig.nice_date_extension:
+#        class: App\Twig\PublicStatusExtension
+#        tags:
+#            - { name: twig.extension }
+#
+#    aml.twig.substring_extension:
+#        class: App\Twig\SubstringExtension
+#        tags:
+#          - { name: twig.extension }
+
+    fos_user.doctrine_registry:
+        alias: doctrine
+
+    ## KNP
+    app.menu_builder:
+        class: App\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+
+    app.main_menu:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory: ["@app.menu_builder", createMainMenu]
+        arguments:
+            - "@request_stack"
+        tags:
+            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+
+    app.breadcrumb_menu:
+        class: Knp\Menu\MenuItem
+        factory: ["@app.menu_builder", createBreadcrumbMenu]
+        arguments:
+            - "@request_stack"
+        tags:
+            - { name: knp_menu.menu, alias: breadcrumb } # The alias is used in the template
+
+    ## Data Fixtures
+    App\DataFixtures\PageFixtures:
+        tags: ['doctrine.fixture.orm']
+
+    App\DataFixtures\BlogFixtures:
+        tags: ['doctrine.fixture.orm']
+
+    App\DataFixtures\DiscographyFixtures:
+        tags: ['doctrine.fixture.orm']
+
+    App\DataFixtures\EvenementFixtures:
+        tags: ['doctrine.fixture.orm']
+
+    ## Article
+    App\Article\ArticleManager:
+        public: true
+        autowire: true
+
+
+    ## Discography
+    App\Discography\DiscographyManager:
+        public: true
+        autowire: true
+
+    ## Evenement
+    App\Evenement\EvenementManager:
+        public: true
+        autowire: true
+
+    ## Google
+    App\Google\Client:
+        arguments:
+          - '@logger'
+          - '%env(GOOGLE_APP_NAME)%'
+          - '%env(GOOGLE_DEVELOPER_KEY)%'
+
+    App\Google\YoutubeProvider:
+        public: true
+        arguments:
+          - '@App\Google\Client'
+          - '%env(YOUTUBE_USERNAME)%'
+
+    ## Video
+    App\Video\VideoManager:
+        public: true
+        autowire: true
+
+    App\Video\VideoFactory:
+        public: true
+        autowire: true
+
+    ## Contact
+    App\EventListener\PostListener:
+        arguments:
+            - '@mailer'
+            - '@doctrine.orm.entity_manager'
+            - '%aml_contact_us.subribers%'
+        tags:
+            - { name: kernel.event_listener, event: aml_contactus.message.post_sent, method: onPostEvent }
+
+
+    App\Contact\ContactMessage:
+        public: true
+        autowire: true
+

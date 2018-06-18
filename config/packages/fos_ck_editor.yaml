@@ -1,0 +1,8 @@
+fos_ck_editor:
+    default_config: aml_config
+    configs:
+        aml_config:
+            toolbar: full
+            uiColor:                "#ffffff"
+            #filebrowserUploadRoute: ~
+            #extraPlugins:           "wordcount"

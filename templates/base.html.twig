@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %} {{ site_name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ block('title') }} {{ site_name }}">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+    </script>
+    <![endif]-->
+
+        <!-- Copy CSS from https://getbootstrap.com/docs/4.0/getting-started/introduction/#css -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% block head_js %}
+        <!-- Copy JavaScript from https://getbootstrap.com/docs/4.0/getting-started/introduction/#js -->
+    {% endblock %}
+
+    <!-- Le styles -->
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
+
+    <link href="{{ asset('assets/global.css') }}" rel="stylesheet"/>
+
+
+    {% block stylesheets %}{% endblock %}
+
+    {% block headerJs %}{% endblock %}
+
+    {{ render(controller('App\\Controller\\DefaultController::googleAnalyticsAction')) }}
+</head>
+<body>
+<div id="global">
+    {# Header #}
+    {{ include('_includes/header.html.twig') }}
+
+    <section id="contenu">
+
+        <!-- CONTENT HERE -->
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success flash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-error flash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('info') %}
+            <div class="alert alert-info flash-notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        <div id="col-left" class="two-cols-content">
+            {% block body %}{% endblock %}
+        </div>
+
+        <div id="col-right">
+            <div class="side-bloc no-border">
+                {% block columnRight %}
+
+                    {# Next Concert #}
+                    {{ render(controller('App\\Controller\\AgendaController::nextConcertAction')) }}
+
+                    {# Block Facebook #}
+                    {{ include('blocs/facebook_page_plugin.html.twig') }}
+
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+    <div class="clearfooter"></div>
+
+    {# Footer #}
+    {{ include('_includes/footer.html.twig') }}
+</div>
+
+<script src="{{ asset('assets/app.js') }}" type="text/javascript"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

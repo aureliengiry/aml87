@@ -22,14 +22,15 @@
 /vendor/
 
 # Assets and user uploads
-/web/bundles/
-/web/uploads/
-/web/media/
+/public/bundles/
+!public/bundles/.gitkeep
+/public/uploads/
+!public/uploads/documents/.gitkeep
+!public/uploads/music/.gitkeep
+!public/uploads/images/.gitkeep
+/public/media/
+!public/media/.gitkeep
 /web/css/
-
-# Assets managed by webpack
-/web/build/*
-!web/build/.gitkeep
 
 # Build data
 /build/
@@ -45,3 +46,30 @@
 /docker-env
 /docker-compose.yml
 
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-pack ###
+/node_modules/
+/public/assets/*
+!public/assets/.gitkeep
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-pack ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
