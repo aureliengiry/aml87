@@ -5,7 +5,6 @@ namespace App\Entity\Video;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Video;
 
-
 /**
  * App\Entity\Video\Youtube
  *
@@ -18,7 +17,7 @@ class Youtube extends Video
      */
     public function getProvider()
     {
-        return $this->provider;
+        return $this->providerId;
     }
 
     public function __toString()
@@ -28,6 +27,7 @@ class Youtube extends Video
 
     public function __construct(string $title, string $idYoutube)
     {
+        parent::__construct();
         $this->title = $title;
         $this->providerId = $idYoutube;
     }

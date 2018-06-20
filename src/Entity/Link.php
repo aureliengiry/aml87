@@ -36,7 +36,7 @@ class Link
     private $url;
 
     /**
-     * @var text description
+     * @var string description
      *
      * @ORM\Column(name="description", type="text")
      */
@@ -134,7 +134,7 @@ class Link
     }
 
     /**
-     * @return the $weight
+     * @return integer $weight
      */
     public function getWeight()
     {
@@ -142,7 +142,7 @@ class Link
     }
 
     /**
-     * @param boolean $weight
+     * @param integer $weight
      */
     public function setWeight($weight)
     {
@@ -152,15 +152,15 @@ class Link
     }
 
     /**
-     * @return the $description
+     * @return string $description
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
 
     /**
-     * @param text $description
+     * @param string $description
      */
     public function setDescription($description)
     {

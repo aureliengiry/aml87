@@ -4,6 +4,7 @@ namespace App\Command;
 use App\Google\YoutubeProvider;
 use App\Video\VideoFactory;
 use App\Video\VideoManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,7 +32,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
     /** @var Logger command logger */
     private $logger;
 
-    /** @var EntityManager */
+    /** @var ObjectManager */
     private $em;
 
     /** @var array list of videos */

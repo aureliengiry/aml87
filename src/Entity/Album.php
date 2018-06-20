@@ -40,7 +40,7 @@ class Album
     private $url;
 
     /**
-     * @var text $description
+     * @var string $description
      *
      * @ORM\Column(name="description", type="text")
      */
@@ -54,7 +54,7 @@ class Album
     private $public;
 
     /**
-     * @var date $date
+     * @var \DateTime $date
      *
      * @ORM\Column(name="date", type="date")
      */
@@ -82,7 +82,7 @@ class Album
      *
      * @return integer
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -92,7 +92,7 @@ class Album
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -104,7 +104,7 @@ class Album
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
@@ -135,9 +135,9 @@ class Album
     /**
      * Set description
      *
-     * @param text $description
+     * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -147,9 +147,9 @@ class Album
     /**
      * Get description
      *
-     * @return text
+     * @return string
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
@@ -159,7 +159,7 @@ class Album
      *
      * @param boolean $public
      */
-    public function setPublic($public)
+    public function setPublic(bool $public)
     {
         $this->public = $public;
 
@@ -167,11 +167,11 @@ class Album
     }
 
     /**
-     * Get public
+     * Is public
      *
      * @return boolean
      */
-    public function getPublic()
+    public function isPublic() : bool
     {
         return $this->public;
     }
@@ -179,7 +179,7 @@ class Album
     /**
      * Set date
      *
-     * @param date $date
+     * @param \DateTime $date
      */
     public function setDate($date)
     {
@@ -191,7 +191,7 @@ class Album
     /**
      * Get date
      *
-     * @return date
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -222,7 +222,7 @@ class Album
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getTracks()
     {
@@ -230,7 +230,7 @@ class Album
     }
 
     /**
-     * @param mixed $tracks
+     * @param ArrayCollection $tracks
      */
     public function setTracks($tracks)
     {
@@ -252,7 +252,8 @@ class Album
 
     /**
      * Fonction to delete tag
-     * @param Discussion $discussion
+     *
+     * @param Track $track
      */
     public function removeTrack(Track $track)
     {

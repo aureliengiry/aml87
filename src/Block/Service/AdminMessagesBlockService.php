@@ -3,6 +3,7 @@
 namespace App\Block\Service;
 
 use App\Entity\Message;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sonata\BlockBundle\Block\Service\AbstractBlockService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,8 +16,6 @@ use Sonata\CoreBundle\Validator\ErrorElement;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
-use Doctrine\ORM\EntityManager;
-
 /**
  * Class AdminMessagesBlockService
  * @package App\Bundle\AdminBundle\Block\Service
@@ -24,12 +23,7 @@ use Doctrine\ORM\EntityManager;
 class AdminMessagesBlockService extends AbstractBlockService
 {
     /**
-     * @var Pool
-     */
-    protected $pool;
-
-    /**
-     * @var EntityManager
+     * @var ObjectManager
      */
     protected $em;
 
@@ -38,9 +32,9 @@ class AdminMessagesBlockService extends AbstractBlockService
      *
      * @param string $name
      * @param EngineInterface $templating
-     * @param EntityManager $em
+     * @param ObjectManager $em
      */
-    public function __construct($name, EngineInterface $templating, EntityManager $em)
+    public function __construct($name, EngineInterface $templating, ObjectManager $em)
     {
         parent::__construct($name, $templating);
 

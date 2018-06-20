@@ -53,11 +53,11 @@ class PostListener
         if (!empty($this->subscribers)) {
 
             foreach (explode(',', $this->subscribers) as $subscriber) {
-                $mail = \Swift_Message::newInstance()
-                    ->setSubject($formatedMessage['subject'])
+                $mail = (new \Swift_Message($formatedMessage['subject']))
                     ->setFrom($post->getEmail(), $post->getName())
                     ->setTo($subscriber)
                     ->setBody($formatedMessage['body']);
+
                 $this->mailer->send($mail);
 
                 $post->setStatus(Message::MESSAGE_STATUS_SAVE_SEND);

@@ -49,14 +49,14 @@ class Tags
     private $name;
 
     /**
-     * @var smallint $weight
+     * @var integer $weight
      *
      * @ORM\Column(name="weight", type="smallint", nullable=true)
      */
     private $weight = 0;
 
     /**
-     * @var text description
+     * @var string description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
@@ -103,9 +103,9 @@ class Tags
     /**
      * Set weight
      *
-     * @param smallint $weight
+     * @param integer $weight
      */
-    public function setWeight($weight)
+    public function setWeight(int $weight)
     {
         $this->weight = $weight;
 
@@ -115,9 +115,9 @@ class Tags
     /**
      * Get weight
      *
-     * @return smallint
+     * @return integer
      */
-    public function getWeight()
+    public function getWeight() : int
     {
         return $this->weight;
     }
@@ -127,7 +127,7 @@ class Tags
      *
      * @param string $systemName
      */
-    public function setSystemName($systemName)
+    public function setSystemName(string $systemName)
     {
         $slugger = new Slugger();
         $this->systemName = $slugger->slugify($systemName, '_');
@@ -140,7 +140,7 @@ class Tags
      *
      * @return string
      */
-    public function getSystemName()
+    public function getSystemName() : string
     {
         return $this->systemName;
     }
@@ -163,9 +163,9 @@ class Tags
     }
 
     /**
-     * Fonction pour supprimer une discussion d'un mot clé
+     * Fonction pour supprimer article associé
      *
-     * @param Discussion $discussion
+     * @param Article $article
      */
     public function removeArticle(Article $article)
     {
@@ -173,17 +173,17 @@ class Tags
     }
 
     /**
-     * @return the $description
+     * @return string $description
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
 
     /**
-     * @param text $description
+     * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 

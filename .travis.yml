@@ -10,13 +10,19 @@ before_install:
 
 install:
   - composer install -o -n
-  - php bin/console doctrine:schema:drop --force --env=test
-  - php bin/console doctrine:database:create --env=test
-  - php bin/console doctrine:schema:update --force --env=test
-  - php bin/console doctrine:fixtures:load --env=test -n
+  - bin/console doctrine:schema:drop --force --env=test
+  - bin/console doctrine:database:create --env=test
+  - bin/console doctrine:schema:update --force --env=test
+  - bin/console doctrine:fixtures:load --env=test -n
 
 script:
+  - bin/console lint:twig templates
+  - bin/console lint:yaml config
   - vendor/bin/phpunit
+  - php vendor/bin/phpunit --coverage-clover build/coverage/xml
+
+after_script:
+  - php vendor/bin/codacycoverage clover build/coverage/xml
 
 notifications:
   email:

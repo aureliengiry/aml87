@@ -38,7 +38,7 @@ class Category
     private $name;
 
     /**
-     * @var text description
+     * @var string description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
@@ -106,15 +106,15 @@ class Category
      *
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
 
     /**
-     * @return text $description
+     * @return string $description
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
@@ -154,6 +154,4 @@ class Category
     {
         return $this->name ?: 'New Category';
     }
-
-
 }

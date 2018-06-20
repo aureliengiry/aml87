@@ -32,21 +32,21 @@ class Page
     private $title;
 
     /**
-     * @var text $body
+     * @var string $body
      *
      * @ORM\Column(name="body", type="text")
      */
     private $body;
 
     /**
-     * @var datetime $created
+     * @var \\DateTime $created
      *
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
 
     /**
-     * @var datetime $updated
+     * @var \DateTime $updated
      *
      * @ORM\Column(name="updated", type="datetime")
      */
@@ -60,9 +60,9 @@ class Page
     private $public;
 
     /**
-     * @var string url
+     * @var UrlPage url
      *
-     * @ORM\OneToOne(targetEntity="\App\Entity\Url", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\App\Entity\UrlPage", cascade={"all"})
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;
@@ -102,9 +102,9 @@ class Page
     /**
      * Set body
      *
-     * @param text $body
+     * @param string $body
      */
-    public function setBody($body)
+    public function setBody(string $body)
     {
         $this->body = $body;
 
@@ -114,9 +114,9 @@ class Page
     /**
      * Get body
      *
-     * @return text
+     * @return string
      */
-    public function getBody()
+    public function getBody() : string
     {
         return $this->body;
     }
@@ -124,7 +124,7 @@ class Page
     /**
      * Set created
      *
-     * @param datetime $created
+     * @param \DateTime $created
      */
     public function setCreated(\DateTime $created = null)
     {
@@ -136,9 +136,9 @@ class Page
     /**
      * Get created
      *
-     * @return datetime
+     * @return \DateTime
      */
-    public function getCreated()
+    public function getCreated() : \DateTime
     {
         return $this->created;
     }
@@ -146,7 +146,7 @@ class Page
     /**
      * Set updated
      *
-     * @param datetime $updated
+     * @param \DateTime $updated
      */
     public function setUpdated(\DateTime $updated = null)
     {
@@ -158,9 +158,9 @@ class Page
     /**
      * Get updated
      *
-     * @return datetime
+     * @return \DateTime
      */
-    public function getUpdated()
+    public function getUpdated() : \DateTime
     {
         return $this->updated;
     }
@@ -170,7 +170,7 @@ class Page
      *
      * @param boolean $public
      */
-    public function setPublic($public)
+    public function setPublic(bool $public)
     {
         $this->public = $public;
 
@@ -182,17 +182,17 @@ class Page
      *
      * @return boolean
      */
-    public function getPublic()
+    public function isPublic() : bool
     {
         return $this->public;
     }
 
     /**
-     * Set title
+     * Set url
      *
-     * @param string $url
+     * @param UrlPage $url
      */
-    public function setUrl($url)
+    public function setUrl(UrlPage $url)
     {
         $this->url = $url;
 
@@ -202,9 +202,9 @@ class Page
     /**
      * Get url
      *
-     * @return string
+     * @return UrlPage
      */
-    public function getUrl()
+    public function getUrl() : UrlPage
     {
         return $this->url;
     }

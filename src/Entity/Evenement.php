@@ -40,14 +40,14 @@ class Evenement
     private $type;
 
     /**
-     * @var datetime $dateStart
+     * @var \DateTime $dateStart
      *
      * @ORM\Column(name="date_start", type="datetime")
      */
     private $dateStart;
 
     /**
-     * @var datetime $dateEnd
+     * @var \DateTime $dateEnd
      *
      * @ORM\Column(name="date_end", type="datetime", nullable=true)
      */
@@ -61,7 +61,7 @@ class Evenement
     private $title;
 
     /**
-     * @var text $description
+     * @var string $description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
@@ -118,7 +118,7 @@ class Evenement
     protected $season;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Video\Youtube", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity="\App\Entity\Video\Youtube", inversedBy="evenements", cascade={"all"}, fetch="LAZY")
      * @ORM\JoinTable(name="evenements_videos",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_video", referencedColumnName="id_video")}
@@ -145,9 +145,9 @@ class Evenement
     /**
      * Set date
      *
-     * @param datetime $dateStart
+     * @param \DateTime $dateStart
      */
-    public function setDateStart($dateStart)
+    public function setDateStart(\DateTime $dateStart)
     {
         $this->dateStart = $dateStart;
 
@@ -157,9 +157,9 @@ class Evenement
     /**
      * Get date
      *
-     * @return datetime
+     * @return \DateTime
      */
-    public function getDateStart()
+    public function getDateStart() : \DateTime
     {
         return $this->dateStart;
     }
@@ -167,9 +167,9 @@ class Evenement
     /**
      * Set dateEnd
      *
-     * @param datetime $dateEnd
+     * @param \DateTime $dateEnd
      */
-    public function setDateEnd($dateEnd)
+    public function setDateEnd(\DateTime $dateEnd)
     {
         $this->dateEnd = $dateEnd;
 
@@ -179,9 +179,9 @@ class Evenement
     /**
      * Get date
      *
-     * @return datetime
+     * @return \DateTime
      */
-    public function getDateEnd()
+    public function getDateEnd() : \DateTime
     {
         return $this->dateEnd;
     }
@@ -191,7 +191,7 @@ class Evenement
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -203,7 +203,7 @@ class Evenement
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
@@ -211,9 +211,9 @@ class Evenement
     /**
      * Set description
      *
-     * @param text $description
+     * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -223,9 +223,9 @@ class Evenement
     /**
      * Get description
      *
-     * @return text
+     * @return string
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
@@ -294,7 +294,7 @@ class Evenement
     }
 
     /**
-     * @return the $type
+     * @return string $type
      */
     public function getType()
     {
@@ -349,7 +349,8 @@ class Evenement
 
     /**
      * Fonction pour supprimer une discussion d'un mot clé
-     * @param Discussion $discussion
+     *
+     * @param Article $article
      */
     public function removeArticle(Article $article)
     {
@@ -416,8 +417,9 @@ class Evenement
     }
 
     /**
-     * Fonction pour supprimer une discussion d'un mot clé
-     * @param Discussion $discussion
+     * Remove Video
+     *
+     * @param Video $video
      */
     public function removeVideo(Video $video)
     {

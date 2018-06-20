@@ -34,9 +34,9 @@ class Article
     private $title = '';
 
     /**
-     * @var string url
+     * @var UrlArticle url
      *
-     * @ORM\OneToOne(targetEntity="\App\Entity\Url", cascade={"all"}, fetch="EAGER")s
+     * @ORM\OneToOne(targetEntity="\App\Entity\UrlArticle", cascade={"all"}, fetch="EAGER")s
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;
@@ -54,28 +54,28 @@ class Article
     private $video;
 
     /**
-     * @var text $body
+     * @var string $body
      *
      * @ORM\Column(name="body", type="text")
      */
     private $body;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
 
     /**
-     * @var datetime $updated
+     * @var \DateTime $updated
      *
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
 
     /**
-     * @var datetime $published
+     * @var \DateTime $published
      *
      * @ORM\Column(name="published", type="datetime",nullable=true)
      */
@@ -126,7 +126,7 @@ class Article
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -138,7 +138,7 @@ class Article
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
@@ -146,9 +146,9 @@ class Article
     /**
      * Set title
      *
-     * @param string $url
+     * @param UrlArticle $url
      */
-    public function setUrl($url)
+    public function setUrl(UrlArticle $url)
     {
         $this->url = $url;
 
@@ -158,9 +158,9 @@ class Article
     /**
      * Get url
      *
-     * @return string
+     * @return UrlArticle
      */
-    public function getUrl()
+    public function getUrl() : UrlArticle
     {
         return $this->url;
     }
@@ -210,9 +210,9 @@ class Article
     /**
      * Set body
      *
-     * @param text $body
+     * @param string $body
      */
-    public function setBody($body)
+    public function setBody(string $body)
     {
         $this->body = $body;
 
@@ -222,9 +222,9 @@ class Article
     /**
      * Get body
      *
-     * @return text
+     * @return string
      */
-    public function getBody()
+    public function getBody() : string
     {
         return $this->body;
     }
@@ -232,7 +232,7 @@ class Article
     /**
      * Set created
      *
-     * @param datetime $created
+     * @param \DateTime $created
      */
     public function setCreated(\DateTime $created = null)
     {
@@ -244,9 +244,9 @@ class Article
     /**
      * Get created
      *
-     * @return datetime
+     * @return \DateTime
      */
-    public function getCreated()
+    public function getCreated() : \DateTime
     {
         return $this->created;
     }
@@ -254,7 +254,7 @@ class Article
     /**
      * Set updated
      *
-     * @param datetime $updated
+     * @param \DateTime $updated
      */
     public function setUpdated(\DateTime $updated = null)
     {
@@ -266,9 +266,9 @@ class Article
     /**
      * Get updated
      *
-     * @return datetime
+     * @return \DateTime
      */
-    public function getUpdated()
+    public function getUpdated() : \DateTime
     {
         return $this->updated;
     }
@@ -278,7 +278,7 @@ class Article
      *
      * @param boolean $public
      */
-    public function setPublic($public)
+    public function setPublic(bool $public)
     {
         $this->public = $public;
 
@@ -286,27 +286,27 @@ class Article
     }
 
     /**
-     * Get public
+     * Is public
      *
      * @return boolean
      */
-    public function isPublic()
+    public function isPublic() : bool
     {
         return $this->public;
     }
 
     /**
-     * @return the $published
+     * @return \DateTime $published
      */
-    public function getPublished()
+    public function getPublished() : \DateTime
     {
         return $this->published;
     }
 
     /**
-     * @param datetime $published
+     * @param \DateTime $published
      */
-    public function setPublished($published)
+    public function setPublished(\DateTime $published)
     {
         $this->published = $published;
 
@@ -314,19 +314,19 @@ class Article
     }
 
     /**
-     * @return the $id_blog_category
+     * @return Category $id_blog_category
      */
-    public function getCategory()
+    public function getCategory() : Category
     {
         return $this->category;
     }
 
     /**
-     * @param field_type $id_blog_category
+     * @param Category $category
      */
-    public function setCategory($id_blog_category)
+    public function setCategory(Category $category)
     {
-        $this->category = $id_blog_category;
+        $this->category = $category;
 
         return $this;
     }
@@ -334,7 +334,7 @@ class Article
     /** ---------- TAGS ---------- */
     /**
      *
-     * @param TumblrTag $tag
+     * @param Tags $tag
      */
     public function addTag(Tags $tag)
     {
@@ -348,7 +348,8 @@ class Article
 
     /**
      * Fonction to delete tag
-     * @param Discussion $discussion
+     *
+     * @param Tags $tag
      */
     public function removeTag(Tags $tag)
     {
@@ -357,7 +358,7 @@ class Article
     }
 
     /**
-     * @return the $tags
+     * @return ArrayCollection $tags
      */
     public function getTags()
     {
@@ -365,7 +366,7 @@ class Article
     }
 
     /**
-     * @return the $tags
+     * @return Article
      */
     public function setTags(ArrayCollection $tags)
     {
@@ -400,7 +401,7 @@ class Article
     }
 
     /**
-     * @return the $evenements
+     * @return ArrayCollection $evenements
      */
     public function getEvenements()
     {
@@ -408,7 +409,7 @@ class Article
     }
 
     /**
-     * @return the $evenements
+     * @return ArrayCollection $evenements
      */
     public function setEvenements(ArrayCollection $evenements)
     {

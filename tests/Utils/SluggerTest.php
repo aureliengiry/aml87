@@ -1,14 +1,13 @@
 <?php
 
-namespace Tests\Aml\Bundle\WebBundle\Utils;
+namespace Tests\App\Utils;
 
 use PHPUnit\Framework\TestCase;
-
 use App\Utils\Slugger;
 
 /**
  * Class SluggerTest
- * @package Tests\Aml\Bundle\WebBundle\Utils
+ * @package Tests\App\Utils
  */
 class SluggerTest extends TestCase
 {

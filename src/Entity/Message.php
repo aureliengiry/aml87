@@ -84,7 +84,7 @@ class Message
     private $status;
 
     /**
-     * @var datetime $created
+     * @var \DateTime $created
      *
      * @ORM\Column(name="created", type="datetime")
      */
@@ -222,7 +222,7 @@ class Message
     /**
      * Set created
      *
-     * @param datetime $created
+     * @param \DateTime $created
      */
     public function setCreated(\DateTime $created = null)
     {

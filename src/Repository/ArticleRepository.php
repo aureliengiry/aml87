@@ -79,15 +79,15 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * Fonction qui permet de supprimer les mots clés libres d'une discussion pour les rajouter proprement
+     * Fonction qui permet de supprimer les mots clés d'un article de blog
      *
-     * @param unknown_type $blog
+     * @param Article $article
      */
-    public function cleanTags($blog)
+    public function cleanTags(Article $article)
     {
         $em = $this->getEntityManager();
-        foreach ($blog->getTags() as $tag) {
-            $blog->removeTag($tag);
+        foreach ($article->getTags() as $tag) {
+            $article->removeTag($tag);
         }
         $em->flush();
     }

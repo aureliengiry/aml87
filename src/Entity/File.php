@@ -36,16 +36,6 @@ class File extends Media
     private $filenameForRemove;
 
     /**
-     * Get id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Set file
      *
      * @param string $file

@@ -41,25 +41,9 @@ class Image extends Media
     // propriété utilisé temporairement pour la suppression
     private $filenameForRemove;
 
-
-    public function __construct()
-    {
-        $this->partenaires = new ArrayCollection();
-    }
-
     public function getType()
     {
-        return array('label' => 'Image', 'key' => 'image');
-    }
-
-
-    /* Link with Partenaire entity */
-    /**
-     * @return the $articles
-     */
-    public function getPartenaire()
-    {
-        return $this->partenaire;
+        return ['label' => 'Image', 'key' => 'image'];
     }
 
     /**

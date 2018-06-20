@@ -41,7 +41,7 @@ abstract class Media
      *
      * @return integer
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -51,7 +51,7 @@ abstract class Media
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -63,17 +63,18 @@ abstract class Media
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
 
     /**
      *
-     * @param unknown_type $name
+     * @param string $name
+     *
      * @return string
      */
-    protected function renameIfFileExist($name)
+    protected function renameIfFileExist(string $name)
     {
         $filename = $this->getUploadRootDir().'/'.$name;
         if (true === file_exists($filename)) {

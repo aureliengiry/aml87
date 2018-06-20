@@ -58,7 +58,7 @@ abstract class Video
      *
      * @return integer
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -86,7 +86,7 @@ abstract class Video
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -98,7 +98,7 @@ abstract class Video
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
@@ -130,7 +130,7 @@ abstract class Video
     }
 
     /**
-     * @return the $evenements
+     * @return ArrayCollection $evenements
      */
     public function getEvenements()
     {
@@ -138,7 +138,7 @@ abstract class Video
     }
 
     /**
-     * @return the $evenements
+     * @return ArrayCollection $evenements
      */
     public function setEvenements(ArrayCollection $evenements)
     {
@@ -146,5 +146,4 @@ abstract class Video
 
         return $this;
     }
-
 }

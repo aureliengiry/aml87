@@ -31,14 +31,14 @@ class Season
     private $name;
 
     /**
-     * @var datetime $dateStart
+     * @var \DateTime $dateStart
      *
      * @ORM\Column(name="date_start", type="datetime")
      */
     private $dateStart;
 
     /**
-     * @var datetime $dateEnd
+     * @var \DateTime $dateEnd
      *
      * @ORM\Column(name="date_end", type="datetime")
      */
@@ -51,7 +51,7 @@ class Season
     protected $evenements;
 
     /**
-     * @return datetime
+     * @return \DateTime
      */
     public function getDateEnd()
     {
@@ -59,7 +59,7 @@ class Season
     }
 
     /**
-     * @param datetime $dateEnd
+     * @param \DateTime $dateEnd
      */
     public function setDateEnd($dateEnd)
     {
@@ -69,7 +69,7 @@ class Season
     }
 
     /**
-     * @return datetime
+     * @return \DateTime
      */
     public function getDateStart()
     {
@@ -77,7 +77,7 @@ class Season
     }
 
     /**
-     * @param datetime $dateStart
+     * @param \DateTime $dateStart
      */
     public function setDateStart($dateStart)
     {
