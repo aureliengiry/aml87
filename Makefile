@@ -127,6 +127,14 @@ tests-functional:
 deps:           ## Install the project PHP and JS dependencies
 deps: vendor
 
+##
+## Tools
+##---------------------------------------------------------------------------
+phpstan:			## PHPStan - PHP Static Analysis Tool
+phpstan:
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpstan.phar analyse src tests"
+
+
 # Internal rules
 
 build:
