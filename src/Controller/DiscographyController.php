@@ -1,18 +1,18 @@
 <?php
+
 namespace App\Controller;
 
 use App\Discography\DiscographyManager;
 use App\Entity\Album;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class DefaultController
+ * Class DefaultController.
  *
- * @package App\Controller
  * @Route("/discographie")
  */
 class DiscographyController extends Controller
@@ -53,8 +53,8 @@ class DiscographyController extends Controller
         }
 
         // Init Main Menu
-        $menu = $this->get("app.main_menu");
-        $menu->getChild("Discographie")->setCurrent(true);
+        $menu = $this->get('app.main_menu');
+        $menu->getChild('Discographie')->setCurrent(true);
 
         $request->attributes->set('label', $entity->getTitle());
 

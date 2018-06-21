@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\AdminType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -17,25 +18,25 @@ class PartenaireAdmin extends AbstractAdmin
             ->add(
                 'name',
                 TextType::class,
-                array(
-                    'label' => 'Nom'
-                )
+                [
+                    'label' => 'Nom',
+                ]
             )
             ->add(
                 'logo',
                 AdminType::class,
-                array(
+                [
                     'delete' => false,
-                    'required' => false
-                )
+                    'required' => false,
+                ]
             )
             ->add('url')
             ->add(
                 'description',
                 TextareaType::class,
-                array(
-                    'required' => false
-                )
+                [
+                    'required' => false,
+                ]
             );
     }
 

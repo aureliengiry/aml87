@@ -1,17 +1,17 @@
 <?php
+
 namespace App\Admin;
 
 use App\Entity\Album;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class TrackAdmin
- * @package App\Admin
+ * Class TrackAdmin.
  */
 class TrackAdmin extends AbstractAdmin
 {
@@ -44,11 +44,11 @@ class TrackAdmin extends AbstractAdmin
                 'album',
                 EntityType::class,
                 [
-                    'label'        => 'Album',
-                    'class'        => Album::class,
+                    'label' => 'Album',
+                    'class' => Album::class,
                     'choice_label' => 'title',
-                    'placeholder'  => 'Choisissez un album',
-                    'attr'         => ['class' => 'uniform'],
+                    'placeholder' => 'Choisissez un album',
+                    'attr' => ['class' => 'uniform'],
                 ]
             )
             ->end();

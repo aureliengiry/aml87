@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Partenaire
+ * Partenaire.
  *
  * @ORM\Table(name="webbundle_partenaires")
  * @ORM\HasLifecycleCallbacks
@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Partenaire
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_partenaire", type="integer")
      * @ORM\Id
@@ -59,16 +59,15 @@ class Partenaire
      */
     protected $evenements;
 
-
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -76,9 +75,10 @@ class Partenaire
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return Partenaire
      */
     public function setName($name)
@@ -89,7 +89,7 @@ class Partenaire
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -99,9 +99,10 @@ class Partenaire
     }
 
     /**
-     * Set url
+     * Set url.
      *
      * @param string $url
+     *
      * @return Partenaire
      */
     public function setUrl($url)
@@ -112,7 +113,7 @@ class Partenaire
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -122,9 +123,10 @@ class Partenaire
     }
 
     /**
-     * Set logo
+     * Set logo.
      *
      * @param string $logo
+     *
      * @return Partenaire
      */
     public function setLogo($logo)
@@ -135,7 +137,7 @@ class Partenaire
     }
 
     /**
-     * Get logo
+     * Get logo.
      *
      * @return string
      */
@@ -145,9 +147,10 @@ class Partenaire
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
+     *
      * @return Partenaire
      */
     public function setDescription($description)
@@ -158,7 +161,7 @@ class Partenaire
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -186,7 +189,8 @@ class Partenaire
     }
 
     /**
-     * Fonction pour supprimer une discussion d'un mot clé
+     * Fonction pour supprimer une discussion d'un mot clé.
+     *
      * @param Discussion $discussion
      */
     public function removeEvenement($evenement)

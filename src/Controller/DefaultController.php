@@ -2,19 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
 use App\Entity\Album;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\Article;
+use App\Event\Sitemap\GenerateEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-use App\Event\Sitemap\GenerateEvent;
-
 /**
- * Class DefaultController
- * @package App\Controller
+ * Class DefaultController.
  */
 class DefaultController extends Controller
 {
@@ -41,7 +39,7 @@ class DefaultController extends Controller
 
         return [
             'lastBlogArticle' => $blogEntity,
-            'lastAlbum'       => $albumEntity,
+            'lastAlbum' => $albumEntity,
         ];
     }
 
@@ -57,20 +55,20 @@ class DefaultController extends Controller
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->container->get('event_dispatcher');
 
-        $hostname = 'http://' . $request->getHost();
+        $hostname = 'http://'.$request->getHost();
 
         // add some urls homepage
         $urls[] = [
-            'loc'        => $this->get('router')->generate('home'),
+            'loc' => $this->get('router')->generate('home'),
             'changefreq' => 'weekly',
-            'priority'   => '1.0',
+            'priority' => '1.0',
         ];
 
         $sitemapGenerationEvent = new GenerateEvent($urls);
         $dispatcher->dispatch('aml_web.sitemap.generate_start', $sitemapGenerationEvent);
 
         return [
-            'urls'     => $sitemapGenerationEvent->getUrls(),
+            'urls' => $sitemapGenerationEvent->getUrls(),
             'hostname' => $hostname,
         ];
     }

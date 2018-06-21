@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -6,9 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class ContactControllerTest
- *
- * @package Tests\Controller
+ * Class ContactControllerTest.
  */
 class ContactControllerTest extends WebTestCase
 {
@@ -20,7 +19,7 @@ class ContactControllerTest extends WebTestCase
     }
 
     /**
-     * Test contact Page
+     * Test contact Page.
      */
     public function testIndex()
     {
@@ -32,7 +31,7 @@ class ContactControllerTest extends WebTestCase
         $this->assertContains('Contactez-nous', $crawler->filter('title')->text());
     }
 
-    /**
+    /*
      * Test post contact form
      */
 //    public function testPostForm()

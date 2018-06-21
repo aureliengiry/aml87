@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Event\Contact;
 
 use App\Entity\Message;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class PostEvent
- * @package App\Event\Contact
+ * Class PostEvent.
  */
 class PostEvent extends Event
 {

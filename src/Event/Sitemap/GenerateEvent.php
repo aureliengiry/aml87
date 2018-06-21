@@ -1,16 +1,15 @@
 <?php
+
 namespace App\Event\Sitemap;
 
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class GenerateEvent
- *
- * @package App\Event
+ * Class GenerateEvent.
  */
 class GenerateEvent extends Event
 {
-    protected $urls = array();
+    protected $urls = [];
 
     public function __construct($sitemapUrls)
     {

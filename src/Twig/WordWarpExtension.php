@@ -6,8 +6,7 @@ use Twig_Extension;
 use Twig_SimpleFilter;
 
 /**
- * Class WordWarpExtension
- * @package App\Twig
+ * Class WordWarpExtension.
  */
 class WordWarpExtension extends Twig_Extension
 {
@@ -20,12 +19,12 @@ class WordWarpExtension extends Twig_Extension
     }
 
     /**
-     * réduit une chaine de caractères sans couper les mots
+     * réduit une chaine de caractères sans couper les mots.
      *
-     * @param string $date date à transformer
-     * @param boolean $dateonly Affiche la date uniquement, quoiqu'il arrive
-     * @param boolean $icon afficher ou non l'icône avant la date
-     * @param string $format format dans lequel retourner la date si pas transformée
+     * @param string $date     date à transformer
+     * @param bool   $dateonly Affiche la date uniquement, quoiqu'il arrive
+     * @param bool   $icon     afficher ou non l'icône avant la date
+     * @param string $format   format dans lequel retourner la date si pas transformée
      *
      * @return string date plus nice à lire
      */
@@ -41,7 +40,7 @@ class WordWarpExtension extends Twig_Extension
             if ($wordwarp) {
                 $length = $this->findSpace($str, $length);
             }
-            $text = '<div class="expand">' . mb_substr($str, 0, $length) . ' ...</div>';
+            $text = '<div class="expand">'.mb_substr($str, 0, $length).' ...</div>';
 
             return $text;
         } else {
@@ -50,12 +49,12 @@ class WordWarpExtension extends Twig_Extension
     }
 
     /**
-     * réduit une chaine de caractères sans couper les mots
+     * réduit une chaine de caractères sans couper les mots.
      *
-     * @param string $date date à transformer
-     * @param boolean $dateonly Affiche la date uniquement, quoiqu'il arrive
-     * @param boolean $icon afficher ou non l'icône avant la date
-     * @param string $format format dans lequel retourner la date si pas transformée
+     * @param string $date     date à transformer
+     * @param bool   $dateonly Affiche la date uniquement, quoiqu'il arrive
+     * @param bool   $icon     afficher ou non l'icône avant la date
+     * @param string $format   format dans lequel retourner la date si pas transformée
      *
      * @return string date plus nice à lire
      */

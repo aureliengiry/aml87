@@ -8,8 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * Class ContactMessage
- * @package App\Contact
+ * Class ContactMessage.
  */
 class ContactMessage
 {
@@ -32,7 +31,7 @@ class ContactMessage
     }
 
     /**
-     * Save message and dispatch event
+     * Save message and dispatch event.
      *
      * @param Message $message
      */

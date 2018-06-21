@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * App\Entity\User
+ * App\Entity\User.
  *
  * @ORM\Table(name="usersbundle_users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -15,7 +14,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -79,9 +78,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -121,7 +120,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to get value of $phone
+     * Function to get value of $phone.
      *
      * @return string
      */
@@ -131,7 +130,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to set value of $phone
+     * Function to set value of $phone.
      *
      * @param string $phone
      */
@@ -143,7 +142,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to get value of $mobile
+     * Function to get value of $mobile.
      *
      * @return string
      */
@@ -153,7 +152,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to set value of $mobile
+     * Function to set value of $mobile.
      *
      * @param string $mobile
      */
@@ -165,7 +164,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to get value of $birthdate
+     * Function to get value of $birthdate.
      *
      * @return string
      */
@@ -175,7 +174,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to set value of $birthdate
+     * Function to set value of $birthdate.
      *
      * @param string $birthdate
      */
@@ -187,7 +186,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to get value of $adresse
+     * Function to get value of $adresse.
      *
      * @return string
      */
@@ -197,7 +196,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to set value of $adresse
+     * Function to set value of $adresse.
      *
      * @param string $adresse
      */
@@ -209,7 +208,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to get value of $job
+     * Function to get value of $job.
      *
      * @return string
      */
@@ -219,7 +218,7 @@ class User extends BaseUser
     }
 
     /**
-     * Function to set value of $job
+     * Function to set value of $job.
      *
      * @param string $job
      */

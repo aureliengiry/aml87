@@ -3,15 +3,13 @@
 namespace App\Controller\MembersArea;
 
 use App\Form\Type\LoginType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class SecurityController
- * @package App\Controller\MembersArea
+ * Class SecurityController.
  */
 class SecurityController extends Controller
 {
@@ -27,10 +25,10 @@ class SecurityController extends Controller
             '_login_email' => $authenticationUtils->getLastUsername(),
         ]);
 
-        return $this->render('security/login.html.twig', array(
-            'error'         => $authenticationUtils->getLastAuthenticationError(),
+        return $this->render('security/login.html.twig', [
+            'error' => $authenticationUtils->getLastAuthenticationError(),
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**

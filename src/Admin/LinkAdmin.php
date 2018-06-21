@@ -3,16 +3,15 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class LinkAdmin
- * @package App\Admin
+ * Class LinkAdmin.
  */
 class LinkAdmin extends AbstractAdmin
 {
@@ -23,7 +22,7 @@ class LinkAdmin extends AbstractAdmin
                 'title',
                 TextType::class,
                 [
-                    'label' => 'Titre'
+                    'label' => 'Titre',
                 ]
             )
             ->add('url', TextType::class)
@@ -45,9 +44,9 @@ class LinkAdmin extends AbstractAdmin
                 'public',
                 CheckboxType::class,
                 [
-                    'label'    => 'Publier',
+                    'label' => 'Publier',
                     'required' => false,
-                    'attr'     => ['data-help' => 'Signifie que le lien sera visible pour tout le monde'],
+                    'attr' => ['data-help' => 'Signifie que le lien sera visible pour tout le monde'],
                 ]
             );
     }

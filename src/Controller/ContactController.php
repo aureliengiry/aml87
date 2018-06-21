@@ -3,14 +3,13 @@
 namespace App\Controller;
 
 use App\Contact\ContactMessage;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\Message;
+use App\Form\Type\MessageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-
-use App\Entity\Message;
-use App\Form\Type\MessageType;
 
 /**
  * Contact Us controller.
@@ -20,7 +19,7 @@ use App\Form\Type\MessageType;
 class ContactController extends Controller
 {
     /**
-     * Index Action to display contact form
+     * Index Action to display contact form.
      *
      * @Route("/", name="aml_contactus_default_index")
      * @Template("contact/index.html.twig")
@@ -32,7 +31,6 @@ class ContactController extends Controller
         $form = $this->createForm(MessageType::class, $contactMessage)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $contactMessage
                 ->setAddressIp($request->getClientIp())
                 ->setStatus(Message::MESSAGE_STATUS_SAVE);
@@ -45,7 +43,7 @@ class ContactController extends Controller
         }
 
         return [
-            'entity'       => $contactMessage,
+            'entity' => $contactMessage,
             'contact_form' => $form->createView(),
         ];
     }

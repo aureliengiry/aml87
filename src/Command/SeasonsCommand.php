@@ -1,57 +1,42 @@
 <?php
-/**
- * Import Blog contens from aml87.fr
- *
- * @author Aurélien GIRY <aurelien.giry@gmail.com>
- */
 
 namespace App\Command;
 
+use App\Entity\Evenement;
+use App\Entity\Season;
+use App\Repository\EvenementRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use App\Entity\Evenement;
-use App\Entity\Season;
-use Symfony\Component\Validator\Constraints\DateTime;
-
 /**
- * Class SeasonsCommand
- * @package App\Command
+ * Class SeasonsCommand.
  */
 class SeasonsCommand extends ContainerAwareCommand
 {
     /**
-     * @var Symfony\Component\Console\Input\InputInterface
+     * @var EvenementRepository
      */
-    protected $input = null;
+    protected $eventRepo;
 
-    /**
-     * @var Symfony\Component\Console\Output\OutputInterface
-     */
-    protected $output = null;
-
-    protected $evenementRepo;
     protected $seasonRepo;
     protected $doctrine;
     protected $entityManager;
 
     /**
-     * Validate entry
+     * Validate entry.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @throws \RunTimeException
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
-        $this->output = $output;
-
         $this->doctrine = $this->getContainer()->get('doctrine');
         $this->entityManager = $this->doctrine->getManager('default');
 
-        $this->evenementRepo = $this->doctrine->getRepository(Evenement::class);
+        $this->eventRepo = $this->doctrine->getRepository(Evenement::class);
         $this->seasonRepo = $this->doctrine->getRepository(Season::class);
     }
 
@@ -67,7 +52,7 @@ class SeasonsCommand extends ContainerAwareCommand
                 <<<EOF
                 The <info>evenements:index:seasons</info> Index seasons for all events and debug mode:
 
-<info>php app/console evenements:index:seasons -vvv</info>
+<info>php bin/console evenements:index:seasons -vvv</info>
 EOF
             );
     }
@@ -77,19 +62,19 @@ EOF
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output->writeln('<info>Indexation evenements/seasons: Start</info>');
+        $output->writeln('<info>Indexation evenements/seasons: Start</info>');
 
         // Build Current Date
         $currentDateTime = new \DateTime();
         $currentDateTime->setTime(0, 0);
 
-        $estimateCurrentSeason = $this->calculateSeason($currentDateTime);
+        $estimateCurrentSeason = $this->calculateSeason($currentDateTime, $output);
 
         // Get list of event
-        $evenements = $this->evenementRepo->findAll();
+        $evenements = $this->eventRepo->findAll();
 
         foreach ($evenements as $event) {
-            $this->getSeasonByEvent($event);
+            $this->getSeasonByEvent($event, $output);
 
             // Archive event
             if ($event->getSeason() != $estimateCurrentSeason) {
@@ -103,13 +88,13 @@ EOF
 
         $this->entityManager->flush();
 
-        $this->output->writeln('<info>Indexation evenements/seasons: End</info>');
+        $output->writeln('<info>Indexation evenements/seasons: End</info>');
     }
 
     /**
      * @param Evenement $event
      */
-    protected function getSeasonByEvent(Evenement &$event)
+    protected function getSeasonByEvent(Evenement &$event, OutputInterface $output)
     {
         $eventDateStart = $event->getDateStart();
         if ($eventDateStart) {
@@ -128,12 +113,13 @@ EOF
                 $event->setSeason($estimateSeason);
             }
         } else {
-            $this->output->writeln('<info>Date Start is empty for this event: '.$event->getId().'</info>');
+            $output->writeln('<info>Date Start is empty for this event: '.$event->getId().'</info>');
         }
     }
 
     /**
      * @param \DateTime $eventDateStart
+     *
      * @return Season
      */
     protected function calculateSeason(\DateTime $eventDateStart)
@@ -143,7 +129,7 @@ EOF
             return $estimateSeason;
         } else {
             $defaultDateStart = Season::SEASON_DEFAULT_DATE_START;
-            $eventDateStartYear = (int)$eventDateStart->format('Y');
+            $eventDateStartYear = (int) $eventDateStart->format('Y');
             $testDateStart = sprintf($defaultDateStart, $eventDateStartYear);
 
             // Build Test Date
@@ -159,7 +145,7 @@ EOF
 
                 // Build Season Date End
                 $defaultDateEnd = Season::SEASON_DEFAULT_DATE_END;
-                $eventDateEndYear = (int)$eventDateStart->format('Y');
+                $eventDateEndYear = (int) $eventDateStart->format('Y');
                 $testDateEnd = sprintf($defaultDateEnd, $eventDateEndYear);
 
                 $seasonDateEndYear = $eventDateStartYear;
@@ -171,7 +157,7 @@ EOF
             } else {
                 // Build Season Date Start
                 $seasonDateStart = $testDateTime;
-                $seasonDateStartYear = (int)$seasonDateStart->format('Y');
+                $seasonDateStartYear = (int) $seasonDateStart->format('Y');
 
                 // Build Season Date End
                 $seasonDateEndYear = $seasonDateStartYear + 1;
@@ -197,6 +183,5 @@ EOF
 
             return $estimateSeason;
         }
-
     }
 }

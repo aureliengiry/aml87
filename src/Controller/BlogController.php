@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Controller;
 
 use App\Article\ArticleManager;
 use App\Entity\Category;
-use App\Entity\Tags;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -48,20 +48,20 @@ class BlogController extends Controller
         // Calcul de la pagination
         $calculLastPage = round($nbPublicArticles / $this->_limitPagination);
         $pagination = [
-            'nbEntities'  => $nbPublicArticles,
-            'nbPages'     => ceil($nbPublicArticles / $this->_limitPagination),
-            'limit'       => $this->_limitPagination,
+            'nbEntities' => $nbPublicArticles,
+            'nbPages' => ceil($nbPublicArticles / $this->_limitPagination),
+            'limit' => $this->_limitPagination,
             'currentPage' => $page,
-            'nextPage'    => ($page + 1 * $this->_limitPagination < $nbPublicArticles ? $page + 1 : false),
-            'prevPage'    => ($page - 1 > 0 ? $page - 1 : false),
-            'lastPage'    => ($calculLastPage >= 0 ? $calculLastPage : 0),
+            'nextPage' => ($page + 1 * $this->_limitPagination < $nbPublicArticles ? $page + 1 : false),
+            'prevPage' => ($page - 1 > 0 ? $page - 1 : false),
+            'lastPage' => ($calculLastPage >= 0 ? $calculLastPage : 0),
         ];
 
         return [
-            'entities'   => $publicArticles,
+            'entities' => $publicArticles,
             'pagination' => $pagination,
             'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
-            'tags'       => $this->get(ArticleManager::class)->getTagsWithNbArticles(),
+            'tags' => $this->get(ArticleManager::class)->getTagsWithNbArticles(),
         ];
     }
 
@@ -75,8 +75,8 @@ class BlogController extends Controller
     public function showAction($slug, Request $request)
     {
         // Init Main Menu
-        $menu = $this->get("app.main_menu");
-        $menu->getChild("Blog")->setCurrent(true);
+        $menu = $this->get('app.main_menu');
+        $menu->getChild('Blog')->setCurrent(true);
 
         $article = $this->get(ArticleManager::class)->getArticleByIdOrUrl($slug);
         if (!$article) {
@@ -88,9 +88,9 @@ class BlogController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         return [
-            'entity'     => $article,
+            'entity' => $article,
             'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
-            'tags'       => $this->get(ArticleManager::class)->getTagsWithNbArticles(),
+            'tags' => $this->get(ArticleManager::class)->getTagsWithNbArticles(),
         ];
     }
 }

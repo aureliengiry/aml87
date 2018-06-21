@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Page;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -30,8 +30,8 @@ class PageController extends Controller
             $entity = $em->getRepository(Page::class)->getPublicPageByUrlKey($url_key);
         } else {
             $entity = $em->getRepository(Page::class)->findOneBy([
-                'id'     => $id,
-                'public' => Page::PAGE_IS_PUBLIC
+                'id' => $id,
+                'public' => Page::PAGE_IS_PUBLIC,
             ]);
         }
 

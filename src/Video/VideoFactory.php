@@ -6,13 +6,12 @@ use App\Entity\Video\Youtube;
 use Google_Service_YouTube_PlaylistItem;
 
 /**
- * Class VideoFactory
- * @package App\Video
+ * Class VideoFactory.
  */
 class VideoFactory
 {
     /**
-     * Create video with youtube data
+     * Create video with youtube data.
      *
      * @param Google_Service_YouTube_PlaylistItem $youtubeData
      *

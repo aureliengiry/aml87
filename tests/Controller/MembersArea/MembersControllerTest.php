@@ -9,8 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
- * Class MembersControllerTest
- * @package Tests\App\Controller\MembersArea
+ * Class MembersControllerTest.
  *
  * @group functional
  * @group members-area
@@ -25,7 +24,7 @@ class MembersControllerTest extends WebTestCase
     }
 
     /**
-     * Test Login redirect
+     * Test Login redirect.
      */
     public function testMembersAreaWithoutLogging()
     {
@@ -38,7 +37,7 @@ class MembersControllerTest extends WebTestCase
     }
 
     /**
-     * Test Home page with user login
+     * Test Home page with user login.
      */
     public function testMembersAreaWithLogging()
     {
@@ -66,7 +65,7 @@ class MembersControllerTest extends WebTestCase
         //$user->setUsername('toto');
 
         $token = new UsernamePasswordToken($user, '', $firewall, ['ROLE_USER']);
-        $session->set('_security_' . $firewall, serialize($token));
+        $session->set('_security_'.$firewall, serialize($token));
         $session->save();
 
         $cookie = new Cookie($session->getName(), $session->getId());

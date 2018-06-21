@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use App\Utils\Slugger;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Category
+ * App\Entity\Category.
  *
  * @ORM\Table(name="blog_categories")
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -15,7 +15,7 @@ use App\Utils\Slugger;
 class Category
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id_category",type="integer")
      * @ORM\Id
@@ -24,21 +24,21 @@ class Category
     private $id;
 
     /**
-     * @var string $systemName
+     * @var string
      *
      * @ORM\Column(name="system_name", type="string", length=255,unique=true)
      */
     private $systemName;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @var text description
+     * @var string description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
@@ -56,9 +56,9 @@ class Category
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -66,7 +66,7 @@ class Category
     }
 
     /**
-     * Set system_name
+     * Set system_name.
      *
      * @param string $systemName
      */
@@ -79,7 +79,7 @@ class Category
     }
 
     /**
-     * Get system_name
+     * Get system_name.
      *
      * @return string
      */
@@ -89,7 +89,7 @@ class Category
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      */
@@ -102,19 +102,19 @@ class Category
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @return text $description
+     * @return string $description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -140,7 +140,6 @@ class Category
     }
 
     /**
-     *
      * @param Blog $article
      */
     public function addArticle(Article $article)
@@ -154,6 +153,4 @@ class Category
     {
         return $this->name ?: 'New Category';
     }
-
-
 }

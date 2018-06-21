@@ -2,20 +2,18 @@
 
 namespace App\Entity;
 
+use App\Utils\Slugger;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Utils\Slugger;
 
 /**
- * App\Entity\File
+ * App\Entity\File.
  *
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\FileRepository")
- *
  */
 class File extends Media
 {
-
     /**
      * @Assert\File(
      *     maxSize = "2M",
@@ -36,17 +34,7 @@ class File extends Media
     private $filenameForRemove;
 
     /**
-     * Get id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set file
+     * Set file.
      *
      * @param string $file
      */
@@ -58,7 +46,7 @@ class File extends Media
     }
 
     /**
-     * Get file
+     * Get file.
      *
      * @return string
      */
@@ -68,7 +56,7 @@ class File extends Media
     }
 
     /**
-     * Set path
+     * Set path.
      *
      * @param string $path
      */
@@ -80,7 +68,7 @@ class File extends Media
     }
 
     /**
-     * Get path
+     * Get path.
      *
      * @return string
      */
@@ -97,7 +85,7 @@ class File extends Media
     protected function getUploadRootDir()
     {
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
-        return __DIR__ . '/../../public/' .$this->getUploadDir();
+        return __DIR__.'/../../public/'.$this->getUploadDir();
     }
 
     protected function getUploadDir()
@@ -156,7 +144,6 @@ class File extends Media
             unlink($this->filenameForRemove);
         }
     }
-
 
     public function getAbsolutePath()
     {

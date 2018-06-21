@@ -6,12 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class AgendaControllerTest
- * @package Tests\Controller
+ * Class AgendaControllerTest.
  */
 class AgendaControllerTest extends WebTestCase
 {
-
     public function testArchivesWithoutSeason()
     {
         $client = static::createClient();

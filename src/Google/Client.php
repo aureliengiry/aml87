@@ -2,12 +2,11 @@
 
 namespace App\Google;
 
-use Monolog\Logger;
 use Google_Client;
+use Monolog\Logger;
 
 /**
- * Class Client
- * @package Aml\Bundle\WebBundle\Google
+ * Class Client.
  */
 class Client
 {
@@ -32,7 +31,7 @@ class Client
     }
 
     /**
-     * Init Google client
+     * Init Google client.
      *
      * @return Google_Client
      */
@@ -46,9 +45,8 @@ class Client
             $this->logger->debug('GOOGLE CLIENT INIT : Success ');
 
             return $this->client;
-
         } catch (\Exception $e) {
-            $this->logger->error('GOOGLE CLIENT INIT ERROR : ' . $e->getMessage());
+            $this->logger->error('GOOGLE CLIENT INIT ERROR : '.$e->getMessage());
             throw $e;
         }
     }

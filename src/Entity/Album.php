@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Album
+ * App\Entity\Album.
  *
  * @ORM\Table(name="discography_albums")
  * @ORM\Entity(repositoryClass="App\Repository\AlbumRepository")
@@ -16,7 +16,7 @@ class Album
     const ALBUM_IS_PUBLIC = 1;
     const ALBUM_IS_PRIVATE = 2;
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id_album", type="integer")
      * @ORM\Id
@@ -25,7 +25,7 @@ class Album
     private $id;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
@@ -40,21 +40,21 @@ class Album
     private $url;
 
     /**
-     * @var text $description
+     * @var string
      *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
 
     /**
-     * @var boolean $public
+     * @var bool
      *
      * @ORM\Column(name="public", type="boolean")
      */
     private $public;
 
     /**
-     * @var date $date
+     * @var \DateTime
      *
      * @ORM\Column(name="date", type="date")
      */
@@ -78,21 +78,21 @@ class Album
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -100,17 +100,17 @@ class Album
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $url
      */
@@ -122,7 +122,7 @@ class Album
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -131,13 +131,12 @@ class Album
         return $this->url;
     }
 
-
     /**
-     * Set description
+     * Set description.
      *
-     * @param text $description
+     * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -145,21 +144,21 @@ class Album
     }
 
     /**
-     * Get description
+     * Get description.
      *
-     * @return text
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * Set public
+     * Set public.
      *
-     * @param boolean $public
+     * @param bool $public
      */
-    public function setPublic($public)
+    public function setPublic(bool $public)
     {
         $this->public = $public;
 
@@ -167,19 +166,19 @@ class Album
     }
 
     /**
-     * Get public
+     * Is public.
      *
-     * @return boolean
+     * @return bool
      */
-    public function getPublic()
+    public function isPublic(): bool
     {
         return $this->public;
     }
 
     /**
-     * Set date
+     * Set date.
      *
-     * @param date $date
+     * @param \DateTime $date
      */
     public function setDate($date)
     {
@@ -189,9 +188,9 @@ class Album
     }
 
     /**
-     * Get date
+     * Get date.
      *
-     * @return date
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -199,9 +198,10 @@ class Album
     }
 
     /**
-     * Set image
+     * Set image.
      *
      * @param string $image
+     *
      * @return Album
      */
     public function setImage($image)
@@ -212,7 +212,7 @@ class Album
     }
 
     /**
-     * Get image
+     * Get image.
      *
      * @return string
      */
@@ -222,7 +222,7 @@ class Album
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getTracks()
     {
@@ -230,7 +230,7 @@ class Album
     }
 
     /**
-     * @param mixed $tracks
+     * @param ArrayCollection $tracks
      */
     public function setTracks($tracks)
     {
@@ -240,7 +240,6 @@ class Album
     }
 
     /**
-     *
      * @param Track $track
      */
     public function addTrack(Track $track)
@@ -251,8 +250,9 @@ class Album
     }
 
     /**
-     * Fonction to delete tag
-     * @param Discussion $discussion
+     * Fonction to delete tag.
+     *
+     * @param Track $track
      */
     public function removeTrack(Track $track)
     {

@@ -5,8 +5,7 @@ namespace Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class BlogControllerTest
- * @package Tests\Controller
+ * Class BlogControllerTest.
  */
 class BlogControllerTest extends WebTestCase
 {

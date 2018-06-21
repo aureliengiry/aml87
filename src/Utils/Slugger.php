@@ -3,15 +3,14 @@
 namespace App\Utils;
 
 /**
- * Class Slugger
- * @package App\Utils
+ * Class Slugger.
  */
 class Slugger
 {
     protected $outputString = '';
 
     /**
-     * Remove letter with accent
+     * Remove letter with accent.
      *
      * @see http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
      *
@@ -131,11 +130,11 @@ class Slugger
     }
 
     /**
-     * Clean string (remove accents, special characters) for URL or filename
+     * Clean string (remove accents, special characters) for URL or filename.
      *
      * @param string $str
      * @param string $replace
-     * @param bool $lowercase
+     * @param bool   $lowercase
      *
      * @return mixed|string
      */
@@ -146,23 +145,23 @@ class Slugger
         $this->removeAccent();
 
         $trans = [
-            '&\#\d+?;'       => '',
-            '&\S+?;'         => '',
-            '\s+'            => $replace,
+            '&\#\d+?;' => '',
+            '&\S+?;' => '',
+            '\s+' => $replace,
             '[^a-z0-9\-\._]' => '',
-            $replace . '+'   => $replace,
-            $replace . '$'   => $replace,
-            '^' . $replace   => $replace,
-            '\.+$'           => '',
+            $replace.'+' => $replace,
+            $replace.'$' => $replace,
+            '^'.$replace => $replace,
+            '\.+$' => '',
         ];
 
         $this->outputString = strip_tags($this->outputString);
 
         foreach ($trans as $key => $val) {
-            $this->outputString = preg_replace("#" . $key . "#i", $val, $this->outputString);
+            $this->outputString = preg_replace('#'.$key.'#i', $val, $this->outputString);
         }
 
-        if ($lowercase === true) {
+        if (true === $lowercase) {
             $this->outputString = strtolower($this->outputString);
         }
 
@@ -171,7 +170,7 @@ class Slugger
 
         // Check and clean last character
         $lastCharacter = substr($this->outputString, -1);
-        if ($lastCharacter === '-') {
+        if ('-' === $lastCharacter) {
             $this->outputString = substr($this->outputString, 0, -1);
         }
 

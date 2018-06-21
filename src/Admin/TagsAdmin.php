@@ -1,15 +1,15 @@
 <?php
+
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 /**
- * Class TagsAdmin
+ * Class TagsAdmin.
  *
- * @package     App\Admin
  * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
 class TagsAdmin extends AbstractAdmin
@@ -22,7 +22,6 @@ class TagsAdmin extends AbstractAdmin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-
     }
 
     protected function configureListFields(ListMapper $listMapper)

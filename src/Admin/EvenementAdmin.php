@@ -1,15 +1,15 @@
 <?php
+
 namespace App\Admin;
 
 use App\Entity\Evenement;
 use App\Entity\Season;
+use App\Entity\UrlEvenement;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-
-use App\Entity\UrlEvenement;
 use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
@@ -19,18 +19,17 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class EvenementAdmin
+ * Class EvenementAdmin.
  *
- * @package App\Admin
  * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
 class EvenementAdmin extends AbstractAdmin
 {
     // setup the default sort column and order
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by' => 'dateStart'
-    );
+        '_sort_by' => 'dateStart',
+    ];
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -39,109 +38,109 @@ class EvenementAdmin extends AbstractAdmin
             ->add(
                 'title',
                 TextType::class,
-                array(
-                    'label' => 'Titre'
-                )
+                [
+                    'label' => 'Titre',
+                ]
             )
             ->add(
                 'type',
                 ChoiceType::class,
-                array(
+                [
                     'label' => 'Type d\'événement',
                     'choices' => Evenement::getTypesEvenements(),
                     'multiple' => false,
-                    'placeholder' => 'Sélectionnez le type d\'événement'
-                )
+                    'placeholder' => 'Sélectionnez le type d\'événement',
+                ]
             )
             ->add(
                 'season',
                 EntityType::class,
-                array(
+                [
                     'label' => 'Saison',
                     'class' => Season::class,
                     'choice_label' => 'name',
                     'placeholder' => 'Sélectionnez une saison',
-                    'attr' => array('class' => 'uiform')
-                )
+                    'attr' => ['class' => 'uiform'],
+                ]
             )
             ->add(
                 'dateStart',
                 DateTimePickerType::class,
-                array(
+                [
                     'dp_side_by_side' => true,
                     'dp_use_current' => false,
                     'dp_use_seconds' => false,
                     'dp_language' => 'fr',
-                    'format' => 'dd/MM/yyyy HH:mm'
-                )
+                    'format' => 'dd/MM/yyyy HH:mm',
+                ]
             )
             ->add(
                 'picture',
                 AdminType::class,
-                array(
+                [
                     'delete' => false,
-                    'required' => false
-                )
+                    'required' => false,
+                ]
             )
             ->add(
                 'description',
                 CKEditorType::class,
-                array(
+                [
                     'required' => false,
                     'config_name' => 'aml_config',
-                )
+                ]
             )
             ->add(
                 'archive',
                 CheckboxType::class,
-                array(
+                [
                     'label' => 'Archiver',
-                    'required' => false
-                )
+                    'required' => false,
+                ]
             )
             ->add(
                 'public',
                 CheckboxType::class,
-                array(
+                [
                     'label' => 'Publier',
-                    'required' => false
-                )
+                    'required' => false,
+                ]
             )
             ->end()
             ->with('Articles')
             ->add(
                 'articles',
                 ModelType::class,
-                array(
+                [
                     'required' => false,
                     'expanded' => true,
                     'multiple' => true,
-                    'by_reference' => false
-                )
+                    'by_reference' => false,
+                ]
             )
             ->end()
             ->with('Vidéos')
             ->add(
                 'videos',
                 ModelType::class,
-                array(
+                [
                     'required' => false,
                     'expanded' => true,
                     'multiple' => true,
-                    'by_reference' => false
-                )
+                    'by_reference' => false,
+                ]
             )
             ->end()
             ->with('Partenaires')
             ->add(
                 'partenaires',
                 ModelType::class,
-                array(
+                [
                     'required' => false,
                     'expanded' => true,
                     'multiple' => true,
-                    'by_reference' => false
-                )
+                    'by_reference' => false,
+                ]
             )
             ->end();
     }
@@ -189,6 +188,4 @@ class EvenementAdmin extends AbstractAdmin
 
         $evenement->setUrl($entityUrl);
     }
-
-
 }

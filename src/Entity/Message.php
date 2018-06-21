@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Message
+ * Message.
  *
  * @ORM\Table(name="contact_us_messages")
  * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
@@ -16,7 +16,7 @@ class Message
     const MESSAGE_STATUS_SAVE = 1;
     const MESSAGE_STATUS_SAVE_SEND = 2;
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_message", type="integer")
      * @ORM\Id
@@ -77,21 +77,21 @@ class Message
     private $addressIp;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="status", type="smallint")
      */
     private $status;
 
     /**
-     * @var datetime $created
+     * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
 
     /**
-     * @var boolean $spam
+     * @var bool
      *
      * @ORM\Column(name="spam", type="boolean")
      */
@@ -103,7 +103,7 @@ class Message
     }
 
     /**
-     * Get id
+     * Get id.
      */
     public function getId(): int
     {
@@ -111,7 +111,7 @@ class Message
     }
 
     /**
-     * Set name
+     * Set name.
      */
     public function setName(string $name)
     {
@@ -119,7 +119,7 @@ class Message
     }
 
     /**
-     * Get name
+     * Get name.
      */
     public function getName(): string
     {
@@ -127,16 +127,15 @@ class Message
     }
 
     /**
-     * Set email
+     * Set email.
      */
     public function setEmail(string $email)
     {
         $this->email = $email;
-
     }
 
     /**
-     * Get email
+     * Get email.
      */
     public function getEmail(): string
     {
@@ -144,7 +143,7 @@ class Message
     }
 
     /**
-     * Set subject
+     * Set subject.
      */
     public function setSubject(string $subject)
     {
@@ -152,7 +151,7 @@ class Message
     }
 
     /**
-     * Get subject
+     * Get subject.
      */
     public function getSubject(): string
     {
@@ -160,7 +159,7 @@ class Message
     }
 
     /**
-     * Set body
+     * Set body.
      */
     public function setBody(string $body)
     {
@@ -168,7 +167,7 @@ class Message
     }
 
     /**
-     * Get body
+     * Get body.
      */
     public function getBody(): string
     {
@@ -176,7 +175,7 @@ class Message
     }
 
     /**
-     * Set addressIp
+     * Set addressIp.
      *
      * @param string $addressIp
      *
@@ -190,7 +189,7 @@ class Message
     }
 
     /**
-     * Get addressIp
+     * Get addressIp.
      */
     public function getAddressIp(): string
     {
@@ -198,7 +197,7 @@ class Message
     }
 
     /**
-     * Set status
+     * Set status.
      */
     public function setStatus(int $status)
     {
@@ -206,23 +205,23 @@ class Message
     }
 
     /**
-     * Get status
+     * Get status.
      */
     public function getStatus(): string
     {
-        $statusOptions = array(
-            0                              => "NC",
-            self::MESSAGE_STATUS_SAVE      => 'Enregistré',
+        $statusOptions = [
+            0 => 'NC',
+            self::MESSAGE_STATUS_SAVE => 'Enregistré',
             self::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé',
-        );
+        ];
 
         return $statusOptions[$this->status];
     }
 
     /**
-     * Set created
+     * Set created.
      *
-     * @param datetime $created
+     * @param \DateTime $created
      */
     public function setCreated(\DateTime $created = null)
     {
@@ -230,7 +229,7 @@ class Message
     }
 
     /**
-     * Get created
+     * Get created.
      */
     public function getCreated(): \DateTime
     {
@@ -238,7 +237,7 @@ class Message
     }
 
     /**
-     * Check if it's a spam
+     * Check if it's a spam.
      */
     public function isSpam(): bool
     {
@@ -246,9 +245,9 @@ class Message
     }
 
     /**
-     * Set spam
+     * Set spam.
      *
-     * @param boolean $spam
+     * @param bool $spam
      */
     public function setSpam($spam)
     {
@@ -256,7 +255,7 @@ class Message
             $spam = true;
         }
 
-        if (is_null($spam)) {
+        if (null === $spam) {
             $spam = false;
         }
 

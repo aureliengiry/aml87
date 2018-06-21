@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Page
+ * App\Entity\Page.
  *
  * @ORM\Table(name="webbundle_pages")
  * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
@@ -16,7 +16,7 @@ class Page
     const PAGE_IS_PRIVATE = 0;
 
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -25,52 +25,52 @@ class Page
     private $id;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @var text $body
+     * @var string
      *
      * @ORM\Column(name="body", type="text")
      */
     private $body;
 
     /**
-     * @var datetime $created
+     * @var \\DateTime
      *
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
 
     /**
-     * @var datetime $updated
+     * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
 
     /**
-     * @var boolean $public
+     * @var bool
      *
      * @ORM\Column(name="public", type="boolean")
      */
     private $public;
 
     /**
-     * @var string url
+     * @var UrlPage url
      *
-     * @ORM\OneToOne(targetEntity="\App\Entity\Url", cascade={"all"})
+     * @ORM\OneToOne(targetEntity="\App\Entity\UrlPage", cascade={"all"})
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private $url;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -78,7 +78,7 @@ class Page
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      */
@@ -90,7 +90,7 @@ class Page
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -100,11 +100,11 @@ class Page
     }
 
     /**
-     * Set body
+     * Set body.
      *
-     * @param text $body
+     * @param string $body
      */
-    public function setBody($body)
+    public function setBody(string $body)
     {
         $this->body = $body;
 
@@ -112,19 +112,19 @@ class Page
     }
 
     /**
-     * Get body
+     * Get body.
      *
-     * @return text
+     * @return string
      */
-    public function getBody()
+    public function getBody(): string
     {
         return $this->body;
     }
 
     /**
-     * Set created
+     * Set created.
      *
-     * @param datetime $created
+     * @param \DateTime $created
      */
     public function setCreated(\DateTime $created = null)
     {
@@ -134,19 +134,19 @@ class Page
     }
 
     /**
-     * Get created
+     * Get created.
      *
-     * @return datetime
+     * @return \DateTime
      */
-    public function getCreated()
+    public function getCreated(): \DateTime
     {
         return $this->created;
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
-     * @param datetime $updated
+     * @param \DateTime $updated
      */
     public function setUpdated(\DateTime $updated = null)
     {
@@ -156,21 +156,21 @@ class Page
     }
 
     /**
-     * Get updated
+     * Get updated.
      *
-     * @return datetime
+     * @return \DateTime
      */
-    public function getUpdated()
+    public function getUpdated(): \DateTime
     {
         return $this->updated;
     }
 
     /**
-     * Set public
+     * Set public.
      *
-     * @param boolean $public
+     * @param bool $public
      */
-    public function setPublic($public)
+    public function setPublic(bool $public)
     {
         $this->public = $public;
 
@@ -178,21 +178,21 @@ class Page
     }
 
     /**
-     * Get public
+     * Get public.
      *
-     * @return boolean
+     * @return bool
      */
-    public function getPublic()
+    public function isPublic(): bool
     {
         return $this->public;
     }
 
     /**
-     * Set title
+     * Set url.
      *
-     * @param string $url
+     * @param UrlPage $url
      */
-    public function setUrl($url)
+    public function setUrl(UrlPage $url)
     {
         $this->url = $url;
 
@@ -200,11 +200,11 @@ class Page
     }
 
     /**
-     * Get url
+     * Get url.
      *
-     * @return string
+     * @return UrlPage
      */
-    public function getUrl()
+    public function getUrl(): UrlPage
     {
         return $this->url;
     }

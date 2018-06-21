@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Track
+ * Track.
  *
  * @ORM\Table(name="discography_tracks")
  * @ORM\Entity(repositoryClass="App\Repository\TrackRepository")
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Track
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_track", type="integer")
      * @ORM\Id
@@ -22,7 +22,7 @@ class Track
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="number", type="smallint")
      */
@@ -51,9 +51,9 @@ class Track
     private $album;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -61,9 +61,10 @@ class Track
     }
 
     /**
-     * Set number
+     * Set number.
      *
-     * @param integer $number
+     * @param int $number
+     *
      * @return Track
      */
     public function setNumber($number)
@@ -74,9 +75,9 @@ class Track
     }
 
     /**
-     * Get number
+     * Get number.
      *
-     * @return integer
+     * @return int
      */
     public function getNumber()
     {
@@ -84,9 +85,10 @@ class Track
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Track
      */
     public function setTitle($title)
@@ -97,7 +99,7 @@ class Track
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -107,9 +109,10 @@ class Track
     }
 
     /**
-     * Set composer
+     * Set composer.
      *
      * @param string $composer
+     *
      * @return Track
      */
     public function setComposer($composer)
@@ -120,7 +123,7 @@ class Track
     }
 
     /**
-     * Get composer
+     * Get composer.
      *
      * @return string
      */
@@ -130,9 +133,10 @@ class Track
     }
 
     /**
-     * Set album
+     * Set album.
      *
-     * @param integer $album
+     * @param int $album
+     *
      * @return Track
      */
     public function setAlbum($album)
@@ -143,9 +147,9 @@ class Track
     }
 
     /**
-     * Get album
+     * Get album.
      *
-     * @return integer
+     * @return int
      */
     public function getAlbum()
     {

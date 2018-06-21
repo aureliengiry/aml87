@@ -2,13 +2,12 @@
 
 namespace App\EventListener;
 
+use App\Entity\Message;
 use App\Event\Contact\PostEvent;
 use Doctrine\Common\Persistence\ObjectManager;
-use App\Entity\Message;
 
 /**
- * Class PostListener
- * @package App\EventListener
+ * Class PostListener.
  */
 class PostListener
 {
@@ -32,7 +31,7 @@ class PostListener
      *
      * @param \Swift_Mailer $mailer
      * @param ObjectManager $entityManager
-     * @param string $subscribers
+     * @param string        $subscribers
      */
     public function __construct(\Swift_Mailer $mailer, ObjectManager $entityManager, string $subscribers = null)
     {
@@ -51,13 +50,12 @@ class PostListener
         $formatedMessage = $this->formatMessage($post);
 
         if (!empty($this->subscribers)) {
-
             foreach (explode(',', $this->subscribers) as $subscriber) {
-                $mail = \Swift_Message::newInstance()
-                    ->setSubject($formatedMessage['subject'])
+                $mail = (new \Swift_Message($formatedMessage['subject']))
                     ->setFrom($post->getEmail(), $post->getName())
                     ->setTo($subscriber)
                     ->setBody($formatedMessage['body']);
+
                 $this->mailer->send($mail);
 
                 $post->setStatus(Message::MESSAGE_STATUS_SAVE_SEND);
@@ -69,7 +67,7 @@ class PostListener
     }
 
     /**
-     * Function to format email
+     * Function to format email.
      *
      * @param Message $post
      */

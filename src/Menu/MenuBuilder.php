@@ -6,16 +6,14 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Class MenuBuilder
- *
- * @package Aml\Bundle\WebBundle\Menu
+ * Class MenuBuilder.
  */
 class MenuBuilder
 {
     private $factory;
 
     /**
-     * Init factory
+     * Init factory.
      *
      * @param FactoryInterface $factory
      */
@@ -25,7 +23,7 @@ class MenuBuilder
     }
 
     /**
-     * Generate main menu
+     * Generate main menu.
      *
      * @param Request $requestStack
      *
@@ -40,8 +38,8 @@ class MenuBuilder
         $menu->addChild(
             'Association',
             [
-                'route'           => 'page_show_rewrite',
-                'routeParameters' => ['url_key' => 'accordeon-autrement']
+                'route' => 'page_show_rewrite',
+                'routeParameters' => ['url_key' => 'accordeon-autrement'],
             ]
         );
 
@@ -54,7 +52,7 @@ class MenuBuilder
     }
 
     /**
-     * Generate breadcrumb
+     * Generate breadcrumb.
      *
      * @param Request $request
      *
@@ -65,7 +63,7 @@ class MenuBuilder
         $menu = $this->factory->createItem('root', [
             'childrenAttributes' => [
                 'class' => 'breadcrumb',
-            ]
+            ],
         ]);
 
         // this item will always be displayed
@@ -85,7 +83,7 @@ class MenuBuilder
             case 'agenda_show_event':
             case 'agenda_show_event_rewrite':
                 $menu->addChild('Agenda', [
-                    'route' => 'agenda'
+                    'route' => 'agenda',
                 ]);
 
                 $menu
@@ -95,7 +93,7 @@ class MenuBuilder
                 break;
             case 'agenda_archives':
                 $menu->addChild('Agenda', [
-                    'route' => 'agenda'
+                    'route' => 'agenda',
                 ]);
 
                 $menu

@@ -3,8 +3,8 @@
 namespace App\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -12,9 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class UsersAdmin
+ * Class UsersAdmin.
  *
- * @package     App\Admin
  * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
 class UsersAdmin extends AbstractAdmin
@@ -59,7 +58,7 @@ class UsersAdmin extends AbstractAdmin
                     'birthdate',
                     DateType::class,
                     [
-                        'widget'   => 'single_text',
+                        'widget' => 'single_text',
                         'required' => false,
                     ]
                 )
@@ -81,7 +80,7 @@ class UsersAdmin extends AbstractAdmin
                     'enabled',
                     CheckboxType::class,
                     [
-                        'label'    => 'Actif',
+                        'label' => 'Actif',
                         'required' => false,
                     ]
                 )

@@ -3,11 +3,10 @@
 namespace App\Entity;
 
 use App\Utils\Slugger;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Url
+ * Url.
  *
  * @ORM\Table(name="core_url")
  * @ORM\Entity(repositoryClass="App\Repository\UrlRepository")
@@ -24,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class Url
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id_url", type="integer")
      * @ORM\Id
@@ -40,17 +39,17 @@ abstract class Url
     protected $urlKey;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * Set urlKey
+     * Set urlKey.
      *
      * @param string $urlKey
      *
@@ -65,7 +64,7 @@ abstract class Url
     }
 
     /**
-     * Get urlKey
+     * Get urlKey.
      *
      * @return string
      */
@@ -73,7 +72,6 @@ abstract class Url
     {
         return $this->urlKey;
     }
-
 
     public function __toString()
     {

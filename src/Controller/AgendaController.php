@@ -4,10 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Season;
 use App\Evenement\EvenementManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,7 +34,7 @@ class AgendaController extends Controller
 
         return [
             'entities' => $this->get(EvenementManager::class)->getPublicEventsInCurrentSeason(),
-            'seasons'  => $seasons
+            'seasons' => $seasons,
         ];
     }
 
@@ -60,8 +60,8 @@ class AgendaController extends Controller
         }
 
         // Init Main Menu
-        $menu = $this->get("app.main_menu");
-        $menu->getChild("Agenda")->setCurrent(true);
+        $menu = $this->get('app.main_menu');
+        $menu->getChild('Agenda')->setCurrent(true);
 
         $request->attributes->set('label', $event->getTitle());
 
@@ -69,7 +69,7 @@ class AgendaController extends Controller
     }
 
     /**
-     * Action for Next Concert Block
+     * Action for Next Concert Block.
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -77,7 +77,7 @@ class AgendaController extends Controller
     {
         return $this->render(
             'agenda/blocs/bloc_next_concert.html.twig', [
-            'nextConcert' => $this->get(EvenementManager::class)->getNextConcert()
+            'nextConcert' => $this->get(EvenementManager::class)->getNextConcert(),
         ]);
     }
 
@@ -103,15 +103,15 @@ class AgendaController extends Controller
         }
 
         // Init Main Menu
-        $menu = $this->get("app.main_menu");
-        $menu->getChild("Agenda")->setCurrent(true);
+        $menu = $this->get('app.main_menu');
+        $menu->getChild('Agenda')->setCurrent(true);
 
         $request->attributes->set('label', $season->getName());
 
         return [
             'currentSeason' => $season,
-            'entities'      => $this->get(EvenementManager::class)->getArchivedConcertBySeason($season),
-            'seasons'       => $seasonsRepository->getPastSeasons(),
+            'entities' => $this->get(EvenementManager::class)->getArchivedConcertBySeason($season),
+            'seasons' => $seasonsRepository->getPastSeasons(),
         ];
     }
 }

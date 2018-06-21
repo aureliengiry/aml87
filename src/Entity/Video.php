@@ -2,13 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use App\Entity\Evenement;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Video
+ * App\Entity\Video.
  *
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
  *
@@ -30,14 +28,14 @@ abstract class Video
     protected $id;
 
     /**
-     * @var string $providerId
+     * @var string
      *
      * @ORM\Column(name="provider_id", type="string", length=50)
      */
     protected $providerId;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="string", length=255,nullable=true)
      */
@@ -54,11 +52,11 @@ abstract class Video
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -82,11 +80,11 @@ abstract class Video
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -94,19 +92,20 @@ abstract class Video
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
+
     /**
      * @param Evenement $evenement
+     *
      * @return $this
      */
     public function addEvenement(Evenement $evenement)
@@ -120,7 +119,8 @@ abstract class Video
     }
 
     /**
-     * Fonction to delete $evenement
+     * Fonction to delete $evenement.
+     *
      * @param Evenement $evenement
      */
     public function removeEvenement(Evenement $evenement)
@@ -130,7 +130,7 @@ abstract class Video
     }
 
     /**
-     * @return the $evenements
+     * @return ArrayCollection $evenements
      */
     public function getEvenements()
     {
@@ -138,7 +138,7 @@ abstract class Video
     }
 
     /**
-     * @return the $evenements
+     * @return ArrayCollection $evenements
      */
     public function setEvenements(ArrayCollection $evenements)
     {
@@ -146,5 +146,4 @@ abstract class Video
 
         return $this;
     }
-
 }

@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Media
+ * App\Entity\Media.
  *
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository") *
  *
@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class Media
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id_media", type="integer")
      * @ORM\Id
@@ -30,28 +30,28 @@ abstract class Media
     protected $id;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="string", length=255,nullable=true)
      */
     protected $title;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -59,21 +59,21 @@ abstract class Media
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
+     * @param string $name
      *
-     * @param unknown_type $name
      * @return string
      */
-    protected function renameIfFileExist($name)
+    protected function renameIfFileExist(string $name)
     {
         $filename = $this->getUploadRootDir().'/'.$name;
         if (true === file_exists($filename)) {
@@ -90,11 +90,9 @@ abstract class Media
                     $fileExist = false;
                     break;
                 } else {
-                    $count++;
+                    ++$count;
                 }
             }
-
-
         }
 
         return $name;
