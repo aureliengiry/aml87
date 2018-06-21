@@ -2,14 +2,11 @@
 
 namespace App\Entity;
 
-use App\Entity\Video;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use App\Entity\Article;
-use App\Entity\Partenaire;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Evenement
+ * App\Entity\Evenement.
  *
  * @ORM\Table(name="evenements")
  * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
@@ -24,7 +21,7 @@ class Evenement
     const EVENEMENT_TYPE_SORTIE = 'sortie';
 
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id_evenement", type="integer")
      * @ORM\Id
@@ -33,42 +30,42 @@ class Evenement
     private $id;
 
     /**
-     * @var string $type
+     * @var string
      *
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
     private $type;
 
     /**
-     * @var \DateTime $dateStart
+     * @var \DateTime
      *
      * @ORM\Column(name="date_start", type="datetime")
      */
     private $dateStart;
 
     /**
-     * @var \DateTime $dateEnd
+     * @var \DateTime
      *
      * @ORM\Column(name="date_end", type="datetime", nullable=true)
      */
     private $dateEnd;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string $description
+     * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @var integer $picture
+     * @var int
      *
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
@@ -76,14 +73,14 @@ class Evenement
     private $picture;
 
     /**
-     * @var boolean $archive
+     * @var bool
      *
      * @ORM\Column(name="archive", type="boolean")
      */
     private $archive;
 
     /**
-     * @var boolean $public
+     * @var bool
      *
      * @ORM\Column(name="public", type="boolean")
      */
@@ -133,9 +130,9 @@ class Evenement
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -143,7 +140,7 @@ class Evenement
     }
 
     /**
-     * Set date
+     * Set date.
      *
      * @param \DateTime $dateStart
      */
@@ -155,17 +152,17 @@ class Evenement
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
-    public function getDateStart() : \DateTime
+    public function getDateStart(): \DateTime
     {
         return $this->dateStart;
     }
 
     /**
-     * Set dateEnd
+     * Set dateEnd.
      *
      * @param \DateTime $dateEnd
      */
@@ -177,17 +174,17 @@ class Evenement
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
-    public function getDateEnd() : \DateTime
+    public function getDateEnd(): \DateTime
     {
         return $this->dateEnd;
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      */
@@ -199,17 +196,17 @@ class Evenement
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
-    public function getTitle() : string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      */
@@ -221,11 +218,11 @@ class Evenement
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -248,11 +245,10 @@ class Evenement
         return $this->picture;
     }
 
-
     /**
-     * Set archive
+     * Set archive.
      *
-     * @param boolean $archive
+     * @param bool $archive
      */
     public function setArchive($archive)
     {
@@ -262,9 +258,9 @@ class Evenement
     }
 
     /**
-     * Get archive
+     * Get archive.
      *
-     * @return boolean
+     * @return bool
      */
     public function getArchive()
     {
@@ -272,9 +268,9 @@ class Evenement
     }
 
     /**
-     * Set public
+     * Set public.
      *
-     * @param boolean $public
+     * @param bool $public
      */
     public function setPublic($public)
     {
@@ -284,9 +280,9 @@ class Evenement
     }
 
     /**
-     * Get public
+     * Get public.
      *
-     * @return boolean
+     * @return bool
      */
     public function getPublic()
     {
@@ -312,12 +308,13 @@ class Evenement
     }
 
     /**
-     * Retourne le liste des différents types d'évènement
+     * Retourne le liste des différents types d'évènement.
+     *
      * @return array
      */
     public static function getTypesEvenements()
     {
-        $typesEvenement = array();
+        $typesEvenement = [];
 
         $typesEvenement[self::EVENEMENT_TYPE_CONCERT] = 'Concert';
         $typesEvenement[self::EVENEMENT_TYPE_CONCOURS] = 'Concours';
@@ -348,7 +345,7 @@ class Evenement
     }
 
     /**
-     * Fonction pour supprimer une discussion d'un mot clé
+     * Fonction pour supprimer une discussion d'un mot clé.
      *
      * @param Article $article
      */
@@ -358,8 +355,8 @@ class Evenement
     }
 
     /* ---------------- PARTENAIRES ---------------- */
+
     /**
-     *
      * @param Partenaire $partenaire
      */
     public function addPartenaire(Partenaire $partenaire)
@@ -371,7 +368,7 @@ class Evenement
     }
 
     /**
-     * Fonction to delete partenaire
+     * Fonction to delete partenaire.
      *
      * @param Partenaire $partenaire
      */
@@ -417,7 +414,7 @@ class Evenement
     }
 
     /**
-     * Remove Video
+     * Remove Video.
      *
      * @param Video $video
      */
@@ -432,7 +429,7 @@ class Evenement
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $url
      */
@@ -444,7 +441,7 @@ class Evenement
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -473,7 +470,7 @@ class Evenement
 
     public function hasSeason()
     {
-        return (bool)$this->season;
+        return (bool) $this->season;
     }
 
     public function getSlug()

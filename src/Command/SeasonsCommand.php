@@ -2,17 +2,15 @@
 
 namespace App\Command;
 
+use App\Entity\Evenement;
+use App\Entity\Season;
 use App\Repository\EvenementRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-use App\Entity\Evenement;
-use App\Entity\Season;
-
 /**
- * Class SeasonsCommand
- * @package App\Command
+ * Class SeasonsCommand.
  */
 class SeasonsCommand extends ContainerAwareCommand
 {
@@ -26,9 +24,9 @@ class SeasonsCommand extends ContainerAwareCommand
     protected $entityManager;
 
     /**
-     * Validate entry
+     * Validate entry.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @throws \RunTimeException
@@ -121,6 +119,7 @@ EOF
 
     /**
      * @param \DateTime $eventDateStart
+     *
      * @return Season
      */
     protected function calculateSeason(\DateTime $eventDateStart)
@@ -130,7 +129,7 @@ EOF
             return $estimateSeason;
         } else {
             $defaultDateStart = Season::SEASON_DEFAULT_DATE_START;
-            $eventDateStartYear = (int)$eventDateStart->format('Y');
+            $eventDateStartYear = (int) $eventDateStart->format('Y');
             $testDateStart = sprintf($defaultDateStart, $eventDateStartYear);
 
             // Build Test Date
@@ -146,7 +145,7 @@ EOF
 
                 // Build Season Date End
                 $defaultDateEnd = Season::SEASON_DEFAULT_DATE_END;
-                $eventDateEndYear = (int)$eventDateStart->format('Y');
+                $eventDateEndYear = (int) $eventDateStart->format('Y');
                 $testDateEnd = sprintf($defaultDateEnd, $eventDateEndYear);
 
                 $seasonDateEndYear = $eventDateStartYear;
@@ -158,7 +157,7 @@ EOF
             } else {
                 // Build Season Date Start
                 $seasonDateStart = $testDateTime;
-                $seasonDateStartYear = (int)$seasonDateStart->format('Y');
+                $seasonDateStartYear = (int) $seasonDateStart->format('Y');
 
                 // Build Season Date End
                 $seasonDateEndYear = $seasonDateStartYear + 1;
@@ -184,6 +183,5 @@ EOF
 
             return $estimateSeason;
         }
-
     }
 }

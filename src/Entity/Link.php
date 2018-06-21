@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Link
+ * App\Entity\Link.
  *
  * @ORM\Table(name="webbundle_links")
  * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Link
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,14 +22,14 @@ class Link
     private $id;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string $url
+     * @var string
      *
      * @ORM\Column(name="url", type="string", length=255)
      */
@@ -43,24 +43,23 @@ class Link
     private $description;
 
     /**
-     * @var boolean weight
+     * @var bool weight
      *
      * @ORM\Column(name="weight", type="integer")
      */
     private $weight = 1;
 
     /**
-     * @var boolean $public
+     * @var bool
      *
      * @ORM\Column(name="public", type="boolean")
      */
     private $public;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -68,7 +67,7 @@ class Link
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      */
@@ -80,7 +79,7 @@ class Link
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -90,7 +89,7 @@ class Link
     }
 
     /**
-     * Set url
+     * Set url.
      *
      * @param string $url
      */
@@ -102,7 +101,7 @@ class Link
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -112,9 +111,9 @@ class Link
     }
 
     /**
-     * Set public
+     * Set public.
      *
-     * @param boolean $public
+     * @param bool $public
      */
     public function setPublic($public)
     {
@@ -124,9 +123,9 @@ class Link
     }
 
     /**
-     * Get public
+     * Get public.
      *
-     * @return boolean
+     * @return bool
      */
     public function getPublic()
     {
@@ -134,7 +133,7 @@ class Link
     }
 
     /**
-     * @return integer $weight
+     * @return int $weight
      */
     public function getWeight()
     {
@@ -142,7 +141,7 @@ class Link
     }
 
     /**
-     * @param integer $weight
+     * @param int $weight
      */
     public function setWeight($weight)
     {
@@ -154,7 +153,7 @@ class Link
     /**
      * @return string $description
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -173,5 +172,4 @@ class Link
     {
         return $this->title ? $this->title : 'New Link';
     }
-
 }

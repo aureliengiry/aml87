@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use App\Utils\Slugger;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Tags
+ * App\Entity\Tags.
  *
  * @ORM\Table(name="blog_tags")
  * @ORM\Entity(repositoryClass="App\Repository\TagsRepository")
@@ -15,14 +15,13 @@ use App\Utils\Slugger;
 class Tags
 {
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id_tag", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
 
     /**
      * @ORM\ManyToMany(targetEntity="Article", inversedBy="tags")
@@ -33,23 +32,22 @@ class Tags
      */
     protected $articles;
 
-
     /**
-     * @var string $system_name
+     * @var string
      *
      * @ORM\Column(name="system_name", type="string", length=255)
      */
     private $systemName;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @var integer $weight
+     * @var int
      *
      * @ORM\Column(name="weight", type="smallint", nullable=true)
      */
@@ -68,9 +66,9 @@ class Tags
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -78,7 +76,7 @@ class Tags
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      */
@@ -91,7 +89,7 @@ class Tags
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -101,9 +99,9 @@ class Tags
     }
 
     /**
-     * Set weight
+     * Set weight.
      *
-     * @param integer $weight
+     * @param int $weight
      */
     public function setWeight(int $weight)
     {
@@ -113,17 +111,17 @@ class Tags
     }
 
     /**
-     * Get weight
+     * Get weight.
      *
-     * @return integer
+     * @return int
      */
-    public function getWeight() : int
+    public function getWeight(): int
     {
         return $this->weight;
     }
 
     /**
-     * Set system_name
+     * Set system_name.
      *
      * @param string $systemName
      */
@@ -136,11 +134,11 @@ class Tags
     }
 
     /**
-     * Get system_name
+     * Get system_name.
      *
      * @return string
      */
-    public function getSystemName() : string
+    public function getSystemName(): string
     {
         return $this->systemName;
     }
@@ -163,7 +161,7 @@ class Tags
     }
 
     /**
-     * Fonction pour supprimer article associé
+     * Fonction pour supprimer article associé.
      *
      * @param Article $article
      */
@@ -175,7 +173,7 @@ class Tags
     /**
      * @return string $description
      */
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -189,7 +187,6 @@ class Tags
 
         return $this;
     }
-
 
     public function __toString()
     {

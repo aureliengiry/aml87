@@ -1,19 +1,18 @@
 <?php
+
 namespace App\Admin;
 
+use App\Entity\UrlPage;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-
-use App\Entity\UrlPage;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class PageAdmin
- * @package App\Admin
+ * Class PageAdmin.
  */
 class PageAdmin extends AbstractAdmin
 {
@@ -23,26 +22,26 @@ class PageAdmin extends AbstractAdmin
             ->add(
                 'title',
                 TextType::class,
-                array(
-                    'label' => 'Titre'
-                )
+                [
+                    'label' => 'Titre',
+                ]
             )
             ->add(
                 'body',
                 CKEditorType::class,
-                array(
+                [
                     'required' => false,
                     'config_name' => 'aml_config',
-                )
+                ]
             )
             ->add(
                 'public',
                 CheckboxType::class,
-                array(
+                [
                     'label' => 'Publier',
                     'required' => false,
-                    'attr' => array('data-help' => 'Signifie que la page sera visible pour tout le monde'),
-                )
+                    'attr' => ['data-help' => 'Signifie que la page sera visible pour tout le monde'],
+                ]
             );
     }
 
@@ -69,7 +68,7 @@ class PageAdmin extends AbstractAdmin
      */
     public function preUpdate($page)
     {
-        $page->setUpdated(new \DateTime);
+        $page->setUpdated(new \DateTime());
 
         $urlKey = $page->getUrl();
         if (empty($urlKey)) {
@@ -91,8 +90,8 @@ class PageAdmin extends AbstractAdmin
         $entityUrl->setUrlKey($page->getTitle());
 
         $page
-            ->setCreated(new \DateTime)
-            ->setUpdated(new \DateTime)
+            ->setCreated(new \DateTime())
+            ->setUpdated(new \DateTime())
             ->setUrl($entityUrl);
     }
 }

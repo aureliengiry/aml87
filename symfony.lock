@@ -2,6 +2,15 @@
     "cocur/slugify": {
         "version": "v3.1"
     },
+    "codacy/coverage": {
+        "version": "dev-master"
+    },
+    "composer/semver": {
+        "version": "1.4.2"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.1.0"
+    },
     "dms/dms-filter": {
         "version": "v3.0.0"
     },
@@ -83,6 +92,15 @@
     "firebase/php-jwt": {
         "version": "v5.0.0"
     },
+    "friendsofphp/php-cs-fixer": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "81dee417d2cc60cd1c9d6208dff2ec22a1103e93"
+        }
+    },
     "friendsofsymfony/ckeditor-bundle": {
         "version": "1.1.0"
     },
@@ -91,6 +109,9 @@
     },
     "fzaninotto/faker": {
         "version": "v1.7.1"
+    },
+    "gitonomy/gitlib": {
+        "version": "v1.0.4"
     },
     "google/apiclient": {
         "version": "2.0",
@@ -175,6 +196,9 @@
     },
     "phar-io/version": {
         "version": "1.0.1"
+    },
+    "php-cs-fixer/diff": {
+        "version": "v1.3.0"
     },
     "phpcollection/phpcollection": {
         "version": "0.5.0"

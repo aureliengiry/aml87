@@ -1,23 +1,22 @@
 <?php
+
 namespace App\Command;
 
 use App\Google\YoutubeProvider;
 use App\Video\VideoFactory;
 use App\Video\VideoManager;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-
-// logger
 use Monolog\Logger;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+// logger
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class UpdateYoutubeDataCommand
- * @package App\Command
+ * Class UpdateYoutubeDataCommand.
  */
 class UpdateYoutubeDataCommand extends ContainerAwareCommand
 {
@@ -26,7 +25,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
     /** @var bool debug mode */
     private $debug = false;
-    
+
     private $output;
 
     /** @var Logger command logger */
@@ -38,9 +37,8 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
     /** @var array list of videos */
     private $videosList = [];
 
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -67,7 +65,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
         // Logger
         $this->logger = $this->getContainer()->get('logger');
-        if ($this->debug === true) {
+        if (true === $this->debug) {
             $this->logger->pushProcessor(new MemoryPeakUsageProcessor());
             $this->logger->pushProcessor(new MemoryUsageProcessor());
         }
@@ -93,32 +91,30 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
                 $videos = $youtubeProvider->getVideosPlaylist($playlistId);
                 foreach ($videos->getItems() as $youtubeVideo) {
                     $idYoutube = $youtubeVideo->getContentDetails()->getVideoId();
-                    if (!in_array($idYoutube, $this->videosList)) {
+                    if (!in_array($idYoutube, $this->videosList, true)) {
                         $video = $this->getContainer()->get(VideoFactory::class)->createVideoFromYoutube(
                             $youtubeVideo
                         );
 
                         $this->em->persist($video);
-                        $output->writeln('Youtube ID: ' . $idYoutube . ' imported.');
+                        $output->writeln('Youtube ID: '.$idYoutube.' imported.');
 
-                        $compteurVideo++;
+                        ++$compteurVideo;
                     }
-
                 }
                 $this->em->flush();
             }
         } catch (\Exception $e) {
-            $output->writeln('<bg=red;fg=white>Error: ' . $e->getMessage() . '</>');
+            $output->writeln('<bg=red;fg=white>Error: '.$e->getMessage().'</>');
         }
 
         $this->output->writeln("New videos: {$compteurVideo}");
-
 
         $output->writeln('<bg=cyan;fg=red>Fin du traitement</>');
     }
 
     /**
-     * Get videos list
+     * Get videos list.
      */
     private function initVideoslist()
     {

@@ -2,15 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Doctrine\Common\Collections\ArrayCollection;
-
 use App\Utils\Slugger;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * App\Entity\Image
+ * App\Entity\Image.
  *
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
@@ -47,7 +45,7 @@ class Image extends Media
     }
 
     /**
-     * Set file
+     * Set file.
      *
      * @param UploadedFile $file
      */
@@ -59,7 +57,7 @@ class Image extends Media
     }
 
     /**
-     * Get file
+     * Get file.
      *
      * @return string
      */
@@ -69,7 +67,7 @@ class Image extends Media
     }
 
     /**
-     * Set path
+     * Set path.
      *
      * @param string $path
      */
@@ -81,7 +79,7 @@ class Image extends Media
     }
 
     /**
-     * Get path
+     * Get path.
      *
      * @return string
      */
@@ -92,13 +90,13 @@ class Image extends Media
 
     public function getWebPath()
     {
-        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
+        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
     }
 
     protected function getUploadRootDir()
     {
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
-        return __DIR__ . '/../../public/' . $this->getUploadDir();
+        return __DIR__.'/../../public/'.$this->getUploadDir();
     }
 
     protected function getUploadDir()
@@ -142,7 +140,7 @@ class Image extends Media
 
     public function getAbsolutePath()
     {
-        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
+        return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
 
     /**

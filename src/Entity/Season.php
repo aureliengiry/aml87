@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Season
+ * App\Entity\Season.
  *
  * @ORM\Table(name="evenements_seasons")
  * @ORM\Entity(repositoryClass="App\Repository\SeasonRepository")
@@ -15,7 +16,7 @@ class Season
     const SEASON_DEFAULT_DATE_END = '%s-08-31';
 
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id_season", type="integer")
      * @ORM\Id
@@ -24,21 +25,21 @@ class Season
     private $id;
 
     /**
-     * @var string $name
+     * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
-     * @var \DateTime $dateStart
+     * @var \DateTime
      *
      * @ORM\Column(name="date_start", type="datetime")
      */
     private $dateStart;
 
     /**
-     * @var \DateTime $dateEnd
+     * @var \DateTime
      *
      * @ORM\Column(name="date_end", type="datetime")
      */
@@ -87,6 +88,7 @@ class Season
     }
 
     /* ----------- EVENEMENTS ------------ */
+
     /**
      * @return mixed
      */
@@ -106,7 +108,6 @@ class Season
     }
 
     /**
-     *
      * @param Evenement $evenement
      */
     public function addEvenement($evenement)
@@ -157,9 +158,10 @@ class Season
         return $this->name ? $this->name : 'New Season';
     }
 
-    public function createStartDate($year){
+    public function createStartDate($year)
+    {
+        $str = sprintf(self::SEASON_DEFAULT_DATE_START, $year);
 
-        $str = sprintf(self::SEASON_DEFAULT_DATE_START,$year);
         return new \DateTime($str);
     }
 }

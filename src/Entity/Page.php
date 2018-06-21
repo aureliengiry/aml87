@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Page
+ * App\Entity\Page.
  *
  * @ORM\Table(name="webbundle_pages")
  * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
@@ -16,7 +16,7 @@ class Page
     const PAGE_IS_PRIVATE = 0;
 
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -25,35 +25,35 @@ class Page
     private $id;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string $body
+     * @var string
      *
      * @ORM\Column(name="body", type="text")
      */
     private $body;
 
     /**
-     * @var \\DateTime $created
+     * @var \\DateTime
      *
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
 
     /**
-     * @var \DateTime $updated
+     * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
 
     /**
-     * @var boolean $public
+     * @var bool
      *
      * @ORM\Column(name="public", type="boolean")
      */
@@ -68,9 +68,9 @@ class Page
     private $url;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -78,7 +78,7 @@ class Page
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      */
@@ -90,7 +90,7 @@ class Page
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -100,7 +100,7 @@ class Page
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
      */
@@ -112,17 +112,17 @@ class Page
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
-    public function getBody() : string
+    public function getBody(): string
     {
         return $this->body;
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      */
@@ -134,17 +134,17 @@ class Page
     }
 
     /**
-     * Get created
+     * Get created.
      *
      * @return \DateTime
      */
-    public function getCreated() : \DateTime
+    public function getCreated(): \DateTime
     {
         return $this->created;
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      */
@@ -156,19 +156,19 @@ class Page
     }
 
     /**
-     * Get updated
+     * Get updated.
      *
      * @return \DateTime
      */
-    public function getUpdated() : \DateTime
+    public function getUpdated(): \DateTime
     {
         return $this->updated;
     }
 
     /**
-     * Set public
+     * Set public.
      *
-     * @param boolean $public
+     * @param bool $public
      */
     public function setPublic(bool $public)
     {
@@ -178,17 +178,17 @@ class Page
     }
 
     /**
-     * Get public
+     * Get public.
      *
-     * @return boolean
+     * @return bool
      */
-    public function isPublic() : bool
+    public function isPublic(): bool
     {
         return $this->public;
     }
 
     /**
-     * Set url
+     * Set url.
      *
      * @param UrlPage $url
      */
@@ -200,11 +200,11 @@ class Page
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return UrlPage
      */
-    public function getUrl() : UrlPage
+    public function getUrl(): UrlPage
     {
         return $this->url;
     }

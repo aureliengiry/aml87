@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Admin;
 
 use App\Entity\Message;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -14,15 +15,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class MessageAdmin
- * @package App\Admin
+ * Class MessageAdmin.
  */
 class MessageAdmin extends AbstractAdmin
 {
     // setup the default sort column and order
     protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by'    => 'created',
+        '_sort_by' => 'created',
     ];
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -56,7 +56,7 @@ class MessageAdmin extends AbstractAdmin
                 'created',
                 DateTimeType::class,
                 [
-                    'widget'   => 'single_text',
+                    'widget' => 'single_text',
                     'required' => false,
                     'disabled' => true,
                 ]
@@ -80,14 +80,14 @@ class MessageAdmin extends AbstractAdmin
             ->add(
                 'status',
                 ChoiceType::class,
-                array(
-                    'choices'     => [
-                        Message::MESSAGE_STATUS_SAVE      => 'Enregistré',
+                [
+                    'choices' => [
+                        Message::MESSAGE_STATUS_SAVE => 'Enregistré',
                         Message::MESSAGE_STATUS_SAVE_SEND => 'Enregistré & envoyé',
                     ],
-                    'required'    => false,
+                    'required' => false,
                     'placeholder' => 'Choose status',
-                )
+                ]
             )
             ->add(
                 'spam',

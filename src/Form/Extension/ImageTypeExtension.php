@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ImageTypeExtension extends AbstractTypeExtension
 {
@@ -21,21 +22,21 @@ class ImageTypeExtension extends AbstractTypeExtension
     }
 
     /**
-     * Add the image_path option
+     * Add the image_path option.
      *
      * @param OptionsResolverInterface $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefined(array('image_path'));
+        $resolver->setDefined(['image_path']);
     }
 
     /**
-     * Pass the image URL to the view
+     * Pass the image URL to the view.
      *
-     * @param FormView $view
+     * @param FormView      $view
      * @param FormInterface $form
-     * @param array $options
+     * @param array         $options
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {

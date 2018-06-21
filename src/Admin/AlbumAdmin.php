@@ -1,13 +1,13 @@
 <?php
+
 namespace App\Admin;
 
+use App\Entity\UrlDiscography;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-
-use App\Entity\UrlDiscography;
 use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\CoreBundle\Form\Type\DatePickerType;
@@ -15,8 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class AlbumAdmin
- * @package App\Admin
+ * Class AlbumAdmin.
  */
 class AlbumAdmin extends AbstractAdmin
 {
@@ -36,9 +35,9 @@ class AlbumAdmin extends AbstractAdmin
                 'description',
                 CKEditorType::class,
                 [
-                    'label'       => 'Texte',
-                    'attr'        => ['size' => 15, 'data-help' => 'Description de l\'album'],
-                    'required'    => false,
+                    'label' => 'Texte',
+                    'attr' => ['size' => 15, 'data-help' => 'Description de l\'album'],
+                    'required' => false,
                     'config_name' => 'aml_config',
                 ]
             )
@@ -47,18 +46,18 @@ class AlbumAdmin extends AbstractAdmin
                 DatePickerType::class,
                 [
                     'dp_side_by_side' => true,
-                    'dp_use_current'  => false,
-                    'dp_language'     => 'fr',
-                    'format'          => 'dd/MM/yyyy',
+                    'dp_use_current' => false,
+                    'dp_language' => 'fr',
+                    'format' => 'dd/MM/yyyy',
                 ]
             )
             ->add(
                 'public',
                 CheckboxType::class,
                 [
-                    'label'    => 'Publier',
+                    'label' => 'Publier',
                     'required' => false,
-                    'attr'     => ['data-help' => 'Signifie que l\'album sera visible pour tout le monde'],
+                    'attr' => ['data-help' => 'Signifie que l\'album sera visible pour tout le monde'],
                 ]
             )
             ->end()
@@ -67,9 +66,9 @@ class AlbumAdmin extends AbstractAdmin
                 'tracks',
                 ModelType::class,
                 [
-                    'required'     => false,
-                    'expanded'     => true,
-                    'multiple'     => true,
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
                     'by_reference' => false,
                 ]
             )

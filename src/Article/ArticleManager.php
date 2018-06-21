@@ -1,6 +1,6 @@
 <?php
-namespace App\Article;
 
+namespace App\Article;
 
 use App\Entity\Article;
 use App\Entity\Tags;
@@ -39,7 +39,8 @@ class ArticleManager
         return $this->em->getRepository(Tags::class);
     }
 
-    public function getTagsWithNbArticles(){
+    public function getTagsWithNbArticles()
+    {
         return $this->getTagsRepository()->getTagsWithNbArticles();
     }
 }

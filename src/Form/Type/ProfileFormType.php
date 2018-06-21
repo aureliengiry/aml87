@@ -16,12 +16,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 /**
- * Class ProfileFormType
- *
- * @package App\Form\Type
+ * Class ProfileFormType.
  */
 class ProfileFormType extends AbstractType
 {
@@ -34,7 +31,7 @@ class ProfileFormType extends AbstractType
      * Builds the embedded form representing the user.
      *
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -97,9 +94,9 @@ class ProfileFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             // Ici, une clé unique par formulaire pour la génération du jeton CSRF
             'intention' => 'aml_user_profile_form',
-        ));
+        ]);
     }
 }

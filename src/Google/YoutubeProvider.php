@@ -5,17 +5,15 @@ namespace App\Google;
 use Google_Service_YouTube;
 
 /**
- * Class YoutubeProvider
- * @package App\Google
+ * Class YoutubeProvider.
  */
 class YoutubeProvider
 {
-    /** @var Client  */
+    /** @var Client */
     private $googleClient;
     private $youtubeUsername;
 
     private $youtubeService;
-
 
     /**
      * YoutubeProvider constructor.
@@ -39,7 +37,7 @@ class YoutubeProvider
         $this->init();
 
         return $this->youtubeService->channels->listChannels(
-            "contentDetails",
+            'contentDetails',
             ['forUsername' => $this->youtubeUsername]
         );
     }
@@ -52,17 +50,17 @@ class YoutubeProvider
     }
 
     /**
-     * Load youtube videos of playlist
+     * Load youtube videos of playlist.
      *
      * @param string $playlistId
-     * @param int $maxResults
+     * @param int    $maxResults
      *
      * @return mixed
      */
     public function getVideosPlaylist(string $playlistId, $maxResults = 50)
     {
         return $this->youtubeService->playlistItems->listPlaylistItems(
-            "snippet,contentDetails",
+            'snippet,contentDetails',
             [
                 'playlistId' => $playlistId,
                 'maxResults' => $maxResults,

@@ -1,18 +1,17 @@
 <?php
+
 namespace App\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class MessageType
- *
- * @package App\Form\Type
+ * Class MessageType.
  */
 class MessageType extends AbstractType
 {
@@ -27,7 +26,7 @@ class MessageType extends AbstractType
                 TextareaType::class,
                 [
                     'attr' => [
-                        'size'      => 15,
+                        'size' => 15,
                         'data-help' => 'Texte de l\'article',
                     ],
                 ]
@@ -37,8 +36,8 @@ class MessageType extends AbstractType
                 TextType::class,
                 [
                     'required' => false,
-                    'attr'     => ['style' => 'display:none'],
-                    'label'    => false,
+                    'attr' => ['style' => 'display:none'],
+                    'label' => false,
                 ]
             )
             ->add(

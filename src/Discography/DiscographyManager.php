@@ -6,8 +6,7 @@ use App\Entity\Album;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class DiscographyManager
- * @package App\Discography
+ * Class DiscographyManager.
  */
 class DiscographyManager
 {
@@ -24,7 +23,7 @@ class DiscographyManager
     public function getPublicAlbums()
     {
         return $this->getAlbumRepository()->findBy(
-            ['public' => "1"],
+            ['public' => '1'],
             ['date' => 'DESC']
         );
     }

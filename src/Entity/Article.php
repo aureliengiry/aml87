@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use App\Entity\Evenement;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Article
+ * App\Entity\Article.
  *
  * @ORM\Table(name="blog_articles")
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -18,7 +17,7 @@ class Article
     const ARTICLE_IS_PRIVATE = 0;
 
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id_article", type="integer")
      * @ORM\Id
@@ -27,7 +26,7 @@ class Article
     private $id;
 
     /**
-     * @var string $title
+     * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
@@ -54,35 +53,35 @@ class Article
     private $video;
 
     /**
-     * @var string $body
+     * @var string
      *
      * @ORM\Column(name="body", type="text")
      */
     private $body;
 
     /**
-     * @var \DateTime $created
+     * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
 
     /**
-     * @var \DateTime $updated
+     * @var \DateTime
      *
      * @ORM\Column(name="updated", type="datetime")
      */
     private $updated;
 
     /**
-     * @var \DateTime $published
+     * @var \DateTime
      *
      * @ORM\Column(name="published", type="datetime",nullable=true)
      */
     private $published;
 
     /**
-     * @var boolean $public
+     * @var bool
      *
      * @ORM\Column(name="public", type="boolean")
      */
@@ -112,9 +111,9 @@ class Article
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -122,7 +121,7 @@ class Article
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      */
@@ -134,17 +133,17 @@ class Article
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
-    public function getTitle() : string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param UrlArticle $url
      */
@@ -156,17 +155,17 @@ class Article
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return UrlArticle
      */
-    public function getUrl() : UrlArticle
+    public function getUrl(): UrlArticle
     {
         return $this->url;
     }
 
     /**
-     * Set logo
+     * Set logo.
      *
      * @param string $logo
      *
@@ -180,7 +179,7 @@ class Article
     }
 
     /**
-     * Get logo
+     * Get logo.
      *
      * @return string
      */
@@ -208,7 +207,7 @@ class Article
     }
 
     /**
-     * Set body
+     * Set body.
      *
      * @param string $body
      */
@@ -220,17 +219,17 @@ class Article
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
-    public function getBody() : string
+    public function getBody(): string
     {
         return $this->body;
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      */
@@ -242,17 +241,17 @@ class Article
     }
 
     /**
-     * Get created
+     * Get created.
      *
      * @return \DateTime
      */
-    public function getCreated() : \DateTime
+    public function getCreated(): \DateTime
     {
         return $this->created;
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      */
@@ -264,19 +263,19 @@ class Article
     }
 
     /**
-     * Get updated
+     * Get updated.
      *
      * @return \DateTime
      */
-    public function getUpdated() : \DateTime
+    public function getUpdated(): \DateTime
     {
         return $this->updated;
     }
 
     /**
-     * Set public
+     * Set public.
      *
-     * @param boolean $public
+     * @param bool $public
      */
     public function setPublic(bool $public)
     {
@@ -286,11 +285,11 @@ class Article
     }
 
     /**
-     * Is public
+     * Is public.
      *
-     * @return boolean
+     * @return bool
      */
-    public function isPublic() : bool
+    public function isPublic(): bool
     {
         return $this->public;
     }
@@ -298,7 +297,7 @@ class Article
     /**
      * @return \DateTime $published
      */
-    public function getPublished() : \DateTime
+    public function getPublished(): \DateTime
     {
         return $this->published;
     }
@@ -316,7 +315,7 @@ class Article
     /**
      * @return Category $id_blog_category
      */
-    public function getCategory() : Category
+    public function getCategory(): Category
     {
         return $this->category;
     }
@@ -332,8 +331,8 @@ class Article
     }
 
     /** ---------- TAGS ---------- */
+
     /**
-     *
      * @param Tags $tag
      */
     public function addTag(Tags $tag)
@@ -347,7 +346,7 @@ class Article
     }
 
     /**
-     * Fonction to delete tag
+     * Fonction to delete tag.
      *
      * @param Tags $tag
      */
@@ -376,8 +375,10 @@ class Article
     }
 
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
+
     /**
      * @param Evenement $evenement
+     *
      * @return $this
      */
     public function addEvenement(Evenement $evenement)
@@ -391,7 +392,8 @@ class Article
     }
 
     /**
-     * Fonction to delete $evenement
+     * Fonction to delete $evenement.
+     *
      * @param Evenement $evenement
      */
     public function removeEvenement(Evenement $evenement)

@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Link;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Blog controller.
@@ -25,7 +25,7 @@ class LiensController extends Controller
     public function indexAction()
     {
         return [
-            'entities' => $this->getDoctrine()->getManager()->getRepository(Link::class)->getPublicLinks()
+            'entities' => $this->getDoctrine()->getManager()->getRepository(Link::class)->getPublicLinks(),
         ];
     }
 }

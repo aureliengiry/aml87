@@ -5,8 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
- * Class MediasController
- * @package App\Controller
+ * Class MediasController.
  */
 class MediasController extends Controller
 {

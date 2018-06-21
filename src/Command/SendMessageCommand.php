@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Command;
 
+use App\Entity\Message;
+use App\Event\Contact\PostEvent;
 use App\Repository\MessageRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -8,12 +11,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use App\Entity\Message;
-use App\Event\Contact\PostEvent;
-
 /**
- * Class SendMessageCommand
- * @package App\Command
+ * Class SendMessageCommand.
  */
 class SendMessageCommand extends ContainerAwareCommand
 {
@@ -70,12 +69,11 @@ EOF
             throw new NotFoundHttpException('Unable to find WebBundle:Message entity.');
         }
 
-        $output->writeln('<info>' . $message->getName() . ' - ' . $message->getSubject() . '</info>');
+        $output->writeln('<info>'.$message->getName().' - '.$message->getSubject().'</info>');
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->getContainer()->get('event_dispatcher');
         $dispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($message));
-
 
         $output->writeln('<info>Send Message : End</info>');
     }

@@ -7,8 +7,7 @@ use App\Entity\Season;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class EvenementManager
- * @package App\Evenement
+ * Class EvenementManager.
  */
 class EvenementManager
 {
@@ -25,9 +24,9 @@ class EvenementManager
     public function getPublicEventsInCurrentSeason()
     {
         return $this->getEventRepository()->getNextEvenements([
-            'public'  => 1,
+            'public' => 1,
             'archive' => 0,
-            'type'    => Evenement::EVENEMENT_TYPE_CONCERT,
+            'type' => Evenement::EVENEMENT_TYPE_CONCERT,
         ]);
     }
 
@@ -45,11 +44,13 @@ class EvenementManager
         return $this->em->getRepository(Evenement::class);
     }
 
-    public function getNextConcert(){
+    public function getNextConcert()
+    {
         return $this->getEventRepository()->findNextConcert();
     }
 
-    public function getArchivedConcertBySeason(Season $season){
+    public function getArchivedConcertBySeason(Season $season)
+    {
         return $this->getEventRepository()->findArchivedConcertBySeason($season);
     }
 }

@@ -6,26 +6,24 @@ use Twig_Extension;
 use Twig_SimpleFilter;
 
 /**
- * Class PublicStatusExtension
- * @package App\Twig
+ * Class PublicStatusExtension.
  */
 class PublicStatusExtension extends Twig_Extension
 {
     public function getFilters()
     {
-        return array
-        (
-            new Twig_SimpleFilter('publicStatus', [$this, 'publicStatusFilter'])
-        );
+        return [
+            new Twig_SimpleFilter('publicStatus', [$this, 'publicStatusFilter']),
+        ];
     }
 
     /**
-     * réduit une chaine de caractères sans couper les mots
+     * réduit une chaine de caractères sans couper les mots.
      *
-     * @param string $date date à transformer
-     * @param boolean $dateonly Affiche la date uniquement, quoiqu'il arrive
-     * @param boolean $icon afficher ou non l'icône avant la date
-     * @param string $format format dans lequel retourner la date si pas transformée
+     * @param string $date     date à transformer
+     * @param bool   $dateonly Affiche la date uniquement, quoiqu'il arrive
+     * @param bool   $icon     afficher ou non l'icône avant la date
+     * @param string $format   format dans lequel retourner la date si pas transformée
      *
      * @return string date plus nice à lire
      */

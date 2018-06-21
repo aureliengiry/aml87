@@ -3,13 +3,12 @@
 namespace App\Admin;
 
 use App\Entity\Category;
+use App\Entity\UrlArticle;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-
-use App\Entity\UrlArticle;
 use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,18 +16,17 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
- * Class ArticleAdmin
+ * Class ArticleAdmin.
  *
- * @package     App\Admin
  * @author      Aurélien GIRY <aurelien.giry@gmail.com>
  */
 class ArticleAdmin extends AbstractAdmin
 {
     // setup the default sort column and order
-    protected $datagridValues = array(
+    protected $datagridValues = [
         '_sort_order' => 'DESC',
-        '_sort_by'    => 'id',
-    );
+        '_sort_by' => 'id',
+    ];
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -39,20 +37,20 @@ class ArticleAdmin extends AbstractAdmin
                 'category',
                 EntityType::class,
                 [
-                    'label'        => 'Catégorie',
-                    'class'        => Category::class,
+                    'label' => 'Catégorie',
+                    'class' => Category::class,
                     'choice_label' => 'name',
-                    'placeholder'  => 'Choisissez une catégorie',
-                    'attr'         => ['class' => 'uniform'],
+                    'placeholder' => 'Choisissez une catégorie',
+                    'attr' => ['class' => 'uniform'],
                 ]
             )
             ->add(
                 'body',
                 CKEditorType::class,
                 [
-                    'label'       => 'Texte',
-                    'required'    => false,
-                    'attr'        => array('size' => 15, 'data-help' => 'Texte de l\'article'),
+                    'label' => 'Texte',
+                    'required' => false,
+                    'attr' => ['size' => 15, 'data-help' => 'Texte de l\'article'],
                     'config_name' => 'aml_config',
                 ]
             )
@@ -60,9 +58,9 @@ class ArticleAdmin extends AbstractAdmin
                 'public',
                 CheckboxType::class,
                 [
-                    'label'    => 'Publier',
+                    'label' => 'Publier',
                     'required' => false,
-                    'attr'     => array('data-help' => 'Signifie que l\'article sera visible pour tout le monde'),
+                    'attr' => ['data-help' => 'Signifie que l\'article sera visible pour tout le monde'],
                 ]
             )
             ->end()
@@ -71,10 +69,9 @@ class ArticleAdmin extends AbstractAdmin
                 'logo',
                 AdminType::class,
                 [
-                    'delete'   => false,
+                    'delete' => false,
                     'required' => false,
                 ]
-
             )
             ->end()
             ->with('Tags')
@@ -82,11 +79,11 @@ class ArticleAdmin extends AbstractAdmin
                 'tags',
                 ModelType::class,
                 [
-                    'required'     => false,
-                    'expanded'     => false,
-                    'multiple'     => true,
+                    'required' => false,
+                    'expanded' => false,
+                    'multiple' => true,
                     'by_reference' => false,
-                    'attr'         => array('data-sonata-select2' => 'true'),
+                    'attr' => ['data-sonata-select2' => 'true'],
                 ]
             )
             ->end()
@@ -95,9 +92,9 @@ class ArticleAdmin extends AbstractAdmin
                 'evenements',
                 ModelType::class,
                 [
-                    'required'     => false,
-                    'expanded'     => true,
-                    'multiple'     => true,
+                    'required' => false,
+                    'expanded' => true,
+                    'multiple' => true,
                     'by_reference' => false,
                 ]
             )
@@ -127,7 +124,7 @@ class ArticleAdmin extends AbstractAdmin
      */
     public function preUpdate($article)
     {
-        $article->setUpdated(new \DateTime);
+        $article->setUpdated(new \DateTime());
 
         $urlKey = $article->getUrl();
         if (empty($urlKey)) {
@@ -149,8 +146,8 @@ class ArticleAdmin extends AbstractAdmin
         $entityUrl->setUrlKey($article->getTitle());
 
         $article
-            ->setCreated(new \DateTime)
-            ->setUpdated(new \DateTime)
+            ->setCreated(new \DateTime())
+            ->setUpdated(new \DateTime())
             ->setUrl($entityUrl);
     }
 }

@@ -19,10 +19,10 @@ script:
   - bin/console lint:twig templates
   - bin/console lint:yaml config
   - vendor/bin/phpunit
-  - php vendor/bin/phpunit --coverage-clover build/coverage/xml
+  - vendor/bin/phpunit --coverage-clover build/coverage/xml
 
 after_script:
-  - php vendor/bin/codacycoverage clover build/coverage/xml
+  - vendor/bin/codacycoverage clover build/coverage/xml
 
 notifications:
   email:

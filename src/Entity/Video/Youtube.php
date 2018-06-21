@@ -2,11 +2,11 @@
 
 namespace App\Entity\Video;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Video;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * App\Entity\Video\Youtube
+ * App\Entity\Video\Youtube.
  *
  * @ORM\Entity(repositoryClass="App\Repository\Video\YoutubeRepository")
  */
