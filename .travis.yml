@@ -20,6 +20,7 @@ script:
   - bin/console lint:yaml config
   - vendor/bin/phpunit
   - vendor/bin/phpunit --coverage-clover build/coverage/xml
+  - bin/console security:check
 
 after_script:
   - vendor/bin/codacycoverage clover build/coverage/xml
