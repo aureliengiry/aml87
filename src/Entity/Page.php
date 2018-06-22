@@ -116,7 +116,7 @@ class Page
      *
      * @return string
      */
-    public function getBody(): string
+    public function getBody(): ?string
     {
         return $this->body;
     }
@@ -182,7 +182,7 @@ class Page
      *
      * @return bool
      */
-    public function isPublic(): bool
+    public function isPublic(): ?bool
     {
         return $this->public;
     }
