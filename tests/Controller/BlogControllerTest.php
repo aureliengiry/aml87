@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -17,7 +22,7 @@ class BlogControllerTest extends WebTestCase
         $crawler = $client->request('GET', $url);
 
         // Check status code
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         // Check page title
         $this->assertContains('Blog', $crawler->filter('title')->text());

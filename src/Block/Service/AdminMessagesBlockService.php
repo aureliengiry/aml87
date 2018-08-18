@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Block\Service;
 
 use App\Entity\Message;
@@ -26,9 +31,7 @@ class AdminMessagesBlockService extends AbstractBlockService
     /**
      * AdminMessagesBlockService constructor.
      *
-     * @param string          $name
-     * @param EngineInterface $templating
-     * @param ObjectManager   $em
+     * @param string $name
      */
     public function __construct($name, EngineInterface $templating, ObjectManager $em)
     {

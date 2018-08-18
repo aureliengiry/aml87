@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Repository;
 
 use App\Entity\Article;
@@ -17,7 +22,6 @@ class CategoryRepository extends EntityRepository
     /**
      * Function retrieves all categories with nb articles by category.
      *
-     * @param string $value
      *
      * @return array
      */

@@ -1,4 +1,8 @@
 <?php
+$fileHeaderComment = <<<COMMENT
+This file is part of the AML87 application.
+(c) Aurélien GIRY <aurelien.giry@gmail.com>
+COMMENT;
 
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)

@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Google;
 
 use Google_Service_YouTube;
@@ -17,9 +22,6 @@ class YoutubeProvider
 
     /**
      * YoutubeProvider constructor.
-     *
-     * @param Client $googleClient
-     * @param string $youtubeUsername
      */
     public function __construct(Client $googleClient, string $youtubeUsername)
     {
@@ -52,10 +54,7 @@ class YoutubeProvider
     /**
      * Load youtube videos of playlist.
      *
-     * @param string $playlistId
-     * @param int    $maxResults
-     *
-     * @return mixed
+     * @param int $maxResults
      */
     public function getVideosPlaylist(string $playlistId, $maxResults = 50)
     {

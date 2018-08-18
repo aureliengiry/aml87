@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Repository;
 
 use App\Entity\Season;
@@ -16,7 +21,6 @@ class SeasonRepository extends EntityRepository
     /**
      * Laod seasons by date start.
      *
-     * @param \DateTime $eventDateStart
      *
      * @return mixed|null
      */

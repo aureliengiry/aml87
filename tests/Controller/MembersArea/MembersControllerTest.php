@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace Tests\App\Controller\MembersArea;
 
 use App\Entity\User;
@@ -29,7 +34,7 @@ class MembersControllerTest extends WebTestCase
     public function testMembersAreaWithoutLogging()
     {
         $this->client->request('GET', '/espace-membres');
-        $this->assertEquals(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
         $this->assertTrue($this->client->getResponse()->isRedirect());
 
         $crawler = $this->client->followRedirect();
@@ -46,7 +51,7 @@ class MembersControllerTest extends WebTestCase
         $this->client->request('GET', '/espace-membres');
         $crawler = $this->client->followRedirect();
 
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         $this->assertContains('Espace membres', $crawler->filter('title')->text());
     }
 

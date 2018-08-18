@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -141,8 +146,6 @@ class Evenement
 
     /**
      * Set date.
-     *
-     * @param \DateTime $dateStart
      */
     public function setDateStart(\DateTime $dateStart)
     {
@@ -153,8 +156,6 @@ class Evenement
 
     /**
      * Get date.
-     *
-     * @return \DateTime
      */
     public function getDateStart(): \DateTime
     {
@@ -163,8 +164,6 @@ class Evenement
 
     /**
      * Set dateEnd.
-     *
-     * @param \DateTime $dateEnd
      */
     public function setDateEnd(\DateTime $dateEnd)
     {
@@ -175,8 +174,6 @@ class Evenement
 
     /**
      * Get date.
-     *
-     * @return \DateTime
      */
     public function getDateEnd(): \DateTime
     {
@@ -185,8 +182,6 @@ class Evenement
 
     /**
      * Set title.
-     *
-     * @param string $title
      */
     public function setTitle(string $title)
     {
@@ -197,8 +192,6 @@ class Evenement
 
     /**
      * Get title.
-     *
-     * @return string
      */
     public function getTitle(): string
     {
@@ -207,8 +200,6 @@ class Evenement
 
     /**
      * Set description.
-     *
-     * @param string $description
      */
     public function setDescription(string $description)
     {
@@ -219,17 +210,12 @@ class Evenement
 
     /**
      * Get description.
-     *
-     * @return string
      */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param mixed $picture
-     */
     public function setPicture($picture)
     {
         $this->picture = $picture;
@@ -237,9 +223,6 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPicture()
     {
         return $this->picture;
@@ -346,8 +329,6 @@ class Evenement
 
     /**
      * Fonction pour supprimer une discussion d'un mot clé.
-     *
-     * @param Article $article
      */
     public function removeArticle(Article $article)
     {
@@ -356,9 +337,6 @@ class Evenement
 
     /* ---------------- PARTENAIRES ---------------- */
 
-    /**
-     * @param Partenaire $partenaire
-     */
     public function addPartenaire(Partenaire $partenaire)
     {
         $partenaire->addEvenement($this);
@@ -369,8 +347,6 @@ class Evenement
 
     /**
      * Fonction to delete partenaire.
-     *
-     * @param Partenaire $partenaire
      */
     public function removePartenaire(Partenaire $partenaire)
     {
@@ -415,8 +391,6 @@ class Evenement
 
     /**
      * Remove Video.
-     *
-     * @param Video $video
      */
     public function removeVideo(Video $video)
     {
@@ -450,17 +424,11 @@ class Evenement
         return $this->url;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSeason()
     {
         return $this->season;
     }
 
-    /**
-     * @param mixed $category
-     */
     public function setSeason($season)
     {
         $this->season = $season;

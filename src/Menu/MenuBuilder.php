@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -14,8 +19,6 @@ class MenuBuilder
 
     /**
      * Init factory.
-     *
-     * @param FactoryInterface $factory
      */
     public function __construct(FactoryInterface $factory)
     {
@@ -25,7 +28,6 @@ class MenuBuilder
     /**
      * Generate main menu.
      *
-     * @param Request $requestStack
      *
      * @return \Knp\Menu\ItemInterface
      */

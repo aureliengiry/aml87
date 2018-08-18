@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\EventListener;
 
 use App\Discography\DiscographyManager;
@@ -20,9 +25,6 @@ class SitemapListener
 
     /**
      * SitemapListener constructor.
-     *
-     * @param Router             $router
-     * @param DiscographyManager $discographyManager
      */
     public function __construct(Router $router, DiscographyManager $discographyManager, ObjectManager $entityManager)
     {
@@ -31,9 +33,6 @@ class SitemapListener
         $this->em = $entityManager;
     }
 
-    /**
-     * @param GenerateEvent $event
-     */
     public function onGenerateSitemapEvent(GenerateEvent $event)
     {
         /** Blog */

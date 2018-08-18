@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use App\Utils\Slugger;
@@ -46,8 +51,6 @@ class Image extends Media
 
     /**
      * Set file.
-     *
-     * @param UploadedFile $file
      */
     public function setFile(UploadedFile $file)
     {

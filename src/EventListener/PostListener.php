@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\EventListener;
 
 use App\Entity\Message;
@@ -29,9 +34,7 @@ class PostListener
     /**
      * PostListener constructor.
      *
-     * @param \Swift_Mailer $mailer
-     * @param ObjectManager $entityManager
-     * @param string        $subscribers
+     * @param string $subscribers
      */
     public function __construct(\Swift_Mailer $mailer, ObjectManager $entityManager, string $subscribers = null)
     {
@@ -40,9 +43,6 @@ class PostListener
         $this->subscribers = $subscribers;
     }
 
-    /**
-     * @param PostEvent $event
-     */
     public function onPostEvent(PostEvent $event)
     {
         $post = $event->getPost();
@@ -68,8 +68,6 @@ class PostListener
 
     /**
      * Function to format email.
-     *
-     * @param Message $post
      */
     private function formatMessage(Message $post): array
     {

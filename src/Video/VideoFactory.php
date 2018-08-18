@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Video;
 
 use App\Entity\Video\Youtube;
@@ -12,10 +17,6 @@ class VideoFactory
 {
     /**
      * Create video with youtube data.
-     *
-     * @param Google_Service_YouTube_PlaylistItem $youtubeData
-     *
-     * @return Youtube
      */
     public function createVideoFromYoutube(Google_Service_YouTube_PlaylistItem $youtubeData): Youtube
     {

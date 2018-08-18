@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Twig;
 
 use Twig_Extension;
@@ -20,10 +25,6 @@ class PublicStatusExtension extends Twig_Extension
     /**
      * réduit une chaine de caractères sans couper les mots.
      *
-     * @param string $date     date à transformer
-     * @param bool   $dateonly Affiche la date uniquement, quoiqu'il arrive
-     * @param bool   $icon     afficher ou non l'icône avant la date
-     * @param string $format   format dans lequel retourner la date si pas transformée
      *
      * @return string date plus nice à lire
      */
@@ -31,9 +32,9 @@ class PublicStatusExtension extends Twig_Extension
     {
         if (true === $boolean) {
             return 'Publié';
-        } else {
-            return 'Brouillon';
         }
+
+        return 'Brouillon';
     }
 
     public function getName()

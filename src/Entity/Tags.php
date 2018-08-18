@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use App\Utils\Slugger;
@@ -77,8 +82,6 @@ class Tags
 
     /**
      * Set title.
-     *
-     * @param string $title
      */
     public function setName($name)
     {
@@ -100,8 +103,6 @@ class Tags
 
     /**
      * Set weight.
-     *
-     * @param int $weight
      */
     public function setWeight(int $weight)
     {
@@ -112,8 +113,6 @@ class Tags
 
     /**
      * Get weight.
-     *
-     * @return int
      */
     public function getWeight(): int
     {
@@ -122,8 +121,6 @@ class Tags
 
     /**
      * Set system_name.
-     *
-     * @param string $systemName
      */
     public function setSystemName(string $systemName)
     {
@@ -135,8 +132,6 @@ class Tags
 
     /**
      * Get system_name.
-     *
-     * @return string
      */
     public function getSystemName(): string
     {
@@ -162,8 +157,6 @@ class Tags
 
     /**
      * Fonction pour supprimer article associé.
-     *
-     * @param Article $article
      */
     public function removeArticle(Article $article)
     {
@@ -178,9 +171,6 @@ class Tags
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
     public function setDescription(string $description)
     {
         $this->description = $description;

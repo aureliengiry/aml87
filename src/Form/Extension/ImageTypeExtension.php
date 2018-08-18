@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -33,10 +38,6 @@ class ImageTypeExtension extends AbstractTypeExtension
 
     /**
      * Pass the image URL to the view.
-     *
-     * @param FormView      $view
-     * @param FormInterface $form
-     * @param array         $options
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {

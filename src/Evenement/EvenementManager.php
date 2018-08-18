@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Evenement;
 
 use App\Entity\Evenement;
@@ -34,9 +39,9 @@ class EvenementManager
     {
         if (is_int($urlKey)) {
             return $this->getEventRepository()->find($urlKey);
-        } else {
-            return $this->getEventRepository()->getEventByUrlKey($urlKey);
         }
+
+        return $this->getEventRepository()->getEventByUrlKey($urlKey);
     }
 
     private function getEventRepository()

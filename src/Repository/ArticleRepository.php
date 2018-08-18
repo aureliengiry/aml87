@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Repository;
 
 use App\Entity\Article;
@@ -18,8 +23,6 @@ class ArticleRepository extends EntityRepository
      * Function to build request in order to filter blog articles.
      *
      * @param $query
-     * @param array $params
-     * @param array $filters
      *
      * @return array
      */
@@ -46,12 +49,6 @@ class ArticleRepository extends EntityRepository
 
     /**
      * Retrieves public articles.
-     *
-     * @param int   $page
-     * @param array $filters
-     * @param int   $limit
-     *
-     * @return Paginator
      */
     public function getPublicArticles(int $page = 1, array $filters = [], int $limit = 5): Paginator
     {
@@ -80,8 +77,6 @@ class ArticleRepository extends EntityRepository
 
     /**
      * Fonction qui permet de supprimer les mots clés d'un article de blog.
-     *
-     * @param Article $article
      */
     public function cleanTags(Article $article)
     {

@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -190,8 +195,6 @@ class Partenaire
 
     /**
      * Fonction pour supprimer une discussion d'un mot clé.
-     *
-     * @param Discussion $discussion
      */
     public function removeEvenement($evenement)
     {

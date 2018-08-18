@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -53,8 +58,6 @@ abstract class Video
 
     /**
      * Get id.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -81,8 +84,6 @@ abstract class Video
 
     /**
      * Set title.
-     *
-     * @param string $title
      */
     public function setTitle(string $title)
     {
@@ -93,8 +94,6 @@ abstract class Video
 
     /**
      * Get title.
-     *
-     * @return string
      */
     public function getTitle(): string
     {
@@ -104,8 +103,6 @@ abstract class Video
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
 
     /**
-     * @param Evenement $evenement
-     *
      * @return $this
      */
     public function addEvenement(Evenement $evenement)
@@ -120,8 +117,6 @@ abstract class Video
 
     /**
      * Fonction to delete $evenement.
-     *
-     * @param Evenement $evenement
      */
     public function removeEvenement(Evenement $evenement)
     {

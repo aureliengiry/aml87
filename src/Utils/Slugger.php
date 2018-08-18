@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Utils;
 
 /**
@@ -132,9 +137,6 @@ class Slugger
     /**
      * Clean string (remove accents, special characters) for URL or filename.
      *
-     * @param string $str
-     * @param string $replace
-     * @param bool   $lowercase
      *
      * @return mixed|string
      */
@@ -162,16 +164,16 @@ class Slugger
         }
 
         if (true === $lowercase) {
-            $this->outputString = strtolower($this->outputString);
+            $this->outputString = mb_strtolower($this->outputString);
         }
 
         $this->outputString = trim(stripslashes($this->outputString));
         $this->outputString = str_replace(['.'], ['-'], $this->outputString);
 
         // Check and clean last character
-        $lastCharacter = substr($this->outputString, -1);
+        $lastCharacter = mb_substr($this->outputString, -1);
         if ('-' === $lastCharacter) {
-            $this->outputString = substr($this->outputString, 0, -1);
+            $this->outputString = mb_substr($this->outputString, 0, -1);
         }
 
         return $this->outputString;
