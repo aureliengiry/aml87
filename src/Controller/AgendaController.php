@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Controller;
 
 use App\Entity\Season;
@@ -49,8 +54,6 @@ class AgendaController extends Controller
      * @Method("GET")
      *
      * @param int|string $slug
-     *
-     * @return array
      */
     public function showAction(string $slug, Request $request): array
     {
@@ -70,8 +73,6 @@ class AgendaController extends Controller
 
     /**
      * Action for Next Concert Block.
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function nextConcertAction(): Response
     {

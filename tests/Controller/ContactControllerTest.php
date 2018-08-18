@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -27,7 +32,7 @@ class ContactControllerTest extends WebTestCase
         $crawler = $this->client->request(Request::METHOD_GET, $url);
 
         // Check status code
-        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         $this->assertContains('Contactez-nous', $crawler->filter('title')->text());
     }
 

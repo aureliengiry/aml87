@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Command;
 
 use App\Entity\Evenement;
@@ -26,8 +31,6 @@ class SeasonsCommand extends ContainerAwareCommand
     /**
      * Validate entry.
      *
-     * @param InputInterface  $input
-     * @param OutputInterface $output
      *
      * @throws \RunTimeException
      */
@@ -77,7 +80,7 @@ EOF
             $this->getSeasonByEvent($event, $output);
 
             // Archive event
-            if ($event->getSeason() != $estimateCurrentSeason) {
+            if ($event->getSeason() !== $estimateCurrentSeason) {
                 $event->setArchive(true);
             } else {
                 $event->setArchive(false);
@@ -91,9 +94,6 @@ EOF
         $output->writeln('<info>Indexation evenements/seasons: End</info>');
     }
 
-    /**
-     * @param Evenement $event
-     */
     protected function getSeasonByEvent(Evenement &$event, OutputInterface $output)
     {
         $eventDateStart = $event->getDateStart();
@@ -104,7 +104,7 @@ EOF
             $eventHasSeason = $event->hasSeason();
             if (true === $eventHasSeason) {
                 // Check if it's good season or not
-                if ($event->getSeason() != $estimateSeason) {
+                if ($event->getSeason() !== $estimateSeason) {
                     // if it's wrong update
                     $event->setSeason($estimateSeason);
                 }
@@ -118,8 +118,6 @@ EOF
     }
 
     /**
-     * @param \DateTime $eventDateStart
-     *
      * @return Season
      */
     protected function calculateSeason(\DateTime $eventDateStart)
@@ -127,61 +125,60 @@ EOF
         $estimateSeason = $this->seasonRepo->getSeasonByDateStart($eventDateStart);
         if ($estimateSeason) {
             return $estimateSeason;
+        }
+        $defaultDateStart = Season::SEASON_DEFAULT_DATE_START;
+        $eventDateStartYear = (int) $eventDateStart->format('Y');
+        $testDateStart = sprintf($defaultDateStart, $eventDateStartYear);
+
+        // Build Test Date
+        $testDateTime = \DateTime::createFromFormat('Y-m-d', $testDateStart);
+        $testDateTime->setTime(0, 0);
+
+        if ($eventDateStart < $testDateTime) {
+            // Build Season Date Start
+            $seasonDateStartYear = $eventDateStartYear - 1;
+            $dateStart = sprintf($defaultDateStart, $seasonDateStartYear);
+            $seasonDateStart = \DateTime::createFromFormat('Y-m-d', $dateStart);
+            $seasonDateStart->setTime(0, 0);
+
+            // Build Season Date End
+            $defaultDateEnd = Season::SEASON_DEFAULT_DATE_END;
+            $eventDateEndYear = (int) $eventDateStart->format('Y');
+            $testDateEnd = sprintf($defaultDateEnd, $eventDateEndYear);
+
+            $seasonDateEndYear = $eventDateStartYear;
+            $seasonDateEnd = \DateTime::createFromFormat('Y-m-d', $testDateEnd);
+            $seasonDateEnd->setTime(0, 0);
+
+            // Build season name
+            $seasonName = "Saison $seasonDateStartYear/$seasonDateEndYear";
         } else {
-            $defaultDateStart = Season::SEASON_DEFAULT_DATE_START;
-            $eventDateStartYear = (int) $eventDateStart->format('Y');
-            $testDateStart = sprintf($defaultDateStart, $eventDateStartYear);
+            // Build Season Date Start
+            $seasonDateStart = $testDateTime;
+            $seasonDateStartYear = (int) $seasonDateStart->format('Y');
 
-            // Build Test Date
-            $testDateTime = \DateTime::createFromFormat('Y-m-d', $testDateStart);
-            $testDateTime->setTime(0, 0);
+            // Build Season Date End
+            $seasonDateEndYear = $seasonDateStartYear + 1;
+            $defaultDateEnd = Season::SEASON_DEFAULT_DATE_END;
+            $testDateEnd = sprintf($defaultDateEnd, $seasonDateEndYear);
 
-            if ($eventDateStart < $testDateTime) {
-                // Build Season Date Start
-                $seasonDateStartYear = $eventDateStartYear - 1;
-                $dateStart = sprintf($defaultDateStart, $seasonDateStartYear);
-                $seasonDateStart = \DateTime::createFromFormat('Y-m-d', $dateStart);
-                $seasonDateStart->setTime(0, 0);
+            $seasonDateEnd = \DateTime::createFromFormat('Y-m-d', $testDateEnd);
+            $seasonDateEnd->setTime(0, 0);
 
-                // Build Season Date End
-                $defaultDateEnd = Season::SEASON_DEFAULT_DATE_END;
-                $eventDateEndYear = (int) $eventDateStart->format('Y');
-                $testDateEnd = sprintf($defaultDateEnd, $eventDateEndYear);
+            // Build season name
+            $seasonName = "Saison $seasonDateStartYear/$seasonDateEndYear";
+        }
 
-                $seasonDateEndYear = $eventDateStartYear;
-                $seasonDateEnd = \DateTime::createFromFormat('Y-m-d', $testDateEnd);
-                $seasonDateEnd->setTime(0, 0);
-
-                // Build season name
-                $seasonName = "Saison $seasonDateStartYear/$seasonDateEndYear";
-            } else {
-                // Build Season Date Start
-                $seasonDateStart = $testDateTime;
-                $seasonDateStartYear = (int) $seasonDateStart->format('Y');
-
-                // Build Season Date End
-                $seasonDateEndYear = $seasonDateStartYear + 1;
-                $defaultDateEnd = Season::SEASON_DEFAULT_DATE_END;
-                $testDateEnd = sprintf($defaultDateEnd, $seasonDateEndYear);
-
-                $seasonDateEnd = \DateTime::createFromFormat('Y-m-d', $testDateEnd);
-                $seasonDateEnd->setTime(0, 0);
-
-                // Build season name
-                $seasonName = "Saison $seasonDateStartYear/$seasonDateEndYear";
-            }
-
-            // Create new Season
-            $estimateSeason = new Season();
-            $estimateSeason
+        // Create new Season
+        $estimateSeason = new Season();
+        $estimateSeason
                 ->setName($seasonName)
                 ->setDateStart($seasonDateStart)
                 ->setDateEnd($seasonDateEnd);
 
-            $this->entityManager->persist($estimateSeason);
-            $this->entityManager->flush();
+        $this->entityManager->persist($estimateSeason);
+        $this->entityManager->flush();
 
-            return $estimateSeason;
-        }
+        return $estimateSeason;
     }
 }

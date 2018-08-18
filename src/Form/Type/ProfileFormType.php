@@ -1,11 +1,8 @@
 <?php
+
 /*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
 namespace App\Form\Type;
@@ -29,9 +26,6 @@ class ProfileFormType extends AbstractType
 
     /**
      * Builds the embedded form representing the user.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

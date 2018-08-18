@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -101,8 +106,6 @@ class Page
 
     /**
      * Set body.
-     *
-     * @param string $body
      */
     public function setBody(string $body)
     {
@@ -135,8 +138,6 @@ class Page
 
     /**
      * Get created.
-     *
-     * @return \DateTime
      */
     public function getCreated(): \DateTime
     {
@@ -157,8 +158,6 @@ class Page
 
     /**
      * Get updated.
-     *
-     * @return \DateTime
      */
     public function getUpdated(): \DateTime
     {
@@ -167,8 +166,6 @@ class Page
 
     /**
      * Set public.
-     *
-     * @param bool $public
      */
     public function setPublic(bool $public)
     {
@@ -189,8 +186,6 @@ class Page
 
     /**
      * Set url.
-     *
-     * @param UrlPage $url
      */
     public function setUrl(UrlPage $url)
     {
@@ -201,8 +196,6 @@ class Page
 
     /**
      * Get url.
-     *
-     * @return UrlPage
      */
     public function getUrl(): UrlPage
     {

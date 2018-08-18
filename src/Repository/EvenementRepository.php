@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Repository;
 
 use App\Entity\Evenement;
@@ -54,8 +59,6 @@ class EvenementRepository extends EntityRepository
      * @param $query
      * @param array $params
      * @param array $filters
-     *
-     * @return mixed
      */
     private function buildRequestByFilters($query, $params = [], $filters = [])
     {
@@ -85,8 +88,6 @@ class EvenementRepository extends EntityRepository
      * Get events not archived.
      *
      * @param array $filters
-     *
-     * @return mixed
      */
     public function getNextEvenements($filters = [])
     {
@@ -108,10 +109,6 @@ class EvenementRepository extends EntityRepository
 
     /**
      * Retrieve archived concerts filter by season.
-     *
-     * @param Season $season
-     *
-     * @return mixed
      */
     public function findArchivedConcertBySeason(Season $season)
     {

@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Article;
 
 use App\Entity\Article;
@@ -24,9 +29,9 @@ class ArticleManager
     {
         if (is_int($urlKey)) {
             return $this->getArticleRepository()->find($urlKey);
-        } else {
-            return $this->getArticleRepository()->getArticleByUrlKey($urlKey);
         }
+
+        return $this->getArticleRepository()->getArticleByUrlKey($urlKey);
     }
 
     private function getArticleRepository()

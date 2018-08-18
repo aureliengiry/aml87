@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Contact;
 
 use App\Entity\Message;
@@ -32,8 +37,6 @@ class ContactMessage
 
     /**
      * Save message and dispatch event.
-     *
-     * @param Message $message
      */
     public function save(Message $message)
     {

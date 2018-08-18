@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace Tests\App\Utils;
 
 use App\Utils\Slugger;
@@ -18,6 +23,6 @@ class SluggerTest extends TestCase
         $slugger = new Slugger();
         $result = $slugger->slugify($inputString);
 
-        $this->assertEquals($expectedString, $result);
+        $this->assertSame($expectedString, $result);
     }
 }

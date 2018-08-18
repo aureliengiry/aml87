@@ -20,7 +20,7 @@
     <!-- Le styles -->
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
 
-    <link href="{{ asset('assets/global.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('build/global.css') }}" rel="stylesheet"/>
 
 
     {% block stylesheets %}{% endblock %}
@@ -77,7 +77,7 @@
     {{ include('_includes/footer.html.twig') }}
 </div>
 
-<script src="{{ asset('assets/app.js') }}" type="text/javascript"></script>
+<script src="{{ asset('build/app.js') }}" type="text/javascript"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

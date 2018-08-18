@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Twig;
 
 use Twig_Extension;
@@ -30,7 +35,7 @@ class SubstringExtension extends Twig_Extension
     {
         $substring = $tmpString = '';
         $tmpArray = [];
-        if (strlen($longString) > $nbChar) {
+        if (mb_strlen($longString) > $nbChar) {
             $tmpString = wordwrap($longString, $nbChar, '#@@#', false);
             $tmpArray = explode('#@@#', $tmpString);
             $substring = $tmpArray[0].' '.$endString;

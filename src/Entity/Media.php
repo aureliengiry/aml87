@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -38,8 +43,6 @@ abstract class Media
 
     /**
      * Get id.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -48,8 +51,6 @@ abstract class Media
 
     /**
      * Set title.
-     *
-     * @param string $title
      */
     public function setTitle(string $title)
     {
@@ -60,8 +61,6 @@ abstract class Media
 
     /**
      * Get title.
-     *
-     * @return string
      */
     public function getTitle(): string
     {
@@ -69,8 +68,6 @@ abstract class Media
     }
 
     /**
-     * @param string $name
-     *
      * @return string
      */
     protected function renameIfFileExist(string $name)
@@ -89,9 +86,8 @@ abstract class Media
                 if (false === file_exists($filename)) {
                     $fileExist = false;
                     break;
-                } else {
-                    ++$count;
                 }
+                ++$count;
             }
         }
 

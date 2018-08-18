@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Twig;
 
 use Twig_Extension;
@@ -21,10 +26,6 @@ class WordWarpExtension extends Twig_Extension
     /**
      * réduit une chaine de caractères sans couper les mots.
      *
-     * @param string $date     date à transformer
-     * @param bool   $dateonly Affiche la date uniquement, quoiqu'il arrive
-     * @param bool   $icon     afficher ou non l'icône avant la date
-     * @param string $format   format dans lequel retourner la date si pas transformée
      *
      * @return string date plus nice à lire
      */
@@ -36,32 +37,28 @@ class WordWarpExtension extends Twig_Extension
         // Delete \n \r \t
         $str = str_replace(["\r\n", "\n", "\r", "\t"], '', $str);
 
-        if (strlen($str) > $length) {
+        if (mb_strlen($str) > $length) {
             if ($wordwarp) {
                 $length = $this->findSpace($str, $length);
             }
             $text = '<div class="expand">'.mb_substr($str, 0, $length).' ...</div>';
 
             return $text;
-        } else {
-            return $str;
         }
+
+        return $str;
     }
 
     /**
      * réduit une chaine de caractères sans couper les mots.
      *
-     * @param string $date     date à transformer
-     * @param bool   $dateonly Affiche la date uniquement, quoiqu'il arrive
-     * @param bool   $icon     afficher ou non l'icône avant la date
-     * @param string $format   format dans lequel retourner la date si pas transformée
      *
      * @return string date plus nice à lire
      */
     public function isWordWarpFilter($str, $length = 200)
     {
         $str = $this->stripHtmlTags($str);
-        if (strlen($str) > $length) {
+        if (mb_strlen($str) > $length) {
             return true;
         }
 

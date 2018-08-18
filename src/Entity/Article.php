@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -122,8 +127,6 @@ class Article
 
     /**
      * Set title.
-     *
-     * @param string $title
      */
     public function setTitle(string $title)
     {
@@ -134,8 +137,6 @@ class Article
 
     /**
      * Get title.
-     *
-     * @return string
      */
     public function getTitle(): string
     {
@@ -144,8 +145,6 @@ class Article
 
     /**
      * Set title.
-     *
-     * @param UrlArticle $url
      */
     public function setUrl(UrlArticle $url)
     {
@@ -156,8 +155,6 @@ class Article
 
     /**
      * Get url.
-     *
-     * @return UrlArticle
      */
     public function getUrl(): UrlArticle
     {
@@ -188,9 +185,6 @@ class Article
         return $this->logo;
     }
 
-    /**
-     * @param mixed $video
-     */
     public function setVideo($video)
     {
         $this->video = $video;
@@ -198,9 +192,6 @@ class Article
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getVideo()
     {
         return $this->video;
@@ -208,8 +199,6 @@ class Article
 
     /**
      * Set body.
-     *
-     * @param string $body
      */
     public function setBody(string $body)
     {
@@ -220,8 +209,6 @@ class Article
 
     /**
      * Get body.
-     *
-     * @return string
      */
     public function getBody(): string
     {
@@ -242,8 +229,6 @@ class Article
 
     /**
      * Get created.
-     *
-     * @return \DateTime
      */
     public function getCreated(): \DateTime
     {
@@ -264,8 +249,6 @@ class Article
 
     /**
      * Get updated.
-     *
-     * @return \DateTime
      */
     public function getUpdated(): \DateTime
     {
@@ -274,8 +257,6 @@ class Article
 
     /**
      * Set public.
-     *
-     * @param bool $public
      */
     public function setPublic(bool $public)
     {
@@ -286,8 +267,6 @@ class Article
 
     /**
      * Is public.
-     *
-     * @return bool
      */
     public function isPublic(): bool
     {
@@ -302,9 +281,6 @@ class Article
         return $this->published;
     }
 
-    /**
-     * @param \DateTime $published
-     */
     public function setPublished(\DateTime $published)
     {
         $this->published = $published;
@@ -320,9 +296,6 @@ class Article
         return $this->category;
     }
 
-    /**
-     * @param Category $category
-     */
     public function setCategory(Category $category)
     {
         $this->category = $category;
@@ -331,10 +304,6 @@ class Article
     }
 
     /** ---------- TAGS ---------- */
-
-    /**
-     * @param Tags $tag
-     */
     public function addTag(Tags $tag)
     {
         if (!$this->tags->contains($tag)) {
@@ -347,8 +316,6 @@ class Article
 
     /**
      * Fonction to delete tag.
-     *
-     * @param Tags $tag
      */
     public function removeTag(Tags $tag)
     {
@@ -377,8 +344,6 @@ class Article
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
 
     /**
-     * @param Evenement $evenement
-     *
      * @return $this
      */
     public function addEvenement(Evenement $evenement)
@@ -393,8 +358,6 @@ class Article
 
     /**
      * Fonction to delete $evenement.
-     *
-     * @param Evenement $evenement
      */
     public function removeEvenement(Evenement $evenement)
     {

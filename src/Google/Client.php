@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Google;
 
 use Google_Client;
@@ -18,10 +23,6 @@ class Client
 
     /**
      * Client constructor.
-     *
-     * @param Logger $logger
-     * @param string $googleAppName
-     * @param string $googleDevKey
      */
     public function __construct(Logger $logger, string $googleAppName, string $googleDevKey)
     {

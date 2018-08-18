@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -79,8 +84,6 @@ class Album
 
     /**
      * Get id.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -89,8 +92,6 @@ class Album
 
     /**
      * Set title.
-     *
-     * @param string $title
      */
     public function setTitle(string $title)
     {
@@ -101,8 +102,6 @@ class Album
 
     /**
      * Get title.
-     *
-     * @return string
      */
     public function getTitle(): string
     {
@@ -133,8 +132,6 @@ class Album
 
     /**
      * Set description.
-     *
-     * @param string $description
      */
     public function setDescription(string $description)
     {
@@ -145,8 +142,6 @@ class Album
 
     /**
      * Get description.
-     *
-     * @return string
      */
     public function getDescription(): string
     {
@@ -155,8 +150,6 @@ class Album
 
     /**
      * Set public.
-     *
-     * @param bool $public
      */
     public function setPublic(bool $public)
     {
@@ -167,8 +160,6 @@ class Album
 
     /**
      * Is public.
-     *
-     * @return bool
      */
     public function isPublic(): bool
     {
@@ -239,9 +230,6 @@ class Album
         return $this;
     }
 
-    /**
-     * @param Track $track
-     */
     public function addTrack(Track $track)
     {
         $this->tracks[] = $track;
@@ -251,8 +239,6 @@ class Album
 
     /**
      * Fonction to delete tag.
-     *
-     * @param Track $track
      */
     public function removeTrack(Track $track)
     {

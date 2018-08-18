@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Repository;
 
 use App\Entity\Article;
@@ -68,7 +73,6 @@ class TagsRepository extends EntityRepository
     /**
      * Function retrieves all tags with nb articles by tag.
      *
-     * @param string $value
      *
      * @return array
      */

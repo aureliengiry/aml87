@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 namespace App\Entity;
 
 use App\Utils\Slugger;
@@ -67,8 +72,6 @@ class Category
 
     /**
      * Set system_name.
-     *
-     * @param string $systemName
      */
     public function setSystemName(string $title)
     {
@@ -90,8 +93,6 @@ class Category
 
     /**
      * Set name.
-     *
-     * @param string $name
      */
     public function setName(string $name)
     {
@@ -103,8 +104,6 @@ class Category
 
     /**
      * Get name.
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -120,8 +119,6 @@ class Category
     }
 
     /**
-     * @param string $description
-     *
      * @return $this
      */
     public function setDescription(string $description)
