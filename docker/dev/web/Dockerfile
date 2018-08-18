@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
         libxml2-utils \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libpng12-dev \
+        libjpeg-dev \
+        libpng-dev \
         vim \
         mysql-client \
         telnet \
@@ -19,21 +20,19 @@ RUN apt-get update && apt-get install -y \
         git \
         libicu-dev \
         python-pip \
-        python-dev
+        python-dev \
+        ssl-cert
 
-RUN docker-php-ext-install soap gd zip intl opcache pdo pdo_mysql mysqli mbstring
+RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr --with-freetype-dir=/usr/
+
+RUN docker-php-ext-install soap gd zip intl opcache pdo pdo_mysql mysqli mbstring calendar
+
 RUN pecl install xdebug
-RUN docker-php-ext-enable xdebug opcache
 
-# # Tools
-# RUN apt-get update --fix-missing && apt-get install -y autoconf \
-#     git \
-#     default-jre \
-#     acl \
-#     curl \
-#     make \
-#     vim \
-#     mysql-client
+RUN docker-php-ext-enable xdebug opcache calendar
+
+# Apache modules
+RUN a2enmod ssl expires headers rewrite
 
 # Sphinx documentation
 RUN pip install sphinx sphinx-autobuild sphinx_rtd_theme sphinxcontrib-phpdomain git+https://github.com/fabpot/sphinx-php.git
@@ -67,7 +66,13 @@ RUN mkdir -p /tmp/blackfire \
     && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
     && rm -Rf /tmp/blackfire
 
-RUN usermod -u 1000 www-data
+# Certificat SSL
+RUN mkdir /etc/apache2/ssl \
+    && mkdir /etc/apache2/ssl/crt \
+    && mkdir /etc/apache2/ssl/key
+
+# Certificat AML87
+RUN openssl req -new -x509 -days 365 -keyout /etc/apache2/ssl/key/aml87.key -out /etc/apache2/ssl/crt/aml87.crt -nodes -subj '/O=AML87/OU=AML87/CN=www.aml87.dev'
 
 
 RUN usermod -u 1000 www-data

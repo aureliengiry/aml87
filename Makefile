@@ -134,6 +134,14 @@ phpstan:			## PHPStan - PHP Static Analysis Tool
 phpstan:
 	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpstan.phar analyse src tests"
 
+php-cs-fixer-dry-run:   ## PHP Code Style Fixer in dry-run mode
+php-cs-fixer-dry-run:
+	 $(EXEC_WEB) /bin/bash -c "cd $(SITE_PATH) && vendor/bin/php-cs-fixer fix --config=.php_cs -v --dry-run --allow-risky=yes"
+
+php-cs-fixer:           ## PHP Code Style Fixer
+php-cs-fixer:
+	 $(EXEC_WEB) /bin/bash -c "cd $(SITE_PATH) && vendor/bin/php-cs-fixer fix --config=.php_cs -v --allow-risky=yes"
+
 
 # Internal rules
 
