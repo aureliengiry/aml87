@@ -8,8 +8,11 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /etc/apache2/sites-available
-      - /var/www/aml87
+      - /etc/apache2/sites-available:consistent
+      - /var/www/aml87:cached
+      - /var/www/aml87/var/cache
+      - /var/www/aml87/var/logs
+      - /var/www/aml87/var/sessions
     tty: true
 
   mysql:
@@ -18,7 +21,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /var/lib/mysql
+      - /var/lib/mysql:cached
     tty: true
 
   blackfire:
