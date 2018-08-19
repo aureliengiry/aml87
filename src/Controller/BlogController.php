@@ -31,7 +31,7 @@ class BlogController extends Controller
      * @Template("blog/index.html.twig")
      * @Method("GET")
      */
-    public function indexAction(Request $request, $page)
+    public function index(Request $request, $page)
     {
         $filters = [];
 
@@ -77,7 +77,7 @@ class BlogController extends Controller
      * @Template("blog/show.html.twig")
      * @Method("GET")
      */
-    public function showAction($slug, Request $request)
+    public function show($slug, Request $request)
     {
         // Init Main Menu
         $menu = $this->get('app.main_menu');

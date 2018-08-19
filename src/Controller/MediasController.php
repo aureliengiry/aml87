@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class MediasController extends Controller
 {
-    public function indexAction($name)
+    public function index($name)
     {
         return $this->render('medias/index.html.twig', ['name' => $name]);
     }

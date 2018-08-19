@@ -30,7 +30,7 @@ class ContactController extends Controller
      * @Template("contact/index.html.twig")
      * @Method({"GET", "POST"})
      */
-    public function indexAction(Request $request)
+    public function index(Request $request)
     {
         $contactMessage = new Message();
         $form = $this->createForm(MessageType::class, $contactMessage)->handleRequest($request);
