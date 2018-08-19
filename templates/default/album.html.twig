@@ -13,10 +13,10 @@
         <div class="disc-description-list">
             <h3>
                 {% if lastAlbum.url.urlKey is defined and lastAlbum.url.urlKey is not empty %}
-                    <a href="{{ path('discography_album_show_rewrite', { 'url_key': lastAlbum.url.urlKey }) }}"
+                    <a href="{{ path('discography_album_show_rewrite', { 'album': lastAlbum.url.urlKey }) }}"
                        title="Voir l'album : {{ lastAlbum.title }}">{{ lastAlbum.title }}</a>
                 {% else %}
-                    <a href="{{ path('discography_album_show', { 'id': lastAlbum.id }) }}"
+                    <a href="{{ path('discography_album_show', { 'album': lastAlbum.id }) }}"
                        title="Voir l'album : {{ lastAlbum.title }}">{{ lastAlbum.title }}</a>
                 {% endif %}
             </h3>
@@ -25,10 +25,10 @@
             <p>{{ lastAlbum.description|raw|wordWarp }}</p>
 
             {% if lastAlbum.url.urlKey is defined and lastAlbum.url.urlKey is not empty %}
-                <a href="{{ path('discography_album_show_rewrite', { 'url_key': lastAlbum.url.urlKey }) }}"
+                <a href="{{ path('discography_album_show_rewrite', { 'album': lastAlbum.url.urlKey }) }}"
                    title="Voir l'album : {{ lastAlbum.title }}">Lire la suite</a>
             {% else %}
-                <a href="{{ path('discography_album_show', { 'id': lastAlbum.id }) }}"
+                <a href="{{ path('discography_album_show', { 'album': lastAlbum.id }) }}"
                    title="Voir l'album : {{ lastAlbum.title }}">Lire la suite</a>
             {% endif %}
         </div>

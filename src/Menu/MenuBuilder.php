@@ -41,7 +41,7 @@ class MenuBuilder
             'Association',
             [
                 'route' => 'page_show_rewrite',
-                'routeParameters' => ['url_key' => 'accordeon-autrement'],
+                'routeParameters' => ['page' => 'accordeon-autrement'],
             ]
         );
 

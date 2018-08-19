@@ -29,10 +29,10 @@
                     <div class="disc-description-list">
                         <h3>
                             {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
-                                <a href="{{ path('discography_album_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
+                                <a href="{{ path('discography_album_show_rewrite', { 'album': entity.url.urlKey }) }}"
                                    title="Voir l'album : {{ entity.title }}">{{ entity.title }}</a>
                             {% else %}
-                                <a href="{{ path('discography_album_show', { 'id': entity.id }) }}"
+                                <a href="{{ path('discography_album_show', { 'album': entity.id }) }}"
                                    title="Voir l'album : {{ entity.title }}">{{ entity.title }}</a>
                             {% endif %}
                         </h3>
@@ -41,10 +41,10 @@
                         <p>{{ entity.description|raw|wordWarp }}</p>
 
                         {% if entity.url.urlKey is defined and entity.url.urlKey is not empty %}
-                            <a href="{{ path('discography_album_show_rewrite', { 'url_key': entity.url.urlKey }) }}"
+                            <a href="{{ path('discography_album_show_rewrite', { 'album': entity.url.urlKey }) }}"
                                title="Voir l'album : {{ entity.title }}">Lire la suite</a>
                         {% else %}
-                            <a href="{{ path('discography_album_show', { 'id': entity.id }) }}"
+                            <a href="{{ path('discography_album_show', { 'album': entity.id }) }}"
                                title="Voir l'album : {{ entity.title }}">Lire la suite</a>
                         {% endif %}
 

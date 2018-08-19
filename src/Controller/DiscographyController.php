@@ -29,7 +29,7 @@ class DiscographyController extends Controller
      * @Template("discography/index.html.twig")
      * @Method("GET")
      */
-    public function indexAction()
+    public function index()
     {
         return ['entities' => $this->container->get(DiscographyManager::class)->getPublicAlbums()];
     }
@@ -37,20 +37,20 @@ class DiscographyController extends Controller
     /**
      * Finds and displays a Album entity.
      *
-     * @Route("/album/id/{id}", name="discography_album_show")
-     * @Route("/album/{url_key}.html", name="discography_album_show_rewrite")
+     * @Route("/album/id/{album}", name="discography_album_show")
+     * @Route("/album/{album}.html", name="discography_album_show_rewrite")
      * @Template("discography/show.html.twig")
      * @Method("GET")
      */
-    public function showAction($id = false, $url_key = null, Request $request)
+    public function show(Request $request, $album)
     {
         $em = $this->getDoctrine()->getManager();
 
         $albumRepository = $em->getRepository(Album::class);
-        if (false === $id || !empty($url_key)) {
-            $entity = $albumRepository->getAlbumByUrlKey($url_key);
+        if (is_numeric($album)) {
+            $entity = $albumRepository->find($album);
         } else {
-            $entity = $albumRepository->find($id);
+            $entity = $albumRepository->getAlbumByUrlKey($album);
         }
 
         if (!$entity) {
