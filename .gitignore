@@ -1,4 +1,4 @@
-# Cache and logs (Symfony3)
+# Cache and logs (Symfony 4)
 /var/*
 !/var/cache
 /var/cache/*
@@ -12,7 +12,6 @@
 
 # Parameters
 /app/config/parameters.yml
-/app/config/parameters.ini
 
 # Managed by Composer
 /var/bootstrap.php.cache
@@ -58,7 +57,8 @@
 
 ###> symfony/framework-bundle ###
 /.env
-/public/bundles/
+/public/bundles/*
+!public/bundles/.gitkeep
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
