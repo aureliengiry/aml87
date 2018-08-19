@@ -5,7 +5,9 @@
 {%- endblock title %}
 
 {% block body %}
-    <h1 class="page-header">Edit Profile</h1>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Edit Profile</h1>
+    </div>
     <div class="row">
         {% block fos_user_content %}
             {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
