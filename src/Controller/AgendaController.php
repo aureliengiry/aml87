@@ -30,7 +30,7 @@ class AgendaController extends Controller
      * @Template("agenda/index.html.twig")
      * @Method("GET")
      */
-    public function indexAction(): array
+    public function index(): array
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -55,7 +55,7 @@ class AgendaController extends Controller
      *
      * @param int|string $slug
      */
-    public function showAction(string $slug, Request $request): array
+    public function show(string $slug, Request $request): array
     {
         $event = $this->get(EvenementManager::class)->getEventByIdOrUrl($slug);
         if (!$event) {
@@ -74,7 +74,7 @@ class AgendaController extends Controller
     /**
      * Action for Next Concert Block.
      */
-    public function nextConcertAction(): Response
+    public function nextConcert(): Response
     {
         return $this->render(
             'agenda/blocs/bloc_next_concert.html.twig', [
@@ -93,7 +93,7 @@ class AgendaController extends Controller
      * @Template("agenda/archives.html.twig")
      * @Method("GET")
      */
-    public function archivesAction(int $season_id, Request $request): array
+    public function archives(int $season_id, Request $request): array
     {
         $em = $this->getDoctrine()->getManager();
         $seasonsRepository = $em->getRepository(Season::class);

@@ -26,7 +26,7 @@ class DefaultController extends Controller
      * @Method("GET")
      * @Template("default/index.html.twig")
      */
-    public function indexAction()
+    public function index()
     {
         // Last blog article
         $repo = $this->getDoctrine()->getRepository(Article::class);
@@ -53,7 +53,7 @@ class DefaultController extends Controller
      * @Method("GET")
      * @Template("default/sitemap.xml.twig")
      */
-    public function sitemapAction(Request $request)
+    public function sitemap(Request $request)
     {
         $urls = [];
 
@@ -83,7 +83,7 @@ class DefaultController extends Controller
      * @Method("GET")
      * @Template("main/google_analytics.html.twig")
      */
-    public function googleAnalyticsAction()
+    public function googleAnalytics()
     {
         return  ['ga_id' => $this->container->getParameter('app_google_analytics.account_id')];
     }

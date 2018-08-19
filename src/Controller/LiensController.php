@@ -27,7 +27,7 @@ class LiensController extends Controller
      * @Template("liens/index.html.twig")
      * @Method("GET")
      */
-    public function indexAction()
+    public function index()
     {
         return [
             'entities' => $this->getDoctrine()->getManager()->getRepository(Link::class)->getPublicLinks(),
