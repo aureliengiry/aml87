@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
  *
- * @ORM\Table(name="WebBundle_videos")
+ * @ORM\Table(name="videos")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="provider", type="string")
  * @ORM\DiscriminatorMap({
