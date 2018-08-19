@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Partenaire.
  *
- * @ORM\Table(name="webbundle_partenaires")
+ * @ORM\Table(name="partenaires")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\PartenaireRepository")
  */

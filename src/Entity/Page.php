@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * App\Entity\Page.
  *
- * @ORM\Table(name="webbundle_pages")
+ * @ORM\Table(name="pages")
  * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
  */
 class Page

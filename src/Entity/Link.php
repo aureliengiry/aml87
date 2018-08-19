@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * App\Entity\Link.
  *
- * @ORM\Table(name="webbundle_links")
+ * @ORM\Table(name="links")
  * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
  */
 class Link
