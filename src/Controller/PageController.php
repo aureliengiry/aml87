@@ -22,22 +22,22 @@ use Symfony\Component\HttpFoundation\Request;
 class PageController extends Controller
 {
     /**
-     * @Route("/page/{id}", name="page_show")
-     * @Route("/{url_key}.html", name="page_show_rewrite")
+     * @Route("/page/{page}", name="page_show")
+     * @Route("/{page}.html", name="page_show_rewrite")
      * @Template("page/index.html.twig"))
      * @Method("GET")
      */
-    public function indexAction($id = false, $url_key = null, Request $request)
+    public function index(Request $request, $page)
     {
         $em = $this->getDoctrine()->getManager();
 
-        if (false === $id) {
-            $entity = $em->getRepository(Page::class)->getPublicPageByUrlKey($url_key);
-        } else {
+        if (is_numeric($page)) {
             $entity = $em->getRepository(Page::class)->findOneBy([
-                'id' => $id,
+                'id' => $page,
                 'public' => Page::PAGE_IS_PUBLIC,
             ]);
+        } else {
+            $entity = $em->getRepository(Page::class)->getPublicPageByUrlKey($page);
         }
 
         if (!$entity) {
