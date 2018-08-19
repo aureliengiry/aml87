@@ -131,74 +131,88 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">{{ site_name }}</a>
-            </div>
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        {% if app.user %}
-                        <a href="#">{{ 'layout.welcome_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a>
-                        {% endif %}
-                    </li>
-                    <li>
-                        <a href="{{ path('app_members_area_logout') }}">
-                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                        </a>
-                    </li>
-                </ul>
-            </div><!--/.navbar-collapse -->
-            {% endif %}
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">{{ site_name }}</a>
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </div>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <div id="navbar" class="avbar-nav px-3">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    {% if app.user %}
+                    {{ 'layout.welcome_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                    {% endif %}
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ path('app_members_area_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                </li>
+            </ul>
+        </div><!--/.navbar-collapse -->
+        {% endif %}
     </nav>
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li><a href="{{ path('fos_user_profile_show') }}">Vérifier mes informations</a></li>
-                    <li><a href="{{ path('fos_user_profile_edit') }}">Mettre à jour mes informations</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="#">Agenda</a></li>
-                    <li><a href="#">Bibliothèque de partitions</a></li>
-                    <li><a href="#">Documents AML</a></li>
-                    <li><a href="#">Mes présences</a></li>
-                    <li><a href="{{ path('aml_users_members_list') }}">Liste des membres</a></li>
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                    <li><a href="{{ path('sonata_admin_redirect') }}">Admin</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
 
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#">Agenda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Bibliothèque de partitions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Documents AML</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Mes présences</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('aml_users_members_list') }}">Liste des membres</a></li>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('sonata_admin_redirect') }}">Admin</a></li>
+                        {% endif %}
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Mes informations</span>
+                        <a class="d-flex align-items-center text-muted" href="#">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_profile_show') }}">Vérifier mes informations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fos_user_profile_edit') }}">Mettre à jour mes informations</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <!-- CONTENT HERE -->
                 {% for flashMessage in app.session.flashbag.get('success') %}
-                    <div class="alert alert-success flash-notice">
+                    <div class="alert alert-success">
                         {{ flashMessage }}
                     </div>
                 {% endfor %}
                 {% for flashMessage in app.session.flashbag.get('notice') %}
-                    <div class="alert alert-error flash-notice">
+                    <div class="alert alert-error">
                         {{ flashMessage }}
                     </div>
                 {% endfor %}
                 {% for flashMessage in app.session.flashbag.get('info') %}
-                    <div class="alert alert-info flash-notice">
+                    <div class="alert alert-info">
                         {{ flashMessage }}
                     </div>
                 {% endfor %}
                 {% block body %}{% endblock %}
-            </div>
+            </main>
         </div>
     </div>
 

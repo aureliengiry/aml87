@@ -33,7 +33,8 @@
 /web/css/
 
 # Build data
-/build/
+/public/build/
+!public/build/.gitkeep
 
 # Composer PHAR
 /composer.phar
