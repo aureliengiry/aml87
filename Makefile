@@ -37,6 +37,11 @@ apache-restart:       ## Restart apache of web container
 apache-restart:
 	$(EXEC_WEB) service apache2 restart
 
+git-hooks-install:    ## Install/update hooks
+git-hooks-install:
+	cp hooks/pre-commit.sh .git/hooks/pre-commit
+	chmod 755 .git/hooks/pre-commit
+
 ##
 ## Shell by container
 ##---------------------------------------------------------------------------
