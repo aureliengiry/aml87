@@ -35,8 +35,8 @@
     "dms/dms-filter-bundle": "^2.0",
     "sonata-project/doctrine-orm-admin-bundle": "^3.3",
     "sonata-project/intl-bundle": "^2.4",
-    "sonata-project/core-bundle": "^3.9",
-    "sonata-project/cache": "^1.0",
+    "sonata-project/core-bundle": "^3.12",
+    "sonata-project/cache": "^2.0",
     "sonata-project/block-bundle": "^3.11",
     "sonata-project/exporter": "^1.8",
     "sonata-project/admin-bundle": "^3.35",
@@ -94,6 +94,11 @@
     "symfony-tests-dir": "tests",
     "symfony": {
       "allow-contrib": true
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.1.99"
     }
   }
 }
