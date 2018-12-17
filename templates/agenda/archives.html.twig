@@ -17,7 +17,7 @@
             {% for event in entities %}
                 <li class="event-item">
                     <span class="date">
-                        {{ event.dateStart | format_date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }} :
+                        {{ event.dateStart | date('EEEE d MMMM Y', 'fr', 'Europe/Paris') }} :
                     </span>
 
                     <h2>

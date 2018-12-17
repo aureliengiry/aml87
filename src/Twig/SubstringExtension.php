@@ -7,18 +7,18 @@
 
 namespace App\Twig;
 
-use Twig_Extension;
-use Twig_SimpleFilter;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * Class SubstringExtension.
  */
-class SubstringExtension extends Twig_Extension
+class SubstringExtension extends AbstractExtension
 {
     public function getFilters()
     {
         return [
-            new Twig_SimpleFilter('substring', [$this, 'substringFilter']),
+            new TwigFilter('substring', [$this, 'substringFilter']),
         ];
     }
 
@@ -44,10 +44,5 @@ class SubstringExtension extends Twig_Extension
         }
 
         return $substring;
-    }
-
-    public function getName()
-    {
-        return 'substring_extension';
     }
 }
