@@ -1,0 +1,145 @@
+easy_admin:
+    site_name: 'AML87'
+    translation_domain: 'admin'
+    design:
+        menu:
+            - { label: 'Page d''accueil', icon: "home", route: 'app_main_index' }
+            - label: 'Contenus'
+              children:
+                  - { entity: Article, icon: "newspaper-o"}
+                  - { entity: Album, icon: "music" }
+                  - { entity: Page, icon: "edit" }
+                  - { entity: Evenement, icon: "calendar" }
+            - label: 'Administration'
+              icon: 'cogs'
+              children:
+                  - { entity: 'User', icon: 'user', params: { sortField: 'lastLogin' }}
+                  - { entity: 'Message', icon: 'envelope', params: { sortField: 'created' }}
+
+    entities:
+        # List the entity class name you want to manage
+        User:
+            class: App\Entity\User
+            label: 'Membres'
+            list:
+                title: "Liste des membres"
+                fields:
+                    - { property: 'username', label: 'Nom d''utilisateur' }
+                    - 'email'
+                    - { property: 'enabled', label: 'Compte actif' }
+                    - { property: 'lastLogin', label: 'Dernière connexion' }
+            form:
+                fields:
+                    - { type: 'tab' , label: 'Basic Information' }
+                    - username
+                    - email
+                    - { property: 'enabled', label: 'Compte actif' }
+                    - roles
+                    - { type: 'tab', label: 'Contact Information', icon: 'phone' }
+                    - { property: 'firstname', label: 'Prénom' }
+                    - { property: 'lastname', label: 'Nom' }
+                    - { property: 'phone', label: 'Téléphone fixe' }
+                    - { property: 'mobile', label: 'Téléphone portable' }
+                    - { property: 'birthdate', label: 'Date d''anniversaire' }
+                    - adresse
+                    - { property: 'job', label: 'Profession' }
+
+
+        Article:
+            class: App\Entity\Article
+            label: 'Blog'
+            list:
+                title: "Liste des articles du blog"
+
+            form:
+                fields:
+                    - { type: 'group' , columns: 7, label: 'Basic Information' }
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'body', label: 'Corps du texte', type: 'fos_ckeditor' }
+                    - { property: 'public', label: 'Publié' }
+                    - { property: 'category', label: 'Catégorie' }
+                    -
+                          property: 'tags'
+                          label: 'Tags'
+                          type: 'collection'
+                          type_options:
+                              entry_type: App\Form\TagEmbeddedForm
+                              allow_delete: false
+                              allow_add: true
+                              by_reference: false
+
+                    - { type: 'group', columns: 4, label: 'Medias', icon: 'image' }
+                    - logo
+                    - video
+        Album:
+            class: App\Entity\Album
+            label: 'Albums'
+            list:
+                title: "Liste des albums de l'AML"
+            form:
+                fields:
+                    - { type: 'group' , columns: 6, label: 'Basic Information' }
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'description', label: 'Corps du texte', type: 'fos_ckeditor' }
+                    - { property: 'public', label: 'Publié' }
+                    - { property: 'date', label: 'Date de sortie' }
+                    - { property: 'image', label: 'Pochette de l''album' }
+                    - { type: 'group', columns: 5, label: 'Liste des morceaux', icon: 'image' }
+                    - { property: 'tracks'}
+        Evenement:
+            class: App\Entity\Evenement
+            label: 'Agenda'
+            list:
+                title: "Liste des évènements"
+                sort: 'dateStart'
+                fields:
+                    - { property: 'title', label: 'Nom' }
+                    - { property: 'type', label: 'Nom' }
+                    - { property: 'getDates', label: 'Date' }
+                    - { property: 'public', label: 'Publique' }
+                    - { property: 'archive', label: 'Archivé' }
+            form:
+                fields:
+                    - { type: 'group' , columns: 6, label: 'Basic Information' }
+                    - { property: 'type', type: 'App\Form\EvenementFieldType'}
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'description', label: 'Corps du texte', type: 'fos_ckeditor' }
+                    - { property: 'dateStart', label: 'Date de début', type_options: { widget: 'single_text', attr: { class: 'js-datapicker' } }}
+                    - { property: 'dateEnd', label: 'Date de fin', type_options: { widget: 'single_text', attr: { class: 'js-datapicker' } }}
+                    - { property: 'public', label: 'Publique' }
+                    - { property: 'archive', label: 'Archive' }
+                    - { type: 'group', columns: 5, label: 'Contenus liés à cet évenement', icon: 'image' }
+                    - { property: 'articles', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Article' }}
+                    - { property: 'partenaires', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Partenaire' }}
+                    -
+                        property: 'videos'
+                        label: 'Vidéos'
+                        type: 'collection'
+                        type_options:
+                            entry_type: App\Form\VideoYoutubeType
+                            allow_delete: false
+                            allow_add: true
+                            by_reference: true
+
+        Media:
+            class: App\Entity\Media
+            label: 'Médias'
+            list:
+                title: "Liste des médias (photos, videos..)"
+        Partenaire:
+            class: App\Entity\Partenaire
+            label: 'Partenaires'
+        Message:
+            class: App\Entity\Message
+            label: 'Messages'
+            list:
+                title: "Liste des messages reçus par le formulaire de contact"
+        Page:
+            class: App\Entity\Page
+            label: 'Pages'
+            form:
+                fields:
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'body', label: 'Corps du texte', type: 'fos_ckeditor' }
+                    - { property: 'public', label: 'Publiée' }
+

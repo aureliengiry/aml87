@@ -77,7 +77,7 @@ class Page
      *
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -87,7 +87,7 @@ class Page
      *
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
 
@@ -99,7 +99,7 @@ class Page
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -139,7 +139,7 @@ class Page
     /**
      * Get created.
      */
-    public function getCreated(): \DateTime
+    public function getCreated(): ?\DateTime
     {
         return $this->created;
     }
@@ -159,7 +159,7 @@ class Page
     /**
      * Get updated.
      */
-    public function getUpdated(): \DateTime
+    public function getUpdated(): ?\DateTime
     {
         return $this->updated;
     }
@@ -197,7 +197,7 @@ class Page
     /**
      * Get url.
      */
-    public function getUrl(): UrlPage
+    public function getUrl():?UrlPage
     {
         return $this->url;
     }

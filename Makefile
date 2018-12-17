@@ -61,17 +61,25 @@ mysql-shell:
 ##
 ## Assets
 ##---------------------------------------------------------------------------
+yarn-install:        ## Yarn install
+yarn-install:
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn install"
+
+yarn-update:         ## Yarn update
+yarn-update:
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn update"
+
 assets-compile-dev:         ## Compile assets for dev
 assets-compile-dev:
-	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn run encore dev"
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn encore dev"
 
 assets-compile-dev-watch:   ## Compile assets for dev with watch mode
 assets-compile-dev-watch:
-	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn run encore dev --watch"
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn encore dev --watch"
 
 assets-compile-prod:        ## Compile assets for prod
 assets-compile-prod:
-	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn run encore production"
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn encore production"
 
 ##
 ## Symfony
@@ -99,12 +107,18 @@ composer-update:
 ##---------------------------------------------------------------------------
 
 db-init-dev:        ## Init Database, fixtures for dev
-db-init-dev: vendor
+db-init-dev:
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:drop --force --env=dev
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:create --env=dev
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:schema:update --force --env=dev
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:fixtures:load --env=dev -n
 
+db-init-dev-without-docker:        ## Init Database, fixtures for dev without docker
+db-init-dev-without-docker:
+	-bin/console doctrine:database:drop --force --env=dev
+	-bin/console doctrine:database:create --env=dev
+	-bin/console doctrine:schema:update --force --env=dev
+	-bin/console doctrine:fixtures:load --env=dev -n
 
 ##
 ## Tests
