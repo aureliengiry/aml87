@@ -1,6 +1,3 @@
-imports:
-    - { resource: services_admin.yml}
-
 parameters:
     app_google_analytics.account_id: '%env(GOOGLE_ANALYTICS_ACCOUNT_ID)%'
     locale: 'fr'
@@ -32,15 +29,15 @@ services:
             - { name: kernel.event_listener, event: aml_web.sitemap.generate_start, method: onGenerateSitemapEvent }
 
     # Service Configuration
-    twig.extension.text:
-        class: Twig_Extensions_Extension_Text
-        tags:
-           - { name: twig.extension }
-
-    twig.extension.intl:
-        class: Twig_Extensions_Extension_Intl
-        tags:
-           - { name: twig.extension }
+#    twig.extension.text:
+#        class: Twig_Extensions_Extension_Text
+#        tags:
+#           - { name: twig.extension }
+#
+#    twig.extension.intl:
+#        class: Twig_Extensions_Extension_Intl
+#        tags:
+#           - { name: twig.extension }
 
 #    aml.twig.word_warp_extension:
 #        class: App\Twig\WordWarpExtension

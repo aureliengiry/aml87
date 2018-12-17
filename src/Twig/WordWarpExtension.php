@@ -7,19 +7,19 @@
 
 namespace App\Twig;
 
-use Twig_Extension;
-use Twig_SimpleFilter;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * Class WordWarpExtension.
  */
-class WordWarpExtension extends Twig_Extension
+class WordWarpExtension extends AbstractExtension
 {
     public function getFilters()
     {
         return [
-            new Twig_SimpleFilter('wordWarp', [$this, 'wordWarpFilter'], ['is_safe' => ['html']]),
-            new Twig_SimpleFilter('isWordWarp', [$this, 'isWordWarpFilter']),
+            new TwigFilter('wordWarp', [$this, 'wordWarpFilter'], ['is_safe' => ['html']]),
+            new TwigFilter('isWordWarp', [$this, 'isWordWarpFilter']),
         ];
     }
 
@@ -75,11 +75,6 @@ class WordWarpExtension extends Twig_Extension
         $allowedTags = '<strong><em>';
 
         return strip_tags($text, $allowedTags);
-    }
-
-    public function getName()
-    {
-        return 'wordWarp_extension';
     }
 
     public function findSpace($str, $length)

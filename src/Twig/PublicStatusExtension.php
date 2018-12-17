@@ -7,18 +7,18 @@
 
 namespace App\Twig;
 
-use Twig_Extension;
-use Twig_SimpleFilter;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
 /**
  * Class PublicStatusExtension.
  */
-class PublicStatusExtension extends Twig_Extension
+class PublicStatusExtension extends AbstractExtension
 {
     public function getFilters()
     {
         return [
-            new Twig_SimpleFilter('publicStatus', [$this, 'publicStatusFilter']),
+            new TwigFilter('publicStatus', [$this, 'publicStatusFilter']),
         ];
     }
 
@@ -35,10 +35,5 @@ class PublicStatusExtension extends Twig_Extension
         }
 
         return 'Brouillon';
-    }
-
-    public function getName()
-    {
-        return 'publicStatus_extension';
     }
 }
