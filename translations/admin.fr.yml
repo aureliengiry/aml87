@@ -1,0 +1,12 @@
+# Easy Admin
+action:
+  search: Rechercher
+  new: Créer
+  edit: Editer
+  delete: Supprimer
+  list: Retourner à la liste
+  save: Enregistrer
+
+label:
+  form:
+    empty_value: Aucun(e)

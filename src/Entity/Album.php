@@ -85,7 +85,7 @@ class Album
     /**
      * Get id.
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -103,7 +103,7 @@ class Album
     /**
      * Get title.
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -113,7 +113,7 @@ class Album
      *
      * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(Url $url)
     {
         $this->url = $url;
 
@@ -125,7 +125,7 @@ class Album
      *
      * @return string
      */
-    public function getUrl()
+    public function getUrl(): ?Url
     {
         return $this->url;
     }
@@ -143,7 +143,7 @@ class Album
     /**
      * Get description.
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -171,7 +171,7 @@ class Album
      *
      * @param \DateTime $date
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
 
@@ -183,7 +183,7 @@ class Album
      *
      * @return \DateTime
      */
-    public function getDate()
+    public function getDate(): \DateTime
     {
         return $this->date;
     }

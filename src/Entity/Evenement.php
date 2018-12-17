@@ -132,6 +132,7 @@ class Evenement
     {
         $this->articles = new ArrayCollection();
         $this->partenaires = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     /**
@@ -139,7 +140,7 @@ class Evenement
      *
      * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -157,7 +158,7 @@ class Evenement
     /**
      * Get date.
      */
-    public function getDateStart(): \DateTime
+    public function getDateStart(): ?\DateTime
     {
         return $this->dateStart;
     }
@@ -165,7 +166,7 @@ class Evenement
     /**
      * Set dateEnd.
      */
-    public function setDateEnd(\DateTime $dateEnd)
+    public function setDateEnd(\DateTime $dateEnd = null)
     {
         $this->dateEnd = $dateEnd;
 
@@ -175,7 +176,7 @@ class Evenement
     /**
      * Get date.
      */
-    public function getDateEnd(): \DateTime
+    public function getDateEnd(): ?\DateTime
     {
         return $this->dateEnd;
     }
@@ -193,7 +194,7 @@ class Evenement
     /**
      * Get title.
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -211,7 +212,7 @@ class Evenement
     /**
      * Get description.
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -233,7 +234,7 @@ class Evenement
      *
      * @param bool $archive
      */
-    public function setArchive($archive)
+    public function setArchive(bool $archive)
     {
         $this->archive = $archive;
 
@@ -245,7 +246,7 @@ class Evenement
      *
      * @return bool
      */
-    public function getArchive()
+    public function getArchive(): bool
     {
         return $this->archive;
     }
@@ -255,7 +256,7 @@ class Evenement
      *
      * @param bool $public
      */
-    public function setPublic($public)
+    public function setPublic(bool $public)
     {
         $this->public = $public;
 
@@ -267,7 +268,7 @@ class Evenement
      *
      * @return bool
      */
-    public function getPublic()
+    public function getPublic(): bool
     {
         return $this->public;
     }
@@ -449,5 +450,29 @@ class Evenement
         }
 
         return $slug;
+    }
+
+    public function getDates(){
+        if(null === $this->dateEnd){
+            return $this->dateStart->format('d M Y à H:m');
+        }
+        else{
+            $formatedDateStart = $this->dateStart->format('d M Y');
+            $formatedDateEnd = $this->dateEnd->format('d M Y');
+
+            if($formatedDateStart === $formatedDateEnd){
+                return sprintf(
+                    'Le %s de %s à %s',
+                    $this->dateStart->format('d M Y'),
+                    $this->dateStart->format('H:m'),
+                    $this->dateEnd->format('H:m')
+                );
+            }
+            return sprintf(
+                'Du %s au %s',
+                $this->dateStart->format('d M Y à H:m'),
+                $this->dateEnd->format('d M Y à H:m')
+            );
+        }
     }
 }

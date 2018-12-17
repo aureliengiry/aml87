@@ -210,7 +210,7 @@ class Article
     /**
      * Get body.
      */
-    public function getBody(): string
+    public function getBody(): ?string
     {
         return $this->body;
     }
@@ -230,7 +230,7 @@ class Article
     /**
      * Get created.
      */
-    public function getCreated(): \DateTime
+    public function getCreated(): ?\DateTime
     {
         return $this->created;
     }
@@ -250,7 +250,7 @@ class Article
     /**
      * Get updated.
      */
-    public function getUpdated(): \DateTime
+    public function getUpdated(): ?\DateTime
     {
         return $this->updated;
     }
@@ -276,7 +276,7 @@ class Article
     /**
      * @return \DateTime $published
      */
-    public function getPublished(): \DateTime
+    public function getPublished(): ?\DateTime
     {
         return $this->published;
     }
@@ -291,7 +291,7 @@ class Article
     /**
      * @return Category $id_blog_category
      */
-    public function getCategory(): Category
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
