@@ -62,13 +62,12 @@ services:
         class: App\Menu\MenuBuilder
         arguments: ["@knp_menu.factory"]
 
-    app.main_menu:
-        class: Knp\Menu\MenuItem # the service definition requires setting the class
+    Knp\Menu\MenuItem: # the service definition requires setting the class
         factory: ["@app.menu_builder", createMainMenu]
         arguments:
             - "@request_stack"
         tags:
-            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+            - { name: knp_menu.menu, alias: app_main_menu } # The alias is what is used to retrieve the menu
 
     app.breadcrumb_menu:
         class: Knp\Menu\MenuItem
@@ -76,7 +75,7 @@ services:
         arguments:
             - "@request_stack"
         tags:
-            - { name: knp_menu.menu, alias: breadcrumb } # The alias is used in the template
+            - { name: knp_menu.menu, alias: app_breadcrumb } # The alias is used in the template
 
     ## Data Fixtures
     App\DataFixtures\PageFixtures:

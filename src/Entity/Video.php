@@ -77,7 +77,7 @@ abstract class Video
     /**
      * @return string
      */
-    public function getProviderId()
+    public function getProviderId(): ?string
     {
         return $this->providerId;
     }
@@ -95,7 +95,7 @@ abstract class Video
     /**
      * Get title.
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }

@@ -7,12 +7,12 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Class MediasController.
  */
-class MediasController extends Controller
+class MediasController extends AbstractController
 {
     public function index($name)
     {

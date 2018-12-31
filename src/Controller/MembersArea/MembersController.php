@@ -8,11 +8,10 @@
 namespace App\Controller\MembersArea;
 
 use App\Entity\User;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * Members controller.
@@ -20,14 +19,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * @Route("/espace-membres")
  * @Security("has_role('ROLE_USER')")
  */
-class MembersController extends Controller
+class MembersController extends AbstractController
 {
     /**
-     * Lists all Blog entities.
+     * dashboard entities.
      *
-     * @Route("/", name="app_members_area")
+     * @Route("/", name="app_members_area", methods={"GET"})
      * @Template("members/index.html.twig")
-     * @Method("GET")
      */
     public function index()
     {
@@ -35,19 +33,15 @@ class MembersController extends Controller
     }
 
     /**
-     * Lists all Blog entities.
+     * Lists all User entities.
      *
-     * @Route("/list", name="aml_users_members_list")
+     * @Route("/list", name="aml_users_members_list", methods={"GET"})
      * @Template("members/list.html.twig")
-     * @Method("GET")
      */
     public function list()
     {
-        $doctine = $this->getDoctrine();
-        $em = $doctine->getManager();
-
         return [
-            'users' => $em->getRepository(User::class)->findAll(),
+            'users' => $this->getDoctrine()->getManager()->getRepository(User::class)->findAll(),
         ];
     }
 }

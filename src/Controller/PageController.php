@@ -8,10 +8,9 @@
 namespace App\Controller;
 
 use App\Entity\Page;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -19,13 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("/")
  */
-class PageController extends Controller
+class PageController extends AbstractController
 {
     /**
-     * @Route("/page/{page}", name="page_show")
-     * @Route("/{page}.html", name="page_show_rewrite")
+     * @Route("/page/{page}", name="page_show", methods={"GET"})
+     * @Route("/{page}.html", name="page_show_rewrite", methods={"GET"})
      * @Template("page/index.html.twig"))
-     * @Method("GET")
      */
     public function index(Request $request, $page)
     {

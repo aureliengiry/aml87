@@ -30,10 +30,15 @@ class Youtube extends Video
         return $this->title ? $this->title : 'New Video Youtube';
     }
 
-    public function __construct(string $title, string $idYoutube)
+    public function __construct(string $title = null, string $idYoutube = null)
     {
         parent::__construct();
         $this->title = $title;
         $this->providerId = $idYoutube;
+    }
+
+    public function createVideo(string $title, string $idYoutube): self
+    {
+        $videoYoutube = new self();
     }
 }

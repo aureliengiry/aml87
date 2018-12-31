@@ -10,20 +10,18 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Entity\Article;
 use App\Event\Sitemap\GenerateEvent;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class DefaultController.
  */
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="app_main_index")
-     * @Method("GET")
+     * @Route("/", name="app_main_index", methods={"GET"})
      * @Template("default/index.html.twig")
      */
     public function index()
@@ -49,8 +47,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/sitemap.{_format}", name="sitemap", Requirements={"_format" = "xml"})
-     * @Method("GET")
+     * @Route("/sitemap.{_format}", name="sitemap", Requirements={"_format" = "xml"}, methods={"GET"})
      * @Template("default/sitemap.xml.twig")
      */
     public function sitemap(Request $request)
@@ -79,12 +76,11 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/google-analytics", name="google-analytics")
-     * @Method("GET")
+     * @Route("/google-analytics", name="google-analytics", methods={"GET"})
      * @Template("main/google_analytics.html.twig")
      */
     public function googleAnalytics()
     {
-        return  ['ga_id' => $this->container->getParameter('app_google_analytics.account_id')];
+        return  ['ga_id' => $this->getParameter('app_google_analytics.account_id')];
     }
 }
