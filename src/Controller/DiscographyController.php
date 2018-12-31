@@ -9,10 +9,10 @@ namespace App\Controller;
 
 use App\Discography\DiscographyManager;
 use App\Entity\Album;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Knp\Menu\MenuItem;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -20,27 +20,37 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("/discographie")
  */
-class DiscographyController extends Controller
+class DiscographyController extends AbstractController
 {
+    /** @var DiscographyManager */
+    private $discographyManager;
+
+    /** @var MenuItem */
+    private $appMainMenu;
+
+    public function __construct(DiscographyManager $discographyManager, MenuItem $appMainMenu)
+    {
+        $this->discographyManager = $discographyManager;
+        $this->appMainMenu = $appMainMenu;
+    }
+
     /**
      * Lists all Album entities.
      *
-     * @Route("/", name="discography")
+     * @Route("/", name="discography", methods={"GET"})
      * @Template("discography/index.html.twig")
-     * @Method("GET")
      */
     public function index()
     {
-        return ['entities' => $this->container->get(DiscographyManager::class)->getPublicAlbums()];
+        return ['entities' => $this->discographyManager->getPublicAlbums()];
     }
 
     /**
      * Finds and displays a Album entity.
      *
-     * @Route("/album/id/{album}", name="discography_album_show")
-     * @Route("/album/{album}.html", name="discography_album_show_rewrite")
+     * @Route("/album/id/{album}", name="discography_album_show", methods={"GET"})
+     * @Route("/album/{album}.html", name="discography_album_show_rewrite", methods={"GET"})
      * @Template("discography/show.html.twig")
-     * @Method("GET")
      */
     public function show(Request $request, $album)
     {
@@ -58,8 +68,7 @@ class DiscographyController extends Controller
         }
 
         // Init Main Menu
-        $menu = $this->get('app.main_menu');
-        $menu->getChild('Discographie')->setCurrent(true);
+        $this->appMainMenu->getChild('Discographie')->setCurrent(true);
 
         $request->attributes->set('label', $entity->getTitle());
 

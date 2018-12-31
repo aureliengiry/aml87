@@ -10,10 +10,9 @@ namespace App\Controller;
 use App\Contact\ContactMessage;
 use App\Entity\Message;
 use App\Form\Type\MessageType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -21,14 +20,21 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("/contact-us")
  */
-class ContactController extends Controller
+class ContactController extends AbstractController
 {
+    /** @var ContactMessage */
+    private $contactMessage;
+
+    public function __construct(ContactMessage $contactMessage)
+    {
+        $this->contactMessage = $contactMessage;
+    }
+
     /**
      * Index Action to display contact form.
      *
-     * @Route("/", name="aml_contactus_default_index")
+     * @Route("/", name="aml_contactus_default_index", methods={"GET", "POST"})
      * @Template("contact/index.html.twig")
-     * @Method({"GET", "POST"})
      */
     public function index(Request $request)
     {
@@ -40,7 +46,7 @@ class ContactController extends Controller
                 ->setAddressIp($request->getClientIp())
                 ->setStatus(Message::MESSAGE_STATUS_SAVE);
 
-            $this->get(ContactMessage::class)->save($contactMessage);
+            $this->contactMessage->save($contactMessage);
 
             $this->addFlash('success', 'E-mail envoyé avec succès');
 

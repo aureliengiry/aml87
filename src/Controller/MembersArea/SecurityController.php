@@ -8,21 +8,20 @@
 namespace App\Controller\MembersArea;
 
 use App\Form\Type\LoginType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class SecurityController.
  */
-class SecurityController extends Controller
+class SecurityController extends AbstractController
 {
     /**
-     * @Route("/connexion", name="app_members_area_login")
-     * @Method("GET")
+     * @Route("/connexion", name="app_members_area_login", methods={"GET"})
      */
-    public function login(Request $request)
+    public function login(Request $request): Response
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
@@ -37,16 +36,14 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/connexion/check", name="app_members_area_login_check")
-     * @Method("POST")
+     * @Route("/connexion/check", name="app_members_area_login_check", methods={"POST"})
      */
     public function loginCheck()
     {
     }
 
     /**
-     * @Route("/deconnexion", name="app_members_area_logout")
-     * @Method("GET")
+     * @Route("/deconnexion", name="app_members_area_logout", methods={"GET"})
      */
     public function logout()
     {

@@ -15,7 +15,7 @@
 
             {# Date #}
             {% if entity.dateStart %}
-                <span class="date">{{ entity.dateStart | date('EEEE d MMMM Y à HH:mm', 'fr', 'Europe/Paris') }}</span>
+                <span class="date">{{ entity.dateStart | date('EEEE d MMMM Y à HH:mm') }}</span>
             {% endif %}
 
             {# Affiche #}

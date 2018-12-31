@@ -9,10 +9,10 @@ namespace App\Controller;
 
 use App\Entity\Season;
 use App\Evenement\EvenementManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Knp\Menu\MenuItem;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,24 +21,33 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @Route("/agenda")
  */
-class AgendaController extends Controller
+class AgendaController extends AbstractController
 {
+    /** @var EvenementManager */
+    private $evenementMamanger;
+
+    /** @var MenuItem     */
+    private $appMainMenu;
+
+    public function __construct(EvenementManager $evenementMamanger, MenuItem $appMainMenu)
+    {
+        $this->evenementMamanger = $evenementMamanger;
+        $this->appMainMenu = $appMainMenu;
+    }
+
     /**
      * Lists all Blog entities.
      *
-     * @Route("/", name="agenda")
+     * @Route("/", name="agenda", methods={"GET"})
      * @Template("agenda/index.html.twig")
-     * @Method("GET")
      */
     public function index(): array
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $seasonsRepository = $em->getRepository(Season::class);
+        $seasonsRepository = $this->getDoctrine()->getManager()->getRepository(Season::class);
         $seasons = $seasonsRepository->getPastSeasons();
 
         return [
-            'entities' => $this->get(EvenementManager::class)->getPublicEventsInCurrentSeason(),
+            'entities' => $this->evenementMamanger->getPublicEventsInCurrentSeason(),
             'seasons' => $seasons,
         ];
     }
@@ -48,23 +57,22 @@ class AgendaController extends Controller
      *
      * @Route(
      *     "/evenement/{slug}.html",
-     *     name="agenda_show_event"
+     *     name="agenda_show_event",
+     *     methods={"GET"}
      *     )
      * @Template("agenda/show.html.twig")
-     * @Method("GET")
      *
      * @param int|string $slug
      */
     public function show(string $slug, Request $request): array
     {
-        $event = $this->get(EvenementManager::class)->getEventByIdOrUrl($slug);
+        $event = $this->evenementMamanger->getEventByIdOrUrl($slug);
         if (!$event) {
             throw $this->createNotFoundException('Unable to find AmlWebBundle:Evenement entity.');
         }
 
         // Init Main Menu
-        $menu = $this->get('app.main_menu');
-        $menu->getChild('Agenda')->setCurrent(true);
+        $this->appMainMenu->getChild('Agenda')->setCurrent(true);
 
         $request->attributes->set('label', $event->getTitle());
 
@@ -78,7 +86,7 @@ class AgendaController extends Controller
     {
         return $this->render(
             'agenda/blocs/bloc_next_concert.html.twig', [
-            'nextConcert' => $this->get(EvenementManager::class)->getNextConcert(),
+            'nextConcert' => $this->evenementMamanger->getNextConcert(),
         ]);
     }
 
@@ -88,15 +96,14 @@ class AgendaController extends Controller
      * @Route(
      *     "/archives/{season_id}",
      *     name="agenda_archives",
-     *     requirements={"season_id"="\d+"}
+     *     requirements={"season_id"="\d+"},
+     *     methods={"GET"}
      *     )
      * @Template("agenda/archives.html.twig")
-     * @Method("GET")
      */
     public function archives(int $season_id, Request $request): array
     {
-        $em = $this->getDoctrine()->getManager();
-        $seasonsRepository = $em->getRepository(Season::class);
+        $seasonsRepository = $this->getDoctrine()->getManager()->getRepository(Season::class);
 
         $season = $seasonsRepository->find($season_id);
         if (!$season) {
@@ -104,14 +111,13 @@ class AgendaController extends Controller
         }
 
         // Init Main Menu
-        $menu = $this->get('app.main_menu');
-        $menu->getChild('Agenda')->setCurrent(true);
+        $this->appMainMenu->getChild('Agenda')->setCurrent(true);
 
         $request->attributes->set('label', $season->getName());
 
         return [
             'currentSeason' => $season,
-            'entities' => $this->get(EvenementManager::class)->getArchivedConcertBySeason($season),
+            'entities' => $this->evenementMamanger->getArchivedConcertBySeason($season),
             'seasons' => $seasonsRepository->getPastSeasons(),
         ];
     }
