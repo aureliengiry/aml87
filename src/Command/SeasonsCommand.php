@@ -10,37 +10,41 @@ namespace App\Command;
 use App\Entity\Evenement;
 use App\Entity\Season;
 use App\Repository\EvenementRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class SeasonsCommand.
  */
-class SeasonsCommand extends ContainerAwareCommand
+class SeasonsCommand extends Command
 {
     /**
      * @var EvenementRepository
      */
     protected $eventRepo;
-
     protected $seasonRepo;
-    protected $doctrine;
-    protected $entityManager;
+
+    /** @var ObjectManager */
+    private $objectManager;
+
+    public function __construct(ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+
+        parent::__construct();
+    }
 
     /**
      * Validate entry.
-     *
      *
      * @throws \RunTimeException
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->doctrine = $this->getContainer()->get('doctrine');
-        $this->entityManager = $this->doctrine->getManager('default');
-
-        $this->eventRepo = $this->doctrine->getRepository(Evenement::class);
-        $this->seasonRepo = $this->doctrine->getRepository(Season::class);
+        $this->eventRepo = $this->objectManager->getRepository(Evenement::class);
+        $this->seasonRepo = $this->objectManager->getRepository(Season::class);
     }
 
     /**
@@ -86,10 +90,10 @@ EOF
                 $event->setArchive(false);
             }
 
-            $this->entityManager->persist($event);
+            $this->objectManager->persist($event);
         }
 
-        $this->entityManager->flush();
+        $this->objectManager->flush();
 
         $output->writeln('<info>Indexation evenements/seasons: End</info>');
     }
@@ -176,8 +180,10 @@ EOF
                 ->setDateStart($seasonDateStart)
                 ->setDateEnd($seasonDateEnd);
 
-        $this->entityManager->persist($estimateSeason);
-        $this->entityManager->flush();
+        if($estimateSeason) {
+            $this->objectManager->persist($estimateSeason);
+            $this->objectManager->flush();
+        }
 
         return $estimateSeason;
     }

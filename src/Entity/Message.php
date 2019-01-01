@@ -86,7 +86,7 @@ class Message
      *
      * @ORM\Column(name="status", type="smallint")
      */
-    private $status;
+    private $status = 0;
 
     /**
      * @var \DateTime
@@ -126,7 +126,7 @@ class Message
     /**
      * Get name.
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -142,7 +142,7 @@ class Message
     /**
      * Get email.
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -158,7 +158,7 @@ class Message
     /**
      * Get subject.
      */
-    public function getSubject(): string
+    public function getSubject(): ?string
     {
         return $this->subject;
     }
@@ -174,7 +174,7 @@ class Message
     /**
      * Get body.
      */
-    public function getBody(): string
+    public function getBody(): ?string
     {
         return $this->body;
     }
@@ -195,7 +195,7 @@ class Message
     /**
      * Get addressIp.
      */
-    public function getAddressIp(): string
+    public function getAddressIp(): ?string
     {
         return $this->addressIp;
     }

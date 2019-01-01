@@ -14,8 +14,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Monolog\Logger;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 // logger
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,7 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Class UpdateYoutubeDataCommand.
  */
-class UpdateYoutubeDataCommand extends ContainerAwareCommand
+class UpdateYoutubeDataCommand extends Command
 {
     const YOUTUBE_STATUS_PUBLIC = 'public';
     const YOUTUBE_STATUS_UNLISTED = 'unlisted';
@@ -33,14 +34,40 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
     private $output;
 
-    /** @var Logger command logger */
+    /** @var LoggerInterface */
     private $logger;
-
-    /** @var ObjectManager */
-    private $em;
 
     /** @var array list of videos */
     private $videosList = [];
+
+    /** @var ObjectManager */
+    private $objectManager;
+
+    /** @var YoutubeProvider */
+    private $youtubeProvider;
+
+    /** @var VideoFactory */
+    private $videoFactory;
+
+    /** @var VideoManager */
+    private $videoManager;
+
+    public function __construct(
+        ObjectManager $objectManager,
+        YoutubeProvider $youtubeProvider,
+        VideoFactory $videoFactory,
+    VideoManager $videoManager,
+    LoggerInterface $logger
+    )
+    {
+        $this->objectManager = $objectManager;
+        $this->youtubeProvider = $youtubeProvider;
+        $this->videoFactory = $videoFactory;
+        $this->videoManager = $videoManager;
+        $this->logger = $logger;
+
+        parent::__construct();
+    }
 
     /**
      * {@inheritdoc}
@@ -68,14 +95,10 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
         $this->output = $output;
 
-        // Logger
-        $this->logger = $this->getContainer()->get('logger');
         if (true === $this->debug) {
             $this->logger->pushProcessor(new MemoryPeakUsageProcessor());
             $this->logger->pushProcessor(new MemoryUsageProcessor());
         }
-
-        $this->em = $this->getContainer()->get('doctrine')->getManager('default');
     }
 
     /**
@@ -87,27 +110,26 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
 
         $this->initVideoslist();
 
-        $youtubeProvider = $this->getContainer()->get(YoutubeProvider::class);
 
         $compteurVideo = 0;
 
         try {
-            if ($playlistId = $youtubeProvider->getPlaylistUploadId()) {
-                $videos = $youtubeProvider->getVideosPlaylist($playlistId);
+            if ($playlistId = $this->youtubeProvider->getPlaylistUploadId()) {
+                $videos = $this->youtubeProvider->getVideosPlaylist($playlistId);
                 foreach ($videos->getItems() as $youtubeVideo) {
                     $idYoutube = $youtubeVideo->getContentDetails()->getVideoId();
                     if (!in_array($idYoutube, $this->videosList, true)) {
-                        $video = $this->getContainer()->get(VideoFactory::class)->createVideoFromYoutube(
+                        $video = $this->videoFactory->createVideoFromYoutube(
                             $youtubeVideo
                         );
 
-                        $this->em->persist($video);
+                        $this->objectManager->persist($video);
                         $output->writeln('Youtube ID: '.$idYoutube.' imported.');
 
                         ++$compteurVideo;
                     }
                 }
-                $this->em->flush();
+                $this->objectManager->flush();
             }
         } catch (\Exception $e) {
             $output->writeln('<bg=red;fg=white>Error: '.$e->getMessage().'</>');
@@ -123,7 +145,7 @@ class UpdateYoutubeDataCommand extends ContainerAwareCommand
      */
     private function initVideoslist()
     {
-        $videos = $this->getContainer()->get(VideoManager::class)->findAllVideosYoutube();
+        $videos = $this->videoManager->findAllVideosYoutube();
         foreach ($videos as $video) {
             $this->videosList[$video->getId()] = $video->getProviderId();
         }

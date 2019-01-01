@@ -246,7 +246,7 @@ class Evenement
      *
      * @return bool
      */
-    public function getArchive(): bool
+    public function getArchive(): ?bool
     {
         return $this->archive;
     }
@@ -268,7 +268,7 @@ class Evenement
      *
      * @return bool
      */
-    public function getPublic(): bool
+    public function getPublic(): ?bool
     {
         return $this->public;
     }
