@@ -10,6 +10,9 @@ easy_admin:
                   - { entity: Album, icon: "music" }
                   - { entity: Page, icon: "edit" }
                   - { entity: Evenement, icon: "calendar" }
+            - label: 'Médias'
+              children:
+                  - { entity: Video, icon: "newspaper-o"}
             - label: 'Administration'
               icon: 'cogs'
               children:
@@ -50,6 +53,10 @@ easy_admin:
             label: 'Blog'
             list:
                 title: "Liste des articles du blog"
+                fields:
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'url', label: 'url', type: 'url' }
+                    - { property: 'public', label: 'Publique', type: 'boolean,' }
 
             form:
                 fields:
@@ -96,6 +103,7 @@ easy_admin:
                     - { property: 'title', label: 'Nom' }
                     - { property: 'type', label: 'Nom' }
                     - { property: 'getDates', label: 'Date' }
+                    - { property: 'season', label: 'Saison' }
                     - { property: 'public', label: 'Publique' }
                     - { property: 'archive', label: 'Archivé' }
             form:
@@ -106,6 +114,7 @@ easy_admin:
                     - { property: 'description', label: 'Corps du texte', type: 'fos_ckeditor' }
                     - { property: 'dateStart', label: 'Date de début', type_options: { widget: 'single_text', attr: { class: 'js-datapicker' } }}
                     - { property: 'dateEnd', label: 'Date de fin', type_options: { widget: 'single_text', attr: { class: 'js-datapicker' } }}
+                    - { property: 'season', label: 'Saison'}
                     - { property: 'public', label: 'Publique' }
                     - { property: 'archive', label: 'Archive' }
                     - { type: 'group', columns: 5, label: 'Contenus liés à cet évenement', icon: 'image' }
@@ -126,6 +135,16 @@ easy_admin:
             label: 'Médias'
             list:
                 title: "Liste des médias (photos, videos..)"
+        Video:
+            class: App\Entity\Video\Youtube
+            label: 'Vidéos'
+            list:
+                title: "Liste des Vidéos"
+                fields:
+                    - { property: 'urlThumbnail', label: 'Thumbnail', type: 'image'}
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'urlYoutube', label: 'URL Youtube', type: 'url' }
+
         Partenaire:
             class: App\Entity\Partenaire
             label: 'Partenaires'

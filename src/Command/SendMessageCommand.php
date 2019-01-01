@@ -10,24 +10,38 @@ namespace App\Command;
 use App\Entity\Message;
 use App\Event\Contact\PostEvent;
 use App\Repository\MessageRepository;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class SendMessageCommand.
  */
-class SendMessageCommand extends ContainerAwareCommand
+class SendMessageCommand extends Command
 {
     /**
      * @var MessageRepository
      */
     protected $messageRepo;
     protected $messageId;
-    protected $doctrine;
-    protected $entityManager;
+
+    /** @var ObjectManager */
+    private $objectManager;
+
+    /** @var EventDispatcherInterface */
+    private $eventDispatcher;
+
+    public function __construct(ObjectManager $objectManager, EventDispatcherInterface $eventDispatcher)
+    {
+        $this->objectManager = $objectManager;
+        $this->eventDispatcher = $eventDispatcher;
+
+        parent::__construct();
+    }
 
     /**
      * @see Command
@@ -53,11 +67,7 @@ EOF
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->doctrine = $this->getContainer()->get('doctrine');
-        $this->entityManager = $this->doctrine->getManager('default');
-
-        $this->messageRepo = $this->doctrine->getRepository(Message::class);
-
+        $this->messageRepo = $this->objectManager->getRepository(Message::class);
         $this->messageId = $input->getArgument('id-message');
     }
 
@@ -77,8 +87,7 @@ EOF
         $output->writeln('<info>'.$message->getName().' - '.$message->getSubject().'</info>');
 
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->getContainer()->get('event_dispatcher');
-        $dispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($message));
+        $this->eventDispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($message));
 
         $output->writeln('<info>Send Message : End</info>');
     }
