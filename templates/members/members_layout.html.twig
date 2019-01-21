@@ -172,7 +172,7 @@
                         <li class="nav-item"><a class="nav-link" href="#">Mes présences</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ path('aml_users_members_list') }}">Liste des membres</a></li>
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <li class="nav-item"><a class="nav-link" href="{{ path('sonata_admin_redirect') }}">Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('easyadmin') }}">Admin</a></li>
                         {% endif %}
                     </ul>
 
