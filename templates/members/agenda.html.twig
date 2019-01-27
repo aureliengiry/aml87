@@ -1,0 +1,31 @@
+{% extends 'members/members_layout.html.twig' %}
+
+{% block title -%}
+    Espace membres - Agenda
+{%- endblock title %}
+
+{% block body %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <h1 class="h2">Agenda{% if current_season %} - {{ current_season.name }}{% endif %}</h1>
+    </div>
+
+    {% if agenda_events is not empty %}
+        <ul>
+        {% for event in agenda_events %}
+            <li class="event-item">
+                <span class="date">{{ event.dates }} :</span>
+                {% if event.isPublic and event.isConcert %}
+                <a href="{{ path('agenda_show_event', { 'slug': event.slug }) }}"
+                   title="{{ event.title|default('Détails') }}">
+                    {{ event.title|default('Détails') }}
+                </a>
+                {% else %}
+                    {{ event.title }}
+                {% endif %}
+
+                <span class="badge badge-secondary">{{ event.type }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock body %}

@@ -5,28 +5,35 @@
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace App\Evenement;
+namespace App\Agenda;
 
 use App\Entity\Evenement;
 use App\Entity\Season;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Class EvenementManager.
+ * Class Agenda.
  */
-class EvenementManager
+class Agenda
 {
     /**
      * @var ObjectManager
      */
     private $em;
 
+
     public function __construct(ObjectManager $entityManager)
     {
         $this->em = $entityManager;
     }
 
-    public function getPublicEventsInCurrentSeason()
+    public function getCurrentSeason(){
+
+    }
+
+    public function getPublicEventsBySeason(Season $season)
     {
         return $this->getEventRepository()->getNextEvenements([
             'public' => 1,
@@ -34,6 +41,12 @@ class EvenementManager
             'type' => Evenement::EVENEMENT_TYPE_CONCERT,
         ]);
     }
+
+    public function getAllEventsBySeason(Season $season)
+    {
+        return $this->getEventRepository()->findBySeason($season);
+    }
+
 
     public function getEventByIdOrUrl(string $urlKey)
     {

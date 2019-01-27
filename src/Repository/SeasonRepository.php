@@ -21,10 +21,9 @@ class SeasonRepository extends EntityRepository
     /**
      * Laod seasons by date start.
      *
-     *
      * @return mixed|null
      */
-    public function getSeasonByDateStart(\DateTime $eventDateStart)
+    public function getSeasonByDateStart(\DateTime $eventDateStart): ?Season
     {
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
@@ -49,7 +48,7 @@ class SeasonRepository extends EntityRepository
      *
      * @return mixed|null
      */
-    public function getLastSeason()
+    public function getLastSeason(): ?Season
     {
         $q = $this->getEntityManager()->createQueryBuilder();
         $q

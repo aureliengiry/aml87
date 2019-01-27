@@ -6,22 +6,12 @@
  */
 
 // any CSS you require will output into a single css file (app.css in this case)
-require('../css/app.sass');
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+require("../css/app.sass");
 
 // loads the jquery package from node_modules
-var $ = require('jquery');
+var $ = require("jquery");
 
-// import the function from greet.js (the .js extension is optional)
-// ./ (or ../) means to look for a local file
-// var greet = require('./greet');
-//
-// $(document).ready(function() {
-//     $('h1').html(greet('john'));
-// });
-
-require('cd-pretty-photo');
+require("cd-pretty-photo");
 $(document).ready(function() {
     $("a[rel^='prettyPhoto']").prettyPhoto({
         theme: 'pp_default',

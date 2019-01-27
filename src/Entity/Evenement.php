@@ -89,7 +89,7 @@ class Evenement
      *
      * @ORM\Column(name="public", type="boolean")
      */
-    private $public;
+    private $public = false;
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Article", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
@@ -242,11 +242,11 @@ class Evenement
     }
 
     /**
-     * Get archive.
+     * Is archive.
      *
      * @return bool
      */
-    public function getArchive(): ?bool
+    public function isArchive(): ?bool
     {
         return $this->archive;
     }
@@ -268,7 +268,7 @@ class Evenement
      *
      * @return bool
      */
-    public function getPublic(): ?bool
+    public function isPublic(): bool
     {
         return $this->public;
     }
@@ -475,4 +475,11 @@ class Evenement
             );
         }
     }
+
+    public function isConcert() : bool
+    {
+        return self::EVENEMENT_TYPE_CONCERT === $this->type;
+    }
+
+    
 }

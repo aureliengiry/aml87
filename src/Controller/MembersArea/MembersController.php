@@ -7,6 +7,8 @@
 
 namespace App\Controller\MembersArea;
 
+use App\Agenda\SeasonManager;
+use App\Agenda\Agenda;
 use App\Entity\User;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -21,6 +23,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class MembersController extends AbstractController
 {
+    /** @var Agenda */
+    private $agenda;
+
+    /** @var SeasonManager */
+    private $seasonManager;
+
+    public function __construct(Agenda $agenda, SeasonManager $seasonManager)
+    {
+        $this->agenda = $agenda;
+        $this->seasonManager = $seasonManager;
+    }
+
     /**
      * dashboard entities.
      *
@@ -42,6 +56,22 @@ class MembersController extends AbstractController
     {
         return [
             'users' => $this->getDoctrine()->getManager()->getRepository(User::class)->findAll(),
+        ];
+    }
+
+    /**
+     * Display agenda.
+     *
+     * @Route("/agenda", name="app_members_agenda", methods={"GET"})
+     * @Template("members/agenda.html.twig")
+     */
+    public function agenda()
+    {
+        $currentSeason = $this->seasonManager->getCurrentSeason();
+
+        return [
+            'current_season' => $currentSeason,
+            'agenda_events' => $this->agenda->getAllEventsBySeason($currentSeason),
         ];
     }
 }
