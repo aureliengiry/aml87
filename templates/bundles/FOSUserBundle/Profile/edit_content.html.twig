@@ -1,9 +1,19 @@
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% form_theme form 'form/material_design_layout.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
+<div class="form-group">
+    <div class="col">
+        {{ form_row(form.firstname) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.lastname) }}
+    </div>
+</div>
+{{ form(form) }}
 <div>
-    <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-primary"/>
+    <button type="submit" class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0">
+        {{ 'profile.edit.submit'|trans }}
+    </button>
 </div>
 {{ form_end(form) }}

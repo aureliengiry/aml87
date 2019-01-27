@@ -9,8 +9,10 @@
         <h1 class="h2">Edit Profile</h1>
     </div>
     <div class="row">
+        <section>
         {% block fos_user_content %}
-            {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+            {% include "bundles/FOSUserBundle/Profile/edit_content.html.twig" %}
         {% endblock fos_user_content %}
+        </section>
     </div>
 {%- endblock body %}

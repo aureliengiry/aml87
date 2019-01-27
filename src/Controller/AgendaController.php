@@ -7,8 +7,9 @@
 
 namespace App\Controller;
 
+use App\Agenda\Agenda;
+use App\Agenda\SeasonManager;
 use App\Entity\Season;
-use App\Evenement\EvenementManager;
 use Knp\Menu\MenuItem;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -23,15 +24,23 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class AgendaController extends AbstractController
 {
-    /** @var EvenementManager */
-    private $evenementMamanger;
+    /** @var Agenda */
+    private $agenda;
+
+    /** @var SeasonManager */
+    private $seasonManager;
 
     /** @var MenuItem     */
     private $appMainMenu;
 
-    public function __construct(EvenementManager $evenementMamanger, MenuItem $appMainMenu)
+    public function __construct(
+        Agenda $agenda,
+        SeasonManager $seasonManager,
+        MenuItem $appMainMenu
+    )
     {
-        $this->evenementMamanger = $evenementMamanger;
+        $this->agenda = $agenda;
+        $this->seasonManager = $seasonManager;
         $this->appMainMenu = $appMainMenu;
     }
 
@@ -43,12 +52,12 @@ class AgendaController extends AbstractController
      */
     public function index(): array
     {
-        $seasonsRepository = $this->getDoctrine()->getManager()->getRepository(Season::class);
-        $seasons = $seasonsRepository->getPastSeasons();
+        $currentSeason = $this->seasonManager->getCurrentSeason();
 
         return [
-            'entities' => $this->evenementMamanger->getPublicEventsInCurrentSeason(),
-            'seasons' => $seasons,
+            'current_season' => $currentSeason,
+            'entities' => $this->agenda->getPublicEventsBySeason($currentSeason),
+            'seasons' => $this->seasonManager->getPastSeasons(),
         ];
     }
 
@@ -66,7 +75,7 @@ class AgendaController extends AbstractController
      */
     public function show(string $slug, Request $request): array
     {
-        $event = $this->evenementMamanger->getEventByIdOrUrl($slug);
+        $event = $this->agenda->getEventByIdOrUrl($slug);
         if (!$event) {
             throw $this->createNotFoundException('Unable to find AmlWebBundle:Evenement entity.');
         }
@@ -86,7 +95,7 @@ class AgendaController extends AbstractController
     {
         return $this->render(
             'agenda/blocs/bloc_next_concert.html.twig', [
-            'nextConcert' => $this->evenementMamanger->getNextConcert(),
+            'nextConcert' => $this->agenda->getNextConcert(),
         ]);
     }
 
@@ -117,7 +126,7 @@ class AgendaController extends AbstractController
 
         return [
             'currentSeason' => $season,
-            'entities' => $this->evenementMamanger->getArchivedConcertBySeason($season),
+            'entities' => $this->agenda->getArchivedConcertBySeason($season),
             'seasons' => $seasonsRepository->getPastSeasons(),
         ];
     }

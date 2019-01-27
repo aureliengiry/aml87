@@ -32,7 +32,6 @@ security:
             provider: fos_userbundle
             switch_user:
                provider: fos_userbundle
-            logout_on_user_change: true
             form_login:
                provider: fos_userbundle
                csrf_token_generator: security.csrf.token_manager
