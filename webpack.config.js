@@ -17,7 +17,6 @@ Encore
 
     // will output as web/build/main.css
     //.addStyleEntry('main-css', './assets/css/app.sass')
-    .addStyleEntry('members-area-style', './assets/css/members-area.sass')
 
     // allow sass/scss files to be processed
     // .enableSassLoader(function(sassOptions) {}, {
