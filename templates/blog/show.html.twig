@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title -%}
-    Blog - {{ entity.title }}
+    Blog - {{ article.title }}
 {%- endblock title %}
 
 {% block body %}
@@ -10,38 +10,38 @@
     {% include "_includes/breadcrumb.html.twig" %}
 
     <article class="blog-article">
-        <h2>{{ entity.title }}</h2>
+        <h2>{{ article.title }}</h2>
 
         <div class="publi-info">
 			<span>Publié le 
-				<span class="date-article-block">{% if entity.created %}{{ entity.created|date('d/m/Y à H:i') }}{% endif %}</span>
+				<span class="date-article-block">{% if article.created %}{{ article.created|date('d/m/Y à H:i') }}{% endif %}</span>
 			</span>
         </div>
 
-        {% if entity.logo %}
+        {% if article.logo %}
             <div class="blog-visuel">
                 <a class="thumbnail" rel="prettyPhoto"
-                   href="{{ asset(entity.logo.webpath) | imagine_filter('modal_img') }}">
-                    <img src="{{ asset(entity.logo.webpath) | imagine_filter('blog_view') }}"
-                         alt="" title="{{ entity.logo.title }}"
+                   href="{{ asset(article.logo.webpath) | imagine_filter('modal_img') }}">
+                    <img src="{{ asset(article.logo.webpath) | imagine_filter('blog_view') }}"
+                         alt="" title="{{ article.logo.title }}"
                          class="imagecache imagecache-blog_view" width="588"/>
                 </a>
             </div>
         {% endif %}
 
-        {% if entity.video %}
+        {% if article.video %}
             <iframe id="ytplayer" type="text/html" width="640" height="360"
-                    src="https://www.youtube.com/embed/{{ entity.video.providerId }}?html5=1"
+                    src="https://www.youtube.com/embed/{{ article.video.providerId }}?html5=1"
                     frameborder="0"
                     allowfullscreen="true">
             </iframe>
         {% endif %}
 
-        <div class="article-description">{{ entity.body|raw }}</div>
+        <div class="article-description">{{ article.body|raw }}</div>
 
-        {% if entity.tags is not empty %}
+        {% if article.tags is not empty %}
             <span class="blog-tags">Mots clés : </span>
-            {% for key,tag in entity.tags %}
+            {% for key,tag in article.tags %}
                 {% if key > 0 %}, {% endif %}<a class="active" title="{{ tag.description }}"
                                                 href="{{ path('blog',{'tag' : tag.systemName}) }}">{{ tag.name }}</a>
             {% endfor %}
@@ -51,13 +51,5 @@
 {% endblock body %}
 
 {% block columnRight %}
-    {# Liste des catégories #}
-    <div class="side-bloc no-border">
-        {% include "blog/blocs/bloc_categories.html.twig" %}
-    </div>
-
-    {# Liste des tags #}
-    <div class="side-bloc">
-        {% include "blog/blocs/bloc_tags.html.twig" %}
-    </div>
+    {{ render(controller('App\\Application\\Controller\\BlogController::filters')) }}
 {% endblock columnRight %}

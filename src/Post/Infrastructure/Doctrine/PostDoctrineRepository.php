@@ -1,0 +1,115 @@
+<?php
+
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
+namespace App\Post\Infrastructure\Doctrine;
+
+use App\Post\Domain\Model\Post;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
+/**
+ * PostDoctrineRepository.
+ */
+class PostDoctrineRepository extends EntityRepository
+{
+    /**
+     * Function to build request in order to filter blog articles.
+     *
+     * @param $query
+     *
+     * @return array
+     */
+    private function buildRequestByFilters(QueryBuilder $query, array $params = [], array $filters = [])
+    {
+        if (isset($filters['category']) && !empty($filters['category'])) {
+            $query
+                ->innerJoin('a.category', 'c')
+                ->andWhere('c.systemName LIKE :category');
+            $params['category'] = $filters['category'];
+        }
+
+        if (isset($filters['tag']) && !empty($filters['tag'])) {
+            $query
+                ->innerJoin('a.tags', 't')
+                ->andWhere('t.systemName LIKE :tag');
+            $params['tag'] = '%'.$filters['tag'].'%';
+        }
+
+        $query->setParameters($params);
+
+        return $query;
+    }
+
+    /**
+     * Retrieves public articles.
+     */
+    public function getPublicArticles(int $page = 1, array $filters = [], int $limit = 5): Paginator
+    {
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+
+        $firstResult = ($page - 1) * $limit;
+        $qb
+            ->select('a')
+            ->from(Post::class, 'a')
+            ->leftJoin('a.logo', 'm')
+            ->leftJoin('a.url', 'u')
+            ->where('a.public = 1')
+            ->orderBy('a.created', 'DESC');
+
+        if (!empty($filters)) {
+            $qb = $this->buildRequestByFilters($qb, [], $filters);
+        }
+
+        $qb
+            ->setFirstResult($firstResult)
+            ->setMaxResults($limit);
+
+        return new Paginator($qb->getQuery());
+    }
+
+    /**
+     * Fonction qui permet de supprimer les mots clés d'un article de blog.
+     */
+    public function cleanTags(Post $article)
+    {
+        $em = $this->getEntityManager();
+        foreach ($article->getTags() as $tag) {
+            $article->removeTag($tag);
+        }
+        $em->flush();
+    }
+
+    /**
+     * Find article by url key.
+     *
+     * @param $urlKey
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return mixed|null
+     */
+    public function getArticleByUrlKey($urlKey)
+    {
+        $q = $this->getEntityManager()->createQueryBuilder();
+        $q
+            ->select('e')
+            ->from(Post::class, 'e')
+            ->join('e.url', 'u')
+            ->where('u.urlKey = :url_key')
+            ->setMaxResults(1);
+
+        $params = [
+            'url_key' => $urlKey,
+        ];
+
+        $q->setParameters($params);
+
+        return $q->getQuery()->getOneOrNullResult();
+    }
+}

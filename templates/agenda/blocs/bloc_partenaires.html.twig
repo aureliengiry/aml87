@@ -1,8 +1,8 @@
 {# Bloc des partenaires #}
-{% if entity.partenaires is not empty %}
+{% if event.partenaires is not empty %}
     <h3>Partenaires</h3>
     <ul id="blocs-evenement-partenaires">
-        {% for key,partenaire  in entity.partenaires %}
+        {% for key,partenaire  in event.partenaires %}
             <li>
                 <div class="partenaire-visuel">
                     <a href="{{ partenaire.url }}" target="_blank">

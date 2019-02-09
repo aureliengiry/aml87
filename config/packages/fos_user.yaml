@@ -2,11 +2,11 @@
 fos_user:
   db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
   firewall_name: main
-  user_class: App\Entity\User
+  user_class: App\Core\Domain\Model\User
   from_email:
     address:        noreply@aml87.fr
     #sender_name:    "%site_name%"
     sender_name:    "AML87"
   profile:
     form:
-      type: App\Form\Type\ProfileFormType
+      type: App\Core\Application\Form\Type\ProfileFormType

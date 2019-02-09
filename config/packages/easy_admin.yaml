@@ -6,7 +6,7 @@ easy_admin:
             - { label: 'Page d''accueil', icon: "home", route: 'app_main_index' }
             - label: 'Contenus'
               children:
-                  - { entity: Article, icon: "newspaper-o"}
+                 # - { entity: Post, icon: "newspaper-o"}
                   - { entity: Album, icon: "music" }
                   - { entity: Page, icon: "edit" }
                   - { entity: Evenement, icon: "calendar" }
@@ -22,7 +22,7 @@ easy_admin:
     entities:
         # List the entity class name you want to manage
         User:
-            class: App\Entity\User
+            class: App\Core\Domain\Model\User
             label: 'Membres'
             list:
                 title: "Liste des membres"
@@ -48,38 +48,38 @@ easy_admin:
                     - { property: 'job', label: 'Profession' }
 
 
-        Article:
-            class: App\Entity\Article
-            label: 'Blog'
-            list:
-                title: "Liste des articles du blog"
-                fields:
-                    - { property: 'title', label: 'Titre' }
-                    - { property: 'url', label: 'url', type: 'url' }
-                    - { property: 'public', label: 'Publique', type: 'boolean,' }
-
-            form:
-                fields:
-                    - { type: 'group' , columns: 7, label: 'Basic Information' }
-                    - { property: 'title', label: 'Titre' }
-                    - { property: 'body', label: 'Corps du texte', type: 'fos_ckeditor' }
-                    - { property: 'public', label: 'Publié' }
-                    - { property: 'category', label: 'Catégorie' }
-                    -
-                          property: 'tags'
-                          label: 'Tags'
-                          type: 'collection'
-                          type_options:
-                              entry_type: App\Form\TagEmbeddedForm
-                              allow_delete: false
-                              allow_add: true
-                              by_reference: false
-
-                    - { type: 'group', columns: 4, label: 'Medias', icon: 'image' }
-                    - logo
-                    - video
+#        Article:
+#            class: App\Post\Domain\Model\Post
+#            label: 'Blog'
+#            list:
+#                title: "Liste des articles du blog"
+#                fields:
+#                    - { property: 'title', label: 'Titre' }
+#                    - { property: 'url', label: 'url', type: 'url' }
+#                    - { property: 'public', label: 'Publique', type: 'boolean,' }
+#
+#            form:
+#                fields:
+#                    - { type: 'group' , columns: 7, label: 'Basic Information' }
+#                    - { property: 'title', label: 'Titre' }
+#                    - { property: 'body', label: 'Corps du texte', type: 'fos_ckeditor' }
+#                    - { property: 'public', label: 'Publié' }
+#                    - { property: 'category', label: 'Catégorie' }
+#                    -
+#                          property: 'tags'
+#                          label: 'Tags'
+#                          type: 'collection'
+#                          type_options:
+#                              entry_type: App\Core\Ui\Form\Type\TagEmbeddedForm
+#                              allow_delete: false
+#                              allow_add: true
+#                              by_reference: false
+#
+#                    - { type: 'group', columns: 4, label: 'Medias', icon: 'image' }
+#                    - logo
+#                    - video
         Album:
-            class: App\Entity\Album
+            class: App\Discography\Domain\Model\Album
             label: 'Albums'
             list:
                 title: "Liste des albums de l'AML"
@@ -94,7 +94,7 @@ easy_admin:
                     - { type: 'group', columns: 5, label: 'Liste des morceaux', icon: 'image' }
                     - { property: 'tracks'}
         Evenement:
-            class: App\Entity\Evenement
+            class: App\Agenda\Domain\Model\Evenement
             label: 'Agenda'
             list:
                 title: "Liste des évènements"
@@ -109,7 +109,7 @@ easy_admin:
             form:
                 fields:
                     - { type: 'group' , columns: 6, label: 'Basic Information' }
-                    - { property: 'type', type: 'App\Form\EvenementFieldType'}
+                    - { property: 'type', type: 'App\Core\Ui\Form\Type\EvenementFieldType'}
                     - { property: 'title', label: 'Titre' }
                     - { property: 'description', label: 'Corps du texte', type: 'fos_ckeditor' }
                     - { property: 'dateStart', label: 'Date de début', type_options: { widget: 'single_text', attr: { class: 'js-datapicker' } }}
@@ -118,25 +118,25 @@ easy_admin:
                     - { property: 'public', label: 'Publique' }
                     - { property: 'archive', label: 'Archive' }
                     - { type: 'group', columns: 5, label: 'Contenus liés à cet évenement', icon: 'image' }
-                    - { property: 'articles', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Article' }}
-                    - { property: 'partenaires', type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\Partenaire' }}
+                    - { property: 'articles', type: 'easyadmin_autocomplete', type_options: { class: 'App\Core\Domain\Model\Article' }}
+                    - { property: 'partenaires', type: 'easyadmin_autocomplete', type_options: { class: 'App\Core\Domain\Model\Partenaire' }}
                     -
                         property: 'videos'
                         label: 'Vidéos'
                         type: 'collection'
                         type_options:
-                            entry_type: App\Form\VideoYoutubeType
+                            entry_type: App\Core\Ui\Form\Type\VideoYoutubeType
                             allow_delete: false
                             allow_add: true
                             by_reference: true
 
         Media:
-            class: App\Entity\Media
+            class: App\Media\Domain\Model\Media
             label: 'Médias'
             list:
                 title: "Liste des médias (photos, videos..)"
         Video:
-            class: App\Entity\Video\Youtube
+            class: App\Media\Domain\Model\Video\Youtube
             label: 'Vidéos'
             list:
                 title: "Liste des Vidéos"
@@ -146,15 +146,15 @@ easy_admin:
                     - { property: 'urlYoutube', label: 'URL Youtube', type: 'url' }
 
         Partenaire:
-            class: App\Entity\Partenaire
+            class: App\Core\Domain\Model\Partenaire
             label: 'Partenaires'
         Message:
-            class: App\Entity\Message
+            class: App\ContactMessage\Domain\Model\Message
             label: 'Messages'
             list:
                 title: "Liste des messages reçus par le formulaire de contact"
         Page:
-            class: App\Entity\Page
+            class: App\Page\Domain\Model\Page
             label: 'Pages'
             form:
                 fields:

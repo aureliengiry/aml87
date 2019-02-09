@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title -%}
-    Discrographie - {{ entity.title }}
+    Discrographie - {{ album.title }}
 {%- endblock title %}
 
 {% block body %}
@@ -12,28 +12,28 @@
     <article class="contenu-page">
 
         <div class="discographie-bloc-titre">
-            <h2 class="discographie">{{ entity.title }}</h2>
-            <span class="disc-date-sortie">Date de sortie : {{ entity.date|date('d-m-Y') }}</span>
+            <h2 class="discographie">{{ album.title }}</h2>
+            <span class="disc-date-sortie">Date de sortie : {{ album.date|date('d-m-Y') }}</span>
         </div>
 
         <div class="disc-presentation">
 
             <div class="disc-pochette-list">
-                {% if entity.image is not empty %}
-                <a rel="prettyPhoto" href="{{ asset(entity.image.webpath) | imagine_filter('modal_img') }}">
-                    <img src="{{ asset(entity.image.webpath) | imagine_filter('discography_list') }}"
-                         alt="{{ entity.image.title }}" title="{{ entity.image.title }}"
+                {% if album.image is not empty %}
+                <a rel="prettyPhoto" href="{{ asset(album.image.webpath) | imagine_filter('modal_img') }}">
+                    <img src="{{ asset(album.image.webpath) | imagine_filter('discography_list') }}"
+                         alt="{{ album.image.title }}" title="{{ album.image.title }}"
                          class="imagecache imagecache-pochette-album" width="180" height="160">
                 </a>
                 {% endif %}
             </div>
 
             <div class="disc-description-list">
-                {{ entity.description|raw }}
+                {{ album.description|raw }}
             </div>
         </div>
 
-        {% if entity.tracks is not empty %}
+        {% if album.tracks is not empty %}
             <div class="disc-list-tracks">
                 <h3>Composition du disque</h3>
 
@@ -46,7 +46,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for key,track in entity.tracks %}
+                    {% for key,track in album.tracks %}
                         <tr>
                             <td>{{ track.number }}</td>
                             <td>{{ track.title }}</td>

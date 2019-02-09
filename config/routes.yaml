@@ -1,3 +1,27 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+controllers:
+  resource: ../src/Core/Ui/Controller/
+  type: annotation
+
+agenda:
+  resource: ../src/Agenda/Ui/Controller/
+  type: annotation
+
+contact_message:
+  resource: ../src/ContactMessage/Ui/Controller/
+  type: annotation
+
+discography:
+  resource: ../src/Discography/Ui/Controller/
+  type: annotation
+
+page:
+  resource: ../src/Page/Ui/Controller/
+  type: annotation
+
+post:
+  resource: ../src/Post/Ui/Controller/
+  type: annotation

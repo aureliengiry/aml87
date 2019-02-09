@@ -54,7 +54,8 @@
     "symfony/yaml": "^4.1",
     "twig/extensions": "^1.5",
     "easycorp/easyadmin-bundle": "^2.0",
-    "symfony/webpack-encore-bundle": "^1.0"
+    "symfony/webpack-encore-bundle": "^1.0",
+    "ramsey/uuid": "^3.8"
   },
   "require-dev": {
     "symfony/phpunit-bridge": "^3.1",

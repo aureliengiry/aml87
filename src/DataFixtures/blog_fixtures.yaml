@@ -1,16 +1,16 @@
 
-App\Entity\Category:
+App\Core\Domain\Model\Category:
     category_{1..4}:
         name: <text(10)>
         description: <text(100)>
 
-App\Entity\Tags:
+App\Core\Domain\Model\Tags:
     tag_{1..20}:
         name (unique): <text(10)>
         description: <text(100)>
         weight: <numberBetween(1, 10)>
 
-App\Entity\Article:
+App\Core\Domain\Model\Article:
     article_{1..50}:
         title: <text(50)>
         body: <text(500)>
@@ -23,6 +23,6 @@ App\Entity\Article:
         url: '@url_article_<current()>'
 
 
-App\Entity\UrlArticle:
+App\Core\Domain\Model\UrlArticle:
     url_article_{1..50}:
         urlKey (unique): 'setUrlKey(<text(10)>)'

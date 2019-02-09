@@ -1,27 +1,66 @@
 parameters:
-    # Adds a fallback DATABASE_URL if the env var is not set.
-    # This allows you to run cache:warmup even if your
-    # environment variables are not available yet.
-    # You should not need to change this value.
-    env(DATABASE_URL): 'sqlite:///%kernel.project_dir%/var/aml-test.db'
+  # Adds a fallback DATABASE_URL if the env var is not set.
+  # This allows you to run cache:warmup even if your
+  # environment variables are not available yet.
+  # You should not need to change this value.
+  env(DATABASE_URL): 'sqlite:///%kernel.project_dir%/var/aml-test.db'
 
 doctrine:
-    dbal:
-        # configure these for your database server
-        driver: 'pdo_mysql'
-        server_version: '5.7'
-        charset: utf8mb4
+  dbal:
+    # configure these for your database server
+    driver: 'pdo_mysql'
+    server_version: '5.7'
+    charset: utf8mb4
 
-        # With Symfony 3.3, remove the `resolve:` prefix
-        url: '%env(resolve:DATABASE_URL)%'
-    orm:
-        auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+    # With Symfony 3.3, remove the `resolve:` prefix
+    url: '%env(resolve:DATABASE_URL)%'
+    types:
+      post_slug: App\Post\Infrastructure\Doctrine\Types\SlugType
+      post_uuid: App\Post\Infrastructure\Doctrine\Types\PostUuidType
+  orm:
+    auto_generate_proxy_classes: '%kernel.debug%'
+    naming_strategy: doctrine.orm.naming_strategy.underscore
+    auto_mapping: true
+    mappings:
+      Core:
+        is_bundle: false
+        type: annotation
+        dir: '%kernel.project_dir%/src/Core/Domain/Model'
+        prefix: 'App\Core\Domain\Model'
+        alias: App\Core
+      Agenda:
+        is_bundle: false
+        type: annotation
+        dir: '%kernel.project_dir%/src/Agenda/Domain/Model'
+        prefix: 'App\Agenda\Domain\Model'
+        alias: App\Agenda
+      ContactMessage:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/ContactMessage/Infrastructure/Doctrine/Mapping'
+        prefix: 'App\ContactMessage\Domain'
+        alias: App\ContactMessage
+      Discography:
+        is_bundle: false
+        type: annotation
+        dir: '%kernel.project_dir%/src/Discography/Domain/Model'
+        prefix: 'App\Discography\Domain\Model'
+        alias: App\Discography
+      Media:
+        is_bundle: false
+        type: annotation
+        dir: '%kernel.project_dir%/src/Media/Domain/Model'
+        prefix: 'App\Media\Domain\Model'
+        alias: App\Media
+      Page:
+        is_bundle: false
+        type: annotation
+        dir: '%kernel.project_dir%/src/Page/Domain/Model'
+        prefix: 'App\Page\Domain\Model'
+        alias: App\Page
+      Post:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Post/Infrastructure/Doctrine/Mapping'
+        prefix: 'App\Post\Domain'
+        alias: App\Post

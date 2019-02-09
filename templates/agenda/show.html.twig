@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title -%}
-    {{ entity.title }} - Agenda
+    {{ event.title }} - Agenda
 {%- endblock title %}
 
 {% block body %}
@@ -11,27 +11,27 @@
         {% include "_includes/breadcrumb.html.twig" %}
 
         <article class="contenu-page">
-            <h1>{{ entity.title }}</h1>
+            <h1>{{ event.title }}</h1>
 
             {# Date #}
-            {% if entity.dateStart %}
-                <span class="date">{{ entity.dateStart|localizeddate('full', 'short')  }}</span>
+            {% if event.dateStart %}
+                <span class="date">{{ event.dateStart|localizeddate('full', 'short')  }}</span>
             {% endif %}
 
             {# Affiche #}
-            {% if entity.picture and entity.picture.webpath %}
+            {% if event.picture and event.picture.webpath %}
                 <div>
-                    <a rel="prettyPhoto" href="{{ asset(entity.picture.webpath) | imagine_filter('modal_img') }}"
+                    <a rel="prettyPhoto" href="{{ asset(event.picture.webpath) | imagine_filter('modal_img') }}"
                        class="thumbnail">
-                        <img data-src="holder.js/160x120" alt="{{ entity.picture.title }}"
-                             src="{{ asset(entity.picture.webpath) | imagine_filter('evenement_view') }}"
-                             title="{{ entity.picture.title }}"
+                        <img data-src="holder.js/160x120" alt="{{ event.picture.title }}"
+                             src="{{ asset(event.picture.webpath) | imagine_filter('evenement_view') }}"
+                             title="{{ event.picture.title }}"
                              class="imagecache imagecache-evenement_view" width="588"/>
                     </a>
                 </div>
             {% endif %}
 
-            <div><p>{{ entity.description|raw }}</p></div>
+            <div><p>{{ event.description|raw }}</p></div>
         </article>
 
         {# Liste vidéos liées #}

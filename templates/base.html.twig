@@ -15,7 +15,7 @@
 
     {% block headerJs %}{% endblock %}
 
-    {{ render(controller('App\\Controller\\DefaultController::googleAnalytics')) }}
+    {{ render(controller('App\\Core\\Ui\\Controller\\DefaultController::googleAnalytics')) }}
 </head>
 <body>
 <div id="global">
@@ -50,7 +50,7 @@
                 {% block columnRight %}
 
                     {# Next Concert #}
-                    {#{{ render(controller('App\\Controller\\AgendaController::nextConcert')) }}#}
+                    {#{{ render(controller('App\\Application\\Controller\\AgendaController::nextConcert')) }}#}
 
                     {# Block Facebook #}
                     {{ include('blocs/facebook_page_plugin.html.twig') }}
