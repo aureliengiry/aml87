@@ -6,7 +6,7 @@ easy_admin:
             - { label: 'Page d''accueil', icon: "home", route: 'app_main_index' }
             - label: 'Contenus'
               children:
-                 # - { entity: Post, icon: "newspaper-o"}
+                  - { entity: Post, icon: "newspaper-o"}
                   - { entity: Album, icon: "music" }
                   - { entity: Page, icon: "edit" }
                   - { entity: Evenement, icon: "calendar" }
@@ -48,33 +48,37 @@ easy_admin:
                     - { property: 'job', label: 'Profession' }
 
 
-#        Article:
-#            class: App\Post\Domain\Model\Post
-#            label: 'Blog'
-#            list:
-#                title: "Liste des articles du blog"
-#                fields:
-#                    - { property: 'title', label: 'Titre' }
-#                    - { property: 'url', label: 'url', type: 'url' }
-#                    - { property: 'public', label: 'Publique', type: 'boolean,' }
+        Post:
+            class: App\Post\Domain\Model\Post
+            label: 'Blog'
+            list:
+                title: "Liste des articles du blog"
+                fields:
+                    - { property: 'content.title', label: 'Titre' }
+                    - { property: 'createdAt', label: 'Créé le' }
+                    - { property: 'slug', label: 'url', type: 'url' }
+                    - { property: 'public', label: 'Publique', type: 'boolean' }
 #
-#            form:
-#                fields:
-#                    - { type: 'group' , columns: 7, label: 'Basic Information' }
-#                    - { property: 'title', label: 'Titre' }
-#                    - { property: 'body', label: 'Corps du texte', type: 'fos_ckeditor' }
-#                    - { property: 'public', label: 'Publié' }
-#                    - { property: 'category', label: 'Catégorie' }
-#                    -
-#                          property: 'tags'
-#                          label: 'Tags'
-#                          type: 'collection'
-#                          type_options:
-#                              entry_type: App\Core\Ui\Form\Type\TagEmbeddedForm
-#                              allow_delete: false
-#                              allow_add: true
-#                              by_reference: false
-#
+            form:
+                fields:
+                    - { type: 'group' , columns: 7, label: 'Basic Information' }
+                    -
+                        property: 'content'
+                        label: 'Contenu'
+                        type: 'App\Post\Ui\Form\Type\PostContentForm'
+
+                    - { property: 'public', label: 'Publié' }
+                    - { property: 'category', label: 'Catégorie' }
+                    -
+                          property: 'tags'
+                          label: 'Tags'
+                          type: 'collection'
+                          type_options:
+                              entry_type: App\Post\Ui\Form\Type\TagEmbeddedForm
+                              allow_delete: false
+                              allow_add: true
+                              by_reference: false
+
 #                    - { type: 'group', columns: 4, label: 'Medias', icon: 'image' }
 #                    - logo
 #                    - video

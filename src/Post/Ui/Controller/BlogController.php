@@ -13,7 +13,7 @@ use App\Core\Infrastructure\Adapter\Doctrine\CategoryBlogDoctrineAdapter;
 use App\Core\Infrastructure\Adapter\Doctrine\TagBlogDoctrineAdapter;
 use App\Post\Domain\Exception\PostNotFoundException;
 use App\Post\Domain\Model\Post;
-use App\Post\Domain\PostManager;
+use App\Post\Domain\Services\PostManager;
 use App\Post\Domain\PostsInterface;
 use Knp\Menu\MenuItem;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -42,6 +42,13 @@ class BlogController extends AbstractController
     /** @var ObtainTagsInterface */
     private $obtainTags;
 
+    /**
+     * BlogController constructor.
+     * @param MenuItem $appMainMenu
+     * @param PostManager $postManager
+     * @param CategoryBlogDoctrineAdapter $categoryBlogDoctrineAdapter
+     * @param TagBlogDoctrineAdapter $tagBlogDoctrineAdapter
+     */
     public function __construct(
         MenuItem $appMainMenu,
         PostManager $postManager,
@@ -109,7 +116,7 @@ class BlogController extends AbstractController
 
             // Init Main Menu
             $this->appMainMenu->getChild('Blog')->setCurrent(true);
-            $request->attributes->set('label', $post->getTitle());
+            $request->attributes->set('label', $post->getContent()->getTitle());
         } catch (PostNotFoundException $articleNotFoundException) {
             throw $this->createNotFoundException($articleNotFoundException->getMessage());
         }
@@ -127,6 +134,7 @@ class BlogController extends AbstractController
      */
     public function filters()
     {
+        return [];
         return [
             'categories' => $this->obtainCategories->getCategoriesWithNbArticles(),
             'tags' => $this->obtainTags->getTagsWithNbArticles(),

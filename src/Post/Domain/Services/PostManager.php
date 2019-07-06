@@ -5,28 +5,27 @@
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace App\Post\Domain;
+namespace App\Post\Domain\Services;
 
 use App\Post\Domain\Exception\PostNotFoundException;
 use App\Post\Domain\Model\Post;
 use App\Post\Domain\PostsInterface;
-use App\Post\Infrastructure\Doctrine\PostDoctrineRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class PostManager.
  */
-class PostManager implements PostsInterface
-{
-    /** @var EntityManagerInterface */
-    private $em;
+class PostManager
+{ 
+    /** @var PostsInterface */
+    private $postRepository;
 
     /**
      * PostDoctrineAdapter constructor.
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(
+        PostsInterface $postRepository)
     {
-        $this->em = $entityManager;
+        $this->postRepository = $postRepository;
     }
 
     public function getPublicPostsWithPagination(int $page, array $filter): iterable
@@ -53,8 +52,13 @@ class PostManager implements PostsInterface
         return $post;
     }
 
-    private function getPostRepository(): PostDoctrineRepository
+    private function getPostRepository(): PostsInterface
     {
-        return $this->em->getRepository(Post::class);
+        return $this->postRepository;
+    }
+
+    public function getLastPublicPost() : ?Post
+    {       
+        return $this->getPostRepository()->findLastPublicPost();
     }
 }

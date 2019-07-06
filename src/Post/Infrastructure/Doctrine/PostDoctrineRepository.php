@@ -8,15 +8,31 @@
 namespace App\Post\Infrastructure\Doctrine;
 
 use App\Post\Domain\Model\Post;
-use Doctrine\ORM\EntityRepository;
+use App\Post\Domain\PostsInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 
 /**
  * PostDoctrineRepository.
  */
-class PostDoctrineRepository extends EntityRepository
+class PostDoctrineRepository 
+    implements PostsInterface, ServiceEntityRepositoryInterface
 {
+    /** @var RegistryInterface */
+    private $entityManager;
+
+     /**
+     * PostDoctrineRepository constructor.
+     *
+     * @param RegistryInterface $registry
+     */
+    public function __construct(RegistryInterface $registry)
+    {
+        $this->entityManager = $registry->getEntityManager();
+    }
+
     /**
      * Function to build request in order to filter blog articles.
      *
@@ -50,17 +66,14 @@ class PostDoctrineRepository extends EntityRepository
      */
     public function getPublicArticles(int $page = 1, array $filters = [], int $limit = 5): Paginator
     {
-        $em = $this->getEntityManager();
-        $qb = $em->createQueryBuilder();
+        $qb = $this->entityManager->createQueryBuilder();
 
         $firstResult = ($page - 1) * $limit;
         $qb
             ->select('a')
             ->from(Post::class, 'a')
-            ->leftJoin('a.logo', 'm')
-            ->leftJoin('a.url', 'u')
             ->where('a.public = 1')
-            ->orderBy('a.created', 'DESC');
+            ->orderBy('a.createdAt', 'DESC');
 
         if (!empty($filters)) {
             $qb = $this->buildRequestByFilters($qb, [], $filters);
@@ -78,11 +91,10 @@ class PostDoctrineRepository extends EntityRepository
      */
     public function cleanTags(Post $article)
     {
-        $em = $this->getEntityManager();
         foreach ($article->getTags() as $tag) {
             $article->removeTag($tag);
         }
-        $em->flush();
+        $$this->entityManager->flush();
     }
 
     /**
@@ -96,16 +108,33 @@ class PostDoctrineRepository extends EntityRepository
      */
     public function getArticleByUrlKey($urlKey)
     {
-        $q = $this->getEntityManager()->createQueryBuilder();
+        $q = $this->entityManager->createQueryBuilder();
         $q
-            ->select('e')
-            ->from(Post::class, 'e')
-            ->join('e.url', 'u')
-            ->where('u.urlKey = :url_key')
+            ->select('p')
+            ->from(Post::class, 'p')
+            ->where('p.slug = :url_key')
             ->setMaxResults(1);
 
         $params = [
             'url_key' => $urlKey,
+        ];
+
+        $q->setParameters($params);
+
+        return $q->getQuery()->getOneOrNullResult();
+    }
+
+    public function findLastPublicPost(){
+        $q = $this->entityManager->createQueryBuilder();
+        $q
+            ->select('p')
+            ->from(Post::class, 'p')
+            ->where('p.public = :public_post')
+            ->orderBy('p.createdAt')
+            ->setMaxResults(1);
+
+        $params = [
+            'public_post' => Post::ARTICLE_IS_PUBLIC,
         ];
 
         $q->setParameters($params);

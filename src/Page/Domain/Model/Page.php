@@ -7,6 +7,7 @@
 
 namespace App\Page\Domain\Model;
 
+use App\Core\DDD\Model\AggregateRoot;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="pages")
  * @ORM\Entity(repositoryClass="App\Page\Infrastructure\Doctrine\PageDoctrineRepository")
  */
-class Page
+final class Page implements AggregateRoot
 {
     const PAGE_IS_PUBLIC = 1;
     const PAGE_IS_PRIVATE = 0;

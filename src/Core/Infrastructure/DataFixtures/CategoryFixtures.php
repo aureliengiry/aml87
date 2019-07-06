@@ -5,24 +5,27 @@
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace App\DataFixtures;
+namespace App\Core\Infrastructure\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nelmio\Alice\Loader\NativeLoader;
 
 /**
- * Class BlogFixtures.
+ * Class CategoryFixtures.
  */
-class BlogFixtures extends Fixture
+class CategoryFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
         $loader = new NativeLoader();
-        $fakeData = $loader->loadFile(__DIR__.'/blog_fixtures.yaml');
+        $fakeData = $loader->loadFile(__DIR__ . '/category_fixtures.yaml');
         foreach ($fakeData->getObjects() as $object) {
+
             $manager->persist($object);
+
         }
+
         $manager->flush();
     }
 }

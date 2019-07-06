@@ -27,7 +27,12 @@ class SlugType extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return $value->content();
+        if (null === $value
+            || ! $value instanceof PostSlug) {
+            return null;
+        }
+        
+        return $value->getValue();
     }
 
     public function getName()

@@ -7,6 +7,7 @@
 
 namespace App\Discography\Domain\Model;
 
+use App\Core\DDD\Model\AggregateRoot;
 use App\Core\Domain\Model\Url;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="discography_albums")
  * @ORM\Entity(repositoryClass="App\Discography\Infrastructure\Doctrine\AlbumDoctrineRepository")
  */
-class Album
+final class Album implements AggregateRoot
 {
     const ALBUM_IS_PUBLIC = 1;
     const ALBUM_IS_PRIVATE = 2;

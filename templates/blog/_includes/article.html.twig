@@ -1,12 +1,12 @@
 <h2>
     <a href="{{ path('blog_show', {'slug': article.slug }) }}"
-       title="Voir l'article : {{ article.title }}">{{ article.title }}</a>
+       title="Voir l'article : {{ article.content.title }}">{{ article.content.title }}</a>
 </h2>
 
 <div class="publi-info">
     <span>Publié le
-        <span class="date-article-block">le {% if article.created %}{{ article.created|date('d/m/Y à H:i') }}{% endif %}</span>
-        {% if article.category.name %}
+        <span class="date-article-block">le {% if article.createdAt %}{{ article.createdAt|date('d/m/Y à H:i') }}{% endif %}</span>
+        {% if article.category %}
             dans <a href="{{ path('blog', {'category' : article.category.systemName}) }}"
                     title="{{ article.category.name }}">{{ article.category.name }}</a>
         {% endif %}
@@ -23,18 +23,18 @@
     <div class="blog-visuel">
         <a rel="prettyPhoto[blog]" href="{{ asset(article.logo.webpath) | imagine_filter('modal_img') }}">
             <img width="425" class="imagecache imagecache-blog_list"
-                 title="{{ article.title }}"
+                 title="{{ article.content.title }}"
                  src="{{ article.logo.webpath | imagine_filter('blog_list') }}"
-                 alt="{{ article.title }}"/>
+                 alt="{{ article.content.title }}"/>
         </a>
     </div>
 {% endif %}
 
 <p class="container-wysiwyg">
-    {{ article.body|raw|wordWarp }}
+    {{ article.content.body|raw|wordWarp }}
 
     <a href="{{ path('blog_show', {'slug': article.slug }) }}"
-       title="Lire l'article : {{ article.title }}">Lire la suite</a>
+       title="Lire l'article : {{ article.content.title }}">Lire la suite</a>
 
 </p>
 

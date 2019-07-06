@@ -7,12 +7,13 @@
 
 namespace App\ContactMessage\Domain\Model;
 
+use App\Core\DDD\Model\AggregateRoot;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Message.
  */
-class Message
+final class Message implements AggregateRoot
 {
     const MESSAGE_STATUS_SAVE = 1;
     const MESSAGE_STATUS_SAVE_SEND = 2;

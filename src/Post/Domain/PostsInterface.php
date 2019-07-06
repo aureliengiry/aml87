@@ -7,14 +7,11 @@
 
 namespace App\Post\Domain;
 
-use App\Post\Domain\Model\Post;
-
 interface PostsInterface
 {
-    public function getPublicPostsWithPagination(int $page, array $filter): iterable;
+    public function getPublicArticles(int $page, array $filters, int $limit);
 
-    /**
-     * @throws \App\Post\Domain\PostNotFoundException
-     */
-    public function getPostBySlug(string $slug): Post;
+    public function getArticleByUrlKey($urlKey);
+
+    public function findLastPublicPost();
 }

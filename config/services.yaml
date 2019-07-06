@@ -111,7 +111,10 @@ services:
 
   App\ContactMessage\Ui\Controller\ContactController:
 
-  ## Media
-
+  ## Post (Blog)
+  App\Post\Domain\Services\PostManager:
+    public: true
+    arguments: 
+      $postRepository: '@App\Post\Infrastructure\Doctrine\PostDoctrineRepository'
 
 

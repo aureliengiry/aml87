@@ -5,7 +5,7 @@
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace Tests\Post\Domain\Model;
+namespace Tests\Post\Domain\ValueObject;
 
 use App\Post\Domain\ValueObject\PostContent;
 use App\Post\Domain\ValueObject\PostSlug;

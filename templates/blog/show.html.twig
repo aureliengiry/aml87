@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title -%}
-    Blog - {{ article.title }}
+    Blog - {{ article.content.title }}
 {%- endblock title %}
 
 {% block body %}
@@ -10,11 +10,11 @@
     {% include "_includes/breadcrumb.html.twig" %}
 
     <article class="blog-article">
-        <h2>{{ article.title }}</h2>
+        <h2>{{ article.content.title }}</h2>
 
         <div class="publi-info">
 			<span>Publié le 
-				<span class="date-article-block">{% if article.created %}{{ article.created|date('d/m/Y à H:i') }}{% endif %}</span>
+				<span class="date-article-block">{% if article.createdAt %}{{ article.createdAt|date('d/m/Y à H:i') }}{% endif %}</span>
 			</span>
         </div>
 
@@ -37,7 +37,7 @@
             </iframe>
         {% endif %}
 
-        <div class="article-description">{{ article.body|raw }}</div>
+        <div class="article-description">{{ article.content.body|raw }}</div>
 
         {% if article.tags is not empty %}
             <span class="blog-tags">Mots clés : </span>
@@ -51,5 +51,5 @@
 {% endblock body %}
 
 {% block columnRight %}
-    {{ render(controller('App\\Application\\Controller\\BlogController::filters')) }}
+    {{ render(controller('App\\Post\\Ui\\Controller\\BlogController::filters')) }}
 {% endblock columnRight %}

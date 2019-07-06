@@ -32,8 +32,24 @@ class PostContent
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
     public function getBody(): string
     {
         return $this->body;
+    }
+
+    /**
+     * @param string $body
+     */
+    public function setBody(string $body): void
+    {
+        $this->body = $body;
     }
 }
