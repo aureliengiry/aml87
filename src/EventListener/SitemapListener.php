@@ -7,10 +7,10 @@
 
 namespace App\EventListener;
 
-use App\Discography\DiscographyManager;
-use App\Entity\Article;
-use App\Entity\Evenement;
+use App\Agenda\Domain\Model\Evenement;
+use App\Discography\Domain\DiscographyManager;
 use App\Event\Sitemap\GenerateEvent;
+use App\Post\Domain\Model\Post;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Router;
 
@@ -19,21 +19,29 @@ use Symfony\Component\Routing\Router;
  */
 class SitemapListener
 {
+    /** @var ObjectManager */
     private $em;
+
+    /** @var Router */
     private $router;
+
+    /** @var DiscographyManager */
     private $discographyManager;
 
     /**
      * SitemapListener constructor.
      */
-    public function __construct(Router $router, DiscographyManager $discographyManager, ObjectManager $entityManager)
+    public function __construct(
+        Router $router,
+        DiscographyManager $discographyManager,
+        ObjectManager $entityManager)
     {
         $this->router = $router;
         $this->discographyManager = $discographyManager;
         $this->em = $entityManager;
     }
 
-    public function onGenerateSitemapEvent(GenerateEvent $event)
+    public function onGenerateSitemapEvent(GenerateEvent $event): void
     {
         /** Blog */
         // Add blog url
@@ -45,7 +53,7 @@ class SitemapListener
         $event->addUrls($mainUrl);
 
         // add some urls blog
-        $repositoryArticle = $this->em->getRepository(Article::class);
+        $repositoryArticle = $this->em->getRepository(Post::class);
         $entitiesBlog = $repositoryArticle->getPublicArticles(1, [], 100);
 
         // add some urls blog

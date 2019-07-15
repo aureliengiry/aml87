@@ -1,0 +1,4 @@
+App\Core\Domain\Model\Category:
+    category_{1..4}:
+        name: <text(10)>
+        description: <text(100)>

@@ -1,10 +1,10 @@
-App\Entity\Season:
+App\Core\Domain\Model\Season:
     season_{1..5}:
         name: "Season_<current()>"
         dateStart: '<dateTimeBetween("-5 years", "now")>'
         dateEnd: '<dateTimeBetween($dateStart, "+1 years")>'
 
-App\Entity\Evenement:
+App\Core\Domain\Model\Evenement:
     event_{1..50}:
         title: <text(10)>
         description: <text(100)>
@@ -14,7 +14,7 @@ App\Entity\Evenement:
         season: '@season_<numberBetween(1, 5)>'
         url: '@url_event_<current()>'
 
-App\Entity\UrlEvenement:
+App\Core\Domain\Model\UrlEvenement:
     url_event_{1..50}:
         urlKey (unique): 'setUrlKey(<text(10)>)'
 

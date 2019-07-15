@@ -4,7 +4,14 @@ set -e
 
 echo "php-cs-fixer start"
 
-PHP_CS_FIXER="./vendor/bin/php-cs-fixer"
+PHP_CS_FIXER_LOCAL="./vendor/bin/php-cs-fixer"
+PHP_CS_FIXER_GLOBAL="~/.composer/vendor/bin/php-cs-fixer"
+
+if [ -x $PHP_CS_FIXER_GLOBAL ]; then
+    PHP_CS_FIXER=$PHP_CS_FIXER_GLOBAL
+else
+    PHP_CS_FIXER=$PHP_CS_FIXER_LOCAL
+fi
 
 if [ -x $PHP_CS_FIXER ]; then
     if git diff --cached --name-only --diff-filter=ACMRTUXB | grep -q '\.php$'; then

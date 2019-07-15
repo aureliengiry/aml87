@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title -%}
-    Association - {{ entity.title }}
+    Association - {{ page.title }}
 {%- endblock title %}
 
 {% block body %}
@@ -10,9 +10,9 @@
     {% include "_includes/breadcrumb.html.twig" %}
 
     <article class="blog-article">
-        <h2>{{ entity.title }}</h2>
+        <h2>{{ page.title }}</h2>
 
-        <div class="article-description">{{ entity.body|raw }}</div>
+        <div class="article-description">{{ page.body|raw }}</div>
     </article>
 
 {% endblock body %}

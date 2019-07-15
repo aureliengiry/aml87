@@ -1,0 +1,22 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Page\Domain\Model\Page" table="pages" repository-class="App\Page\Infrastructure\Doctrine\PageDoctrineRepository">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="title" type="string" column="title" length="255" />
+        <field name="body" type="text" column="body" />
+        <field name="created" type="datetime_immutable" column="created" />
+        <field name="updated" type="datetime" column="created" />
+        <field name="public" type="boolean" column="public" />
+
+        <one-to-one field="url" target-entity="App\Page\Domain\Model\UrlPage" >
+            <cascade><cascade-all/></cascade>
+            <join-column name="id_url" referenced-column-name="id_url" />
+        </one-to-one>
+    </entity>
+
+</doctrine-mapping>

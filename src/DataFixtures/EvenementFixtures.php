@@ -7,7 +7,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Evenement;
+use App\Core\Domain\Model\Evenement;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Nelmio\Alice\Loader\NativeLoader;
@@ -22,11 +22,10 @@ class EvenementFixtures extends Fixture
         $loader = new NativeLoader();
         $fakeData = $loader->loadFile(__DIR__.'/evenements_fixtures.yaml');
         foreach ($fakeData->getObjects() as $object) {
-
-            if( $object instanceof Evenement) {
+            if ($object instanceof Evenement) {
                 /** @var Evenement $object */
-                $allEventTypes = array_keys(Evenement::getTypesEvenements());
-                $eventType = array_rand($allEventTypes);
+                $allEventTypes = \array_keys(Evenement::getTypesEvenements());
+                $eventType = \array_rand($allEventTypes);
                 $object->setType($allEventTypes[$eventType]);
             }
             $manager->persist($object);

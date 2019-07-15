@@ -1,0 +1,5 @@
+App\Core\Domain\Model\Tag:
+    tag_{1..20}:
+        name (unique): <text(10)>
+        description: <text(100)>
+        weight: <numberBetween(1, 10)>

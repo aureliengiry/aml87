@@ -11,18 +11,18 @@
 
     <div class="contenu-page">
 
-        {% if entities is not empty %}
-            {% for entity in entities %}
+        {% if articles is not empty %}
+            {% for article in articles %}
 
                 {# articles #}
                 <article class="blog-article{% if loop.first %} first{% endif %}{% if loop.last %} last{% endif %}">
-                    {% include "blog/blocs/article.html.twig" %}
+                    {% include "blog/_includes/article.html.twig" %}
                 </article>
 
             {% endfor %}
 
             {# Pagination #}
-            {% include "blog/blocs/pagination.html.twig" %}
+            {% include "blog/_includes/pagination.html.twig" %}
 
         {% else %}
             <h1>Blog</h1>
@@ -33,13 +33,5 @@
 {% endblock body %}
 
 {% block columnRight %}
-    {# Liste des catégories #}
-    <div class="side-bloc no-border">
-        {% include "blog/blocs/bloc_categories.html.twig" %}
-    </div>
-
-    {# Liste des tags #}
-    <div class="side-bloc">
-        {% include "blog/blocs/bloc_tags.html.twig" %}
-    </div>
+    {{ render(controller('App\\Post\\Ui\\Controller\\BlogController::filters')) }}
 {% endblock columnRight %}

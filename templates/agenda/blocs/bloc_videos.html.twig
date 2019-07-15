@@ -1,9 +1,9 @@
 {# Bloc des vidéos liées #}
-{% if entity.videos is not empty %}
+{% if event.videos is not empty %}
     <div id="blocs-evenement-videos">
         <h2>Vidéos</h2>
         <ul>
-            {% for key,video in entity.videos %}
+            {% for key,video in event.videos %}
                 <li>
                     <div class="video-lockup">
                         <div class="video-lockup-thumbnail">

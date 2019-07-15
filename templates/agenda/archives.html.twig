@@ -14,7 +14,7 @@
         <h1>Archives - {{ currentSeason.name }}</h1>
 
         <ul id="agenda-concerts-public">
-            {% for event in entities %}
+            {% for event in agenda_events %}
                 <li class="event-item">
                     <span class="date">
                         {{ event.dateStart|localizeddate('full', 'short') }} :
