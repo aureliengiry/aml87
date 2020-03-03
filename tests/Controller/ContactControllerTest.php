@@ -5,7 +5,7 @@
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace Tests\Controller;
+namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;

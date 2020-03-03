@@ -26,7 +26,6 @@ class WordWarpExtension extends AbstractExtension
     /**
      * réduit une chaine de caractères sans couper les mots.
      *
-     *
      * @return string date plus nice à lire
      */
     public function wordWarpFilter($str, $length = 500, $id = null, $wordwarp = true)
@@ -51,7 +50,6 @@ class WordWarpExtension extends AbstractExtension
 
     /**
      * réduit une chaine de caractères sans couper les mots.
-     *
      *
      * @return string date plus nice à lire
      */

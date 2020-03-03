@@ -5,7 +5,7 @@
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace Tests\App\Utils;
+namespace App\Tests\App\Utils;
 
 use App\Utils\Slugger;
 use PHPUnit\Framework\TestCase;

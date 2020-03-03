@@ -27,7 +27,7 @@ class ArticleManager
 
     public function getArticleByIdOrUrl($urlKey)
     {
-        if (is_int($urlKey)) {
+        if (\is_int($urlKey)) {
             return $this->getArticleRepository()->find($urlKey);
         }
 

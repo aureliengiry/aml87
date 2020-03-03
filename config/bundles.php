@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * This file is part of the AML87 application.
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ */
+
 return [
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
@@ -19,7 +24,6 @@ return [
     Symfony\Bundle\WebServerBundle\WebServerBundle::class => ['dev' => true],
     FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
     FOS\UserBundle\FOSUserBundle::class => ['all' => true],
-    Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['dev' => true, 'test' => true],
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
     Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
 ];

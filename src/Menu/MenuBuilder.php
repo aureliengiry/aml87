@@ -28,7 +28,6 @@ class MenuBuilder
     /**
      * Generate main menu.
      *
-     *
      * @return \Knp\Menu\ItemInterface
      */
     public function createMainMenu()

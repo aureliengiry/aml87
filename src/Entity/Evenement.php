@@ -231,8 +231,6 @@ class Evenement
 
     /**
      * Set archive.
-     *
-     * @param bool $archive
      */
     public function setArchive(bool $archive)
     {
@@ -253,8 +251,6 @@ class Evenement
 
     /**
      * Set public.
-     *
-     * @param bool $public
      */
     public function setPublic(bool $public)
     {
@@ -265,8 +261,6 @@ class Evenement
 
     /**
      * Get public.
-     *
-     * @return bool
      */
     public function isPublic(): bool
     {
@@ -452,34 +446,33 @@ class Evenement
         return $slug;
     }
 
-    public function getDates(){
-        if(null === $this->dateEnd){
+    public function getDates()
+    {
+        if (null === $this->dateEnd) {
             return $this->dateStart->format('d M Y à H:m');
         }
-        else{
-            $formatedDateStart = $this->dateStart->format('d M Y');
-            $formatedDateEnd = $this->dateEnd->format('d M Y');
 
-            if($formatedDateStart === $formatedDateEnd){
-                return sprintf(
+        $formatedDateStart = $this->dateStart->format('d M Y');
+        $formatedDateEnd = $this->dateEnd->format('d M Y');
+
+        if ($formatedDateStart === $formatedDateEnd) {
+            return sprintf(
                     'Le %s de %s à %s',
                     $this->dateStart->format('d M Y'),
                     $this->dateStart->format('H:m'),
                     $this->dateEnd->format('H:m')
                 );
-            }
-            return sprintf(
+        }
+
+        return sprintf(
                 'Du %s au %s',
                 $this->dateStart->format('d M Y à H:m'),
                 $this->dateEnd->format('d M Y à H:m')
             );
-        }
     }
 
-    public function isConcert() : bool
+    public function isConcert(): bool
     {
         return self::EVENEMENT_TYPE_CONCERT === $this->type;
     }
-
-    
 }

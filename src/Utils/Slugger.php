@@ -18,8 +18,6 @@ class Slugger
      * Remove letter with accent.
      *
      * @see http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
-     *
-     * @param $string
      */
     protected function removeAccent()
     {
@@ -136,7 +134,6 @@ class Slugger
 
     /**
      * Clean string (remove accents, special characters) for URL or filename.
-     *
      *
      * @return mixed|string
      */

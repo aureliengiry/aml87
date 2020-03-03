@@ -10,10 +10,10 @@ namespace App\Controller;
 use App\Article\ArticleManager;
 use App\Entity\Category;
 use Knp\Menu\MenuItem;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Blog controller.
@@ -59,7 +59,7 @@ class BlogController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $publicArticles = $this->articleManager->getPublicArticlesWithPagination($page, $filters);
-        $nbPublicArticles = count($publicArticles);
+        $nbPublicArticles = \count($publicArticles);
 
         // Calcul de la pagination
         $calculLastPage = round($nbPublicArticles / $this->_limitPagination);

@@ -10,10 +10,10 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Entity\Article;
 use App\Event\Sitemap\GenerateEvent;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class DefaultController.

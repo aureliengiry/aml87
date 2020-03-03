@@ -44,7 +44,7 @@ class Page
     private $body;
 
     /**
-     * @var \\DateTime
+     * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
      */
@@ -84,8 +84,6 @@ class Page
 
     /**
      * Set title.
-     *
-     * @param string $title
      */
     public function setTitle(string $title)
     {
@@ -197,7 +195,7 @@ class Page
     /**
      * Get url.
      */
-    public function getUrl():?UrlPage
+    public function getUrl(): ?UrlPage
     {
         return $this->url;
     }

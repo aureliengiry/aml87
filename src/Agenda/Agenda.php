@@ -9,8 +9,6 @@ namespace App\Agenda;
 
 use App\Entity\Evenement;
 use App\Entity\Season;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -23,14 +21,13 @@ class Agenda
      */
     private $em;
 
-
     public function __construct(ObjectManager $entityManager)
     {
         $this->em = $entityManager;
     }
 
-    public function getCurrentSeason(){
-
+    public function getCurrentSeason()
+    {
     }
 
     public function getPublicEventsBySeason(Season $season)
@@ -47,10 +44,9 @@ class Agenda
         return $this->getEventRepository()->findBySeason($season);
     }
 
-
     public function getEventByIdOrUrl(string $urlKey)
     {
-        if (is_int($urlKey)) {
+        if (\is_int($urlKey)) {
             return $this->getEventRepository()->find($urlKey);
         }
 

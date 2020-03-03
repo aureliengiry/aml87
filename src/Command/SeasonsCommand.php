@@ -10,7 +10,7 @@ namespace App\Command;
 use App\Entity\Evenement;
 use App\Entity\Season;
 use App\Repository\EvenementRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -26,12 +26,12 @@ class SeasonsCommand extends Command
     protected $eventRepo;
     protected $seasonRepo;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->objectManager = $objectManager;
+        $this->entityManager = $entityManager;
 
         parent::__construct();
     }
@@ -43,8 +43,8 @@ class SeasonsCommand extends Command
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->eventRepo = $this->objectManager->getRepository(Evenement::class);
-        $this->seasonRepo = $this->objectManager->getRepository(Season::class);
+        $this->eventRepo = $this->entityManager->getRepository(Evenement::class);
+        $this->seasonRepo = $this->entityManager->getRepository(Season::class);
     }
 
     /**
@@ -67,7 +67,7 @@ EOF
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<info>Indexation evenements/seasons: Start</info>');
 
@@ -90,15 +90,17 @@ EOF
                 $event->setArchive(false);
             }
 
-            $this->objectManager->persist($event);
+            $this->entityManager->persist($event);
         }
 
-        $this->objectManager->flush();
+        $this->entityManager->flush();
 
         $output->writeln('<info>Indexation evenements/seasons: End</info>');
+
+        return 0;
     }
 
-    protected function getSeasonByEvent(Evenement &$event, OutputInterface $output)
+    protected function getSeasonByEvent(Evenement &$event, OutputInterface $output): void
     {
         $eventDateStart = $event->getDateStart();
         if ($eventDateStart) {
@@ -121,10 +123,7 @@ EOF
         }
     }
 
-    /**
-     * @return Season
-     */
-    protected function calculateSeason(\DateTime $eventDateStart)
+    protected function calculateSeason(\DateTime $eventDateStart): Season
     {
         $estimateSeason = $this->seasonRepo->getSeasonByDateStart($eventDateStart);
         if ($estimateSeason) {
@@ -180,9 +179,9 @@ EOF
                 ->setDateStart($seasonDateStart)
                 ->setDateEnd($seasonDateEnd);
 
-        if($estimateSeason) {
-            $this->objectManager->persist($estimateSeason);
-            $this->objectManager->flush();
+        if ($estimateSeason) {
+            $this->entityManager->persist($estimateSeason);
+            $this->entityManager->flush();
         }
 
         return $estimateSeason;

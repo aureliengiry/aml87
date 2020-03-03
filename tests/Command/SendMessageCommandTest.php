@@ -5,9 +5,8 @@
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace Tests\Command;
+namespace App\Tests\Command;
 
-use App\Command\SendMessageCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -25,9 +24,8 @@ class SendMessageCommandTest extends KernelTestCase
      */
     public function testEmptyIdMessage()
     {
-        self::bootKernel();
-        $application = new Application(self::$kernel);
-        $application->add(new SendMessageCommand());
+        $kernel = static::createKernel();
+        $application = new Application($kernel);
         $command = $application->find('contact-us:send:message');
 
         $commandTester = new CommandTester($command);
@@ -44,9 +42,8 @@ class SendMessageCommandTest extends KernelTestCase
      */
     public function testWrongIdMessage()
     {
-        self::bootKernel();
-        $application = new Application(self::$kernel);
-        $application->add(new SendMessageCommand());
+        $kernel = static::createKernel();
+        $application = new Application($kernel);
         $command = $application->find('contact-us:send:message');
 
         $commandTester = new CommandTester($command);

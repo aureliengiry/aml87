@@ -7,13 +7,13 @@
 
 namespace App\Controller\MembersArea;
 
-use App\Agenda\SeasonManager;
 use App\Agenda\Agenda;
+use App\Agenda\SeasonManager;
 use App\Entity\User;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Members controller.

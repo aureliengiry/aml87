@@ -182,7 +182,6 @@ class Message
     /**
      * Set addressIp.
      *
-     *
      * @return Message
      */
     public function setAddressIp(string $addressIp)

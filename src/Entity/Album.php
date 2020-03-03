@@ -168,8 +168,6 @@ class Album
 
     /**
      * Set date.
-     *
-     * @param \DateTime $date
      */
     public function setDate(\DateTime $date)
     {
@@ -180,8 +178,6 @@ class Album
 
     /**
      * Get date.
-     *
-     * @return \DateTime
      */
     public function getDate(): \DateTime
     {

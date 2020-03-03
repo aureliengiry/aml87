@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Youtube extends Video
 {
     const PATTERN_URL_VIDEO = 'https://www.youtube.com/watch?v=%s';
-    const PATTERN_URL_THUMBNAIL_HQ = "https://i.ytimg.com/vi/%s/hqdefault.jpg";
-    const PATTERN_URL_THUMBNAIL = "https://i.ytimg.com/vi/%s/default.jpg";
+    const PATTERN_URL_THUMBNAIL_HQ = 'https://i.ytimg.com/vi/%s/hqdefault.jpg';
+    const PATTERN_URL_THUMBNAIL = 'https://i.ytimg.com/vi/%s/default.jpg';
 
     /**
      * @return string
@@ -46,15 +46,18 @@ class Youtube extends Video
         $videoYoutube = new self();
     }
 
-    public function getUrlYoutube(){
+    public function getUrlYoutube()
+    {
         return sprintf(self::PATTERN_URL_VIDEO, $this->providerId);
     }
 
-    public function getUrlThumbnail(){
+    public function getUrlThumbnail()
+    {
         return sprintf(self::PATTERN_URL_THUMBNAIL, $this->providerId);
     }
 
-    public function getUrlThumbnailHq(){
+    public function getUrlThumbnailHq()
+    {
         return sprintf(self::PATTERN_URL_THUMBNAIL_HQ, $this->providerId);
     }
 }

@@ -42,6 +42,13 @@ git-hooks-install:
 	cp hooks/pre-commit.sh .git/hooks/pre-commit
 	chmod 755 .git/hooks/pre-commit
 
+project-update:       ## Start all process to update project. Ex: make project-update
+project-update: composer-install yarn-install assets-compile-dev apache-restart git-hooks-install
+
+project-upgrade:       ## Start all process to update project. Ex: make project-upgrade
+project-upgrade: composer-update yarn-upgrade assets-compile-dev apache-restart git-hooks-install
+
+
 ##
 ## Shell by container
 ##---------------------------------------------------------------------------
@@ -65,9 +72,9 @@ yarn-install:        ## Yarn install
 yarn-install:
 	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn install"
 
-yarn-update:         ## Yarn update
-yarn-update:
-	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn update"
+yarn-upgrade:         ## Yarn upgrade
+yarn-upgrade:
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && yarn upgrade"
 
 assets-compile-dev:         ## Compile assets for dev
 assets-compile-dev:
@@ -91,16 +98,21 @@ sf-list:
 
 sf-cc:        ## Clear the cache in dev env
 sf-cc:
-	@$(EXEC_WEB) $(SYMFONY_CONSOLE) cache:clear --no-warmup
-	@$(EXEC_WEB) $(SYMFONY_CONSOLE) cache:warmup
+	$(EXEC_WEB) $(SYMFONY_CONSOLE) cache:clear --no-warmup
+	$(EXEC_WEB) $(SYMFONY_CONSOLE) cache:warmup
+	$(EXEC_WEB) chmod -R 777 $(PROJECT_PATH)/var
+
+sf-db-migrate:      ## Migrate database schema to the latest available version. Ex: make sf-db-migrate
+sf-db-migrate:
+	$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:migrations:migrate -n
 
 composer-install:   ## Install vendor
 composer-install:
-	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 /usr/local/bin/composer install -o"
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 /usr/local/bin/composer install"
 
 composer-update:    ## Update vendor
 composer-update:
-	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 /usr/local/bin/composer update -o"
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 /usr/local/bin/composer update"
 
 ##
 ## Database
@@ -155,15 +167,25 @@ phpstan:
 
 php-cs-fixer-dry-run:   ## PHP Code Style Fixer in dry-run mode
 php-cs-fixer-dry-run:
-	 $(EXEC_WEB) /bin/bash -c "cd $(SITE_PATH) && vendor/bin/php-cs-fixer fix --config=.php_cs -v --dry-run --allow-risky=yes"
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && vendor/bin/php-cs-fixer fix --config=.php_cs -v --dry-run --allow-risky=yes"
 
 php-cs-fixer:           ## PHP Code Style Fixer
 php-cs-fixer:
-	 $(EXEC_WEB) /bin/bash -c "cd $(SITE_PATH) && vendor/bin/php-cs-fixer fix --config=.php_cs -v --allow-risky=yes"
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && vendor/bin/php-cs-fixer fix --config=.php_cs -v --allow-risky=yes"
 
+eslint:           ## Lint Javascript files
+eslint: yarn-install
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && ./node_modules/.bin/eslint assets/js webpack.config.js"
+
+eslint-fix: 		## Lint Javascript files and fix them
+eslint-fix: yarn-install
+	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && ./node_modules/.bin/eslint --fix assets/js webpack.config.js"
+
+ssl-certificate-create:  ## Create self-signed certificate
+ssl-certificate-create:
+	$(EXEC_WEB) /bin/bash -c "openssl req -new -x509 -days 365 -keyout /etc/apache2/ssl/key/aml87.key -out /etc/apache2/ssl/crt/aml87.crt -nodes -subj '/O=AML87/OU=AML87/CN=www.aml87.local'"
 
 # Internal rules
-
 build:
 	$(FIG) build
 
@@ -186,9 +208,6 @@ vendor: composer.lock
 
 composer.lock: composer.json
 	@echo compose.lock is not up to date.
-
-app/config/parameters.yml: app/config/parameters.yml.dist
-	@$(RUN_WEB) composer -d $(PROJECT_PATH) run-script post-install-cmd
 
 node_modules: yarn.lock
 	@$(RUN_NODEJS) yarn install

@@ -8,9 +8,9 @@
 namespace App\Controller;
 
 use App\Entity\Link;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Blog controller.
