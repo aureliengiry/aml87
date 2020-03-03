@@ -11,7 +11,7 @@ services:
       - /etc/apache2/sites-available:consistent
       - /var/www/aml87:cached
       - /var/www/aml87/var/cache
-      - /var/www/aml87/var/logs
+      - /var/www/aml87/var/log
       - /var/www/aml87/var/sessions
     tty: true
 

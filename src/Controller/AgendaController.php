@@ -11,11 +11,11 @@ use App\Agenda\Agenda;
 use App\Agenda\SeasonManager;
 use App\Entity\Season;
 use Knp\Menu\MenuItem;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Blog controller.
@@ -30,15 +30,14 @@ class AgendaController extends AbstractController
     /** @var SeasonManager */
     private $seasonManager;
 
-    /** @var MenuItem     */
+    /** @var MenuItem */
     private $appMainMenu;
 
     public function __construct(
         Agenda $agenda,
         SeasonManager $seasonManager,
         MenuItem $appMainMenu
-    )
-    {
+    ) {
         $this->agenda = $agenda;
         $this->seasonManager = $seasonManager;
         $this->appMainMenu = $appMainMenu;

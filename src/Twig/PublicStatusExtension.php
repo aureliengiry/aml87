@@ -25,7 +25,6 @@ class PublicStatusExtension extends AbstractExtension
     /**
      * réduit une chaine de caractères sans couper les mots.
      *
-     *
      * @return string date plus nice à lire
      */
     public function publicStatusFilter($boolean)

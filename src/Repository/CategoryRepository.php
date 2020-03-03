@@ -22,7 +22,6 @@ class CategoryRepository extends EntityRepository
     /**
      * Function retrieves all categories with nb articles by category.
      *
-     *
      * @return array
      */
     public function getCategoriesWithNbArticles()

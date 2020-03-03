@@ -9,37 +9,32 @@ namespace App\EventListener;
 
 use App\Entity\Message;
 use App\Event\Contact\PostEvent;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class PostListener.
  */
 class PostListener
 {
-    /**
-     * @var \Swift_Mailer
-     */
+    /** @var \Swift_Mailer */
     private $mailer;
 
-    /**
-     * @var ObjectManager
-     */
-    private $em;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $subscribers;
 
     /**
      * PostListener constructor.
-     *
-     * @param string $subscribers
      */
-    public function __construct(\Swift_Mailer $mailer, ObjectManager $entityManager, string $subscribers = null)
+    public function __construct(
+        \Swift_Mailer $mailer,
+        EntityManagerInterface $entityManager,
+        string $subscribers = null)
     {
         $this->mailer = $mailer;
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
         $this->subscribers = $subscribers;
     }
 
@@ -59,10 +54,10 @@ class PostListener
                 $this->mailer->send($mail);
 
                 $post->setStatus(Message::MESSAGE_STATUS_SAVE_SEND);
-                $this->em->persist($post);
+                $this->entityManager->persist($post);
             }
 
-            $this->em->flush();
+            $this->entityManager->flush();
         }
     }
 

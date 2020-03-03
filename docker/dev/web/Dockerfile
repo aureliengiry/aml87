@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
         libjpeg-dev \
         libpng-dev \
         vim \
-        mysql-client \
+        default-mysql-client \
         telnet \
         netcat \
         wget \
@@ -65,15 +65,6 @@ RUN mkdir -p /tmp/blackfire \
     && curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux_static/amd64 | tar zxp -C /tmp/blackfire \
     && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
     && rm -Rf /tmp/blackfire
-
-# Certificat SSL
-RUN mkdir /etc/apache2/ssl \
-    && mkdir /etc/apache2/ssl/crt \
-    && mkdir /etc/apache2/ssl/key
-
-# Certificat AML87
-RUN openssl req -new -x509 -days 365 -keyout /etc/apache2/ssl/key/aml87.key -out /etc/apache2/ssl/crt/aml87.crt -nodes -subj '/O=AML87/OU=AML87/CN=www.aml87.dev'
-
 
 RUN usermod -u 1000 www-data
 

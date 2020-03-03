@@ -73,7 +73,6 @@ class TagsRepository extends EntityRepository
     /**
      * Function retrieves all tags with nb articles by tag.
      *
-     *
      * @return array
      */
     public function getTagsWithNbArticles()

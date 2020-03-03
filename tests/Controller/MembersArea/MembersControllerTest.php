@@ -5,7 +5,7 @@
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace Tests\App\Controller\MembersArea;
+namespace App\Tests\App\Controller\MembersArea;
 
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -23,9 +23,16 @@ class MembersControllerTest extends WebTestCase
 {
     private $client = null;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = static::createClient();
+    }
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->client = null;
     }
 
     /**

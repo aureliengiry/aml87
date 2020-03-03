@@ -22,8 +22,7 @@ class EvenementFixtures extends Fixture
         $loader = new NativeLoader();
         $fakeData = $loader->loadFile(__DIR__.'/evenements_fixtures.yaml');
         foreach ($fakeData->getObjects() as $object) {
-
-            if( $object instanceof Evenement) {
+            if ($object instanceof Evenement) {
                 /** @var Evenement $object */
                 $allEventTypes = array_keys(Evenement::getTypesEvenements());
                 $eventType = array_rand($allEventTypes);

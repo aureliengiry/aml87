@@ -10,11 +10,9 @@ namespace App\Command;
 use App\Google\YoutubeProvider;
 use App\Video\VideoFactory;
 use App\Video\VideoManager;
-use Doctrine\Common\Persistence\ObjectManager;
-use Monolog\Logger;
+use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Processor\MemoryPeakUsageProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
-// logger
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -40,8 +38,8 @@ class UpdateYoutubeDataCommand extends Command
     /** @var array list of videos */
     private $videosList = [];
 
-    /** @var ObjectManager */
-    private $objectManager;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
     /** @var YoutubeProvider */
     private $youtubeProvider;
@@ -53,14 +51,13 @@ class UpdateYoutubeDataCommand extends Command
     private $videoManager;
 
     public function __construct(
-        ObjectManager $objectManager,
+        EntityManagerInterface $entityManager,
         YoutubeProvider $youtubeProvider,
         VideoFactory $videoFactory,
-    VideoManager $videoManager,
-    LoggerInterface $logger
-    )
-    {
-        $this->objectManager = $objectManager;
+        VideoManager $videoManager,
+        LoggerInterface $logger
+    ) {
+        $this->entityManager = $entityManager;
         $this->youtubeProvider = $youtubeProvider;
         $this->videoFactory = $videoFactory;
         $this->videoManager = $videoManager;
@@ -104,12 +101,11 @@ class UpdateYoutubeDataCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<bg=cyan;fg=red>Start treatment </>');
 
         $this->initVideoslist();
-
 
         $compteurVideo = 0;
 
@@ -118,18 +114,18 @@ class UpdateYoutubeDataCommand extends Command
                 $videos = $this->youtubeProvider->getVideosPlaylist($playlistId);
                 foreach ($videos->getItems() as $youtubeVideo) {
                     $idYoutube = $youtubeVideo->getContentDetails()->getVideoId();
-                    if (!in_array($idYoutube, $this->videosList, true)) {
+                    if (!\in_array($idYoutube, $this->videosList, true)) {
                         $video = $this->videoFactory->createVideoFromYoutube(
                             $youtubeVideo
                         );
 
-                        $this->objectManager->persist($video);
+                        $this->entityManager->persist($video);
                         $output->writeln('Youtube ID: '.$idYoutube.' imported.');
 
                         ++$compteurVideo;
                     }
                 }
-                $this->objectManager->flush();
+                $this->entityManager->flush();
             }
         } catch (\Exception $e) {
             $output->writeln('<bg=red;fg=white>Error: '.$e->getMessage().'</>');
@@ -138,19 +134,21 @@ class UpdateYoutubeDataCommand extends Command
         $this->output->writeln("New videos: {$compteurVideo}");
 
         $output->writeln('<bg=cyan;fg=red>Fin du traitement</>');
+
+        return 0;
     }
 
     /**
      * Get videos list.
      */
-    private function initVideoslist()
+    private function initVideoslist(): void
     {
         $videos = $this->videoManager->findAllVideosYoutube();
         foreach ($videos as $video) {
             $this->videosList[$video->getId()] = $video->getProviderId();
         }
 
-        $nbVideos = count($this->videosList);
+        $nbVideos = \count($this->videosList);
         $this->output->writeln("Init videos: {$nbVideos}");
     }
 }

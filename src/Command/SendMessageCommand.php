@@ -10,7 +10,7 @@ namespace App\Command;
 use App\Entity\Message;
 use App\Event\Contact\PostEvent;
 use App\Repository\MessageRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,15 +29,17 @@ class SendMessageCommand extends Command
     protected $messageRepo;
     protected $messageId;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
     /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
-    public function __construct(ObjectManager $objectManager, EventDispatcherInterface $eventDispatcher)
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EventDispatcherInterface $eventDispatcher)
     {
-        $this->objectManager = $objectManager;
+        $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
 
         parent::__construct();
@@ -67,14 +69,14 @@ EOF
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->messageRepo = $this->objectManager->getRepository(Message::class);
+        $this->messageRepo = $this->entityManager->getRepository(Message::class);
         $this->messageId = $input->getArgument('id-message');
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<info>Send message : Start</info>');
 
@@ -86,9 +88,11 @@ EOF
 
         $output->writeln('<info>'.$message->getName().' - '.$message->getSubject().'</info>');
 
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $this->eventDispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($message));
 
         $output->writeln('<info>Send Message : End</info>');
+
+        return 0;
     }
 }

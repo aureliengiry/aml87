@@ -8,6 +8,7 @@ framework:
     # Remove or comment this section to explicitly disable session support.
     session:
         handler_id: ~
+        save_path:   '%kernel.project_dir%/var/sessions'
 
     #esi: true
     #fragments: true

@@ -10,10 +10,10 @@ namespace App\Controller;
 use App\Contact\ContactMessage;
 use App\Entity\Message;
 use App\Form\Type\MessageType;
-use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Contact Us controller.
