@@ -9,21 +9,19 @@ namespace App\Agenda;
 
 use App\Entity\Evenement;
 use App\Entity\Season;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class Agenda.
  */
 class Agenda
 {
-    /**
-     * @var ObjectManager
-     */
-    private $em;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    public function __construct(ObjectManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
     public function getCurrentSeason()
@@ -55,7 +53,7 @@ class Agenda
 
     private function getEventRepository()
     {
-        return $this->em->getRepository(Evenement::class);
+        return $this->entityManager->getRepository(Evenement::class);
     }
 
     public function getNextConcert()

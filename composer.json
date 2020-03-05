@@ -59,6 +59,7 @@
     "doctrine/doctrine-fixtures-bundle": "^3.0",
     "friendsofphp/php-cs-fixer": "^2.16",
     "nelmio/alice": "^3.5",
+    "phpstan/phpstan": "^0.12.14",
     "roave/security-advisories": "dev-master",
     "sensiolabs/security-checker": "^6.0",
     "symfony/maker-bundle": "^1.7",

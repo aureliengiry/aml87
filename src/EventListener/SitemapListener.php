@@ -11,7 +11,7 @@ use App\Discography\DiscographyManager;
 use App\Entity\Article;
 use App\Entity\Evenement;
 use App\Event\Sitemap\GenerateEvent;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Router;
 
 /**
@@ -19,18 +19,26 @@ use Symfony\Component\Routing\Router;
  */
 class SitemapListener
 {
-    private $em;
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    /** @var Router */
     private $router;
+
+    /** @var DiscographyManager */
     private $discographyManager;
 
     /**
      * SitemapListener constructor.
      */
-    public function __construct(Router $router, DiscographyManager $discographyManager, ObjectManager $entityManager)
+    public function __construct(
+        Router $router,
+        DiscographyManager $discographyManager,
+        EntityManagerInterface $entityManager)
     {
         $this->router = $router;
         $this->discographyManager = $discographyManager;
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
     public function onGenerateSitemapEvent(GenerateEvent $event)
@@ -45,7 +53,7 @@ class SitemapListener
         $event->addUrls($mainUrl);
 
         // add some urls blog
-        $repositoryArticle = $this->em->getRepository(Article::class);
+        $repositoryArticle = $this->entityManager->getRepository(Article::class);
         $entitiesBlog = $repositoryArticle->getPublicArticles(1, [], 100);
 
         // add some urls blog
@@ -112,7 +120,7 @@ class SitemapListener
         $event->addUrls($mainUrl);
 
         // add some urls fo agenda events
-        $evenementRepository = $this->em->getRepository(Evenement::class);
+        $evenementRepository = $this->entityManager->getRepository(Evenement::class);
         $agendaEvents = $evenementRepository->getNextEvenements([
             'public' => 1,
             'archive' => 0,

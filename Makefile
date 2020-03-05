@@ -11,7 +11,7 @@ PROJECT_PATH=/var/www/aml87
 SYMFONY_CONSOLE="$(PROJECT_PATH)/bin/console"
 
 .DEFAULT_GOAL := help
-.PHONY: help start stop reset db db-diff db-migrate db-rollback db-load watch clear clean test tu tf tj lint ls ly lt lj build up perm deps cc sf-list
+.PHONY: help start stop reset db db-diff db-migrate db-rollback db-load watch clear clean test tu tf tj lint ls ly lt lj up cc sf-list
 
 help:
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
@@ -145,18 +145,11 @@ tests-init: vendor
 
 tests-ut:             ## Run the phpunit on unit tests and exclude functional tests
 tests-ut:
-	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit --exclude-group functional"
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 bin/phpunit --exclude-group functional"
 
 tests-functional:  ## Run the phpunit on functionnal tests
 tests-functional:
-	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit --group functional"
-
-##
-## Dependencies
-##---------------------------------------------------------------------------
-
-deps:           ## Install the project PHP and JS dependencies
-deps: vendor
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 bin/phpunit --group functional"
 
 ##
 ## Tools
@@ -186,9 +179,6 @@ ssl-certificate-create:
 	$(EXEC_WEB) /bin/bash -c "openssl req -new -x509 -days 365 -keyout /etc/apache2/ssl/key/aml87.key -out /etc/apache2/ssl/crt/aml87.crt -nodes -subj '/O=AML87/OU=AML87/CN=www.aml87.local'"
 
 # Internal rules
-build:
-	$(FIG) build
-
 docker-cmd-up:
 	$(FIG) up -d && $(FIG) logs
 
@@ -198,11 +188,8 @@ docker-cmd-start:
 docker-cmd-stop:
 	$(FIG) stop
 
-perm:
-	-$(EXEC_WEB) chmod -R 777 $(PROJECT_PATH)/var
 
 # Rules from files
-
 vendor: composer.lock
 	@$(EXEC_WEB) composer install -d $(PROJECT_PATH)
 

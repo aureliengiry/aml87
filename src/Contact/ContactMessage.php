@@ -9,7 +9,7 @@ namespace App\Contact;
 
 use App\Entity\Message;
 use App\Event\Contact\PostEvent;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -17,31 +17,27 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class ContactMessage
 {
-    /**
-     * @var ObjectManager
-     */
-    private $em;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    /**
-     * @var EventDispatcherInterface
-     */
+    /** @var EventDispatcherInterface */
     private $eventDispatcher;
 
     public function __construct(
-        ObjectManager $entityManager,
+        EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
      * Save message and dispatch event.
      */
-    public function save(Message $message)
+    public function save(Message $message): void
     {
-        $this->em->persist($message);
-        $this->em->flush();
+        $this->entityManager->persist($message);
+        $this->entityManager->flush();
 
         if (false === $message->isSpam()) {
             $this->eventDispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($message));

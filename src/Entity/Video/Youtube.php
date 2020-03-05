@@ -41,11 +41,6 @@ class Youtube extends Video
         $this->providerId = $idYoutube;
     }
 
-    public function createVideo(string $title, string $idYoutube): self
-    {
-        $videoYoutube = new self();
-    }
-
     public function getUrlYoutube()
     {
         return sprintf(self::PATTERN_URL_VIDEO, $this->providerId);

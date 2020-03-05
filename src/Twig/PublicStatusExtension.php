@@ -27,7 +27,7 @@ class PublicStatusExtension extends AbstractExtension
      *
      * @return string date plus nice à lire
      */
-    public function publicStatusFilter($boolean)
+    public function publicStatusFilter($boolean): string
     {
         if (true === $boolean) {
             return 'Publié';

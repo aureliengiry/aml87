@@ -8,7 +8,7 @@
 namespace App\Event\Contact;
 
 use App\Entity\Message;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class PostEvent.

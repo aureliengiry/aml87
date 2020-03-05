@@ -31,7 +31,7 @@ class SubstringExtension extends AbstractExtension
      *
      * @return string chaine réduite
      */
-    public function substringFilter($longString, $nbChar = 10, $endString = '[...]')
+    public function substringFilter(string $longString, ?int $nbChar = 10, ?string $endString = '[...]'): string
     {
         $substring = $tmpString = '';
         $tmpArray = [];
