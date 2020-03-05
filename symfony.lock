@@ -227,6 +227,9 @@
     "phpseclib/phpseclib": {
         "version": "2.0.11"
     },
+    "phpstan/phpstan": {
+        "version": "0.12.14"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },

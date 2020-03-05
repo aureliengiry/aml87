@@ -9,26 +9,24 @@ namespace App\Agenda;
 
 use App\Entity\Season;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class SeasonManager.
  */
 class SeasonManager
 {
-    /**
-     * @var ObjectManager
-     */
-    private $em;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    public function __construct(ObjectManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
     private function getSeasonRepository()
     {
-        return $this->em->getRepository(Season::class);
+        return $this->entityManager->getRepository(Season::class);
     }
 
     public function getAllSeasons(): Collection

@@ -10,21 +10,19 @@ namespace App\Video;
 use App\Entity\Video;
 use App\Repository\Video\YoutubeRepository;
 use App\Repository\VideoRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class VideoManager.
  */
 class VideoManager
 {
-    /**
-     * @var ObjectManager
-     */
-    private $em;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    public function __construct(ObjectManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
     public function findAllVideosYoutube()
@@ -34,11 +32,11 @@ class VideoManager
 
     private function getVideoRepository(): VideoRepository
     {
-        return $this->em->getRepository(Video::class);
+        return $this->entityManager->getRepository(Video::class);
     }
 
     private function getVideoYoutubeeRepository(): YoutubeRepository
     {
-        return $this->em->getRepository(Video\Youtube::class);
+        return $this->entityManager->getRepository(Video\Youtube::class);
     }
 }

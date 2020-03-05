@@ -24,11 +24,9 @@ class WordWarpExtension extends AbstractExtension
     }
 
     /**
-     * réduit une chaine de caractères sans couper les mots.
-     *
-     * @return string date plus nice à lire
+     * Réduit une chaine de caractères sans couper les mots.
      */
-    public function wordWarpFilter($str, $length = 500, $id = null, $wordwarp = true)
+    public function wordWarpFilter(string $str, ?int $length = 500, $id = null, $wordwarp = true): string
     {
         // Delete HTML tags
         $str = $this->stripHtmlTags($str);
@@ -53,14 +51,11 @@ class WordWarpExtension extends AbstractExtension
      *
      * @return string date plus nice à lire
      */
-    public function isWordWarpFilter($str, $length = 200)
+    public function isWordWarpFilter(string $str, ?int $length = 200): bool
     {
         $str = $this->stripHtmlTags($str);
-        if (mb_strlen($str) > $length) {
-            return true;
-        }
 
-        return false;
+        return mb_strlen($str) > $length;
     }
 
     /**
@@ -68,14 +63,14 @@ class WordWarpExtension extends AbstractExtension
      * script code, and embedded objects.  Add line breaks around
      * block-level tags to prevent word joining after tag removal.
      */
-    public function stripHtmlTags($text)
+    public function stripHtmlTags(string $text): string
     {
         $allowedTags = '<strong><em>';
 
         return strip_tags($text, $allowedTags);
     }
 
-    public function findSpace($str, $length)
+    public function findSpace(string $str, int $length)
     {
         while ($length > 0 && !$val = mb_strpos($str, ' ', $length)) {
             $length = $length - 10;

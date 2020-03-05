@@ -8,21 +8,19 @@
 namespace App\Discography;
 
 use App\Entity\Album;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class DiscographyManager.
  */
 class DiscographyManager
 {
-    /**
-     * @var ObjectManager
-     */
-    private $em;
+    /** @var EntityManagerInterface */
+    private $entityManager;
 
-    public function __construct(ObjectManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
     public function getPublicAlbums()
@@ -35,6 +33,6 @@ class DiscographyManager
 
     private function getAlbumRepository()
     {
-        return $this->em->getRepository(Album::class);
+        return $this->entityManager->getRepository(Album::class);
     }
 }
