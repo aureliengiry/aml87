@@ -18,7 +18,6 @@ install:
 script:
   - bin/console lint:twig templates
   - bin/console lint:yaml config
-  - bin/console security:check
   - yarn install
   - yarn encore dev
   - bin/phpunit
