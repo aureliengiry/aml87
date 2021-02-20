@@ -39,7 +39,7 @@ class PageController extends AbstractController
         }
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find AmlWebBundle:Page entity.');
+            throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
         $request->attributes->set('label', $entity->getTitle());

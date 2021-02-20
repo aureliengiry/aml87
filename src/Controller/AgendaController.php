@@ -76,7 +76,7 @@ class AgendaController extends AbstractController
     {
         $event = $this->agenda->getEventByIdOrUrl($slug);
         if (!$event) {
-            throw $this->createNotFoundException('Unable to find AmlWebBundle:Evenement entity.');
+            throw $this->createNotFoundException('Unable to find Evenement entity.');
         }
 
         // Init Main Menu
@@ -115,7 +115,7 @@ class AgendaController extends AbstractController
 
         $season = $seasonsRepository->find($season_id);
         if (!$season) {
-            throw $this->createNotFoundException('Unable to find AmlWebBundle:Season entity.');
+            throw $this->createNotFoundException('Unable to find Season entity.');
         }
 
         // Init Main Menu

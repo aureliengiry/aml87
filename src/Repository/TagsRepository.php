@@ -60,7 +60,7 @@ class TagsRepository extends EntityRepository
     public function loadOneTagByName($tag)
     {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT bt.id,bt.name FROM AmlWebBundle:Tags bt WHERE bt.name LIKE :tag')
+            ->createQuery('SELECT bt.id,bt.name FROM Tags::class bt WHERE bt.name LIKE :tag')
             ->setParameter('tag', $tag);
 
         try {

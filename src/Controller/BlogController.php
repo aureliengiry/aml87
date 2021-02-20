@@ -94,7 +94,7 @@ class BlogController extends AbstractController
 
         $article = $this->articleManager->getArticleByIdOrUrl($slug);
         if (!$article) {
-            throw $this->createNotFoundException('Unable to find AmlWebBundle:Blog entity.');
+            throw $this->createNotFoundException('Unable to find Blog entity.');
         }
 
         $request->attributes->set('label', $article->getTitle());

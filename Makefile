@@ -154,9 +154,17 @@ tests-functional:
 ##
 ## Tools
 ##---------------------------------------------------------------------------
-phpstan:			## PHPStan - PHP Static Analysis Tool
-phpstan:
-	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpstan.phar analyse src tests"
+phpstan-general: ## PHPStan - PHP Static Analysis Tool (Analyse all files in src/*)
+phpstan-general:
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpstan analyse -c phpstan.neon src --level 7"
+
+phpstan-tests: ## PHPStan - PHP Static Analysis Tool (Analyse all files in tests/*)
+phpstan-tests:
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level 7"
+
+phpstan-diff: ## PHPStan analyse diff files with master (Analyse all updated php files)
+phpstan-diff:
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpstan analyse --level 7 \`git diff --name-only master... '*.php' \`"
 
 php-cs-fixer-dry-run:   ## PHP Code Style Fixer in dry-run mode
 php-cs-fixer-dry-run:
