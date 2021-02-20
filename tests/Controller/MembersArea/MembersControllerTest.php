@@ -23,12 +23,12 @@ class MembersControllerTest extends WebTestCase
 {
     private $client = null;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = static::createClient();
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
 
