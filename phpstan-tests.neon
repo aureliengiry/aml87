@@ -1,0 +1,9 @@
+parameters:
+    bootstrapFiles:
+        - bin/.phpunit/phpunit/vendor/autoload.php
+    symfony:
+        container_xml_path: var/cache/test/srcApp_KernelTestDebugContainer.xml
+        console_application_loader: build/phpstan/console-loader.php
+    doctrine:
+        objectManagerLoader: build/phpstan/doctrine-orm-bootstrap.php
+    checkMissingIterableValueType: false # need PHP 7.4

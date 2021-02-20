@@ -59,7 +59,11 @@
     "doctrine/doctrine-fixtures-bundle": "^3.0",
     "friendsofphp/php-cs-fixer": "^2.16",
     "nelmio/alice": "^3.5",
-    "phpstan/phpstan": "^0.12.14",
+    "phpstan/extension-installer": "^1.1",
+    "phpstan/phpstan": "^0.12.78",
+    "phpstan/phpstan-doctrine": "^0.12.32",
+    "phpstan/phpstan-phpunit": "^0.12.17",
+    "phpstan/phpstan-symfony": "^0.12.20",
     "roave/security-advisories": "dev-master",
     "symfony/maker-bundle": "^1.7",
     "symfony/profiler-pack": "^1.0",
@@ -77,7 +81,15 @@
     ],
     "post-update-cmd": [
       "@auto-scripts"
-    ]
+    ],
+    "phpstan": [
+      "@php bin/console cache:warmup --env=dev",
+      "@php bin/console cache:warmup --env=test",
+      "@phpstan-general",
+      "@phpstan-tests"
+    ],
+    "phpstan-general": "php vendor/bin/phpstan analyse -c phpstan.neon src --level 7 --no-progress",
+    "phpstan-tests": "php vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level 7 --no-progress"
   },
   "conflict": {
     "symfony/symfony": "*"
