@@ -43,10 +43,10 @@ git-hooks-install:
 	chmod 755 .git/hooks/pre-commit
 
 project-update:       ## Start all process to update project. Ex: make project-update
-project-update: composer-install yarn-install assets-compile-dev apache-restart git-hooks-install
+project-update: composer-install sf-cc yarn-install assets-compile-dev apache-restart git-hooks-install
 
 project-upgrade:       ## Start all process to update project. Ex: make project-upgrade
-project-upgrade: composer-update yarn-upgrade assets-compile-dev apache-restart git-hooks-install
+project-upgrade: composer-update sf-cc yarn-upgrade assets-compile-dev apache-restart git-hooks-install
 
 
 ##
@@ -100,7 +100,9 @@ sf-cc:        ## Clear the cache in dev env
 sf-cc:
 	$(EXEC_WEB) $(SYMFONY_CONSOLE) cache:clear --no-warmup
 	$(EXEC_WEB) $(SYMFONY_CONSOLE) cache:warmup
-	$(EXEC_WEB) chmod -R 777 $(PROJECT_PATH)/var
+	$(EXEC_WEB) chmod -R 777 $(PROJECT_PATH)/var/log
+	$(EXEC_WEB) chmod -R 777 $(PROJECT_PATH)/var/sessions
+	$(EXEC_WEB) chmod -R 777 $(PROJECT_PATH)/var/cache
 
 sf-db-migrate:      ## Migrate database schema to the latest available version. Ex: make sf-db-migrate
 sf-db-migrate:
