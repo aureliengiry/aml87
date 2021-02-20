@@ -269,15 +269,6 @@
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
     },
-    "sensiolabs/security-checker": {
-        "version": "4.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.0",
-            "ref": "421933bf8f0e75546ac8e00cb3eb12904fa2ac1a"
-        }
-    },
     "sentry/sentry": {
         "version": "1.9.1"
     },
@@ -373,9 +364,6 @@
             "version": "3.3",
             "ref": "87c585d24de9f43bca80ebcfd5cf5cb39445d95f"
         }
-    },
-    "symfony/http-client": {
-        "version": "v4.4.5"
     },
     "symfony/http-client-contracts": {
         "version": "v1.1.8"
