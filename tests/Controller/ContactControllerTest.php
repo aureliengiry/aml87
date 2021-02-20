@@ -18,7 +18,7 @@ class ContactControllerTest extends WebTestCase
 {
     private $client = null;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->client = static::createClient();
     }

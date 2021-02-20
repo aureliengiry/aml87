@@ -81,6 +81,6 @@ class DefaultController extends AbstractController
      */
     public function googleAnalytics()
     {
-        return  ['ga_id' => $this->getParameter('app_google_analytics.account_id')];
+        return ['ga_id' => $this->getParameter('app_google_analytics.account_id')];
     }
 }
