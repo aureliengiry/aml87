@@ -20,6 +20,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class MessageType extends AbstractType
 {
+    /** @var string|null */
+    private $reCAPTCHA_site_key;
+
+    public function __construct(?string $reCAPTCHA_site_key)
+    {
+        $this->reCAPTCHA_site_key = $reCAPTCHA_site_key;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -49,7 +57,12 @@ class MessageType extends AbstractType
                 'send',
                 SubmitType::class,
                 [
-                    'attr' => ['class' => 'btn btn-primary pull-right'],
+                    'attr' => [
+                        'class' => 'btn btn-primary pull-right g-recaptcha',
+                        'data-sitekey' => $this->reCAPTCHA_site_key,
+                        'data-callback' => 'onSubmit',
+                        'data-action' => 'submit',
+                    ],
                 ]
             );
     }
