@@ -142,3 +142,6 @@ services:
         public: true
         autowire: true
 
+    App\Form\Type\MessageType:
+        arguments:
+            $reCAPTCHA_site_key: '%env(RECAPTCHA_SITE_KEY)%'

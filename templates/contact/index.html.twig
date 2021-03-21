@@ -31,3 +31,13 @@
     {% include "contact/index/contact_form.html.twig" %}
 
 {%- endblock body %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags("app") }}
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("container-form-contact-us").submit();
+        }
+    </script>
+{% endblock %}
