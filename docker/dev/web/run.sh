@@ -51,61 +51,19 @@ function init_vhosts()
     fi
 }
 
-function init_blackfire()
-{
-    read -r -d '' BLACKFIRE_INI <<HEREDOC
-extension=blackfire.so
-blackfire.agent_socket=tcp://blackfire:${BLACKFIRE_PORT}
-blackfire.agent_timeout=5
-blackfire.log_file=/var/log/blackfire.log
-blackfire.log_level=${BLACKFIRE_LOG_LEVEL}
-blackfire.server_id=${BLACKFIRE_SERVER_ID}
-blackfire.server_token=${BLACKFIRE_SERVER_TOKEN}
-HEREDOC
-
-    echo "${BLACKFIRE_INI}" >>  /usr/local/etc/php/conf.d/blackfire.ini
-}
-
 function init_xdebug()
 {
-    read -r -d '' XDEBUG_INI <<HEREDOC
-[xdebug]
-xdebug.max_nesting_level=500
-xdebug.profiler_enable_trigger=1
-xdebug.profiler_output_dir=/var/www/html/xdebug
-xdebug.profiler_output_name=cachegrind.out.%p.%u
-xdebug.var_display_max_children=-1
-xdebug.var_display_max_depth=-1
-xdebug.var_display_max_data=-1
-xdebug.remote_autostart=0
-xdebug.remote_enable=1
-xdebug.remote_port=9000
-xdebug.remote_connect_back=1
-xdebug.remote_handler=dbgp
-HEREDOC
+    echo "Xdebug INIT - START"
 
-    echo "${XDEBUG_INI}" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
-    read -r -d '' XDEBUG_PROFILE <<HEREDOC
+     read -r -d '' XDEBUG_PROFILE <<HEREDOC
 # Xdebug
 export PHP_IDE_CONFIG="serverName=${XDEBUG_SERVER_NAME}"
 export XDEBUG_CONFIG="remote_host=$(/sbin/ip route|awk '/default/ { print $3 }') idekey=${XDEBUG_IDE_KEY}"
 HEREDOC
 
     echo "${XDEBUG_PROFILE}" >> ~/.bashrc
-}
 
-function init_opcache()
-{
-    read -r -d '' OPCACHE_INI <<HEREDOC
-[OPcache]
-opcache.memory_consumption=512
-opcache.revalidate_freq=60
-opcache.validate_timestamps=1
-opcache.max_accelerated_files=5000
-HEREDOC
-
-    echo "${OPCACHE_INI}" >> /etc/php/7.1/mods-available/opcache.ini
+    echo "Xdebug INIT - END"
 }
 
 LOCK_FILE="/var/docker.lock"
@@ -115,7 +73,6 @@ if [[ ! -e "${LOCK_FILE}" ]]; then
 
     # init_opcache
     init_xdebug
-    init_blackfire
 
 
     touch "${LOCK_FILE}"
@@ -123,7 +80,6 @@ fi
 
 init_configuration
 init_vhosts
-composer self-update
 service apache2 start
 
 tail -f /dev/null
