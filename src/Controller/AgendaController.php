@@ -11,7 +11,6 @@ use App\Agenda\Agenda;
 use App\Agenda\SeasonManager;
 use App\Entity\Season;
 use Knp\Menu\MenuItem;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,16 +21,11 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/agenda")
  */
-class AgendaController extends AbstractController
+final class AgendaController extends AbstractController
 {
-    /** @var Agenda */
-    private $agenda;
-
-    /** @var SeasonManager */
-    private $seasonManager;
-
-    /** @var MenuItem */
-    private $appMainMenu;
+    private Agenda $agenda;
+    private SeasonManager $seasonManager;
+    private MenuItem $appMainMenu;
 
     public function __construct(
         Agenda $agenda,
@@ -47,17 +41,16 @@ class AgendaController extends AbstractController
      * Lists all Blog entities.
      *
      * @Route("/", name="agenda", methods={"GET"})
-     * @Template("agenda/index.html.twig")
      */
-    public function index(): array
+    public function index(): Response
     {
         $currentSeason = $this->seasonManager->getCurrentSeason();
 
-        return [
+        return $this->render('agenda/index.html.twig', [
             'current_season' => $currentSeason,
             'entities' => $this->agenda->getPublicEventsBySeason($currentSeason),
             'seasons' => $this->seasonManager->getPastSeasons(),
-        ];
+        ]);
     }
 
     /**
@@ -68,11 +61,10 @@ class AgendaController extends AbstractController
      *     name="agenda_show_event",
      *     methods={"GET"}
      *     )
-     * @Template("agenda/show.html.twig")
      *
      * @param int|string $slug
      */
-    public function show(string $slug, Request $request): array
+    public function show(string $slug, Request $request): Response
     {
         $event = $this->agenda->getEventByIdOrUrl($slug);
         if ( ! $event) {
@@ -84,7 +76,7 @@ class AgendaController extends AbstractController
 
         $request->attributes->set('label', $event->getTitle());
 
-        return ['entity' => $event];
+        return $this->render('agenda/show.html.twig', ['entity' => $event]);
     }
 
     /**
@@ -109,9 +101,8 @@ class AgendaController extends AbstractController
      *     requirements={"season_id"="\d+"},
      *     methods={"GET"}
      *     )
-     * @Template("agenda/archives.html.twig")
      */
-    public function archives(int $season_id, Request $request): array
+    public function archives(int $season_id, Request $request): Response
     {
         $seasonsRepository = $this->getDoctrine()->getManager()->getRepository(Season::class);
 
@@ -125,10 +116,10 @@ class AgendaController extends AbstractController
 
         $request->attributes->set('label', $season->getName());
 
-        return [
+        return $this->render('agenda/archives.html.twig', [
             'currentSeason' => $season,
             'entities' => $this->agenda->getArchivedConcertBySeason($season),
             'seasons' => $seasonsRepository->getPastSeasons(),
-        ];
+        ]);
     }
 }

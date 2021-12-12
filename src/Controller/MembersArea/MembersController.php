@@ -11,8 +11,8 @@ use App\Agenda\Agenda;
 use App\Agenda\SeasonManager;
 use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,13 +21,10 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/espace-membres")
  * @Security("has_role('ROLE_USER')")
  */
-class MembersController extends AbstractController
+final class MembersController extends AbstractController
 {
-    /** @var Agenda */
-    private $agenda;
-
-    /** @var SeasonManager */
-    private $seasonManager;
+    private Agenda $agenda;
+    private SeasonManager $seasonManager;
 
     public function __construct(Agenda $agenda, SeasonManager $seasonManager)
     {
@@ -39,39 +36,36 @@ class MembersController extends AbstractController
      * dashboard entities.
      *
      * @Route("/", name="app_members_area", methods={"GET"})
-     * @Template("members/index.html.twig")
      */
-    public function index()
+    public function index(): Response
     {
-        return [];
+        return $this->render('members/index.html.twig');
     }
 
     /**
      * Lists all User entities.
      *
      * @Route("/list", name="aml_users_members_list", methods={"GET"})
-     * @Template("members/list.html.twig")
      */
-    public function list()
+    public function list(): Response
     {
-        return [
+        return $this->render('members/list.html.twig', [
             'users' => $this->getDoctrine()->getManager()->getRepository(User::class)->findAll(),
-        ];
+        ]);
     }
 
     /**
      * Display agenda.
      *
      * @Route("/agenda", name="app_members_agenda", methods={"GET"})
-     * @Template("members/agenda.html.twig")
      */
-    public function agenda()
+    public function agenda(): Response
     {
         $currentSeason = $this->seasonManager->getCurrentSeason();
 
-        return [
+        return $this->render('members/agenda.html.twig', [
             'current_season' => $currentSeason,
             'agenda_events' => $this->agenda->getAllEventsBySeason($currentSeason),
-        ];
+        ]);
     }
 }

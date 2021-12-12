@@ -212,7 +212,13 @@ tests-ut:             ## Run the phpunit on unit tests and exclude functional te
 tests-functional:  ## Run the phpunit on functionnal tests
 	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 bin/phpunit --group functional"
 
-.PHONY: tests-init tests-ut tests-functional
+tests-watch: ## Run the phpunit on watch mode. Ex: make tests-watch
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit-watcher watch --timeout=0"
+
+tests-watch-filter: ## Run the phpunit on watch mode with filter. Ex: make tests-watch FILTER=testname
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit-watcher watch --filter=$(FILTER)"
+
+.PHONY: tests-init tests-ut tests-functional tests-watch tests-watch-filter
 
 ##
 ## ----------------------------------------------------------------------------

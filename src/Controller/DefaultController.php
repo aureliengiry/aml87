@@ -10,21 +10,21 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Entity\Article;
 use App\Event\Sitemap\GenerateEvent;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class DefaultController.
  */
-class DefaultController extends AbstractController
+final class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="app_main_index", methods={"GET"})
-     * @Template("default/index.html.twig")
      */
-    public function index()
+    public function index(): Response
     {
         // Last blog article
         $repo = $this->getDoctrine()->getRepository(Article::class);
@@ -40,22 +40,18 @@ class DefaultController extends AbstractController
             ['date' => 'DESC']
         );
 
-        return [
+        return $this->render('default/index.html.twig', [
             'lastBlogArticle' => $blogEntity,
             'lastAlbum' => $albumEntity,
-        ];
+        ]);
     }
 
     /**
      * @Route("/sitemap.{_format}", name="sitemap", Requirements={"_format" = "xml"}, methods={"GET"})
-     * @Template("default/sitemap.xml.twig")
      */
-    public function sitemap(Request $request)
+    public function sitemap(Request $request, EventDispatcher $eventDispatcher): Response
     {
         $urls = [];
-
-        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $dispatcher = $this->container->get('event_dispatcher');
 
         $hostname = 'http://'.$request->getHost();
 
@@ -67,20 +63,19 @@ class DefaultController extends AbstractController
         ];
 
         $sitemapGenerationEvent = new GenerateEvent($urls);
-        $dispatcher->dispatch('aml_web.sitemap.generate_start', $sitemapGenerationEvent);
+        $eventDispatcher->dispatch('aml_web.sitemap.generate_start', $sitemapGenerationEvent);
 
-        return [
+        return $this->render('default/sitemap.xml.twig', [
             'urls' => $sitemapGenerationEvent->getUrls(),
             'hostname' => $hostname,
-        ];
+        ]);
     }
 
     /**
      * @Route("/google-analytics", name="google-analytics", methods={"GET"})
-     * @Template("main/google_analytics.html.twig")
      */
-    public function googleAnalytics()
+    public function googleAnalytics(): Response
     {
-        return ['ga_id' => $this->getParameter('app_google_analytics.account_id')];
+        return $this->render('main/google_analytics.html.twig', ['ga_id' => $this->getParameter('app_google_analytics.account_id')]);
     }
 }

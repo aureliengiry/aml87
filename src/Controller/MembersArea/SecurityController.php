@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class SecurityController.
  */
-class SecurityController extends AbstractController
+final class SecurityController extends AbstractController
 {
     /**
      * @Route("/connexion", name="app_members_area_login", methods={"GET"})
