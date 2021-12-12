@@ -75,7 +75,7 @@ class AgendaController extends AbstractController
     public function show(string $slug, Request $request): array
     {
         $event = $this->agenda->getEventByIdOrUrl($slug);
-        if (!$event) {
+        if ( ! $event) {
             throw $this->createNotFoundException('Unable to find Evenement entity.');
         }
 
@@ -93,9 +93,11 @@ class AgendaController extends AbstractController
     public function nextConcert(): Response
     {
         return $this->render(
-            'agenda/blocs/bloc_next_concert.html.twig', [
-            'nextConcert' => $this->agenda->getNextConcert(),
-        ]);
+            'agenda/blocs/bloc_next_concert.html.twig',
+            [
+                'nextConcert' => $this->agenda->getNextConcert(),
+            ]
+        );
     }
 
     /**
@@ -114,7 +116,7 @@ class AgendaController extends AbstractController
         $seasonsRepository = $this->getDoctrine()->getManager()->getRepository(Season::class);
 
         $season = $seasonsRepository->find($season_id);
-        if (!$season) {
+        if ( ! $season) {
             throw $this->createNotFoundException('Unable to find Season entity.');
         }
 

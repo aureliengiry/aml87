@@ -34,7 +34,8 @@ class SitemapListener
     public function __construct(
         Router $router,
         DiscographyManager $discographyManager,
-        EntityManagerInterface $entityManager)
+        EntityManagerInterface $entityManager
+    )
     {
         $this->router = $router;
         $this->discographyManager = $discographyManager;
@@ -58,7 +59,7 @@ class SitemapListener
 
         // add some urls blog
         foreach ($entitiesBlog as $article) {
-            if (!$article->getUrl()) {
+            if ( ! $article->getUrl()) {
                 continue;
             }
 
@@ -90,7 +91,7 @@ class SitemapListener
 
         // Add some urls of discography
         foreach ($this->discographyManager->getPublicAlbums() as $album) {
-            if (!$album->getUrl()) {
+            if ( ! $album->getUrl()) {
                 continue;
             }
 
@@ -128,7 +129,7 @@ class SitemapListener
         ]);
 
         foreach ($agendaEvents as $agendaEvent) {
-            if (!$agendaEvent->getUrl()) {
+            if ( ! $agendaEvent->getUrl()) {
                 continue;
             }
 

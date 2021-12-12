@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Album
 {
-    const ALBUM_IS_PUBLIC = 1;
-    const ALBUM_IS_PRIVATE = 2;
+    public const ALBUM_IS_PUBLIC = 1;
+    public const ALBUM_IS_PRIVATE = 2;
     /**
      * @var int
      *

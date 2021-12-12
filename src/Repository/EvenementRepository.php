@@ -73,7 +73,7 @@ class EvenementRepository extends EntityRepository
                 ->andWhere('e.public = :public');
             $params['public'] = $filters['public'];
         }
-        if (isset($filters['type']) && !empty($filters['type'])) {
+        if (isset($filters['type']) && ! empty($filters['type'])) {
             $query
                 ->andWhere('e.type = :type');
             $params['type'] = $filters['type'];

@@ -57,10 +57,10 @@ class SeasonsCommand extends Command
             ->setDescription('Index seasons for all events')
             ->setHelp(
                 <<<EOF
-                The <info>evenements:index:seasons</info> Index seasons for all events and debug mode:
+                                    The <info>evenements:index:seasons</info> Index seasons for all events and debug mode:
 
-<info>php bin/console evenements:index:seasons -vvv</info>
-EOF
+                    <info>php bin/console evenements:index:seasons -vvv</info>
+                    EOF
             );
     }
 

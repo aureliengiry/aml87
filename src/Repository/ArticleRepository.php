@@ -28,14 +28,14 @@ class ArticleRepository extends EntityRepository
      */
     private function buildRequestByFilters($query, array $params = [], array $filters = [])
     {
-        if (isset($filters['category']) && !empty($filters['category'])) {
+        if (isset($filters['category']) && ! empty($filters['category'])) {
             $query
                 ->innerJoin('a.category', 'c')
                 ->andWhere('c.systemName LIKE :category');
             $params['category'] = $filters['category'];
         }
 
-        if (isset($filters['tag']) && !empty($filters['tag'])) {
+        if (isset($filters['tag']) && ! empty($filters['tag'])) {
             $query
                 ->innerJoin('a.tags', 't')
                 ->andWhere('t.systemName LIKE :tag');
@@ -64,7 +64,7 @@ class ArticleRepository extends EntityRepository
             ->where('a.public = 1')
             ->orderBy('a.created', 'DESC');
 
-        if (!empty($filters)) {
+        if ( ! empty($filters)) {
             $qb = $this->buildRequestByFilters($qb, [], $filters);
         }
 

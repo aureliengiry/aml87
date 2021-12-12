@@ -18,12 +18,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Evenement
 {
-    const EVENEMENT_TYPE_CONCERT = 'concert';
-    const EVENEMENT_TYPE_REUNION = 'reunion';
-    const EVENEMENT_TYPE_REPETITION = 'repetition';
-    const EVENEMENT_TYPE_ENREGISTREMENT = 'enregistrement';
-    const EVENEMENT_TYPE_CONCOURS = 'concours';
-    const EVENEMENT_TYPE_SORTIE = 'sortie';
+    public const EVENEMENT_TYPE_CONCERT = 'concert';
+    public const EVENEMENT_TYPE_REUNION = 'reunion';
+    public const EVENEMENT_TYPE_REPETITION = 'repetition';
+    public const EVENEMENT_TYPE_ENREGISTREMENT = 'enregistrement';
+    public const EVENEMENT_TYPE_CONCOURS = 'concours';
+    public const EVENEMENT_TYPE_SORTIE = 'sortie';
 
     /**
      * @var int
@@ -439,7 +439,7 @@ class Evenement
     public function getSlug()
     {
         $slug = $this->id;
-        if ($this->getUrl() && !empty($this->getUrl()->getUrlKey())) {
+        if ($this->getUrl() && ! empty($this->getUrl()->getUrlKey())) {
             $slug = $this->getUrl()->getUrlKey();
         }
 
@@ -457,18 +457,18 @@ class Evenement
 
         if ($formatedDateStart === $formatedDateEnd) {
             return sprintf(
-                    'Le %s de %s à %s',
-                    $this->dateStart->format('d M Y'),
-                    $this->dateStart->format('H:m'),
-                    $this->dateEnd->format('H:m')
-                );
+                'Le %s de %s à %s',
+                $this->dateStart->format('d M Y'),
+                $this->dateStart->format('H:m'),
+                $this->dateEnd->format('H:m')
+            );
         }
 
         return sprintf(
-                'Du %s au %s',
-                $this->dateStart->format('d M Y à H:m'),
-                $this->dateEnd->format('d M Y à H:m')
-            );
+            'Du %s au %s',
+            $this->dateStart->format('d M Y à H:m'),
+            $this->dateEnd->format('d M Y à H:m')
+        );
     }
 
     public function isConcert(): bool

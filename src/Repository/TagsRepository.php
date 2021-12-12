@@ -85,8 +85,7 @@ class TagsRepository extends EntityRepository
             ->join('t.articles', 'a')
             ->where('a.public = :public')
             ->groupBy('t.id')
-            ->orderBy('t.name', 'ASC')
-        ;
+            ->orderBy('t.name', 'ASC');
 
         $qb->setParameter('public', Article::ARTICLE_IS_PUBLIC);
 

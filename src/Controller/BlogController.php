@@ -93,7 +93,7 @@ class BlogController extends AbstractController
         $this->appMainMenu->getChild('Blog')->setCurrent(true);
 
         $article = $this->articleManager->getArticleByIdOrUrl($slug);
-        if (!$article) {
+        if ( ! $article) {
             throw $this->createNotFoundException('Unable to find Blog entity.');
         }
 
