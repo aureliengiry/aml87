@@ -8,13 +8,14 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class MediasController.
  */
-class MediasController extends AbstractController
+final class MediasController extends AbstractController
 {
-    public function index($name)
+    public function index($name): Response
     {
         return $this->render('medias/index.html.twig', ['name' => $name]);
     }

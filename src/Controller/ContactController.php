@@ -10,9 +10,9 @@ namespace App\Controller;
 use App\Contact\ContactMessage;
 use App\Entity\Message;
 use App\Form\Type\MessageType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -20,10 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/contact-us")
  */
-class ContactController extends AbstractController
+final class ContactController extends AbstractController
 {
-    /** @var ContactMessage */
-    private $contactMessage;
+    private ContactMessage $contactMessage;
 
     public function __construct(ContactMessage $contactMessage)
     {
@@ -34,9 +33,8 @@ class ContactController extends AbstractController
      * Index Action to display contact form.
      *
      * @Route("/", name="aml_contactus_default_index", methods={"GET", "POST"})
-     * @Template("contact/index.html.twig")
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $contactMessage = new Message();
         $form = $this->createForm(MessageType::class, $contactMessage)->handleRequest($request);
@@ -53,9 +51,9 @@ class ContactController extends AbstractController
             return $this->redirectToRoute('aml_contactus_default_index');
         }
 
-        return [
+        return $this->render('contact/index.html.twig', [
             'entity' => $contactMessage,
             'contact_form' => $form->createView(),
-        ];
+        ]);
     }
 }

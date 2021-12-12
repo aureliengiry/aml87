@@ -8,8 +8,8 @@
 namespace App\Controller;
 
 use App\Entity\Link;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -17,18 +17,17 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/liens")
  */
-class LiensController extends AbstractController
+final class LiensController extends AbstractController
 {
     /**
      * Lists all link entities.
      *
      * @Route("/", name="liens", methods={"GET"})
-     * @Template("liens/index.html.twig")
      */
-    public function index()
+    public function index(): Response
     {
-        return [
+        return $this->render('liens/index.html.twig', [
             'entities' => $this->getDoctrine()->getManager()->getRepository(Link::class)->getPublicLinks(),
-        ];
+        ]);
     }
 }

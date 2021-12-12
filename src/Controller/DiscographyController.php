@@ -10,9 +10,9 @@ namespace App\Controller;
 use App\Discography\DiscographyManager;
 use App\Entity\Album;
 use Knp\Menu\MenuItem;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -20,13 +20,10 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/discographie")
  */
-class DiscographyController extends AbstractController
+final class DiscographyController extends AbstractController
 {
-    /** @var DiscographyManager */
-    private $discographyManager;
-
-    /** @var MenuItem */
-    private $appMainMenu;
+    private DiscographyManager $discographyManager;
+    private MenuItem $appMainMenu;
 
     public function __construct(DiscographyManager $discographyManager, MenuItem $appMainMenu)
     {
@@ -38,11 +35,10 @@ class DiscographyController extends AbstractController
      * Lists all Album entities.
      *
      * @Route("/", name="discography", methods={"GET"})
-     * @Template("discography/index.html.twig")
      */
-    public function index()
+    public function index(): Response
     {
-        return ['entities' => $this->discographyManager->getPublicAlbums()];
+        return $this->render('discography/index.html.twig', ['entities' => $this->discographyManager->getPublicAlbums()]);
     }
 
     /**
@@ -50,9 +46,8 @@ class DiscographyController extends AbstractController
      *
      * @Route("/album/id/{album}", name="discography_album_show", methods={"GET"})
      * @Route("/album/{album}.html", name="discography_album_show_rewrite", methods={"GET"})
-     * @Template("discography/show.html.twig")
      */
-    public function show(Request $request, $album)
+    public function show(Request $request, $album): Response
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -72,8 +67,8 @@ class DiscographyController extends AbstractController
 
         $request->attributes->set('label', $entity->getTitle());
 
-        return [
+        return $this->render('discography/show.html.twig', [
             'entity' => $entity,
-        ];
+        ]);
     }
 }

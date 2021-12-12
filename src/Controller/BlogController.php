@@ -10,9 +10,9 @@ namespace App\Controller;
 use App\Article\ArticleManager;
 use App\Entity\Category;
 use Knp\Menu\MenuItem;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -20,15 +20,12 @@ use Symfony\Component\Routing\Annotation\Route;
  *
  * @Route("/blog")
  */
-class BlogController extends AbstractController
+final class BlogController extends AbstractController
 {
-    protected $_limitPagination = 5;
+    protected int $_limitPagination = 5;
 
-    /** @var ArticleManager */
-    private $articleManager;
-
-    /** @var MenuItem */
-    private $appMainMenu;
+    private ArticleManager $articleManager;
+    private MenuItem $appMainMenu;
 
     public function __construct(ArticleManager $articleManager, MenuItem $appMainMenu)
     {
@@ -39,10 +36,9 @@ class BlogController extends AbstractController
     /**
      * Lists all Blog entities.
      *
-     * @Route("/{page}", name="blog",requirements={"page" = "\d+"}, defaults={"page" = 1}, methods={"GET"})
-     * @Template("blog/index.html.twig")
+     * @Route("/{page}", name="blog", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods={"GET"})
      */
-    public function index(Request $request, $page)
+    public function index(Request $request, int $page): Response
     {
         $filters = [];
 
@@ -73,21 +69,20 @@ class BlogController extends AbstractController
             'lastPage' => ($calculLastPage >= 0 ? $calculLastPage : 0),
         ];
 
-        return [
+        return $this->render('blog/index.html.twig', [
             'entities' => $publicArticles,
             'pagination' => $pagination,
             'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
             'tags' => $this->articleManager->getTagsWithNbArticles(),
-        ];
+        ]);
     }
 
     /**
      * Finds and displays a Blog entity.
      *
      * @Route("/article/{slug}.html", name="blog_show", methods={"GET"})
-     * @Template("blog/show.html.twig")
      */
-    public function show($slug, Request $request)
+    public function show(string $slug, Request $request): Response
     {
         // Init Main Menu
         $this->appMainMenu->getChild('Blog')->setCurrent(true);
@@ -101,10 +96,10 @@ class BlogController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        return [
+        return $this->render('blog/show.html.twig', [
             'entity' => $article,
             'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
             'tags' => $this->articleManager->getTagsWithNbArticles(),
-        ];
+        ]);
     }
 }
