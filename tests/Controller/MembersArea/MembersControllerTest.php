@@ -5,7 +5,7 @@
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace App\Tests\App\Controller\MembersArea;
+namespace App\Tests\Controller\MembersArea;
 
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
