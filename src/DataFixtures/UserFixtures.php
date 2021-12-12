@@ -9,12 +9,12 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 class UserFixtures extends Fixture
 {
-    const ADMIN_USER = 'admin';
-    const SIMPLE_USER = 'simple-user';
+    public const ADMIN_USER = 'admin';
+    public const SIMPLE_USER = 'simple-user';
 
     public function load(ObjectManager $manager)
     {

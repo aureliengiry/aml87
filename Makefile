@@ -232,10 +232,10 @@ phpstan-diff: ## PHPStan analyse diff files with master (Analyse all updated php
 	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpstan analyse --level 7 \`git diff --name-only master... '*.php' \`"
 
 php-cs-fixer-dry-run:   ## PHP Code Style Fixer in dry-run mode
-	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && vendor/bin/php-cs-fixer fix --config=.php_cs -v --dry-run --allow-risky=yes"
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run --allow-risky=yes"
 
 php-cs-fixer:           ## PHP Code Style Fixer
-	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && vendor/bin/php-cs-fixer fix --config=.php_cs -v --allow-risky=yes"
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --allow-risky=yes"
 
 eslint: yarn-install  ## Lint Javascript files
 	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && ./node_modules/.bin/eslint assets/js webpack.config.js"
