@@ -24,8 +24,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class UpdateYoutubeDataCommand extends Command
 {
-    const YOUTUBE_STATUS_PUBLIC = 'public';
-    const YOUTUBE_STATUS_UNLISTED = 'unlisted';
+    public const YOUTUBE_STATUS_PUBLIC = 'public';
+    public const YOUTUBE_STATUS_UNLISTED = 'unlisted';
 
     /** @var bool debug mode */
     private $debug = false;
@@ -114,7 +114,7 @@ class UpdateYoutubeDataCommand extends Command
                 $videos = $this->youtubeProvider->getVideosPlaylist($playlistId);
                 foreach ($videos->getItems() as $youtubeVideo) {
                     $idYoutube = $youtubeVideo->getContentDetails()->getVideoId();
-                    if (!\in_array($idYoutube, $this->videosList, true)) {
+                    if ( ! \in_array($idYoutube, $this->videosList, true)) {
                         $video = $this->videoFactory->createVideoFromYoutube(
                             $youtubeVideo
                         );

@@ -34,8 +34,7 @@ class ArticleType extends AbstractType
                 'allow_add' => true,
                 'by_reference' => false,
             ])
-            ->add('evenements')
-        ;
+            ->add('evenements');
     }
 
     public function configureOptions(OptionsResolver $resolver)

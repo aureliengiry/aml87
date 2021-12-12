@@ -38,7 +38,7 @@ class PageController extends AbstractController
             $entity = $em->getRepository(Page::class)->getPublicPageByUrlKey($page);
         }
 
-        if (!$entity) {
+        if ( ! $entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
         }
 

@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article
 {
-    const ARTICLE_IS_PUBLIC = 1;
-    const ARTICLE_IS_PRIVATE = 0;
+    public const ARTICLE_IS_PUBLIC = 1;
+    public const ARTICLE_IS_PRIVATE = 0;
 
     /**
      * @var int
@@ -306,7 +306,7 @@ class Article
     /** ---------- TAGS ---------- */
     public function addTag(Tags $tag)
     {
-        if (!$this->tags->contains($tag)) {
+        if ( ! $this->tags->contains($tag)) {
             $tag->addArticle($this);
             $this->tags[] = $tag;
         }
@@ -348,7 +348,7 @@ class Article
      */
     public function addEvenement(Evenement $evenement)
     {
-        if (!$this->evenements->contains($evenement)) {
+        if ( ! $this->evenements->contains($evenement)) {
             $evenement->addArticle($this);
             $this->evenements[] = $evenement;
         }
@@ -391,7 +391,7 @@ class Article
     public function getSlug()
     {
         $slug = $this->id;
-        if ($this->getUrl() && !empty($this->getUrl()->getUrlKey())) {
+        if ($this->getUrl() && ! empty($this->getUrl()->getUrlKey())) {
             $slug = $this->getUrl()->getUrlKey();
         }
 

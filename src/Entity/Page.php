@@ -17,8 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Page
 {
-    const PAGE_IS_PUBLIC = 1;
-    const PAGE_IS_PRIVATE = 0;
+    public const PAGE_IS_PUBLIC = 1;
+    public const PAGE_IS_PRIVATE = 0;
 
     /**
      * @var int

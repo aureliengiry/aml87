@@ -37,7 +37,8 @@ class SendMessageCommand extends Command
 
     public function __construct(
         EntityManagerInterface $entityManager,
-        EventDispatcherInterface $eventDispatcher)
+        EventDispatcherInterface $eventDispatcher
+    )
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
@@ -55,10 +56,10 @@ class SendMessageCommand extends Command
             ->setDescription('Send message by id')
             ->setHelp(
                 <<<EOF
-                The <info>contact-us:send:message</info> send selected message by mail and debug mode:
+                                    The <info>contact-us:send:message</info> send selected message by mail and debug mode:
 
-<info>php bin/console contact-us:send:message -vvv</info>
-EOF
+                    <info>php bin/console contact-us:send:message -vvv</info>
+                    EOF
             );
 
         $this->addArgument('id-message', InputArgument::REQUIRED, 'ID Message');
@@ -82,7 +83,7 @@ EOF
 
         // Load contact message
         $message = $this->messageRepo->find($this->messageId);
-        if (!$message) {
+        if ( ! $message) {
             throw new NotFoundHttpException('Unable to find WebBundle:Message entity.');
         }
 

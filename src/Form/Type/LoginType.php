@@ -23,8 +23,7 @@ class LoginType extends AbstractType
     {
         $builder
             ->add($options['username_parameter'], TextType::class)
-            ->add($options['password_parameter'], PasswordType::class)
-        ;
+            ->add($options['password_parameter'], PasswordType::class);
 
         if ($options['remember_me']) {
             $builder->add($options['remember_me_parameter'], CheckboxType::class);
@@ -50,8 +49,7 @@ class LoginType extends AbstractType
             ->setAllowedTypes('username_parameter', 'string')
             ->setAllowedTypes('password_parameter', 'string')
             ->setAllowedTypes('remember_me_parameter', 'string')
-            ->setAllowedTypes('remember_me', 'bool')
-        ;
+            ->setAllowedTypes('remember_me', 'bool');
     }
 
     /**

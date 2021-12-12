@@ -18,8 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Message
 {
-    const MESSAGE_STATUS_SAVE = 1;
-    const MESSAGE_STATUS_SAVE_SEND = 2;
+    public const MESSAGE_STATUS_SAVE = 1;
+    public const MESSAGE_STATUS_SAVE_SEND = 2;
     /**
      * @var int
      *
@@ -254,7 +254,7 @@ class Message
      */
     public function setSpam($spam)
     {
-        if (!empty($spam)) {
+        if ( ! empty($spam)) {
             $spam = true;
         }
 

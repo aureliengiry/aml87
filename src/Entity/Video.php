@@ -107,7 +107,7 @@ abstract class Video
      */
     public function addEvenement(Evenement $evenement)
     {
-        if (!$this->evenements->contains($evenement)) {
+        if ( ! $this->evenements->contains($evenement)) {
             $evenement->addVideo($this);
             $this->evenements[] = $evenement;
         }

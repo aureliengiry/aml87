@@ -19,8 +19,7 @@ class VideoYoutubeType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('providerId', TextType::class)
-        ;
+            ->add('providerId', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

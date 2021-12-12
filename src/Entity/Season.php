@@ -17,8 +17,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Season
 {
-    const SEASON_DEFAULT_DATE_START = '%s-09-01';
-    const SEASON_DEFAULT_DATE_END = '%s-08-31';
+    public const SEASON_DEFAULT_DATE_START = '%s-09-01';
+    public const SEASON_DEFAULT_DATE_END = '%s-08-31';
 
     /**
      * @var int

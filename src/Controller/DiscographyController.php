@@ -63,7 +63,7 @@ class DiscographyController extends AbstractController
             $entity = $albumRepository->getAlbumByUrlKey($album);
         }
 
-        if (!$entity) {
+        if ( ! $entity) {
             throw $this->createNotFoundException('Unable to find Album entity.');
         }
 

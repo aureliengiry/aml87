@@ -31,7 +31,8 @@ class PostListener
     public function __construct(
         \Swift_Mailer $mailer,
         EntityManagerInterface $entityManager,
-        string $subscribers = null)
+        string $subscribers = null
+    )
     {
         $this->mailer = $mailer;
         $this->entityManager = $entityManager;
@@ -44,7 +45,7 @@ class PostListener
 
         $formatedMessage = $this->formatMessage($post);
 
-        if (!empty($this->subscribers)) {
+        if ( ! empty($this->subscribers)) {
             foreach (explode(',', $this->subscribers) as $subscriber) {
                 $mail = (new \Swift_Message($formatedMessage['subject']))
                     ->setFrom($post->getEmail(), $post->getName())

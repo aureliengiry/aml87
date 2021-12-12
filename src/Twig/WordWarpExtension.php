@@ -72,7 +72,7 @@ class WordWarpExtension extends AbstractExtension
 
     public function findSpace(string $str, int $length)
     {
-        while ($length > 0 && !$val = mb_strpos($str, ' ', $length)) {
+        while ($length > 0 && ! $val = mb_strpos($str, ' ', $length)) {
             $length = $length - 10;
         }
 
