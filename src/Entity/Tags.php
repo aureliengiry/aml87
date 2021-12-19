@@ -26,7 +26,7 @@ class Tags
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\ManyToMany(targetEntity="Article", inversedBy="tags")

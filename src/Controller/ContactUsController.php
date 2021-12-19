@@ -14,27 +14,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 /**
- * Contact Us controller.
- *
  * @Route("/contact-us")
  */
-final class ContactController extends AbstractController
+final class ContactUsController extends AbstractController
 {
-    private ContactMessage $contactMessage;
-
-    public function __construct(ContactMessage $contactMessage)
-    {
-        $this->contactMessage = $contactMessage;
-    }
-
     /**
      * Index Action to display contact form.
      *
      * @Route("/", name="aml_contactus_default_index", methods={"GET", "POST"})
      */
-    public function index(Request $request): Response
+    public function index(
+        Request $request,
+        ContactMessage $contactMessageService,
+        Environment $twig
+    ): Response
     {
         $contactMessage = new Message();
         $form = $this->createForm(MessageType::class, $contactMessage)->handleRequest($request);
@@ -44,16 +40,16 @@ final class ContactController extends AbstractController
                 ->setAddressIp($request->getClientIp())
                 ->setStatus(Message::MESSAGE_STATUS_SAVE);
 
-            $this->contactMessage->save($contactMessage);
+            $contactMessageService->save($contactMessage);
 
             $this->addFlash('success', 'E-mail envoyé avec succès');
 
             return $this->redirectToRoute('aml_contactus_default_index');
         }
 
-        return $this->render('contact/index.html.twig', [
+        return new Response($twig->render('contact/index.html.twig', [
             'entity' => $contactMessage,
             'contact_form' => $form->createView(),
-        ]);
+        ]));
     }
 }

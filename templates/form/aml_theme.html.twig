@@ -1,14 +1,14 @@
 {% use 'form_div_layout.html.twig' with field_label as base_field_label %}
 
 {% block email_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% set type = type|default('email') %}
         {{ block('field_widget') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock email_widget %}
 
 {% block field_row %}
-    {% spaceless %}
+    {% apply spaceless %}
 
         {% if radio is defined and radio is same as(true) %}
             {{ form_label(form, label|default(null)) }}
@@ -31,7 +31,7 @@
                 </div>
             </div>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock field_row %} 
 
 {% block form_label %}
@@ -60,17 +60,17 @@
 {% endblock %}
 
 {% block choice_widget_expanded %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div {{ block('widget_container_attributes') }}>
             {% for child in form %}
                 {{ form_row(child, {'radio': true, 'bouton': child}) }}
             {% endfor %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock choice_widget_expanded %}
 
 {% block form_errors %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if errors|length > 0 %}
             <div class="alert alert-error">
                 {% for error in errors %}
@@ -81,22 +81,22 @@
                 {% endfor %}
             </div>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock form_errors %}
 
 
 
 {% block date_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div id="date_evenement" class="input-append date" data-date="{{ "now"|date("d/m/Y") }}">
             {{ block('field_widget') }}<span class="add-on"><i class="icon-th"></i></span>
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock date_widget %}
 
 
 {% block time_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if widget == 'single_text' %}
             <div class="input-append bootstrap-timepicker-component">
                 {{ block('form_widget_simple') }}<span class="add-on"><i class="icon-time"></i></span>
@@ -107,7 +107,7 @@
                 :{{ form_widget(form.minute, { 'attr': { 'size': '1' } }) }}{% if with_seconds %}:{{ form_widget(form.second, { 'attr': { 'size': '1' } }) }}{% endif %}
             </div>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock time_widget %}
 
 {%- block button_widget -%}

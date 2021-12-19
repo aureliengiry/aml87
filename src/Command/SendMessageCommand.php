@@ -38,8 +38,7 @@ class SendMessageCommand extends Command
     public function __construct(
         EntityManagerInterface $entityManager,
         EventDispatcherInterface $eventDispatcher
-    )
-    {
+    ) {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
 
@@ -90,7 +89,7 @@ class SendMessageCommand extends Command
         $output->writeln('<info>'.$message->getName().' - '.$message->getSubject().'</info>');
 
         /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $this->eventDispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($message));
+        $this->eventDispatcher->dispatch(new PostEvent($message), 'aml_contactus.message.post_sent');
 
         $output->writeln('<info>Send Message : End</info>');
 

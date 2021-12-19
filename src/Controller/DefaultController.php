@@ -15,12 +15,18 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
-/**
- * Class DefaultController.
- */
 final class DefaultController extends AbstractController
 {
+    private Environment $twig;
+
+    public function __construct(
+        Environment $twig
+    ) {
+        $this->twig = $twig;
+    }
+
     /**
      * @Route("/", name="app_main_index", methods={"GET"})
      */
@@ -40,10 +46,13 @@ final class DefaultController extends AbstractController
             ['date' => 'DESC']
         );
 
-        return $this->render('default/index.html.twig', [
-            'lastBlogArticle' => $blogEntity,
-            'lastAlbum' => $albumEntity,
-        ]);
+        return new Response($this->twig->render(
+            'default/index.html.twig',
+            [
+                'lastBlogArticle' => $blogEntity,
+                'lastAlbum' => $albumEntity,
+            ]
+        ));
     }
 
     /**
@@ -53,8 +62,6 @@ final class DefaultController extends AbstractController
     {
         $urls = [];
 
-        $hostname = 'http://'.$request->getHost();
-
         // add some urls homepage
         $urls[] = [
             'loc' => $this->get('router')->generate('home'),
@@ -63,12 +70,15 @@ final class DefaultController extends AbstractController
         ];
 
         $sitemapGenerationEvent = new GenerateEvent($urls);
-        $eventDispatcher->dispatch('aml_web.sitemap.generate_start', $sitemapGenerationEvent);
+        $eventDispatcher->dispatch($sitemapGenerationEvent, 'aml_web.sitemap.generate_start');
 
-        return $this->render('default/sitemap.xml.twig', [
-            'urls' => $sitemapGenerationEvent->getUrls(),
-            'hostname' => $hostname,
-        ]);
+        return new Response($this->twig->render(
+            'default/sitemap.xml.twig',
+            [
+                'urls' => $sitemapGenerationEvent->getUrls(),
+                'hostname' => $request->getSchemeAndHttpHost(),
+            ]
+        ));
     }
 
     /**
@@ -76,6 +86,8 @@ final class DefaultController extends AbstractController
      */
     public function googleAnalytics(): Response
     {
-        return $this->render('main/google_analytics.html.twig', ['ga_id' => $this->getParameter('app_google_analytics.account_id')]);
+        return new Response($this->twig->render('main/google_analytics.html.twig', [
+            'ga_id' => $this->getParameter('app_google_analytics.account_id'),
+        ]));
     }
 }

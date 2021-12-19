@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 /**
  * Blog controller.
@@ -26,11 +27,16 @@ final class BlogController extends AbstractController
 
     private ArticleManager $articleManager;
     private MenuItem $appMainMenu;
+    private Environment $twig;
 
-    public function __construct(ArticleManager $articleManager, MenuItem $appMainMenu)
-    {
+    public function __construct(
+        ArticleManager $articleManager,
+        MenuItem $appMainMenu,
+        Environment $twig
+    ) {
         $this->articleManager = $articleManager;
         $this->appMainMenu = $appMainMenu;
+        $this->twig = $twig;
     }
 
     /**
@@ -69,12 +75,15 @@ final class BlogController extends AbstractController
             'lastPage' => ($calculLastPage >= 0 ? $calculLastPage : 0),
         ];
 
-        return $this->render('blog/index.html.twig', [
-            'entities' => $publicArticles,
-            'pagination' => $pagination,
-            'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
-            'tags' => $this->articleManager->getTagsWithNbArticles(),
-        ]);
+        return new Response($this->twig->render(
+            'blog/index.html.twig',
+            [
+                'entities' => $publicArticles,
+                'pagination' => $pagination,
+                'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
+                'tags' => $this->articleManager->getTagsWithNbArticles(),
+            ]
+        ));
     }
 
     /**
@@ -96,10 +105,13 @@ final class BlogController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        return $this->render('blog/show.html.twig', [
-            'entity' => $article,
-            'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
-            'tags' => $this->articleManager->getTagsWithNbArticles(),
-        ]);
+        return new Response($this->twig->render(
+            'blog/show.html.twig',
+            [
+                'entity' => $article,
+                'categories' => $em->getRepository(Category::class)->getCategoriesWithNbArticles(),
+                'tags' => $this->articleManager->getTagsWithNbArticles(),
+            ]
+        ));
     }
 }

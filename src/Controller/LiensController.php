@@ -11,10 +11,9 @@ use App\Entity\Link;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 /**
- * Blog controller.
- *
  * @Route("/liens")
  */
 final class LiensController extends AbstractController
@@ -24,10 +23,10 @@ final class LiensController extends AbstractController
      *
      * @Route("/", name="liens", methods={"GET"})
      */
-    public function index(): Response
+    public function index(Environment $twig): Response
     {
-        return $this->render('liens/index.html.twig', [
+        return new Response($twig->render('liens/index.html.twig', [
             'entities' => $this->getDoctrine()->getManager()->getRepository(Link::class)->getPublicLinks(),
-        ]);
+        ]));
     }
 }
