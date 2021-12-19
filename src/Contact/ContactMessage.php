@@ -17,11 +17,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class ContactMessage
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EntityManagerInterface $entityManager;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -40,7 +37,7 @@ class ContactMessage
         $this->entityManager->flush();
 
         if (false === $message->isSpam()) {
-            $this->eventDispatcher->dispatch('aml_contactus.message.post_sent', new PostEvent($message));
+            $this->eventDispatcher->dispatch(new PostEvent($message), 'aml_contactus.message.post_sent');
         }
     }
 }

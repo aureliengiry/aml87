@@ -21,7 +21,7 @@ class UserFixtures extends Fixture
         $adminUser = new User();
         $adminUser->setSuperAdmin(true);
         $adminUser->setUsername(self::ADMIN_USER);
-        $adminUser->setFirstname('Admin');
+        $adminUser->setFirstname('admin');
         $adminUser->setLastname('User');
         $adminUser->setPlainPassword('password');
         $adminUser->setEmail('admin@aml87.fr');

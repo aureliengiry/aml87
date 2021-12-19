@@ -23,7 +23,7 @@ class Image extends Media
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Album", mappedBy="image")
      */
-    protected $album;
+    protected ?Album $album;
 
     /**
      * @Assert\File(
@@ -39,81 +39,63 @@ class Image extends Media
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $path;
+    protected ?string $path;
 
-    // propriété utilisé temporairement pour la suppression
-    private $filenameForRemove;
+    private ?string $filenameForRemove;
 
-    public function getType()
+    public function getType(): array
     {
         return ['label' => 'Image', 'key' => 'image'];
     }
 
-    /**
-     * Set file.
-     */
-    public function setFile(UploadedFile $file)
+    public function setFile($file): self
     {
         $this->file = $file;
 
         return $this;
     }
 
-    /**
-     * Get file.
-     *
-     * @return string
-     */
     public function getFile()
     {
         return $this->file;
     }
 
-    /**
-     * Set path.
-     *
-     * @param string $path
-     */
-    public function setPath($path)
+    public function setPath(string $path): self
     {
         $this->path = $path;
 
         return $this;
     }
 
-    /**
-     * Get path.
-     *
-     * @return string
-     */
-    public function getPath()
+    public function getPath(): ?string
     {
         return $this->path;
     }
 
-    public function getWebPath()
+    public function getWebPath(): ?string
     {
         return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
     }
 
-    protected function getUploadRootDir()
+    protected function getUploadRootDir(): string
     {
+        dd(__DIR__);
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
         return __DIR__.'/../../public/'.$this->getUploadDir();
     }
 
-    protected function getUploadDir()
+    protected function getUploadDir(): string
     {
         // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
         // le document/image dans la vue.
-        return 'uploads/images';
+        return '/uploads/images';
     }
 
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
-    public function preUpload()
+    public function preUpload(): void
     {
         if (null !== $this->file) {
             $slugger = new Slugger();
@@ -127,7 +109,7 @@ class Image extends Media
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
      */
-    public function upload()
+    public function upload(): void
     {
         if (null === $this->file) {
             return;
@@ -141,7 +123,7 @@ class Image extends Media
         unset($this->file);
     }
 
-    public function getAbsolutePath()
+    public function getAbsolutePath(): ?string
     {
         return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
@@ -149,7 +131,7 @@ class Image extends Media
     /**
      * @ORM\PreRemove()
      */
-    public function storeFilenameForRemove()
+    public function storeFilenameForRemove(): void
     {
         $this->filenameForRemove = $this->getAbsolutePath();
     }
@@ -157,7 +139,7 @@ class Image extends Media
     /**
      * @ORM\PostRemove()
      */
-    public function removeUpload()
+    public function removeUpload(): void
     {
         if ($this->filenameForRemove && true === file_exists($this->filenameForRemove)) {
             unlink($this->filenameForRemove);

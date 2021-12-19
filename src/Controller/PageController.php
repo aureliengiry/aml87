@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 /**
  * Page controller.
@@ -24,7 +25,7 @@ final class PageController extends AbstractController
      * @Route("/page/{page}", name="page_show", methods={"GET"})
      * @Route("/{page}.html", name="page_show_rewrite", methods={"GET"})
      */
-    public function index(Request $request, $page): Response
+    public function index(Request $request, $page, Environment $twig): Response
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -43,8 +44,8 @@ final class PageController extends AbstractController
 
         $request->attributes->set('label', $entity->getTitle());
 
-        return $this->render('page/index.html.twig', [
+        return new Response($twig->render('page/index.html.twig', [
             'entity' => $entity,
-        ]);
+        ]));
     }
 }

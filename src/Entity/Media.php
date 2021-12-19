@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * App\Entity\Media.
  *
- * @ORM\Entity(repositoryClass="App\Repository\MediaRepository") *
+ * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
  *
  * @ORM\Table(name="mediasbundle_medias")
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -26,32 +26,22 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class Media
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id_media", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    protected ?int $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255,nullable=true)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
-    protected $title;
+    protected ?string $title;
 
-    /**
-     * Get id.
-     */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set title.
-     */
     public function setTitle(string $title)
     {
         $this->title = $title;
@@ -59,18 +49,12 @@ abstract class Media
         return $this;
     }
 
-    /**
-     * Get title.
-     */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @return string
-     */
-    protected function renameIfFileExist(string $name)
+    protected function renameIfFileExist(string $name): string
     {
         $filename = $this->getUploadRootDir().'/'.$name;
         if (true === file_exists($filename)) {

@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 /**
  * Class DefaultController.
@@ -24,6 +25,7 @@ final class DiscographyController extends AbstractController
 {
     private DiscographyManager $discographyManager;
     private MenuItem $appMainMenu;
+    private Environment $twig;
 
     public function __construct(DiscographyManager $discographyManager, MenuItem $appMainMenu)
     {
@@ -42,7 +44,7 @@ final class DiscographyController extends AbstractController
     }
 
     /**
-     * Finds and displays a Album entity.
+     * Finds and displays Album entity.
      *
      * @Route("/album/id/{album}", name="discography_album_show", methods={"GET"})
      * @Route("/album/{album}.html", name="discography_album_show_rewrite", methods={"GET"})

@@ -24,7 +24,7 @@ class Track
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @var int

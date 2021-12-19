@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2676f34e3c22fdf2efdc8ad6a0c3a44a",
+    "content-hash": "26ee210c9f3d412c8846af75cdf66419",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -1533,63 +1533,60 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v2.3.15",
+            "version": "v3.5.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "5f2653e98104fcb9d7c1c00df8812786aac9f5db"
+                "reference": "152c48f8ee8e0952633344c0dc7e2d6eb44a138f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/5f2653e98104fcb9d7c1c00df8812786aac9f5db",
-                "reference": "5f2653e98104fcb9d7c1c00df8812786aac9f5db",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/152c48f8ee8e0952633344c0dc7e2d6eb44a138f",
+                "reference": "152c48f8ee8e0952633344c0dc7e2d6eb44a138f",
                 "shasum": ""
             },
             "require": {
-                "doctrine/common": "^2.8 || ^3.0",
-                "doctrine/doctrine-bundle": "^1.8|^2.0",
-                "doctrine/orm": "^2.6.3",
-                "doctrine/persistence": "^1.3.4 || ^2.0",
-                "pagerfanta/pagerfanta": "^1.0.1|^2.0",
-                "php": ">=7.1.3",
-                "symfony/asset": "^4.2|^5.0",
-                "symfony/cache": "^4.2|^5.0",
-                "symfony/config": "^4.2|^5.0",
-                "symfony/dependency-injection": "^4.2|^5.0",
-                "symfony/doctrine-bridge": "^4.2|^5.0",
-                "symfony/error-handler": "^4.4|^5.0",
-                "symfony/event-dispatcher": "^4.2|^5.0",
-                "symfony/expression-language": "^4.2|^5.0",
-                "symfony/finder": "^4.2|^5.0",
-                "symfony/form": "^4.2|^5.0",
-                "symfony/framework-bundle": "^4.2|^5.0",
-                "symfony/http-foundation": "^4.2|^5.0",
-                "symfony/http-kernel": "^4.3.7|^5.0",
-                "symfony/polyfill-mbstring": "^1.7",
-                "symfony/property-access": "^4.2|^5.0",
-                "symfony/security-bundle": "^4.2|^5.0",
-                "symfony/translation": "^4.2|^5.0",
-                "symfony/twig-bridge": "^4.2|^5.0",
-                "symfony/twig-bundle": "^4.2|^5.0",
-                "symfony/validator": "^4.2|^5.0",
-                "twig/twig": "^2.11.3|^3.0"
+                "doctrine/doctrine-bundle": "^2.4",
+                "doctrine/orm": "^2.6,>=2.6.3",
+                "ext-json": "*",
+                "nikic/php-parser": "^4.3",
+                "php": ">=7.2.5",
+                "symfony/asset": "^4.4|^5.0",
+                "symfony/cache": "^4.4|^5.0",
+                "symfony/config": "^4.4|^5.0",
+                "symfony/dependency-injection": "^4.4|^5.0",
+                "symfony/deprecation-contracts": "^2.0|^3.0",
+                "symfony/doctrine-bridge": "^4.4,>=4.4.22|^5.2,>=5.2.7",
+                "symfony/event-dispatcher": "^4.4|^5.0",
+                "symfony/filesystem": "^4.4|^5.0",
+                "symfony/form": "^4.4|^5.0",
+                "symfony/framework-bundle": "^4.4|^5.0",
+                "symfony/http-foundation": "^4.4|^5.0",
+                "symfony/http-kernel": "^4.4|^5.0",
+                "symfony/intl": "^4.4|^5.0",
+                "symfony/polyfill-php73": "^1.13",
+                "symfony/property-access": "^4.4|^5.0",
+                "symfony/security-bundle": "^4.4|^5.0",
+                "symfony/string": "^5.0",
+                "symfony/translation": "^4.4|^5.0",
+                "symfony/twig-bundle": "^4.4|^5.0",
+                "symfony/uid": "^5.1"
+            },
+            "conflict": {
+                "doctrine/dbal": "<2.10"
             },
             "require-dev": {
-                "doctrine/data-fixtures": "^1.3",
-                "doctrine/doctrine-fixtures-bundle": "^3.0",
+                "doctrine/doctrine-fixtures-bundle": "^3.4",
                 "psr/log": "~1.0",
-                "symfony/browser-kit": "^4.2|^5.0",
-                "symfony/console": "^4.2|^5.0",
-                "symfony/css-selector": "^4.2|^5.0",
-                "symfony/dom-crawler": "^4.2|^5.0",
-                "symfony/phpunit-bridge": "^4.3.5|^5.0",
-                "symfony/var-dumper": "^4.2|^5.0",
-                "symfony/yaml": "^4.2|^5.0"
+                "symfony/browser-kit": "^4.4|^5.0",
+                "symfony/css-selector": "^4.4|^5.0",
+                "symfony/dom-crawler": "^4.4|^5.0",
+                "symfony/phpunit-bridge": "^5.2"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -1604,7 +1601,7 @@
             "authors": [
                 {
                     "name": "Project Contributors",
-                    "homepage": "https://github.com/EasyCorp/EasyAdminBundle/blob/master/CONTRIBUTORS.md"
+                    "homepage": "https://github.com/EasyCorp/EasyAdminBundle/graphs/contributors"
                 }
             ],
             "description": "Admin generator for Symfony applications",
@@ -1616,7 +1613,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v2.3.15"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.5.17"
             },
             "funding": [
                 {
@@ -1624,7 +1621,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-17T18:36:40+00:00"
+            "time": "2021-12-15T07:19:30+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -2073,16 +2070,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.224.1",
+            "version": "v0.225.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "06e515176ebf32c3dcf7c01b3f377af6bfca6ae3"
+                "reference": "0e2387a7c082fc05d62555952391791db8c55435"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/06e515176ebf32c3dcf7c01b3f377af6bfca6ae3",
-                "reference": "06e515176ebf32c3dcf7c01b3f377af6bfca6ae3",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/0e2387a7c082fc05d62555952391791db8c55435",
+                "reference": "0e2387a7c082fc05d62555952391791db8c55435",
                 "shasum": ""
             },
             "require": {
@@ -2111,9 +2108,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.224.1"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.225.0"
             },
-            "time": "2021-12-05T12:26:30+00:00"
+            "time": "2021-12-12T12:24:34+00:00"
         },
         {
             "name": "google/auth",
@@ -3241,100 +3238,60 @@
             "time": "2021-05-28T08:32:12+00:00"
         },
         {
-            "name": "pagerfanta/pagerfanta",
-            "version": "v2.7.2",
+            "name": "nikic/php-parser",
+            "version": "v4.13.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/BabDev/Pagerfanta.git",
-                "reference": "911f515ae80898981c07c3d098f2092e97da1a2f"
+                "url": "https://github.com/nikic/PHP-Parser.git",
+                "reference": "210577fe3cf7badcc5814d99455df46564f3c077"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/911f515ae80898981c07c3d098f2092e97da1a2f",
-                "reference": "911f515ae80898981c07c3d098f2092e97da1a2f",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/210577fe3cf7badcc5814d99455df46564f3c077",
+                "reference": "210577fe3cf7badcc5814d99455df46564f3c077",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "php": "^7.2 || ^8.0",
-                "symfony/deprecation-contracts": "^2.1",
-                "symfony/polyfill-php80": "^1.15"
-            },
-            "conflict": {
-                "twig/twig": "<1.35 || >=2.0,<2.5"
-            },
-            "replace": {
-                "pagerfanta/core": "self.version",
-                "pagerfanta/doctrine-collections-adapter": "self.version",
-                "pagerfanta/doctrine-dbal-adapter": "self.version",
-                "pagerfanta/doctrine-mongodb-odm-adapter": "self.version",
-                "pagerfanta/doctrine-orm-adapter": "self.version",
-                "pagerfanta/doctrine-phpcr-odm-adapter": "self.version",
-                "pagerfanta/elastica-adapter": "self.version",
-                "pagerfanta/solarium-adapter": "self.version",
-                "pagerfanta/twig": "self.version"
+                "ext-tokenizer": "*",
+                "php": ">=7.0"
             },
             "require-dev": {
-                "dg/bypass-finals": "^1.3.1",
-                "doctrine/cache": "^1.11 || ^2.0",
-                "doctrine/collections": "^1.4",
-                "doctrine/dbal": "^2.5 || ^3.0",
-                "doctrine/orm": "^2.5",
-                "doctrine/phpcr-odm": "^1.3",
-                "friendsofphp/php-cs-fixer": "^3.0",
-                "jackalope/jackalope-doctrine-dbal": "^1.3",
-                "mandango/mandango": "^1.0@dev",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^0.12.93",
-                "phpstan/phpstan-phpunit": "^0.12.21",
-                "phpunit/phpunit": "^8.5 || ^9.5",
-                "propel/propel": "^2.0@dev",
-                "propel/propel1": "^1.7",
-                "ruflin/elastica": "^1.3 || ^2.0 || ^3.0 || ^5.0 || ^6.0 || ^7.0",
-                "solarium/solarium": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
-                "symfony/cache": "^4.4 || ^5.2 || ^6.0",
-                "twig/twig": "^1.35 || ^2.5 || ^3.0"
+                "ircmaxell/php-yacc": "^0.0.7",
+                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
             },
-            "suggest": {
-                "twig/twig": "To integrate Pagerfanta with Twig"
-            },
+            "bin": [
+                "bin/php-parse"
+            ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.9-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "Pagerfanta\\": "lib/Core/",
-                    "Pagerfanta\\Adapter\\": "src/Adapter/",
-                    "Pagerfanta\\Doctrine\\Collections\\": "lib/Adapter/Doctrine/Collections/",
-                    "Pagerfanta\\Doctrine\\DBAL\\": "lib/Adapter/Doctrine/DBAL/",
-                    "Pagerfanta\\Doctrine\\MongoDBODM\\": "lib/Adapter/Doctrine/MongoDBODM/",
-                    "Pagerfanta\\Doctrine\\ORM\\": "lib/Adapter/Doctrine/ORM/",
-                    "Pagerfanta\\Doctrine\\PHPCRODM\\": "lib/Adapter/Doctrine/PHPCRODM/",
-                    "Pagerfanta\\Elastica\\": "lib/Adapter/Elastica/",
-                    "Pagerfanta\\Solarium\\": "lib/Adapter/Solarium/",
-                    "Pagerfanta\\Twig\\": "lib/Twig/"
+                    "PhpParser\\": "lib/PhpParser"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "BSD-3-Clause"
             ],
-            "description": "Pagination for PHP",
-            "keywords": [
-                "page",
-                "pagination",
-                "paginator",
-                "paging"
-            ],
-            "support": {
-                "issues": "https://github.com/BabDev/Pagerfanta/issues",
-                "source": "https://github.com/BabDev/Pagerfanta/tree/v2.7.2"
-            },
-            "funding": [
+            "authors": [
                 {
-                    "url": "https://github.com/mbabker",
-                    "type": "github"
+                    "name": "Nikita Popov"
                 }
             ],
-            "time": "2021-08-01T15:53:26+00:00"
+            "description": "A PHP parser written in PHP",
+            "keywords": [
+                "parser",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/nikic/PHP-Parser/issues",
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.2"
+            },
+            "time": "2021-11-30T19:35:32+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -6823,6 +6780,87 @@
             "time": "2021-05-27T09:27:20+00:00"
         },
         {
+            "name": "symfony/polyfill-intl-grapheme",
+            "version": "v1.23.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
+                "reference": "16880ba9c5ebe3642d1995ab866db29270b36535"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/16880ba9c5ebe3642d1995ab866db29270b36535",
+                "reference": "16880ba9c5ebe3642d1995ab866db29270b36535",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "suggest": {
+                "ext-intl": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\Grapheme\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's grapheme_* functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "grapheme",
+                "intl",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.23.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-05-27T12:26:48+00:00"
+        },
+        {
             "name": "symfony/polyfill-intl-icu",
             "version": "v1.23.0",
             "source": {
@@ -7476,6 +7514,85 @@
                 }
             ],
             "time": "2021-05-21T13:25:03+00:00"
+        },
+        {
+            "name": "symfony/polyfill-uuid",
+            "version": "v1.23.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-uuid.git",
+                "reference": "9165effa2eb8a31bb3fa608df9d529920d21ddd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-uuid/zipball/9165effa2eb8a31bb3fa608df9d529920d21ddd9",
+                "reference": "9165effa2eb8a31bb3fa608df9d529920d21ddd9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "suggest": {
+                "ext-uuid": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.23-dev"
+                },
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Uuid\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Pineau",
+                    "email": "lyrixx@lyrixx.info"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for uuid functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "uuid"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-uuid/tree/v1.23.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-02-19T12:13:01+00:00"
         },
         {
             "name": "symfony/process",
@@ -8336,6 +8453,92 @@
             "time": "2021-07-10T08:41:57+00:00"
         },
         {
+            "name": "symfony/string",
+            "version": "v5.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/string.git",
+                "reference": "9ffaaba53c61ba75a3c7a3a779051d1e9ec4fd2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/string/zipball/9ffaaba53c61ba75a3c7a3a779051d1e9ec4fd2d",
+                "reference": "9ffaaba53c61ba75a3c7a3a779051d1e9ec4fd2d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-ctype": "~1.8",
+                "symfony/polyfill-intl-grapheme": "~1.0",
+                "symfony/polyfill-intl-normalizer": "~1.0",
+                "symfony/polyfill-mbstring": "~1.0",
+                "symfony/polyfill-php80": "~1.15"
+            },
+            "conflict": {
+                "symfony/translation-contracts": ">=3.0"
+            },
+            "require-dev": {
+                "symfony/error-handler": "^4.4|^5.0|^6.0",
+                "symfony/http-client": "^4.4|^5.0|^6.0",
+                "symfony/translation-contracts": "^1.1|^2",
+                "symfony/var-exporter": "^4.4|^5.0|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\String\\": ""
+                },
+                "files": [
+                    "Resources/functions.php"
+                ],
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides an object-oriented API to strings and deals with bytes, UTF-8 code points and grapheme clusters in a unified way",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "grapheme",
+                "i18n",
+                "string",
+                "unicode",
+                "utf-8",
+                "utf8"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/string/tree/v5.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-11-24T10:02:00+00:00"
+        },
+        {
             "name": "symfony/swiftmailer-bundle",
             "version": "v3.5.3",
             "source": {
@@ -8854,6 +9057,79 @@
                 }
             ],
             "time": "2021-08-04T20:31:23+00:00"
+        },
+        {
+            "name": "symfony/uid",
+            "version": "v5.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/uid.git",
+                "reference": "8a7214460dcf034920583abf0018722f463a3aac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/uid/zipball/8a7214460dcf034920583abf0018722f463a3aac",
+                "reference": "8a7214460dcf034920583abf0018722f463a3aac",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-uuid": "^1.15"
+            },
+            "require-dev": {
+                "symfony/console": "^4.4|^5.0|^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Uid\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Pineau",
+                    "email": "lyrixx@lyrixx.info"
+                },
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides an object-oriented API to generate and represent UIDs",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "UID",
+                "uuid"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/uid/tree/v5.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-11-02T13:48:32+00:00"
         },
         {
             "name": "symfony/validator",
@@ -10348,62 +10624,6 @@
             "time": "2021-10-12T16:09:54+00:00"
         },
         {
-            "name": "nikic/php-parser",
-            "version": "v4.13.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "210577fe3cf7badcc5814d99455df46564f3c077"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/210577fe3cf7badcc5814d99455df46564f3c077",
-                "reference": "210577fe3cf7badcc5814d99455df46564f3c077",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.2"
-            },
-            "time": "2021-11-30T19:35:32+00:00"
-        },
-        {
             "name": "phar-io/manifest",
             "version": "2.0.3",
             "source": {
@@ -11680,12 +11900,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "aaf5d29aa54f39be4945b0ceeb1f3d9fdb7af8ee"
+                "reference": "fff53639bf1fa25f311c3e54932ac8c827f9a343"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/aaf5d29aa54f39be4945b0ceeb1f3d9fdb7af8ee",
-                "reference": "aaf5d29aa54f39be4945b0ceeb1f3d9fdb7af8ee",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/fff53639bf1fa25f311c3e54932ac8c827f9a343",
+                "reference": "fff53639bf1fa25f311c3e54932ac8c827f9a343",
                 "shasum": ""
             },
             "conflict": {
@@ -11698,7 +11918,7 @@
                 "amphp/http": "<1.0.1",
                 "amphp/http-client": ">=4,<4.4",
                 "api-platform/core": ">=2.2,<2.2.10|>=2.3,<2.3.6",
-                "area17/twill": "<=2.5.2",
+                "area17/twill": "<1.2.5|>=2,<2.5.3",
                 "asymmetricrypt/asymmetricrypt": ">=0,<9.9.99",
                 "aws/aws-sdk-php": ">=3,<3.2.1",
                 "bagisto/bagisto": "<0.1.5",
@@ -11751,7 +11971,7 @@
                 "drupal/drupal": ">=7,<7.80|>=8,<8.9.16|>=9,<9.1.12|>=9.2,<9.2.4",
                 "dweeves/magmi": "<=0.7.24",
                 "ecodev/newsletter": "<=4",
-                "elgg/elgg": "<3.3.22",
+                "elgg/elgg": "<3.3.23|>=4,<4.0.5",
                 "endroid/qr-code-bundle": "<3.4.2",
                 "enshrined/svg-sanitize": "<0.13.1",
                 "erusev/parsedown": "<1.7.2",
@@ -11809,11 +12029,12 @@
                 "illuminate/cookie": ">=4,<=4.0.11|>=4.1,<=4.1.99999|>=4.2,<=4.2.99999|>=5,<=5.0.99999|>=5.1,<=5.1.99999|>=5.2,<=5.2.99999|>=5.3,<=5.3.99999|>=5.4,<=5.4.99999|>=5.5,<=5.5.49|>=5.6,<=5.6.99999|>=5.7,<=5.7.99999|>=5.8,<=5.8.99999|>=6,<6.18.31|>=7,<7.22.4",
                 "illuminate/database": "<6.20.26|>=7,<7.30.5|>=8,<8.40",
                 "illuminate/encryption": ">=4,<=4.0.11|>=4.1,<=4.1.31|>=4.2,<=4.2.22|>=5,<=5.0.35|>=5.1,<=5.1.46|>=5.2,<=5.2.45|>=5.3,<=5.3.31|>=5.4,<=5.4.36|>=5.5,<5.5.40|>=5.6,<5.6.15",
-                "illuminate/view": ">=7,<7.1.2",
+                "illuminate/view": "<6.20.42|>=7,<7.30.6|>=8,<8.75",
                 "impresscms/impresscms": "<=1.4.2",
                 "in2code/femanager": "<5.5.1|>=6,<6.3.1",
                 "intelliants/subrion": "<=4.2.1",
                 "ivankristianto/phpwhois": "<=4.3",
+                "jackalope/jackalope-doctrine-dbal": "<1.7.4",
                 "james-heinrich/getid3": "<1.9.21",
                 "joomla/archive": "<1.1.10",
                 "joomla/session": "<1.3.1",
@@ -11892,11 +12113,12 @@
                 "phpoffice/phpexcel": "<1.8.2",
                 "phpoffice/phpspreadsheet": "<1.16",
                 "phpseclib/phpseclib": "<2.0.31|>=3,<3.0.7",
+                "phpservermon/phpservermon": "<=3.5.2",
                 "phpunit/phpunit": ">=4.8.19,<4.8.28|>=5.0.10,<5.6.3",
                 "phpwhois/phpwhois": "<=4.2.5",
                 "phpxmlrpc/extras": "<0.6.1",
-                "pimcore/pimcore": "<10.1.3",
-                "pocketmine/pocketmine-mp": "<3.15.4",
+                "pimcore/pimcore": "<10.2.6",
+                "pocketmine/pocketmine-mp": "<4.0.3",
                 "pressbooks/pressbooks": "<5.18",
                 "prestashop/autoupgrade": ">=4,<4.10.1",
                 "prestashop/contactform": ">1.0.1,<4.3",
@@ -11913,7 +12135,7 @@
                 "pusher/pusher-php-server": "<2.2.1",
                 "pwweb/laravel-core": "<=0.3.6-beta",
                 "rainlab/debugbar-plugin": "<3.1",
-                "remdex/livehelperchat": "<=2",
+                "remdex/livehelperchat": "<=3.90",
                 "rmccue/requests": ">=1.6,<1.8",
                 "robrichards/xmlseclibs": "<3.0.4",
                 "sabberworm/php-css-parser": ">=1,<1.0.1|>=2,<2.0.1|>=3,<3.0.1|>=4,<4.0.1|>=5,<5.0.9|>=5.1,<5.1.3|>=5.2,<5.2.1|>=6,<6.0.2|>=7,<7.0.4|>=8,<8.0.1|>=8.1,<8.1.1|>=8.2,<8.2.1|>=8.3,<8.3.1",
@@ -11925,7 +12147,7 @@
                 "shopware/platform": "<=6.4.6",
                 "shopware/production": "<=6.3.5.2",
                 "shopware/shopware": "<5.7.6",
-                "showdoc/showdoc": "<2.9.13",
+                "showdoc/showdoc": "<=2.9.13",
                 "silverstripe/admin": "<4.8.1",
                 "silverstripe/assets": ">=1,<1.4.7|>=1.5,<1.5.2",
                 "silverstripe/cms": "<4.3.6|>=4.4,<4.4.4",
@@ -11945,16 +12167,16 @@
                 "simplito/elliptic-php": "<1.0.6",
                 "slim/slim": "<2.6",
                 "smarty/smarty": "<3.1.39",
-                "snipe/snipe-it": "<=5.3.3",
+                "snipe/snipe-it": "<5.3.5",
                 "socalnick/scn-social-auth": "<1.15.2",
                 "socialiteproviders/steam": "<1.1",
                 "spoonity/tcpdf": "<6.2.22",
                 "squizlabs/php_codesniffer": ">=1,<2.8.1|>=3,<3.0.1",
-                "ssddanbrown/bookstack": "<21.11.2",
+                "ssddanbrown/bookstack": "<21.11.3",
                 "stormpath/sdk": ">=0,<9.9.99",
                 "studio-42/elfinder": "<2.1.59",
                 "subrion/cms": "<=4.2.1",
-                "sulu/sulu": "<1.6.43|>=2,<2.0.10|>=2.1,<2.1.1",
+                "sulu/sulu": "= 2.4.0-RC1|<1.6.44|>=2,<2.2.18|>=2.3,<2.3.8",
                 "swiftmailer/swiftmailer": ">=4,<5.4.5",
                 "sylius/admin-bundle": ">=1,<1.0.17|>=1.1,<1.1.9|>=1.2,<1.2.2",
                 "sylius/grid": ">=1,<1.1.19|>=1.2,<1.2.18|>=1.3,<1.3.13|>=1.4,<1.4.5|>=1.5,<1.5.1",
@@ -12029,6 +12251,7 @@
                 "wikimedia/parsoid": "<0.12.2",
                 "willdurand/js-translation-bundle": "<2.1.1",
                 "wp-cli/wp-cli": "<2.5",
+                "yetiforce/yetiforce-crm": "<=6.3",
                 "yidashi/yii2cmf": "<=2",
                 "yii2mod/yii2-cms": "<1.9.2",
                 "yiisoft/yii": ">=1.1.14,<1.1.15",
@@ -12101,7 +12324,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-10T21:12:50+00:00"
+            "time": "2021-12-17T20:13:17+00:00"
         },
         {
             "name": "sebastian/cli-parser",

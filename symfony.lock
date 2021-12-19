@@ -224,9 +224,6 @@
     "nikic/php-parser": {
         "version": "v4.0.3"
     },
-    "pagerfanta/pagerfanta": {
-        "version": "v2.0.1"
-    },
     "paragonie/constant_time_encoding": {
         "version": "v2.4.0"
     },
@@ -500,6 +497,9 @@
     "symfony/polyfill-iconv": {
         "version": "v1.14.0"
     },
+    "symfony/polyfill-intl-grapheme": {
+        "version": "v1.23.1"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.9.0"
     },
@@ -520,6 +520,9 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.22.1"
+    },
+    "symfony/polyfill-uuid": {
+        "version": "v1.23.0"
     },
     "symfony/process": {
         "version": "v4.1.3"
@@ -566,6 +569,9 @@
     "symfony/stopwatch": {
         "version": "v4.1.3"
     },
+    "symfony/string": {
+        "version": "v5.4.0"
+    },
     "symfony/swiftmailer-bundle": {
         "version": "2.5",
         "recipe": {
@@ -601,6 +607,9 @@
             "version": "3.3",
             "ref": "f75ac166398e107796ca94cc57fa1edaa06ec47f"
         }
+    },
+    "symfony/uid": {
+        "version": "v5.4.0"
     },
     "symfony/validator": {
         "version": "v3.4.14"

@@ -15,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 /**
  * Blog controller.
@@ -26,15 +27,18 @@ final class AgendaController extends AbstractController
     private Agenda $agenda;
     private SeasonManager $seasonManager;
     private MenuItem $appMainMenu;
+    private Environment $twig;
 
     public function __construct(
         Agenda $agenda,
         SeasonManager $seasonManager,
-        MenuItem $appMainMenu
+        MenuItem $appMainMenu,
+        Environment $twig
     ) {
         $this->agenda = $agenda;
         $this->seasonManager = $seasonManager;
         $this->appMainMenu = $appMainMenu;
+        $this->twig = $twig;
     }
 
     /**
@@ -46,11 +50,14 @@ final class AgendaController extends AbstractController
     {
         $currentSeason = $this->seasonManager->getCurrentSeason();
 
-        return $this->render('agenda/index.html.twig', [
-            'current_season' => $currentSeason,
-            'entities' => $this->agenda->getPublicEventsBySeason($currentSeason),
-            'seasons' => $this->seasonManager->getPastSeasons(),
-        ]);
+        return new Response($this->twig->render(
+            'agenda/index.html.twig',
+            [
+                'current_season' => $currentSeason,
+                'entities' => $this->agenda->getPublicEventsBySeason($currentSeason),
+                'seasons' => $this->seasonManager->getPastSeasons(),
+            ]
+        ));
     }
 
     /**
@@ -61,8 +68,6 @@ final class AgendaController extends AbstractController
      *     name="agenda_show_event",
      *     methods={"GET"}
      *     )
-     *
-     * @param int|string $slug
      */
     public function show(string $slug, Request $request): Response
     {
@@ -76,20 +81,19 @@ final class AgendaController extends AbstractController
 
         $request->attributes->set('label', $event->getTitle());
 
-        return $this->render('agenda/show.html.twig', ['entity' => $event]);
+        return new Response(
+            $this->twig->render('agenda/show.html.twig', ['entity' => $event])
+        );
     }
 
-    /**
-     * Action for Next Concert Block.
-     */
     public function nextConcert(): Response
     {
-        return $this->render(
+        return new Response($this->twig->render(
             'agenda/blocs/bloc_next_concert.html.twig',
             [
                 'nextConcert' => $this->agenda->getNextConcert(),
             ]
-        );
+        ));
     }
 
     /**
@@ -116,10 +120,13 @@ final class AgendaController extends AbstractController
 
         $request->attributes->set('label', $season->getName());
 
-        return $this->render('agenda/archives.html.twig', [
-            'currentSeason' => $season,
-            'entities' => $this->agenda->getArchivedConcertBySeason($season),
-            'seasons' => $seasonsRepository->getPastSeasons(),
-        ]);
+        return new Response($this->twig->render(
+            'agenda/archives.html.twig',
+            [
+                'currentSeason' => $season,
+                'entities' => $this->agenda->getArchivedConcertBySeason($season),
+                'seasons' => $seasonsRepository->getPastSeasons(),
+            ]
+        ));
     }
 }
