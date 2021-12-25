@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -14,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EvenementFieldType extends AbstractType
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             // Configure your form options here

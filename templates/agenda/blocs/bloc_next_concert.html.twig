@@ -2,7 +2,7 @@
     <div id="block-concert">
         <h3>Prochain concert</h3>
 
-        <span class="date">{{ nextConcert.dateStart|localizeddate('full', 'short')  }}</span>
+        <span class="date">{{ nextConcert.dateStart|format_date('full')  }}</span>
 
         <div class="container-date-description-block">
             <div>{{ nextConcert.title }} </div>

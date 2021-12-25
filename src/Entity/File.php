@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -104,7 +106,7 @@ class File extends Media
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
-    public function preUpload()
+    public function preUpload(): void
     {
         if (null !== $this->file) {
             $slugger = new Slugger();
@@ -118,7 +120,7 @@ class File extends Media
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
      */
-    public function upload()
+    public function upload(): void
     {
         if (null === $this->file) {
             return;
@@ -135,7 +137,7 @@ class File extends Media
     /**
      * @ORM\PreRemove()
      */
-    public function storeFilenameForRemove()
+    public function storeFilenameForRemove(): void
     {
         $this->filenameForRemove = $this->getAbsolutePath();
     }
@@ -143,7 +145,7 @@ class File extends Media
     /**
      * @ORM\PostRemove()
      */
-    public function removeUpload()
+    public function removeUpload(): void
     {
         if ($this->filenameForRemove && true === file_exists($this->filenameForRemove)) {
             unlink($this->filenameForRemove);

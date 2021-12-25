@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -41,7 +43,7 @@ class SeasonsCommand extends Command
      *
      * @throws \RunTimeException
      */
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->eventRepo = $this->entityManager->getRepository(Evenement::class);
         $this->seasonRepo = $this->entityManager->getRepository(Season::class);
@@ -50,7 +52,7 @@ class SeasonsCommand extends Command
     /**
      * @see Command
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('evenements:index:seasons')

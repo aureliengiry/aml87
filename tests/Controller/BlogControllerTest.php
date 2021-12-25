@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -14,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class BlogControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testIndex(): void
     {
         $client = static::createClient();
 

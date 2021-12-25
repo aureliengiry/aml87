@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -15,7 +17,18 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class AgendaControllerTest extends WebTestCase
 {
-    public function testArchivesWithoutSeason()
+    public function testAgenda(): void
+    {
+        $client = static::createClient();
+
+        $url = $client->getContainer()->get('router')->generate('agenda');
+        $crawler = $client->request('GET', $url);
+
+        // Check status code
+        $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+    }
+
+    public function testArchivesWithoutSeason(): void
     {
         $client = static::createClient();
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -39,7 +41,7 @@ class MembersControllerTest extends WebTestCase
     /**
      * Test Login redirect.
      */
-    public function testMembersAreaWithoutLogging()
+    public function testMembersAreaWithoutLogging(): void
     {
         $this->client->request('GET', '/espace-membres');
         $this->assertSame(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
@@ -52,7 +54,7 @@ class MembersControllerTest extends WebTestCase
     /**
      * Test Home page with user login.
      */
-    public function testMembersAreaWithLogging()
+    public function testMembersAreaWithLogging(): void
     {
         $this->logIn();
 
@@ -63,7 +65,7 @@ class MembersControllerTest extends WebTestCase
         $this->assertStringContainsString('Espace membres', $crawler->filter('title')->text());
     }
 
-    private function logIn()
+    private function logIn(): void
     {
         $session = $this->client->getContainer()->get('session');
 

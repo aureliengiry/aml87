@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -188,7 +190,7 @@ class Partenaire
         return $this;
     }
 
-    public function addEvenement($evenement)
+    public function addEvenement($evenement): void
     {
         $this->evenements[] = $evenement;
     }
@@ -196,7 +198,7 @@ class Partenaire
     /**
      * Fonction pour supprimer une discussion d'un mot clé.
      */
-    public function removeEvenement($evenement)
+    public function removeEvenement($evenement): void
     {
         $this->evenements->removeElement($evenement);
     }

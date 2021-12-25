@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -19,7 +21,7 @@ class Slugger
      *
      * @see http://www.ficgs.com/How-to-remove-accents-in-PHP-f3057.html
      */
-    protected function removeAccent()
+    protected function removeAccent(): void
     {
         $this->outputString = str_replace(
             [

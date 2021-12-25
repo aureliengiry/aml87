@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -38,14 +40,14 @@ final class SecurityController extends AbstractController
     /**
      * @Route("/connexion/check", name="app_members_area_login_check", methods={"POST"})
      */
-    public function loginCheck()
+    public function loginCheck(): void
     {
     }
 
     /**
      * @Route("/deconnexion", name="app_members_area_logout", methods={"GET"})
      */
-    public function logout()
+    public function logout(): void
     {
     }
 }

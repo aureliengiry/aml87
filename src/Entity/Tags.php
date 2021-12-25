@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -150,7 +152,7 @@ class Tags
         return $this;
     }
 
-    public function addArticle(Article $article)
+    public function addArticle(Article $article): void
     {
         $this->articles[] = $article;
     }
@@ -158,7 +160,7 @@ class Tags
     /**
      * Fonction pour supprimer article associé.
      */
-    public function removeArticle(Article $article)
+    public function removeArticle(Article $article): void
     {
         $this->articles->removeElement($article);
     }

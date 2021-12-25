@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -118,7 +120,7 @@ abstract class Video
     /**
      * Fonction to delete $evenement.
      */
-    public function removeEvenement(Evenement $evenement)
+    public function removeEvenement(Evenement $evenement): void
     {
         $this->evenements->removeElement($evenement);
         $evenement->removeVideo($this);

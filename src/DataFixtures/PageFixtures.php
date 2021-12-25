@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -16,7 +18,7 @@ use Nelmio\Alice\Loader\NativeLoader;
  */
 class PageFixtures extends Fixture
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $loader = new NativeLoader();
         $fakeData = $loader->loadFile(__DIR__.'/pages_fixtures.yaml');

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -22,7 +24,7 @@ class PartenaireRepository extends EntityRepository
      *
      * @param MongoboxTumblrBundle :Tumblr $partenaire
      */
-    public function cleanTags($partenaire)
+    public function cleanTags($partenaire): void
     {
         $em = $this->getEntityManager();
         foreach ($partenaire->getTags() as $tag) {
@@ -36,7 +38,7 @@ class PartenaireRepository extends EntityRepository
      *
      * @param MongoboxTumblrBundle :Tumblr $partenaire
      */
-    public function cleanLogo($partenaire)
+    public function cleanLogo($partenaire): void
     {
         $em = $this->getEntityManager();
         foreach ($partenaire->getLogo() as $tag) {

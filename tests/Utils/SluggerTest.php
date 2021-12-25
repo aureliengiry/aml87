@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -15,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  */
 class SluggerTest extends TestCase
 {
-    public function testSluggify()
+    public function testSluggify(): void
     {
         $inputString = 'aAa & à Ù on utilise php7 pour la mongo v2 ou ~ pas ?';
         $expectedString = 'aaa-a-u-on-utilise-php7-pour-la-mongo-v2-ou-pas';

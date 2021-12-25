@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -30,8 +32,7 @@ final class ContactUsController extends AbstractController
         Request $request,
         ContactMessage $contactMessageService,
         Environment $twig
-    ): Response
-    {
+    ): Response {
         $contactMessage = new Message();
         $form = $this->createForm(MessageType::class, $contactMessage)->handleRequest($request);
 

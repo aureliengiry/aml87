@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -78,7 +80,7 @@ class ArticleRepository extends EntityRepository
     /**
      * Fonction qui permet de supprimer les mots clés d'un article de blog.
      */
-    public function cleanTags(Article $article)
+    public function cleanTags(Article $article): void
     {
         $em = $this->getEntityManager();
         foreach ($article->getTags() as $tag) {

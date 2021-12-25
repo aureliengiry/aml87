@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -100,7 +102,7 @@ class User extends BaseUser
     /**
      * @param string $firstname
      */
-    public function setFirstname($firstname)
+    public function setFirstname($firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -116,7 +118,7 @@ class User extends BaseUser
     /**
      * @param string $lastname
      */
-    public function setLastname($lastname)
+    public function setLastname($lastname): void
     {
         $this->lastname = $lastname;
     }

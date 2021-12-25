@@ -17,7 +17,7 @@
             {% for event in entities %}
                 <li class="event-item">
                     <span class="date">
-                        {{ event.dateStart|localizeddate('full', 'short') }} :
+                        {{ event.dateStart|format_date('full') }} :
                     </span>
 
                     <h2>
