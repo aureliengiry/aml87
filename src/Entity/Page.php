@@ -29,42 +29,32 @@ class Page
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    private string $title;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="body", type="text")
      */
-    private $body;
+    private string $body;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="created", type="datetime")
      */
-    private $created;
+    private \DateTime $created;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="updated", type="datetime")
      */
-    private $updated;
+    private \DateTime $updated;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="public", type="boolean")
      */
-    private $public;
+    private bool $public;
 
     /**
      * @var UrlPage url
@@ -72,7 +62,7 @@ class Page
      * @ORM\OneToOne(targetEntity="\App\Entity\UrlPage", cascade={"all"})
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
-    private $url;
+    private \App\Entity\UrlPage $url;
 
     /**
      * Get id.

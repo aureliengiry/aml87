@@ -29,14 +29,12 @@ class Album
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    private string $title;
 
     /**
      * @var string url
@@ -44,28 +42,22 @@ class Album
      * @ORM\OneToOne(targetEntity="\App\Entity\Url", cascade={"all"})
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
-    private $url;
+    private string $url;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text")
      */
-    private $description;
+    private string $description;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="public", type="boolean")
      */
-    private $public;
+    private bool $public;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="date", type="date")
      */
-    private $date;
+    private \DateTime $date;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", inversedBy="album" ,cascade={"all"})
@@ -245,6 +237,6 @@ class Album
 
     public function __toString()
     {
-        return $this->title ? $this->title : 'Nouvel Album';
+        return $this->title ?: 'Nouvel Album';
     }
 }

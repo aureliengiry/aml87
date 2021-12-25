@@ -34,64 +34,48 @@ class Evenement
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
-    private $type;
+    private string $type;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="date_start", type="datetime")
      */
-    private $dateStart;
+    private \DateTime $dateStart;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="date_end", type="datetime", nullable=true)
      */
-    private $dateEnd;
+    private \DateTime $dateEnd;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    private string $title;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    private string $description;
 
     /**
-     * @var int
-     *
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
-    private $picture;
+    private int $picture;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="archive", type="boolean")
      */
-    private $archive;
+    private bool $archive;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="public", type="boolean")
      */
-    private $public = false;
+    private bool $public = false;
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Article", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
@@ -113,7 +97,7 @@ class Evenement
      * @ORM\OneToOne(targetEntity="\App\Entity\Url", cascade={"all"}, fetch="EAGER")
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
-    private $url;
+    private string $url;
 
     /**
      * @ORM\ManyToOne(targetEntity="Season", inversedBy="evenements")

@@ -26,28 +26,24 @@ class Link
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    private string $title;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="url", type="string", length=255)
      */
-    private $url;
+    private string $url;
 
     /**
      * @var string description
      *
      * @ORM\Column(name="description", type="text")
      */
-    private $description;
+    private string $description;
 
     /**
      * @var bool weight
@@ -57,11 +53,9 @@ class Link
     private $weight = 1;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="public", type="boolean")
      */
-    private $public;
+    private bool $public;
 
     /**
      * Get id.
@@ -177,6 +171,6 @@ class Link
 
     public function __toString()
     {
-        return $this->title ? $this->title : 'New Link';
+        return $this->title ?: 'New Link';
     }
 }

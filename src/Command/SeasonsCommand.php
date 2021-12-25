@@ -28,8 +28,7 @@ class SeasonsCommand extends Command
     protected $eventRepo;
     protected $seasonRepo;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -77,7 +76,7 @@ class SeasonsCommand extends Command
         $currentDateTime = new \DateTime();
         $currentDateTime->setTime(0, 0);
 
-        $estimateCurrentSeason = $this->calculateSeason($currentDateTime, $output);
+        $estimateCurrentSeason = $this->calculateSeason($currentDateTime);
 
         // Get list of event
         $evenements = $this->eventRepo->findAll();

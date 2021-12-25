@@ -33,7 +33,7 @@ class Youtube extends Video
 
     public function __toString()
     {
-        return $this->title ? $this->title : 'New Video Youtube';
+        return $this->title ?: 'New Video Youtube';
     }
 
     public function __construct(string $title = null, string $idYoutube = null)

@@ -22,8 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class MessageType extends AbstractType
 {
-    /** @var string|null */
-    private $reCAPTCHA_site_key;
+    private ?string $reCAPTCHA_site_key;
 
     public function __construct(?string $reCAPTCHA_site_key)
     {

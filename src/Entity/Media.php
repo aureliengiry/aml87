@@ -32,12 +32,12 @@ abstract class Media
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected ?int $id;
+    protected ?int $id = null;
 
     /**
      * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
-    protected ?string $title;
+    protected ?string $title = null;
 
     public function getId(): ?int
     {

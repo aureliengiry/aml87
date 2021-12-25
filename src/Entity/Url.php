@@ -80,6 +80,6 @@ abstract class Url
 
     public function __toString()
     {
-        return $this->urlKey ? $this->urlKey : 'Url not define';
+        return $this->urlKey ?: 'Url not define';
     }
 }

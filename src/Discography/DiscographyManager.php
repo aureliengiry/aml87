@@ -17,15 +17,14 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class DiscographyManager
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
-    public function getPublicAlbums()
+    public function getPublicAlbums(): iterable
     {
         return $this->getAlbumRepository()->findBy(
             ['public' => '1'],
