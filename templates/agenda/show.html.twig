@@ -15,7 +15,7 @@
 
             {# Date #}
             {% if entity.dateStart %}
-                <span class="date">{{ entity.dateStart|localizeddate('full', 'short')  }}</span>
+                <span class="date">{{ entity.dateStart|format_date('full')  }}</span>
             {% endif %}
 
             {# Affiche #}

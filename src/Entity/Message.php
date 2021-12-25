@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -118,7 +120,7 @@ class Message
     /**
      * Set name.
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -134,7 +136,7 @@ class Message
     /**
      * Set email.
      */
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -150,7 +152,7 @@ class Message
     /**
      * Set subject.
      */
-    public function setSubject(string $subject)
+    public function setSubject(string $subject): void
     {
         $this->subject = $subject;
     }
@@ -166,7 +168,7 @@ class Message
     /**
      * Set body.
      */
-    public function setBody(string $body)
+    public function setBody(string $body): void
     {
         $this->body = $body;
     }
@@ -202,7 +204,7 @@ class Message
     /**
      * Set status.
      */
-    public function setStatus(int $status)
+    public function setStatus(int $status): void
     {
         $this->status = $status;
     }
@@ -226,7 +228,7 @@ class Message
      *
      * @param \DateTime $created
      */
-    public function setCreated(\DateTime $created = null)
+    public function setCreated(\DateTime $created = null): void
     {
         $this->created = $created;
     }
@@ -252,7 +254,7 @@ class Message
      *
      * @param bool $spam
      */
-    public function setSpam($spam)
+    public function setSpam($spam): void
     {
         if ( ! empty($spam)) {
             $spam = true;

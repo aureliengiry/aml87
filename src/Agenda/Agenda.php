@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -24,11 +26,11 @@ class Agenda
         $this->entityManager = $entityManager;
     }
 
-    public function getCurrentSeason()
+    public function getCurrentSeason(): void
     {
     }
 
-    public function getPublicEventsBySeason(Season $season)
+    public function getPublicEventsBySeason()
     {
         return $this->getEventRepository()->getNextEvenements([
             'public' => 1,

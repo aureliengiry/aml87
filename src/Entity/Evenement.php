@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -317,7 +319,7 @@ class Evenement
         return $this;
     }
 
-    public function addArticle(Article $article)
+    public function addArticle(Article $article): void
     {
         $this->articles[] = $article;
     }
@@ -325,7 +327,7 @@ class Evenement
     /**
      * Fonction pour supprimer une discussion d'un mot clé.
      */
-    public function removeArticle(Article $article)
+    public function removeArticle(Article $article): void
     {
         $this->articles->removeElement($article);
     }
@@ -343,7 +345,7 @@ class Evenement
     /**
      * Fonction to delete partenaire.
      */
-    public function removePartenaire(Partenaire $partenaire)
+    public function removePartenaire(Partenaire $partenaire): void
     {
         $this->partenaires->removeElement($partenaire);
     }
@@ -379,7 +381,7 @@ class Evenement
         return $this;
     }
 
-    public function addVideo(Video $video)
+    public function addVideo(Video $video): void
     {
         $this->videos[] = $video;
     }
@@ -387,7 +389,7 @@ class Evenement
     /**
      * Remove Video.
      */
-    public function removeVideo(Video $video)
+    public function removeVideo(Video $video): void
     {
         $this->videos->removeElement($video);
     }

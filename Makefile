@@ -200,8 +200,7 @@ db-init-dev-without-docker:        ## Init Database, fixtures for dev without do
 ## ----------------------------------------------------------------------------
 ##
 
-tests-init: ## Init Database, fixtures for the PHP unit tests on docker
-tests-init: vendor
+tests-init: vendor ## Init Database, fixtures for the PHP unit tests on docker
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:drop --force --env=test
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:create --env=test
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:schema:update --force --env=test

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -236,7 +238,7 @@ class Album
     /**
      * Fonction to delete tag.
      */
-    public function removeTrack(Track $track)
+    public function removeTrack(Track $track): void
     {
         $this->tracks->removeElement($track);
     }

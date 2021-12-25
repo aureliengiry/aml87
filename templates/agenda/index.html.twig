@@ -15,7 +15,7 @@
         <ul id="agenda-concerts-public">
             {% for event in entities %}
                 <li class="event-item">
-                    <span class="date">{{ event.dateStart|localizeddate('full', 'short') }} :</span>
+                    <span class="date">{{ event.dateStart|format_date('full') }} :</span>
 
                     <h2>
                         <a href="{{ path('agenda_show_event', { 'slug': event.slug }) }}"

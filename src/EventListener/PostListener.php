@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -32,14 +34,13 @@ class PostListener
         \Swift_Mailer $mailer,
         EntityManagerInterface $entityManager,
         string $subscribers = null
-    )
-    {
+    ) {
         $this->mailer = $mailer;
         $this->entityManager = $entityManager;
         $this->subscribers = $subscribers;
     }
 
-    public function onPostEvent(PostEvent $event)
+    public function onPostEvent(PostEvent $event): void
     {
         $post = $event->getPost();
 

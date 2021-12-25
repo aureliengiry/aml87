@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -35,14 +37,13 @@ class SitemapListener
         Router $router,
         DiscographyManager $discographyManager,
         EntityManagerInterface $entityManager
-    )
-    {
+    ) {
         $this->router = $router;
         $this->discographyManager = $discographyManager;
         $this->entityManager = $entityManager;
     }
 
-    public function onGenerateSitemapEvent(GenerateEvent $event)
+    public function onGenerateSitemapEvent(GenerateEvent $event): void
     {
         /** Blog */
         // Add blog url

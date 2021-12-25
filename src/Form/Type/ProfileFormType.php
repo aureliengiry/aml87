@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -27,7 +29,7 @@ class ProfileFormType extends AbstractType
     /**
      * Builds the embedded form representing the user.
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(
@@ -86,7 +88,7 @@ class ProfileFormType extends AbstractType
         return \FOS\UserBundle\Form\Type\ProfileFormType::class;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             // Ici, une clé unique par formulaire pour la génération du jeton CSRF

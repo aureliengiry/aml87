@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -48,13 +50,11 @@ final class AgendaController extends AbstractController
      */
     public function index(): Response
     {
-        $currentSeason = $this->seasonManager->getCurrentSeason();
-
         return new Response($this->twig->render(
             'agenda/index.html.twig',
             [
-                'current_season' => $currentSeason,
-                'entities' => $this->agenda->getPublicEventsBySeason($currentSeason),
+                'current_season' => $this->seasonManager->getCurrentSeason(),
+                'entities' => $this->agenda->getPublicEventsBySeason(),
                 'seasons' => $this->seasonManager->getPastSeasons(),
             ]
         ));

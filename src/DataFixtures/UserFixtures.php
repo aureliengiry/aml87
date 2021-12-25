@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the AML87 application.
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
@@ -16,7 +18,7 @@ class UserFixtures extends Fixture
     public const ADMIN_USER = 'admin';
     public const SIMPLE_USER = 'simple-user';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $adminUser = new User();
         $adminUser->setSuperAdmin(true);
