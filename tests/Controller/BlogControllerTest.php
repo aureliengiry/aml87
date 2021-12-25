@@ -25,7 +25,7 @@ class BlogControllerTest extends WebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
 
         // Check page title
-        $this->assertContains('Blog', $crawler->filter('title')->text());
+        $this->assertStringContainsString('Blog', $crawler->filter('title')->text());
 
         // Check if there is at least one article
         //$this->assertTrue($crawler->filter('#col-left .contenu-page article')->count() > 0);

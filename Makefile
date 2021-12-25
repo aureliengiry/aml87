@@ -5,6 +5,7 @@ EXEC_MYSQL=docker-compose exec mysql
 
 PROJECT_PATH=/var/www/aml87
 SYMFONY_CONSOLE="$(PROJECT_PATH)/bin/console"
+SYMFONY_CONSOLE_LOCAL=symfony console
 
 ##
 ## ----------------------------------------------------------------------------
@@ -199,21 +200,30 @@ db-init-dev-without-docker:        ## Init Database, fixtures for dev without do
 ## ----------------------------------------------------------------------------
 ##
 
-tests-init:        ## Init Database, fixtures for the PHP unit tests
+tests-init: ## Init Database, fixtures for the PHP unit tests on docker
 tests-init: vendor
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:drop --force --env=test
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:database:create --env=test
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:schema:update --force --env=test
 	-$(EXEC_WEB) $(SYMFONY_CONSOLE) doctrine:fixtures:load --env=test -n
 
+tests-init-local: ## Init Database, fixtures for the PHP unit tests on local
+	-$(SYMFONY_CONSOLE_LOCAL) doctrine:database:drop --force --env=test
+	-$(SYMFONY_CONSOLE_LOCAL) doctrine:database:create --env=test
+	-$(SYMFONY_CONSOLE_LOCAL) doctrine:schema:update --force --env=test
+	-$(SYMFONY_CONSOLE_LOCAL) doctrine:fixtures:load --env=test -n
+
 tests-ut:             ## Run the phpunit on unit tests and exclude functional tests
-	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 bin/phpunit --exclude-group functional"
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit --exclude-group functional"
 
 tests-functional:  ## Run the phpunit on functionnal tests
-	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 bin/phpunit --group functional"
+	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit --group functional"
 
 tests-watch: ## Run the phpunit on watch mode. Ex: make tests-watch
 	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit-watcher watch --timeout=0"
+
+tests-watch-local: ## Run the phpunit on watch mode. Ex: make tests-watch-local
+	php -d memory_limit=-1 vendor/bin/phpunit-watcher watch
 
 tests-watch-filter: ## Run the phpunit on watch mode with filter. Ex: make tests-watch FILTER=testname
 	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit-watcher watch --filter=$(FILTER)"

@@ -7,33 +7,43 @@
 
 namespace App\Tests\Controller;
 
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class ContactControllerTest.
+ *
+ * @group functional
  */
 class ContactControllerTest extends WebTestCase
 {
-    private $client = null;
+    private ?KernelBrowser $client = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->client = static::createClient();
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->client = null;
     }
 
     /**
      * Test contact Page.
      */
-    public function testIndex()
+    public function testIndex(): void
     {
         $url = $this->client->getContainer()->get('router')->generate('aml_contactus_default_index');
         $crawler = $this->client->request(Request::METHOD_GET, $url);
 
         // Check status code
         $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        $this->assertContains('Contactez-nous', $crawler->filter('title')->text());
+        $this->assertStringContainsString('Contactez-nous', $crawler->filter('title')->text());
     }
 
     /*
