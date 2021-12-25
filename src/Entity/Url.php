@@ -30,37 +30,23 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class Url
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id_url", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    protected ?int $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="url_key", type="string", length=255)
      */
-    protected $urlKey;
+    protected string $urlKey;
 
-    /**
-     * Get id.
-     */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set urlKey.
-     *
-     * @param string $urlKey
-     *
-     * @return Url
-     */
-    public function setUrlKey($urlKey)
+    public function setUrlKey(string $urlKey): self
     {
         $slugger = new Slugger();
         $this->urlKey = $slugger->slugify($urlKey);
@@ -68,17 +54,12 @@ abstract class Url
         return $this;
     }
 
-    /**
-     * Get urlKey.
-     *
-     * @return string
-     */
-    public function getUrlKey()
+    public function getUrlKey(): string
     {
         return $this->urlKey;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->urlKey ?: 'Url not define';
     }

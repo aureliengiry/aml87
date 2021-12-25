@@ -9,16 +9,16 @@
     "eslint-plugin-standard": "^4.0.1"
   },
   "dependencies": {
-    "@symfony/webpack-encore": "^0.22.2",
-    "bootstrap": "^4.1.1",
+    "@symfony/webpack-encore": "^1.4.0",
+    "bootstrap": "4.3.1",
     "cd-pretty-photo": "^0.0.3",
     "chart.js": "^2.9.3",
     "core-js": "3",
-    "jquery": "^3.3.1",
+    "jquery": "3.6.0",
     "mdbootstrap": "^4.7.0",
-    "node-sass": "^4.9.2",
-    "popper.js": "^1.14.6",
-    "sass-loader": "^7.3.1"
+    "node-sass": "^5.0.0",
+    "popper.js": "^1.16.0",
+    "sass-loader": "^11.0.0"
   },
   "license": "UNLICENSED",
   "private": true,

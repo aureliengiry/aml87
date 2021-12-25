@@ -44,120 +44,65 @@ class Track
     private string $composer;
 
     /**
-     * @var string url
-     *
      * @ORM\ManyToOne(targetEntity="Album", inversedBy="tracks")
      * @ORM\JoinColumn(name="id_album", referencedColumnName="id_album")
      */
-    private string $album;
+    private Album $album;
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set number.
-     *
-     * @param int $number
-     *
-     * @return Track
-     */
-    public function setNumber($number)
+    public function setNumber(int $number): self
     {
         $this->number = $number;
 
         return $this;
     }
 
-    /**
-     * Get number.
-     *
-     * @return int
-     */
-    public function getNumber()
+    public function getNumber(): int
     {
         return $this->number;
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Track
-     */
-    public function setTitle($title)
+    public function setTitle($title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * Set composer.
-     *
-     * @param string $composer
-     *
-     * @return Track
-     */
-    public function setComposer($composer)
+    public function setComposer(string $composer): self
     {
         $this->composer = $composer;
 
         return $this;
     }
 
-    /**
-     * Get composer.
-     *
-     * @return string
-     */
-    public function getComposer()
+    public function getComposer(): string
     {
         return $this->composer;
     }
 
-    /**
-     * Set album.
-     *
-     * @param int $album
-     *
-     * @return Track
-     */
-    public function setAlbum($album)
+    public function setAlbum(Album $album): self
     {
         $this->album = $album;
 
         return $this;
     }
 
-    /**
-     * Get album.
-     *
-     * @return int
-     */
-    public function getAlbum()
+    public function getAlbum(): Album
     {
         return $this->album;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title ?: 'New Track';
     }
