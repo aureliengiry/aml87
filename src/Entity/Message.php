@@ -29,80 +29,60 @@ class Message
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
-     * @var string
-     *
      * @Assert\NotBlank()
      * @Assert\Type("string")
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name = '';
+    private string $name = '';
 
     /**
-     * @var string
-     *
      * @Assert\NotBlank()
      * @Assert\Email()
      * @Assert\Type("string")
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(name="email", type="string", length=255)
      */
-    private $email = '';
+    private string $email = '';
 
     /**
-     * @var string
-     *
      * @Assert\NotBlank()
      * @Assert\Type("string")
      * @Assert\Length(max=255)
-     *
      * @ORM\Column(name="subject", type="string", length=255)
      */
-    private $subject = '';
+    private string $subject = '';
 
     /**
-     * @var string
-     *
      * @Assert\NotBlank()
      * @Assert\Type("string")
      * @Assert\Length(min=10, max=1000)
-     *
      * @ORM\Column(name="body", type="text")
      */
-    private $body = '';
+    private string $body = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="address_ip", type="string", length=255)
      */
-    private $addressIp;
+    private string $addressIp;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="status", type="smallint")
      */
-    private $status = 0;
+    private int $status = 0;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="created", type="datetime")
      */
-    private $created;
+    private \DateTime $created;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="spam", type="boolean")
      */
-    private $spam = false;
+    private bool $spam = false;
 
     public function __construct()
     {

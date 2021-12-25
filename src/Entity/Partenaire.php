@@ -28,21 +28,17 @@ class Partenaire
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="url", type="string", length=255)
      */
-    private $url;
+    private string $url;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
@@ -51,11 +47,9 @@ class Partenaire
     private $logo;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    private string $description;
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Evenement", inversedBy="partenaires")

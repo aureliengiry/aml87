@@ -28,7 +28,7 @@ class Tags
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="Article", inversedBy="tags")
@@ -40,32 +40,26 @@ class Tags
     protected $articles;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="system_name", type="string", length=255)
      */
-    private $systemName;
+    private string $systemName;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="weight", type="smallint", nullable=true)
      */
-    private $weight = 0;
+    private int $weight = 0;
 
     /**
      * @var string description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description = '';
+    private string $description = '';
 
     public function __construct()
     {
@@ -182,6 +176,6 @@ class Tags
 
     public function __toString()
     {
-        return $this->name ? $this->name : 'New Tag';
+        return $this->name ?: 'New Tag';
     }
 }

@@ -31,11 +31,8 @@ class SendMessageCommand extends Command
     protected $messageRepo;
     protected $messageId;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
+    private EntityManagerInterface $entityManager;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         EntityManagerInterface $entityManager,

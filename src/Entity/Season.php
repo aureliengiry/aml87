@@ -29,28 +29,22 @@ class Season
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="date_start", type="datetime")
      */
-    private $dateStart;
+    private \DateTime $dateStart;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="date_end", type="datetime")
      */
-    private $dateEnd;
+    private \DateTime $dateEnd;
 
     /**
      * @ORM\OneToMany(targetEntity="Evenement", mappedBy="season")
@@ -156,7 +150,7 @@ class Season
 
     public function __toString()
     {
-        return $this->name ? $this->name : 'New Season';
+        return $this->name ?: 'New Season';
     }
 
     public function createStartDate($year)

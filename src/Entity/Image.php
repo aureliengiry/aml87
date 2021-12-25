@@ -25,7 +25,7 @@ class Image extends Media
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Album", mappedBy="image")
      */
-    protected ?Album $album;
+    protected ?Album $album = null;
 
     /**
      * @Assert\File(
@@ -41,9 +41,9 @@ class Image extends Media
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected ?string $path;
+    protected ?string $path = null;
 
-    private ?string $filenameForRemove;
+    private ?string $filenameForRemove = null;
 
     public function getType(): array
     {

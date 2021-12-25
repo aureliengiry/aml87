@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -17,7 +18,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class MenuBuilder
 {
-    private $factory;
+    private FactoryInterface $factory;
 
     /**
      * Init factory.
@@ -29,10 +30,8 @@ class MenuBuilder
 
     /**
      * Generate main menu.
-     *
-     * @return \Knp\Menu\ItemInterface
      */
-    public function createMainMenu()
+    public function createMainMenu(): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
@@ -56,12 +55,8 @@ class MenuBuilder
 
     /**
      * Generate breadcrumb.
-     *
-     * @param Request $request
-     *
-     * @return \Knp\Menu\ItemInterface
      */
-    public function createBreadcrumbMenu(RequestStack $request)
+    public function createBreadcrumbMenu(RequestStack $request): ItemInterface
     {
         $menu = $this->factory->createItem('root', [
             'childrenAttributes' => [
@@ -73,7 +68,7 @@ class MenuBuilder
         $menu->addChild('Accueil', ['route' => 'app_main_index']);
 
         // create the menu according to the route
-        $currentRequest = $request->getCurrentRequest('_route');
+        $currentRequest = $request->getCurrentRequest();
         $route = $currentRequest->get('_route');
         switch ($route) {
             /* ----- AGENDA ----- */

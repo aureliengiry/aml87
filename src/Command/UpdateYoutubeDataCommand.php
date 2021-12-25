@@ -29,28 +29,19 @@ class UpdateYoutubeDataCommand extends Command
     public const YOUTUBE_STATUS_PUBLIC = 'public';
     public const YOUTUBE_STATUS_UNLISTED = 'unlisted';
 
-    /** @var bool debug mode */
-    private $debug = false;
+    private bool $debug = false;
 
-    private $output;
+    private OutputInterface $output;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var array list of videos */
-    private $videosList = [];
+    private array $videosList = [];
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    /** @var YoutubeProvider */
-    private $youtubeProvider;
-
-    /** @var VideoFactory */
-    private $videoFactory;
-
-    /** @var VideoManager */
-    private $videoManager;
+    private YoutubeProvider $youtubeProvider;
+    private VideoFactory $videoFactory;
+    private VideoManager $videoManager;
 
     public function __construct(
         EntityManagerInterface $entityManager,

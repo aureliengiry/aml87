@@ -14,13 +14,9 @@ use App\Repository\Video\YoutubeRepository;
 use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * Class VideoManager.
- */
 class VideoManager
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {

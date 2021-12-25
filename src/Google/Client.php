@@ -10,23 +10,23 @@ declare(strict_types=1);
 namespace App\Google;
 
 use Google_Client;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Client.
  */
 class Client
 {
-    private $logger;
-    private $googleAppName;
-    private $googleDevKey;
+    private LoggerInterface $logger;
+    private string $googleAppName;
+    private string $googleDevKey;
 
-    private $client;
+    private ?Google_Client $client = null;
 
     /**
      * Client constructor.
      */
-    public function __construct(Logger $logger, string $googleAppName, string $googleDevKey)
+    public function __construct(LoggerInterface $logger, string $googleAppName, string $googleDevKey)
     {
         $this->logger = $logger;
         $this->googleAppName = $googleAppName;

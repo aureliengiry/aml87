@@ -25,7 +25,7 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(name="system_name", type="string", length=255, unique=true)
@@ -40,7 +40,7 @@ class Category
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="category")

@@ -9,12 +9,9 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
-/**
- * Class Slugger.
- */
 class Slugger
 {
-    protected $outputString = '';
+    protected string $outputString = '';
 
     /**
      * Remove letter with accent.

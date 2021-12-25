@@ -15,11 +15,11 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ArticleManager
 {
-    private $em;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
     public function getPublicArticlesWithPagination(int $page, array $filter)
@@ -38,12 +38,12 @@ class ArticleManager
 
     private function getArticleRepository()
     {
-        return $this->em->getRepository(Article::class);
+        return $this->entityManager->getRepository(Article::class);
     }
 
     private function getTagsRepository()
     {
-        return $this->em->getRepository(Tags::class);
+        return $this->entityManager->getRepository(Tags::class);
     }
 
     public function getTagsWithNbArticles()

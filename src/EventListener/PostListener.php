@@ -18,14 +18,11 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class PostListener
 {
-    /** @var \Swift_Mailer */
-    private $mailer;
+    private \Swift_Mailer $mailer;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    /** @var string */
-    private $subscribers;
+    private string $subscribers;
 
     /**
      * PostListener constructor.

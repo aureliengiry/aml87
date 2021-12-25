@@ -29,7 +29,7 @@ class Article
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /***
      * @ORM\Column(name="title", type="string", length=255)
@@ -46,13 +46,13 @@ class Article
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
-    private ?Image $logo;
+    private ?Image $logo = null;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Video\Youtube", cascade={"all"})
      * @ORM\JoinColumn(name="id_video", referencedColumnName="id_video")
      */
-    private ?Youtube $video;
+    private ?Youtube $video = null;
 
     /**
      * @ORM\Column(name="body", type="text")
@@ -72,7 +72,7 @@ class Article
     /**
      * @ORM\Column(name="published", type="datetime", nullable=true)
      */
-    private ?\DateTime $published;
+    private ?\DateTime $published = null;
 
     /**
      * @ORM\Column(name="public", type="boolean")
@@ -287,7 +287,7 @@ class Article
 
     public function __toString(): string
     {
-        return $this->title ? $this->title : 'New Article';
+        return $this->title ?: 'New Article';
     }
 
     public function getSlug(): string

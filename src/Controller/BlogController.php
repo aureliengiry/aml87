@@ -63,7 +63,7 @@ final class BlogController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $publicArticles = $this->articleManager->getPublicArticlesWithPagination($page, $filters);
-        $nbPublicArticles = \count($publicArticles);
+        $nbPublicArticles = is_countable($publicArticles) ? \count($publicArticles) : 0;
 
         // Calcul de la pagination
         $calculLastPage = round($nbPublicArticles / $this->_limitPagination);

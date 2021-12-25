@@ -26,28 +26,22 @@ class Track
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="number", type="smallint")
      */
-    private $number;
+    private int $number;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    private string $title;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="composer", type="string", length=255)
      */
-    private $composer;
+    private string $composer;
 
     /**
      * @var string url
@@ -55,7 +49,7 @@ class Track
      * @ORM\ManyToOne(targetEntity="Album", inversedBy="tracks")
      * @ORM\JoinColumn(name="id_album", referencedColumnName="id_album")
      */
-    private $album;
+    private string $album;
 
     /**
      * Get id.
@@ -165,6 +159,6 @@ class Track
 
     public function __toString()
     {
-        return $this->title ? $this->title : 'New Track';
+        return $this->title ?: 'New Track';
     }
 }

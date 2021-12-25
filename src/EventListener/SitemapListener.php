@@ -21,14 +21,11 @@ use Symfony\Component\Routing\Router;
  */
 class SitemapListener
 {
-    /** @var EntityManagerInterface */
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    /** @var Router */
-    private $router;
+    private Router $router;
 
-    /** @var DiscographyManager */
-    private $discographyManager;
+    private DiscographyManager $discographyManager;
 
     /**
      * SitemapListener constructor.

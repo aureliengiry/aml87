@@ -16,11 +16,10 @@ use Google_Service_YouTube;
  */
 class YoutubeProvider
 {
-    /** @var Client */
-    private $googleClient;
-    private $youtubeUsername;
+    private Client $googleClient;
+    private string $youtubeUsername;
 
-    private $youtubeService;
+    private ?Google_Service_YouTube $youtubeService = null;
 
     /**
      * YoutubeProvider constructor.
