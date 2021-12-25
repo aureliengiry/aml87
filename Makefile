@@ -212,7 +212,7 @@ tests-init-local: ## Init Database, fixtures for the PHP unit tests on local
 	-$(SYMFONY_CONSOLE_LOCAL) doctrine:schema:update --force --env=test
 	-$(SYMFONY_CONSOLE_LOCAL) doctrine:fixtures:load --env=test -n
 
-tests-ut:             ## Run the phpunit on unit tests and exclude functional tests
+tests-ut:  ## Run the phpunit on unit tests and exclude functional tests
 	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && php -d memory_limit=-1 vendor/bin/phpunit --exclude-group functional"
 
 tests-functional:  ## Run the phpunit on functionnal tests

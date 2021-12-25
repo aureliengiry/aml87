@@ -28,8 +28,6 @@ class Evenement
     public const EVENEMENT_TYPE_SORTIE = 'sortie';
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="id_evenement", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -49,7 +47,7 @@ class Evenement
     /**
      * @ORM\Column(name="date_end", type="datetime", nullable=true)
      */
-    private \DateTime $dateEnd;
+    private ?\DateTime $dateEnd;
 
     /**
      * @ORM\Column(name="title", type="string", length=255)
@@ -59,18 +57,18 @@ class Evenement
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private string $description;
+    private ?string $description;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
-    private int $picture;
+    private ?Image $picture = null;
 
     /**
      * @ORM\Column(name="archive", type="boolean")
      */
-    private bool $archive;
+    private bool $archive = false;
 
     /**
      * @ORM\Column(name="public", type="boolean")
@@ -84,26 +82,24 @@ class Evenement
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
      * )
      */
-    protected $articles;
+    protected iterable $articles;
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Partenaire", mappedBy="evenements", cascade={"all"}, fetch="LAZY")
      */
-    protected $partenaires;
+    protected iterable $partenaires;
 
     /**
-     * @var string url
-     *
      * @ORM\OneToOne(targetEntity="\App\Entity\Url", cascade={"all"}, fetch="EAGER")
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
-    private string $url;
+    private Url $url;
 
     /**
      * @ORM\ManyToOne(targetEntity="Season", inversedBy="evenements")
      * @ORM\JoinColumn(name="id_season", referencedColumnName="id_season")
      */
-    protected $season;
+    protected Season $season;
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Video\Youtube", inversedBy="evenements", cascade={"all"}, fetch="LAZY")
@@ -112,7 +108,7 @@ class Evenement
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_video", referencedColumnName="id_video")}
      * )
      */
-    protected $videos;
+    protected iterable $videos;
 
     public function __construct()
     {
@@ -121,162 +117,108 @@ class Evenement
         $this->videos = new ArrayCollection();
     }
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set date.
-     */
-    public function setDateStart(\DateTime $dateStart)
+    public function setDateStart(\DateTime $dateStart): self
     {
         $this->dateStart = $dateStart;
 
         return $this;
     }
 
-    /**
-     * Get date.
-     */
-    public function getDateStart(): ?\DateTime
+    public function getDateStart(): \DateTime
     {
         return $this->dateStart;
     }
 
-    /**
-     * Set dateEnd.
-     */
-    public function setDateEnd(\DateTime $dateEnd = null)
+    public function setDateEnd(?\DateTime $dateEnd = null): self
     {
         $this->dateEnd = $dateEnd;
 
         return $this;
     }
 
-    /**
-     * Get date.
-     */
     public function getDateEnd(): ?\DateTime
     {
         return $this->dateEnd;
     }
 
-    /**
-     * Set title.
-     */
-    public function setTitle(string $title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * Get title.
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * Set description.
-     */
-    public function setDescription(string $description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * Get description.
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setPicture($picture)
+    public function setPicture(Image $picture): self
     {
         $this->picture = $picture;
 
         return $this;
     }
 
-    public function getPicture()
+    public function getPicture(): ?Image
     {
         return $this->picture;
     }
 
-    /**
-     * Set archive.
-     */
-    public function setArchive(bool $archive)
+    public function setArchive(bool $archive): self
     {
         $this->archive = $archive;
 
         return $this;
     }
 
-    /**
-     * Is archive.
-     *
-     * @return bool
-     */
-    public function isArchive(): ?bool
+    public function isArchive(): bool
     {
         return $this->archive;
     }
 
-    /**
-     * Set public.
-     */
-    public function setPublic(bool $public)
+    public function setPublic(bool $public): self
     {
         $this->public = $public;
 
         return $this;
     }
 
-    /**
-     * Get public.
-     */
     public function isPublic(): bool
     {
         return $this->public;
     }
 
-    /**
-     * @return string $type
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     */
-    public function setType($type)
+    public function setType(string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * Retourne le liste des différents types d'évènement.
-     *
-     * @return array
-     */
-    public static function getTypesEvenements()
+    public static function getTypesEvenements(): array
     {
         $typesEvenement = [];
 
@@ -291,12 +233,12 @@ class Evenement
     }
 
     /* ---------------- ARTICLES LIES ---------------- */
-    public function getArticles()
+    public function getArticles(): iterable
     {
         return $this->articles;
     }
 
-    public function setArticles(ArrayCollection $articles)
+    public function setArticles(iterable $articles): self
     {
         $this->articles = $articles;
 
@@ -308,9 +250,6 @@ class Evenement
         $this->articles[] = $article;
     }
 
-    /**
-     * Fonction pour supprimer une discussion d'un mot clé.
-     */
     public function removeArticle(Article $article): void
     {
         $this->articles->removeElement($article);
@@ -318,7 +257,7 @@ class Evenement
 
     /* ---------------- PARTENAIRES ---------------- */
 
-    public function addPartenaire(Partenaire $partenaire)
+    public function addPartenaire(Partenaire $partenaire): self
     {
         $partenaire->addEvenement($this);
         $this->partenaires[] = $partenaire;
@@ -326,26 +265,17 @@ class Evenement
         return $this;
     }
 
-    /**
-     * Fonction to delete partenaire.
-     */
     public function removePartenaire(Partenaire $partenaire): void
     {
         $this->partenaires->removeElement($partenaire);
     }
 
-    /**
-     * @return Evenement
-     */
-    public function getPartenaires()
+    public function getPartenaires(): iterable
     {
         return $this->partenaires;
     }
 
-    /**
-     * @return Evenement
-     */
-    public function setPartenaires(ArrayCollection $partenaires)
+    public function setPartenaires(iterable $partenaires): self
     {
         $this->partenaires = $partenaires;
 
@@ -353,12 +283,12 @@ class Evenement
     }
 
     /* ---------------- VIDEOS LIEES ---------------- */
-    public function getVideos()
+    public function getVideos(): iterable
     {
         return $this->videos;
     }
 
-    public function setVideos(ArrayCollection $videos)
+    public function setVideos(iterable $videos): self
     {
         $this->videos = $videos;
 
@@ -370,61 +300,48 @@ class Evenement
         $this->videos[] = $video;
     }
 
-    /**
-     * Remove Video.
-     */
     public function removeVideo(Video $video): void
     {
         $this->videos->removeElement($video);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title ?: 'New Event';
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $url
-     */
-    public function setUrl($url)
+    public function setUrl(Url $url): self
     {
         $this->url = $url;
 
         return $this;
     }
 
-    /**
-     * Get url.
-     *
-     * @return string
-     */
-    public function getUrl()
+    public function getUrl(): Url
     {
         return $this->url;
     }
 
-    public function getSeason()
+    public function getSeason(): Season
     {
         return $this->season;
     }
 
-    public function setSeason($season)
+    public function setSeason(Season $season): self
     {
         $this->season = $season;
 
         return $this;
     }
 
-    public function hasSeason()
+    public function hasSeason(): bool
     {
         return (bool) $this->season;
     }
 
-    public function getSlug()
+    public function getSlug(): string
     {
-        $slug = $this->id;
+        $slug = (string) $this->id;
         if ($this->getUrl() && ! empty($this->getUrl()->getUrlKey())) {
             $slug = $this->getUrl()->getUrlKey();
         }
@@ -432,7 +349,7 @@ class Evenement
         return $slug;
     }
 
-    public function getDates()
+    public function getDates(): string
     {
         if (null === $this->dateEnd) {
             return $this->dateStart->format('d M Y à H:m');

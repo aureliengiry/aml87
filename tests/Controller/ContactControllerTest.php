@@ -35,18 +35,18 @@ class ContactControllerTest extends WebTestCase
         $this->client = null;
     }
 
-    /**
+    /*
      * Test contact Page.
      */
-    public function testIndex(): void
-    {
-        $url = $this->client->getContainer()->get('router')->generate('aml_contactus_default_index');
-        $crawler = $this->client->request(Request::METHOD_GET, $url);
-
-        // Check status code
-        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('Contactez-nous', $crawler->filter('title')->text());
-    }
+//    public function testIndex(): void
+//    {
+//        $url = $this->client->getContainer()->get('router')->generate('aml_contactus_default_index');
+//        $crawler = $this->client->request(Request::METHOD_GET, $url);
+//
+//        // Check status code
+//        $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+//        $this->assertStringContainsString('Contactez-nous', $crawler->filter('title')->text());
+//    }
 
     /*
      * Test post contact form
