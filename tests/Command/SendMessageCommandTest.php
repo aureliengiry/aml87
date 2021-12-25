@@ -9,7 +9,9 @@ namespace App\Tests\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class SendMessageCommandTest.
@@ -18,12 +20,12 @@ class SendMessageCommandTest extends KernelTestCase
 {
     /**
      * Test command without argument.
-     *
-     * @expectedException \Symfony\Component\Console\Exception\RuntimeException
-     * @expectedExceptionMessage Not enough arguments (missing: "id-message").
      */
-    public function testEmptyIdMessage()
+    public function testEmptyIdMessage(): void
     {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Not enough arguments (missing: "id-message").');
+
         $kernel = static::createKernel();
         $application = new Application($kernel);
         $command = $application->find('contact-us:send:message');
@@ -36,12 +38,12 @@ class SendMessageCommandTest extends KernelTestCase
 
     /**
      * Test command with wrong id message.
-     *
-     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Unable to find WebBundle:Message entity
      */
-    public function testWrongIdMessage()
+    public function testWrongIdMessage(): void
     {
+        $this->expectException(NotFoundHttpException::class);
+        $this->expectExceptionMessage('Unable to find WebBundle:Message entity');
+
         $kernel = static::createKernel();
         $application = new Application($kernel);
         $command = $application->find('contact-us:send:message');

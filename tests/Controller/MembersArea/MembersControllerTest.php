@@ -8,6 +8,7 @@
 namespace App\Tests\Controller\MembersArea;
 
 use App\Entity\User;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class MembersControllerTest extends WebTestCase
 {
-    private $client = null;
+    private ?KernelBrowser $client = null;
 
     protected function setUp(): void
     {
@@ -45,7 +46,7 @@ class MembersControllerTest extends WebTestCase
         $this->assertTrue($this->client->getResponse()->isRedirect());
 
         $crawler = $this->client->followRedirect();
-        $this->assertContains('Connexion', $crawler->filter('title')->text());
+        $this->assertStringContainsString('Connexion', $crawler->filter('title')->text());
     }
 
     /**
@@ -59,7 +60,7 @@ class MembersControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
 
         $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
-        $this->assertContains('Espace membres', $crawler->filter('title')->text());
+        $this->assertStringContainsString('Espace membres', $crawler->filter('title')->text());
     }
 
     private function logIn()

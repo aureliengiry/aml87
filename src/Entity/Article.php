@@ -8,6 +8,7 @@
 namespace App\Entity;
 
 use App\Entity\Video\Youtube;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -85,16 +86,19 @@ class Article
     /**
      * @ORM\ManyToMany(targetEntity="Tags", mappedBy="articles", cascade={"all"})
      */
-    private iterable $tags = [];
+    private iterable $tags;
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Evenement", mappedBy="articles", cascade={"all"})
      */
-    private iterable $evenements = [];
+    private iterable $evenements;
 
     public function __construct()
     {
         $this->created = $this->updated = new \DateTime();
+
+        $this->tags = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
     }
 
     public function getId(): ?int

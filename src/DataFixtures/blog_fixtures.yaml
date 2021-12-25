@@ -14,8 +14,7 @@ App\Entity\Article:
     article_{1..50}:
         title: <text(50)>
         body: <text(500)>
-        created: '<dateTimeBetween("-200 days", "now")>'
-        updated: '<dateTimeBetween($created, "now")>'
+        updated: '<dateTime()>'
         published: '<dateTimeBetween($updated, "now")>'
         public: <boolean()>
         category: '@category_<numberBetween(1, 4)>'
