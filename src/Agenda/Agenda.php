@@ -11,59 +11,51 @@ namespace App\Agenda;
 
 use App\Entity\Evenement;
 use App\Entity\Season;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\EvenementRepository;
 
-/**
- * Class Agenda.
- */
 class Agenda
 {
-    private EntityManagerInterface $entityManager;
+    private EvenementRepository $evenementRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EvenementRepository $evenementRepository)
     {
-        $this->entityManager = $entityManager;
+        $this->evenementRepository = $evenementRepository;
     }
 
     public function getCurrentSeason(): void
     {
     }
 
-    public function getPublicEventsBySeason()
+    public function getPublicEventsBySeason(): iterable
     {
-        return $this->getEventRepository()->getNextEvenements([
-            'public' => 1,
-            'archive' => 0,
+        return $this->evenementRepository->getNextEvenements([
+            'public' => true,
+            'archive' => false,
             'type' => Evenement::EVENEMENT_TYPE_CONCERT,
         ]);
     }
 
-    public function getAllEventsBySeason(Season $season)
+    public function getAllEventsBySeason(Season $season): iterable
     {
-        return $this->getEventRepository()->findBySeason($season);
+        return $this->evenementRepository->findBySeason($season);
     }
 
-    public function getEventByIdOrUrl(string $urlKey)
+    public function getEventByIdOrUrl(string $urlKey): ?Evenement
     {
-        if (\is_int($urlKey)) {
-            return $this->getEventRepository()->find($urlKey);
+        if (is_numeric($urlKey)) {
+            return $this->evenementRepository->find($urlKey);
         }
 
-        return $this->getEventRepository()->getEventByUrlKey($urlKey);
+        return $this->evenementRepository->getEventByUrlKey($urlKey);
     }
 
-    private function getEventRepository()
+    public function getNextConcert(): ?Evenement
     {
-        return $this->entityManager->getRepository(Evenement::class);
+        return $this->evenementRepository->findNextConcert();
     }
 
-    public function getNextConcert()
+    public function getArchivedConcertBySeason(Season $season): iterable
     {
-        return $this->getEventRepository()->findNextConcert();
-    }
-
-    public function getArchivedConcertBySeason(Season $season)
-    {
-        return $this->getEventRepository()->findArchivedConcertBySeason($season);
+        return $this->evenementRepository->findArchivedConcertBySeason($season);
     }
 }

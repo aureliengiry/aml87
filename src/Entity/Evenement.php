@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,7 +38,7 @@ class Evenement
     /**
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
-    private string $type;
+    private ?string $type = null;
 
     /**
      * @ORM\Column(name="date_start", type="datetime")
@@ -47,7 +48,7 @@ class Evenement
     /**
      * @ORM\Column(name="date_end", type="datetime", nullable=true)
      */
-    private ?\DateTime $dateEnd;
+    private ?\DateTime $dateEnd = null;
 
     /**
      * @ORM\Column(name="title", type="string", length=255)
@@ -57,7 +58,7 @@ class Evenement
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = null;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
@@ -76,18 +77,18 @@ class Evenement
     private bool $public = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Article", inversedBy="evenements",cascade={"all"}, fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity="\App\Entity\Article", inversedBy="evenements", cascade={"all"}, fetch="LAZY")
      * @ORM\JoinTable(name="evenements_articles",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
      * )
      */
-    protected iterable $articles;
+    protected Collection $articles;
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Partenaire", mappedBy="evenements", cascade={"all"}, fetch="LAZY")
      */
-    protected iterable $partenaires;
+    protected Collection $partenaires;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Url", cascade={"all"}, fetch="EAGER")
@@ -108,7 +109,7 @@ class Evenement
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_video", referencedColumnName="id_video")}
      * )
      */
-    protected iterable $videos;
+    protected Collection $videos;
 
     public function __construct()
     {
@@ -233,12 +234,12 @@ class Evenement
     }
 
     /* ---------------- ARTICLES LIES ---------------- */
-    public function getArticles(): iterable
+    public function getArticles(): Collection
     {
         return $this->articles;
     }
 
-    public function setArticles(iterable $articles): self
+    public function setArticles(Collection $articles): self
     {
         $this->articles = $articles;
 
@@ -270,12 +271,12 @@ class Evenement
         $this->partenaires->removeElement($partenaire);
     }
 
-    public function getPartenaires(): iterable
+    public function getPartenaires(): Collection
     {
         return $this->partenaires;
     }
 
-    public function setPartenaires(iterable $partenaires): self
+    public function setPartenaires(Collection $partenaires): self
     {
         $this->partenaires = $partenaires;
 
@@ -283,12 +284,12 @@ class Evenement
     }
 
     /* ---------------- VIDEOS LIEES ---------------- */
-    public function getVideos(): iterable
+    public function getVideos(): Collection
     {
         return $this->videos;
     }
 
-    public function setVideos(iterable $videos): self
+    public function setVideos(Collection $videos): self
     {
         $this->videos = $videos;
 

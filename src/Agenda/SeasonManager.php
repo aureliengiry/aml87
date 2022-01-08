@@ -10,42 +10,37 @@ declare(strict_types=1);
 namespace App\Agenda;
 
 use App\Entity\Season;
+use App\Repository\SeasonRepository;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * Class SeasonManager.
- */
 class SeasonManager
 {
-    private EntityManagerInterface $entityManager;
+    private SeasonRepository $seasonRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(SeasonRepository $seasonRepository)
     {
-        $this->entityManager = $entityManager;
+        $this->seasonRepository = $seasonRepository;
     }
 
-    private function getSeasonRepository()
-    {
-        return $this->entityManager->getRepository(Season::class);
-    }
-
+    /**
+     * @return Season[]
+     */
     public function getAllSeasons(): Collection
     {
-        return $this->getSeasonRepository()->findAll();
+        return $this->seasonRepository->findAll();
     }
 
     public function getCurrentSeason(): ?Season
     {
-        return $this->getSeasonRepository()->getSeasonByDateStart(new \DateTime());
+        return $this->seasonRepository->getSeasonByDateStart(new \DateTime());
     }
 
     public function getNextSeasonByDate(\DateTime $dateTime): void
     {
     }
 
-    public function getPastSeasons()
+    public function getPastSeasons(): iterable
     {
-        return $this->getSeasonRepository()->getPastSeasons();
+        return $this->seasonRepository->getPastSeasons();
     }
 }

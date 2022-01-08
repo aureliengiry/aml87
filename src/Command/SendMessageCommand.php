@@ -10,9 +10,8 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Entity\Message;
-use App\Event\Contact\PostEvent;
+use App\Event\Contact\MessageSaved;
 use App\Repository\MessageRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,23 +24,19 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class SendMessageCommand extends Command
 {
-    /**
-     * @var MessageRepository
-     */
-    protected $messageRepo;
-    protected $messageId;
+    private MessageRepository $messageRepo;
+    private ?int $messageId = null;
 
-    private EntityManagerInterface $entityManager;
     private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        MessageRepository $messageRepo
     ) {
-        $this->entityManager = $entityManager;
-        $this->eventDispatcher = $eventDispatcher;
-
         parent::__construct();
+
+        $this->eventDispatcher = $eventDispatcher;
+        $this->messageRepo = $messageRepo;
     }
 
     /**
@@ -56,7 +51,7 @@ class SendMessageCommand extends Command
                 <<<EOF
                                     The <info>contact-us:send:message</info> send selected message by mail and debug mode:
 
-                    <info>php bin/console contact-us:send:message -vvv</info>
+                    <info>bin/console contact-us:send:message -vvv</info>
                     EOF
             );
 
@@ -68,7 +63,6 @@ class SendMessageCommand extends Command
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->messageRepo = $this->entityManager->getRepository(Message::class);
         $this->messageId = $input->getArgument('id-message');
     }
 
@@ -82,13 +76,13 @@ class SendMessageCommand extends Command
         // Load contact message
         $message = $this->messageRepo->find($this->messageId);
         if ( ! $message) {
-            throw new NotFoundHttpException('Unable to find WebBundle:Message entity.');
+            throw new NotFoundHttpException('Unable to find message with id: '.$this->messageId);
         }
 
         $output->writeln('<info>'.$message->getName().' - '.$message->getSubject().'</info>');
 
-        /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-        $this->eventDispatcher->dispatch(new PostEvent($message), 'aml_contactus.message.post_sent');
+        /* @todo to refactor, no action before dispatch */
+        $this->eventDispatcher->dispatch(new MessageSaved($message), 'aml_contactus.message.post_sent');
 
         $output->writeln('<info>Send Message : End</info>');
 

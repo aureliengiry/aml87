@@ -55,13 +55,11 @@ class TagsRepository extends ServiceEntityRepository
     }
 
     /**
-     * Funtion to load TumblrTab by name.
+     * Function to load TumblrTab by name.
      *
-     * @param string $tag
-     *
-     * @return bool
+     * @return iterable|bool
      */
-    public function loadOneTagByName($tag)
+    public function loadOneTagByName(string $tag)
     {
         $query = $this->getEntityManager()
             ->createQuery('SELECT bt.id,bt.name FROM Tags::class bt WHERE bt.name LIKE :tag')
@@ -76,10 +74,8 @@ class TagsRepository extends ServiceEntityRepository
 
     /**
      * Function retrieves all tags with nb articles by tag.
-     *
-     * @return array
      */
-    public function getTagsWithNbArticles()
+    public function getTagsWithNbArticles(): iterable
     {
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();

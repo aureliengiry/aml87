@@ -10,44 +10,38 @@ declare(strict_types=1);
 namespace App\Article;
 
 use App\Entity\Article;
-use App\Entity\Tags;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ArticleRepository;
+use App\Repository\TagsRepository;
 
 class ArticleManager
 {
-    private EntityManagerInterface $entityManager;
+    private ArticleRepository $articleRepository;
+    private TagsRepository $tagsRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(
+        ArticleRepository $articleRepository,
+        TagsRepository $tagsRepository
+    ) {
+        $this->articleRepository = $articleRepository;
+        $this->tagsRepository = $tagsRepository;
     }
 
     public function getPublicArticlesWithPagination(int $page, array $filter)
     {
-        return $this->getArticleRepository()->getPublicArticles($page, $filter);
+        return $this->articleRepository->getPublicArticles($page, $filter);
     }
 
-    public function getArticleByIdOrUrl($urlKey)
+    public function getArticleByIdOrUrl($urlKey): ?Article
     {
         if (\is_int($urlKey)) {
-            return $this->getArticleRepository()->find($urlKey);
+            return $this->articleRepository->find($urlKey);
         }
 
-        return $this->getArticleRepository()->getArticleByUrlKey($urlKey);
+        return $this->articleRepository->getArticleByUrlKey($urlKey);
     }
 
-    private function getArticleRepository()
+    public function getTagsWithNbArticles(): iterable
     {
-        return $this->entityManager->getRepository(Article::class);
-    }
-
-    private function getTagsRepository()
-    {
-        return $this->entityManager->getRepository(Tags::class);
-    }
-
-    public function getTagsWithNbArticles()
-    {
-        return $this->getTagsRepository()->getTagsWithNbArticles();
+        return $this->tagsRepository->getTagsWithNbArticles();
     }
 }

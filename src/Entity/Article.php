@@ -11,6 +11,7 @@ namespace App\Entity;
 
 use App\Entity\Video\Youtube;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,10 +38,10 @@ class Article
     private string $title = '';
 
     /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\UrlArticle", cascade={"all"}, fetch="EAGER")s
+     * @ORM\OneToOne(targetEntity="\App\Entity\UrlArticle", cascade={"all"}, fetch="EAGER")
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
-    private UrlArticle $url;
+    private ?UrlArticle $url = null;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
@@ -83,17 +84,21 @@ class Article
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
      * @ORM\JoinColumn(name="id_category", referencedColumnName="id_category")
      */
-    private $category;
+    private Category $category;
 
     /**
      * @ORM\ManyToMany(targetEntity="Tags", mappedBy="articles", cascade={"all"})
+     *
+     * @var Tags[]
      */
-    private iterable $tags;
+    private Collection $tags;
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Evenement", mappedBy="articles", cascade={"all"})
+     *
+     * @var Evenement[]
      */
-    private iterable $evenements;
+    private Collection $evenements;
 
     public function __construct()
     {
@@ -202,7 +207,7 @@ class Article
         return $this->published;
     }
 
-    public function setPublished(\DateTime $published)
+    public function setPublished(\DateTime $published): self
     {
         $this->published = $published;
 
@@ -214,7 +219,7 @@ class Article
         return $this->category;
     }
 
-    public function setCategory(Category $category)
+    public function setCategory(Category $category): self
     {
         $this->category = $category;
 
@@ -238,15 +243,21 @@ class Article
     public function removeTag(Tags $tag): void
     {
         $this->tags->removeElement($tag);
-        $tag->deleteArticle($this);
+        $tag->removeArticle($this);
     }
 
-    public function getTags(): iterable
+    /**
+     * @return Tags[]
+     */
+    public function getTags(): Collection
     {
         return $this->tags;
     }
 
-    public function setTags(iterable $tags): self
+    /**
+     * @param Tags[] $tags
+     */
+    public function setTags(Collection $tags): self
     {
         $this->tags = $tags;
 
@@ -273,12 +284,18 @@ class Article
         $evenement->removeArticle($this);
     }
 
-    public function getEvenements(): iterable
+    /**
+     * @return Evenement[]
+     */
+    public function getEvenements(): Collection
     {
         return $this->evenements;
     }
 
-    public function setEvenements(iterable $evenements): self
+    /**
+     * @param Evenement[] $evenements
+     */
+    public function setEvenements(Collection $evenements): self
     {
         $this->evenements = $evenements;
 

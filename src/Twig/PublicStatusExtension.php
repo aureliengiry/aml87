@@ -12,12 +12,9 @@ namespace App\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-/**
- * Class PublicStatusExtension.
- */
 class PublicStatusExtension extends AbstractExtension
 {
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('publicStatus', [$this, 'publicStatusFilter']),
@@ -25,11 +22,9 @@ class PublicStatusExtension extends AbstractExtension
     }
 
     /**
-     * réduit une chaine de caractères sans couper les mots.
-     *
-     * @return string date plus nice à lire
+     * Réduit une chaine de caractères sans couper les mots.
      */
-    public function publicStatusFilter($boolean): string
+    public function publicStatusFilter(bool $boolean): string
     {
         if (true === $boolean) {
             return 'Publié';

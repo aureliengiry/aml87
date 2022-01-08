@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace App\Contact;
 
 use App\Entity\Message;
-use App\Event\Contact\PostEvent;
+use App\Event\Contact\MessageSaved;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -39,7 +39,7 @@ class ContactMessage
         $this->entityManager->flush();
 
         if (false === $message->isSpam()) {
-            $this->eventDispatcher->dispatch(new PostEvent($message), 'aml_contactus.message.post_sent');
+            $this->eventDispatcher->dispatch(new MessageSaved($message), 'aml_contactus.message.post_sent');
         }
     }
 }

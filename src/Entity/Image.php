@@ -81,7 +81,6 @@ class Image extends Media
 
     protected function getUploadRootDir(): string
     {
-        dd(__DIR__);
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
         return __DIR__.'/../../public/'.$this->getUploadDir();
     }

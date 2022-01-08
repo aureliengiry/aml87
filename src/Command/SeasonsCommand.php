@@ -12,40 +12,28 @@ namespace App\Command;
 use App\Entity\Evenement;
 use App\Entity\Season;
 use App\Repository\EvenementRepository;
+use App\Repository\SeasonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class SeasonsCommand.
- */
 class SeasonsCommand extends Command
 {
-    /**
-     * @var EvenementRepository
-     */
-    protected $eventRepo;
-    protected $seasonRepo;
-
+    private EvenementRepository $eventRepo;
+    private SeasonRepository $seasonRepo;
     private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EvenementRepository $eventRepo,
+        SeasonRepository $seasonRepo
+    ) {
         parent::__construct();
-    }
 
-    /**
-     * Validate entry.
-     *
-     * @throws \RunTimeException
-     */
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->eventRepo = $this->entityManager->getRepository(Evenement::class);
-        $this->seasonRepo = $this->entityManager->getRepository(Season::class);
+        $this->entityManager = $entityManager;
+        $this->eventRepo = $eventRepo;
+        $this->seasonRepo = $seasonRepo;
     }
 
     /**
@@ -143,7 +131,9 @@ class SeasonsCommand extends Command
             $seasonDateStartYear = $eventDateStartYear - 1;
             $dateStart = sprintf($defaultDateStart, $seasonDateStartYear);
             $seasonDateStart = \DateTime::createFromFormat('Y-m-d', $dateStart);
-            $seasonDateStart->setTime(0, 0);
+            if ($seasonDateStart) {
+                $seasonDateStart->setTime(0, 0);
+            }
 
             // Build Season Date End
             $defaultDateEnd = Season::SEASON_DEFAULT_DATE_END;
@@ -152,8 +142,9 @@ class SeasonsCommand extends Command
 
             $seasonDateEndYear = $eventDateStartYear;
             $seasonDateEnd = \DateTime::createFromFormat('Y-m-d', $testDateEnd);
-            $seasonDateEnd->setTime(0, 0);
-
+            if ($seasonDateEnd) {
+                $seasonDateEnd->setTime(0, 0);
+            }
             // Build season name
             $seasonName = "Saison $seasonDateStartYear/$seasonDateEndYear";
         } else {
@@ -167,7 +158,9 @@ class SeasonsCommand extends Command
             $testDateEnd = sprintf($defaultDateEnd, $seasonDateEndYear);
 
             $seasonDateEnd = \DateTime::createFromFormat('Y-m-d', $testDateEnd);
-            $seasonDateEnd->setTime(0, 0);
+            if ($seasonDateEnd) {
+                $seasonDateEnd->setTime(0, 0);
+            }
 
             // Build season name
             $seasonName = "Saison $seasonDateStartYear/$seasonDateEndYear";
@@ -180,10 +173,8 @@ class SeasonsCommand extends Command
                 ->setDateStart($seasonDateStart)
                 ->setDateEnd($seasonDateEnd);
 
-        if ($estimateSeason) {
-            $this->entityManager->persist($estimateSeason);
-            $this->entityManager->flush();
-        }
+        $this->entityManager->persist($estimateSeason);
+        $this->entityManager->flush();
 
         return $estimateSeason;
     }

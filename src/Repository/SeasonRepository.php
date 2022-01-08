@@ -28,8 +28,6 @@ class SeasonRepository extends ServiceEntityRepository
 
     /**
      * Laod seasons by date start.
-     *
-     * @return mixed|null
      */
     public function getSeasonByDateStart(\DateTime $eventDateStart): ?Season
     {
@@ -53,8 +51,6 @@ class SeasonRepository extends ServiceEntityRepository
 
     /**
      * Retrieve last past season.
-     *
-     * @return mixed|null
      */
     public function getLastSeason(): ?Season
     {
@@ -71,10 +67,8 @@ class SeasonRepository extends ServiceEntityRepository
 
     /**
      * Load past seasons.
-     *
-     * @return array|null
      */
-    public function getPastSeasons()
+    public function getPastSeasons(): iterable
     {
         $q = $this->getEntityManager()->createQueryBuilder();
         $q
@@ -86,8 +80,8 @@ class SeasonRepository extends ServiceEntityRepository
             ->orderBy('s.dateStart', 'DESC');
 
         $params = [
-            'archive' => 1,
-            'public' => 1,
+            'archive' => true,
+            'public' => true,
         ];
 
         $q->setParameters($params);

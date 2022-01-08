@@ -21,9 +21,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class UpdateYoutubeDataCommand.
- */
 class UpdateYoutubeDataCommand extends Command
 {
     public const YOUTUBE_STATUS_PUBLIC = 'public';
@@ -32,7 +29,6 @@ class UpdateYoutubeDataCommand extends Command
     private bool $debug = false;
 
     private OutputInterface $output;
-
     private LoggerInterface $logger;
 
     private array $videosList = [];
@@ -50,13 +46,13 @@ class UpdateYoutubeDataCommand extends Command
         VideoManager $videoManager,
         LoggerInterface $logger
     ) {
+        parent::__construct();
+
         $this->entityManager = $entityManager;
         $this->youtubeProvider = $youtubeProvider;
         $this->videoFactory = $videoFactory;
         $this->videoManager = $videoManager;
         $this->logger = $logger;
-
-        parent::__construct();
     }
 
     /**

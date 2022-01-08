@@ -17,7 +17,7 @@ use Twig\TwigFilter;
  */
 class WordWarpExtension extends AbstractExtension
 {
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('wordWarp', [$this, 'wordWarpFilter'], ['is_safe' => ['html']]),
@@ -28,7 +28,7 @@ class WordWarpExtension extends AbstractExtension
     /**
      * Réduit une chaine de caractères sans couper les mots.
      */
-    public function wordWarpFilter(string $str, ?int $length = 500, $id = null, $wordwarp = true): string
+    public function wordWarpFilter(string $str, ?int $length = 500, bool $wordwarp = true): string
     {
         // Delete HTML tags
         $str = $this->stripHtmlTags($str);
@@ -49,9 +49,7 @@ class WordWarpExtension extends AbstractExtension
     }
 
     /**
-     * réduit une chaine de caractères sans couper les mots.
-     *
-     * @return string date plus nice à lire
+     * Réduit une chaine de caractères sans couper les mots.
      */
     public function isWordWarpFilter(string $str, ?int $length = 200): bool
     {

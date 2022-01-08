@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace App\EventListener;
 
 use App\Entity\Message;
-use App\Event\Contact\PostEvent;
+use App\Event\Contact\MessageSaved;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -24,9 +24,6 @@ class PostListener
 
     private string $subscribers;
 
-    /**
-     * PostListener constructor.
-     */
     public function __construct(
         \Swift_Mailer $mailer,
         EntityManagerInterface $entityManager,
@@ -37,9 +34,9 @@ class PostListener
         $this->subscribers = $subscribers;
     }
 
-    public function onPostEvent(PostEvent $event): void
+    public function onPostEvent(MessageSaved $event): void
     {
-        $post = $event->getPost();
+        $post = $event->getMessage();
 
         $formatedMessage = $this->formatMessage($post);
 
