@@ -12,20 +12,17 @@ namespace App\Event\Contact;
 use App\Entity\Message;
 use Symfony\Contracts\EventDispatcher\Event;
 
-/**
- * Class PostEvent.
- */
-class PostEvent extends Event
+class MessageSaved extends Event
 {
-    protected $post;
+    private Message $message;
 
-    public function __construct(Message $post)
+    public function __construct(Message $message)
     {
-        $this->post = $post;
+        $this->message = $message;
     }
 
-    public function getPost()
+    public function getMessage(): Message
     {
-        return $this->post;
+        return $this->message;
     }
 }
