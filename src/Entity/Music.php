@@ -31,14 +31,14 @@ class Music extends File
      */
     private $file;
 
-    protected function getUploadDir()
+    protected function getUploadDir(): string
     {
         // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
         // le document/image dans la vue.
         return 'uploads/music';
     }
 
-    public function getType()
+    public function getType(): array
     {
         return ['label' => 'Fichier audio', 'key' => 'music'];
     }

@@ -34,7 +34,7 @@ abstract class Url
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected ?int $id;
+    protected ?int $id = null;
 
     /**
      * @ORM\Column(name="url_key", type="string", length=255)

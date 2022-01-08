@@ -252,6 +252,18 @@ php-cs-fixer-dry-run:   ## PHP Code Style Fixer in dry-run mode
 php-cs-fixer:           ## PHP Code Style Fixer
 	$(EXEC_WEB) /bin/bash -c "cd $(PROJECT_PATH) && vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --allow-risky=yes"
 
+rector-init: ## Init settings for Rector
+	$(EXEC_WEB) /bin/bash -c "$(PROJECT_PATH)/vendor/bin/rector init"
+
+rector-process-diff-dry-run: ## Run rector on selected directory with dry-run mode. Ex: make rector-process-diff-dry-run
+	$(EXEC_WEB) /bin/bash -c "php -d memory_limit=-1 $(PROJECT_PATH)/vendor/bin/rector process \`git diff --name-only master... '*.php' \` --dry-run"
+
+rector-process-dry-run: ## Run rector on selected directory with dry-run mode. Ex: make rector-process-dry-run FILTER=src
+	$(EXEC_WEB) /bin/bash -c "php -d memory_limit=-1 $(PROJECT_PATH)/vendor/bin/rector process ${FILTER} --dry-run"
+
+rector-process: ## Run rector on selected directory. Ex: make rector-process FILTER=src
+	$(EXEC_WEB_PHP_74) /bin/bash -c "php -d memory_limit=-1 $(PROJECT_PATH)/vendor/bin/rector process ${FILTER}"
+
 eslint: yarn-install  ## Lint Javascript files
 	$(EXEC_NODEJS) /bin/bash -c "cd $(PROJECT_PATH) && ./node_modules/.bin/eslint assets/js webpack.config.js"
 

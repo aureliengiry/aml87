@@ -39,137 +39,86 @@ class Link
     private string $url;
 
     /**
-     * @var string description
-     *
      * @ORM\Column(name="description", type="text")
      */
     private string $description;
 
     /**
-     * @var bool weight
-     *
      * @ORM\Column(name="weight", type="integer")
      */
-    private $weight = 1;
+    private int $weight = 1;
 
     /**
      * @ORM\Column(name="public", type="boolean")
      */
     private bool $public;
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * Set url.
-     *
-     * @param string $url
-     */
-    public function setUrl($url)
+    public function setUrl(string $url): self
     {
         $this->url = $url;
 
         return $this;
     }
 
-    /**
-     * Get url.
-     *
-     * @return string
-     */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
 
-    /**
-     * Set public.
-     *
-     * @param bool $public
-     */
-    public function setPublic($public)
+    public function setPublic(bool $public): self
     {
         $this->public = $public;
 
         return $this;
     }
 
-    /**
-     * Get public.
-     *
-     * @return bool
-     */
-    public function getPublic()
+    public function getPublic(): bool
     {
         return $this->public;
     }
 
-    /**
-     * @return int $weight
-     */
-    public function getWeight()
+    public function getWeight(): int
     {
         return $this->weight;
     }
 
-    /**
-     * @param int $weight
-     */
-    public function setWeight($weight)
+    public function setWeight(int $weight): self
     {
         $this->weight = $weight;
 
         return $this;
     }
 
-    /**
-     * @return string $description
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title ?: 'New Link';
     }

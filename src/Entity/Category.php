@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Utils\Slugger;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,7 +48,12 @@ class Category
      * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
      * @ORM\JoinColumn(name="id", referencedColumnName="id_article")
      */
-    private iterable $articles = [];
+    private Collection $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,7 +98,7 @@ class Category
         return $this;
     }
 
-    public function getArticles(): iterable
+    public function getArticles(): Collection
     {
         return $this->articles;
     }

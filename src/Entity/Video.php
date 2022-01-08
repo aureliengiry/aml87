@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,36 +33,29 @@ abstract class Video
      * @ORM\Column(name="id_video", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    protected ?int $id;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="provider_id", type="string", length=50)
      */
-    protected $providerId;
+    protected string $providerId;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255,nullable=true)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
-    protected $title;
+    protected ?string $title = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Evenement", mappedBy="videos", cascade={"all"})
      */
-    protected $evenements;
+    protected Collection $evenements;
 
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
     }
 
-    /**
-     * Get id.
-     */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -69,34 +63,25 @@ abstract class Video
     /**
      * @param string $providerId
      */
-    public function setProviderId($providerId)
+    public function setProviderId($providerId): self
     {
         $this->providerId = $providerId;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getProviderId(): ?string
     {
         return $this->providerId;
     }
 
-    /**
-     * Set title.
-     */
-    public function setTitle(string $title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * Get title.
-     */
     public function getTitle(): ?string
     {
         return $this->title;
@@ -104,10 +89,7 @@ abstract class Video
 
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
 
-    /**
-     * @return $this
-     */
-    public function addEvenement(Evenement $evenement)
+    public function addEvenement(Evenement $evenement): self
     {
         if ( ! $this->evenements->contains($evenement)) {
             $evenement->addVideo($this);
@@ -126,18 +108,12 @@ abstract class Video
         $evenement->removeVideo($this);
     }
 
-    /**
-     * @return ArrayCollection $evenements
-     */
-    public function getEvenements()
+    public function getEvenements(): Collection
     {
         return $this->evenements;
     }
 
-    /**
-     * @return ArrayCollection $evenements
-     */
-    public function setEvenements(ArrayCollection $evenements)
+    public function setEvenements(Collection $evenements): self
     {
         $this->evenements = $evenements;
 

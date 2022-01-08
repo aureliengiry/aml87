@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -65,8 +66,10 @@ class Album
     /**
      * @ORM\OneToMany(targetEntity="Track", mappedBy="album",cascade={"all"})
      * @ORM\JoinColumn(name="id_track", referencedColumnName="id_track")
+     *
+     * @var Track[]
      */
-    private iterable $tracks;
+    private Collection $tracks;
 
     public function __construct()
     {
@@ -150,12 +153,12 @@ class Album
         return $this->image;
     }
 
-    public function getTracks(): iterable
+    public function getTracks(): Collection
     {
         return $this->tracks;
     }
 
-    public function setTracks(iterable $tracks): self
+    public function setTracks(Collection $tracks): self
     {
         $this->tracks = $tracks;
 

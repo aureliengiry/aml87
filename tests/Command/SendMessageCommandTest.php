@@ -44,7 +44,7 @@ class SendMessageCommandTest extends KernelTestCase
     public function testWrongIdMessage(): void
     {
         $this->expectException(NotFoundHttpException::class);
-        $this->expectExceptionMessage('Unable to find WebBundle:Message entity');
+        $this->expectExceptionMessage('Unable to find message with id: 999');
 
         $kernel = static::createKernel();
         $application = new Application($kernel);

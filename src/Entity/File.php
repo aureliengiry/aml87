@@ -35,17 +35,17 @@ class File extends Media
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $path;
+    protected ?string $path = null;
 
     // propriété utilisé temporairement pour la suppression
-    private $filenameForRemove;
+    private ?string $filenameForRemove = null;
 
     /**
      * Set file.
      *
      * @param string $file
      */
-    public function setFile($file)
+    public function setFile($file): self
     {
         $this->file = $file;
 
@@ -67,7 +67,7 @@ class File extends Media
      *
      * @param string $path
      */
-    public function setPath($path)
+    public function setPath($path): self
     {
         $this->path = $path;
 
@@ -84,18 +84,18 @@ class File extends Media
         return $this->path;
     }
 
-    public function getWebPath()
+    public function getWebPath(): ?string
     {
         return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
     }
 
-    protected function getUploadRootDir()
+    protected function getUploadRootDir(): string
     {
         // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
         return __DIR__.'/../../public/'.$this->getUploadDir();
     }
 
-    protected function getUploadDir()
+    protected function getUploadDir(): string
     {
         // on se débarrasse de « __DIR__ » afin de ne pas avoir de problème lorsqu'on affiche
         // le document/image dans la vue.
@@ -152,12 +152,12 @@ class File extends Media
         }
     }
 
-    public function getAbsolutePath()
+    public function getAbsolutePath(): ?string
     {
         return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
 
-    public function getType()
+    public function getType(): array
     {
         return ['label' => 'Fichier', 'key' => 'file'];
     }
