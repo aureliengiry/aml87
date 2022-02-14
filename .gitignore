@@ -32,15 +32,13 @@
 /public/build/
 !public/build/.gitkeep
 
-# Composer PHAR
-/composer.phar
-
 # node modules
 /node_modules
 
 # Docker
 /docker-env
 /docker-compose.yml
+/Makefile
 ###> symfony/framework-bundle ###
 /.env
 /public/bundles/*

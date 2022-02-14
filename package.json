@@ -16,8 +16,8 @@
     "core-js": "3",
     "jquery": "3.6.0",
     "mdbootstrap": "^4.7.0",
-    "node-sass": "^5.0.0",
     "popper.js": "^1.16.0",
+    "sass": "^1.49.7",
     "sass-loader": "^11.0.0"
   },
   "license": "UNLICENSED",

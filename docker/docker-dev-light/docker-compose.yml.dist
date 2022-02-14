@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  mysql:
+    image: mariadb:10.2
+    environment:
+      - MYSQL_DATABASE=aml87
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+    ports:
+      - "3306:3306"
+    volumes:
+      - <local database storage>:/var/lib/mysql:cached
+    tty: true
+
+  blackfire:
+    image: blackfire/blackfire
+    env_file: docker-env
+    ports:
+      - "8707:8707"
+
+  nodejs:
+    image: node:16.14.0-alpine3.15
+    working_dir: /var/www/aml87
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/var/www/aml87:rw,cached
+    command: tail -F /dev/null
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    env_file: docker-env
+    ports:
+      [ 1025, 1080 ]
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+    - RABBITMQ_DEFAULT_USER=admin
+    - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - "15672:15672"
+    tty: true

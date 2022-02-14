@@ -5,14 +5,15 @@ services:
     build: docker/dev/web
     env_file: docker-env
     ports:
-      - "80:80"
-      - "443:443"
+      - "85:80"
+      - "446:443"
     volumes:
-      - /etc/apache2/sites-available:consistent
-      - /var/www/aml87:cached
-      - /var/www/aml87/var/cache
-      - /var/www/aml87/var/log
-      - /var/www/aml87/var/sessions
+      - ./docker/dev/web/extra/vhosts/aml87.conf:/etc/apache2/sites-available/aml87.conf:ro
+      - ./docker/dev/web/extra/ssl:/etc/apache2/ssl:ro
+      - ./docker/dev/web/extra/conf/custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini:ro
+      - ./:/var/www/aml87:rw,cached
+      - /var/www/aml87/var
+    working_dir: /var/www/aml87
     tty: true
 
   mysql:
@@ -21,7 +22,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /var/lib/mysql:cached
+      - ~/docker-shared-folder/aml87-data:/var/lib/mysql:cached
     tty: true
 
   blackfire:
@@ -34,15 +35,16 @@ services:
     build: docker/dev/nodejs
     env_file: docker-env
     ports:
-     - "8888:8888"
+      - "8888:8888"
     volumes_from:
-     - web
+      - web
 
   mailcatcher:
     image: schickling/mailcatcher
     env_file: docker-env
     ports:
-      - "1080:1080"
+      [ 1025, 1080 ]
+      #- "1080:1080"
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -50,5 +52,4 @@ services:
     ports:
       - "15672:15672"
     tty: true
-    restart: always
-
+    #restart: always
