@@ -25,21 +25,19 @@
         {% endif %}
 
 
-        {{ form_start(form, { action: path('app_members_area_login_check') }) }}
+        <form method="post">
 
-                {{ form_label(form._login_email, 'E-mail', { label_attr: { class: 'visually-hidden' } }) }}
-                {{ form_errors(form._login_email) }}
-                {{ form_widget(form._login_email, { attr: { placeholder: 'E-mail' } }) }}
+            <label for="inputUsername" class="visually-hidden">Login</label>
+            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Login" required autofocus>
+            <label for="inputPassword" class="visually-hidden">Mot de passe</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
 
-                {{ form_label(form._login_password, 'Mot de passe', { label_attr: { class: 'visually-hidden' } }) }}
-                {{ form_errors(form._login_password) }}
-                {{ form_widget(form._login_password, { attr: { placeholder: 'Mot de passe' } }) }}
-
-                <a href="" class="form__forgotten-pw">Oublié ?</a>
-
+            <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
                 <button class="btn btn-primary" type="submit">Connexion</button>
 
-        {{ form_end(form) }}
+        </form>
     </div>
 </div>
 {%- endblock body %}

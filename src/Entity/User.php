@@ -10,7 +10,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * App\Entity\User.
@@ -18,65 +19,75 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User extends BaseUser
+class User implements UserInterface
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private ?int $id = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      */
-    protected $firstname;
+    private ?string $firstname = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
      */
-    protected $lastname;
+    private ?string $lastname = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="phone", type="string", length=20, nullable=true)
      */
-    protected $phone;
+    private ?string $phone = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="mobile", type="string", length=20, nullable=true)
      */
-    protected $mobile;
+    private ?string $mobile = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="birthdate", type="datetime", nullable=true)
      */
-    protected $birthdate;
+    private ?\DateTime $birthdate = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="adresse", type="text", nullable=true)
      */
-    protected $adresse;
+    private ?string $adresse = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="job", type="string", length=255, nullable=true)
      */
-    protected $job;
+    private ?string $job = null;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private string $username;
+
+    /**
+     * @ORM\Column(type="json_array")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private string $password;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private string $email;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTime $lastLogin = null;
 
     public function __construct()
     {
@@ -84,12 +95,7 @@ class User extends BaseUser
         // your own logic
     }
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -239,5 +245,88 @@ class User extends BaseUser
         $this->job = $job;
 
         return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt(): void
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getLastLogin(): ?\DateTime
+    {
+        return $this->lastLogin;
     }
 }

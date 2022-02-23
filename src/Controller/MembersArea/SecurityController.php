@@ -9,39 +9,26 @@ declare(strict_types=1);
 
 namespace App\Controller\MembersArea;
 
-use App\Form\Type\LoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-/**
- * Class SecurityController.
- */
 final class SecurityController extends AbstractController
 {
     /**
-     * @Route("/connexion", name="app_members_area_login", methods={"GET"})
+     * @Route("/login", name="app_members_area_login", methods={"GET","POST"})
      */
-    public function login(Request $request): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $authenticationUtils = $this->get('security.authentication_utils');
-
-        $form = $this->get('form.factory')->createNamed('', LoginType::class, [
-            '_login_email' => $authenticationUtils->getLastUsername(),
-        ]);
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_members_area');
+        }
 
         return $this->render('security/login.html.twig', [
             'error' => $authenticationUtils->getLastAuthenticationError(),
-            'form' => $form->createView(),
+            'last_username' => $authenticationUtils->getLastUsername(),
         ]);
-    }
-
-    /**
-     * @Route("/connexion/check", name="app_members_area_login_check", methods={"POST"})
-     */
-    public function loginCheck(): void
-    {
     }
 
     /**
