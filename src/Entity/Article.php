@@ -84,7 +84,7 @@ class Article
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
      * @ORM\JoinColumn(name="id_category", referencedColumnName="id_category")
      */
-    private Category $category;
+    private ?Category $category = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="Tags", mappedBy="articles", cascade={"all"})

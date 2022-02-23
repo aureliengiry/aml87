@@ -6,7 +6,7 @@
 <div class="publi-info">
     <span>Publié le
         <span class="date-article-block">le {% if entity.created %}{{ entity.created|date('d/m/Y à H:i') }}{% endif %}</span>
-        {% if entity.category.name %}
+        {% if entity.category and entity.category.name and entity.category.systemName %}
             dans <a href="{{ path('blog', {'category' : entity.category.systemName}) }}"
                     title="{{ entity.category.name }}">{{ entity.category.name }}</a>
         {% endif %}
