@@ -69,9 +69,9 @@ class User implements UserInterface
     private string $username;
 
     /**
-     * @ORM\Column(type="json_array")
+     * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
@@ -89,11 +89,10 @@ class User implements UserInterface
      */
     private ?\DateTime $lastLogin = null;
 
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $active = true;
 
     public function getId(): ?int
     {
@@ -121,126 +120,70 @@ class User implements UserInterface
         return $this->firstname;
     }
 
-    /**
-     * @param string $lastname
-     */
-    public function setLastname($lastname): void
+    public function setLastname(?string $lastname): void
     {
         $this->lastname = $lastname;
     }
 
-    /**
-     * @return string
-     */
-    public function getLastname()
+    public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
-    /**
-     * Function to get value of $phone.
-     *
-     * @return string
-     */
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    /**
-     * Function to set value of $phone.
-     *
-     * @param string $phone
-     */
-    public function setPhone($phone)
+    public function setPhone(?string $phone): self
     {
         $this->phone = $phone;
 
         return $this;
     }
 
-    /**
-     * Function to get value of $mobile.
-     *
-     * @return string
-     */
-    public function getMobile()
+    public function getMobile(): ?string
     {
         return $this->mobile;
     }
 
-    /**
-     * Function to set value of $mobile.
-     *
-     * @param string $mobile
-     */
-    public function setMobile($mobile)
+    public function setMobile(?string $mobile)
     {
         $this->mobile = $mobile;
 
         return $this;
     }
 
-    /**
-     * Function to get value of $birthdate.
-     *
-     * @return string
-     */
-    public function getBirthdate()
+    public function getBirthdate(): ?\DateTime
     {
         return $this->birthdate;
     }
 
-    /**
-     * Function to set value of $birthdate.
-     *
-     * @param string $birthdate
-     */
-    public function setBirthdate($birthdate)
+    public function setBirthdate(?\DateTime $birthdate): self
     {
         $this->birthdate = $birthdate;
 
         return $this;
     }
 
-    /**
-     * Function to get value of $adresse.
-     *
-     * @return string
-     */
-    public function getAdresse()
+    public function getAdresse(): ?string
     {
         return $this->adresse;
     }
 
-    /**
-     * Function to set value of $adresse.
-     *
-     * @param string $adresse
-     */
-    public function setAdresse($adresse)
+    public function setAdresse(?string $adresse): self
     {
         $this->adresse = $adresse;
 
         return $this;
     }
 
-    /**
-     * Function to get value of $job.
-     *
-     * @return string
-     */
-    public function getJob()
+    public function getJob(): ?string
     {
         return $this->job;
     }
 
-    /**
-     * Function to set value of $job.
-     *
-     * @param string $job
-     */
-    public function setJob($job)
+    public function setJob(?string $job): self
     {
         $this->job = $job;
 
@@ -288,6 +231,17 @@ class User implements UserInterface
         return $this;
     }
 
+    public function setSuperAdmin(bool $superAdmin): void
+    {
+        if ($superAdmin) {
+            $roles = $this->roles;
+            // guarantee every user at least has ROLE_USER
+            $roles[] = 'ROLE_SUPER_ADMIN';
+
+            $this->setRoles(array_unique($roles));
+        }
+    }
+
     /**
      * @see UserInterface
      */
@@ -325,8 +279,23 @@ class User implements UserInterface
         return $this->email;
     }
 
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
     public function getLastLogin(): ?\DateTime
     {
         return $this->lastLogin;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
     }
 }

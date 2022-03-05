@@ -12,11 +12,19 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
+    private UserPasswordEncoderInterface $passwordEncoder;
+
     public const ADMIN_USER = 'admin';
     public const SIMPLE_USER = 'simple-user';
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
 
     public function load(ObjectManager $manager): void
     {
@@ -25,26 +33,32 @@ class UserFixtures extends Fixture
         $adminUser->setUsername(self::ADMIN_USER);
         $adminUser->setFirstname('admin');
         $adminUser->setLastname('User');
-        $adminUser->setPlainPassword('password');
+        $adminUser->setPassword($this->passwordEncoder->encodePassword(
+            $adminUser,
+            'password'
+        ));
         $adminUser->setEmail('admin@aml87.fr');
-        $adminUser->setEnabled(true);
+        $adminUser->setActive(true);
 
         $manager->persist($adminUser);
 
-        $this->setReference(self::ADMIN_USER, $adminUser);
+        $this->addReference(self::ADMIN_USER, $adminUser);
 
         $simpleUser = new User();
         $simpleUser->setSuperAdmin(false);
         $simpleUser->setUsername(self::SIMPLE_USER);
         $simpleUser->setFirstname('Simple');
         $simpleUser->setLastname('User');
-        $simpleUser->setPlainPassword('password');
+        $simpleUser->setPassword($this->passwordEncoder->encodePassword(
+            $simpleUser,
+            'password'
+        ));
         $simpleUser->setEmail('simple-user@aml87.fr');
-        $simpleUser->setEnabled(true);
+        $simpleUser->setActive(true);
 
         $manager->persist($simpleUser);
 
-        $this->setReference(self::SIMPLE_USER, $simpleUser);
+        $this->addReference(self::SIMPLE_USER, $simpleUser);
 
         $manager->flush();
     }

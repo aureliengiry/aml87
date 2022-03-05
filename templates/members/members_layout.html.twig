@@ -57,7 +57,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ path('aml_users_members_list') }}">Liste des
                             membres</a></li>
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <li class="nav-item"><a class="nav-link" href="{{ path('easyadmin') }}">Admin</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_admin_dashboard_index') }}">Admin</a></li>
                     {% endif %}
                 </ul>
 
@@ -73,7 +73,7 @@
                         <a class="nav-link" href="#">Vérifier mes informations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mettre à jour mes
+                        <a class="nav-link" href="{{ path('members_edit_profile') }}">Mettre à jour mes
                             informations</a>
                     </li>
                 </ul>
