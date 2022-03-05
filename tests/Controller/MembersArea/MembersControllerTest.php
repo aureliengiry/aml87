@@ -9,7 +9,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller\MembersArea;
 
+use App\DataFixtures\UserFixtures;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -25,10 +27,12 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class MembersControllerTest extends WebTestCase
 {
     private ?KernelBrowser $client = null;
+    private ?UserRepository $userRepository = null;
 
     protected function setUp(): void
     {
         $this->client = static::createClient();
+        $this->userRepository = self::$container->get(UserRepository::class);
     }
 
     protected function tearDown(): void
@@ -36,6 +40,7 @@ class MembersControllerTest extends WebTestCase
         parent::tearDown();
 
         $this->client = null;
+        $this->userRepository = null;
     }
 
     /**
@@ -78,6 +83,8 @@ class MembersControllerTest extends WebTestCase
 
         //$user = new User();
         //$user->setUsername('toto');
+
+        $user = $this->userRepository->findOneBy(['username' => UserFixtures::SIMPLE_USER]);
 
         $token = new UsernamePasswordToken($user, '', $firewall, ['ROLE_USER']);
         $session->set('_security_'.$firewall, serialize($token));
