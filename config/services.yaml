@@ -21,13 +21,6 @@ services:
     App\Utils\Slugger:
         autowire: true
 
-    App\EventListener\SitemapListener:
-        autowire: true
-        arguments:
-            - '@router'
-        tags:
-            - { name: kernel.event_listener, event: aml_web.sitemap.generate_start, method: onGenerateSitemapEvent }
-
     # Service Configuration
 #    twig.extension.text:
 #        class: Twig_Extensions_Extension_Text
@@ -133,8 +126,7 @@ services:
             - '@doctrine.orm.entity_manager'
             - '%aml_contact_us.subribers%'
         tags:
-            - { name: kernel.event_listener, event: aml_contactus.message.post_sent, method: onPostEvent }
-
+            name: kernel.event_subscriber
 
     App\Contact\ContactMessage:
         public: true

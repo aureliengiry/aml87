@@ -82,7 +82,7 @@ class SendMessageCommand extends Command
         $output->writeln('<info>'.$message->getName().' - '.$message->getSubject().'</info>');
 
         /* @todo to refactor, no action before dispatch */
-        $this->eventDispatcher->dispatch(new MessageSaved($message), 'aml_contactus.message.post_sent');
+        $this->eventDispatcher->dispatch(new MessageSaved($message));
 
         $output->writeln('<info>Send Message : End</info>');
 
