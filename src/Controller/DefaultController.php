@@ -11,9 +11,8 @@ namespace App\Controller;
 
 use App\Entity\Album;
 use App\Entity\Article;
-use App\Event\Sitemap\GenerateEvent;
+use App\Sitemap\SitemapGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,11 +21,14 @@ use Twig\Environment;
 final class DefaultController extends AbstractController
 {
     private Environment $twig;
+    private SitemapGenerator $sitemap;
 
     public function __construct(
-        Environment $twig
+        Environment $twig,
+        SitemapGenerator $sitemap
     ) {
         $this->twig = $twig;
+        $this->sitemap = $sitemap;
     }
 
     /**
@@ -60,24 +62,12 @@ final class DefaultController extends AbstractController
     /**
      * @Route("/sitemap.{_format}", name="sitemap", Requirements={"_format" = "xml"}, methods={"GET"})
      */
-    public function sitemap(Request $request, EventDispatcher $eventDispatcher): Response
+    public function sitemap(Request $request): Response
     {
-        $urls = [];
-
-        // add some urls homepage
-        $urls[] = [
-            'loc' => $this->get('router')->generate('home'),
-            'changefreq' => 'weekly',
-            'priority' => '1.0',
-        ];
-
-        $sitemapGenerationEvent = new GenerateEvent($urls);
-        $eventDispatcher->dispatch($sitemapGenerationEvent, 'aml_web.sitemap.generate_start');
-
         return new Response($this->twig->render(
             'default/sitemap.xml.twig',
             [
-                'urls' => $sitemapGenerationEvent->getUrls(),
+                'urls' => $this->sitemap->getUrls(),
                 'hostname' => $request->getSchemeAndHttpHost(),
             ]
         ));

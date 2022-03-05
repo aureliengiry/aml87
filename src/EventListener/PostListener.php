@@ -12,11 +12,9 @@ namespace App\EventListener;
 use App\Entity\Message;
 use App\Event\Contact\MessageSaved;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
- * Class PostListener.
- */
-class PostListener
+class PostListener implements EventSubscriberInterface
 {
     private \Swift_Mailer $mailer;
 
@@ -32,6 +30,16 @@ class PostListener
         $this->mailer = $mailer;
         $this->entityManager = $entityManager;
         $this->subscribers = $subscribers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            MessageSaved::class => 'onPostEvent',
+        ];
     }
 
     public function onPostEvent(MessageSaved $event): void

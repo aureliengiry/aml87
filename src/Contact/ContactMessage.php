@@ -39,7 +39,7 @@ class ContactMessage
         $this->entityManager->flush();
 
         if (false === $message->isSpam()) {
-            $this->eventDispatcher->dispatch(new MessageSaved($message), 'aml_contactus.message.post_sent');
+            $this->eventDispatcher->dispatch(new MessageSaved($message));
         }
     }
 }

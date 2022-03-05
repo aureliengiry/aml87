@@ -7,53 +7,58 @@ declare(strict_types=1);
  * (c) Aurélien GIRY <aurelien.giry@gmail.com>
  */
 
-namespace App\EventListener;
+namespace App\Sitemap;
 
 use App\Discography\DiscographyManager;
-use App\Entity\Article;
 use App\Entity\Evenement;
-use App\Event\Sitemap\GenerateEvent;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Routing\Router;
+use App\Repository\ArticleRepository;
+use App\Repository\EvenementRepository;
+use Symfony\Component\Routing\RouterInterface;
 
-/**
- * Class PostListener.
- */
-class SitemapListener
+class SitemapGenerator
 {
-    private EntityManagerInterface $entityManager;
+    private array $urls = [];
 
-    private Router $router;
-
+    private RouterInterface $router;
     private DiscographyManager $discographyManager;
+    private ArticleRepository $articleRepository;
+    private EvenementRepository $evenementRepository;
 
-    /**
-     * SitemapListener constructor.
-     */
     public function __construct(
-        Router $router,
+        RouterInterface $router,
         DiscographyManager $discographyManager,
-        EntityManagerInterface $entityManager
+        ArticleRepository $articleRepository,
+        EvenementRepository $evenementRepository
     ) {
         $this->router = $router;
         $this->discographyManager = $discographyManager;
-        $this->entityManager = $entityManager;
+        $this->articleRepository = $articleRepository;
+        $this->evenementRepository = $evenementRepository;
     }
 
-    public function onGenerateSitemapEvent(GenerateEvent $event): void
+    public function addUrls(array $url): void
     {
-        /** Blog */
+        $this->urls[] = $url;
+    }
+
+    public function getUrls(): array
+    {
+        // add some urls homepage
+        $this->addUrls([
+            'loc' => $this->router->generate('app_main_index'),
+            'changefreq' => 'weekly',
+            'priority' => '1.0',
+        ]);
+
+        /* Blog */
         // Add blog url
-        $mainUrl = [
+        $this->addUrls([
             'loc' => $this->router->generate('blog'),
             'changefreq' => 'weekly',
             'priority' => '0.80',
-        ];
-        $event->addUrls($mainUrl);
+        ]);
 
-        // add some urls blog
-        $repositoryArticle = $this->entityManager->getRepository(Article::class);
-        $entitiesBlog = $repositoryArticle->getPublicArticles(1, [], 100);
+        $entitiesBlog = $this->articleRepository->getPublicArticles(1, [], 100);
 
         // add some urls blog
         foreach ($entitiesBlog as $article) {
@@ -66,26 +71,24 @@ class SitemapListener
                 'changefreq' => 'weekly',
                 'priority' => '0.50',
             ];
-            $event->addUrls($urlArticleBlog);
+            $this->addUrls($urlArticleBlog);
         }
 
-        /** Contact */
+        /* Contact */
         // Add main url
-        $mainUrl = [
+        $this->addUrls([
             'loc' => $this->router->generate('aml_contactus_default_index'),
             'changefreq' => 'weekly',
             'priority' => '0.80',
-        ];
-        $event->addUrls($mainUrl);
+        ]);
 
-        /** Discography */
+        /* Discography */
         // Add main url
-        $mainUrl = [
+        $this->addUrls([
             'loc' => $this->router->generate('discography'),
             'changefreq' => 'weekly',
             'priority' => '0.80',
-        ];
-        $event->addUrls($mainUrl);
+        ]);
 
         // Add some urls of discography
         foreach ($this->discographyManager->getPublicAlbums() as $album) {
@@ -94,11 +97,11 @@ class SitemapListener
             }
 
             $urlAlbum = $this->router->generate('discography_album_show_rewrite', [
-                'url_key' => $album->getUrl()->getUrlKey(),
+                'album' => $album->getUrl()->getUrlKey(),
             ]);
 
             if (empty($urlAlbum)) {
-                $urlAlbum = $this->router->generate('discography_album_show', ['id' => $album->getId()]);
+                $urlAlbum = $this->router->generate('discography_album_show', ['album' => $album->getId()]);
             }
 
             $urlAlbumDiscography = [
@@ -106,37 +109,37 @@ class SitemapListener
                 'changefreq' => 'weekly',
                 'priority' => '0.50',
             ];
-            $event->addUrls($urlAlbumDiscography);
+            $this->addUrls($urlAlbumDiscography);
         }
 
-        /** Evenements */
+        /* Evenements */
         // add main url
-        $mainUrl = [
+        $this->addUrls([
             'loc' => $this->router->generate('agenda'),
             'changefreq' => 'weekly',
             'priority' => '0.80',
-        ];
-        $event->addUrls($mainUrl);
+        ]);
 
         // add some urls fo agenda events
-        $evenementRepository = $this->entityManager->getRepository(Evenement::class);
-        $agendaEvents = $evenementRepository->getNextEvenements([
+        $agendaEvents = $this->evenementRepository->getNextEvenements([
             'public' => 1,
             'archive' => 0,
             'type' => Evenement::EVENEMENT_TYPE_CONCERT,
         ]);
 
         foreach ($agendaEvents as $agendaEvent) {
-            if ( ! $agendaEvent->getUrl()) {
+            if ( ! isset($agendaEvent['slug']) || empty($agendaEvent['slug'])) {
                 continue;
             }
 
             $urlEventAgenda = [
-                'loc' => $this->router->generate('agenda_show_event', ['slug' => $agendaEvent->getSlug()]),
+                'loc' => $this->router->generate('agenda_show_event', ['slug' => $agendaEvent['slug']]),
                 'changefreq' => 'weekly',
                 'priority' => '0.50',
             ];
-            $event->addUrls($urlEventAgenda);
+            $this->addUrls($urlEventAgenda);
         }
+
+        return $this->urls;
     }
 }
