@@ -7,7 +7,7 @@ on:
 
 jobs:
   symfony:
-    name: Symfony 4.4 (PHP ${{ matrix.php-versions }})
+    name: Symfony 5.4 (PHP ${{ matrix.php-versions }})
     # https://hub.docker.com/_/ubuntu/
     runs-on: ubuntu-latest
     strategy:

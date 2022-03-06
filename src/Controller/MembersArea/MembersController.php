@@ -12,7 +12,7 @@ namespace App\Controller\MembersArea;
 use App\Agenda\Agenda;
 use App\Agenda\SeasonManager;
 use App\Entity\User;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Members controller.
  *
  * @Route("/espace-membres")
- * @Security("has_role('ROLE_USER')")
+ * @IsGranted("ROLE_USER")
  */
 final class MembersController extends AbstractController
 {

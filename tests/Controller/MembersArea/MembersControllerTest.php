@@ -32,7 +32,7 @@ class MembersControllerTest extends WebTestCase
     protected function setUp(): void
     {
         $this->client = static::createClient();
-        $this->userRepository = self::$container->get(UserRepository::class);
+        $this->userRepository = static::getContainer()->get(UserRepository::class);
     }
 
     protected function tearDown(): void
@@ -48,7 +48,7 @@ class MembersControllerTest extends WebTestCase
      */
     public function testMembersAreaWithoutLogging(): void
     {
-        $this->client->request('GET', '/espace-membres');
+        $this->client->request('GET', '/fr/espace-membres');
         $this->assertSame(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
         $this->assertTrue($this->client->getResponse()->isRedirect());
 
@@ -63,7 +63,7 @@ class MembersControllerTest extends WebTestCase
     {
         $this->logIn();
 
-        $this->client->request('GET', '/espace-membres');
+        $this->client->request('GET', '/fr/espace-membres');
         $crawler = $this->client->followRedirect();
 
         $this->assertSame(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
@@ -81,8 +81,8 @@ class MembersControllerTest extends WebTestCase
         $user->method('getId')->willReturn(3);
         $user->method('getUsername')->willReturn('testor');
 
-        //$user = new User();
-        //$user->setUsername('toto');
+        // $user = new User();
+        // $user->setUsername('toto');
 
         $user = $this->userRepository->findOneBy(['username' => UserFixtures::SIMPLE_USER]);
 

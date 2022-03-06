@@ -12,16 +12,16 @@ namespace App\DataFixtures;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
-    private UserPasswordEncoderInterface $passwordEncoder;
+    private UserPasswordHasherInterface $passwordEncoder;
 
     public const ADMIN_USER = 'admin';
     public const SIMPLE_USER = 'simple-user';
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordHasherInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
     }
@@ -33,7 +33,7 @@ class UserFixtures extends Fixture
         $adminUser->setUsername(self::ADMIN_USER);
         $adminUser->setFirstname('admin');
         $adminUser->setLastname('User');
-        $adminUser->setPassword($this->passwordEncoder->encodePassword(
+        $adminUser->setPassword($this->passwordEncoder->hashPassword(
             $adminUser,
             'password'
         ));
@@ -49,12 +49,13 @@ class UserFixtures extends Fixture
         $simpleUser->setUsername(self::SIMPLE_USER);
         $simpleUser->setFirstname('Simple');
         $simpleUser->setLastname('User');
-        $simpleUser->setPassword($this->passwordEncoder->encodePassword(
+        $simpleUser->setPassword($this->passwordEncoder->hashPassword(
             $simpleUser,
             'password'
         ));
         $simpleUser->setEmail('simple-user@aml87.fr');
         $simpleUser->setActive(true);
+        $simpleUser->setRoles($simpleUser->getRoles());
 
         $manager->persist($simpleUser);
 
