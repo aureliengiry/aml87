@@ -13,17 +13,20 @@ use App\Entity\Message;
 use App\Event\Contact\MessageSaved;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 
 class PostListener implements EventSubscriberInterface
 {
-    private \Swift_Mailer $mailer;
+    private MailerInterface $mailer;
 
     private EntityManagerInterface $entityManager;
 
     private string $subscribers;
 
     public function __construct(
-        \Swift_Mailer $mailer,
+        MailerInterface $mailer,
         EntityManagerInterface $entityManager,
         string $subscribers = null
     ) {
@@ -50,10 +53,11 @@ class PostListener implements EventSubscriberInterface
 
         if ( ! empty($this->subscribers)) {
             foreach (explode(',', $this->subscribers) as $subscriber) {
-                $mail = (new \Swift_Message($formatedMessage['subject']))
-                    ->setFrom($post->getEmail(), $post->getName())
-                    ->setTo($subscriber)
-                    ->setBody($formatedMessage['body']);
+                $mail = (new Email())
+                    ->subject($formatedMessage['subject'])
+                    ->from(new Address($post->getEmail(), $post->getName()))
+                    ->to($subscriber)
+                    ->text($formatedMessage['body']);
 
                 $this->mailer->send($mail);
 

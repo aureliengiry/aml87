@@ -1,7 +1,6 @@
 parameters:
     app_google_analytics.account_id: '%env(GOOGLE_ANALYTICS_ACCOUNT_ID)%'
     locale: 'fr'
-    aml_contact_us.subribers: '%env(APP_ADMIN_EMAIL)%'
 
 services:
     # default configuration for services in *this* file
@@ -17,9 +16,6 @@ services:
     App\:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
-
-    App\Utils\Slugger:
-        autowire: true
 
     # Service Configuration
 #    twig.extension.text:
@@ -84,18 +80,10 @@ services:
     ## Article
     App\Article\ArticleManager:
         public: true
-        autowire: true
-
 
     ## Discography
     App\Discography\DiscographyManager:
         public: true
-        autowire: true
-
-    ## Evenement
-    App\Evenement\EvenementManager:
-        public: true
-        autowire: true
 
     ## Google
     App\Google\Client:
@@ -113,18 +101,14 @@ services:
     ## Video
     App\Video\VideoManager:
         public: true
-        autowire: true
 
     App\Video\VideoFactory:
         public: true
-        autowire: true
 
     ## Contact
     App\EventListener\PostListener:
         arguments:
-            - '@mailer'
-            - '@doctrine.orm.entity_manager'
-            - '%aml_contact_us.subribers%'
+            $subscribers: '%env(APP_ADMIN_EMAIL)%'
         tags:
             name: kernel.event_subscriber
 

@@ -34,12 +34,6 @@
     <!-- Configure your db driver and server_version in config/packages/doctrine.yaml -->
     <env name="DATABASE_URL" value="sqlite:///%kernel.project_dir%/var/aml-test.db"/>
     <!-- ###- doctrine/doctrine-bundle ### -->
-    <!-- ###+ symfony/swiftmailer-bundle ### -->
-    <!-- For Gmail as a transport, use: "gmail://username:password@localhost" -->
-    <!-- For a generic SMTP server, use: "smtp://localhost:25?encryption=&auth_mode=" -->
-    <!-- Delivery is disabled by default via "null://localhost" -->
-    <env name="MAILER_URL" value="null://localhost"/>
-    <!-- ###- symfony/swiftmailer-bundle ### -->
   </php>
   <testsuites>
     <testsuite name="AML87 Test Suite">

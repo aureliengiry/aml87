@@ -59,10 +59,7 @@ class MessageType extends AbstractType
                 SubmitType::class,
                 [
                     'attr' => [
-                        'class' => 'btn btn-primary pull-right g-recaptcha',
-                        'data-sitekey' => $this->reCAPTCHA_site_key,
-                        'data-callback' => 'onSubmit',
-                        'data-action' => 'submit',
+                        'class' => 'btn btn-primary pull-right',
                     ],
                 ]
             );
