@@ -60,7 +60,7 @@ final class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/sitemap.{_format}", name="sitemap", Requirements={"_format" = "xml"}, methods={"GET"})
+     * @Route("/sitemap.{_format}", name="sitemap", requirements={"_format" = "xml"}, methods={"GET"})
      */
     public function sitemap(Request $request): Response
     {

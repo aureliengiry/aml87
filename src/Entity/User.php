@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Column(name="id", type="integer")
@@ -234,7 +235,7 @@ class User implements UserInterface
     public function setSuperAdmin(bool $superAdmin): void
     {
         if ($superAdmin) {
-            $roles = $this->roles;
+            $roles = $this->getRoles();
             // guarantee every user at least has ROLE_USER
             $roles[] = 'ROLE_SUPER_ADMIN';
 

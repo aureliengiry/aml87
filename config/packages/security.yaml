@@ -1,14 +1,20 @@
 security:
-    encoders:
-        App\Entity\User:
-            algorithm: bcrypt
+    # a new authentication system is available since Symfony 5.1 to make
+    # Symfony security more extensible and easier to understand
+    # https://symfony.com/doc/current/security.html
+    enable_authenticator_manager: true
+
+    password_hashers:
+        # Our user class and the algorithm we'll use to encode passwords
+        # 'auto' means to let Symfony choose the best possible password hasher (Argon2 or Bcrypt)
+        # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
         ROLE_SUPER_ADMIN:
             - ROLE_USER
             - ROLE_ADMIN
-            - ROLE_SONATA_ADMIN
             - ROLE_ALLOWED_TO_SWITCH
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
@@ -23,30 +29,44 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: lazy
-
-            # activate different ways to authenticate
-
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
+            lazy: true
             provider: app_user_provider
-            guard:
-                authenticators:
-                    - App\Security\AppAuthenticator
-            #switch_user:
-            #   provider: app_user_provider
+
             form_login:
-               provider: app_user_provider
-               csrf_token_generator: security.csrf.token_manager
+                # The route name that the login form submits to
+                check_path: app_members_area_login
+                # The name of the route where the login form lives
+                # When the user tries to access a protected page, they are redirected here
+                login_path: app_members_area_login
+                # Secure the login form against CSRF
+                # Reference: https://symfony.com/doc/current/security/csrf.html
+                enable_csrf: true
+                # The page users are redirect to when there is no previous page stored in the
+                # session (for example when the users access directly to the login page).
+                default_target_path: app_members_area
             logout:
+                # The route name the user can go to in order to logout
                 path: app_members_area_logout
+                # The name of the route to redirect to after logging out
                 target: app_main_index
+
+
+            # needed because in tests we redefine the 'main' firewall to use
+            # HTTP Basic instead of the login form, so this firewall has
+            # multiple authenticators
+            # See https://symfony.com/doc/current/security/experimental_authenticators.html#configuring-the-authentication-entry-point
+            entry_point: 'form_login'
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/espace-membres, roles: ROLE_USER }
+        - { path: '^/(%app_locales%)/admin', roles: ROLE_ADMIN }
+        - { path: '^/(%app_locales%)/espace-membres', roles: ROLE_USER }
+
+when@test:
+    # this configuration simplifies testing URLs protected by the security mechanism
+    # See https://symfony.com/doc/current/testing/http_authentication.html
+    security:
+        firewalls:
+            main:
+                http_basic: ~

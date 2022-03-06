@@ -1,6 +1,6 @@
 sentry:
     options:
-        curl_method: async
+        environment: '%kernel.environment%'
 
 #    skip_capture:  # To skip certain exceptions, specify a list below
 #      - 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'

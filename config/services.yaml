@@ -1,6 +1,7 @@
 parameters:
     app_google_analytics.account_id: '%env(GOOGLE_ANALYTICS_ACCOUNT_ID)%'
     locale: 'fr'
+    app_locales: en|fr
 
 services:
     # default configuration for services in *this* file

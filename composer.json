@@ -28,11 +28,11 @@
     "google/apiclient": "^2.1",
     "incenteev/composer-parameter-handler": "^2.1",
     "jms/serializer": "^1.10",
-    "knplabs/knp-menu": "^2.3",
-    "knplabs/knp-menu-bundle": "^2.2",
+    "knplabs/knp-menu": "^3.3",
+    "knplabs/knp-menu-bundle": "^3.2",
     "liip/imagine-bundle": "^2.7",
-    "sensio/framework-extra-bundle": "^5.5",
-    "sentry/sentry-symfony": "^2.0",
+    "sensio/framework-extra-bundle": "^6.1",
+    "sentry/sentry-symfony": "^4.2",
     "symfony/dependency-injection": "*",
     "symfony/dotenv": "*",
     "symfony/flex": "^1.6",
@@ -100,7 +100,7 @@
   "extra": {
     "symfony": {
       "allow-contrib": false,
-      "require": "4.4.*"
+      "require": "5.4.*"
     }
   },
   "config": {
