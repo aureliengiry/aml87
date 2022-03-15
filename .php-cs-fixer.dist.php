@@ -11,8 +11,8 @@ return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
-        '@PHP74Migration' => true,
-        '@PHP74Migration:risky' => true,
+        '@PHP81Migration' => true,
+        //  '@PHP81Migration:risky' => true,
         'array_syntax' => ['syntax' => 'short'],
         'full_opening_tag' => false,
         'array_indentation' => true,
