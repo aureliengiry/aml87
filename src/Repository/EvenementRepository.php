@@ -54,7 +54,7 @@ class EvenementRepository extends ServiceEntityRepository
             ->setParameters(
                 [
                     'dateStart' => $dateTimeStart,
-                    //'date_end' => $dateTimeEnd,
+                    // 'date_end' => $dateTimeEnd,
                 ]
             );
 
@@ -183,7 +183,7 @@ class EvenementRepository extends ServiceEntityRepository
 
         try {
             return $query->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
+        } catch (\Doctrine\ORM\NoResultException) {
             return null;
         }
     }

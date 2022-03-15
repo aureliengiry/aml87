@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="links")
  * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
  */
-class Link
+class Link implements \Stringable
 {
     /**
      * @var int

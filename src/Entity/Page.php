@@ -17,10 +17,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="pages")
  * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
  */
-class Page
+class Page implements \Stringable
 {
-    public const PAGE_IS_PUBLIC = 1;
-    public const PAGE_IS_PRIVATE = 0;
+    final public const PAGE_IS_PUBLIC = 1;
+    final public const PAGE_IS_PRIVATE = 0;
 
     /**
      * @var int
@@ -116,8 +116,6 @@ class Page
 
     /**
      * Set created.
-     *
-     * @param \DateTime $created
      */
     public function setCreated(\DateTime $created = null)
     {
@@ -136,8 +134,6 @@ class Page
 
     /**
      * Set updated.
-     *
-     * @param \DateTime $updated
      */
     public function setUpdated(\DateTime $updated = null)
     {
@@ -192,7 +188,7 @@ class Page
         return $this->url;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title ?: 'New Page';
     }

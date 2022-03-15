@@ -20,10 +20,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="blog_articles")
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
-class Article
+class Article implements \Stringable
 {
-    public const ARTICLE_IS_PUBLIC = 1;
-    public const ARTICLE_IS_PRIVATE = 0;
+    final public const ARTICLE_IS_PUBLIC = 1;
+    final public const ARTICLE_IS_PRIVATE = 0;
 
     /**
      * @ORM\Column(name="id_article", type="integer")

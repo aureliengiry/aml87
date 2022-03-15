@@ -30,6 +30,6 @@ class BlogControllerTest extends WebTestCase
         $this->assertStringContainsString('Blog', $crawler->filter('title')->text());
 
         // Check if there is at least one article
-        //$this->assertTrue($crawler->filter('#col-left .contenu-page article')->count() > 0);
+        // $this->assertTrue($crawler->filter('#col-left .contenu-page article')->count() > 0);
     }
 }

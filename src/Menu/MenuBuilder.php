@@ -18,14 +18,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class MenuBuilder
 {
-    private FactoryInterface $factory;
-
     /**
      * Init factory.
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct(private readonly FactoryInterface $factory)
     {
-        $this->factory = $factory;
     }
 
     /**

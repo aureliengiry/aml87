@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Page;
+use App\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,17 +28,15 @@ final class PageController extends AbstractController
      * @Route("/page/{page}", name="page_show", methods={"GET"})
      * @Route("/{page}.html", name="page_show_rewrite", methods={"GET"})
      */
-    public function index(Request $request, $page, Environment $twig): Response
+    public function index(Request $request, $page, Environment $twig, PageRepository $pageRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
         if (is_numeric($page)) {
-            $entity = $em->getRepository(Page::class)->findOneBy([
+            $entity = $pageRepository->findOneBy([
                 'id' => $page,
                 'public' => Page::PAGE_IS_PUBLIC,
             ]);
         } else {
-            $entity = $em->getRepository(Page::class)->getPublicPageByUrlKey($page);
+            $entity = $pageRepository->getPublicPageByUrlKey($page);
         }
 
         if ( ! $entity) {

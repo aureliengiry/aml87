@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Link;
+use App\Repository\LinkRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,10 +26,10 @@ final class LiensController extends AbstractController
      *
      * @Route("/", name="liens", methods={"GET"})
      */
-    public function index(Environment $twig): Response
+    public function index(Environment $twig, LinkRepository $linkRepository): Response
     {
         return new Response($twig->render('liens/index.html.twig', [
-            'entities' => $this->getDoctrine()->getManager()->getRepository(Link::class)->getPublicLinks(),
+            'entities' => $linkRepository->getPublicLinks(),
         ]));
     }
 }

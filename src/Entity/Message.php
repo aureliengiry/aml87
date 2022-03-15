@@ -18,10 +18,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="contact_us_messages")
  * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
  */
-class Message
+class Message implements \Stringable
 {
-    public const MESSAGE_STATUS_SAVE = 1;
-    public const MESSAGE_STATUS_SAVE_SEND = 2;
+    final public const MESSAGE_STATUS_SAVE = 1;
+    final public const MESSAGE_STATUS_SAVE_SEND = 2;
     /**
      * @var int
      *
@@ -205,8 +205,6 @@ class Message
 
     /**
      * Set created.
-     *
-     * @param \DateTime $created
      */
     public function setCreated(\DateTime $created = null): void
     {
@@ -247,7 +245,7 @@ class Message
         $this->spam = $spam;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->subject ?: 'New message';
     }

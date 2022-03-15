@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="blog_tags")
  * @ORM\Entity(repositoryClass="App\Repository\TagsRepository")
  */
-class Tags
+class Tags implements \Stringable
 {
     /**
      * @var int
@@ -174,7 +174,7 @@ class Tags
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name ?: 'New Tag';
     }

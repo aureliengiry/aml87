@@ -19,10 +19,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="discography_albums")
  * @ORM\Entity(repositoryClass="App\Repository\AlbumRepository")
  */
-class Album
+class Album implements \Stringable
 {
-    public const ALBUM_IS_PUBLIC = 1;
-    public const ALBUM_IS_PRIVATE = 2;
+    final public const ALBUM_IS_PUBLIC = 1;
+    final public const ALBUM_IS_PRIVATE = 2;
 
     /**
      * @ORM\Column(name="id_album", type="integer")

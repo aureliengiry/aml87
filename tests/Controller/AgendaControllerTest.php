@@ -12,9 +12,6 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class AgendaControllerTest.
- */
 class AgendaControllerTest extends WebTestCase
 {
     public function testAgenda(): void
@@ -22,7 +19,7 @@ class AgendaControllerTest extends WebTestCase
         $client = static::createClient();
 
         $url = $client->getContainer()->get('router')->generate('agenda');
-        $crawler = $client->request('GET', $url);
+        $client->request('GET', $url);
 
         // Check status code
         $this->assertSame(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -32,8 +29,8 @@ class AgendaControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $url = $client->getContainer()->get('router')->generate('agenda_archives', ['season_id' => 0]);
-        $crawler = $client->request('GET', $url);
+        $url = $client->getContainer()->get('router')->generate('agenda_archives', ['seasonId' => 0]);
+        $client->request('GET', $url);
 
         // Check status code
         $this->assertSame(Response::HTTP_NOT_FOUND, $client->getResponse()->getStatusCode());

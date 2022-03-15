@@ -16,14 +16,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
-    private UserPasswordHasherInterface $passwordEncoder;
+    final public const ADMIN_USER = 'admin';
+    final public const SIMPLE_USER = 'simple-user';
 
-    public const ADMIN_USER = 'admin';
-    public const SIMPLE_USER = 'simple-user';
-
-    public function __construct(UserPasswordHasherInterface $passwordEncoder)
+    public function __construct(private readonly UserPasswordHasherInterface $passwordEncoder)
     {
-        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function load(ObjectManager $manager): void

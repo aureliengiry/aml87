@@ -17,10 +17,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="evenements_seasons")
  * @ORM\Entity(repositoryClass="App\Repository\SeasonRepository")
  */
-class Season
+class Season implements \Stringable
 {
-    public const SEASON_DEFAULT_DATE_START = '%s-09-01';
-    public const SEASON_DEFAULT_DATE_END = '%s-08-31';
+    final public const SEASON_DEFAULT_DATE_START = '%s-09-01';
+    final public const SEASON_DEFAULT_DATE_END = '%s-08-31';
 
     /**
      * @var int
@@ -148,7 +148,7 @@ class Season
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name ?: 'New Season';
     }

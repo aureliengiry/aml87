@@ -19,15 +19,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class ContactMessage
 {
-    private EntityManagerInterface $entityManager;
-    private EventDispatcherInterface $eventDispatcher;
-
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        EventDispatcherInterface $eventDispatcher
-    ) {
-        $this->entityManager = $entityManager;
-        $this->eventDispatcher = $eventDispatcher;
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly EventDispatcherInterface $eventDispatcher)
+    {
     }
 
     /**

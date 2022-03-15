@@ -15,11 +15,8 @@ use App\Repository\EvenementRepository;
 
 class Agenda
 {
-    private EvenementRepository $evenementRepository;
-
-    public function __construct(EvenementRepository $evenementRepository)
+    public function __construct(private readonly EvenementRepository $evenementRepository)
     {
-        $this->evenementRepository = $evenementRepository;
     }
 
     public function getCurrentSeason(): void

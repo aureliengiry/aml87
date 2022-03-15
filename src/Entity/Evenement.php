@@ -19,14 +19,14 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="evenements")
  * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
  */
-class Evenement
+class Evenement implements \Stringable
 {
-    public const EVENEMENT_TYPE_CONCERT = 'concert';
-    public const EVENEMENT_TYPE_REUNION = 'reunion';
-    public const EVENEMENT_TYPE_REPETITION = 'repetition';
-    public const EVENEMENT_TYPE_ENREGISTREMENT = 'enregistrement';
-    public const EVENEMENT_TYPE_CONCOURS = 'concours';
-    public const EVENEMENT_TYPE_SORTIE = 'sortie';
+    final public const EVENEMENT_TYPE_CONCERT = 'concert';
+    final public const EVENEMENT_TYPE_REUNION = 'reunion';
+    final public const EVENEMENT_TYPE_REPETITION = 'repetition';
+    final public const EVENEMENT_TYPE_ENREGISTREMENT = 'enregistrement';
+    final public const EVENEMENT_TYPE_CONCOURS = 'concours';
+    final public const EVENEMENT_TYPE_SORTIE = 'sortie';
 
     /**
      * @ORM\Column(name="id_evenement", type="integer")

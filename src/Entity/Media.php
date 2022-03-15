@@ -25,7 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     "music" = "Music"
  * })
  */
-abstract class Media
+abstract class Media implements \Stringable
 {
     /**
      * @ORM\Column(name="id_media", type="integer")
@@ -80,7 +80,7 @@ abstract class Media
         return $name;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title ?: 'New media';
     }

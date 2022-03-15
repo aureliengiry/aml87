@@ -25,13 +25,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class MembersController extends AbstractController
 {
-    private Agenda $agenda;
-    private SeasonManager $seasonManager;
-
-    public function __construct(Agenda $agenda, SeasonManager $seasonManager)
+    public function __construct(private readonly Agenda $agenda, private readonly SeasonManager $seasonManager)
     {
-        $this->agenda = $agenda;
-        $this->seasonManager = $seasonManager;
     }
 
     /**

@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="discography_tracks")
  * @ORM\Entity(repositoryClass="App\Repository\TrackRepository")
  */
-class Track
+class Track implements \Stringable
 {
     /**
      * @var int
