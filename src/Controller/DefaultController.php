@@ -20,15 +20,8 @@ use Twig\Environment;
 
 final class DefaultController extends AbstractController
 {
-    private Environment $twig;
-    private SitemapGenerator $sitemap;
-
-    public function __construct(
-        Environment $twig,
-        SitemapGenerator $sitemap
-    ) {
-        $this->twig = $twig;
-        $this->sitemap = $sitemap;
+    public function __construct(private readonly Environment $twig, private readonly SitemapGenerator $sitemap)
+    {
     }
 
     /**

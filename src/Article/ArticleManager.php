@@ -15,15 +15,8 @@ use App\Repository\TagsRepository;
 
 class ArticleManager
 {
-    private ArticleRepository $articleRepository;
-    private TagsRepository $tagsRepository;
-
-    public function __construct(
-        ArticleRepository $articleRepository,
-        TagsRepository $tagsRepository
-    ) {
-        $this->articleRepository = $articleRepository;
-        $this->tagsRepository = $tagsRepository;
+    public function __construct(private readonly ArticleRepository $articleRepository, private readonly TagsRepository $tagsRepository)
+    {
     }
 
     public function getPublicArticlesWithPagination(int $page, array $filter)

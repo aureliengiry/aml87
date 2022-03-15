@@ -25,14 +25,10 @@ use Twig\Environment;
  */
 final class DiscographyController extends AbstractController
 {
-    private DiscographyManager $discographyManager;
-    private MenuItem $appMainMenu;
-    private Environment $twig;
+    private readonly Environment $twig;
 
-    public function __construct(DiscographyManager $discographyManager, MenuItem $appMainMenu)
+    public function __construct(private readonly DiscographyManager $discographyManager, private readonly MenuItem $appMainMenu)
     {
-        $this->discographyManager = $discographyManager;
-        $this->appMainMenu = $appMainMenu;
     }
 
     /**

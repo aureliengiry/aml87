@@ -19,21 +19,8 @@ class SitemapGenerator
 {
     private array $urls = [];
 
-    private RouterInterface $router;
-    private DiscographyManager $discographyManager;
-    private ArticleRepository $articleRepository;
-    private EvenementRepository $evenementRepository;
-
-    public function __construct(
-        RouterInterface $router,
-        DiscographyManager $discographyManager,
-        ArticleRepository $articleRepository,
-        EvenementRepository $evenementRepository
-    ) {
-        $this->router = $router;
-        $this->discographyManager = $discographyManager;
-        $this->articleRepository = $articleRepository;
-        $this->evenementRepository = $evenementRepository;
+    public function __construct(private readonly RouterInterface $router, private readonly DiscographyManager $discographyManager, private readonly ArticleRepository $articleRepository, private readonly EvenementRepository $evenementRepository)
+    {
     }
 
     public function addUrls(array $url): void

@@ -16,18 +16,13 @@ use Google_Service_YouTube;
  */
 class YoutubeProvider
 {
-    private Client $googleClient;
-    private string $youtubeUsername;
-
     private ?Google_Service_YouTube $youtubeService = null;
 
     /**
      * YoutubeProvider constructor.
      */
-    public function __construct(Client $googleClient, string $youtubeUsername)
+    public function __construct(private readonly Client $googleClient, private readonly string $youtubeUsername)
     {
-        $this->googleClient = $googleClient;
-        $this->youtubeUsername = $youtubeUsername;
     }
 
     public function init(): void

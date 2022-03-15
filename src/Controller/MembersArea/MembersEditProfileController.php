@@ -14,15 +14,8 @@ use Twig\Environment;
 
 class MembersEditProfileController extends AbstractController
 {
-    private Environment $twig;
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(
-        Environment $twig,
-        EntityManagerInterface $entityManager
-    ) {
-        $this->twig = $twig;
-        $this->entityManager = $entityManager;
+    public function __construct(private readonly Environment $twig, private readonly EntityManagerInterface $entityManager)
+    {
     }
 
     /**

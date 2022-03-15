@@ -23,36 +23,23 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateYoutubeDataCommand extends Command
 {
-    public const YOUTUBE_STATUS_PUBLIC = 'public';
-    public const YOUTUBE_STATUS_UNLISTED = 'unlisted';
+    final public const YOUTUBE_STATUS_PUBLIC = 'public';
+    final public const YOUTUBE_STATUS_UNLISTED = 'unlisted';
 
     private bool $debug = false;
 
     private OutputInterface $output;
-    private LoggerInterface $logger;
 
     private array $videosList = [];
 
-    private EntityManagerInterface $entityManager;
-
-    private YoutubeProvider $youtubeProvider;
-    private VideoFactory $videoFactory;
-    private VideoManager $videoManager;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        YoutubeProvider $youtubeProvider,
-        VideoFactory $videoFactory,
-        VideoManager $videoManager,
-        LoggerInterface $logger
+        private readonly EntityManagerInterface $entityManager,
+        private readonly YoutubeProvider $youtubeProvider,
+        private readonly VideoFactory $videoFactory,
+        private readonly VideoManager $videoManager,
+        private readonly LoggerInterface $logger
     ) {
         parent::__construct();
-
-        $this->entityManager = $entityManager;
-        $this->youtubeProvider = $youtubeProvider;
-        $this->videoFactory = $videoFactory;
-        $this->videoManager = $videoManager;
-        $this->logger = $logger;
     }
 
     /**

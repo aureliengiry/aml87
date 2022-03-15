@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\PartenaireRepository")
  */
-class Partenaire
+class Partenaire implements \Stringable
 {
     /**
      * @var int
@@ -197,7 +197,7 @@ class Partenaire
         $this->evenements->removeElement($evenement);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name ?: 'Nouveau Partenaire';
     }

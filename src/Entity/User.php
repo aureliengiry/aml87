@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
     /**
      * @ORM\Column(name="id", type="integer")

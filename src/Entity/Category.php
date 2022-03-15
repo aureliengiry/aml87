@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="blog_categories")
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
-class Category
+class Category implements \Stringable
 {
     /**
      * @ORM\Column(name="id_category",type="integer")

@@ -26,21 +26,8 @@ use Twig\Environment;
  */
 final class AgendaController extends AbstractController
 {
-    private Agenda $agenda;
-    private SeasonManager $seasonManager;
-    private MenuItem $appMainMenu;
-    private Environment $twig;
-
-    public function __construct(
-        Agenda $agenda,
-        SeasonManager $seasonManager,
-        MenuItem $appMainMenu,
-        Environment $twig
-    ) {
-        $this->agenda = $agenda;
-        $this->seasonManager = $seasonManager;
-        $this->appMainMenu = $appMainMenu;
-        $this->twig = $twig;
+    public function __construct(private readonly Agenda $agenda, private readonly SeasonManager $seasonManager, private readonly MenuItem $appMainMenu, private readonly Environment $twig)
+    {
     }
 
     /**

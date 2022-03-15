@@ -22,11 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class MessageType extends AbstractType
 {
-    private ?string $reCAPTCHA_site_key;
-
-    public function __construct(?string $reCAPTCHA_site_key)
+    public function __construct(private readonly ?string $reCAPTCHA_site_key)
     {
-        $this->reCAPTCHA_site_key = $reCAPTCHA_site_key;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

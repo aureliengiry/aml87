@@ -27,7 +27,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     "page" = "App\Entity\UrlPage"
  * })
  */
-abstract class Url
+abstract class Url implements \Stringable
 {
     /**
      * @ORM\Column(name="id_url", type="integer")
