@@ -33,7 +33,7 @@ abstract class Video
      * @ORM\Column(name="id_video", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected ?int $id;
+    protected ?int $id = null;
 
     /**
      * @ORM\Column(name="provider_id", type="string", length=50)

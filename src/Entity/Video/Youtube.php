@@ -17,11 +17,11 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity(repositoryClass="App\Repository\Video\YoutubeRepository")
  */
-class Youtube extends Video
+class Youtube extends Video implements \Stringable
 {
-    public const PATTERN_URL_VIDEO = 'https://www.youtube.com/watch?v=%s';
-    public const PATTERN_URL_THUMBNAIL_HQ = 'https://i.ytimg.com/vi/%s/hqdefault.jpg';
-    public const PATTERN_URL_THUMBNAIL = 'https://i.ytimg.com/vi/%s/default.jpg';
+    final public const PATTERN_URL_VIDEO = 'https://www.youtube.com/watch?v=%s';
+    final public const PATTERN_URL_THUMBNAIL_HQ = 'https://i.ytimg.com/vi/%s/hqdefault.jpg';
+    final public const PATTERN_URL_THUMBNAIL = 'https://i.ytimg.com/vi/%s/default.jpg';
 
     /**
      * @return string
@@ -31,7 +31,7 @@ class Youtube extends Video
         return $this->providerId;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title ?: 'New Video Youtube';
     }

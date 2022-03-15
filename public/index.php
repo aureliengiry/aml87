@@ -10,12 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 require \dirname(__DIR__).'/config/bootstrap.php';
 
 if ($_SERVER['APP_DEBUG']) {
-    umask(0000);
+    umask(0);
 
     Debug::enable();
 } else {
     // create files (logs) with rights -rw-rw-r--
-    umask(0002);
+    umask(0o002);
 }
 
 if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? $_ENV['TRUSTED_PROXIES'] ?? false) {

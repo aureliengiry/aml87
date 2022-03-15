@@ -17,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity(repositoryClass="App\Entity\Repository\Video\DailymotionRepository")
  */
-class Dailymotion extends Video
+class Dailymotion extends Video implements \Stringable
 {
     public function __construct()
     {
@@ -32,7 +32,7 @@ class Dailymotion extends Video
         return 'Dailymotion';
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->title ?: 'New Video Youtube';
     }

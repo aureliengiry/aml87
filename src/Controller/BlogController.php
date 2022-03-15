@@ -27,18 +27,12 @@ final class BlogController extends AbstractController
 {
     protected int $_limitPagination = 5;
 
-    private ArticleManager $articleManager;
-    private MenuItem $appMainMenu;
-    private Environment $twig;
-
     public function __construct(
-        ArticleManager $articleManager,
-        MenuItem $appMainMenu,
-        Environment $twig
-    ) {
-        $this->articleManager = $articleManager;
-        $this->appMainMenu = $appMainMenu;
-        $this->twig = $twig;
+        private readonly ArticleManager $articleManager,
+        private readonly MenuItem $appMainMenu,
+        private readonly Environment $twig
+    )
+    {
     }
 
     /**

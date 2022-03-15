@@ -24,19 +24,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class SendMessageCommand extends Command
 {
-    private MessageRepository $messageRepo;
     private ?int $messageId = null;
 
-    private EventDispatcherInterface $eventDispatcher;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        MessageRepository $messageRepo
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly MessageRepository $messageRepo
     ) {
         parent::__construct();
-
-        $this->eventDispatcher = $eventDispatcher;
-        $this->messageRepo = $messageRepo;
     }
 
     /**

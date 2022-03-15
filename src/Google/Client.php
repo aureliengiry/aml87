@@ -17,20 +17,13 @@ use Psr\Log\LoggerInterface;
  */
 class Client
 {
-    private LoggerInterface $logger;
-    private string $googleAppName;
-    private string $googleDevKey;
-
     private ?Google_Client $client = null;
 
     /**
      * Client constructor.
      */
-    public function __construct(LoggerInterface $logger, string $googleAppName, string $googleDevKey)
+    public function __construct(private readonly LoggerInterface $logger, private readonly string $googleAppName, private readonly string $googleDevKey)
     {
-        $this->logger = $logger;
-        $this->googleAppName = $googleAppName;
-        $this->googleDevKey = $googleDevKey;
     }
 
     /**

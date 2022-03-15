@@ -15,11 +15,8 @@ use Doctrine\Common\Collections\Collection;
 
 class SeasonManager
 {
-    private SeasonRepository $seasonRepository;
-
-    public function __construct(SeasonRepository $seasonRepository)
+    public function __construct(private readonly SeasonRepository $seasonRepository)
     {
-        $this->seasonRepository = $seasonRepository;
     }
 
     /**

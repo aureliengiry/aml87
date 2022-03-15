@@ -19,20 +19,12 @@ use Symfony\Component\Mime\Email;
 
 class PostListener implements EventSubscriberInterface
 {
-    private MailerInterface $mailer;
-
-    private EntityManagerInterface $entityManager;
-
-    private string $subscribers;
-
     public function __construct(
-        MailerInterface $mailer,
-        EntityManagerInterface $entityManager,
-        string $subscribers = null
-    ) {
-        $this->mailer = $mailer;
-        $this->entityManager = $entityManager;
-        $this->subscribers = $subscribers;
+        private readonly MailerInterface $mailer,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly string $subscribers
+    )
+    {
     }
 
     /**

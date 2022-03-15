@@ -11,7 +11,7 @@ namespace App\Controller;
 
 use App\Agenda\Agenda;
 use App\Agenda\SeasonManager;
-use App\Entity\Season;
+use App\Repository\SeasonRepository;
 use Knp\Menu\MenuItem;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,21 +26,13 @@ use Twig\Environment;
  */
 final class AgendaController extends AbstractController
 {
-    private Agenda $agenda;
-    private SeasonManager $seasonManager;
-    private MenuItem $appMainMenu;
-    private Environment $twig;
-
     public function __construct(
-        Agenda $agenda,
-        SeasonManager $seasonManager,
-        MenuItem $appMainMenu,
-        Environment $twig
+        private readonly Agenda $agenda,
+        private readonly SeasonManager $seasonManager,
+        private readonly MenuItem $appMainMenu,
+        private readonly Environment $twig,
+        private readonly SeasonRepository $seasonRepository
     ) {
-        $this->agenda = $agenda;
-        $this->seasonManager = $seasonManager;
-        $this->appMainMenu = $appMainMenu;
-        $this->twig = $twig;
     }
 
     /**
@@ -100,18 +92,16 @@ final class AgendaController extends AbstractController
      * Lists all archived event.
      *
      * @Route(
-     *     "/archives/{season_id}",
+     *     "/archives/{seasonId}",
      *     name="agenda_archives",
-     *     requirements={"season_id"="\d+"},
+     *     requirements={"seasonId"="\d+"},
      *     methods={"GET"}
      *     )
      */
-    public function archives(int $season_id, Request $request): Response
+    public function archives(int $seasonId, Request $request): Response
     {
-        $seasonsRepository = $this->getDoctrine()->getManager()->getRepository(Season::class);
-
-        $season = $seasonsRepository->find($season_id);
-        if ( ! $season) {
+        $season = $this->seasonRepository->find($seasonId);
+        if (null === $season) {
             throw $this->createNotFoundException('Unable to find Season entity.');
         }
 
@@ -125,7 +115,7 @@ final class AgendaController extends AbstractController
             [
                 'currentSeason' => $season,
                 'entities' => $this->agenda->getArchivedConcertBySeason($season),
-                'seasons' => $seasonsRepository->getPastSeasons(),
+                'seasons' => $this->seasonRepository->getPastSeasons(),
             ]
         ));
     }

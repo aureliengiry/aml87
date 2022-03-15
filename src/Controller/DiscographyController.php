@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Discography\DiscographyManager;
 use App\Entity\Album;
+use App\Repository\AlbumRepository;
 use Knp\Menu\MenuItem;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,14 +26,12 @@ use Twig\Environment;
  */
 final class DiscographyController extends AbstractController
 {
-    private DiscographyManager $discographyManager;
-    private MenuItem $appMainMenu;
-    private Environment $twig;
-
-    public function __construct(DiscographyManager $discographyManager, MenuItem $appMainMenu)
-    {
-        $this->discographyManager = $discographyManager;
-        $this->appMainMenu = $appMainMenu;
+    public function __construct(
+        private readonly DiscographyManager $discographyManager,
+        private readonly MenuItem $appMainMenu,
+        private readonly Environment $twig,
+        private readonly AlbumRepository $albumRepository
+    ) {
     }
 
     /**
@@ -42,7 +41,9 @@ final class DiscographyController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('discography/index.html.twig', ['entities' => $this->discographyManager->getPublicAlbums()]);
+        return new Response($this->twig->render('discography/index.html.twig', [
+            'entities' => $this->discographyManager->getPublicAlbums(),
+        ]));
     }
 
     /**
@@ -53,13 +54,10 @@ final class DiscographyController extends AbstractController
      */
     public function show(Request $request, $album): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $albumRepository = $em->getRepository(Album::class);
         if (is_numeric($album)) {
-            $entity = $albumRepository->find($album);
+            $entity = $this->albumRepository->find($album);
         } else {
-            $entity = $albumRepository->getAlbumByUrlKey($album);
+            $entity = $this->albumRepository->getAlbumByUrlKey($album);
         }
 
         if ( ! $entity) {
@@ -71,8 +69,8 @@ final class DiscographyController extends AbstractController
 
         $request->attributes->set('label', $entity->getTitle());
 
-        return $this->render('discography/show.html.twig', [
+        return new Response($this->twig->render('discography/show.html.twig', [
             'entity' => $entity,
-        ]);
+        ]));
     }
 }

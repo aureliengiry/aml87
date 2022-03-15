@@ -14,11 +14,8 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class MessageSaved extends Event
 {
-    private Message $message;
-
-    public function __construct(Message $message)
+    public function __construct(private readonly Message $message)
     {
-        $this->message = $message;
     }
 
     public function getMessage(): Message

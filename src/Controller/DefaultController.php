@@ -11,6 +11,8 @@ namespace App\Controller;
 
 use App\Entity\Album;
 use App\Entity\Article;
+use App\Repository\AlbumRepository;
+use App\Repository\ArticleRepository;
 use App\Sitemap\SitemapGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,15 +22,12 @@ use Twig\Environment;
 
 final class DefaultController extends AbstractController
 {
-    private Environment $twig;
-    private SitemapGenerator $sitemap;
-
     public function __construct(
-        Environment $twig,
-        SitemapGenerator $sitemap
+        private readonly Environment $twig,
+        private readonly SitemapGenerator $sitemap,
+        private readonly ArticleRepository $articleRepository,
+        private readonly AlbumRepository $albumRepository
     ) {
-        $this->twig = $twig;
-        $this->sitemap = $sitemap;
     }
 
     /**
@@ -37,15 +36,13 @@ final class DefaultController extends AbstractController
     public function index(): Response
     {
         // Last blog article
-        $repo = $this->getDoctrine()->getRepository(Article::class);
-        $blogEntity = $repo->findOneBy(
+        $blogEntity = $this->articleRepository->findOneBy(
             ['public' => Article::ARTICLE_IS_PUBLIC],
             ['created' => 'DESC']
         );
 
         // Last Album
-        $repo = $this->getDoctrine()->getRepository(Album::class);
-        $albumEntity = $repo->findOneBy(
+        $albumEntity = $this->albumRepository->findOneBy(
             ['public' => Album::ALBUM_IS_PUBLIC],
             ['date' => 'DESC']
         );

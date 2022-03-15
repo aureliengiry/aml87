@@ -20,20 +20,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SeasonsCommand extends Command
 {
-    private EvenementRepository $eventRepo;
-    private SeasonRepository $seasonRepo;
-    private EntityManagerInterface $entityManager;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        EvenementRepository $eventRepo,
-        SeasonRepository $seasonRepo
+        private readonly EntityManagerInterface $entityManager,
+        private readonly EvenementRepository $eventRepo,
+        private readonly SeasonRepository $seasonRepo
     ) {
         parent::__construct();
-
-        $this->entityManager = $entityManager;
-        $this->eventRepo = $eventRepo;
-        $this->seasonRepo = $seasonRepo;
     }
 
     /**
