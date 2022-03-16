@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
@@ -13,12 +13,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * App\Entity\Evenement.
- *
- * @ORM\Table(name="evenements")
- * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
- */
+#[ORM\Table(name: 'evenements')]
+#[ORM\Entity(repositoryClass: \App\Repository\EvenementRepository::class)]
 class Evenement implements \Stringable
 {
     final public const EVENEMENT_TYPE_CONCERT = 'concert';
@@ -28,87 +24,53 @@ class Evenement implements \Stringable
     final public const EVENEMENT_TYPE_CONCOURS = 'concours';
     final public const EVENEMENT_TYPE_SORTIE = 'sortie';
 
-    /**
-     * @ORM\Column(name="id_evenement", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Column(name: 'id_evenement', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(name="type", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(name: 'type', type: 'string', length: 255, nullable: true)]
     private ?string $type = null;
 
-    /**
-     * @ORM\Column(name="date_start", type="datetime")
-     */
+    #[ORM\Column(name: 'date_start', type: 'datetime')]
     private \DateTime $dateStart;
 
-    /**
-     * @ORM\Column(name="date_end", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'date_end', type: 'datetime', nullable: true)]
     private ?\DateTime $dateEnd = null;
 
-    /**
-     * @ORM\Column(name="title", type="string", length=255)
-     */
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
     private string $title;
 
-    /**
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
+    #[ORM\Column(name: 'description', type: 'text', nullable: true)]
     private ?string $description = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
-     * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
-     */
+    #[ORM\OneToOne(targetEntity: \App\Entity\Image::class, cascade: ['all'])]
+    #[ORM\JoinColumn(name: 'id_media', referencedColumnName: 'id_media')]
     private ?Image $picture = null;
 
-    /**
-     * @ORM\Column(name="archive", type="boolean")
-     */
+    #[ORM\Column(name: 'archive', type: 'boolean')]
     private bool $archive = false;
 
-    /**
-     * @ORM\Column(name="public", type="boolean")
-     */
+    #[ORM\Column(name: 'public', type: 'boolean')]
     private bool $public = false;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Article", inversedBy="evenements", cascade={"all"}, fetch="LAZY")
-     * @ORM\JoinTable(name="evenements_articles",
-     *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
-     *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
-     * )
-     */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Article::class, inversedBy: 'evenements', cascade: ['all'], fetch: 'LAZY')]
+    #[ORM\JoinTable(name: 'evenements_articles', joinColumns: [new ORM\JoinColumn(name: 'id_evenement', referencedColumnName: 'id_evenement')], inverseJoinColumns: [new ORM\JoinColumn(name: 'id_article', referencedColumnName: 'id_article')])]
     protected Collection $articles;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Partenaire", mappedBy="evenements", cascade={"all"}, fetch="LAZY")
-     */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Partenaire::class, mappedBy: 'evenements', cascade: ['all'], fetch: 'LAZY')]
     protected Collection $partenaires;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\Url", cascade={"all"}, fetch="EAGER")
-     * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
-     */
+    #[ORM\OneToOne(targetEntity: \App\Entity\Url::class, cascade: ['all'], fetch: 'EAGER')]
+    #[ORM\JoinColumn(name: 'id_url', referencedColumnName: 'id_url')]
     private Url $url;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Season", inversedBy="evenements")
-     * @ORM\JoinColumn(name="id_season", referencedColumnName="id_season")
-     */
+    #[ORM\ManyToOne(targetEntity: 'Season', inversedBy: 'evenements')]
+    #[ORM\JoinColumn(name: 'id_season', referencedColumnName: 'id_season')]
     protected Season $season;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Video\Youtube", inversedBy="evenements", cascade={"all"}, fetch="LAZY")
-     * @ORM\JoinTable(name="evenements_videos",
-     *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
-     *        inverseJoinColumns={@ORM\JoinColumn(name="id_video", referencedColumnName="id_video")}
-     * )
-     */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Video\Youtube::class, inversedBy: 'evenements', cascade: ['all'], fetch: 'LAZY')]
+    #[ORM\JoinTable(name: 'evenements_videos', joinColumns: [new ORM\JoinColumn(name: 'id_evenement', referencedColumnName: 'id_evenement')], inverseJoinColumns: [new ORM\JoinColumn(name: 'id_video', referencedColumnName: 'id_video')])]
     protected Collection $videos;
 
     public function __construct()
@@ -257,7 +219,6 @@ class Evenement implements \Stringable
     }
 
     /* ---------------- PARTENAIRES ---------------- */
-
     public function addPartenaire(Partenaire $partenaire): self
     {
         $partenaire->addEvenement($this);

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Controller;
@@ -20,9 +20,8 @@ use Twig\Environment;
 
 /**
  * Blog controller.
- *
- * @Route("/blog")
  */
+#[Route(path: '/blog')]
 final class BlogController extends AbstractController
 {
     protected int $_limitPagination = 5;
@@ -31,34 +30,27 @@ final class BlogController extends AbstractController
         private readonly ArticleManager $articleManager,
         private readonly MenuItem $appMainMenu,
         private readonly Environment $twig
-    )
-    {
+    ) {
     }
 
     /**
      * Lists all Blog entities.
-     *
-     * @Route("/{page}", name="blog", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods={"GET"})
      */
+    #[Route(path: '/{page}', name: 'blog', requirements: ['page' => '\d+'], defaults: ['page' => 1], methods: ['GET'])]
     public function index(Request $request, int $page): Response
     {
         $filters = [];
-
         $category = $request->get('category');
         if ($category) {
             $filters['category'] = $category;
         }
-
         $tag = $request->get('tag');
         if ($tag) {
             $filters['tag'] = $tag;
         }
-
         $em = $this->getDoctrine()->getManager();
-
         $publicArticles = $this->articleManager->getPublicArticlesWithPagination($page, $filters);
         $nbPublicArticles = is_countable($publicArticles) ? \count($publicArticles) : 0;
-
         // Calcul de la pagination
         $calculLastPage = round($nbPublicArticles / $this->_limitPagination);
         $pagination = [
@@ -84,21 +76,17 @@ final class BlogController extends AbstractController
 
     /**
      * Finds and displays a Blog entity.
-     *
-     * @Route("/article/{slug}.html", name="blog_show", methods={"GET"})
      */
+    #[Route(path: '/article/{slug}.html', name: 'blog_show', methods: ['GET'])]
     public function show(string $slug, Request $request): Response
     {
         // Init Main Menu
         $this->appMainMenu->getChild('Blog')->setCurrent(true);
-
         $article = $this->articleManager->getArticleByIdOrUrl($slug);
         if ( ! $article) {
             throw $this->createNotFoundException('Unable to find Blog entity.');
         }
-
         $request->attributes->set('label', $article->getTitle());
-
         $em = $this->getDoctrine()->getManager();
 
         return new Response($this->twig->render(

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Command;
@@ -84,23 +84,19 @@ class SeasonsCommand extends Command
     protected function getSeasonByEvent(Evenement &$event, OutputInterface $output): void
     {
         $eventDateStart = $event->getDateStart();
-        if ($eventDateStart) {
-            $estimateSeason = $this->calculateSeason($eventDateStart);
+        $estimateSeason = $this->calculateSeason($eventDateStart);
 
-            // Check current season of event
-            $eventHasSeason = $event->hasSeason();
-            if (true === $eventHasSeason) {
-                // Check if it's good season or not
-                if ($event->getSeason() !== $estimateSeason) {
-                    // if it's wrong update
-                    $event->setSeason($estimateSeason);
-                }
-            } else {
-                // Update event
+        // Check current season of event
+        $eventHasSeason = $event->hasSeason();
+        if (true === $eventHasSeason) {
+            // Check if it's good season or not
+            if ($event->getSeason() !== $estimateSeason) {
+                // if it's wrong update
                 $event->setSeason($estimateSeason);
             }
         } else {
-            $output->writeln('<info>Date Start is empty for this event: '.$event->getId().'</info>');
+            // Update event
+            $event->setSeason($estimateSeason);
         }
     }
 

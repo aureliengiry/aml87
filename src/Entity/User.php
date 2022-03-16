@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
@@ -12,87 +12,43 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints\DateTime;
 
-/**
- * App\Entity\User.
- *
- * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
+#[ORM\Table(name: 'users')]
+#[ORM\Entity(repositoryClass: \App\Repository\UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
-
-    /**
-     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(name: 'firstname', type: 'string', length: 255, nullable: true)]
     private ?string $firstname = null;
-
-    /**
-     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(name: 'lastname', type: 'string', length: 255, nullable: true)]
     private ?string $lastname = null;
-
-    /**
-     * @ORM\Column(name="phone", type="string", length=20, nullable=true)
-     */
+    #[ORM\Column(name: 'phone', type: 'string', length: 20, nullable: true)]
     private ?string $phone = null;
-
-    /**
-     * @ORM\Column(name="mobile", type="string", length=20, nullable=true)
-     */
+    #[ORM\Column(name: 'mobile', type: 'string', length: 20, nullable: true)]
     private ?string $mobile = null;
-
-    /**
-     * @ORM\Column(name="birthdate", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'birthdate', type: 'datetime', nullable: true)]
     private ?\DateTime $birthdate = null;
-
-    /**
-     * @ORM\Column(name="adresse", type="text", nullable=true)
-     */
+    #[ORM\Column(name: 'adresse', type: 'text', nullable: true)]
     private ?string $adresse = null;
-
-    /**
-     * @ORM\Column(name="job", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(name: 'job', type: 'string', length: 255, nullable: true)]
     private ?string $job = null;
-
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private string $username;
-
-    /**
-     * @ORM\Column(type="json")
-     */
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
-
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     private string $password;
-
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     private string $email;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $lastLogin = null;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private bool $active = true;
 
     public function getId(): ?int

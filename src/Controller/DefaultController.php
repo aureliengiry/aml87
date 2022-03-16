@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Controller;
@@ -30,9 +30,7 @@ final class DefaultController extends AbstractController
     ) {
     }
 
-    /**
-     * @Route("/", name="app_main_index", methods={"GET"})
-     */
+    #[Route(path: '/', name: 'app_main_index', methods: ['GET'])]
     public function index(): Response
     {
         // Last blog article
@@ -40,7 +38,6 @@ final class DefaultController extends AbstractController
             ['public' => Article::ARTICLE_IS_PUBLIC],
             ['created' => 'DESC']
         );
-
         // Last Album
         $albumEntity = $this->albumRepository->findOneBy(
             ['public' => Album::ALBUM_IS_PUBLIC],
@@ -56,9 +53,7 @@ final class DefaultController extends AbstractController
         ));
     }
 
-    /**
-     * @Route("/sitemap.{_format}", name="sitemap", requirements={"_format" = "xml"}, methods={"GET"})
-     */
+    #[Route(path: '/sitemap.{_format}', name: 'sitemap', requirements: ['_format' => 'xml'], methods: ['GET'])]
     public function sitemap(Request $request): Response
     {
         return new Response($this->twig->render(
@@ -70,9 +65,7 @@ final class DefaultController extends AbstractController
         ));
     }
 
-    /**
-     * @Route("/google-analytics", name="google-analytics", methods={"GET"})
-     */
+    #[Route(path: '/google-analytics', name: 'google-analytics', methods: ['GET'])]
     public function googleAnalytics(): Response
     {
         return new Response($this->twig->render('main/google_analytics.html.twig', [

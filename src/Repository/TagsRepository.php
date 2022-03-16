@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Repository;
@@ -15,6 +15,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * @extends ServiceEntityRepository<Tags>
+ *
  * @method Tags|null find($id, $lockMode = null, $lockVersion = null)
  * @method Tags|null findOneBy(array $criteria, array $orderBy = null)
  * @method Tags[]    findAll()

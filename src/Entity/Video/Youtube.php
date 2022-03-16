@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity\Video;
@@ -12,11 +12,7 @@ namespace App\Entity\Video;
 use App\Entity\Video;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * App\Entity\Video\Youtube.
- *
- * @ORM\Entity(repositoryClass="App\Repository\Video\YoutubeRepository")
- */
+#[ORM\Entity(repositoryClass: \App\Repository\Video\YoutubeRepository::class)]
 class Youtube extends Video implements \Stringable
 {
     final public const PATTERN_URL_VIDEO = 'https://www.youtube.com/watch?v=%s';

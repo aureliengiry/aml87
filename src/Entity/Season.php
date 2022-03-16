@@ -2,54 +2,36 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * App\Entity\Season.
- *
- * @ORM\Table(name="evenements_seasons")
- * @ORM\Entity(repositoryClass="App\Repository\SeasonRepository")
- */
+#[ORM\Table(name: 'evenements_seasons')]
+#[ORM\Entity(repositoryClass: \App\Repository\SeasonRepository::class)]
 class Season implements \Stringable
 {
     final public const SEASON_DEFAULT_DATE_START = '%s-09-01';
     final public const SEASON_DEFAULT_DATE_END = '%s-08-31';
-
     /**
      * @var int
-     *
-     * @ORM\Column(name="id_season", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id_season', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
-
-    /**
-     * @ORM\Column(name="name", type="string", length=255)
-     */
+    #[ORM\Column(name: 'name', type: 'string', length: 255)]
     private string $name;
-
-    /**
-     * @ORM\Column(name="date_start", type="datetime")
-     */
+    #[ORM\Column(name: 'date_start', type: 'datetime')]
     private \DateTime $dateStart;
-
-    /**
-     * @ORM\Column(name="date_end", type="datetime")
-     */
+    #[ORM\Column(name: 'date_end', type: 'datetime')]
     private \DateTime $dateEnd;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Evenement", mappedBy="season")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id_evenement")
-     */
+    #[ORM\OneToMany(targetEntity: 'Evenement', mappedBy: 'season')]
+    #[ORM\JoinColumn(name: 'id', referencedColumnName: 'id_evenement')]
     protected $evenements;
 
     /**
@@ -89,7 +71,6 @@ class Season implements \Stringable
     }
 
     /* ----------- EVENEMENTS ------------ */
-
     public function getEvenements()
     {
         return $this->evenements;

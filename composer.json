@@ -91,8 +91,8 @@
       "@phpstan-general",
       "@phpstan-tests"
     ],
-    "phpstan-general": "php vendor/bin/phpstan analyse -c phpstan.neon src --level 7 --no-progress",
-    "phpstan-tests": "php vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level 7 --no-progress"
+    "phpstan-general": "php vendor/bin/phpstan analyse -c phpstan.neon src --level 7 --no-progress --error-format=github",
+    "phpstan-tests": "php vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level 7 --no-progress --error-format=github"
   },
   "conflict": {
     "symfony/symfony": "*"

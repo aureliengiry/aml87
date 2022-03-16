@@ -2,55 +2,35 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * App\Entity\Link.
- *
- * @ORM\Table(name="links")
- * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
- */
+#[ORM\Table(name: 'links')]
+#[ORM\Entity(repositoryClass: \App\Repository\LinkRepository::class)]
 class Link implements \Stringable
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
-
-    /**
-     * @ORM\Column(name="title", type="string", length=255)
-     */
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
     private string $title;
-
-    /**
-     * @ORM\Column(name="url", type="string", length=255)
-     */
+    #[ORM\Column(name: 'url', type: 'string', length: 255)]
     private string $url;
-
-    /**
-     * @ORM\Column(name="description", type="text")
-     */
+    #[ORM\Column(name: 'description', type: 'text')]
     private string $description;
-
-    /**
-     * @ORM\Column(name="weight", type="integer")
-     */
+    #[ORM\Column(name: 'weight', type: 'integer')]
     private int $weight = 1;
-
-    /**
-     * @ORM\Column(name="public", type="boolean")
-     */
+    #[ORM\Column(name: 'public', type: 'boolean')]
     private bool $public;
 
     public function getId(): ?int
