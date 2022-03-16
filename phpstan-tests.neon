@@ -6,4 +6,5 @@ parameters:
         console_application_loader: build/phpstan/console-loader.php
     doctrine:
         objectManagerLoader: build/phpstan/doctrine-orm-bootstrap.php
-    checkMissingIterableValueType: false # need PHP 7.4
+    checkMissingIterableValueType: true # need PHP 7.4
+    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'

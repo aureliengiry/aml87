@@ -18,9 +18,7 @@ class MembersEditProfileController extends AbstractController
     {
     }
 
-    /**
-     * @Route("/espace-membres/edit/profile", name="members_edit_profile")
-     */
+    #[Route(path: '/espace-membres/edit/profile', name: 'members_edit_profile')]
     public function __invoke(Request $request): Response
     {
         $user = $this->getUser();

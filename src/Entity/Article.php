@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
@@ -14,90 +14,56 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * App\Entity\Article.
- *
- * @ORM\Table(name="blog_articles")
- * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
- */
+#[ORM\Table(name: 'blog_articles')]
+#[ORM\Entity(repositoryClass: \App\Repository\ArticleRepository::class)]
 class Article implements \Stringable
 {
     final public const ARTICLE_IS_PUBLIC = 1;
     final public const ARTICLE_IS_PRIVATE = 0;
 
-    /**
-     * @ORM\Column(name="id_article", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Column(name: 'id_article', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
 
-    /***
-     * @ORM\Column(name="title", type="string", length=255)
-     */
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
     private string $title = '';
 
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\UrlArticle", cascade={"all"}, fetch="EAGER")
-     * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
-     */
+    #[ORM\OneToOne(targetEntity: \App\Entity\UrlArticle::class, cascade: ['all'], fetch: 'EAGER')]
+    #[ORM\JoinColumn(name: 'id_url', referencedColumnName: 'id_url')]
     private ?UrlArticle $url = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
-     * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
-     */
+    #[ORM\OneToOne(targetEntity: \App\Entity\Image::class, cascade: ['all'])]
+    #[ORM\JoinColumn(name: 'id_media', referencedColumnName: 'id_media')]
     private ?Image $logo = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\Video\Youtube", cascade={"all"})
-     * @ORM\JoinColumn(name="id_video", referencedColumnName="id_video")
-     */
+    #[ORM\OneToOne(targetEntity: \App\Entity\Video\Youtube::class, cascade: ['all'])]
+    #[ORM\JoinColumn(name: 'id_video', referencedColumnName: 'id_video')]
     private ?Youtube $video = null;
 
-    /**
-     * @ORM\Column(name="body", type="text")
-     */
+    #[ORM\Column(name: 'body', type: 'text')]
     private string $body;
 
-    /**
-     * @ORM\Column(name="created", type="datetime")
-     */
-    private \DateTime $created;
+    #[ORM\Column(name: 'created', type: 'datetime')]
+    private readonly \DateTime $created;
 
-    /**
-     * @ORM\Column(name="updated", type="datetime")
-     */
+    #[ORM\Column(name: 'updated', type: 'datetime')]
     private \DateTime $updated;
 
-    /**
-     * @ORM\Column(name="published", type="datetime", nullable=true)
-     */
+    #[ORM\Column(name: 'published', type: 'datetime', nullable: true)]
     private ?\DateTime $published = null;
 
-    /**
-     * @ORM\Column(name="public", type="boolean")
-     */
+    #[ORM\Column(name: 'public', type: 'boolean')]
     private bool $public;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
-     * @ORM\JoinColumn(name="id_category", referencedColumnName="id_category")
-     */
+    #[ORM\ManyToOne(targetEntity: 'Category', inversedBy: 'articles')]
+    #[ORM\JoinColumn(name: 'id_category', referencedColumnName: 'id_category')]
     private ?Category $category = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Tags", mappedBy="articles", cascade={"all"})
-     *
-     * @var Tags[]
-     */
+    #[ORM\ManyToMany(targetEntity: 'Tags', mappedBy: 'articles', cascade: ['all'])]
     private Collection $tags;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Evenement", mappedBy="articles", cascade={"all"})
-     *
-     * @var Evenement[]
-     */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Evenement::class, mappedBy: 'articles', cascade: ['all'])]
     private Collection $evenements;
 
     public function __construct()

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Controller;
@@ -19,15 +19,12 @@ use Twig\Environment;
 
 /**
  * Page controller.
- *
- * @Route("/")
  */
+#[Route(path: '/')]
 final class PageController extends AbstractController
 {
-    /**
-     * @Route("/page/{page}", name="page_show", methods={"GET"})
-     * @Route("/{page}.html", name="page_show_rewrite", methods={"GET"})
-     */
+    #[Route(path: '/page/{page}', name: 'page_show', methods: ['GET'])]
+    #[Route(path: '/{page}.html', name: 'page_show_rewrite', methods: ['GET'])]
     public function index(Request $request, $page, Environment $twig, PageRepository $pageRepository): Response
     {
         if (is_numeric($page)) {
@@ -38,11 +35,9 @@ final class PageController extends AbstractController
         } else {
             $entity = $pageRepository->getPublicPageByUrlKey($page);
         }
-
         if ( ! $entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
         }
-
         $request->attributes->set('label', $entity->getTitle());
 
         return new Response($twig->render('page/index.html.twig', [

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
@@ -14,74 +14,48 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Message.
- *
- * @ORM\Table(name="contact_us_messages")
- * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
  */
+#[ORM\Table(name: 'contact_us_messages')]
+#[ORM\Entity(repositoryClass: \App\Repository\MessageRepository::class)]
 class Message implements \Stringable
 {
     final public const MESSAGE_STATUS_SAVE = 1;
     final public const MESSAGE_STATUS_SAVE_SEND = 2;
     /**
      * @var int
-     *
-     * @ORM\Column(name="id_message", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id_message', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     * @Assert\Length(max=255)
-     * @ORM\Column(name="name", type="string", length=255)
-     */
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(name: 'name', type: 'string', length: 255)]
     private string $name = '';
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     * @Assert\Type("string")
-     * @Assert\Length(max=255)
-     * @ORM\Column(name="email", type="string", length=255)
-     */
+    #[Assert\NotBlank]
+    #[Assert\Email]
+    #[Assert\Type('string')]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(name: 'email', type: 'string', length: 255)]
     private string $email = '';
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     * @Assert\Length(max=255)
-     * @ORM\Column(name="subject", type="string", length=255)
-     */
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    #[Assert\Length(max: 255)]
+    #[ORM\Column(name: 'subject', type: 'string', length: 255)]
     private string $subject = '';
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     * @Assert\Length(min=10, max=1000)
-     * @ORM\Column(name="body", type="text")
-     */
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    #[Assert\Length(min: 10, max: 1000)]
+    #[ORM\Column(name: 'body', type: 'text')]
     private string $body = '';
-
-    /**
-     * @ORM\Column(name="address_ip", type="string", length=255)
-     */
+    #[ORM\Column(name: 'address_ip', type: 'string', length: 255)]
     private string $addressIp;
-
-    /**
-     * @ORM\Column(name="status", type="smallint")
-     */
+    #[ORM\Column(name: 'status', type: 'smallint')]
     private int $status = 0;
-
-    /**
-     * @ORM\Column(name="created", type="datetime")
-     */
+    #[ORM\Column(name: 'created', type: 'datetime')]
     private \DateTime $created;
-
-    /**
-     * @ORM\Column(name="spam", type="boolean")
-     */
+    #[ORM\Column(name: 'spam', type: 'boolean')]
     private bool $spam = false;
 
     public function __construct()

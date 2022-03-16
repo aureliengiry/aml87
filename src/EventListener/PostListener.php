@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\EventListener;
@@ -23,8 +23,7 @@ class PostListener implements EventSubscriberInterface
         private readonly MailerInterface $mailer,
         private readonly EntityManagerInterface $entityManager,
         private readonly string $subscribers
-    )
-    {
+    ) {
     }
 
     /**

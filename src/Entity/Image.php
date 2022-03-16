@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
@@ -14,35 +14,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * App\Entity\Image.
- *
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
- */
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: \App\Repository\ImageRepository::class)]
 class Image extends Media
 {
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\Album", mappedBy="image")
-     */
+    #[ORM\OneToOne(targetEntity: \App\Entity\Album::class, mappedBy: 'image')]
     protected ?Album $album = null;
-
-    /**
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     mimeTypes = {"image/jpeg","image/gif","image/png"},
-     *     mimeTypesMessage = "L'image choisie jjj ne correspond pas à un type de fichier valide",
-     *     notFoundMessage = "L'image n'a pas été trouvée sur le disque",
-     *     uploadErrorMessage = "Erreur dans l'upload de l'image"
-     * )
-     */
+    #[Assert\File(maxSize: '2M', mimeTypes: ['image/jpeg', 'image/gif', 'image/png'], mimeTypesMessage: "L'image choisie jjj ne correspond pas à un type de fichier valide", notFoundMessage: "L'image n'a pas été trouvée sur le disque", uploadErrorMessage: "Erreur dans l'upload de l'image")]
     private $file;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected ?string $path = null;
-
     private ?string $filenameForRemove = null;
 
     public function getType(): array
@@ -92,10 +73,8 @@ class Image extends Media
         return '/uploads/images';
     }
 
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function preUpload(): void
     {
         if (null !== $this->file) {
@@ -106,21 +85,17 @@ class Image extends Media
         }
     }
 
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
+    #[ORM\PostPersist]
+    #[ORM\PostUpdate]
     public function upload(): void
     {
         if (null === $this->file) {
             return;
         }
-
         // vous devez lancer une exception ici si le fichier ne peut pas
         // être déplacé afin que l'entité ne soit pas persistée dans la
         // base de données comme le fait la méthode move() de UploadedFile
         $this->file->move($this->getUploadRootDir(), $this->path);
-
         unset($this->file);
     }
 
@@ -129,17 +104,13 @@ class Image extends Media
         return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
 
-    /**
-     * @ORM\PreRemove()
-     */
+    #[ORM\PreRemove]
     public function storeFilenameForRemove(): void
     {
         $this->filenameForRemove = $this->getAbsolutePath();
     }
 
-    /**
-     * @ORM\PostRemove()
-     */
+    #[ORM\PostRemove]
     public function removeUpload(): void
     {
         if ($this->filenameForRemove && true === file_exists($this->filenameForRemove)) {

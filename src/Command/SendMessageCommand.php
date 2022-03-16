@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Command;
@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class SendMessageCommand extends Command
 {
-    private ?int $messageId = null;
+    private int $messageId;
 
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
@@ -57,7 +57,7 @@ class SendMessageCommand extends Command
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->messageId = $input->getArgument('id-message');
+        $this->messageId = (int) $input->getArgument('id-message');
     }
 
     /**
@@ -69,7 +69,7 @@ class SendMessageCommand extends Command
 
         // Load contact message
         $message = $this->messageRepo->find($this->messageId);
-        if ( ! $message) {
+        if (null === $message) {
             throw new NotFoundHttpException('Unable to find message with id: '.$this->messageId);
         }
 
@@ -80,6 +80,6 @@ class SendMessageCommand extends Command
 
         $output->writeln('<info>Send Message : End</info>');
 
-        return 0;
+        return O;
     }
 }

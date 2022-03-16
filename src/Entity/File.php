@@ -2,39 +2,26 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
 
+use App\Repository\FileRepository;
 use App\Utils\Slugger;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * App\Entity\File.
- *
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="App\Repository\FileRepository")
- */
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: FileRepository::class)]
 class File extends Media
 {
-    /**
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Le fichier choisi ne correspond pas à un type de fichier valide",
-     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
-     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
-     * )
-     */
+    #[Assert\File(maxSize: '2M', mimeTypes: ['application/pdf', 'application/x-pdf'], mimeTypesMessage: 'Le fichier choisi ne correspond pas à un type de fichier valide', notFoundMessage: "Le fichier n'a pas été trouvé sur le disque", uploadErrorMessage: "Erreur dans l'upload du fichier")]
     private $file;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected ?string $path = null;
 
     // propriété utilisé temporairement pour la suppression
@@ -102,10 +89,8 @@ class File extends Media
         return 'uploads/documents';
     }
 
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function preUpload(): void
     {
         if (null !== $this->file) {
@@ -116,35 +101,27 @@ class File extends Media
         }
     }
 
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
+    #[ORM\PostPersist]
+    #[ORM\PostUpdate]
     public function upload(): void
     {
         if (null === $this->file) {
             return;
         }
-
         // vous devez lancer une exception ici si le fichier ne peut pas
         // être déplacé afin que l'entité ne soit pas persistée dans la
         // base de données comme le fait la méthode move() de UploadedFile
         $this->file->move($this->getUploadRootDir(), $this->path);
-
         unset($this->file);
     }
 
-    /**
-     * @ORM\PreRemove()
-     */
+    #[ORM\PreRemove]
     public function storeFilenameForRemove(): void
     {
         $this->filenameForRemove = $this->getAbsolutePath();
     }
 
-    /**
-     * @ORM\PostRemove()
-     */
+    #[ORM\PostRemove]
     public function removeUpload(): void
     {
         if ($this->filenameForRemove && true === file_exists($this->filenameForRemove)) {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
@@ -13,52 +13,30 @@ use App\Utils\Slugger;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * App\Entity\Tags.
- *
- * @ORM\Table(name="blog_tags")
- * @ORM\Entity(repositoryClass="App\Repository\TagsRepository")
- */
+#[ORM\Table(name: 'blog_tags')]
+#[ORM\Entity(repositoryClass: \App\Repository\TagsRepository::class)]
 class Tags implements \Stringable
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id_tag", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id_tag', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Article", inversedBy="tags")
-     * @ORM\JoinTable(name="blog_articles_tags",
-     *        joinColumns={@ORM\JoinColumn(name="id_tag", referencedColumnName="id_tag")},
-     *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
-     * )
-     */
+    #[ORM\ManyToMany(targetEntity: 'Article', inversedBy: 'tags')]
+    #[ORM\JoinTable(name: 'blog_articles_tags', joinColumns: [new ORM\JoinColumn(name: 'id_tag', referencedColumnName: 'id_tag')], inverseJoinColumns: [new ORM\JoinColumn(name: 'id_article', referencedColumnName: 'id_article')])]
     protected $articles;
-
-    /**
-     * @ORM\Column(name="system_name", type="string", length=255)
-     */
+    #[ORM\Column(name: 'system_name', type: 'string', length: 255)]
     private string $systemName;
-
-    /**
-     * @ORM\Column(name="name", type="string", length=255)
-     */
+    #[ORM\Column(name: 'name', type: 'string', length: 255)]
     private string $name;
-
-    /**
-     * @ORM\Column(name="weight", type="smallint", nullable=true)
-     */
+    #[ORM\Column(name: 'weight', type: 'smallint', nullable: true)]
     private int $weight = 0;
-
     /**
      * @var string description
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
      */
+    #[ORM\Column(name: 'description', type: 'text', nullable: true)]
     private string $description = '';
 
     public function __construct()

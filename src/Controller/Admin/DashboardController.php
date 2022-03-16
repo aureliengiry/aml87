@@ -91,9 +91,7 @@ class DashboardController extends AbstractDashboardController
             ]);
     }
 
-    /**
-     * @Route("/admin")
-     */
+    #[Route(path: '/admin')]
     public function index(): Response
     {
         return parent::index();

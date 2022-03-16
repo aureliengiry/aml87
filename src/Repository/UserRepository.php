@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Repository;
@@ -15,6 +15,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
+ * @extends ServiceEntityRepository<User>
+ *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User[]    findAll()
@@ -27,7 +29,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
         parent::__construct($registry, User::class);
     }
 
-    public function loadUserByUsername($username)
+    public function loadUserByUsername(string $username)
     {
         return $this->createQueryBuilder('u')
             ->where('u.username = :username OR u.email = :email')

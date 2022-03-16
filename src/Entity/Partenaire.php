@@ -2,189 +2,116 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Partenaire.
- *
- * @ORM\Table(name="partenaires")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="App\Repository\PartenaireRepository")
- */
+#[ORM\Table(name: 'partenaires')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: \App\Repository\PartenaireRepository::class)]
 class Partenaire implements \Stringable
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_partenaire", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Column(name: 'id_partenaire', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(name="name", type="string", length=255)
-     */
+    #[ORM\Column(name: 'name', type: 'string', length: 255)]
     private string $name;
 
-    /**
-     * @ORM\Column(name="url", type="string", length=255)
-     */
+    #[ORM\Column(name: 'url', type: 'string', length: 255)]
     private string $url;
 
-    /**
-     * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
-     * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
-     */
-    private $logo;
+    #[ORM\OneToOne(targetEntity: \App\Entity\Image::class, cascade: ['all'])]
+    #[ORM\JoinColumn(name: 'id_media', referencedColumnName: 'id_media')]
+    private Image $logo;
 
-    /**
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private string $description;
+    #[ORM\Column(name: 'description', type: 'text', nullable: true)]
+    private ?string $description = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Evenement", inversedBy="partenaires")
-     * @ORM\JoinTable(name="evenements_partenaires",
-     *        joinColumns={@ORM\JoinColumn(name="id_partenaire", referencedColumnName="id_partenaire")},
-     *        inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}
-     * )
-     */
-    protected $evenements;
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Evenement::class, inversedBy: 'partenaires')]
+    #[ORM\JoinTable(name: 'evenements_partenaires', joinColumns: [new ORM\JoinColumn(name: 'id_partenaire', referencedColumnName: 'id_partenaire')], inverseJoinColumns: [new ORM\JoinColumn(name: 'id_evenement', referencedColumnName: 'id_evenement')])]
+    protected Collection $evenements;
 
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
     }
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return Partenaire
-     */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name.
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * Set url.
-     *
-     * @param string $url
-     *
-     * @return Partenaire
-     */
-    public function setUrl($url)
+    public function setUrl(string $url): self
     {
         $this->url = $url;
 
         return $this;
     }
 
-    /**
-     * Get url.
-     *
-     * @return string
-     */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
 
-    /**
-     * Set logo.
-     *
-     * @param string $logo
-     *
-     * @return Partenaire
-     */
-    public function setLogo($logo)
+    public function setLogo($logo): self
     {
         $this->logo = $logo;
 
         return $this;
     }
 
-    /**
-     * Get logo.
-     *
-     * @return string
-     */
-    public function getLogo()
+    public function getLogo(): Image
     {
         return $this->logo;
     }
 
-    /**
-     * Set description.
-     *
-     * @param string $description
-     *
-     * @return Partenaire
-     */
-    public function setDescription($description)
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * Get description.
-     *
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
-    public function getEvenements()
+    public function getEvenements(): Collection
     {
         return $this->evenements;
     }
 
-    public function setEvenements($evenements)
+    public function setEvenements(Collection $evenements): self
     {
         $this->evenements = $evenements;
 
         return $this;
     }
 
-    public function addEvenement($evenement): void
+    public function addEvenement(Evenement $evenement): void
     {
         $this->evenements[] = $evenement;
     }
@@ -192,7 +119,7 @@ class Partenaire implements \Stringable
     /**
      * Fonction pour supprimer une discussion d'un mot clé.
      */
-    public function removeEvenement($evenement): void
+    public function removeEvenement(Evenement $evenement): void
     {
         $this->evenements->removeElement($evenement);
     }

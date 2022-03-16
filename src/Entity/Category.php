@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
@@ -14,40 +14,26 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * App\Entity\Category.
- *
- * @ORM\Table(name="blog_categories")
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
- */
+#[ORM\Table(name: 'blog_categories')]
+#[ORM\Entity(repositoryClass: \App\Repository\CategoryRepository::class)]
 class Category implements \Stringable
 {
-    /**
-     * @ORM\Column(name="id_category",type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Column(name: 'id_category', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(name="system_name", type="string", length=255, unique=true)
-     */
+    #[ORM\Column(name: 'system_name', type: 'string', length: 255, unique: true)]
     private string $systemName;
 
-    /**
-     * @ORM\Column(name="name", type="string", length=255)
-     */
+    #[ORM\Column(name: 'name', type: 'string', length: 255)]
     private string $name;
 
-    /**
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
+    #[ORM\Column(name: 'description', type: 'text', nullable: true)]
     private ?string $description = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
-     * @ORM\JoinColumn(name="id", referencedColumnName="id_article")
-     */
+    #[ORM\OneToMany(targetEntity: 'Article', mappedBy: 'category')]
+    #[ORM\JoinColumn(name: 'id', referencedColumnName: 'id_article')]
     private Collection $articles;
 
     public function __construct()

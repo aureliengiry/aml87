@@ -2,66 +2,43 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * App\Entity\Page.
- *
- * @ORM\Table(name="pages")
- * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
- */
+#[ORM\Table(name: 'pages')]
+#[ORM\Entity(repositoryClass: \App\Repository\PageRepository::class)]
 class Page implements \Stringable
 {
     final public const PAGE_IS_PUBLIC = 1;
     final public const PAGE_IS_PRIVATE = 0;
-
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
-
-    /**
-     * @ORM\Column(name="title", type="string", length=255)
-     */
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
     private string $title;
-
-    /**
-     * @ORM\Column(name="body", type="text")
-     */
+    #[ORM\Column(name: 'body', type: 'text')]
     private string $body;
-
-    /**
-     * @ORM\Column(name="created", type="datetime")
-     */
+    #[ORM\Column(name: 'created', type: 'datetime')]
     private \DateTime $created;
-
-    /**
-     * @ORM\Column(name="updated", type="datetime")
-     */
+    #[ORM\Column(name: 'updated', type: 'datetime')]
     private \DateTime $updated;
-
-    /**
-     * @ORM\Column(name="public", type="boolean")
-     */
+    #[ORM\Column(name: 'public', type: 'boolean')]
     private bool $public;
-
     /**
      * @var UrlPage url
-     *
-     * @ORM\OneToOne(targetEntity="\App\Entity\UrlPage", cascade={"all"})
-     * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
+    #[ORM\OneToOne(targetEntity: \App\Entity\UrlPage::class, cascade: ['all'])]
+    #[ORM\JoinColumn(name: 'id_url', referencedColumnName: 'id_url')]
     private \App\Entity\UrlPage $url;
 
     /**

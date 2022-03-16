@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
+ * (c) Aurélien GIRY <aurelien.giry@gmail.com>.
  */
 
 namespace App\Entity;
@@ -13,40 +13,26 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Track.
- *
- * @ORM\Table(name="discography_tracks")
- * @ORM\Entity(repositoryClass="App\Repository\TrackRepository")
  */
+#[ORM\Table(name: 'discography_tracks')]
+#[ORM\Entity(repositoryClass: \App\Repository\TrackRepository::class)]
 class Track implements \Stringable
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id_track", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id_track', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
-
-    /**
-     * @ORM\Column(name="number", type="smallint")
-     */
+    #[ORM\Column(name: 'number', type: 'smallint')]
     private int $number;
-
-    /**
-     * @ORM\Column(name="title", type="string", length=255)
-     */
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
     private string $title;
-
-    /**
-     * @ORM\Column(name="composer", type="string", length=255)
-     */
+    #[ORM\Column(name: 'composer', type: 'string', length: 255)]
     private string $composer;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Album", inversedBy="tracks")
-     * @ORM\JoinColumn(name="id_album", referencedColumnName="id_album")
-     */
+    #[ORM\ManyToOne(targetEntity: 'Album', inversedBy: 'tracks')]
+    #[ORM\JoinColumn(name: 'id_album', referencedColumnName: 'id_album')]
     private Album $album;
 
     public function getId(): ?int
