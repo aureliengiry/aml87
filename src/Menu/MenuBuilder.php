@@ -97,7 +97,7 @@ class MenuBuilder
                     ->setLabel($currentRequest->get('label'));
                 break;
 
-            /* ----- Blog ----- */
+                /* ----- Blog ----- */
             case 'blog':
                 $menu
                     ->addChild('Blog')
@@ -111,7 +111,7 @@ class MenuBuilder
                     ->setLabel($currentRequest->get('label'));
                 break;
 
-            /* ----- Page ----- */
+                /* ----- Page ----- */
             case 'page_show':
             case 'page_show_rewrite':
                 $menu
@@ -119,7 +119,7 @@ class MenuBuilder
                     ->setCurrent(true)
                     ->setLabel($currentRequest->get('label'));
                 break;
-            /* ----- Discography ----- */
+                /* ----- Discography ----- */
             case 'discography':
                 $menu
                     ->addChild('Discographie')
@@ -133,7 +133,7 @@ class MenuBuilder
                     ->setCurrent(true)
                     ->setLabel($currentRequest->get('label'));
                 break;
-            /* ----- Contact us ----- */
+                /* ----- Contact us ----- */
             case 'aml_contactus_default_index':
                 $menu
                     ->addChild('Contactez-nous')

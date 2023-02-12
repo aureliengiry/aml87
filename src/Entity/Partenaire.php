@@ -16,17 +16,19 @@ use Doctrine\ORM\Mapping as ORM;
  * Partenaire.
  *
  * @ORM\Table(name="partenaires")
+ *
  * @ORM\HasLifecycleCallbacks
+ *
  * @ORM\Entity(repositoryClass="App\Repository\PartenaireRepository")
  */
 class Partenaire implements \Stringable
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id_partenaire", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
@@ -42,9 +44,10 @@ class Partenaire implements \Stringable
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
+     *
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
-    private $logo;
+    private ?\App\Entity\Image $logo = null;
 
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -53,12 +56,15 @@ class Partenaire implements \Stringable
 
     /**
      * @ORM\ManyToMany(targetEntity="\App\Entity\Evenement", inversedBy="partenaires")
+     *
      * @ORM\JoinTable(name="evenements_partenaires",
      *        joinColumns={@ORM\JoinColumn(name="id_partenaire", referencedColumnName="id_partenaire")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")}
      * )
+     *
+     * @var \Doctrine\Common\Collections\Collection<\App\Entity\Evenement>
      */
-    protected $evenements;
+    protected \Doctrine\Common\Collections\Collection $evenements;
 
     public function __construct()
     {
@@ -67,10 +73,8 @@ class Partenaire implements \Stringable
 
     /**
      * Get id.
-     *
-     * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -78,11 +82,9 @@ class Partenaire implements \Stringable
     /**
      * Set name.
      *
-     * @param string $name
-     *
      * @return Partenaire
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -91,10 +93,8 @@ class Partenaire implements \Stringable
 
     /**
      * Get name.
-     *
-     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -102,11 +102,9 @@ class Partenaire implements \Stringable
     /**
      * Set url.
      *
-     * @param string $url
-     *
      * @return Partenaire
      */
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
 
@@ -115,10 +113,8 @@ class Partenaire implements \Stringable
 
     /**
      * Get url.
-     *
-     * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -150,11 +146,9 @@ class Partenaire implements \Stringable
     /**
      * Set description.
      *
-     * @param string $description
-     *
      * @return Partenaire
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
 
@@ -163,10 +157,8 @@ class Partenaire implements \Stringable
 
     /**
      * Get description.
-     *
-     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }

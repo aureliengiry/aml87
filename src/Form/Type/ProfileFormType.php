@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ProfileFormType extends AbstractType
 {
-    public function getName()
+    public function getName(): string
     {
         return 'aml_user_profile';
     }

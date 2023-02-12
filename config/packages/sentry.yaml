@@ -6,3 +6,7 @@ sentry:
 #      - 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
 #      - 'Symfony\Component\HttpKernel\Exception\BadRequestHttpException'
 #      - 'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException'
+
+when@prod:
+    sentry:
+        dsn: '%env(SENTRY_DSN)%'

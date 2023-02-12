@@ -10,17 +10,13 @@
 /var/sessions/*
 !var/sessions/.gitkeep
 
-
 # Managed by Composer
 /var/bootstrap.php.cache
 /bin/*
 !bin/console
 !bin/symfony_requirements
-/vendor/
 
 # Assets and user uploads
-/public/bundles/
-!public/bundles/.gitkeep
 /public/uploads/
 !public/uploads/documents/.gitkeep
 !public/uploads/music/.gitkeep
@@ -32,20 +28,23 @@
 /public/build/
 !public/build/.gitkeep
 
-# node modules
-/node_modules
-
 # Docker
-/docker-env
-/docker-compose.yml
-/Makefile
+docker-env
+docker-compose.yaml
+docker-compose.override.yaml
+docker-compose.yaml.previous
+docker-compose.override.yaml.previous
+Makefile
+
 ###> symfony/framework-bundle ###
 /.env
+/public/bundles
 /public/bundles/*
 !public/bundles/.gitkeep
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 npm-debug.log
@@ -63,9 +62,3 @@ yarn-error.log
 ###< symfony/phpunit-bridge ###
 
 /.vscode
-
-
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###

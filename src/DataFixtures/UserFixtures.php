@@ -16,7 +16,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
+    /**
+     * @var string
+     */
     final public const ADMIN_USER = 'admin';
+
+    /**
+     * @var string
+     */
     final public const SIMPLE_USER = 'simple-user';
 
     public function __construct(private readonly UserPasswordHasherInterface $passwordEncoder)

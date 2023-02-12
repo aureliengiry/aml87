@@ -17,8 +17,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
  *
  * @ORM\Table(name="mediasbundle_medias")
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name="type", type="string")
+ *
  * @ORM\DiscriminatorMap({
  *     "file" = "File",
  *     "image" = "Image",
@@ -29,8 +32,10 @@ abstract class Media implements \Stringable
 {
     /**
      * @ORM\Column(name="id_media", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     protected ?int $id = null;
 
@@ -59,20 +64,21 @@ abstract class Media implements \Stringable
     protected function renameIfFileExist(string $name): string
     {
         $filename = $this->getUploadRootDir().'/'.$name;
-        if (true === file_exists($filename)) {
+        if (file_exists($filename)) {
             $nameExplode = explode('.', $name);
             $nameFile = $nameExplode[0];
             $extension = $nameExplode[1];
 
             $fileExist = true;
             $count = 1;
-            while (true === $fileExist) {
+            while ($fileExist) {
                 $name = $nameFile.'_'.$count.'.'.$extension;
                 $filename = $this->getUploadRootDir().'/'.$name;
-                if (false === file_exists($filename)) {
+                if ( ! file_exists($filename)) {
                     $fileExist = false;
                     break;
                 }
+
                 ++$count;
             }
         }

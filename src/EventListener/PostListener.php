@@ -23,8 +23,7 @@ class PostListener implements EventSubscriberInterface
         private readonly MailerInterface $mailer,
         private readonly EntityManagerInterface $entityManager,
         private readonly string $subscribers
-    )
-    {
+    ) {
     }
 
     /**
@@ -43,7 +42,7 @@ class PostListener implements EventSubscriberInterface
 
         $formatedMessage = $this->formatMessage($post);
 
-        if ( ! empty($this->subscribers)) {
+        if ('' !== $this->subscribers) {
             foreach (explode(',', $this->subscribers) as $subscriber) {
                 $mail = (new Email())
                     ->subject($formatedMessage['subject'])
@@ -63,17 +62,15 @@ class PostListener implements EventSubscriberInterface
 
     /**
      * Function to format email.
+     *
+     * @return array{subject: string, body: string}
      */
     private function formatMessage(Message $post): array
     {
-        $message = [];
+        return ['subject' => 'AML87 - '.$post->getName().' cherche à vous contacter', 'body' => 'Bonjour,
 
-        $message['subject'] = 'AML87 - '.$post->getName().' cherche à vous contacter';
-        $message['body'] = 'Bonjour,'."\n\n"
+'
             .$post->getName().'('.$post->getEmail(
-            ).') vous ecrit par l\'intermediaire du formulaire de contact : '."\n\n"
-            .$post->getBody();
-
-        return $message;
+            ).") vous ecrit par l'intermediaire du formulaire de contact : \n\n".$post->getBody()];
     }
 }

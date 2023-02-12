@@ -19,15 +19,12 @@ use Twig\Environment;
 
 /**
  * Page controller.
- *
- * @Route("/")
  */
+#[Route(path: '/')]
 final class PageController extends AbstractController
 {
-    /**
-     * @Route("/page/{page}", name="page_show", methods={"GET"})
-     * @Route("/{page}.html", name="page_show_rewrite", methods={"GET"})
-     */
+    #[Route(path: '/page/{page}', name: 'page_show', methods: ['GET'])]
+    #[Route(path: '/{page}.html', name: 'page_show_rewrite', methods: ['GET'])]
     public function index(Request $request, $page, Environment $twig, PageRepository $pageRepository): Response
     {
         if (is_numeric($page)) {

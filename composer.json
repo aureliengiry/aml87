@@ -63,7 +63,7 @@
     "phpstan/phpstan-phpunit": "^1.0",
     "phpstan/phpstan-symfony": "^1.0",
     "phpunit/phpunit": "^9.5",
-    "rector/rector": "^0.12.9",
+    "rector/rector": "^0.17.1",
     "roave/security-advisories": "dev-master",
     "spatie/phpunit-watcher": "^1.23",
     "symfony/browser-kit": "*",
@@ -75,8 +75,7 @@
   },
   "scripts": {
     "auto-scripts": {
-      "cache:clear --no-warmup": "symfony-cmd",
-      "cache:warmup": "symfony-cmd",
+      "cache:clear": "symfony-cmd",
       "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd"
     },
     "post-install-cmd": [
@@ -109,12 +108,13 @@
       "*": "dist"
     },
     "platform": {
-      "php": "8.1"
+      "php": "8.2"
     },
     "sort-packages": true,
     "allow-plugins": {
       "phpstan/extension-installer": true,
       "symfony/flex": true,
+      "composer/package-versions-deprecated": true,
       "php-http/discovery": true
     }
   }

@@ -20,22 +20,23 @@ class SubstringExtension extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('substring', [$this, 'substringFilter']),
+            new TwigFilter('substring', $this->substringFilter(...)),
         ];
     }
 
     /**
      * réduit une chaine de caractères sans couper les mots.
      *
-     * @param string $longString chaine de caractères à réduire
-     * @param int    $nbChar     nombre de caractères à afficher
-     * @param string $endString  chaine de caractères terminant la chaine réduite (par défaut '[...]')
+     * @param string      $longString chaine de caractères à réduire
+     * @param int|null    $nbChar     nombre de caractères à afficher
+     * @param string|null $endString  chaine de caractères terminant la chaine réduite (par défaut '[...]')
      *
      * @return string chaine réduite
      */
     public function substringFilter(string $longString, ?int $nbChar = 10, ?string $endString = '[...]'): string
     {
-        $substring = $tmpString = '';
+        $substring = '';
+        $tmpString = '';
         $tmpArray = [];
         if (mb_strlen($longString) > $nbChar) {
             $tmpString = wordwrap($longString, $nbChar, '#@@#', false);

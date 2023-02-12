@@ -1,0 +1,33 @@
+## traefik.yml
+global:
+  sendAnonymousUsage: false
+
+# Docker configuration backend
+providers:
+  docker:
+    defaultRule: "Host(`{{ trimPrefix `/` .Name }}.docker.localhost`)"
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    network: aml87_webgateway
+
+
+# API and dashboard configuration
+api:
+  dashboard: true
+  insecure: true
+
+log:
+  level: DEBUG
+accessLog: {}
+
+entryPoints:
+  http:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: https
+          scheme: https
+  https:
+    address: ":443"
+

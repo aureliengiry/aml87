@@ -89,7 +89,7 @@ class SeasonsCommand extends Command
 
             // Check current season of event
             $eventHasSeason = $event->hasSeason();
-            if (true === $eventHasSeason) {
+            if ($eventHasSeason) {
                 // Check if it's good season or not
                 if ($event->getSeason() !== $estimateSeason) {
                     // if it's wrong update
@@ -107,9 +107,10 @@ class SeasonsCommand extends Command
     protected function calculateSeason(\DateTime $eventDateStart): Season
     {
         $estimateSeason = $this->seasonRepo->getSeasonByDateStart($eventDateStart);
-        if ($estimateSeason) {
+        if ($estimateSeason instanceof \App\Entity\Season) {
             return $estimateSeason;
         }
+
         $defaultDateStart = Season::SEASON_DEFAULT_DATE_START;
         $eventDateStartYear = (int) $eventDateStart->format('Y');
         $testDateStart = sprintf($defaultDateStart, $eventDateStartYear);
@@ -137,8 +138,9 @@ class SeasonsCommand extends Command
             if ($seasonDateEnd) {
                 $seasonDateEnd->setTime(0, 0);
             }
+
             // Build season name
-            $seasonName = "Saison $seasonDateStartYear/$seasonDateEndYear";
+            $seasonName = sprintf('Saison %d/%d', $seasonDateStartYear, $seasonDateEndYear);
         } else {
             // Build Season Date Start
             $seasonDateStart = $testDateTime;
@@ -155,7 +157,7 @@ class SeasonsCommand extends Command
             }
 
             // Build season name
-            $seasonName = "Saison $seasonDateStartYear/$seasonDateEndYear";
+            $seasonName = sprintf('Saison %d/%d', $seasonDateStartYear, $seasonDateEndYear);
         }
 
         // Create new Season

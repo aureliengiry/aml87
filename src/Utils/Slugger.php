@@ -9,6 +9,9 @@ declare(strict_types=1);
 
 namespace App\Utils;
 
+/**
+ * @see \App\Tests\Utils\SluggerTest
+ */
 class Slugger
 {
     protected string $outputString = '';
@@ -136,7 +139,7 @@ class Slugger
      *
      * @return mixed|string
      */
-    public function slugify(string $str, string $replace = '-', bool $lowercase = true)
+    public function slugify(string $str, string $replace = '-', bool $lowercase = true): string
     {
         $this->outputString = $str;
 
@@ -159,7 +162,7 @@ class Slugger
             $this->outputString = preg_replace('#'.$key.'#i', $val, $this->outputString);
         }
 
-        if (true === $lowercase) {
+        if ($lowercase) {
             $this->outputString = mb_strtolower($this->outputString);
         }
 

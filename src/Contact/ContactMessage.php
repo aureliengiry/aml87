@@ -31,7 +31,7 @@ class ContactMessage
         $this->entityManager->persist($message);
         $this->entityManager->flush();
 
-        if (false === $message->isSpam()) {
+        if ( ! $message->isSpam()) {
             $this->eventDispatcher->dispatch(new MessageSaved($message));
         }
     }

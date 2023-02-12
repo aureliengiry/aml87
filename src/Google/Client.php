@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace App\Google;
 
-use Google_Client;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -17,7 +16,7 @@ use Psr\Log\LoggerInterface;
  */
 class Client
 {
-    private ?Google_Client $client = null;
+    private ?\Google_Client $client = null;
 
     /**
      * Client constructor.
@@ -28,22 +27,20 @@ class Client
 
     /**
      * Init Google client.
-     *
-     * @return Google_Client
      */
-    public function get()
+    public function get(): ?\Google_Client
     {
         try {
-            $this->client = new Google_Client();
+            $this->client = new \Google_Client();
             $this->client->setApplicationName($this->googleAppName);
             $this->client->setDeveloperKey($this->googleDevKey);
 
             $this->logger->debug('GOOGLE CLIENT INIT : Success ');
 
             return $this->client;
-        } catch (\Exception $e) {
-            $this->logger->error('GOOGLE CLIENT INIT ERROR : '.$e->getMessage());
-            throw $e;
+        } catch (\Exception $exception) {
+            $this->logger->error('GOOGLE CLIENT INIT ERROR : '.$exception->getMessage());
+            throw $exception;
         }
     }
 }

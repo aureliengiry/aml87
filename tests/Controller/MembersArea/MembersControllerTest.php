@@ -20,6 +20,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class MembersControllerTest extends WebTestCase
 {
     private ?KernelBrowser $client = null;
+
     private ?UserRepository $userRepository = null;
 
     protected function setUp(): void

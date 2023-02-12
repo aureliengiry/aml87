@@ -12,7 +12,7 @@ App\Entity\Tags:
 
 App\Entity\Article:
     article_{1..50}:
-        title: <text(50)>
+        title: <text(25)>
         body: <text(500)>
         updated: '<dateTime()>'
         published: '<dateTimeBetween($updated, "now")>'

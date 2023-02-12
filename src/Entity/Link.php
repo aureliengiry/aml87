@@ -15,16 +15,17 @@ use Doctrine\ORM\Mapping as ORM;
  * App\Entity\Link.
  *
  * @ORM\Table(name="links")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
  */
 class Link implements \Stringable
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 

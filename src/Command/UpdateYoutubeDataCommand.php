@@ -23,7 +23,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateYoutubeDataCommand extends Command
 {
+    /**
+     * @var string
+     */
     final public const YOUTUBE_STATUS_PUBLIC = 'public';
+
+    /**
+     * @var string
+     */
     final public const YOUTUBE_STATUS_UNLISTED = 'unlisted';
 
     private bool $debug = false;
@@ -101,13 +108,14 @@ class UpdateYoutubeDataCommand extends Command
                         ++$compteurVideo;
                     }
                 }
+
                 $this->entityManager->flush();
             }
-        } catch (\Exception $e) {
-            $output->writeln('<bg=red;fg=white>Error: '.$e->getMessage().'</>');
+        } catch (\Exception $exception) {
+            $output->writeln('<bg=red;fg=white>Error: '.$exception->getMessage().'</>');
         }
 
-        $this->output->writeln("New videos: {$compteurVideo}");
+        $this->output->writeln(sprintf('New videos: %d', $compteurVideo));
 
         $output->writeln('<bg=cyan;fg=red>Fin du traitement</>');
 
@@ -125,6 +133,6 @@ class UpdateYoutubeDataCommand extends Command
         }
 
         $nbVideos = \count($this->videosList);
-        $this->output->writeln("Init videos: {$nbVideos}");
+        $this->output->writeln(sprintf('Init videos: %d', $nbVideos));
     }
 }

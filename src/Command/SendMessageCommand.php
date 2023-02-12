@@ -21,6 +21,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class SendMessageCommand.
+ *
+ * @see \App\Tests\Command\SendMessageCommandTest
  */
 class SendMessageCommand extends Command
 {
@@ -69,7 +71,7 @@ class SendMessageCommand extends Command
 
         // Load contact message
         $message = $this->messageRepo->find($this->messageId);
-        if ( ! $message) {
+        if ( ! $message instanceof \App\Entity\Message) {
             throw new NotFoundHttpException('Unable to find message with id: '.$this->messageId);
         }
 

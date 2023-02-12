@@ -15,16 +15,17 @@ use Doctrine\ORM\Mapping as ORM;
  * Track.
  *
  * @ORM\Table(name="discography_tracks")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\TrackRepository")
  */
 class Track implements \Stringable
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id_track", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
@@ -45,6 +46,7 @@ class Track implements \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Album", inversedBy="tracks")
+     *
      * @ORM\JoinColumn(name="id_album", referencedColumnName="id_album")
      */
     private Album $album;
@@ -66,7 +68,7 @@ class Track implements \Stringable
         return $this->number;
     }
 
-    public function setTitle($title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 

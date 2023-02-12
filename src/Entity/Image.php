@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * App\Entity\Image.
  *
  * @ORM\HasLifecycleCallbacks
+ *
  * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
  */
 class Image extends Media
@@ -27,15 +28,7 @@ class Image extends Media
      */
     protected ?Album $album = null;
 
-    /**
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     mimeTypes = {"image/jpeg","image/gif","image/png"},
-     *     mimeTypesMessage = "L'image choisie jjj ne correspond pas à un type de fichier valide",
-     *     notFoundMessage = "L'image n'a pas été trouvée sur le disque",
-     *     uploadErrorMessage = "Erreur dans l'upload de l'image"
-     * )
-     */
+    #[Assert\File(maxSize: '2M', mimeTypes: ['image/jpeg', 'image/gif', 'image/png'], mimeTypesMessage: "L'image choisie jjj ne correspond pas à un type de fichier valide", notFoundMessage: "L'image n'a pas été trouvée sur le disque", uploadErrorMessage: "Erreur dans l'upload de l'image")]
     private $file;
 
     /**
@@ -45,6 +38,9 @@ class Image extends Media
 
     private ?string $filenameForRemove = null;
 
+    /**
+     * @return array{label: string, key: string}
+     */
     public function getType(): array
     {
         return ['label' => 'Image', 'key' => 'image'];
@@ -94,6 +90,7 @@ class Image extends Media
 
     /**
      * @ORM\PrePersist()
+     *
      * @ORM\PreUpdate()
      */
     public function preUpload(): void
@@ -101,13 +98,13 @@ class Image extends Media
         if (null !== $this->file) {
             $slugger = new Slugger();
             $cleanName = $slugger->slugify($this->file->getClientOriginalName(), '_');
-            $name = $this->renameIfFileExist($cleanName);
-            $this->path = $name;
+            $this->path = $this->renameIfFileExist($cleanName);
         }
     }
 
     /**
      * @ORM\PostPersist()
+     *
      * @ORM\PostUpdate()
      */
     public function upload(): void
@@ -142,7 +139,7 @@ class Image extends Media
      */
     public function removeUpload(): void
     {
-        if ($this->filenameForRemove && true === file_exists($this->filenameForRemove)) {
+        if ($this->filenameForRemove && file_exists($this->filenameForRemove)) {
             unlink($this->filenameForRemove);
         }
     }

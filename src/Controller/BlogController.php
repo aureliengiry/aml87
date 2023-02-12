@@ -31,8 +31,7 @@ final class BlogController extends AbstractController
         private readonly ArticleManager $articleManager,
         private readonly MenuItem $appMainMenu,
         private readonly Environment $twig
-    )
-    {
+    ) {
     }
 
     /**

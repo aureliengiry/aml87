@@ -1,0 +1,31 @@
+version: '3.8'
+
+# Traefik is our exposed network
+networks:
+  webgateway:
+    #driver: bridge # si conf externe
+
+services:
+  traefik:
+    container_name: aml87_traefik
+    image: traefik:saintmarcelin
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - ./docker/docker-full/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./docker/docker-full/traefik/config.yml:/etc/traefik/config.yml
+      - ./docker/docker-full/traefik/ssl:/etc/traefik/ssl
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      webgateway: ~
+
+  nginx:
+    networks:
+      internal: ~
+      webgateway: ~
+    labels:
+      - "traefik.http.routers.aml87.rule=Host(`www.aml87.local`)"
+      - "traefik.http.routers.aml87.tls=true"
+      - "traefik.enable=true"

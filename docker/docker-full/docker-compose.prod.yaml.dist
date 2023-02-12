@@ -1,0 +1,53 @@
+version: "3.8"
+
+networks:
+  internal:
+    external: false
+
+services:
+  nginx:
+    container_name: aml87_nginx
+    image: nginx:alpine
+    volumes:
+      - ./docker/docker-full/nginx/conf.d:/etc/nginx/conf.d:ro
+    expose:
+      - "80"
+    depends_on:
+      - php-fpm
+    networks:
+      internal: ~
+    restart: always
+
+  php-fpm:
+    container_name: aml87_php_fpm
+    env_file: .env
+    environment:
+      - SYMFONY_ALLOW_APPDEV=0
+      - APP_ENV=prod
+      - APP_DEBUG=0
+    image: aml87_php_fpm:1.0
+    volumes:
+      - app:/var/www/html
+    networks:
+      internal: ~
+    restart: always
+
+  mysql:
+    container_name: aml87_mysql
+    image: mariadb:10.2
+    env_file: docker-env
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql:cached
+    networks:
+      internal: ~
+    restart: always
+
+volumes:
+  db-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ~/docker-shared-folder/aml87-data

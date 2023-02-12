@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class MessageType extends AbstractType
 {
-    public function __construct(private readonly ?string $reCAPTCHA_site_key)
+    public function __construct()
     {
     }
 
@@ -38,7 +38,7 @@ class MessageType extends AbstractType
                 [
                     'attr' => [
                         'size' => 15,
-                        'data-help' => 'Texte de l\'article',
+                        'data-help' => "Texte de l'article",
                     ],
                 ]
             )
@@ -62,7 +62,7 @@ class MessageType extends AbstractType
             );
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'aml_bundle_WebBundle_messagetype';
     }

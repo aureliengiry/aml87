@@ -18,39 +18,52 @@ use Doctrine\ORM\Mapping as ORM;
  * App\Entity\Article.
  *
  * @ORM\Table(name="blog_articles")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
 class Article implements \Stringable
 {
+    /**
+     * @var int
+     */
     final public const ARTICLE_IS_PUBLIC = 1;
+
+    /**
+     * @var int
+     */
     final public const ARTICLE_IS_PRIVATE = 0;
 
     /**
      * @ORM\Column(name="id_article", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
-    /***
+    /**
      * @ORM\Column(name="title", type="string", length=255)
      */
     private string $title = '';
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\UrlArticle", cascade={"all"}, fetch="EAGER")
+     *
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private ?UrlArticle $url = null;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
+     *
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private ?Image $logo = null;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Video\Youtube", cascade={"all"})
+     *
      * @ORM\JoinColumn(name="id_video", referencedColumnName="id_video")
      */
     private ?Youtube $video = null;
@@ -73,7 +86,7 @@ class Article implements \Stringable
     /**
      * @ORM\Column(name="published", type="datetime", nullable=true)
      */
-    private ?\DateTime $published = null;
+    private ?\DateTime $published;
 
     /**
      * @ORM\Column(name="public", type="boolean")
@@ -82,6 +95,7 @@ class Article implements \Stringable
 
     /**
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
+     *
      * @ORM\JoinColumn(name="id_category", referencedColumnName="id_category")
      */
     private ?Category $category = null;
@@ -102,8 +116,8 @@ class Article implements \Stringable
 
     public function __construct()
     {
-        $this->created = $this->updated = new \DateTime();
-
+        $this->created = new \DateTime();
+        $this->updated = $this->created;
         $this->tags = new ArrayCollection();
         $this->evenements = new ArrayCollection();
     }
@@ -310,7 +324,7 @@ class Article implements \Stringable
     public function getSlug(): string
     {
         $slug = (string) $this->id;
-        if ($this->getUrl() && ! empty($this->getUrl()->getUrlKey())) {
+        if ($this->getUrl() && '' !== $this->getUrl()->getUrlKey()) {
             $slug = $this->getUrl()->getUrlKey();
         }
 

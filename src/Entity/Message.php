@@ -16,52 +16,61 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Message.
  *
  * @ORM\Table(name="contact_us_messages")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\MessageRepository")
  */
 class Message implements \Stringable
 {
-    final public const MESSAGE_STATUS_SAVE = 1;
-    final public const MESSAGE_STATUS_SAVE_SEND = 2;
     /**
      * @var int
-     *
+     */
+    final public const MESSAGE_STATUS_SAVE = 1;
+
+    /**
+     * @var int
+     */
+    final public const MESSAGE_STATUS_SAVE_SEND = 2;
+
+    /**
      * @ORM\Column(name="id_message", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     * @Assert\Length(max=255)
      * @ORM\Column(name="name", type="string", length=255)
      */
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    #[Assert\Length(max: 255)]
     private string $name = '';
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     * @Assert\Type("string")
-     * @Assert\Length(max=255)
      * @ORM\Column(name="email", type="string", length=255)
      */
+    #[Assert\NotBlank]
+    #[Assert\Email]
+    #[Assert\Type('string')]
+    #[Assert\Length(max: 255)]
     private string $email = '';
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     * @Assert\Length(max=255)
      * @ORM\Column(name="subject", type="string", length=255)
      */
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    #[Assert\Length(max: 255)]
     private string $subject = '';
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Type("string")
-     * @Assert\Length(min=10, max=1000)
      * @ORM\Column(name="body", type="text")
      */
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    #[Assert\Length(min: 10, max: 1000)]
     private string $body = '';
 
     /**
@@ -234,7 +243,7 @@ class Message implements \Stringable
      */
     public function setSpam($spam): void
     {
-        if ( ! empty($spam)) {
+        if ($spam) {
             $spam = true;
         }
 

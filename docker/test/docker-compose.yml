@@ -1,7 +1,0 @@
-version: '2'
-
-services:
-  php74:
-    build: php74
-    container_name: relight_admin_wercker_php74
-    command: tail -f /dev/null

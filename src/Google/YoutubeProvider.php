@@ -9,14 +9,12 @@ declare(strict_types=1);
 
 namespace App\Google;
 
-use Google_Service_YouTube;
-
 /**
  * Class YoutubeProvider.
  */
 class YoutubeProvider
 {
-    private ?Google_Service_YouTube $youtubeService = null;
+    private ?\Google_Service_YouTube $youtubeService = null;
 
     /**
      * YoutubeProvider constructor.
@@ -27,7 +25,7 @@ class YoutubeProvider
 
     public function init(): void
     {
-        $this->youtubeService = new Google_Service_YouTube($this->googleClient->get());
+        $this->youtubeService = new \Google_Service_YouTube($this->googleClient->get());
     }
 
     public function getPlaylists()

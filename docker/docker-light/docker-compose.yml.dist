@@ -12,12 +12,6 @@ services:
       - <local database storage>:/var/lib/mysql:cached
     tty: true
 
-  blackfire:
-    image: blackfire/blackfire
-    env_file: docker-env
-    ports:
-      - "8707:8707"
-
   nodejs:
     image: node:16.14.0-alpine3.15
     working_dir: /var/www/aml87
@@ -32,12 +26,3 @@ services:
     env_file: docker-env
     ports:
       [ 1025, 1080 ]
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    environment:
-    - RABBITMQ_DEFAULT_USER=admin
-    - RABBITMQ_DEFAULT_PASS=password
-    ports:
-      - "15672:15672"
-    tty: true
