@@ -12,6 +12,9 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @group functional
+ */
 class AgendaControllerTest extends WebTestCase
 {
     public function testAgenda(): void

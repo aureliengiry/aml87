@@ -12,7 +12,7 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class BlogControllerTest.
+ * @group functional
  */
 class BlogControllerTest extends WebTestCase
 {

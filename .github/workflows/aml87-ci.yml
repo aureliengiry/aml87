@@ -74,6 +74,12 @@ jobs:
             key: node_modules
             path: node_modules
 
+        - name: Caching
+          uses: actions/cache@v2.1.7
+          with:
+            key: assets
+            path: public/build
+
     security:
       needs: build
       runs-on: ubuntu-latest
@@ -153,6 +159,13 @@ jobs:
             path: node_modules
             restore-keys: node_modules
 
+        - name: Cache restoring
+          uses: actions/cache@v2.1.7
+          with:
+            key: assets
+            path: public/build
+            restore-keys: assets
+
         # Symfony
         - name: Check the Symfony console
           run: |
@@ -173,9 +186,7 @@ jobs:
             php vendor/bin/phpunit --stop-on-failure --exclude-group functional
 
         - name: Run functional tests
-          run: |
-            php -S localhost:8000 >> /dev/null &
-            php vendor/bin/phpunit --group functional
+          run: php vendor/bin/phpunit --group functional
 
         # - name: Run Behat/Mink tests
         #  run: |
