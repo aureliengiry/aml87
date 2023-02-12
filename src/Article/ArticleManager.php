@@ -19,7 +19,7 @@ class ArticleManager
     {
     }
 
-    public function getPublicArticlesWithPagination(int $page, array $filter)
+    public function getPublicArticlesWithPagination(int $page, array $filter): \Doctrine\ORM\Tools\Pagination\Paginator
     {
         return $this->articleRepository->getPublicArticles($page, $filter);
     }

@@ -31,9 +31,6 @@ class EvenementRepository extends ServiceEntityRepository
     /**
      * Get events filter by date start and date end.
      *
-     * @param $dateStart
-     * @param $dateEnd
-     *
      * @return array
      */
     public function getEvenementsCalendar($dateStart, $dateEnd)
@@ -64,11 +61,9 @@ class EvenementRepository extends ServiceEntityRepository
     /**
      * Function to build request in order to filter blog articles.
      *
-     * @param $query
-     * @param array $params
      * @param array $filters
      */
-    private function buildRequestByFilters($query, $params = [], $filters = [])
+    private function buildRequestByFilters(\Doctrine\ORM\QueryBuilder $query, array $params = [], $filters = [])
     {
         if (isset($filters['archive'])) {
             $query
@@ -81,6 +76,7 @@ class EvenementRepository extends ServiceEntityRepository
                 ->andWhere('e.public = :public');
             $params['public'] = $filters['public'];
         }
+
         if (isset($filters['type']) && ! empty($filters['type'])) {
             $query
                 ->andWhere('e.type = :type');

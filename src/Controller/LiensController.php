@@ -16,16 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-/**
- * @Route("/liens")
- */
+#[Route(path: '/liens')]
 final class LiensController extends AbstractController
 {
     /**
      * Lists all link entities.
-     *
-     * @Route("/", name="liens", methods={"GET"})
      */
+    #[Route(path: '/', name: 'liens', methods: ['GET'])]
     public function index(Environment $twig, LinkRepository $linkRepository): Response
     {
         return new Response($twig->render('liens/index.html.twig', [

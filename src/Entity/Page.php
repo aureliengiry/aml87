@@ -15,19 +15,27 @@ use Doctrine\ORM\Mapping as ORM;
  * App\Entity\Page.
  *
  * @ORM\Table(name="pages")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
  */
 class Page implements \Stringable
 {
+    /**
+     * @var int
+     */
     final public const PAGE_IS_PUBLIC = 1;
-    final public const PAGE_IS_PRIVATE = 0;
 
     /**
      * @var int
-     *
+     */
+    final public const PAGE_IS_PRIVATE = 0;
+
+    /**
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
@@ -60,14 +68,13 @@ class Page implements \Stringable
      * @var UrlPage url
      *
      * @ORM\OneToOne(targetEntity="\App\Entity\UrlPage", cascade={"all"})
+     *
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private \App\Entity\UrlPage $url;
 
     /**
      * Get id.
-     *
-     * @return int
      */
     public function getId(): ?int
     {
@@ -86,8 +93,6 @@ class Page implements \Stringable
 
     /**
      * Get title.
-     *
-     * @return string
      */
     public function getTitle(): ?string
     {
@@ -106,8 +111,6 @@ class Page implements \Stringable
 
     /**
      * Get body.
-     *
-     * @return string
      */
     public function getBody(): ?string
     {
@@ -162,8 +165,6 @@ class Page implements \Stringable
 
     /**
      * Get public.
-     *
-     * @return bool
      */
     public function isPublic(): ?bool
     {

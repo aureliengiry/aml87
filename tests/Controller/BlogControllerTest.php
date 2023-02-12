@@ -24,7 +24,7 @@ class BlogControllerTest extends WebTestCase
         $crawler = $client->request('GET', $url);
 
         // Check status code
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertSame(\Symfony\Component\HttpFoundation\Response::HTTP_OK, $client->getResponse()->getStatusCode());
 
         // Check page title
         $this->assertStringContainsString('Blog', $crawler->filter('title')->text());

@@ -39,7 +39,7 @@ class DashboardController extends AbstractDashboardController
         return Crud::new();
     }
 
-    public function configureMenuItems(): iterable
+    public function configureMenuItems(): \Iterator
     {
         $submenu1 = [
             MenuItem::linkToCrud('Blog', 'far fa-newspaper', Article::class),
@@ -91,9 +91,7 @@ class DashboardController extends AbstractDashboardController
             ]);
     }
 
-    /**
-     * @Route("/admin")
-     */
+    #[Route(path: '/admin')]
     public function index(): Response
     {
         return parent::index();

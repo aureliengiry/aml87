@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,18 +18,13 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ContactControllerTest extends WebTestCase
 {
-    private ?KernelBrowser $client = null;
-
     protected function setUp(): void
     {
-        $this->client = static::createClient();
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
-
-        $this->client = null;
     }
 
     /*

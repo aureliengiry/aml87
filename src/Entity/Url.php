@@ -16,10 +16,13 @@ use Doctrine\ORM\Mapping as ORM;
  * Url.
  *
  * @ORM\Table(name="core_url")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\UrlRepository")
  *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name="entity_source", type="string",length=50)
+ *
  * @ORM\DiscriminatorMap({
  *     "article" = "App\Entity\UrlArticle",
  *     "evenement" = "App\Entity\UrlEvenement",
@@ -31,8 +34,10 @@ abstract class Url implements \Stringable
 {
     /**
      * @ORM\Column(name="id_url", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     protected ?int $id = null;
 

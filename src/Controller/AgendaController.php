@@ -22,8 +22,9 @@ use Twig\Environment;
 /**
  * Blog controller.
  *
- * @Route("/agenda")
+ * @see \App\Tests\Controller\AgendaControllerTest
  */
+#[Route(path: '/agenda')]
 final class AgendaController extends AbstractController
 {
     public function __construct(
@@ -37,9 +38,8 @@ final class AgendaController extends AbstractController
 
     /**
      * Lists all Blog entities.
-     *
-     * @Route("/", name="agenda", methods={"GET"})
      */
+    #[Route(path: '/', name: 'agenda', methods: ['GET'])]
     public function index(): Response
     {
         return new Response($this->twig->render(
@@ -54,17 +54,12 @@ final class AgendaController extends AbstractController
 
     /**
      * Finds and displays a Evenement entity.
-     *
-     * @Route(
-     *     "/evenement/{slug}.html",
-     *     name="agenda_show_event",
-     *     methods={"GET"}
-     *     )
      */
+    #[Route(path: '/evenement/{slug}.html', name: 'agenda_show_event', methods: ['GET'])]
     public function show(string $slug, Request $request): Response
     {
         $event = $this->agenda->getEventByIdOrUrl($slug);
-        if ( ! $event) {
+        if ( ! $event instanceof \App\Entity\Evenement) {
             throw $this->createNotFoundException('Unable to find Evenement entity.');
         }
 
@@ -90,18 +85,12 @@ final class AgendaController extends AbstractController
 
     /**
      * Lists all archived event.
-     *
-     * @Route(
-     *     "/archives/{seasonId}",
-     *     name="agenda_archives",
-     *     requirements={"seasonId"="\d+"},
-     *     methods={"GET"}
-     *     )
      */
+    #[Route(path: '/archives/{seasonId}', name: 'agenda_archives', requirements: ['seasonId' => '\d+'], methods: ['GET'])]
     public function archives(int $seasonId, Request $request): Response
     {
         $season = $this->seasonRepository->find($seasonId);
-        if (null === $season) {
+        if ( ! $season instanceof \App\Entity\Season) {
             throw $this->createNotFoundException('Unable to find Season entity.');
         }
 

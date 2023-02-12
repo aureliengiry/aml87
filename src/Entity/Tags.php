@@ -17,27 +17,31 @@ use Doctrine\ORM\Mapping as ORM;
  * App\Entity\Tags.
  *
  * @ORM\Table(name="blog_tags")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\TagsRepository")
  */
 class Tags implements \Stringable
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id_tag", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="Article", inversedBy="tags")
+     *
      * @ORM\JoinTable(name="blog_articles_tags",
      *        joinColumns={@ORM\JoinColumn(name="id_tag", referencedColumnName="id_tag")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
      * )
+     *
+     * @var \Doctrine\Common\Collections\Collection<\App\Entity\Article>
      */
-    protected $articles;
+    protected \Doctrine\Common\Collections\Collection $articles;
 
     /**
      * @ORM\Column(name="system_name", type="string", length=255)
@@ -68,10 +72,8 @@ class Tags implements \Stringable
 
     /**
      * Get id.
-     *
-     * @return int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -79,7 +81,7 @@ class Tags implements \Stringable
     /**
      * Set title.
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
         $this->setSystemName($name);
@@ -89,10 +91,8 @@ class Tags implements \Stringable
 
     /**
      * Get title.
-     *
-     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

@@ -26,6 +26,9 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
 {
     use TargetPathTrait;
 
+    /**
+     * @var string
+     */
     final public const LOGIN_ROUTE = 'app_members_area_login';
 
     public function __construct(private readonly EntityManagerInterface $entityManager, private readonly UrlGeneratorInterface $urlGenerator, private readonly CsrfTokenManagerInterface $csrfTokenManager, private readonly UserPasswordEncoderInterface $passwordEncoder)
@@ -38,6 +41,9 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
             && $request->isMethod('POST');
     }
 
+    /**
+     * @return array{username: bool|float|int|string|null, password: bool|float|int|string|null, csrf_token: bool|float|int|string|null}
+     */
     public function getCredentials(Request $request): array
     {
         $credentials = [
@@ -62,7 +68,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username']]);
 
-        if ( ! $user) {
+        if ( ! $user instanceof \App\Entity\User) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }

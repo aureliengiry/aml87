@@ -1,18 +1,5 @@
-parameters:
-    # Adds a fallback DATABASE_URL if the env var is not set.
-    # This allows you to run cache:warmup even if your
-    # environment variables are not available yet.
-    # You should not need to change this value.
-    env(DATABASE_URL): 'sqlite:///%kernel.project_dir%/var/aml-test.db'
-
 doctrine:
     dbal:
-        # configure these for your database server
-        driver: 'pdo_mysql'
-        server_version: '5.7'
-        charset: utf8mb4
-
-        # With Symfony 3.3, remove the `resolve:` prefix
         url: '%env(resolve:DATABASE_URL)%'
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
@@ -25,3 +12,34 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+
+when@test:
+    doctrine:
+        dbal:
+            # configure these for your database server
+            driver: 'pdo_sqlite'
+            charset: utf8mb4
+            memory: true
+
+            # With Symfony 3.3, remove the `resolve:` prefix
+            url: 'sqlite:///%kernel.project_dir%/var/aml-test.db'
+            #url: "sqlite:///:memory:"
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system

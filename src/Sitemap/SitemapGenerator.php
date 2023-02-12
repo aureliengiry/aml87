@@ -87,7 +87,7 @@ class SitemapGenerator
                 'album' => $album->getUrl()->getUrlKey(),
             ]);
 
-            if (empty($urlAlbum)) {
+            if ('' === $urlAlbum) {
                 $urlAlbum = $this->router->generate('discography_album_show', ['album' => $album->getId()]);
             }
 

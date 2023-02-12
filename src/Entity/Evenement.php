@@ -17,21 +17,47 @@ use Doctrine\ORM\Mapping as ORM;
  * App\Entity\Evenement.
  *
  * @ORM\Table(name="evenements")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
  */
 class Evenement implements \Stringable
 {
+    /**
+     * @var string
+     */
     final public const EVENEMENT_TYPE_CONCERT = 'concert';
+
+    /**
+     * @var string
+     */
     final public const EVENEMENT_TYPE_REUNION = 'reunion';
+
+    /**
+     * @var string
+     */
     final public const EVENEMENT_TYPE_REPETITION = 'repetition';
+
+    /**
+     * @var string
+     */
     final public const EVENEMENT_TYPE_ENREGISTREMENT = 'enregistrement';
+
+    /**
+     * @var string
+     */
     final public const EVENEMENT_TYPE_CONCOURS = 'concours';
+
+    /**
+     * @var string
+     */
     final public const EVENEMENT_TYPE_SORTIE = 'sortie';
 
     /**
      * @ORM\Column(name="id_evenement", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
@@ -48,7 +74,7 @@ class Evenement implements \Stringable
     /**
      * @ORM\Column(name="date_end", type="datetime", nullable=true)
      */
-    private ?\DateTime $dateEnd = null;
+    private ?\DateTime $dateEnd;
 
     /**
      * @ORM\Column(name="title", type="string", length=255)
@@ -62,6 +88,7 @@ class Evenement implements \Stringable
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Image", cascade={"all"})
+     *
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
     private ?Image $picture = null;
@@ -77,7 +104,8 @@ class Evenement implements \Stringable
     private bool $public = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Article", inversedBy="evenements", cascade={"all"}, fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity="\App\Entity\Article", inversedBy="evenements", cascade={"all"})
+     *
      * @ORM\JoinTable(name="evenements_articles",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_article", referencedColumnName="id_article")}
@@ -86,24 +114,27 @@ class Evenement implements \Stringable
     protected Collection $articles;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Partenaire", mappedBy="evenements", cascade={"all"}, fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity="\App\Entity\Partenaire", mappedBy="evenements", cascade={"all"})
      */
     protected Collection $partenaires;
 
     /**
      * @ORM\OneToOne(targetEntity="\App\Entity\Url", cascade={"all"}, fetch="EAGER")
+     *
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
     private Url $url;
 
     /**
      * @ORM\ManyToOne(targetEntity="Season", inversedBy="evenements")
+     *
      * @ORM\JoinColumn(name="id_season", referencedColumnName="id_season")
      */
     protected Season $season;
 
     /**
-     * @ORM\ManyToMany(targetEntity="\App\Entity\Video\Youtube", inversedBy="evenements", cascade={"all"}, fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity="\App\Entity\Video\Youtube", inversedBy="evenements", cascade={"all"})
+     *
      * @ORM\JoinTable(name="evenements_videos",
      *        joinColumns={@ORM\JoinColumn(name="id_evenement", referencedColumnName="id_evenement")},
      *        inverseJoinColumns={@ORM\JoinColumn(name="id_video", referencedColumnName="id_video")}
@@ -219,18 +250,12 @@ class Evenement implements \Stringable
         return $this;
     }
 
+    /**
+     * @return array{concert: string, concours: string, enregistrement: string, repetition: string, reunion: string, sortie: string}
+     */
     public static function getTypesEvenements(): array
     {
-        $typesEvenement = [];
-
-        $typesEvenement[self::EVENEMENT_TYPE_CONCERT] = 'Concert';
-        $typesEvenement[self::EVENEMENT_TYPE_CONCOURS] = 'Concours';
-        $typesEvenement[self::EVENEMENT_TYPE_ENREGISTREMENT] = 'Enregistrement';
-        $typesEvenement[self::EVENEMENT_TYPE_REPETITION] = 'Répétition';
-        $typesEvenement[self::EVENEMENT_TYPE_REUNION] = 'Réunion';
-        $typesEvenement[self::EVENEMENT_TYPE_SORTIE] = 'Sortie';
-
-        return $typesEvenement;
+        return [self::EVENEMENT_TYPE_CONCERT => 'Concert', self::EVENEMENT_TYPE_CONCOURS => 'Concours', self::EVENEMENT_TYPE_ENREGISTREMENT => 'Enregistrement', self::EVENEMENT_TYPE_REPETITION => 'Répétition', self::EVENEMENT_TYPE_REUNION => 'Réunion', self::EVENEMENT_TYPE_SORTIE => 'Sortie'];
     }
 
     /* ---------------- ARTICLES LIES ---------------- */
@@ -343,7 +368,7 @@ class Evenement implements \Stringable
     public function getSlug(): string
     {
         $slug = (string) $this->id;
-        if ($this->getUrl() && ! empty($this->getUrl()->getUrlKey())) {
+        if ($this->getUrl() && '' !== $this->getUrl()->getUrlKey()) {
             $slug = $this->getUrl()->getUrlKey();
         }
 
@@ -352,7 +377,7 @@ class Evenement implements \Stringable
 
     public function getDates(): string
     {
-        if (null === $this->dateEnd) {
+        if ( ! $this->dateEnd instanceof \DateTime) {
             return $this->dateStart->format('d M Y à H:m');
         }
 

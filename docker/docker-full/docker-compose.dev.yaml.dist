@@ -1,0 +1,88 @@
+version: "3.8"
+
+networks:
+  internal:
+    external: false
+
+services:
+  nginx:
+    container_name: aml87_nginx
+    image: nginx:alpine
+    volumes:
+      - ./docker/docker-full/nginx/conf.d:/etc/nginx/conf.d:ro
+      - app:/var/www/html
+    expose:
+      - "80"
+    depends_on:
+      - php-fpm
+    networks:
+      internal: ~
+
+  php-fpm:
+    container_name: aml87_php_fpm
+    env_file: .env
+    environment:
+      - XDEBUG_IDE_KEY=PHPSTORM
+      - XDEBUG_SERVER_NAME="docker-aml-server"
+      - SYMFONY_ALLOW_APPDEV=1
+      - APP_ENV=dev
+      - APP_DEBUG=1
+      - DATABASE_URL="mysql://root@mysql:3306/aml87?charset=utf8mb4"
+      - MAILER_DSN="smtp://aml87_mailcatcher:1025?encryption=&auth_mode="
+    build:
+      context: .
+      dockerfile: ./docker/docker-full/phpfpm/Dockerfile
+      args:
+        - BUILD_ARGUMENT_ENV=dev
+    volumes:
+      - app:/var/www/html
+    networks:
+      internal: ~
+
+  mysql:
+    container_name: aml87_mysql
+    image: mariadb:10.2
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=aml87
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=aml87
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql:cached
+    networks:
+      internal: ~
+
+  encore:
+    container_name: aml87_encore
+    image: node:16.14.0-alpine3.15
+    working_dir: /var/www/html
+    volumes:
+      - app:/var/www/html:rw
+    networks:
+      internal: ~
+
+  mailcatcher:
+    container_name: aml87_mailcatcher
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
+    networks:
+      internal: ~
+
+volumes:
+  app:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ./
+  db-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      #device: ~/docker-shared-folder/aml87-data

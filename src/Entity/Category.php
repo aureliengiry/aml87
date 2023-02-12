@@ -18,14 +18,17 @@ use Doctrine\ORM\Mapping as ORM;
  * App\Entity\Category.
  *
  * @ORM\Table(name="blog_categories")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
 class Category implements \Stringable
 {
     /**
      * @ORM\Column(name="id_category",type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
@@ -46,7 +49,10 @@ class Category implements \Stringable
 
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="category")
+     *
      * @ORM\JoinColumn(name="id", referencedColumnName="id_article")
+     *
+     * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Article>|\App\Entity\Article[]
      */
     private Collection $articles;
 

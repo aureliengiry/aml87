@@ -24,10 +24,7 @@ class Dailymotion extends Video implements \Stringable
         parent::__construct();
     }
 
-    /**
-     * @return string
-     */
-    public function getProvider()
+    public function getProvider(): string
     {
         return 'Dailymotion';
     }

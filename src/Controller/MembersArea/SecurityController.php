@@ -21,12 +21,10 @@ final class SecurityController extends AbstractController
 {
     use TargetPathTrait;
 
-    /**
-     * @Route("/login", name="app_members_area_login", methods={"GET","POST"})
-     */
+    #[Route(path: '/login', name: 'app_members_area_login', methods: ['GET', 'POST'])]
     public function login(Request $request, Security $security, AuthenticationUtils $authenticationUtils): Response
     {
-        if ($this->getUser()) {
+        if ($this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             return $this->redirectToRoute('app_members_area');
         }
 
@@ -42,9 +40,7 @@ final class SecurityController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/deconnexion", name="app_members_area_logout", methods={"GET"})
-     */
+    #[Route(path: '/deconnexion', name: 'app_members_area_logout', methods: ['GET'])]
     public function logout(): void
     {
     }

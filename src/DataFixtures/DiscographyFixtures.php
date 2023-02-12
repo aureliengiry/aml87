@@ -25,6 +25,7 @@ class DiscographyFixtures extends Fixture
         foreach ($fakeData->getObjects() as $object) {
             $manager->persist($object);
         }
+
         $manager->flush();
     }
 }

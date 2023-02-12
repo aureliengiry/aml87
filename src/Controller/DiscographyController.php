@@ -21,9 +21,8 @@ use Twig\Environment;
 
 /**
  * Class DefaultController.
- *
- * @Route("/discographie")
  */
+#[Route(path: '/discographie')]
 final class DiscographyController extends AbstractController
 {
     public function __construct(
@@ -36,9 +35,8 @@ final class DiscographyController extends AbstractController
 
     /**
      * Lists all Album entities.
-     *
-     * @Route("/", name="discography", methods={"GET"})
      */
+    #[Route(path: '/', name: 'discography', methods: ['GET'])]
     public function index(): Response
     {
         return new Response($this->twig->render('discography/index.html.twig', [
@@ -48,17 +46,12 @@ final class DiscographyController extends AbstractController
 
     /**
      * Finds and displays Album entity.
-     *
-     * @Route("/album/id/{album}", name="discography_album_show", methods={"GET"})
-     * @Route("/album/{album}.html", name="discography_album_show_rewrite", methods={"GET"})
      */
+    #[Route(path: '/album/id/{album}', name: 'discography_album_show', methods: ['GET'])]
+    #[Route(path: '/album/{album}.html', name: 'discography_album_show_rewrite', methods: ['GET'])]
     public function show(Request $request, $album): Response
     {
-        if (is_numeric($album)) {
-            $entity = $this->albumRepository->find($album);
-        } else {
-            $entity = $this->albumRepository->getAlbumByUrlKey($album);
-        }
+        $entity = is_numeric($album) ? $this->albumRepository->find($album) : $this->albumRepository->getAlbumByUrlKey($album);
 
         if ( ! $entity) {
             throw $this->createNotFoundException('Unable to find Album entity.');

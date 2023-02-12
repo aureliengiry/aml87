@@ -15,19 +15,27 @@ use Doctrine\ORM\Mapping as ORM;
  * App\Entity\Season.
  *
  * @ORM\Table(name="evenements_seasons")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\SeasonRepository")
  */
 class Season implements \Stringable
 {
+    /**
+     * @var string
+     */
     final public const SEASON_DEFAULT_DATE_START = '%s-09-01';
+
+    /**
+     * @var string
+     */
     final public const SEASON_DEFAULT_DATE_END = '%s-08-31';
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="id_season", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
@@ -48,40 +56,31 @@ class Season implements \Stringable
 
     /**
      * @ORM\OneToMany(targetEntity="Evenement", mappedBy="season")
+     *
      * @ORM\JoinColumn(name="id", referencedColumnName="id_evenement")
+     *
+     * @var \Doctrine\Common\Collections\Collection<\App\Entity\Evenement>
      */
-    protected $evenements;
+    protected \Doctrine\Common\Collections\Collection $evenements;
 
-    /**
-     * @return \DateTime
-     */
-    public function getDateEnd()
+    public function getDateEnd(): \DateTime
     {
         return $this->dateEnd;
     }
 
-    /**
-     * @param \DateTime $dateEnd
-     */
-    public function setDateEnd($dateEnd)
+    public function setDateEnd(\DateTime $dateEnd)
     {
         $this->dateEnd = $dateEnd;
 
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getDateStart()
+    public function getDateStart(): \DateTime
     {
         return $this->dateStart;
     }
 
-    /**
-     * @param \DateTime $dateStart
-     */
-    public function setDateStart($dateStart)
+    public function setDateStart(\DateTime $dateStart)
     {
         $this->dateStart = $dateStart;
 
@@ -95,6 +94,9 @@ class Season implements \Stringable
         return $this->evenements;
     }
 
+    /**
+     * @param \Doctrine\Common\Collections\Collection&\App\Entity\Evenement[] $evenements
+     */
     public function setEvenements($evenements)
     {
         $this->evenements = $evenements;
@@ -103,7 +105,7 @@ class Season implements \Stringable
     }
 
     /**
-     * @param Evenement $evenement
+     * @param \Doctrine\Common\Collections\Collection&\App\Entity\Evenement[] $evenement
      */
     public function addEvenement($evenement)
     {
@@ -112,36 +114,24 @@ class Season implements \Stringable
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
-    public function setId($id)
+    public function setId(?int $id)
     {
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -153,10 +143,15 @@ class Season implements \Stringable
         return $this->name ?: 'New Season';
     }
 
-    public function createStartDate($year)
+    public function createStartDate($year): \DateTime
     {
         $str = sprintf(self::SEASON_DEFAULT_DATE_START, $year);
 
         return new \DateTime($str);
+    }
+
+    public function __construct()
+    {
+        $this->evenements = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }

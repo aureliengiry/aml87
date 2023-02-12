@@ -19,14 +19,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Youtube extends Video implements \Stringable
 {
+    /**
+     * @var string
+     */
     final public const PATTERN_URL_VIDEO = 'https://www.youtube.com/watch?v=%s';
-    final public const PATTERN_URL_THUMBNAIL_HQ = 'https://i.ytimg.com/vi/%s/hqdefault.jpg';
-    final public const PATTERN_URL_THUMBNAIL = 'https://i.ytimg.com/vi/%s/default.jpg';
 
     /**
-     * @return string
+     * @var string
      */
-    public function getProvider()
+    final public const PATTERN_URL_THUMBNAIL_HQ = 'https://i.ytimg.com/vi/%s/hqdefault.jpg';
+
+    /**
+     * @var string
+     */
+    final public const PATTERN_URL_THUMBNAIL = 'https://i.ytimg.com/vi/%s/default.jpg';
+
+    public function getProvider(): string
     {
         return $this->providerId;
     }
@@ -43,17 +51,17 @@ class Youtube extends Video implements \Stringable
         $this->providerId = $idYoutube;
     }
 
-    public function getUrlYoutube()
+    public function getUrlYoutube(): string
     {
         return sprintf(self::PATTERN_URL_VIDEO, $this->providerId);
     }
 
-    public function getUrlThumbnail()
+    public function getUrlThumbnail(): string
     {
         return sprintf(self::PATTERN_URL_THUMBNAIL, $this->providerId);
     }
 
-    public function getUrlThumbnailHq()
+    public function getUrlThumbnailHq(): string
     {
         return sprintf(self::PATTERN_URL_THUMBNAIL_HQ, $this->providerId);
     }

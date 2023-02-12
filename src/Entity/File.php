@@ -17,19 +17,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * App\Entity\File.
  *
  * @ORM\HasLifecycleCallbacks
+ *
  * @ORM\Entity(repositoryClass="App\Repository\FileRepository")
  */
 class File extends Media
 {
-    /**
-     * @Assert\File(
-     *     maxSize = "2M",
-     *     mimeTypes = {"application/pdf", "application/x-pdf"},
-     *     mimeTypesMessage = "Le fichier choisi ne correspond pas à un type de fichier valide",
-     *     notFoundMessage = "Le fichier n'a pas été trouvé sur le disque",
-     *     uploadErrorMessage = "Erreur dans l'upload du fichier"
-     * )
-     */
+    #[Assert\File(maxSize: '2M', mimeTypes: ['application/pdf', 'application/x-pdf'], mimeTypesMessage: 'Le fichier choisi ne correspond pas à un type de fichier valide', notFoundMessage: "Le fichier n'a pas été trouvé sur le disque", uploadErrorMessage: "Erreur dans l'upload du fichier")]
     private $file;
 
     /**
@@ -64,10 +57,8 @@ class File extends Media
 
     /**
      * Set path.
-     *
-     * @param string $path
      */
-    public function setPath($path): self
+    public function setPath(?string $path): self
     {
         $this->path = $path;
 
@@ -76,10 +67,8 @@ class File extends Media
 
     /**
      * Get path.
-     *
-     * @return string
      */
-    public function getPath()
+    public function getPath(): ?string
     {
         return $this->path;
     }
@@ -104,6 +93,7 @@ class File extends Media
 
     /**
      * @ORM\PrePersist()
+     *
      * @ORM\PreUpdate()
      */
     public function preUpload(): void
@@ -111,13 +101,13 @@ class File extends Media
         if (null !== $this->file) {
             $slugger = new Slugger();
             $cleanName = $slugger->slugify($this->file->getClientOriginalName(), '_');
-            $name = $this->renameIfFileExist($cleanName);
-            $this->path = $name;
+            $this->path = $this->renameIfFileExist($cleanName);
         }
     }
 
     /**
      * @ORM\PostPersist()
+     *
      * @ORM\PostUpdate()
      */
     public function upload(): void
@@ -147,7 +137,7 @@ class File extends Media
      */
     public function removeUpload(): void
     {
-        if ($this->filenameForRemove && true === file_exists($this->filenameForRemove)) {
+        if ($this->filenameForRemove && file_exists($this->filenameForRemove)) {
             unlink($this->filenameForRemove);
         }
     }
@@ -157,6 +147,9 @@ class File extends Media
         return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
     }
 
+    /**
+     * @return array{label: string, key: string}
+     */
     public function getType(): array
     {
         return ['label' => 'Fichier', 'key' => 'file'];

@@ -20,8 +20,8 @@ class WordWarpExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('wordWarp', [$this, 'wordWarpFilter'], ['is_safe' => ['html']]),
-            new TwigFilter('isWordWarp', [$this, 'isWordWarpFilter']),
+            new TwigFilter('wordWarp', $this->wordWarpFilter(...), ['is_safe' => ['html']]),
+            new TwigFilter('isWordWarp', $this->isWordWarpFilter(...)),
         ];
     }
 
@@ -40,9 +40,8 @@ class WordWarpExtension extends AbstractExtension
             if ($wordwarp) {
                 $length = $this->findSpace($str, $length);
             }
-            $text = '<div class="expand">'.mb_substr($str, 0, $length).' ...</div>';
 
-            return $text;
+            return '<div class="expand">'.mb_substr($str, 0, $length).' ...</div>';
         }
 
         return $str;
@@ -74,7 +73,7 @@ class WordWarpExtension extends AbstractExtension
     {
         $val = null;
         while ($length > 0 && ! $val = mb_strpos($str, ' ', $length)) {
-            $length = $length - 10;
+            $length -= 10;
         }
 
         return $val;

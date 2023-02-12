@@ -1,0 +1,75 @@
+#!/bin/bash
+
+env=dev
+docker=false
+traefik=false
+
+for arg in "$@"; do
+    case "$arg" in
+    --docker=*)
+        docker=`echo $arg | sed 's/--docker=//'`
+    ;;
+
+    --with-traefik)
+        traefik=true
+    ;;
+
+    --help)
+        echo 'usage: ./configure [options]'
+        echo ''
+        echo 'options:'
+        echo '  --docker=<version>: enable docker (full|light)'
+        echo '  --with-traefik: add reverse proxy traefik'
+        echo ''
+        echo 'All invalid options are silently ignored!'
+        exit 0
+    ;;
+
+    esac
+done
+
+if [ $docker != false ] && [ ! -d ./docker/docker-$docker ]; then
+  echo "This $docker formula doesn't exist!"
+  exit 0
+fi
+
+if [ $docker != false ] && [ $env = "dev" ]; then
+  echo "Add docker files in $docker version ..."
+  if [ -f ./docker-compose.yaml ]; then
+    echo "Save previous file docker-compose"
+    mv ./docker-compose.yaml ./docker-compose.yaml.previous
+    echo "File ./docker-compose.yaml.previous created !"
+  fi
+
+  if [ -f ./docker-compose.override.yaml ]; then
+    echo "Save previous file docker-compose"
+    mv ./docker-compose.override.yaml ./docker-compose.override.yaml.previous
+    echo "File ./docker-compose.override.yaml.previous created !"
+  fi
+
+  cp ./docker/docker-$docker/docker-compose.$env.yaml.dist ./docker-compose.yaml
+  cp ./docker/docker-$docker/Makefile.dist ./Makefile
+
+  if [ $docker = "full" ] && [ $traefik = true ]; then
+    echo "Oh! You want a reverse proxy!"
+    cp ./docker/docker-$docker/docker-compose.$env.override.yaml.dist ./docker-compose.override.yaml
+  elif [ $docker = "light" ] && [ $traefik = true ]; then
+    echo "You can't have proxy with light configuration!"
+  fi
+
+  if [ $docker = "light" ]; then
+    echo "Copy configuration files for docker-light version"
+    cp ./docker/docker-$docker/.php-version ./.php-version
+    cp ./docker/docker-$docker/php.ini ./php.ini
+  fi
+else
+  echo "Docker is only compatible with dev environment..."
+fi
+
+if [ ! -f ./.env ]; then
+  echo ".env file doesn't exist"
+  cp ./.env.dist .env
+  echo "File .env created !"
+fi
+
+echo 'Configuration complete'

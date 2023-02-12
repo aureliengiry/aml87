@@ -17,7 +17,7 @@ class PublicStatusExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('publicStatus', [$this, 'publicStatusFilter']),
+            new TwigFilter('publicStatus', $this->publicStatusFilter(...)),
         ];
     }
 
@@ -26,7 +26,7 @@ class PublicStatusExtension extends AbstractExtension
      */
     public function publicStatusFilter(bool $boolean): string
     {
-        if (true === $boolean) {
+        if ($boolean) {
             return 'Publié';
         }
 

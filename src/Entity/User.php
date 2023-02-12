@@ -18,14 +18,17 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * App\Entity\User.
  *
  * @ORM\Table(name="users")
+ *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
     /**
      * @ORM\Column(name="id", type="integer")
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     private ?int $id = null;
 
@@ -76,6 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
     /**
      * @var string The hashed password
+     *
      * @ORM\Column(type="string")
      */
     private string $password;
@@ -105,18 +109,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this->firstname.' '.$this->lastname;
     }
 
-    /**
-     * @param string $firstname
-     */
-    public function setFirstname($firstname): void
+    public function setFirstname(?string $firstname): void
     {
         $this->firstname = $firstname;
     }
 
-    /**
-     * @return string
-     */
-    public function getFirstname()
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
@@ -198,7 +196,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
      */
     public function getUsername(): string
     {
-        return (string) $this->username;
+        return $this->username;
     }
 
     public function setUsername(string $username): self
@@ -248,7 +246,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self

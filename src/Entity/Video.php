@@ -19,8 +19,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
  *
  * @ORM\Table(name="videos")
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name="provider", type="string")
+ *
  * @ORM\DiscriminatorMap({
  *     "youtube" = "\App\Entity\Video\Youtube",
  *     "dailymotion" = "\App\Entity\Video\Dailymotion"
@@ -30,8 +33,10 @@ abstract class Video
 {
     /**
      * @ORM\Id
+     *
      * @ORM\Column(name="id_video", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @ORM\GeneratedValue
      */
     protected ?int $id = null;
 
@@ -60,10 +65,7 @@ abstract class Video
         return $this->id;
     }
 
-    /**
-     * @param string $providerId
-     */
-    public function setProviderId($providerId): self
+    public function setProviderId(string $providerId): self
     {
         $this->providerId = $providerId;
 

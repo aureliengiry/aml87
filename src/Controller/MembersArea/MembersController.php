@@ -20,9 +20,11 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Members controller.
  *
- * @Route("/espace-membres")
  * @IsGranted("ROLE_USER")
+ *
+ * @see \App\Tests\Controller\MembersArea\MembersControllerTest
  */
+#[Route(path: '/espace-membres')]
 final class MembersController extends AbstractController
 {
     public function __construct(private readonly Agenda $agenda, private readonly SeasonManager $seasonManager)
@@ -31,9 +33,8 @@ final class MembersController extends AbstractController
 
     /**
      * dashboard entities.
-     *
-     * @Route("/", name="app_members_area", methods={"GET"})
      */
+    #[Route(path: '/', name: 'app_members_area', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('members/index.html.twig');
@@ -41,9 +42,8 @@ final class MembersController extends AbstractController
 
     /**
      * Lists all User entities.
-     *
-     * @Route("/list", name="aml_users_members_list", methods={"GET"})
      */
+    #[Route(path: '/list', name: 'aml_users_members_list', methods: ['GET'])]
     public function list(): Response
     {
         return $this->render('members/list.html.twig', [
@@ -53,9 +53,8 @@ final class MembersController extends AbstractController
 
     /**
      * Display agenda.
-     *
-     * @Route("/agenda", name="app_members_agenda", methods={"GET"})
      */
+    #[Route(path: '/agenda', name: 'app_members_agenda', methods: ['GET'])]
     public function agenda(): Response
     {
         $currentSeason = $this->seasonManager->getCurrentSeason();

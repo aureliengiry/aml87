@@ -35,6 +35,7 @@ class PartenaireRepository extends ServiceEntityRepository
         foreach ($partenaire->getTags() as $tag) {
             $partenaire->removeTag($tag);
         }
+
         $em->flush();
     }
 
@@ -47,6 +48,7 @@ class PartenaireRepository extends ServiceEntityRepository
         foreach ($partenaire->getLogo() as $tag) {
             $partenaire->removeTag($tag);
         }
+
         $em->flush();
     }
 }

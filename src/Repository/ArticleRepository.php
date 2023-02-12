@@ -30,11 +30,9 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * Function to build request in order to filter blog articles.
      *
-     * @param $query
-     *
      * @return array
      */
-    private function buildRequestByFilters($query, array $params = [], array $filters = [])
+    private function buildRequestByFilters(\Doctrine\ORM\QueryBuilder $query, array $params = [], array $filters = [])
     {
         if (isset($filters['category']) && ! empty($filters['category'])) {
             $query
@@ -69,7 +67,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->where('a.public = 1')
             ->orderBy('a.created', 'DESC');
 
-        if ( ! empty($filters)) {
+        if ([] !== $filters) {
             $qb = $this->buildRequestByFilters($qb, [], $filters);
         }
 
@@ -89,13 +87,12 @@ class ArticleRepository extends ServiceEntityRepository
         foreach ($article->getTags() as $tag) {
             $article->removeTag($tag);
         }
+
         $em->flush();
     }
 
     /**
      * Find article by url key.
-     *
-     * @param $urlKey
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
      *
