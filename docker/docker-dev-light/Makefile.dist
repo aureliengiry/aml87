@@ -2,7 +2,6 @@
 EXEC_NODEJS=docker-compose exec nodejs
 EXEC_MYSQL=docker-compose exec mysql
 
-PROJECT_PATH=/var/www/aml87
 SYMFONY_BIN=symfony
 COMPOSER_BIN=$(SYMFONY_BIN) composer
 SYMFONY_CONSOLE=$(SYMFONY_BIN) console
@@ -258,7 +257,7 @@ eslint-fix: yarn-install ## Lint Javascript files and fix them
 
 # Rules from files
 vendor: composer.lock
-	@composer install -d $(PROJECT_PATH)
+	@composer install
 
 composer.lock: composer.json
 	@echo compose.lock is not up to date.

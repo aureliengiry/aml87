@@ -2,11 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the AML87 application.
- * (c) Aurélien GIRY <aurelien.giry@gmail.com>
- */
-
 namespace App\Tests\Controller\MembersArea;
 
 use App\DataFixtures\UserFixtures;
@@ -19,8 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
- * Class MembersControllerTest.
- *
  * @group functional
  * @group members-area
  */
