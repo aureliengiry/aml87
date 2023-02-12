@@ -6,118 +6,177 @@ on:
   pull_request:
 
 jobs:
-  symfony:
-    name: Symfony 5.4 (PHP ${{ matrix.php-versions }})
-    # https://hub.docker.com/_/ubuntu/
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
-      matrix:
-        php-versions: ['8.1']
-    steps:
-      # https://github.com/actions/checkout (official)
-      - name: Checkout
-        uses: actions/checkout@v2
+    build:
+      name: build app AML87 (Symfony 5.4/PHP ${{ matrix.php-versions }})
+      # https://hub.docker.com/_/ubuntu/
+      runs-on: ubuntu-latest
+      strategy:
+        fail-fast: true
+        matrix:
+          php-versions: [ '8.1' ]
+      steps:
+        # https://github.com/actions/checkout (official)
+        - name: Checkout
+          uses: actions/checkout@v2
 
-      # https://github.com/shivammathur/setup-php (community)
-      - name: Setup PHP, extensions and composer with shivammathur/setup-php
-        uses: shivammathur/setup-php@verbose
-        with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo
+        # https://github.com/shivammathur/setup-php (community)
+        - name: Setup PHP, extensions and composer with shivammathur/setup-php
+          uses: shivammathur/setup-php@verbose
+          with:
+            php-version: ${{ matrix.php-versions }}
+            extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, dom, filter, gd, iconv, json, mbstring, pdo
 
-      # Composer
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        # Composer
+        - name: Get composer cache directory
+          id: composer-cache
+          run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-        # https://help.github.com/en/actions/configuring-and-managing-workflows/caching-dependencies-to-speed-up-workflows
-      - name: Cache composer dependencies
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          # https://help.github.com/en/actions/configuring-and-managing-workflows/caching-dependencies-to-speed-up-workflows
+        - name: Cache composer dependencies
+          uses: actions/cache@v1
+          with:
+            path: ${{ steps.composer-cache.outputs.dir }}
+            key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+            restore-keys: ${{ runner.os }}-composer-
 
-      - name: Install Composer dependencies
-        run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+        - name: Install Composer dependencies
+          run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
 
-      # https://github.com/sensiolabs/security-checker
-      - name: Security check installed dependencies
-        uses: symfonycorp/security-checker-action@v2
+        - uses: actions/setup-node@v2
+          with:
+            node-version: '14'
 
-      - name: Check twig templates
-        run: php bin/console lint:twig templates --env=test
+        - name: Cache node_modules
+          uses: actions/cache@v1
+          id: yarn-cache-node-modules
+          with:
+            path: node_modules
+            key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-yarn-cache-node-modules-
 
-      - name: Check yaml files in config directory
-        run: php bin/console lint:yaml --parse-tags config
+        - name: Yarn install
+          if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
+          run: yarn install
 
-      # https://github.com/chekalsky/phpcs-action (community)
-#      - name: Check PSR12 code style (PHP_CodeSniffer)
-#        uses: chekalsky/phpcs-action@v1.2.0
-#        with:
-#          enable_warnings: true
-#          installed_paths: '${{ github.workspace }}/vendor/squizlabs/php_codesniffer'
-#          phpcs_bin_path: './vendor/bin/phpcs src --ignore="Migrations/"'
+        - name: Yarn build
+          run: yarn run encore production
 
-      # https://github.com/phpmd/phpmd
-      # - name: Analyses PHP Code (PHP Mess Detector)
-      #  run: vendor/bin/phpmd src,tests text .phpmd-ruleset.xml
+        - name: Caching
+          uses: actions/cache@v2.1.7
+          with:
+            key: vendor
+            path: vendor
 
-      # https://github.com/phpstan/phpstan
-#      - name: Analyse PHP Code (PHPStan)
-#        run: vendor/bin/phpstan analyse src
+        - name: Caching
+          uses: actions/cache@v2.1.7
+          with:
+            key: node_modules
+            path: node_modules
 
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+    security:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
 
-      - name: Cache node_modules
-        uses: actions/cache@v1
-        id: yarn-cache-node-modules
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-cache-node-modules-
+        - name: Cache restoring
+          uses: actions/cache@v2.1.7
+          with:
+            key: vendor
+            path: vendor
+            restore-keys: vendor
 
-      - name: Yarn install
-        if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
-        run: yarn install
+        - name: Cache restoring
+          uses: actions/cache@v2.1.7
+          with:
+            key: node_modules
+            path: node_modules
+            restore-keys: node_modules
 
-      - name: Yarn build
-        run: yarn run encore production
+        # https://github.com/symfonycorp/security-checker-action
+        - name: Security check installed dependencies
+          uses: symfonycorp/security-checker-action@v4
+          with:
+            disable-exit-code: 1
+          id: security-check
 
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: build
-          path: public/build
+        - name: Display the vulnerabilities as JSON
+          run: echo ${{ steps.security-check.outputs.vulns }}
 
-      # Symfony
-      - name: Check the Symfony console
-        run: |
-          php bin/console -V
-          php bin/console about
+    linters:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
 
-      # Tests
-      - name: Init Database for tests
-        run: |
-          php bin/console doctrine:schema:drop --force --env=test
-          php bin/console doctrine:database:create --env=test
-          php bin/console doctrine:schema:update --force --env=test
-          php bin/console doctrine:schema:validate --env=test  --skip-sync
-          php bin/console doctrine:fixtures:load --env=test --purge-with-truncate -n
+        - name: Cache restoring
+          uses: actions/cache@v2.1.7
+          with:
+            key: vendor
+            path: vendor
+            restore-keys: vendor
 
-      - name: Run unit tests
-        run: |
-          php vendor/bin/phpunit --stop-on-failure --exclude-group functional
+        - name: Cache restoring
+          uses: actions/cache@v2.1.7
+          with:
+            key: node_modules
+            path: node_modules
+            restore-keys: node_modules
 
-      - name: Run functional tests
-        run: |
-          php -S localhost:8000 >> /dev/null &
-          php vendor/bin/phpunit --group functional
+        - name: Check twig templates
+          run: php bin/console lint:twig templates --env=test
 
-      # - name: Run Behat/Mink tests
-      #  run: |
-      #    php vendor/bin/behat
+        - name: Check yaml files in config directory
+          run: php bin/console lint:yaml --parse-tags config
+
+    tests:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: Cache restoring
+          uses: actions/cache@v2.1.7
+          with:
+            key: vendor
+            path: vendor
+            restore-keys: vendor
+
+        - name: Cache restoring
+          uses: actions/cache@v2.1.7
+          with:
+            key: node_modules
+            path: node_modules
+            restore-keys: node_modules
+
+        # Symfony
+        - name: Check the Symfony console
+          run: |
+            php bin/console -V
+            php bin/console about
+
+        # Tests
+        - name: Init Database for tests
+          run: |
+            php bin/console doctrine:schema:drop --force --env=test
+            php bin/console doctrine:database:create --env=test
+            php bin/console doctrine:schema:update --force --env=test
+            php bin/console doctrine:schema:validate --env=test  --skip-sync
+            php bin/console doctrine:fixtures:load --env=test --purge-with-truncate -n
+
+        - name: Run unit tests
+          run: |
+            php vendor/bin/phpunit --stop-on-failure --exclude-group functional
+
+        - name: Run functional tests
+          run: |
+            php -S localhost:8000 >> /dev/null &
+            php vendor/bin/phpunit --group functional
+
+        # - name: Run Behat/Mink tests
+        #  run: |
+        #    php vendor/bin/behat
