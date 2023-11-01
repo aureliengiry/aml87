@@ -6,6 +6,10 @@ traefik=false
 
 for arg in "$@"; do
     case "$arg" in
+    --env=*)
+        env=`echo $arg | sed 's/--env=//'`
+    ;;
+
     --docker=*)
         docker=`echo $arg | sed 's/--docker=//'`
     ;;
@@ -33,7 +37,7 @@ if [ $docker != false ] && [ ! -d ./docker/docker-$docker ]; then
   exit 0
 fi
 
-if [ $docker != false ] && [ $env = "dev" ]; then
+if [ $docker != false ]; then
   echo "Add docker files in $docker version ..."
   if [ -f ./docker-compose.yaml ]; then
     echo "Save previous file docker-compose"
@@ -57,7 +61,7 @@ if [ $docker != false ] && [ $env = "dev" ]; then
     echo "You can't have proxy with light configuration!"
   fi
 
-  if [ $docker = "light" ]; then
+  if [ $docker = "light" ] && [ $env = "dev" ]; then
     echo "Copy configuration files for docker-light version"
     cp ./docker/docker-$docker/.php-version ./.php-version
     cp ./docker/docker-$docker/php.ini ./php.ini
