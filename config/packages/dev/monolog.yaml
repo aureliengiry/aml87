@@ -2,7 +2,8 @@ monolog:
     handlers:
         main:
             type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            #path: "%kernel.logs_dir%/%kernel.environment%.log"
+            path:  "php://stderr"
             level: debug
             channels: ["!event"]
         # uncomment to get logging in your browser
@@ -19,6 +20,7 @@ monolog:
             channels: ["!event", "!doctrine", "!console"]
         login:
             type:               stream
-            path:               "%kernel.logs_dir%/auth.log"
+            #path:               "%kernel.logs_dir%/auth.log"
+            path:  "php://stderr"
             level:              info
             channels:           security

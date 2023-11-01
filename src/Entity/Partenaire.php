@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Partenaire.
  *
- * @ORM\Table(name="partenaires")
+ * @ORM\Table(name="webbundle_partenaires")
  *
  * @ORM\HasLifecycleCallbacks
  *

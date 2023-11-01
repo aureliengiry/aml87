@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * App\Entity\Link.
  *
- * @ORM\Table(name="links")
+ * @ORM\Table(name="webbundle_links")
  *
  * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
  */

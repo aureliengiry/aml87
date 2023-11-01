@@ -10,9 +10,14 @@ services:
     image: nginx:alpine
     volumes:
       - ./docker/docker-full/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./docker/docker-full/nginx/ssl/crt/aml87_dev.crt:/etc/nginx/ssl/crt/aml87.crt:ro
+      - ./docker/docker-full/nginx/ssl/key/aml87_dev.key:/etc/nginx/ssl/key/aml87.key:ro
       - app:/var/www/html
+      - php_socket:/var/run/php
     expose:
-      - "80"
+      - "443"
+    ports:
+      - "443:443"
     depends_on:
       - php-fpm
     networks:
@@ -27,8 +32,8 @@ services:
       - SYMFONY_ALLOW_APPDEV=1
       - APP_ENV=dev
       - APP_DEBUG=1
-      - DATABASE_URL="mysql://root@mysql:3306/aml87?charset=utf8mb4"
-      - MAILER_DSN="smtp://aml87_mailcatcher:1025?encryption=&auth_mode="
+      - DATABASE_URL=mysql://root@mysql:3306/aml87
+      - MAILER_DSN=smtp://aml87_mailcatcher:1025?encryption=&auth_mode=
     build:
       context: .
       dockerfile: ./docker/docker-full/phpfpm/Dockerfile
@@ -36,6 +41,9 @@ services:
         - BUILD_ARGUMENT_ENV=dev
     volumes:
       - app:/var/www/html
+      - /var/www/html/var
+      - php_socket:/var/run/php
+      - ./docker/docker-full/phpfpm/php-fpm.d/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
     networks:
       internal: ~
 
@@ -52,7 +60,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - db-data:/var/lib/mysql:cached
+      - aml87-mysql-volume:/var/lib/mysql:cached
     networks:
       internal: ~
 
@@ -74,15 +82,17 @@ services:
       internal: ~
 
 volumes:
+  php_socket:
   app:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
       device: ./
-  db-data:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      #device: ~/docker-shared-folder/aml87-data
+  aml87-mysql-volume:
+    external: true
+#    driver: local
+#    driver_opts:
+#      type: 'none'
+#      o: 'bind'
+#      device: ~/docker-shared-folder/aml87-data

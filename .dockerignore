@@ -10,11 +10,17 @@
 .php-version
 .sensiolabs.yml
 
-.env
-.env.local
+**/.env
+**/.env.local
+**/.DS_Store
 *.md
 docker-compose.*
 hooks
 
 node_modules
 vendor
+var/cache
+var/log
+var/sessions
+var/*.db
+var/.php_cs.cache
