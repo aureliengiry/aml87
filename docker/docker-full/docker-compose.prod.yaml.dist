@@ -10,6 +10,8 @@ services:
     image: nginx:alpine
     volumes:
       - ./docker/docker-full/nginx/conf.d:/etc/nginx/conf.d:ro
+      - php_socket:/var/run/php
+      - app:/var/www/html
     expose:
       - "80"
     depends_on:
@@ -28,6 +30,7 @@ services:
     image: aml87_php_fpm:1.0
     volumes:
       - app:/var/www/html
+      - php_socket:/var/run/php
     networks:
       internal: ~
     restart: always
@@ -39,13 +42,16 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - db-data:/var/lib/mysql:cached
+      - aml87-mysql-volume:/var/lib/mysql:cached
     networks:
       internal: ~
     restart: always
 
 volumes:
-  db-data:
+  app:
+  php_socket:
+  aml87-mysql-volume:
+    external: true
     driver: local
     driver_opts:
       type: 'none'
