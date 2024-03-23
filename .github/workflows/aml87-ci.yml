@@ -13,11 +13,11 @@ jobs:
       strategy:
         fail-fast: true
         matrix:
-          php-versions: [ '8.1', '8.2']
+          php-versions: ['8.2']
       steps:
         # https://github.com/actions/checkout (official)
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
 
         # https://github.com/shivammathur/setup-php (community)
         - name: Setup PHP, extensions and composer with shivammathur/setup-php
