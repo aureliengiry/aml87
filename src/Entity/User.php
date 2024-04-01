@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * App\Entity\User.
  *
- * @ORM\Table(name="users")
+ * @ORM\Table(name="usersbundle_users")
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */

@@ -32,7 +32,7 @@ class ArticleRepository extends ServiceEntityRepository
      *
      * @return array
      */
-    private function buildRequestByFilters(\Doctrine\ORM\QueryBuilder $query, array $params = [], array $filters = [])
+    private function buildRequestByFilters(\Doctrine\ORM\QueryBuilder $query, array $params = [], array $filters = []): \Doctrine\ORM\QueryBuilder
     {
         if (isset($filters['category']) && ! empty($filters['category'])) {
             $query

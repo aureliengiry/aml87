@@ -39,7 +39,7 @@ class ArticleCrudController extends AbstractCrudController
         $category = AssociationField::new('category');
         $tags = AssociationField::new('tags');
         $panel2 = FormField::addPanel('Medias');
-//        $logo = ImageField::new('logo')->setUploadDir('public/uploads/images');
+        //        $logo = ImageField::new('logo')->setUploadDir('public/uploads/images');
         $logo = AssociationField::new('logo')->renderAsNativeWidget();
         $video = AssociationField::new('video');
         $published = DateTimeField::new('published');

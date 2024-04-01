@@ -45,9 +45,6 @@ class SeasonsCommand extends Command
             );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<info>Indexation evenements/seasons: Start</info>');
@@ -107,7 +104,7 @@ class SeasonsCommand extends Command
     protected function calculateSeason(\DateTime $eventDateStart): Season
     {
         $estimateSeason = $this->seasonRepo->getSeasonByDateStart($eventDateStart);
-        if ($estimateSeason instanceof \App\Entity\Season) {
+        if ($estimateSeason instanceof Season) {
             return $estimateSeason;
         }
 

@@ -69,7 +69,7 @@ class WordWarpExtension extends AbstractExtension
         return strip_tags($text, $allowedTags);
     }
 
-    public function findSpace(string $str, int $length)
+    public function findSpace(string $str, int $length): int|bool|null
     {
         $val = null;
         while ($length > 0 && ! $val = mb_strpos($str, ' ', $length)) {

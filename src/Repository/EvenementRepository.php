@@ -60,10 +60,8 @@ class EvenementRepository extends ServiceEntityRepository
 
     /**
      * Function to build request in order to filter blog articles.
-     *
-     * @param array $filters
      */
-    private function buildRequestByFilters(\Doctrine\ORM\QueryBuilder $query, array $params = [], $filters = [])
+    private function buildRequestByFilters(\Doctrine\ORM\QueryBuilder $query, array $params = [], array $filters = []): \Doctrine\ORM\QueryBuilder
     {
         if (isset($filters['archive'])) {
             $query

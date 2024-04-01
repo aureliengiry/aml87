@@ -215,7 +215,7 @@ class Message implements \Stringable
     /**
      * Set created.
      */
-    public function setCreated(\DateTime $created = null): void
+    public function setCreated(?\DateTime $created = null): void
     {
         $this->created = $created;
     }

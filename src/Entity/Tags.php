@@ -134,12 +134,12 @@ class Tags implements \Stringable
         return $this->systemName;
     }
 
-    public function getArticles()
+    public function getArticles(): \Doctrine\Common\Collections\Collection
     {
         return $this->articles;
     }
 
-    public function setArticles($articles)
+    public function setArticles(\Doctrine\Common\Collections\Collection $articles)
     {
         $this->articles = $articles;
 

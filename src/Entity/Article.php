@@ -86,7 +86,7 @@ class Article implements \Stringable
     /**
      * @ORM\Column(name="published", type="datetime", nullable=true)
      */
-    private ?\DateTime $published;
+    private ?\DateTime $published = null;
 
     /**
      * @ORM\Column(name="public", type="boolean")

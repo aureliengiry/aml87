@@ -40,8 +40,9 @@ final class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/deconnexion', name: 'app_members_area_logout', methods: ['GET'])]
-    public function logout(): void
+    #[Route(path: '/logout', name: 'app_members_area_logout', methods: ['GET', 'POST'])]
+    public function logout()
     {
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

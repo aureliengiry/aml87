@@ -21,8 +21,9 @@ use Twig\Environment;
 /**
  * Blog controller.
  *
- * @Route("/blog")
+ * @see \App\Tests\Controller\BlogControllerTest
  */
+#[Route(path: '/blog')]
 final class BlogController extends AbstractController
 {
     protected int $_limitPagination = 5;
@@ -36,9 +37,8 @@ final class BlogController extends AbstractController
 
     /**
      * Lists all Blog entities.
-     *
-     * @Route("/{page}", name="blog", requirements={"page" = "\d+"}, defaults={"page" = 1}, methods={"GET"})
      */
+    #[Route(path: '/{page}', name: 'blog', requirements: ['page' => '\d+'], defaults: ['page' => 1], methods: ['GET'])]
     public function index(Request $request, int $page): Response
     {
         $filters = [];
@@ -65,7 +65,7 @@ final class BlogController extends AbstractController
             'nbPages' => ceil($nbPublicArticles / $this->_limitPagination),
             'limit' => $this->_limitPagination,
             'currentPage' => $page,
-            'nextPage' => ($page + 1 * $this->_limitPagination < $nbPublicArticles ? $page + 1 : false),
+            'nextPage' => ($page + $this->_limitPagination < $nbPublicArticles ? $page + 1 : false),
             'prevPage' => ($page - 1 > 0 ? $page - 1 : false),
             'lastPage' => ($calculLastPage >= 0 ? $calculLastPage : 0),
         ];
@@ -83,16 +83,15 @@ final class BlogController extends AbstractController
 
     /**
      * Finds and displays a Blog entity.
-     *
-     * @Route("/article/{slug}.html", name="blog_show", methods={"GET"})
      */
+    #[Route(path: '/article/{slug}.html', name: 'blog_show', methods: ['GET'])]
     public function show(string $slug, Request $request): Response
     {
         // Init Main Menu
         $this->appMainMenu->getChild('Blog')->setCurrent(true);
 
         $article = $this->articleManager->getArticleByIdOrUrl($slug);
-        if ( ! $article) {
+        if ( ! $article instanceof \App\Entity\Article) {
             throw $this->createNotFoundException('Unable to find Blog entity.');
         }
 
