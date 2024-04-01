@@ -71,7 +71,7 @@ class Page implements \Stringable
      *
      * @ORM\JoinColumn(name="id_url", referencedColumnName="id_url")
      */
-    private \App\Entity\UrlPage $url;
+    private UrlPage $url;
 
     /**
      * Get id.
@@ -120,7 +120,7 @@ class Page implements \Stringable
     /**
      * Set created.
      */
-    public function setCreated(\DateTime $created = null)
+    public function setCreated(?\DateTime $created = null)
     {
         $this->created = $created;
 
@@ -138,7 +138,7 @@ class Page implements \Stringable
     /**
      * Set updated.
      */
-    public function setUpdated(\DateTime $updated = null)
+    public function setUpdated(?\DateTime $updated = null)
     {
         $this->updated = $updated;
 

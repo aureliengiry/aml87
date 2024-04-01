@@ -44,7 +44,7 @@ class Youtube extends Video implements \Stringable
         return $this->title ?: 'New Video Youtube';
     }
 
-    public function __construct(string $title = null, string $idYoutube = null)
+    public function __construct(?string $title = null, ?string $idYoutube = null)
     {
         parent::__construct();
         $this->title = $title;

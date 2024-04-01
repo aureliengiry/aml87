@@ -47,7 +47,7 @@ class Partenaire implements \Stringable
      *
      * @ORM\JoinColumn(name="id_media", referencedColumnName="id_media")
      */
-    private ?\App\Entity\Image $logo = null;
+    private ?Image $logo = null;
 
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -126,7 +126,7 @@ class Partenaire implements \Stringable
      *
      * @return Partenaire
      */
-    public function setLogo($logo)
+    public function setLogo(?Image $logo)
     {
         $this->logo = $logo;
 
@@ -138,7 +138,7 @@ class Partenaire implements \Stringable
      *
      * @return string
      */
-    public function getLogo()
+    public function getLogo(): ?Image
     {
         return $this->logo;
     }
@@ -164,12 +164,12 @@ class Partenaire implements \Stringable
     }
 
     /* -------------------- GESTION EVENEMENTS LIES ------------------------- */
-    public function getEvenements()
+    public function getEvenements(): \Doctrine\Common\Collections\Collection
     {
         return $this->evenements;
     }
 
-    public function setEvenements($evenements)
+    public function setEvenements(\Doctrine\Common\Collections\Collection $evenements)
     {
         $this->evenements = $evenements;
 

@@ -49,9 +49,6 @@ class UpdateYoutubeDataCommand extends Command
         parent::__construct();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function configure(): void
     {
         $this
@@ -66,9 +63,6 @@ class UpdateYoutubeDataCommand extends Command
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->debug = $input->getOption('debug');
@@ -81,9 +75,6 @@ class UpdateYoutubeDataCommand extends Command
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<bg=cyan;fg=red>Start treatment </>');

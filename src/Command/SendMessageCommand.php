@@ -54,24 +54,18 @@ class SendMessageCommand extends Command
         $this->addArgument('id-message', InputArgument::REQUIRED, 'ID Message');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->messageId = $input->getArgument('id-message');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<info>Send message : Start</info>');
 
         // Load contact message
         $message = $this->messageRepo->find($this->messageId);
-        if ( ! $message instanceof \App\Entity\Message) {
+        if ( ! $message instanceof Message) {
             throw new NotFoundHttpException('Unable to find message with id: '.$this->messageId);
         }
 

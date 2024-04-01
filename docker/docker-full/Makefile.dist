@@ -9,6 +9,8 @@ EXEC_PHP=$(DOCKER_COMPOSE) exec php-fpm
 COMPOSER_BIN=$(EXEC_PHP) php -d memory_limit=-1 /usr/bin/composer
 SYMFONY_CONSOLE=$(EXEC_PHP) php -d memory_limit=-1 $(WORKING_DIR)/bin/console
 
+PHP_LOCAL=/usr/local/opt/php@8.2/bin/php
+SYMFONY_CONSOLE_LOCAL=bin/console
 ##
 ## ----------------------------------------------------------------------------
 ##   Project setup
@@ -208,62 +210,115 @@ db-init-dev:        ## Init Database, fixtures for dev
 ## ----------------------------------------------------------------------------
 ##
 
+PHPUNIT=./vendor/bin/phpunit
+PHPUNIT_WATCHER=./vendor/bin/phpunit-watcher
+
 tests-init: vendor ## Init Database, fixtures for the PHP unit tests on docker
-	-$(SYMFONY_CONSOLE) doctrine:database:drop --force --env=test
-	-$(SYMFONY_CONSOLE) doctrine:database:create --env=test
-	-$(SYMFONY_CONSOLE) doctrine:schema:update --complete --force --env=test
-	-$(SYMFONY_CONSOLE) doctrine:fixtures:load --env=test -n
+	-$(SYMFONY_CONSOLE_LOCAL) doctrine:database:drop --force --env=test
+	-$(SYMFONY_CONSOLE_LOCAL) doctrine:database:create --env=test
+	-$(SYMFONY_CONSOLE_LOCAL) doctrine:schema:update --complete --force --env=test
+	-$(SYMFONY_CONSOLE_LOCAL) doctrine:fixtures:load --env=test -n
 
 
 tests-ut:  ## Run the phpunit on unit tests and exclude functional tests
-	php -d memory_limit=-1 vendor/bin/phpunit --exclude-group functional --testdox
+	php -d memory_limit=-1 $(PHPUNIT) --exclude-group functional --testdox
 
 tests-functional:  ## Run the phpunit on functionnal tests
-	php -d memory_limit=-1 vendor/bin/phpunit --group functional --testdox
+	php -d memory_limit=-1 $(PHPUNIT) --group functional --testdox
 
 tests-watch: ## Run the phpunit on watch mode. Ex: make tests-watch
-	php -d memory_limit=-1 vendor/bin/phpunit-watcher watch
+	php -d memory_limit=-1 $(PHPUNIT_WATCHER) watch
 
 tests-watch-filter: ## Run the phpunit on watch mode with filter. Ex: make tests-watch FILTER=testname
-	php -d memory_limit=-1 vendor/bin/phpunit-watcher watch --filter=$(FILTER)
+	php -d memory_limit=-1 $(PHPUNIT_WATCHER) watch --filter=$(FILTER)
 
 .PHONY: tests-init tests-ut tests-functional tests-watch tests-watch-filter
+
+##
+## ----------------------------------------------------------------------------
+##   PHP CS Fixer
+## ----------------------------------------------------------------------------
+##
+PHP_CS_FIXER=./vendor/bin/php-cs-fixer
+php-cs-fixer-dry-run: ## PHP Code Style Fixer with dry-run mode
+	$(PHP_LOCAL) $(PHP_CS_FIXER) fix --config=.php-cs-fixer.dist.php -v --dry-run --allow-risky=yes
+
+php-cs-fixer: ## PHP Code Style Fixer
+	$(PHP_LOCAL) $(PHP_CS_FIXER) --config=.php-cs-fixer.dist.php -v --allow-risky=yes
+
+php-cs-fixer-on-updated-files-dry-run: ## PHP Code Style Fixer on updated files with dry-run mode
+	@if git diff --cached --name-only --diff-filter=ACMRTUXB | grep -q '\.php$$'; then \
+		STAGED_FILES=$$(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\.php$$'); \
+		$(PHP_CS_FIXER) fix --dry-run --verbose --allow-risky=yes --config=.php-cs-fixer.dist.php -- $$STAGED_FILES; \
+	else echo "Aucun fichier modifié."; \
+	fi
+
+
+php-cs-fixer-on-updated-files: ## PHP Code Style Fixer on updated files
+	@if git diff --cached --name-only --diff-filter=ACMRTUXB | grep -q '\.php$$'; then \
+		STAGED_FILES=$$(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\.php$$'); \
+		$(PHP_CS_FIXER) fix --verbose --allow-risky=yes --config=relight_v3/.php-cs-fixer.dist.php -- $$STAGED_FILES; \
+	else echo "Aucun fichier modifié."; \
+	fi
+
+.PHONY: php-cs-fixer-dry-run php-cs-fixer php-cs-fixer-on-updated-files php-cs-fixer-on-updated-files-dry-run php-cs-fixer-on-updated-files
+
+##
+## ----------------------------------------------------------------------------
+##   PHP Stan
+## ----------------------------------------------------------------------------
+##
+PHPSTAN=./vendor/bin/phpstan
+phpstan: ## PHPStan - PHP Static Analysis
+	- make phpstan-src
+	- make phpstan-tests
+
+phpstan-src: ## PHPStan - PHP Static Analysis Tool (Analyse all files in src/*)
+	$(PHP_LOCAL) -d memory_limit=-1 $(PHPSTAN) analyse src -c phpstan.neon
+
+phpstan-tests: ## PHPStan - PHP Static Analysis Tool (Analyse all files in tests/*)
+	$(PHP_LOCAL) -d memory_limit=-1 $(PHPSTAN) analyse tests -c phpstan-tests.neon
+
+.PHONY: phpstan phpstan-api phpstan-logistics phpstan-neteven phpstan-order phpstan-pim phpstan-pogpdis phpstan-shipment phpstan-shared phpstan-voucher phpstan-tests
+
+
+##
+## ----------------------------------------------------------------------------
+##   Rector
+## ----------------------------------------------------------------------------
+##
+
+RECTOR=./vendor/bin/rector
+rector-init: ## Init settings for Rector
+	$(EXEC_PHP) $(RECTOR) init
+
+rector-process-dry-run: ## Run rector on selected directory with dry-run mode. Ex: make rector-process-dry-run FILTER=src
+	$(PHP_LOCAL) -d memory_limit=-1 $(RECTOR) process ${FILTER} --config ./rector.php --dry-run
+
+rector-process: ## Run rector on selected directory. Ex: make rector-process FILTER=src
+	$(PHP_LOCAL) -d memory_limit=-1 $(RECTOR) process ${FILTER} --config ./rector.php
+
+rector-on-updated-files-dry-run: ## Run rector on updated files with dry run mode
+	@if git diff --cached --name-only --diff-filter=ACMRTUXB | grep -q '\.php$$'; then \
+		STAGED_FILES=$$(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\.php$$'); \
+		$(PHP_LOCAL) -d memory_limit=-1 $(RECTOR) process $$STAGED_FILES --config ./rector.php --dry-run; \
+	else echo "Aucun fichier modifié."; \
+	fi
+
+rector-on-updated-files: ## Run rector on updated files
+	@if git diff --cached --name-only --diff-filter=ACMRTUXB | grep -q '\.php$$'; then \
+		STAGED_FILES=$$(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\.php$$'); \
+		$(PHP_LOCAL) -d memory_limit=-1 $(RECTOR) process $$STAGED_FILES --config ./rector.php; \
+	else echo "Aucun fichier modifié."; \
+	fi
+
+.PHONY: rector-init rector-process-dry-run rector-process rector-on-updated-files-dry-run rector-on-updated-files
 
 ##
 ## ----------------------------------------------------------------------------
 ##   Tools
 ## ----------------------------------------------------------------------------
 ##
-phpstan-complete: ## PHPStan - PHP Static Analysis Tool (Analyse all files in src/*)
-	$(COMPOSER_BIN) phpstan
-
-phpstan-general: ## PHPStan - PHP Static Analysis Tool (Analyse all files in src/*)
-	php -d memory_limit=-1 vendor/bin/phpstan analyse -c phpstan.neon src --level max
-
-phpstan-tests: ## PHPStan - PHP Static Analysis Tool (Analyse all files in tests/*)
-	php -d memory_limit=-1 vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level max
-
-phpstan-diff: ## PHPStan analyse diff files with master (Analyse all updated php files)
-	php -d memory_limit=-1 vendor/bin/phpstan analyse --level 7 \`git diff --name-only master... '*.php' \`
-
-php-cs-fixer-dry-run:   ## PHP Code Style Fixer in dry-run mode
-	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run --allow-risky=yes
-
-php-cs-fixer:           ## PHP Code Style Fixer
-	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --allow-risky=yes
-
-rector-init: ## Init settings for Rector
-	php vendor/bin/rector init
-
-rector-process-diff-dry-run: ## Run rector on selected directory with dry-run mode. Ex: make rector-process-diff-dry-run
-	php -d memory_limit=-1 vendor/bin/rector process \`git diff --name-only master... '*.php' \` --dry-run
-
-rector-process-dry-run: ## Run rector on selected directory with dry-run mode. Ex: make rector-process-dry-run FILTER=src
-	php -d memory_limit=-1 vendor/bin/rector process ${FILTER} --dry-run
-
-rector-process: ## Run rector on selected directory. Ex: make rector-process FILTER=src
-	 php -d memory_limit=-1 vendor/bin/rector process ${FILTER}
-
 eslint: yarn-install  ## Lint Javascript files
 	$(EXEC_NODEJS) /bin/sh -c "./node_modules/.bin/eslint assets/js webpack.config.js"
 

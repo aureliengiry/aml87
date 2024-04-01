@@ -74,7 +74,7 @@ class Evenement implements \Stringable
     /**
      * @ORM\Column(name="date_end", type="datetime", nullable=true)
      */
-    private ?\DateTime $dateEnd;
+    private ?\DateTime $dateEnd = null;
 
     /**
      * @ORM\Column(name="title", type="string", length=255)

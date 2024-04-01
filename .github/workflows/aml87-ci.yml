@@ -85,7 +85,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
 
         - name: Cache restoring
           uses: actions/cache@v2.1.7
@@ -103,7 +103,7 @@ jobs:
 
         # https://github.com/symfonycorp/security-checker-action
         - name: Security check installed dependencies
-          uses: symfonycorp/security-checker-action@v4
+          uses: symfonycorp/security-checker-action@v5
           with:
             disable-exit-code: 1
           id: security-check
@@ -116,7 +116,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
 
         - name: Cache restoring
           uses: actions/cache@v2.1.7
@@ -143,7 +143,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v4
 
         - name: Cache restoring
           uses: actions/cache@v2.1.7

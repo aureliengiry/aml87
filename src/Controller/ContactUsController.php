@@ -18,16 +18,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-/**
- * @Route("/contact-us")
- */
+#[Route(path: '/contact-us')]
 final class ContactUsController extends AbstractController
 {
     /**
      * Index Action to display contact form.
-     *
-     * @Route("/", name="aml_contactus_default_index", methods={"GET", "POST"})
      */
+    #[Route(path: '/', name: 'aml_contactus_default_index', methods: ['GET', 'POST'])]
     public function index(
         Request $request,
         ContactMessage $contactMessageService,

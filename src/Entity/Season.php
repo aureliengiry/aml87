@@ -89,15 +89,15 @@ class Season implements \Stringable
 
     /* ----------- EVENEMENTS ------------ */
 
-    public function getEvenements()
+    public function getEvenements(): \Doctrine\Common\Collections\Collection
     {
         return $this->evenements;
     }
 
     /**
-     * @param \Doctrine\Common\Collections\Collection&\App\Entity\Evenement[] $evenements
+     * @param (\Doctrine\Common\Collections\Collection&\iterable<\App\Entity\Evenement>) $evenements
      */
-    public function setEvenements($evenements)
+    public function setEvenements(mixed $evenements)
     {
         $this->evenements = $evenements;
 
@@ -107,7 +107,7 @@ class Season implements \Stringable
     /**
      * @param \Doctrine\Common\Collections\Collection&\App\Entity\Evenement[] $evenement
      */
-    public function addEvenement($evenement)
+    public function addEvenement(mixed $evenement)
     {
         $this->evenements[] = $evenement;
 

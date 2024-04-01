@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 $finder = (new PhpCsFixer\Finder())
     ->in(__DIR__)
-    ->exclude(['var', 'bin', 'node_modules']) // vendor already excluded in Finder()
-;
+    ->exclude(['var', 'bin', 'node_modules']); // vendor already excluded in Finder()
 
 return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
-        '@PHP81Migration' => true,
+        '@PHP82Migration' => true,
         'array_syntax' => ['syntax' => 'short'],
         'full_opening_tag' => false,
         'array_indentation' => true,
