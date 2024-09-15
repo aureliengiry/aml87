@@ -39,30 +39,30 @@ fi
 
 if [ $docker != false ]; then
   echo "Add docker files in $docker version ..."
-  if [ -f ./docker-compose.yaml ]; then
-    echo "Save previous file docker-compose"
-    mv ./docker-compose.yaml ./docker-compose.yaml.previous
-    echo "File ./docker-compose.yaml.previous created !"
+  if [ -f ./compose.yaml ]; then
+    echo "Save previous file compose"
+    mv ./compose.yaml ./compose.yaml.previous
+    echo "File ./compose.yaml.previous created !"
   fi
 
-  if [ -f ./docker-compose.override.yaml ]; then
-    echo "Save previous file docker-compose"
-    mv ./docker-compose.override.yaml ./docker-compose.override.yaml.previous
-    echo "File ./docker-compose.override.yaml.previous created !"
+  if [ -f ./compose.override.yaml ]; then
+    echo "Save previous file compose"
+    mv ./compose.override.yaml ./compose.override.yaml.previous
+    echo "File ./compose.override.yaml.previous created !"
   fi
 
-  cp ./docker/docker-$docker/docker-compose.$env.yaml.dist ./docker-compose.yaml
+  cp ./docker/docker-$docker/compose.$env.yaml.dist ./compose.yaml
   cp ./docker/docker-$docker/Makefile.dist ./Makefile
 
   if [ $docker = "full" ] && [ $traefik = true ]; then
     echo "Oh! You want a reverse proxy!"
-    cp ./docker/docker-$docker/docker-compose.$env.override.yaml.dist ./docker-compose.override.yaml
+    cp ./docker/docker-$docker/compose.$env.override.yaml.dist ./compose.override.yaml
   elif [ $docker = "light" ] && [ $traefik = true ]; then
     echo "You can't have proxy with light configuration!"
   fi
 
   if [ $docker = "light" ] && [ $env = "dev" ]; then
-    echo "Copy configuration files for docker-light version"
+    echo "Copy configuration files for light version"
     cp ./docker/docker-$docker/.php-version ./.php-version
     cp ./docker/docker-$docker/php.ini ./php.ini
   fi

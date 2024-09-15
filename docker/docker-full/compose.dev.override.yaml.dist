@@ -1,5 +1,3 @@
-version: '3.8'
-
 # Traefik is our exposed network
 networks:
   webgateway:
@@ -26,6 +24,6 @@ services:
       internal: ~
       webgateway: ~
     labels:
-      - "traefik.http.routers.aml87.rule=Host(`www.aml87.fr`)"
+      - "traefik.http.routers.aml87.rule=Host(`www.aml87.local`)"
       - "traefik.http.routers.aml87.tls=true"
       - "traefik.enable=true"

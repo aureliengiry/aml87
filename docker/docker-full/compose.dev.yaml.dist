@@ -1,5 +1,3 @@
-version: "3.8"
-
 networks:
   internal:
     external: false
@@ -44,6 +42,11 @@ services:
       - /var/www/html/var
       - php_socket:/var/run/php
       - ./docker/docker-full/phpfpm/php-fpm.d/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /var/www/html
     networks:
       internal: ~
 
@@ -84,15 +87,11 @@ services:
 volumes:
   php_socket:
   app:
+  aml87-mysql-volume:
+    external: true
+  medias:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: ./
-  aml87-mysql-volume:
-    external: true
-#    driver: local
-#    driver_opts:
-#      type: 'none'
-#      o: 'bind'
-#      device: ~/docker-shared-folder/aml87-data
+      device: ./public/uploads

@@ -15,6 +15,7 @@
 **/.DS_Store
 *.md
 docker-compose.*
+compose.*
 hooks
 
 node_modules
