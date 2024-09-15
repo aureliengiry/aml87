@@ -34,6 +34,10 @@ docker-compose.yaml
 docker-compose.override.yaml
 docker-compose.yaml.previous
 docker-compose.override.yaml.previous
+compose.yaml
+compose.override.yaml
+compose.yaml.previous
+compose.override.yaml.previous
 Makefile
 
 ###> symfony/framework-bundle ###
